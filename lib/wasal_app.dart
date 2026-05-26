@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:wasal/features/splash/ui/screens/spalsh_screen.dart';
-import 'package:wasal/flavors/flavors_config.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wasal/core/routing/app_router.dart';
+import 'package:wasal/core/routing/app_routes_name.dart';
+import 'package:wasal/core/theme/app_theme.dart';
 
 class WasalApp extends StatelessWidget {
   const WasalApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SpalshScreen(),
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      builder: (context, child) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.lightTheme,
+        initialRoute: AppRoutes.splash,
+        onGenerateRoute: AppRouter().onGenerateRoute,
+      ),
     );
   }
 }
