@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class SpalshScreen extends StatefulWidget {
-  const SpalshScreen({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<SpalshScreen> createState() => _SpalshScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SpalshScreenState extends State<SpalshScreen>
+class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _iconScale;

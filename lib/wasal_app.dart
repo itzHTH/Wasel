@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wasal/features/splash/ui/screens/spalsh_screen.dart';
-import 'package:wasal/flavors/flavors_config.dart';
+import 'package:wasal/features/splash/ui/screens/splash_screen.dart';
 
 class WasalApp extends StatelessWidget {
   const WasalApp({super.key});
@@ -9,7 +8,7 @@ class WasalApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SpalshScreen(),
+      home: SplashScreen(),
     );
   }
 }
