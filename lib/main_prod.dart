@@ -5,6 +5,6 @@ void main() {
   mainCommon(
     flavor: Flavor.production,
     appName: 'Wasel',
-    baseUrl: 'https://wasel-prod.zimiru.com',
+    baseUrl: 'https://apiservice.ddns.net/wasl',
   );
 }
