@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/features/splash/ui/screens/spalsh_screen.dart';
 import 'package:wasal/flavors/flavors_config.dart';
 
 class WasalApp extends StatelessWidget {
@@ -6,11 +7,9 @@ class WasalApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(child: Text('Wasel ${FlavorConfig.instance.flavor}')),
-      ),
+      home: SpalshScreen(),
     );
   }
 }
