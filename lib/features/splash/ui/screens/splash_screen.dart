@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:wasal/core/theme/app_color.dart';
+import 'package:wasal/core/theme/app_text_styles.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -68,7 +70,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff0F1A2A),
+      backgroundColor: AppColor.secondary900,
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -81,15 +83,12 @@ class _SplashScreenState extends State<SplashScreen>
                 child: SvgPicture.asset("assets/icons/wasel-icon.svg"),
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 10),
             FadeTransition(
               opacity: _textOpacity,
               child: SlideTransition(
                 position: _textSlide,
-                child: const Text(
-                  "وصل",
-                  style: TextStyle(color: Colors.white, fontSize: 44),
-                ),
+                child: Text("وَصَل", style: AppTextStyles.font48Neutral0Bold),
               ),
             ),
           ],
