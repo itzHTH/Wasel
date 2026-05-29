@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 /// Each call to [call] creates a fresh [CancelToken], so only the latest
 /// request can be cancelled. Previous tokens are automatically invalidated.
 ///
-//! Cancel from Cubit
+//! Cancel from State Management: If you want to cancel a request when a widget is disposed,
 
 abstract class CancellableUseCase<T, P> {
   CancelToken _cancelToken = CancelToken();
