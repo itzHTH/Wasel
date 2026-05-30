@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:wasal/core/extensions/navigation_extension.dart';
+import 'package:wasal/core/routing/app_routes_name.dart';
 import 'package:wasal/core/theme/app_color.dart';
 import 'package:wasal/core/theme/app_text_styles.dart';
 
@@ -56,9 +58,13 @@ class _SplashScreenState extends State<SplashScreen>
           ),
         );
 
-    _controller.forward();
-
-    // TODO : Check And Navigate To Login/Home Screen
+    _controller
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          context.pushNamed(AppRoutes.auth);
+        }
+      })
+      ..forward();
   }
 
   @override

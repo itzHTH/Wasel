@@ -13,6 +13,9 @@ class AppTextFormField extends StatelessWidget {
   final Color? backgroundColor;
   final TextEditingController? controller;
   final Function(String?) validator;
+  final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
+  final Widget? prefixIcon;
   const AppTextFormField({
     super.key,
     this.contentPadding,
@@ -26,6 +29,9 @@ class AppTextFormField extends StatelessWidget {
     this.backgroundColor,
     this.controller,
     required this.validator,
+    this.keyboardType,
+    this.textInputAction,
+    this.prefixIcon,
   });
 
   @override
@@ -42,10 +48,13 @@ class AppTextFormField extends StatelessWidget {
         hintStyle: hintStyle,
         hintText: hintText,
         suffixIcon: suffixIcon,
+        prefixIcon: prefixIcon,
         fillColor: backgroundColor,
         filled: backgroundColor != null,
       ),
       obscureText: isObscureText ?? false,
+      keyboardType: keyboardType,
+      textInputAction: textInputAction,
       style: inputTextStyle,
       validator: (value) {
         return validator(value);
