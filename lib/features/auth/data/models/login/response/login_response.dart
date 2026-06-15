@@ -26,7 +26,7 @@ class LoginResponse {
   });
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) =>
-      _$LoginResponseFromJson(json);
+      _$LoginResponseFromJson(json['data'] as Map<String, dynamic>);
 
   Map<String, dynamic> toJson() => _$LoginResponseToJson(this);
 
