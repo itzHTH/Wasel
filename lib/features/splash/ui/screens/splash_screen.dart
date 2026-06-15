@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:wasal/core/const/app_constants.dart';
 import 'package:wasal/core/extensions/navigation_extension.dart';
+import 'package:wasal/core/helpers/app_local_cache.dart';
 import 'package:wasal/core/routing/app_routes_name.dart';
 import 'package:wasal/core/theme/app_color.dart';
 import 'package:wasal/core/theme/app_text_styles.dart';
@@ -61,10 +63,25 @@ class _SplashScreenState extends State<SplashScreen>
     _controller
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
-          context.pushNamed(AppRoutes.auth);
+          handleIsAuthenticatedUser();
         }
       })
       ..forward();
+  }
+
+  void handleIsAuthenticatedUser() async {
+    final token = await AppLocalCache.getSecuredString(AppConstants.tokenKey);
+    final refreshToken = await AppLocalCache.getSecuredString(
+      AppConstants.refreshTokenKey,
+    );
+
+    if (token != null && refreshToken != null) {
+      if (!mounted) return;
+      Navigator.pushReplacementNamed(context, AppRoutes.home);
+    } else {
+      if (!mounted) return;
+      context.pushReplacementNamed(AppRoutes.auth);
+    }
   }
 
   @override
