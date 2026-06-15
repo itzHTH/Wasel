@@ -17,6 +17,10 @@ class WasalApp extends StatelessWidget {
         theme: AppTheme.lightTheme,
         initialRoute: AppRoutes.splash,
         onGenerateRoute: AppRouter().onGenerateRoute,
+        builder: (context, child) => Directionality(
+          textDirection: TextDirection.rtl,
+          child: child!,
+        ),
       ),
     );
   }
