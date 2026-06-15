@@ -47,17 +47,6 @@ class AuthLabeledField extends StatelessWidget {
           backgroundColor: AppColor.neutral50,
           hintStyle: AppTextStyles.font14Neutral400Regular,
           inputTextStyle: AppTextStyles.font14Secondary900SemiBold,
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppDimens.radius12),
-            borderSide: const BorderSide(color: AppColor.neutral200),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppDimens.radius12),
-            borderSide: const BorderSide(
-              color: AppColor.primary500,
-              width: 1.5,
-            ),
-          ),
         ),
       ],
     );
