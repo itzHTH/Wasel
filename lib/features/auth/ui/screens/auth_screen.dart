@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wasal/core/networking/errors/error_handler.dart';
 import 'package:wasal/core/routing/app_routes_name.dart';
 import 'package:wasal/core/theme/app_color.dart';
 import 'package:wasal/core/theme/app_dimens.dart';
