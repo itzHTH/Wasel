@@ -3,6 +3,8 @@ import 'package:wasal/core/const/app_constants.dart';
 import 'package:wasal/core/helpers/app_local_cache.dart';
 import 'package:wasal/core/networking/api_results.dart';
 import 'package:wasal/core/networking/errors/error_handler.dart';
+import 'package:wasal/features/auth/data/models/initiate_registeration/request/initiate_registeration_request.dart';
+import 'package:wasal/features/auth/data/models/initiate_registeration/response/initiate_registeration_response.dart';
 import 'package:wasal/features/auth/data/models/login/request/login_request.dart';
 import 'package:wasal/features/auth/data/models/login/response/login_response.dart';
 import 'package:wasal/features/auth/data/services/auth_api_service.dart';
@@ -33,6 +35,21 @@ class AuthRepo implements BaseAuthRepo {
         AppConstants.refreshTokenKey,
         response.refreshToken,
       );
+
+      return ApiResults.success(response);
+    } catch (e) {
+      return ApiResults.failure(ErrorHandler.handle(e));
+    }
+  }
+
+  @override
+  Future<ApiResults<InitiateRegisterationResponse>> initiateRegistration(
+    InitiateRegisterationRequest request, {
+    CancelToken? cancelToken,
+  }) async {
+    try {
+      final InitiateRegisterationResponse response = await _authApiService
+          .initiateRegistration(request, cancelToken: cancelToken);
 
       return ApiResults.success(response);
     } catch (e) {
