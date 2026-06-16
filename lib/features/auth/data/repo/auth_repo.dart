@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/core/const/app_constants.dart';
 import 'package:wasal/core/helpers/app_local_cache.dart';
 import 'package:wasal/core/networking/api_results.dart';
@@ -9,6 +10,8 @@ import 'package:wasal/features/auth/data/models/login/request/login_request.dart
 import 'package:wasal/features/auth/data/models/login/response/login_response.dart';
 import 'package:wasal/features/auth/data/services/auth_api_service.dart';
 import 'package:wasal/features/auth/domain/repo/base_auth_repo.dart';
+
+part 'auth_repo.g.dart';
 
 class AuthRepo implements BaseAuthRepo {
   final AuthApiService _authApiService;
@@ -56,4 +59,10 @@ class AuthRepo implements BaseAuthRepo {
       return ApiResults.failure(ErrorHandler.handle(e));
     }
   }
+}
+
+@riverpod
+AuthRepo authRepo(Ref ref) {
+  final authApiService = ref.watch(authApiServiceProvider);
+  return AuthRepo(authApiService);
 }
