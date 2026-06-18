@@ -4,14 +4,16 @@ import 'package:wasal/core/theme/app_color.dart';
 import 'package:wasal/core/theme/app_dimens.dart';
 
 class AppBackButton extends StatelessWidget {
-  const AppBackButton({super.key});
+  final VoidCallback? onTap;
+
+  const AppBackButton({super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.centerRight,
       child: GestureDetector(
-        onTap: () => Navigator.pop(context),
+        onTap: onTap ?? () => Navigator.pop(context),
         child: Container(
           width: 40.r,
           height: 40.r,
