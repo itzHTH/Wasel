@@ -15,9 +15,13 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const AuthScreen());
 
       case AppRoutes.otpVerification:
-        final phone = settings.arguments as String? ?? '';
+        final Map<String, dynamic> args =
+            settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
-          builder: (_) => OtpVerificationScreen(email: phone),
+          builder: (_) => OtpVerificationScreen(
+            email: args['email'] ?? '',
+            registrationToken: args['registrationToken'] ?? '',
+          ),
         );
 
       case AppRoutes.home:
