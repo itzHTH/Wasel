@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/core/routing/app_routes_name.dart';
 import 'package:wasal/core/theme/app_color.dart';
 import 'package:wasal/core/theme/app_dimens.dart';
+import 'package:wasal/features/auth/data/models/initiate_registeration/response/initiate_registeration_response.dart';
 import 'package:wasal/features/auth/data/models/login/request/login_request.dart';
-import 'package:wasal/features/auth/ui/providers/login_provider.dart';
+import 'package:wasal/features/auth/ui/providers/login/login_provider.dart';
+import 'package:wasal/features/auth/ui/providers/register/register_provider.dart';
 import 'package:wasal/features/auth/ui/widgets/auth_header.dart';
 import 'package:wasal/features/auth/ui/widgets/auth_primary_button.dart';
 import 'package:wasal/features/auth/ui/widgets/auth_social_section.dart';
@@ -44,7 +46,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
     setState(() => _isLogin = isLogin);
   }
 
-  void _handleSubmit(WidgetRef ref) {
+  void _handleSubmit(WidgetRef ref) async {
     if (_isLogin) {
       if (_loginFormKey.currentState?.validate() ?? false) {
         ref
@@ -58,37 +60,31 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
       }
     } else {
       if (_registerFormKey.currentState?.validate() ?? false) {
-        Navigator.pushNamed(
-          context,
-          AppRoutes.otpVerification,
-          arguments: _registerEmailCtrl.text,
-        );
+        final registrationResponse = await ref
+            .read(registerProvider.notifier)
+            .initiateRegistration(_registerEmailCtrl.text.trim());
+
+        if (registrationResponse != null && mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('تم ارسال الرمز الى الايميل بنجاح')),
+          );
+          Navigator.pushReplacementNamed(
+            context,
+            AppRoutes.otpVerification,
+            arguments: {
+              'email': _registerEmailCtrl.text.trim(),
+              'registrationToken': registrationResponse.registerToken,
+            },
+          );
+        }
       }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(loginProvider.select((state) => state), (previous, next) {
-      if (next.hasError) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(next.error.toString())));
-      } else if (next.isLoading) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('جاري تسجيل الدخول...')));
-      } else {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('تم تسجيل الدخول بنجاح')));
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          AppRoutes.home,
-          (route) => false,
-        );
-      }
-    });
+    loginProviderListner(context);
+    registerProviderListner(context);
 
     return Scaffold(
       backgroundColor: AppColor.neutral0,
@@ -130,9 +126,13 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
               SizedBox(height: AppDimens.space24),
               Consumer(
                 builder: (context, ref, child) {
-                  final state = ref.watch(loginProvider);
+                  final loginState = ref.watch(loginProvider);
+                  final registerState = ref.watch(registerProvider);
+
                   return AuthPrimaryButton(
-                    isLoading: state.isLoading,
+                    isLoading: _isLogin
+                        ? loginState.isLoading
+                        : registerState.isLoading,
                     label: _isLogin ? 'تسجيل الدخول' : 'إنشاء حساب',
                     onPressed: () => _handleSubmit(ref),
                   );
@@ -150,5 +150,42 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
         ),
       ),
     );
+  }
+
+  void loginProviderListner(BuildContext context) {
+    ref.listen(loginProvider.select((state) => state), (previous, next) {
+      if (next.hasError) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(next.error.toString())));
+      } else if (next.isLoading) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('جاري تسجيل الدخول...')));
+      } else {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('تم تسجيل الدخول بنجاح')));
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          AppRoutes.home,
+          (route) => false,
+        );
+      }
+    });
+  }
+
+  void registerProviderListner(BuildContext context) {
+    ref.listen(registerProvider.select((state) => state), (previous, next) {
+      if (next.hasError) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(next.error.toString())));
+      } else if (next.isLoading) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('جاري إنشاء الحساب...')));
+      }
+    });
   }
 }

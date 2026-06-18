@@ -1,26 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/core/theme/app_color.dart';
 import 'package:wasal/core/theme/app_dimens.dart';
 import 'package:wasal/core/theme/app_text_styles.dart';
 import 'package:wasal/core/widgets/app_back_button.dart';
+import 'package:wasal/features/auth/ui/providers/register/register_provider.dart';
 import 'package:wasal/features/auth/ui/widgets/auth_primary_button.dart';
 import 'package:wasal/features/auth/ui/widgets/otp_countdown_timer.dart';
 import 'package:wasal/features/auth/ui/widgets/otp_pin_input.dart';
 import 'package:wasal/features/auth/ui/widgets/resend_otp_row.dart';
 
-class OtpVerificationScreen extends StatefulWidget {
+class OtpVerificationScreen extends ConsumerStatefulWidget {
   final String email;
+  final String? registrationToken;
 
-  const OtpVerificationScreen({super.key, required this.email});
+  const OtpVerificationScreen({
+    super.key,
+    required this.email,
+    this.registrationToken,
+  });
 
   @override
-  State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _OtpVerificationScreenState();
 }
 
-class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
+class _OtpVerificationScreenState extends ConsumerState<OtpVerificationScreen> {
   final _otpController = TextEditingController();
   bool _canResend = false;
   int _timerResetKey = 0;
+
+  String? registrationToken;
+
+  @override
+  void initState() {
+    registrationToken = widget.registrationToken;
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -30,12 +46,20 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   void _onTimerExpired() => setState(() => _canResend = true);
 
-  void _onResend() {
+  void _onResend() async {
     setState(() {
       _canResend = false;
+    });
+
+    final result = await ref
+        .read(registerProvider.notifier)
+        .initiateRegistration(widget.email);
+
+    registrationToken = result?.registerToken;
+
+    setState(() {
       _timerResetKey++;
     });
-    // TODO: trigger resend OTP API call
   }
 
   void _onSend() {
@@ -47,6 +71,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    registerProviderListner(context);
     return Scaffold(
       backgroundColor: AppColor.neutral0,
       body: SafeArea(
@@ -93,5 +118,19 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
         ),
       ),
     );
+  }
+
+  void registerProviderListner(BuildContext context) {
+    ref.listen(registerProvider.select((state) => state), (previous, next) {
+      if (next.hasError) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(next.error.toString())));
+      } else if (next.isLoading) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('جاري إنشاء الحساب...')));
+      }
+    });
   }
 }
