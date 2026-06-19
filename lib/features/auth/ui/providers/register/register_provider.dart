@@ -3,6 +3,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/core/networking/api_results.dart';
 import 'package:wasal/features/auth/data/models/register/initiate_registeration/request/initiate_registeration_request.dart';
 import 'package:wasal/features/auth/data/models/register/initiate_registeration/response/initiate_registeration_response.dart';
+import 'package:wasal/features/auth/data/models/register/verify_otp/request/verify_otp_request.dart';
+import 'package:wasal/features/auth/data/models/register/verify_otp/response/verify_otp_respons.dart';
 import 'package:wasal/features/auth/ui/providers/auth_use_case_providers.dart';
 
 part 'register_provider.g.dart';
@@ -32,6 +34,32 @@ class Register extends _$Register {
 
       success: (response) {
         state = AsyncValue<InitiateRegisterationResponse>.data(response);
+        return response;
+      },
+    );
+  }
+
+  Future<VerifyOtpResponse?> verifyOtp(String sessionToken, String otp) async {
+    state = const AsyncValue<VerifyOtpResponse>.loading();
+
+    final useCase = ref.read(verifyOtpUseCaseProvider);
+
+    final result = await useCase.execute(
+      VerifyOtpRequest(sessionToken: sessionToken, otpCode: otp),
+      CancelToken(),
+    );
+
+    return result.when(
+      failure: (error) {
+        state = AsyncValue<VerifyOtpResponse>.error(
+          error.apiErrorModel.message ?? "حصل خطأ ما",
+          StackTrace.current,
+        );
+        return null;
+      },
+
+      success: (response) {
+        state = AsyncValue<VerifyOtpResponse>.data(response);
         return response;
       },
     );
