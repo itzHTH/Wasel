@@ -164,7 +164,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                 onSubmit: _handleEmailSubmit,
               ),
               RegisterOtpPage(
-                email: _emailCtrl.text,
+                emailCtrl: _emailCtrl,
                 otpCtrl: _otpCtrl,
                 onSubmit: _handleOtpSubmit,
                 onBack: () => _goToPage(0),
