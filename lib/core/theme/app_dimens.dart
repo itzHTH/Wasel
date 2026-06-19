@@ -18,6 +18,7 @@ class AppDimens {
   static double get space24 => 24.h;
   static double get space32 => 32.h;
   static double get space40 => 40.h;
+  static double get space48 => 48.h;
 
   // ── Component Heights
   static double get buttonHeight => 56.h;
@@ -29,6 +30,7 @@ class AppDimens {
   static double get icon18 => 18.r;
   static double get icon20 => 20.r;
   static double get icon24 => 24.r;
+  static double get icon36 => 36.r;
 
   // ── Screen
   static double get screenHPadding => 24.w;
