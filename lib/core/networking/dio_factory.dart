@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/core/const/app_constants.dart';
 import 'api_constants.dart';
+
+part 'dio_factory.g.dart';
 
 class DioFactory {
   // Private constructor to prevent external instantiation
@@ -50,4 +53,9 @@ class DioFactory {
       ),
     ]);
   }
+}
+
+@riverpod
+Dio dioFactory(Ref ref) {
+  return DioFactory.instance.dio;
 }

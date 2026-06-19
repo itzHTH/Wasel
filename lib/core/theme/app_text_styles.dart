@@ -23,6 +23,12 @@ class AppTextStyles {
     color: AppColor.neutral0,
   );
 
+  static TextStyle get font32Secondary900Bold => _base(
+    fontSize: 32.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColor.secondary900,
+  );
+
   static TextStyle get font24Secondary900Bold => _base(
     fontSize: 24.sp,
     fontWeight: FontWeight.w700,

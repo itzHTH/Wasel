@@ -4,7 +4,7 @@ import 'package:wasal/core/theme/app_dimens.dart';
 import 'package:wasal/core/theme/app_text_styles.dart';
 import 'package:wasal/core/widgets/app_text_form_field.dart';
 
-class AuthLabeledField extends StatelessWidget {
+class AppLabeledFormField extends StatelessWidget {
   final String label;
   final String hintText;
   final TextEditingController? controller;
@@ -15,7 +15,7 @@ class AuthLabeledField extends StatelessWidget {
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
 
-  const AuthLabeledField({
+  const AppLabeledFormField({
     super.key,
     required this.label,
     required this.hintText,
