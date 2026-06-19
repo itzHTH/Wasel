@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/core/theme/app_dimens.dart';
 import 'package:wasal/core/theme/app_text_styles.dart';
 import 'package:wasal/core/widgets/app_back_button.dart';
+import 'package:wasal/features/auth/ui/providers/register/register_provider.dart';
 import 'package:wasal/features/auth/ui/widgets/common/auth_primary_button.dart';
 import 'package:wasal/features/auth/ui/widgets/register/form_page/register_form.dart';
 
@@ -56,7 +58,16 @@ class RegisterFormPage extends StatelessWidget {
           ),
           SizedBox(height: AppDimens.space32),
 
-          AuthPrimaryButton(label: 'إنشاء حساب', onPressed: onSubmit),
+          Consumer(
+            builder: (context, ref, child) {
+              final isLoading = ref.watch(registerProvider).isLoading;
+              return AuthPrimaryButton(
+                label: 'إنشاء حساب',
+                onPressed: isLoading ? null : onSubmit,
+                isLoading: isLoading,
+              );
+            },
+          ),
           SizedBox(height: AppDimens.space32),
         ],
       ),
