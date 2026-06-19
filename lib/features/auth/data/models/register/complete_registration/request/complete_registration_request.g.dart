@@ -6,6 +6,7 @@ part of 'complete_registration_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+// ignore: unused_element
 CompleteRegistrationRequest _$CompleteRegistrationRequestFromJson(
   Map<String, dynamic> json,
 ) => CompleteRegistrationRequest(
