@@ -3,6 +3,7 @@ import 'package:retrofit/retrofit.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/core/networking/api_constants.dart';
 import 'package:wasal/core/networking/dio_factory.dart';
+import 'package:wasal/features/auth/data/models/logout/response/logout_response.dart';
 import 'package:wasal/features/auth/data/models/register/complete_registration/request/complete_registration_request.dart';
 import 'package:wasal/features/auth/data/models/register/complete_registration/response/complete_registration_response.dart';
 import 'package:wasal/features/auth/data/models/register/initiate_registeration/request/initiate_registeration_request.dart';
@@ -40,6 +41,12 @@ abstract class AuthApiService {
   @POST(ApiConstants.completeRegistration)
   Future<CompleteRegistrationResponse> completeRegistration(
     @Body() CompleteRegistrationRequest request, {
+    @CancelRequest() CancelToken? cancelToken,
+  });
+
+  @POST(ApiConstants.revokeToken)
+  Future<LogoutResponse> logout(
+    @Body() String refreshToken, {
     @CancelRequest() CancelToken? cancelToken,
   });
 }

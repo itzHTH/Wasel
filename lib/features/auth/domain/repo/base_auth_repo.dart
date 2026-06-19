@@ -29,4 +29,9 @@ abstract class BaseAuthRepo {
     CompleteRegistrationRequest request, {
     CancelToken? cancelToken,
   });
+
+  Future<ApiResults<void>> logout(
+    String refreshToken, {
+    CancelToken? cancelToken,
+  });
 }
