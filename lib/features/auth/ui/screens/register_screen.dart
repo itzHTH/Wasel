@@ -18,6 +18,7 @@ class RegisterScreen extends ConsumerStatefulWidget {
 class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final _pageController = PageController();
   // ignore: unused_field
+  String? _sessionToken;
   String? _registrationToken;
 
   // Email page Controllers
@@ -65,7 +66,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           .initiateRegistration(_emailCtrl.text.trim());
 
       if (result != null && mounted) {
-        _registrationToken = result.sessionToken;
+        _sessionToken = result.sessionToken;
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('تم ارسال الرمز الى الايميل بنجاح')),
         );
@@ -76,12 +77,17 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   }
 
   // Page 2 - OTP page handlers
-  void _handleOtpSubmit() {
+  Future<void> _handleOtpSubmit() async {
     if (_otpCtrl.text.length == 6) {
-      // TODO: Call OTP verification API
+      final result = await ref
+          .read(registerProvider.notifier)
+          .verifyOtp(_sessionToken!, _otpCtrl.text.trim());
 
-      // Navigate to form page
-      _goToPage(2);
+      if (result != null && mounted) {
+        _registrationToken = result.registerToken;
+        _otpCtrl.clear();
+        _goToPage(2);
+      }
     }
   }
 
@@ -91,7 +97,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
         .read(registerProvider.notifier)
         .initiateRegistration(_emailCtrl.text.trim());
 
-    _registrationToken = result?.sessionToken;
+    if (result != null && mounted) {
+      _sessionToken = result.sessionToken;
+      _otpCtrl.clear();
+    }
   }
 
   // Page 3 - Form page handlers

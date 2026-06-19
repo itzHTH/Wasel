@@ -98,3 +98,49 @@ final class InitiateRegistrationUseCaseProvider
 
 String _$initiateRegistrationUseCaseHash() =>
     r'6e8d19e7a537068d086f69745bcfe76ba0c4ea6a';
+
+@ProviderFor(verifyOtpUseCase)
+final verifyOtpUseCaseProvider = VerifyOtpUseCaseProvider._();
+
+final class VerifyOtpUseCaseProvider
+    extends
+        $FunctionalProvider<
+          VerifyOtpUseCase,
+          VerifyOtpUseCase,
+          VerifyOtpUseCase
+        >
+    with $Provider<VerifyOtpUseCase> {
+  VerifyOtpUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'verifyOtpUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$verifyOtpUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<VerifyOtpUseCase> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  VerifyOtpUseCase create(Ref ref) {
+    return verifyOtpUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(VerifyOtpUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<VerifyOtpUseCase>(value),
+    );
+  }
+}
+
+String _$verifyOtpUseCaseHash() => r'cb728275c72777d486152e9f66b6bfa251fed048';
