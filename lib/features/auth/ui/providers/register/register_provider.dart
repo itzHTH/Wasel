@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/core/networking/api_results.dart';
-import 'package:wasal/features/auth/data/models/initiate_registeration/request/initiate_registeration_request.dart';
-import 'package:wasal/features/auth/data/models/initiate_registeration/response/initiate_registeration_response.dart';
+import 'package:wasal/features/auth/data/models/register/initiate_registeration/request/initiate_registeration_request.dart';
+import 'package:wasal/features/auth/data/models/register/initiate_registeration/response/initiate_registeration_response.dart';
 import 'package:wasal/features/auth/ui/providers/auth_use_case_providers.dart';
 
 part 'register_provider.g.dart';

@@ -6,9 +6,9 @@ part 'initiate_registeration_response.g.dart';
 @JsonSerializable()
 class InitiateRegisterationResponse {
   @JsonKey(name: "data")
-  final String registerToken;
+  final String sessionToken;
 
-  InitiateRegisterationResponse({required this.registerToken});
+  InitiateRegisterationResponse({required this.sessionToken});
 
   Map<String, dynamic> toJson() => _$InitiateRegisterationResponseToJson(this);
 
@@ -16,6 +16,6 @@ class InitiateRegisterationResponse {
       _$InitiateRegisterationResponseFromJson(json);
 
   InitiateRegisteration toEntity() {
-    return InitiateRegisteration(registerToken: registerToken);
+    return InitiateRegisteration(sessionToken: sessionToken);
   }
 }

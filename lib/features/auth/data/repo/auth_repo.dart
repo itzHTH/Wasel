@@ -4,10 +4,12 @@ import 'package:wasal/core/const/app_constants.dart';
 import 'package:wasal/core/helpers/app_local_cache.dart';
 import 'package:wasal/core/networking/api_results.dart';
 import 'package:wasal/core/networking/errors/error_handler.dart';
-import 'package:wasal/features/auth/data/models/initiate_registeration/request/initiate_registeration_request.dart';
-import 'package:wasal/features/auth/data/models/initiate_registeration/response/initiate_registeration_response.dart';
+import 'package:wasal/features/auth/data/models/register/initiate_registeration/request/initiate_registeration_request.dart';
+import 'package:wasal/features/auth/data/models/register/initiate_registeration/response/initiate_registeration_response.dart';
 import 'package:wasal/features/auth/data/models/login/request/login_request.dart';
 import 'package:wasal/features/auth/data/models/login/response/login_response.dart';
+import 'package:wasal/features/auth/data/models/register/verify_otp/request/verify_otp_request.dart';
+import 'package:wasal/features/auth/data/models/register/verify_otp/response/verify_otp_respons.dart';
 import 'package:wasal/features/auth/data/services/auth_api_service.dart';
 import 'package:wasal/features/auth/domain/repo/base_auth_repo.dart';
 
@@ -53,6 +55,23 @@ class AuthRepo implements BaseAuthRepo {
     try {
       final InitiateRegisterationResponse response = await _authApiService
           .initiateRegistration(request, cancelToken: cancelToken);
+
+      return ApiResults.success(response);
+    } catch (e) {
+      return ApiResults.failure(ErrorHandler.handle(e));
+    }
+  }
+
+  @override
+  Future<ApiResults<VerifyOtpResponse>> verifyOtp(
+    VerifyOtpRequest request, {
+    CancelToken? cancelToken,
+  }) async {
+    try {
+      final VerifyOtpResponse response = await _authApiService.verifyOtp(
+        request,
+        cancelToken: cancelToken,
+      );
 
       return ApiResults.success(response);
     } catch (e) {

@@ -3,10 +3,12 @@ import 'package:retrofit/retrofit.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/core/networking/api_constants.dart';
 import 'package:wasal/core/networking/dio_factory.dart';
-import 'package:wasal/features/auth/data/models/initiate_registeration/request/initiate_registeration_request.dart';
-import 'package:wasal/features/auth/data/models/initiate_registeration/response/initiate_registeration_response.dart';
+import 'package:wasal/features/auth/data/models/register/initiate_registeration/request/initiate_registeration_request.dart';
+import 'package:wasal/features/auth/data/models/register/initiate_registeration/response/initiate_registeration_response.dart';
 import 'package:wasal/features/auth/data/models/login/request/login_request.dart';
 import 'package:wasal/features/auth/data/models/login/response/login_response.dart';
+import 'package:wasal/features/auth/data/models/register/verify_otp/request/verify_otp_request.dart';
+import 'package:wasal/features/auth/data/models/register/verify_otp/response/verify_otp_respons.dart';
 
 part 'auth_api_service.g.dart';
 
@@ -24,6 +26,12 @@ abstract class AuthApiService {
   @POST(ApiConstants.initiateRegistration)
   Future<InitiateRegisterationResponse> initiateRegistration(
     @Body() InitiateRegisterationRequest request, {
+    @CancelRequest() CancelToken? cancelToken,
+  });
+
+  @POST(ApiConstants.verifyOtp)
+  Future<VerifyOtpResponse> verifyOtp(
+    @Body() VerifyOtpRequest request, {
     @CancelRequest() CancelToken? cancelToken,
   });
 }

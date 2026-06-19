@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:wasal/core/networking/api_results.dart';
-import 'package:wasal/features/auth/data/models/initiate_registeration/request/initiate_registeration_request.dart';
-import 'package:wasal/features/auth/data/models/initiate_registeration/response/initiate_registeration_response.dart';
+import 'package:wasal/features/auth/data/models/register/initiate_registeration/request/initiate_registeration_request.dart';
+import 'package:wasal/features/auth/data/models/register/initiate_registeration/response/initiate_registeration_response.dart';
 import 'package:wasal/features/auth/data/models/login/request/login_request.dart';
 import 'package:wasal/features/auth/data/models/login/response/login_response.dart';
+import 'package:wasal/features/auth/data/models/register/verify_otp/request/verify_otp_request.dart';
+import 'package:wasal/features/auth/data/models/register/verify_otp/response/verify_otp_respons.dart';
 
 abstract class BaseAuthRepo {
   Future<ApiResults<LoginResponse>> login(
@@ -13,6 +15,11 @@ abstract class BaseAuthRepo {
 
   Future<ApiResults<InitiateRegisterationResponse>> initiateRegistration(
     InitiateRegisterationRequest request, {
+    CancelToken? cancelToken,
+  });
+
+  Future<ApiResults<VerifyOtpResponse>> verifyOtp(
+    VerifyOtpRequest request, {
     CancelToken? cancelToken,
   });
 }
