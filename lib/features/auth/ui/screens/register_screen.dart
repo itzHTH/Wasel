@@ -65,7 +65,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           .initiateRegistration(_emailCtrl.text.trim());
 
       if (result != null && mounted) {
-        _registrationToken = result.registerToken;
+        _registrationToken = result.sessionToken;
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('تم ارسال الرمز الى الايميل بنجاح')),
         );
@@ -91,7 +91,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
         .read(registerProvider.notifier)
         .initiateRegistration(_emailCtrl.text.trim());
 
-    _registrationToken = result?.registerToken;
+    _registrationToken = result?.sessionToken;
   }
 
   // Page 3 - Form page handlers

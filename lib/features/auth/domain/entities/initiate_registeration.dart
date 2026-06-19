@@ -1,5 +1,5 @@
 class InitiateRegisteration {
-  final String registerToken;
+  final String sessionToken;
 
-  InitiateRegisteration({required this.registerToken});
+  InitiateRegisteration({required this.sessionToken});
 }

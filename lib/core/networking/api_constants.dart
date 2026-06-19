@@ -9,8 +9,9 @@ class ApiConstants {
   static const String login = '/api/v1/Auth/login';
   static const String initiateRegistration =
       '/api/v1/Auth/rider/initiate-registration';
-  static const String verifyRegistration =
-      '/api/v1/Auth/rider/verify-registration';
+  static const String verifyOtp = '/api/v1/Auth/rider/verify-otp';
+  static const String completeRegistration =
+      '/api/v1/Auth/rider/complete-registration';
   static const String refreshToken = '/api/v1/Auth/refresh-token';
   static const String revokeToken = '/api/v1/Auth/revoke-token';
   static const String forgotPassword = '/api/v1/Auth/forgot-password';
