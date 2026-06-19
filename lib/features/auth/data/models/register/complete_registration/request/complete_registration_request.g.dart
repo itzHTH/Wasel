@@ -6,23 +6,22 @@ part of 'complete_registration_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-// ignore: unused_element
 CompleteRegistrationRequest _$CompleteRegistrationRequestFromJson(
   Map<String, dynamic> json,
 ) => CompleteRegistrationRequest(
-  registrationToken: json['registrationToken'] as String,
+  registerToken: json['registerToken'] as String,
   firstName: json['firstName'] as String,
   lastName: json['lastName'] as String,
-  phone: json['phone'] as String,
+  phoneNumber: json['phoneNumber'] as String,
   password: json['password'] as String,
 );
 
 Map<String, dynamic> _$CompleteRegistrationRequestToJson(
   CompleteRegistrationRequest instance,
 ) => <String, dynamic>{
-  'registrationToken': instance.registrationToken,
+  'registerToken': instance.registerToken,
   'firstName': instance.firstName,
   'lastName': instance.lastName,
-  'phone': instance.phone,
+  'phoneNumber': instance.phoneNumber,
   'password': instance.password,
 };

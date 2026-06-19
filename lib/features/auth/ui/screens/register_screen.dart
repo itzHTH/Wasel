@@ -7,6 +7,7 @@ import 'package:wasal/features/auth/ui/providers/register/register_provider.dart
 import 'package:wasal/features/auth/ui/widgets/register/email_page/register_email_page.dart';
 import 'package:wasal/features/auth/ui/widgets/register/form_page/register_form_page.dart';
 import 'package:wasal/features/auth/ui/widgets/register/otp_page/register_otp_page.dart';
+import 'package:wasal/features/home/ui/screens/home_screen.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
@@ -81,7 +82,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     if (_otpCtrl.text.length == 6) {
       final result = await ref
           .read(registerProvider.notifier)
-          .verifyOtp(_sessionToken!, _otpCtrl.text.trim());
+          .verifyOtp(sessionToken: _sessionToken!, otp: _otpCtrl.text.trim());
 
       if (result != null && mounted) {
         _registrationToken = result.registerToken;
@@ -104,9 +105,28 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   }
 
   // Page 3 - Form page handlers
-  void _handleFormSubmit() {
+  Future<void> _handleFormSubmit() async {
     if (_formKey.currentState?.validate() ?? false) {
-      // TODO: Call complete registration API
+      final result = await ref
+          .read(registerProvider.notifier)
+          .completeRegistration(
+            registrationToken: _registrationToken!,
+            firstName: _firstNameCtrl.text.trim(),
+            lastName: _lastNameCtrl.text.trim(),
+            password: _passwordCtrl.text.trim(),
+            phone: _phoneCtrl.text.trim(),
+          );
+
+      if (mounted && result != null) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('تم التسجيل بنجاح')));
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
+          (route) => false,
+        );
+      }
     }
   }
 

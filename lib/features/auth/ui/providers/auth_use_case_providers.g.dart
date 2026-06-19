@@ -144,3 +144,52 @@ final class VerifyOtpUseCaseProvider
 }
 
 String _$verifyOtpUseCaseHash() => r'cb728275c72777d486152e9f66b6bfa251fed048';
+
+@ProviderFor(completeRegistrationUseCase)
+final completeRegistrationUseCaseProvider =
+    CompleteRegistrationUseCaseProvider._();
+
+final class CompleteRegistrationUseCaseProvider
+    extends
+        $FunctionalProvider<
+          CompleteRegistrationUseCase,
+          CompleteRegistrationUseCase,
+          CompleteRegistrationUseCase
+        >
+    with $Provider<CompleteRegistrationUseCase> {
+  CompleteRegistrationUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'completeRegistrationUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$completeRegistrationUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<CompleteRegistrationUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  CompleteRegistrationUseCase create(Ref ref) {
+    return completeRegistrationUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(CompleteRegistrationUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<CompleteRegistrationUseCase>(value),
+    );
+  }
+}
+
+String _$completeRegistrationUseCaseHash() =>
+    r'4c79d16e5c6134a8ad83b840229583fd3256ad53';

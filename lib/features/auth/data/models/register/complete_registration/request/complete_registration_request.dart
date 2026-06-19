@@ -4,17 +4,17 @@ part 'complete_registration_request.g.dart';
 
 @JsonSerializable()
 class CompleteRegistrationRequest {
-  final String registrationToken;
+  final String registerToken;
   final String firstName;
   final String lastName;
-  final String phone;
+  final String phoneNumber;
   final String password;
 
   CompleteRegistrationRequest({
-    required this.registrationToken,
+    required this.registerToken,
     required this.firstName,
     required this.lastName,
-    required this.phone,
+    required this.phoneNumber,
     required this.password,
   });
 

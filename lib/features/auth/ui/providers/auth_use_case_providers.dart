@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/features/auth/data/repo/auth_repo.dart';
+import 'package:wasal/features/auth/domain/usecases/complete_registration_use_case.dart';
 import 'package:wasal/features/auth/domain/usecases/initiate_registeration_use_case.dart';
 import 'package:wasal/features/auth/domain/usecases/login_use_case.dart';
 import 'package:wasal/features/auth/domain/usecases/verify_otp_use_case.dart';
@@ -22,4 +23,10 @@ InitiateRegisterationUseCase initiateRegistrationUseCase(Ref ref) {
 VerifyOtpUseCase verifyOtpUseCase(Ref ref) {
   final authRepo = ref.watch(authRepoProvider);
   return VerifyOtpUseCase(authRepo);
+}
+
+@riverpod
+CompleteRegistrationUseCase completeRegistrationUseCase(Ref ref) {
+  final authRepo = ref.watch(authRepoProvider);
+  return CompleteRegistrationUseCase(authRepo);
 }
