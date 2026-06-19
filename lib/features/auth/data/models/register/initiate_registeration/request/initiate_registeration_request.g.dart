@@ -6,6 +6,7 @@ part of 'initiate_registeration_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+// ignore: unused_element
 InitiateRegisterationRequest _$InitiateRegisterationRequestFromJson(
   Map<String, dynamic> json,
 ) => InitiateRegisterationRequest(email: json['email'] as String);

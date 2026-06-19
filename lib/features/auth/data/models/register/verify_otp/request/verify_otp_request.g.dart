@@ -6,6 +6,7 @@ part of 'verify_otp_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+// ignore: unused_element
 VerifyOtpRequest _$VerifyOtpRequestFromJson(Map<String, dynamic> json) =>
     VerifyOtpRequest(
       sessionToken: json['sessionToken'] as String,
