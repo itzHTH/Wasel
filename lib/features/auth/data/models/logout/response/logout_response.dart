@@ -1,4 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:wasal/features/auth/domain/entities/logout.dart';
+
 part 'logout_response.g.dart';
 
 @JsonSerializable()
@@ -11,4 +13,8 @@ class LogoutResponse {
   factory LogoutResponse.fromJson(Map<String, dynamic> json) =>
       _$LogoutResponseFromJson(json);
   Map<String, dynamic> toJson() => _$LogoutResponseToJson(this);
+
+  Logout toEntity() {
+    return Logout(success: success);
+  }
 }

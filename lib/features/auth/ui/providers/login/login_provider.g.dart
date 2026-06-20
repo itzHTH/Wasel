@@ -12,8 +12,7 @@ part of 'login_provider.dart';
 @ProviderFor(Login)
 final loginProvider = LoginProvider._();
 
-final class LoginProvider
-    extends $AsyncNotifierProvider<Login, LoginResponse?> {
+final class LoginProvider extends $AsyncNotifierProvider<Login, entity.Login?> {
   LoginProvider._()
     : super(
         from: null,
@@ -33,19 +32,19 @@ final class LoginProvider
   Login create() => Login();
 }
 
-String _$loginHash() => r'1d8675f9d9e1203344992a1417ba2358af8ac8b9';
+String _$loginHash() => r'acc335fe15dd59a9a0731c88d3297521846393d6';
 
-abstract class _$Login extends $AsyncNotifier<LoginResponse?> {
-  FutureOr<LoginResponse?> build();
+abstract class _$Login extends $AsyncNotifier<entity.Login?> {
+  FutureOr<entity.Login?> build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref = this.ref as $Ref<AsyncValue<LoginResponse?>, LoginResponse?>;
+    final ref = this.ref as $Ref<AsyncValue<entity.Login?>, entity.Login?>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue<LoginResponse?>, LoginResponse?>,
-              AsyncValue<LoginResponse?>,
+              AnyNotifier<AsyncValue<entity.Login?>, entity.Login?>,
+              AsyncValue<entity.Login?>,
               Object?,
               Object?
             >;
