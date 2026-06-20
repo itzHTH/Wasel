@@ -2,21 +2,21 @@ import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/core/networking/api_results.dart';
 import 'package:wasal/features/auth/data/models/register/complete_registration/request/complete_registration_request.dart';
-import 'package:wasal/features/auth/data/models/register/complete_registration/response/complete_registration_response.dart';
 import 'package:wasal/features/auth/data/models/register/initiate_registeration/request/initiate_registeration_request.dart';
-import 'package:wasal/features/auth/data/models/register/initiate_registeration/response/initiate_registeration_response.dart';
 import 'package:wasal/features/auth/data/models/register/verify_otp/request/verify_otp_request.dart';
-import 'package:wasal/features/auth/data/models/register/verify_otp/response/verify_otp_respons.dart';
+import 'package:wasal/features/auth/domain/entities/complete_registration.dart';
+import 'package:wasal/features/auth/domain/entities/initiate_registeration.dart';
+import 'package:wasal/features/auth/domain/entities/verify_otp.dart';
 import 'package:wasal/features/auth/ui/providers/auth_use_case_providers.dart';
 
 part 'register_provider.g.dart';
 
 @riverpod
 class Register extends _$Register {
-  Future<InitiateRegisterationResponse?> initiateRegistration(
+  Future<InitiateRegisteration?> initiateRegistration(
     String email,
   ) async {
-    state = const AsyncValue<InitiateRegisterationResponse>.loading();
+    state = const AsyncValue<InitiateRegisteration>.loading();
 
     final useCase = ref.read(initiateRegistrationUseCaseProvider);
 
@@ -27,7 +27,7 @@ class Register extends _$Register {
 
     return result.when(
       failure: (error) {
-        state = AsyncValue<InitiateRegisterationResponse>.error(
+        state = AsyncValue<InitiateRegisteration>.error(
           error.apiErrorModel.message ?? "حصل خطأ ما",
           StackTrace.current,
         );
@@ -35,17 +35,17 @@ class Register extends _$Register {
       },
 
       success: (response) {
-        state = AsyncValue<InitiateRegisterationResponse>.data(response);
+        state = AsyncValue<InitiateRegisteration>.data(response);
         return response;
       },
     );
   }
 
-  Future<VerifyOtpResponse?> verifyOtp({
+  Future<VerifyOtp?> verifyOtp({
     required String sessionToken,
     required String otp,
   }) async {
-    state = const AsyncValue<VerifyOtpResponse>.loading();
+    state = const AsyncValue<VerifyOtp>.loading();
 
     final useCase = ref.read(verifyOtpUseCaseProvider);
 
@@ -56,7 +56,7 @@ class Register extends _$Register {
 
     return result.when(
       failure: (error) {
-        state = AsyncValue<VerifyOtpResponse>.error(
+        state = AsyncValue<VerifyOtp>.error(
           error.apiErrorModel.message ?? "حصل خطأ ما",
           StackTrace.current,
         );
@@ -64,20 +64,20 @@ class Register extends _$Register {
       },
 
       success: (response) {
-        state = AsyncValue<VerifyOtpResponse>.data(response);
+        state = AsyncValue<VerifyOtp>.data(response);
         return response;
       },
     );
   }
 
-  Future<CompleteRegistrationResponse?> completeRegistration({
+  Future<CompleteRegistration?> completeRegistration({
     required String registrationToken,
     required String firstName,
     required String lastName,
     required String password,
     required String phone,
   }) async {
-    state = const AsyncValue<CompleteRegistrationResponse>.loading();
+    state = const AsyncValue<CompleteRegistration>.loading();
 
     final useCase = ref.read(completeRegistrationUseCaseProvider);
 
@@ -94,7 +94,7 @@ class Register extends _$Register {
 
     return result.when(
       failure: (error) {
-        state = AsyncValue<CompleteRegistrationResponse>.error(
+        state = AsyncValue<CompleteRegistration>.error(
           error.apiErrorModel.message ?? "حصل خطأ ما",
           StackTrace.current,
         );
@@ -102,7 +102,7 @@ class Register extends _$Register {
       },
 
       success: (response) {
-        state = AsyncValue<CompleteRegistrationResponse>.data(response);
+        state = AsyncValue<CompleteRegistration>.data(response);
         return response;
       },
     );

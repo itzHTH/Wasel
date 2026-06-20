@@ -1,4 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:wasal/features/auth/domain/entities/complete_registration.dart';
+
 part 'complete_registration_response.g.dart';
 
 @JsonSerializable()
@@ -29,4 +31,12 @@ class CompleteRegistrationResponse {
       );
 
   Map<String, dynamic> toJson() => _$CompleteRegistrationResponseToJson(this);
+
+  CompleteRegistration toEntity() {
+    return CompleteRegistration(
+      isAuthenticated: isAuthenticated,
+      userName: userName,
+      email: email,
+    );
+  }
 }
