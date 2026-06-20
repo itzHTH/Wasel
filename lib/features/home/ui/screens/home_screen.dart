@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wasal/core/helpers/app_local_cache.dart';
 import 'package:wasal/core/routing/app_routes_name.dart';
 import 'package:wasal/core/theme/app_color.dart';
 import 'package:wasal/features/auth/ui/providers/logout/logout.dart';
@@ -31,33 +30,22 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   onPressed: () async {
-                    ref
-                        .read(logoutProvider.notifier)
-                        .execute(
-                          await AppLocalCache.getSecuredString(
-                                'refreshToken',
-                              ) ??
-                              '',
-                        )
-                        .then((isLoggedOut) {
-                          if (isLoggedOut && context.mounted) {
-                            Navigator.pushReplacementNamed(
-                              context,
-                              AppRoutes.auth,
-                            );
-                          } else {
-                            if (context.mounted) {
-                              // Handle logout failure (e.g., show an error message)
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                    'فشل تسجيل الخروج. حاول مرة أخرى.',
-                                  ),
-                                ),
-                              );
-                            }
-                          }
-                        });
+                    ref.read(logoutProvider.notifier).execute().then((
+                      isLoggedOut,
+                    ) {
+                      if (isLoggedOut && context.mounted) {
+                        Navigator.pushReplacementNamed(context, AppRoutes.auth);
+                      } else {
+                        if (context.mounted) {
+                          // Handle logout failure (e.g., show an error message)
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('فشل تسجيل الخروج. حاول مرة أخرى.'),
+                            ),
+                          );
+                        }
+                      }
+                    });
                   },
                   child: ref
                       .watch(logoutProvider)

@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/core/networking/api_results.dart';
-import 'package:wasal/features/auth/data/models/logout/request/logout_request.dart';
 import 'package:wasal/features/auth/ui/providers/auth_use_case_providers.dart';
 
 part 'logout.g.dart';
@@ -13,13 +12,10 @@ class Logout extends _$Logout {
     return false; // Initial state is false, indicating not logged out
   }
 
-  Future<bool> execute(String refreshToken) async {
+  Future<bool> execute() async {
     state = const AsyncValue.loading();
     final logoutUseCase = ref.watch(logoutUseCaseProvider);
-    final result = await logoutUseCase.execute(
-      LogoutRequest(refreshToken: refreshToken),
-      CancelToken(),
-    );
+    final result = await logoutUseCase.execute(null, CancelToken());
     return result.when(
       success: (data) {
         state = AsyncValue.data(data.success);

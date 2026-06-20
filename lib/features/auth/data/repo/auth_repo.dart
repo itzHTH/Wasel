@@ -106,11 +106,11 @@ class AuthRepo implements BaseAuthRepo {
   }
 
   @override
-  Future<ApiResults<LogoutResponse>> logout(
-    String refreshToken, {
-    CancelToken? cancelToken,
-  }) async {
+  Future<ApiResults<LogoutResponse>> logout({CancelToken? cancelToken}) async {
     try {
+      final refreshToken =
+          await AppLocalCache.getSecuredString(AppConstants.refreshTokenKey) ??
+          '';
       final response = await _authApiService.logout(
         LogoutRequest(refreshToken: refreshToken),
         cancelToken: cancelToken,
