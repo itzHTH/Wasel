@@ -31,8 +31,5 @@ abstract class BaseAuthRepo {
     CancelToken? cancelToken,
   });
 
-  Future<ApiResults<LogoutResponse>> logout(
-    String refreshToken, {
-    CancelToken? cancelToken,
-  });
+  Future<ApiResults<LogoutResponse>> logout({CancelToken? cancelToken});
 }
