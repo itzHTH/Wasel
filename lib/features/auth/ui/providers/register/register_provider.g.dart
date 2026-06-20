@@ -32,7 +32,7 @@ final class RegisterProvider extends $AsyncNotifierProvider<Register, void> {
   Register create() => Register();
 }
 
-String _$registerHash() => r'71d584fb38425bbeb043d9f098bb0dca8056cf21';
+String _$registerHash() => r'd6074cd20c065109b388df75327bf6587214f3c7';
 
 abstract class _$Register extends $AsyncNotifier<void> {
   FutureOr<void> build();
