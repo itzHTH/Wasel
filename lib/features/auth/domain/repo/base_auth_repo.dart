@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:wasal/core/networking/api_results.dart';
+import 'package:wasal/features/auth/data/models/logout/response/logout_response.dart';
 import 'package:wasal/features/auth/data/models/register/complete_registration/request/complete_registration_request.dart';
 import 'package:wasal/features/auth/data/models/register/complete_registration/response/complete_registration_response.dart';
 import 'package:wasal/features/auth/data/models/register/initiate_registeration/request/initiate_registeration_request.dart';
@@ -29,4 +30,6 @@ abstract class BaseAuthRepo {
     CompleteRegistrationRequest request, {
     CancelToken? cancelToken,
   });
+
+  Future<ApiResults<LogoutResponse>> logout({CancelToken? cancelToken});
 }
