@@ -9,7 +9,7 @@ part of 'login_response.dart';
 LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) =>
     LoginResponse(
       isAuthenticated: json['isAuthenticated'] as bool,
-      userName: json['userName'] as String,
+      userName: json['userName'] as String?,
       email: json['email'] as String,
       roles: (json['roles'] as List<dynamic>).map((e) => e as String).toList(),
       token: json['token'] as String,

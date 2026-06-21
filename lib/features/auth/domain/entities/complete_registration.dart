@@ -1,11 +1,11 @@
 class CompleteRegistration {
   final bool isAuthenticated;
-  final String userName;
+  final String? userName;
   final String email;
 
   CompleteRegistration({
     required this.isAuthenticated,
-    required this.userName,
+    this.userName,
     required this.email,
   });
 }
