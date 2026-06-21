@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/core/networking/api_results.dart';
 import 'package:wasal/features/auth/data/models/register/complete_registration/request/complete_registration_request.dart';
@@ -19,10 +18,10 @@ class Register extends _$Register {
     state = const AsyncValue<InitiateRegisteration>.loading();
 
     final useCase = ref.read(initiateRegistrationUseCaseProvider);
+    ref.onDispose(useCase.cancel);
 
-    final result = await useCase.execute(
+    final result = await useCase.call(
       InitiateRegisterationRequest(email: email),
-      CancelToken(),
     );
 
     return result.when(
@@ -48,10 +47,10 @@ class Register extends _$Register {
     state = const AsyncValue<VerifyOtp>.loading();
 
     final useCase = ref.read(verifyOtpUseCaseProvider);
+    ref.onDispose(useCase.cancel);
 
-    final result = await useCase.execute(
+    final result = await useCase.call(
       VerifyOtpRequest(sessionToken: sessionToken, otpCode: otp),
-      CancelToken(),
     );
 
     return result.when(
@@ -80,8 +79,9 @@ class Register extends _$Register {
     state = const AsyncValue<CompleteRegistration>.loading();
 
     final useCase = ref.read(completeRegistrationUseCaseProvider);
+    ref.onDispose(useCase.cancel);
 
-    final result = await useCase.execute(
+    final result = await useCase.call(
       CompleteRegistrationRequest(
         registerToken: registrationToken,
         firstName: firstName,
@@ -89,7 +89,6 @@ class Register extends _$Register {
         password: password,
         phoneNumber: phone,
       ),
-      CancelToken(),
     );
 
     return result.when(
