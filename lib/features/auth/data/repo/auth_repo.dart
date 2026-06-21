@@ -35,16 +35,16 @@ class AuthRepo implements BaseAuthRepo {
   }) async {
     try {
       final LoginResponse response = await _authApiService.login(
-        LoginRequest(
-          email: loginRequest.email,
-          password: loginRequest.password,
-        ),
+        loginRequest,
         cancelToken: cancelToken,
       );
 
       // Store the token and refresh token securely in local cache
-      AppLocalCache.setSecuredString(AppConstants.tokenKey, response.token);
-      AppLocalCache.setSecuredString(
+      await AppLocalCache.setSecuredString(
+        AppConstants.tokenKey,
+        response.token,
+      );
+      await AppLocalCache.setSecuredString(
         AppConstants.refreshTokenKey,
         response.refreshToken,
       );
@@ -97,8 +97,11 @@ class AuthRepo implements BaseAuthRepo {
           .completeRegistration(request, cancelToken: cancelToken);
 
       // Store the token and refresh token securely in local cache
-      AppLocalCache.setSecuredString(AppConstants.tokenKey, response.token);
-      AppLocalCache.setSecuredString(
+      await AppLocalCache.setSecuredString(
+        AppConstants.tokenKey,
+        response.token,
+      );
+      await AppLocalCache.setSecuredString(
         AppConstants.refreshTokenKey,
         response.refreshToken,
       );
@@ -121,11 +124,11 @@ class AuthRepo implements BaseAuthRepo {
       );
 
       // Clear the stored tokens from local cache
-      AppLocalCache.clearAllSecuredData();
+      await AppLocalCache.clearAllSecuredData();
 
       return ApiResults.success(response.toEntity());
     } catch (e) {
-      return Future.value(ApiResults.failure(ErrorHandler.handle(e)));
+      return ApiResults.failure(ErrorHandler.handle(e));
     }
   }
 }
