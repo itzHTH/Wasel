@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/core/const/app_constants.dart';
+import 'package:wasal/core/networking/interceptors/auth_interceptor.dart';
 import 'api_constants.dart';
 
 part 'dio_factory.g.dart';
@@ -41,6 +42,8 @@ class DioFactory {
 
   void _addInterceptors() {
     dio.interceptors.addAll([
+      // Injects the access token and handles 401 → refresh → retry.
+      AuthInterceptor(),
       // Logs requests, responses, and errors in a readable format
       PrettyDioLogger(
         requestHeader: true,
