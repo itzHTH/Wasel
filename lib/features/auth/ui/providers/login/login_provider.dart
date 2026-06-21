@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/core/networking/api_results.dart';
 import 'package:wasal/features/auth/data/models/login/request/login_request.dart';
@@ -12,8 +11,9 @@ class Login extends _$Login {
   Future<void> login(LoginRequest request) async {
     state = const AsyncValue.loading();
     final useCase = ref.read(loginUseCaseProvider);
+    ref.onDispose(useCase.cancel);
 
-    final result = await useCase.execute(request, CancelToken());
+    final result = await useCase.call(request);
 
     result.when(
       failure: (error) => state = AsyncValue.error(

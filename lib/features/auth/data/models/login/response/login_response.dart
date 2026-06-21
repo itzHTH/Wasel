@@ -6,7 +6,7 @@ part 'login_response.g.dart';
 @JsonSerializable()
 class LoginResponse {
   final bool isAuthenticated;
-  final String userName;
+  final String? userName;
   final String email;
   final List<String> roles;
   final String token;

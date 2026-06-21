@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/core/networking/api_results.dart';
 import 'package:wasal/features/auth/ui/providers/auth_use_case_providers.dart';
@@ -15,7 +14,8 @@ class Logout extends _$Logout {
   Future<bool> execute() async {
     state = const AsyncValue.loading();
     final logoutUseCase = ref.watch(logoutUseCaseProvider);
-    final result = await logoutUseCase.execute(null, CancelToken());
+    ref.onDispose(logoutUseCase.cancel);
+    final result = await logoutUseCase.call(null);
     return result.when(
       success: (data) {
         state = AsyncValue.data(data.success);
