@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wasal/core/helpers/app_navigation.dart';
 import 'package:wasal/core/routing/app_router.dart';
 import 'package:wasal/core/routing/app_routes_name.dart';
 import 'package:wasal/core/theme/app_theme.dart';
@@ -14,13 +15,12 @@ class WasalApp extends StatelessWidget {
       minTextAdapt: true,
       builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
+        navigatorKey: AppNavigation.navigatorKey,
         theme: AppTheme.lightTheme,
         initialRoute: AppRoutes.splash,
         onGenerateRoute: AppRouter().onGenerateRoute,
-        builder: (context, child) => Directionality(
-          textDirection: TextDirection.rtl,
-          child: child!,
-        ),
+        builder: (context, child) =>
+            Directionality(textDirection: TextDirection.rtl, child: child!),
       ),
     );
   }
