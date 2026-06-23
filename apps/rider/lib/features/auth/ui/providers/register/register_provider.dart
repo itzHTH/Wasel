@@ -1,12 +1,12 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/networking/api_results.dart';
-import 'package:wasal/features/auth/data/models/register/complete_registration/request/complete_registration_request.dart';
-import 'package:wasal/features/auth/data/models/register/initiate_registeration/request/initiate_registeration_request.dart';
-import 'package:wasal/features/auth/data/models/register/verify_otp/request/verify_otp_request.dart';
-import 'package:wasal/features/auth/domain/entities/complete_registration.dart';
-import 'package:wasal/features/auth/domain/entities/initiate_registeration.dart';
-import 'package:wasal/features/auth/domain/entities/verify_otp.dart';
-import 'package:wasal/features/auth/ui/providers/auth_use_case_providers.dart';
+import 'package:wasel_auth/data/models/register/complete_registration/request/complete_registration_request.dart';
+import 'package:wasel_auth/data/models/register/initiate_registeration/request/initiate_registeration_request.dart';
+import 'package:wasel_auth/data/models/register/verify_otp/request/verify_otp_request.dart';
+import 'package:wasel_auth/domain/entities/complete_registration.dart';
+import 'package:wasel_auth/domain/entities/initiate_registeration.dart';
+import 'package:wasel_auth/domain/entities/verify_otp.dart';
+import 'package:wasel_auth/providers/auth_use_case_providers.dart';
 
 part 'register_provider.g.dart';
 

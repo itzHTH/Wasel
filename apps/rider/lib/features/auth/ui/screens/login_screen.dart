@@ -4,7 +4,6 @@ import 'package:wasal/core/routing/app_routes_name.dart';
 import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
-import 'package:wasal/features/auth/data/models/login/request/login_request.dart';
 import 'package:wasal/features/auth/ui/providers/login/login_provider.dart';
 import 'package:wasal/features/auth/ui/widgets/common/auth_header.dart';
 import 'package:wasal/features/auth/ui/widgets/common/auth_primary_button.dart';
@@ -34,12 +33,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     if (_formKey.currentState?.validate() ?? false) {
       ref
           .read(loginProvider.notifier)
-          .login(
-            LoginRequest(
-              email: _emailCtrl.text.trim(),
-              password: _passCtrl.text.trim(),
-            ),
-          );
+          .login(_emailCtrl.text.trim(), _passCtrl.text.trim());
     }
   }
 

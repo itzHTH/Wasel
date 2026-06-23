@@ -11,7 +11,7 @@ environment:
 workspace:
   - apps/rider
   - packages/core
-  # - packages/auth
+  - packages/auth
   # - apps/driver
 
 dev_dependencies:
