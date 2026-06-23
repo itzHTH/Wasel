@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wasal/core/networking/errors/error_handler.dart';
+import 'package:wasel_core/networking/errors/error_handler.dart';
 
 part 'api_results.freezed.dart';
 

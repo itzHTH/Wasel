@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/core/routing/app_routes_name.dart';
-import 'package:wasal/core/theme/app_color.dart';
+import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasal/features/auth/ui/providers/logout/logout.dart';
 
 class HomeScreen extends StatelessWidget {

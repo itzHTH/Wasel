@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wasal/core/theme/app_color.dart';
-import 'package:wasal/core/theme/app_dimens.dart';
-import 'package:wasal/core/widgets/app_labeled_field.dart';
+import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/app_dimens.dart';
+import 'package:wasel_core/widgets/app_labeled_field.dart';
 
 class AppPasswordFormField extends StatefulWidget {
   final String label;

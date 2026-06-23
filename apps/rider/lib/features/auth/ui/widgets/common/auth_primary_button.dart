@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wasal/core/theme/app_color.dart';
-import 'package:wasal/core/theme/app_dimens.dart';
-import 'package:wasal/core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/app_dimens.dart';
+import 'package:wasel_core/theme/app_text_styles.dart';
 
 class AuthPrimaryButton extends StatelessWidget {
   final String label;

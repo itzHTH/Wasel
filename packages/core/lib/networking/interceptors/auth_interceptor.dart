@@ -1,17 +1,24 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:wasal/core/const/app_constants.dart';
-import 'package:wasal/core/helpers/app_local_cache.dart';
-import 'package:wasal/core/helpers/app_navigation.dart';
-import 'package:wasal/core/networking/api_constants.dart';
-import 'package:wasal/core/routing/app_routes_name.dart';
+import 'package:wasel_core/const/app_constants.dart';
+import 'package:wasel_core/helpers/app_local_cache.dart';
+import 'package:wasel_core/networking/api_constants.dart';
 
 /// Injects the stored access token into every outgoing request and, on a 401,
 /// transparently refreshes the session and replays the original request.
 ///
 /// If the refresh fails (expired/invalid refresh token), the stored session is
-/// cleared and the user is routed back to the auth screen.
+/// cleared and [onSessionExpired] is invoked so the host app can route the user
+/// back to its auth screen.
 class AuthInterceptor extends Interceptor {
+  /// Called once when the session can no longer be refreshed (forced logout).
+  ///
+  /// This package is app-agnostic: it does not know about any app's routes or
+  /// navigator. Each host app registers its own handler at startup, e.g.
+  /// `AuthInterceptor.onSessionExpired = () =>
+  ///     AppNavigation.pushReplacementNamed(AppRoutes.auth);`
+  static void Function()? onSessionExpired;
+
   /// Plain Dio used ONLY for the refresh call and for replaying the original
   /// request. It has no [AuthInterceptor], so a 401 here can never re-enter
   /// this interceptor and cause an infinite loop.
@@ -135,6 +142,6 @@ class AuthInterceptor extends Interceptor {
     if (_isLoggingOut) return;
     _isLoggingOut = true;
     await AppLocalCache.clearAllSecuredData();
-    AppNavigation.pushReplacementNamed(AppRoutes.auth);
+    onSessionExpired?.call();
   }
 }

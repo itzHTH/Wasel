@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:wasal/core/networking/api_results.dart';
-import 'package:wasal/core/usecase/cancellable_use_case.dart';
+import 'package:wasel_core/networking/api_results.dart';
+import 'package:wasel_core/usecase/cancellable_use_case.dart';
 import 'package:wasal/features/auth/data/models/register/complete_registration/request/complete_registration_request.dart';
 import 'package:wasal/features/auth/domain/entities/complete_registration.dart';
 import 'package:wasal/features/auth/domain/repo/base_auth_repo.dart';

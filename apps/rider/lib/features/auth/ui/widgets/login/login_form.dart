@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:wasal/core/helpers/app_validators.dart';
-import 'package:wasal/core/theme/app_color.dart';
-import 'package:wasal/core/theme/app_dimens.dart';
-import 'package:wasal/core/widgets/app_labeled_field.dart';
-import 'package:wasal/core/widgets/password_field.dart';
+import 'package:wasel_core/helpers/app_validators.dart';
+import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/app_dimens.dart';
+import 'package:wasel_core/widgets/app_labeled_field.dart';
+import 'package:wasel_core/widgets/password_field.dart';
 
 class LoginForm extends StatelessWidget {
   final GlobalKey<FormState> formKey;

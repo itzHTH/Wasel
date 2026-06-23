@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:wasal/core/networking/errors/api_error_model.dart';
-import 'package:wasal/core/networking/errors/api_errors.dart';
+import 'package:wasel_core/networking/errors/api_error_model.dart';
+import 'package:wasel_core/networking/errors/api_errors.dart';
 
 /// 1 - DataSource — represents all possible error states (server or local)
 enum DataSource {

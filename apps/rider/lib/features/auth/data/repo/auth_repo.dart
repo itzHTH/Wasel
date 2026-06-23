@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:wasal/core/const/app_constants.dart';
-import 'package:wasal/core/helpers/app_local_cache.dart';
-import 'package:wasal/core/networking/api_results.dart';
-import 'package:wasal/core/networking/errors/error_handler.dart';
+import 'package:wasel_core/const/app_constants.dart';
+import 'package:wasel_core/helpers/app_local_cache.dart';
+import 'package:wasel_core/networking/api_results.dart';
+import 'package:wasel_core/networking/errors/error_handler.dart';
 import 'package:wasal/features/auth/data/models/logout/request/logout_request.dart';
 import 'package:wasal/features/auth/data/models/register/complete_registration/request/complete_registration_request.dart';
 import 'package:wasal/features/auth/data/models/register/complete_registration/response/complete_registration_response.dart';
