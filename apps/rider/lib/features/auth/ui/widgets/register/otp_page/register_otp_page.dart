@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wasal/core/theme/app_dimens.dart';
-import 'package:wasal/core/theme/app_text_styles.dart';
-import 'package:wasal/core/widgets/app_back_button.dart';
+import 'package:wasel_core/theme/app_dimens.dart';
+import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/widgets/app_back_button.dart';
 import 'package:wasal/features/auth/ui/providers/register/register_provider.dart';
 import 'package:wasal/features/auth/ui/widgets/common/auth_primary_button.dart';
 import 'package:wasal/features/auth/ui/widgets/register/otp_page/otp_pin_input.dart';

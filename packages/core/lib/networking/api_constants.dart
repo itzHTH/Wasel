@@ -1,4 +1,4 @@
-import 'package:wasal/flavors/flavors_config.dart';
+import 'package:wasel_core/flavors/flavors_config.dart';
 
 class ApiConstants {
   static String get baseUrl => FlavorConfig.instance.baseUrl;

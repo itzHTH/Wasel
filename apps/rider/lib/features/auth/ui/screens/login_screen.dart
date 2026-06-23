@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/core/routing/app_routes_name.dart';
-import 'package:wasal/core/theme/app_color.dart';
-import 'package:wasal/core/theme/app_dimens.dart';
-import 'package:wasal/core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/app_dimens.dart';
+import 'package:wasel_core/theme/app_text_styles.dart';
 import 'package:wasal/features/auth/data/models/login/request/login_request.dart';
 import 'package:wasal/features/auth/ui/providers/login/login_provider.dart';
 import 'package:wasal/features/auth/ui/widgets/common/auth_header.dart';

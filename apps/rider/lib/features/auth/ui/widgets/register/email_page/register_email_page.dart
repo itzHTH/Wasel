@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wasal/core/helpers/app_validators.dart';
-import 'package:wasal/core/theme/app_color.dart';
-import 'package:wasal/core/theme/app_dimens.dart';
-import 'package:wasal/core/theme/app_text_styles.dart';
+import 'package:wasel_core/helpers/app_validators.dart';
+import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/app_dimens.dart';
+import 'package:wasel_core/theme/app_text_styles.dart';
 import 'package:wasal/features/auth/ui/providers/register/register_provider.dart';
 import 'package:wasal/features/auth/ui/widgets/common/auth_header.dart';
-import 'package:wasal/core/widgets/app_labeled_field.dart';
+import 'package:wasel_core/widgets/app_labeled_field.dart';
 import 'package:wasal/features/auth/ui/widgets/common/auth_primary_button.dart';
 import 'package:wasal/features/auth/ui/widgets/common/auth_social_section.dart';
 

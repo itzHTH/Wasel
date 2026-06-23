@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:wasal/core/networking/api_results.dart';
-import 'package:wasal/core/usecase/cancellable_use_case.dart';
+import 'package:wasel_core/networking/api_results.dart';
+import 'package:wasel_core/usecase/cancellable_use_case.dart';
 import 'package:wasal/features/auth/data/models/register/verify_otp/request/verify_otp_request.dart';
 import 'package:wasal/features/auth/domain/entities/verify_otp.dart';
 import 'package:wasal/features/auth/domain/repo/base_auth_repo.dart';

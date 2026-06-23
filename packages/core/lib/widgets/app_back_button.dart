@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:wasal/core/theme/app_color.dart';
-import 'package:wasal/core/theme/app_dimens.dart';
+import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/app_dimens.dart';
 
 class AppBackButton extends StatelessWidget {
   final VoidCallback? onTap;

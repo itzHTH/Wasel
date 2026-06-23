@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wasal/core/theme/app_color.dart';
+import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasal/features/auth/ui/providers/register/register_provider.dart';
 import 'package:wasal/features/auth/ui/widgets/register/email_page/register_email_page.dart';
 import 'package:wasal/features/auth/ui/widgets/register/form_page/register_form_page.dart';

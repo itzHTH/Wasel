@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wasal/core/theme/app_dimens.dart';
+import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasal/features/auth/ui/widgets/register/otp_page/otp_countdown_timer.dart';
 import 'package:wasal/features/auth/ui/widgets/register/otp_page/resend_otp_row.dart';
 

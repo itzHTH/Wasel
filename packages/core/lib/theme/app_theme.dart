@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wasal/core/theme/app_color.dart';
-import 'package:wasal/core/theme/app_dimens.dart';
+import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/app_dimens.dart';
 
 class AppTheme {
   static ThemeData get lightTheme {

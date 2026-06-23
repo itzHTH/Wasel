@@ -1,5 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:wasal/core/networking/api_results.dart';
+import 'package:wasel_core/networking/api_results.dart';
 import 'package:wasal/features/auth/ui/providers/auth_use_case_providers.dart';
 
 part 'logout.g.dart';

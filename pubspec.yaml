@@ -10,7 +10,7 @@ environment:
 #   Phase 1 -> packages/core, Phase 2 -> packages/auth, Phase 3 -> apps/driver
 workspace:
   - apps/rider
-  # - packages/core
+  - packages/core
   # - packages/auth
   # - apps/driver
 

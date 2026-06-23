@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:wasal/core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/app_text_styles.dart';
 
 class OtpCountdownTimer extends StatefulWidget {
   final VoidCallback? onExpired;

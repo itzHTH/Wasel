@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wasal/core/const/app_constants.dart';
+import 'package:wasel_core/const/app_constants.dart';
 
 class AppLocalCache {
   // private constructor as I don't want to allow creating an instance of this class itself.
