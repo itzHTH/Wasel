@@ -12,7 +12,7 @@ workspace:
   - apps/rider
   - packages/core
   - packages/auth
-  # - apps/driver
+  - apps/driver
 
 dev_dependencies:
   melos: ^6.0.0
