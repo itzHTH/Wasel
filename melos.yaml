@@ -1,0 +1,14 @@
+name: wasel_workspace
+
+packages:
+  - apps/*
+  - packages/*
+
+scripts:
+  gen:
+    description: "Run build_runner codegen in every package that depends on build_runner."
+    run: dart run build_runner build --delete-conflicting-outputs
+    exec:
+      concurrency: 1
+    packageFilters:
+      dependsOn: build_runner
