@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:driver/features/driver_verification/ui/utils/capture_stub.dart';
+import 'package:driver/features/driver_verification/ui/screens/selfie_camera_screen.dart';
 import 'package:driver/features/driver_verification/ui/utils/document_scanner_launcher.dart';
 import 'package:driver/features/driver_verification/ui/widgets/capture_preview_sheet.dart';
 import 'package:driver/features/driver_verification/ui/widgets/steps/license_step.dart';
@@ -18,8 +18,7 @@ import 'package:driver/features/driver_verification/ui/widgets/wizard_progress.d
 /// UI-only: the captured images and vehicle fields live here locally as
 /// [ValueNotifier]s so each rebuild is scoped to the smallest widget that
 /// observes it (no top-level `setState`). The marked `// TODO(provider)` seams
-/// are where the Riverpod wizard notifier + use cases plug in later, and the
-/// `// TODO(phase3)` seam is where the real camera replaces the stub capture.
+/// are where the Riverpod wizard notifier + use cases plug in later.
 class VerificationWizardScreen extends ConsumerStatefulWidget {
   const VerificationWizardScreen({super.key});
 
@@ -118,10 +117,11 @@ class _VerificationWizardScreenState
     }
   }
 
-  // Documents use the ML Kit scanner (Android). The selfie stays on the Phase 2
-  // stub until the front-camera face capture lands in Phase 4.
-  // TODO(phase4): replace the selfie stub with the selfie camera screen.
-  Future<XFile?> _captureSelfieStub() => generateStubCapture('صورة شخصية');
+  // Documents use the ML Kit scanner (Android); the selfie uses the front
+  // camera with face-driven auto-capture.
+  Future<XFile?> _captureSelfie() => Navigator.of(context).push<XFile>(
+    MaterialPageRoute(builder: (_) => const SelfieCameraScreen()),
+  );
 
   // ── Navigation ───────────────────────────────────────────────────────────--
 
@@ -218,7 +218,7 @@ class _VerificationWizardScreenState
                     ),
                     SelfieStep(
                       selfie: _selfie,
-                      onTap: () => _capture(_selfie, _captureSelfieStub),
+                      onTap: () => _capture(_selfie, _captureSelfie),
                     ),
                   ],
                 ),
