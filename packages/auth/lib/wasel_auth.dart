@@ -6,6 +6,9 @@
 /// request models and read response/entity types directly.
 library;
 
+// Config — selects rider vs driver registration endpoints
+export 'auth_user_type.dart';
+
 // Domain — entities
 export 'domain/entities/complete_registration.dart';
 export 'domain/entities/initiate_registeration.dart';

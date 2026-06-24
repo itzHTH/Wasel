@@ -13,6 +13,7 @@ import 'package:wasel_auth/data/models/login/request/login_request.dart';
 import 'package:wasel_auth/data/models/login/response/login_response.dart';
 import 'package:wasel_auth/data/models/register/verify_otp/request/verify_otp_request.dart';
 import 'package:wasel_auth/data/models/register/verify_otp/response/verify_otp_respons.dart';
+import 'package:wasel_auth/auth_user_type.dart';
 import 'package:wasel_auth/data/services/auth_api_service.dart';
 import 'package:wasel_auth/domain/entities/complete_registration.dart';
 import 'package:wasel_auth/domain/entities/initiate_registeration.dart';
@@ -26,7 +27,10 @@ part 'auth_repo.g.dart';
 class AuthRepo implements BaseAuthRepo {
   final AuthApiService _authApiService;
 
-  AuthRepo(this._authApiService);
+  /// Selects the role-specific registration endpoints (rider vs driver).
+  final AuthUserType _userType;
+
+  AuthRepo(this._authApiService, this._userType);
 
   @override
   Future<ApiResults<Login>> login(
@@ -62,7 +66,11 @@ class AuthRepo implements BaseAuthRepo {
   }) async {
     try {
       final InitiateRegisterationResponse response = await _authApiService
-          .initiateRegistration(request, cancelToken: cancelToken);
+          .initiateRegistration(
+            _userType.path,
+            request,
+            cancelToken: cancelToken,
+          );
 
       return ApiResults.success(response.toEntity());
     } catch (e) {
@@ -77,6 +85,7 @@ class AuthRepo implements BaseAuthRepo {
   }) async {
     try {
       final VerifyOtpResponse response = await _authApiService.verifyOtp(
+        _userType.path,
         request,
         cancelToken: cancelToken,
       );
@@ -94,7 +103,11 @@ class AuthRepo implements BaseAuthRepo {
   }) async {
     try {
       final CompleteRegistrationResponse response = await _authApiService
-          .completeRegistration(request, cancelToken: cancelToken);
+          .completeRegistration(
+            _userType.path,
+            request,
+            cancelToken: cancelToken,
+          );
 
       // Store the token and refresh token securely in local cache
       await AppLocalCache.setSecuredString(
@@ -136,5 +149,6 @@ class AuthRepo implements BaseAuthRepo {
 @riverpod
 AuthRepo authRepo(Ref ref) {
   final authApiService = ref.watch(authApiServiceProvider);
-  return AuthRepo(authApiService);
+  final userType = ref.watch(authUserTypeProvider);
+  return AuthRepo(authApiService, userType);
 }
