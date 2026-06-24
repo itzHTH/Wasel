@@ -29,18 +29,21 @@ abstract class AuthApiService {
 
   @POST(ApiConstants.initiateRegistration)
   Future<InitiateRegisterationResponse> initiateRegistration(
+    @Path('userType') String userType,
     @Body() InitiateRegisterationRequest request, {
     @CancelRequest() CancelToken? cancelToken,
   });
 
   @POST(ApiConstants.verifyOtp)
   Future<VerifyOtpResponse> verifyOtp(
+    @Path('userType') String userType,
     @Body() VerifyOtpRequest request, {
     @CancelRequest() CancelToken? cancelToken,
   });
 
   @POST(ApiConstants.completeRegistration)
   Future<CompleteRegistrationResponse> completeRegistration(
+    @Path('userType') String userType,
     @Body() CompleteRegistrationRequest request, {
     @CancelRequest() CancelToken? cancelToken,
   });

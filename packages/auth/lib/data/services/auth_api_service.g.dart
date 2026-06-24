@@ -54,6 +54,7 @@ class _AuthApiService implements AuthApiService {
 
   @override
   Future<InitiateRegisterationResponse> initiateRegistration(
+    String userType,
     InitiateRegisterationRequest request, {
     CancelToken? cancelToken,
   }) async {
@@ -67,7 +68,7 @@ class _AuthApiService implements AuthApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/api/v1/Auth/rider/initiate-registration',
+            '/api/v1/Auth/${userType}/initiate-registration',
             queryParameters: queryParameters,
             data: _data,
             cancelToken: cancelToken,
@@ -87,6 +88,7 @@ class _AuthApiService implements AuthApiService {
 
   @override
   Future<VerifyOtpResponse> verifyOtp(
+    String userType,
     VerifyOtpRequest request, {
     CancelToken? cancelToken,
   }) async {
@@ -100,7 +102,7 @@ class _AuthApiService implements AuthApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/api/v1/Auth/rider/verify-otp',
+            '/api/v1/Auth/${userType}/verify-otp',
             queryParameters: queryParameters,
             data: _data,
             cancelToken: cancelToken,
@@ -120,6 +122,7 @@ class _AuthApiService implements AuthApiService {
 
   @override
   Future<CompleteRegistrationResponse> completeRegistration(
+    String userType,
     CompleteRegistrationRequest request, {
     CancelToken? cancelToken,
   }) async {
@@ -133,7 +136,7 @@ class _AuthApiService implements AuthApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/api/v1/Auth/rider/complete-registration',
+            '/api/v1/Auth/${userType}/complete-registration',
             queryParameters: queryParameters,
             data: _data,
             cancelToken: cancelToken,

@@ -14,4 +14,6 @@ Map<String, dynamic> _$CompleteRegistrationRequestToJson(
   'lastName': instance.lastName,
   'phoneNumber': instance.phoneNumber,
   'password': instance.password,
+  'city': ?instance.city,
+  'address': ?instance.address,
 };
