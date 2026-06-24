@@ -6,4 +6,7 @@ class AppRoutes {
   static const String register = '/register';
 
   static const String home = '/home';
+
+  // Driver verification (boundary placeholder — impl left to owner)
+  static const String driverVerification = '/driver-verification';
 }
