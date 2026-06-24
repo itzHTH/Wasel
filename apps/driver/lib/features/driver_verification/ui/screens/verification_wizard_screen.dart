@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:driver/features/driver_verification/ui/utils/capture_stub.dart';
+import 'package:driver/features/driver_verification/ui/utils/document_scanner_launcher.dart';
 import 'package:driver/features/driver_verification/ui/widgets/capture_preview_sheet.dart';
 import 'package:driver/features/driver_verification/ui/widgets/steps/license_step.dart';
 import 'package:driver/features/driver_verification/ui/widgets/steps/selfie_step.dart';
@@ -97,21 +98,30 @@ class _VerificationWizardScreenState
     }
   }
 
-  // ── Capture (Phase 2 stub; Phase 3/4 swap in the camera) ─────────────────--
+  // ── Capture ──────────────────────────────────────────────────────────────--
 
-  Future<void> _capture(ValueNotifier<XFile?> slot, String label) async {
-    // TODO(phase3): replace the stub with the real camera screen for this slot.
-    final captured = await generateStubCapture(label);
-    if (!mounted) return;
+  /// Runs [capture] for [slot], then confirms via the preview sheet. A null
+  /// capture (cancel/unsupported) or a "retake"/dismiss leaves the slot's
+  /// previous value intact; only an explicit confirm fills it.
+  Future<void> _capture(
+    ValueNotifier<XFile?> slot,
+    Future<XFile?> Function() capture,
+  ) async {
+    final captured = await capture();
+    if (captured == null || !mounted) return;
     final confirmed = await showCapturePreviewSheet(
       context: context,
       file: captured,
     );
-    // Confirm fills the slot; retake/dismiss leaves the previous value intact.
     if (confirmed == true) {
       slot.value = captured;
     }
   }
+
+  // Documents use the ML Kit scanner (Android). The selfie stays on the Phase 2
+  // stub until the front-camera face capture lands in Phase 4.
+  // TODO(phase4): replace the selfie stub with the selfie camera screen.
+  Future<XFile?> _captureSelfieStub() => generateStubCapture('صورة شخصية');
 
   // ── Navigation ───────────────────────────────────────────────────────────--
 
@@ -193,13 +203,14 @@ class _VerificationWizardScreenState
                       front: _licenseFront,
                       back: _licenseBack,
                       onTapFront: () =>
-                          _capture(_licenseFront, 'الوجه الأمامي للرخصة'),
+                          _capture(_licenseFront, scanDocumentImage),
                       onTapBack: () =>
-                          _capture(_licenseBack, 'الوجه الخلفي للرخصة'),
+                          _capture(_licenseBack, scanDocumentImage),
                     ),
                     VehicleStep(
                       photo: _vehiclePhoto,
-                      onTapPhoto: () => _capture(_vehiclePhoto, 'صورة المركبة'),
+                      onTapPhoto: () =>
+                          _capture(_vehiclePhoto, scanDocumentImage),
                       formKey: _vehicleFormKey,
                       modelCtrl: _modelCtrl,
                       yearCtrl: _yearCtrl,
@@ -207,7 +218,7 @@ class _VerificationWizardScreenState
                     ),
                     SelfieStep(
                       selfie: _selfie,
-                      onTap: () => _capture(_selfie, 'صورة شخصية'),
+                      onTap: () => _capture(_selfie, _captureSelfieStub),
                     ),
                   ],
                 ),
