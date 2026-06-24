@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
+import 'package:driver/features/driver_verification/ui/models/verification_submission.dart';
 import 'package:driver/features/driver_verification/ui/screens/selfie_camera_screen.dart';
+import 'package:driver/features/driver_verification/ui/screens/uploading_screen.dart';
 import 'package:driver/features/driver_verification/ui/utils/document_scanner_launcher.dart';
 import 'package:driver/features/driver_verification/ui/widgets/capture_preview_sheet.dart';
+import 'package:driver/features/driver_verification/ui/widgets/rejection_banner.dart';
 import 'package:driver/features/driver_verification/ui/widgets/steps/license_step.dart';
 import 'package:driver/features/driver_verification/ui/widgets/steps/selfie_step.dart';
 import 'package:driver/features/driver_verification/ui/widgets/steps/vehicle_step.dart';
@@ -20,7 +23,11 @@ import 'package:driver/features/driver_verification/ui/widgets/wizard_progress.d
 /// observes it (no top-level `setState`). The marked `// TODO(provider)` seams
 /// are where the Riverpod wizard notifier + use cases plug in later.
 class VerificationWizardScreen extends ConsumerStatefulWidget {
-  const VerificationWizardScreen({super.key});
+  /// When non-null, a rejection banner is shown above the form (set when the
+  /// driver is routed back here after a previous submission was rejected).
+  final String? rejectionReason;
+
+  const VerificationWizardScreen({super.key, this.rejectionReason});
 
   @override
   ConsumerState<VerificationWizardScreen> createState() =>
@@ -157,10 +164,23 @@ class _VerificationWizardScreenState
   }
 
   void _onSubmit() {
-    // TODO(provider): hand the captured images + vehicle fields to the submit
-    // use case and route to the uploading screen (Phase 5).
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('تم الوصول إلى الإرسال (Phase 2)')),
+    // Gating guarantees every slot is filled by the time Submit is reachable.
+    // TODO(provider): replace this local payload + push with the submit use
+    // case; the uploading screen will then observe the upload-progress provider
+    // instead of its fake driver.
+    final submission = VerificationSubmission(
+      licenseFront: _licenseFront.value!,
+      licenseBack: _licenseBack.value!,
+      vehiclePhoto: _vehiclePhoto.value!,
+      selfie: _selfie.value!,
+      vehicleModel: _modelCtrl.text.trim(),
+      vehicleYear: _yearCtrl.text.trim(),
+      vin: _vinCtrl.text.trim(),
+    );
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => UploadingScreen(submission: submission),
+      ),
     );
   }
 
@@ -178,6 +198,16 @@ class _VerificationWizardScreenState
         body: SafeArea(
           child: Column(
             children: [
+              if (widget.rejectionReason != null)
+                Padding(
+                  padding: EdgeInsets.fromLTRB(
+                    AppDimens.screenHPadding,
+                    AppDimens.space16,
+                    AppDimens.screenHPadding,
+                    0,
+                  ),
+                  child: RejectionBanner(reason: widget.rejectionReason!),
+                ),
               Padding(
                 padding: EdgeInsets.fromLTRB(
                   AppDimens.screenHPadding,
