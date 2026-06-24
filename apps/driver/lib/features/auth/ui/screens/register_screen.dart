@@ -127,9 +127,11 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(const SnackBar(content: Text('تم التسجيل بنجاح')));
+        // A freshly-registered driver must verify before using the app; the
+        // gate checks their status and routes accordingly.
         Navigator.pushNamedAndRemoveUntil(
           context,
-          AppRoutes.home,
+          AppRoutes.driverVerification,
           (route) => false,
         );
       }
