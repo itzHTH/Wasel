@@ -5,7 +5,9 @@
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>We need camera access to capture your verification documents (driver's license, vehicle, and selfie).</string>
+	<string>need camera access for verification ID card</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>need photo library access for verification vehicle Photo</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

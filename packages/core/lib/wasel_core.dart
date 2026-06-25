@@ -20,6 +20,9 @@ export 'helpers/app_navigation.dart';
 export 'helpers/app_url_launcher.dart';
 export 'helpers/app_validators.dart';
 
+// Permissions
+export 'permissions/permission_gate.dart';
+
 // Networking
 export 'networking/api_constants.dart';
 export 'networking/api_results.dart';
@@ -41,6 +44,7 @@ export 'usecase/cancellable_use_case.dart';
 
 // Widgets
 export 'widgets/app_back_button.dart';
+export 'widgets/app_dialog.dart';
 export 'widgets/app_header_with_logo.dart';
 export 'widgets/app_labeled_field.dart';
 export 'widgets/app_text_form_field.dart';
