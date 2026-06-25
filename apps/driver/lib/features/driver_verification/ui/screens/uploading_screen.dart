@@ -9,7 +9,7 @@ import 'package:wasel_core/theme/app_text_styles.dart';
 import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
 import 'package:driver/features/driver_verification/ui/models/verification_submission.dart';
 import 'package:driver/features/driver_verification/ui/screens/under_review_screen.dart';
-import 'package:driver/features/driver_verification/ui/widgets/verification_status_badge.dart';
+import 'package:driver/features/driver_verification/ui/widgets/common/verification_status_badge.dart';
 
 /// The three visible states of the submit/upload flow.
 enum _UploadPhase { uploading, success, failure }

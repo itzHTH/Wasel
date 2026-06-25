@@ -5,7 +5,7 @@ import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
 import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
-import 'package:driver/features/driver_verification/ui/widgets/captured_image.dart';
+import 'package:driver/features/driver_verification/ui/widgets/wizard/captured_image.dart';
 
 /// Shows the just-captured [file] large with confirm / retake actions.
 ///

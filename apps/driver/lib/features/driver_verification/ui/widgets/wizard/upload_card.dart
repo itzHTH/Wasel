@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
-import 'package:driver/features/driver_verification/ui/widgets/captured_image.dart';
+import 'package:driver/features/driver_verification/ui/widgets/wizard/captured_image.dart';
 
 /// A tappable capture slot used across the verification wizard.
 ///

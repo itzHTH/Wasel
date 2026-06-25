@@ -3,10 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:driver/features/driver_verification/ui/widgets/camera_overlay_painter.dart';
-import 'package:driver/features/driver_verification/ui/widgets/camera_preview_cover.dart';
-import 'package:driver/features/driver_verification/ui/widgets/guidance_text.dart';
-import 'package:driver/features/driver_verification/ui/widgets/manual_capture_button.dart';
+import 'package:driver/features/driver_verification/ui/widgets/camera/camera_overlay_painter.dart';
+import 'package:driver/features/driver_verification/ui/widgets/camera/camera_preview_cover.dart';
+import 'package:driver/features/driver_verification/ui/widgets/camera/guidance_text.dart';
+import 'package:driver/features/driver_verification/ui/widgets/camera/manual_capture_button.dart';
 
 /// The live camera UI: cover-fit preview, framing overlay, close button, static
 /// guidance pill, and the manual shutter.

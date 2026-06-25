@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 import 'package:wasel_core/extensions/navigation_extension.dart';
 import 'package:wasel_core/theme/app_color.dart';
@@ -8,7 +7,7 @@ import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
 import 'package:driver/features/driver_verification/ui/models/verification_status.dart';
 import 'package:driver/features/driver_verification/ui/screens/verification_wizard_screen.dart';
-import 'package:driver/features/driver_verification/ui/widgets/verification_status_badge.dart';
+import 'package:driver/features/driver_verification/ui/widgets/common/verification_status_badge.dart';
 
 /// Shown while the submitted verification awaits a back-office decision. Status
 /// is **polled** (there is no FCM): the driver pulls-to-refresh or taps "تحديث
@@ -58,7 +57,9 @@ class _UnderReviewScreenState extends State<UnderReviewScreen> {
       case VerificationStatus.underReview:
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('لا يزال طلبك قيد المراجعة، سنخبرك فور تحديث الحالة.'),
+            content: Text(
+              'لا يزال طلبك قيد المراجعة، سنخبرك فور تحديث الحالة.',
+            ),
           ),
         );
     }
@@ -68,7 +69,8 @@ class _UnderReviewScreenState extends State<UnderReviewScreen> {
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (_) => const VerificationWizardScreen(
-          rejectionReason: 'تم رفض طلبك السابق، يرجى مراجعة بياناتك وإعادة الإرسال.',
+          rejectionReason:
+              'تم رفض طلبك السابق، يرجى مراجعة بياناتك وإعادة الإرسال.',
         ),
       ),
       (route) => route.isFirst,
@@ -133,55 +135,6 @@ class _UnderReviewScreenState extends State<UnderReviewScreen> {
                   ),
                 ),
               ),
-            ),
-            if (kDebugMode) _DebugStatusSelector(selected: _simulatedStatus),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-/// Debug-only selector for the next fake status check. Never shown in release.
-class _DebugStatusSelector extends StatelessWidget {
-  final ValueNotifier<VerificationStatus> selected;
-
-  const _DebugStatusSelector({required this.selected});
-
-  static const _options = <(VerificationStatus, String)>[
-    (VerificationStatus.underReview, 'قيد المراجعة'),
-    (VerificationStatus.approved, 'مقبول'),
-    (VerificationStatus.rejected, 'مرفوض'),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: AppDimens.screenHPadding,
-        right: AppDimens.screenHPadding,
-        bottom: AppDimens.space8,
-      ),
-      child: ValueListenableBuilder<VerificationStatus>(
-        valueListenable: selected,
-        builder: (context, current, _) => Column(
-          children: [
-            Text(
-              'محاكاة نتيجة التحديث (debug)',
-              style: AppTextStyles.font12Neutral400Regular,
-            ),
-            SizedBox(height: AppDimens.space8),
-            Wrap(
-              alignment: WrapAlignment.center,
-              spacing: AppDimens.space8,
-              children: [
-                for (final (status, label) in _options)
-                  ChoiceChip(
-                    label: Text(label),
-                    selected: current == status,
-                    onSelected: (_) => selected.value = status,
-                  ),
-              ],
             ),
           ],
         ),
