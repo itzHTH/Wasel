@@ -3,11 +3,8 @@ import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
 
-/// Where a capture slot should source its image from.
 enum CaptureSource { camera, gallery }
 
-/// Bottom sheet offering camera vs. gallery. Returns the chosen [CaptureSource],
-/// or `null` if the sheet is dismissed.
 Future<CaptureSource?> showCaptureSourceSheet({required BuildContext context}) {
   return showModalBottomSheet<CaptureSource>(
     context: context,

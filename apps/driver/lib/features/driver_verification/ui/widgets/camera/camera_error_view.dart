@@ -3,7 +3,6 @@ import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
 
-/// Full-screen error state for the camera capture flow, with a back action.
 class CameraErrorView extends StatelessWidget {
   final String message;
   final VoidCallback onBack;

@@ -3,7 +3,6 @@ import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
 
-/// A pill of guidance text shown over the camera (e.g. "Center your face").
 class GuidanceText extends StatelessWidget {
   final String message;
 

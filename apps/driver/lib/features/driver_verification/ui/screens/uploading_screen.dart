@@ -1,6 +1,4 @@
-import 'dart:async';
-
-import 'package:flutter/foundation.dart' show ValueListenable, kDebugMode;
+import 'package:flutter/foundation.dart' show ValueListenable;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasel_core/theme/app_color.dart';
@@ -8,20 +6,10 @@ import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
 import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
 import 'package:driver/features/driver_verification/ui/models/verification_submission.dart';
-import 'package:driver/features/driver_verification/ui/screens/under_review_screen.dart';
 import 'package:driver/features/driver_verification/ui/widgets/common/verification_status_badge.dart';
 
-/// The three visible states of the submit/upload flow.
 enum _UploadPhase { uploading, success, failure }
 
-/// Submit/upload screen — blocks interaction while the verification documents
-/// are "uploaded", then resolves to success or an in-place failure with retry.
-///
-/// UI-only: progress is driven by a **fake** timer and the outcome by a
-/// debug-only failure toggle. The `// TODO(provider)` seams mark where the
-/// submit use case + its upload-progress stream plug in later. The captured
-/// images live in [VerificationSubmission] for the whole session, so a retry
-/// never requires re-capturing.
 class UploadingScreen extends StatefulWidget {
   final VerificationSubmission submission;
 
@@ -32,17 +20,8 @@ class UploadingScreen extends StatefulWidget {
 }
 
 class _UploadingScreenState extends State<UploadingScreen> {
-  // Fake upload pacing: ~3s from 0 → 100%.
-  static const _tick = Duration(milliseconds: 60);
-  static const _step = 0.02;
-
   final _phase = ValueNotifier<_UploadPhase>(_UploadPhase.uploading);
   final _progress = ValueNotifier<double>(0);
-
-  /// Debug-only: force the next attempt to fail so both paths are testable.
-  final _simulateFailure = ValueNotifier<bool>(false);
-
-  Timer? _timer;
 
   @override
   void initState() {
@@ -52,51 +31,18 @@ class _UploadingScreenState extends State<UploadingScreen> {
 
   @override
   void dispose() {
-    _timer?.cancel();
     _phase.dispose();
     _progress.dispose();
-    _simulateFailure.dispose();
     super.dispose();
   }
 
-  /// Runs (or re-runs) the fake upload from zero.
-  // TODO(provider): replace the timer with the submit use case + its
-  // upload-progress stream; drive [_progress]/[_phase] from that instead.
+  // TODO(provider): submit widget.submission via the submit use case and drive
+  // _progress / _phase from its upload-progress stream — on completion set
+  // _phase = success and route to UnderReviewScreen; on error set
+  // _phase = failure.
   void _startUpload() {
-    _timer?.cancel();
     _progress.value = 0;
     _phase.value = _UploadPhase.uploading;
-    _timer = Timer.periodic(_tick, (timer) {
-      final next = _progress.value + _step;
-      if (next >= 1) {
-        _progress.value = 1;
-        timer.cancel();
-        _finish();
-      } else {
-        _progress.value = next;
-      }
-    });
-  }
-
-  void _finish() {
-    if (_simulateFailure.value) {
-      _phase.value = _UploadPhase.failure;
-      return;
-    }
-    _phase.value = _UploadPhase.success;
-    // Brief success confirmation, then route to the Under Review screen.
-    // TODO(provider): trigger this once the submit use case reports completion.
-    Future.delayed(const Duration(milliseconds: 900), () {
-      if (!mounted) return;
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const UnderReviewScreen()),
-      );
-    });
-  }
-
-  void _backToForm() {
-    _timer?.cancel();
-    Navigator.of(context).pop();
   }
 
   @override
@@ -108,30 +54,19 @@ class _UploadingScreenState extends State<UploadingScreen> {
         backgroundColor: AppColor.neutral0,
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: AppDimens.screenHPadding,
-            ),
-            child: Column(
-              children: [
-                Expanded(
-                  child: Center(
-                    child: ValueListenableBuilder<_UploadPhase>(
-                      valueListenable: _phase,
-                      builder: (context, phase, _) => switch (phase) {
-                        _UploadPhase.uploading => _UploadingBody(
-                          progress: _progress,
-                        ),
-                        _UploadPhase.success => const _SuccessBody(),
-                        _UploadPhase.failure => _FailureBody(
-                          onRetry: _startUpload,
-                          onBackToForm: _backToForm,
-                        ),
-                      },
-                    ),
+            padding: EdgeInsets.symmetric(horizontal: AppDimens.screenHPadding),
+            child: Center(
+              child: ValueListenableBuilder<_UploadPhase>(
+                valueListenable: _phase,
+                builder: (context, phase, _) => switch (phase) {
+                  _UploadPhase.uploading => _UploadingBody(progress: _progress),
+                  _UploadPhase.success => const _SuccessBody(),
+                  _UploadPhase.failure => _FailureBody(
+                    onRetry: _startUpload,
+                    onBackToForm: () => Navigator.of(context).pop(),
                   ),
-                ),
-                if (kDebugMode) _DebugFailureToggle(value: _simulateFailure),
-              ],
+                },
+              ),
             ),
           ),
         ),
@@ -140,7 +75,6 @@ class _UploadingScreenState extends State<UploadingScreen> {
   }
 }
 
-/// Circular progress ring with the live percentage in the centre.
 class _UploadingBody extends StatelessWidget {
   final ValueListenable<double> progress;
 
@@ -193,7 +127,6 @@ class _UploadingBody extends StatelessWidget {
   }
 }
 
-/// Terminal success state. Phase 6 swaps this for navigation to Under Review.
 class _SuccessBody extends StatelessWidget {
   const _SuccessBody();
 
@@ -208,7 +141,10 @@ class _SuccessBody extends StatelessWidget {
           background: AppColor.alertSuccess100,
         ),
         SizedBox(height: AppDimens.space24),
-        Text('تم رفع المستندات بنجاح', style: AppTextStyles.font20Secondary900Bold),
+        Text(
+          'تم رفع المستندات بنجاح',
+          style: AppTextStyles.font20Secondary900Bold,
+        ),
         SizedBox(height: AppDimens.space8),
         Text(
           'سيتم مراجعة طلبك وإشعارك بالنتيجة.',
@@ -220,8 +156,6 @@ class _SuccessBody extends StatelessWidget {
   }
 }
 
-/// In-place failure state: message + retry (re-runs upload, no re-capture) +
-/// back to the form.
 class _FailureBody extends StatelessWidget {
   final VoidCallback onRetry;
   final VoidCallback onBackToForm;
@@ -239,7 +173,10 @@ class _FailureBody extends StatelessWidget {
           background: AppColor.alertError100,
         ),
         SizedBox(height: AppDimens.space24),
-        Text('تعذّر رفع المستندات', style: AppTextStyles.font20Secondary900Bold),
+        Text(
+          'تعذّر رفع المستندات',
+          style: AppTextStyles.font20Secondary900Bold,
+        ),
         SizedBox(height: AppDimens.space8),
         Text(
           'تحقق من اتصالك بالإنترنت ثم أعد المحاولة.',
@@ -257,38 +194,6 @@ class _FailureBody extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-/// Debug-only switch to force the next attempt to fail, so QA can exercise the
-/// failure → retry path deterministically. Never shown in release builds.
-class _DebugFailureToggle extends StatelessWidget {
-  final ValueNotifier<bool> value;
-
-  const _DebugFailureToggle({required this.value});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: AppDimens.space8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'محاكاة فشل الرفع (debug)',
-            style: AppTextStyles.font12Neutral400Regular,
-          ),
-          ValueListenableBuilder<bool>(
-            valueListenable: value,
-            builder: (context, on, _) => Switch(
-              value: on,
-              activeThumbColor: AppColor.alertError500,
-              onChanged: (next) => value.value = next,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

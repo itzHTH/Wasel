@@ -7,10 +7,6 @@ import 'package:wasel_core/theme/app_text_styles.dart';
 import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
 import 'package:driver/features/driver_verification/ui/widgets/wizard/captured_image.dart';
 
-/// Shows the just-captured [file] large with confirm / retake actions.
-///
-/// Returns `true` when the user accepts the capture, and `false`/`null` when
-/// they choose to retake or dismiss the sheet.
 Future<bool?> showCapturePreviewSheet({
   required BuildContext context,
   required XFile file,

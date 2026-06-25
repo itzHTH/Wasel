@@ -5,8 +5,6 @@ import 'package:driver/features/driver_verification/ui/widgets/wizard/steps/lice
 import 'package:driver/features/driver_verification/ui/widgets/wizard/steps/selfie_step.dart';
 import 'package:driver/features/driver_verification/ui/widgets/wizard/steps/vehicle_step.dart';
 
-/// The swipe-disabled three-step PageView. Wires each slot's tap to the capture
-/// flow ([captureInto]) and writes the confirmed file back into the slot.
 class WizardPages extends StatelessWidget {
   final PageController pageController;
   final ValueChanged<int> onPageChanged;

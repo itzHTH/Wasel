@@ -5,34 +5,17 @@ import 'package:driver/features/driver_verification/ui/widgets/camera/camera_cap
 import 'package:driver/features/driver_verification/ui/widgets/camera/camera_error_view.dart';
 import 'package:driver/features/driver_verification/ui/widgets/camera/camera_overlay_painter.dart';
 
-/// Generalised manual camera capture used across driver verification.
-///
-/// Renders a cover-fit preview with a dimmed [CameraOverlayPainter] cutout,
-/// static [GuidanceText], and a [ManualCaptureButton]. The user frames the shot
-/// and taps the shutter — there is no auto-capture and no on-device ML.
-///
-/// Camera permission is gated via [ensurePermission] *before* the controller is
-/// created; if it is refused the screen pops with `null`. Pops with the captured
-/// [XFile] on success, or `null` if the user backs out. The controller is
-/// disposed on every exit path (back, capture, app backgrounding).
 class CameraCaptureScreen extends StatefulWidget {
-  /// Shape of the framing cutout (rect for documents, oval for the selfie).
   final CutoutShape cutoutShape;
 
-  /// Which physical camera to use (back for documents, front for the selfie).
   final CameraLensDirection lensDirection;
 
-  /// Static instruction shown in the guidance pill.
   final String guidanceText;
 
-  /// Capture quality. Documents default to high for legibility; callers may pass
-  /// a lower preset (e.g. medium for the selfie) to ease low-end devices.
   final ResolutionPreset resolution;
 
-  /// Cutout width as a fraction of the available width (passthrough to painter).
   final double widthFactor;
 
-  /// Cutout height / width (passthrough to painter).
   final double aspectRatio;
 
   const CameraCaptureScreen({
@@ -127,8 +110,7 @@ class _CameraCaptureScreenState extends State<CameraCaptureScreen>
       }
       _error.value = null;
       _controller.value = controller;
-    } catch (e) {
-      debugPrint('Camera init failed: $e');
+    } catch (_) {
       if (mounted) _error.value = 'تعذّر تشغيل الكاميرا';
     }
   }
@@ -150,8 +132,7 @@ class _CameraCaptureScreenState extends State<CameraCaptureScreen>
       final file = await controller.takePicture();
       if (!mounted) return;
       Navigator.of(context).pop(file);
-    } catch (e) {
-      debugPrint('Capture failed: $e');
+    } catch (_) {
       if (!mounted) return;
       _isCapturing.value = false;
       ScaffoldMessenger.of(context).showSnackBar(

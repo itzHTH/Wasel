@@ -5,7 +5,6 @@ import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
 import 'package:driver/features/driver_verification/ui/widgets/wizard/upload_card.dart';
 
-/// Wizard step 3 — selfie: a single face-capture slot.
 class SelfieStep extends StatelessWidget {
   final ValueListenable<XFile?> selfie;
   final VoidCallback onTap;
