@@ -1,3 +1,4 @@
+import 'package:driver/features/driver_verification/ui/screens/verification_wizard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:driver/features/auth/ui/screens/login_screen.dart';
@@ -21,9 +22,14 @@ class AppRouter {
       case AppRoutes.home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
 
-      case AppRoutes.driverVerification:
+      case AppRoutes.driverVerificationStatus:
         return MaterialPageRoute(
           builder: (_) => const VerificationGateScreen(),
+        );
+
+      case AppRoutes.driverVerificationWizard:
+        return MaterialPageRoute(
+          builder: (_) => const VerificationWizardScreen(),
         );
 
       default:
