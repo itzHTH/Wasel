@@ -131,7 +131,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
         // gate checks their status and routes accordingly.
         Navigator.pushNamedAndRemoveUntil(
           context,
-          AppRoutes.driverVerification,
+          AppRoutes.driverVerificationWizard,
           (route) => false,
         );
       }
