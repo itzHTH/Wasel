@@ -4,9 +4,6 @@ import 'package:camera/camera.dart' show XFile;
 import 'package:flutter/material.dart';
 import 'package:wasel_core/theme/app_color.dart';
 
-/// Renders a captured [XFile] image. Reads bytes (works for both an in-memory
-/// stub `XFile.fromData` and a real on-disk camera capture), so the card
-/// thumbnail and the preview sheet share one rendering path.
 class CapturedImage extends StatelessWidget {
   final XFile file;
   final BoxFit fit;

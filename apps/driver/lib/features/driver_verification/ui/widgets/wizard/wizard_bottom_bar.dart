@@ -5,9 +5,6 @@ import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
 import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
 
-/// Persistent wizard footer: an optional secondary "Back" and the primary
-/// "Next" action, which becomes "Submit" on the final step. The primary action
-/// is disabled (greyed) until the current step's gating is satisfied.
 class WizardBottomBar extends StatelessWidget {
   final bool showBack;
   final bool isLastStep;
@@ -41,7 +38,10 @@ class WizardBottomBar extends StatelessWidget {
           child: Row(
             children: [
               if (showBack) ...[
-                SizedBox(width: 110.w, child: _BackButton(onTap: onBack)),
+                SizedBox(
+                  width: 110.w,
+                  child: _BackButton(onTap: onBack),
+                ),
                 SizedBox(width: AppDimens.space12),
               ],
               Expanded(

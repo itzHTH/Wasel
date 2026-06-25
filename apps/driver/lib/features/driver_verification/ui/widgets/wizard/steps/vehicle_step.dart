@@ -6,7 +6,6 @@ import 'package:wasel_core/theme/app_text_styles.dart';
 import 'package:wasel_core/widgets/app_labeled_field.dart';
 import 'package:driver/features/driver_verification/ui/widgets/wizard/upload_card.dart';
 
-/// Wizard step 2 — vehicle: a photo slot plus model / year / VIN fields.
 class VehicleStep extends StatelessWidget {
   final ValueListenable<XFile?> photo;
   final VoidCallback onTapPhoto;

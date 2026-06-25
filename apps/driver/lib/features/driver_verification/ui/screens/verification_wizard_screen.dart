@@ -8,17 +8,7 @@ import 'package:driver/features/driver_verification/ui/widgets/wizard/wizard_foo
 import 'package:driver/features/driver_verification/ui/widgets/wizard/wizard_header.dart';
 import 'package:driver/features/driver_verification/ui/widgets/wizard/wizard_pages.dart';
 
-/// Driver verification wizard — three steps (license, vehicle, selfie) over a
-/// swipe-disabled [PageView], with per-step gating and a persistent footer.
-///
-/// UI-only: the captured images and vehicle fields live here as [ValueNotifier]s
-/// so each rebuild is scoped to the smallest widget that observes them (no
-/// top-level `setState`). The build is composed from [WizardHeader],
-/// [WizardPages], and [WizardFooter]; capture lives in `verification_capture`.
-/// The `// TODO(provider)` seams are where the Riverpod notifier plugs in later.
 class VerificationWizardScreen extends ConsumerStatefulWidget {
-  /// When non-null, a rejection banner is shown above the form (set when the
-  /// driver is routed back here after a previous submission was rejected).
   final String? rejectionReason;
 
   const VerificationWizardScreen({super.key, this.rejectionReason});
@@ -52,7 +42,6 @@ class _VerificationWizardScreenState
   final _vehiclePhoto = ValueNotifier<XFile?>(null);
   final _selfie = ValueNotifier<XFile?>(null);
 
-  /// Everything the footer's enable/back/label state derives from.
   late final Listenable _gate = Listenable.merge([
     _currentStep,
     _licenseFront,

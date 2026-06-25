@@ -7,13 +7,6 @@ import 'package:driver/features/driver_verification/ui/widgets/camera/camera_ove
 import 'package:driver/features/driver_verification/ui/widgets/wizard/capture_preview_sheet.dart';
 import 'package:driver/features/driver_verification/ui/widgets/wizard/capture_source_sheet.dart';
 
-/// Capture orchestration for the verification wizard, kept out of the widget
-/// tree. The `capture*` helpers return the chosen [XFile] (or null on
-/// cancel/deny); [captureInto] adds the preview-confirm step and fills the slot.
-
-/// Runs [capture], shows the preview-confirm sheet, and writes the result into
-/// [slot] only on an explicit confirm. A cancel / retake / dismiss leaves
-/// [slot] untouched.
 Future<void> captureInto(
   BuildContext context,
   ValueNotifier<XFile?> slot,
@@ -58,8 +51,6 @@ Future<XFile?> captureVehicle(BuildContext context) async {
   }
 }
 
-/// Pushes the manual camera screen with the given framing and returns the
-/// captured file (or null if the user backs out / denies the permission).
 Future<XFile?> _pushCamera(
   BuildContext context, {
   required CutoutShape cutoutShape,

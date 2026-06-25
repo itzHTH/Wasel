@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 import 'package:wasel_core/extensions/navigation_extension.dart';
 import 'package:wasel_core/theme/app_color.dart';
@@ -9,16 +8,6 @@ import 'package:driver/features/driver_verification/ui/models/verification_statu
 import 'package:driver/features/driver_verification/ui/screens/under_review_screen.dart';
 import 'package:driver/features/driver_verification/ui/screens/verification_wizard_screen.dart';
 
-/// Entry point for driver verification. Shows a loader while "checking" the
-/// driver's status, then routes by the 4-state model:
-/// no-status / [VerificationStatus.rejected] → wizard,
-/// [VerificationStatus.pending] / [VerificationStatus.underReview] → review,
-/// [VerificationStatus.approved] → home.
-///
-/// UI-only: the status check is faked. A fresh driver has no status yet, so the
-/// release default routes to the wizard. In debug a selector lets QA pick any
-/// status so every branch is testable. The `// TODO(provider)` seam marks where
-/// the status-poll use case plugs in.
 class VerificationGateScreen extends StatefulWidget {
   const VerificationGateScreen({super.key});
 
@@ -27,30 +16,20 @@ class VerificationGateScreen extends StatefulWidget {
 }
 
 class _VerificationGateScreenState extends State<VerificationGateScreen> {
-  // A freshly-registered driver has no status yet → wizard.
-  static const VerificationStatus? _fakeStatus = null;
-
-  bool _checking = true;
-
   @override
   void initState() {
     super.initState();
     _check();
   }
 
-  // TODO(provider): replace the fake delay + status with the status-poll use
-  // case, then route on its result.
   Future<void> _check() async {
-    await Future.delayed(const Duration(milliseconds: 1200));
+    final status = await _pollStatus();
     if (!mounted) return;
-    // In debug, hand control to the selector instead of auto-routing so all
-    // branches can be exercised without recompiling.
-    if (kDebugMode) {
-      setState(() => _checking = false);
-      return;
-    }
-    _routeFor(_fakeStatus);
+    _routeFor(status);
   }
+
+  // TODO(provider): replace with the status-poll use case result.
+  Future<VerificationStatus?> _pollStatus() async => null;
 
   void _routeFor(VerificationStatus? status) {
     switch (status) {
@@ -79,13 +58,7 @@ class _VerificationGateScreenState extends State<VerificationGateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.neutral0,
-      body: SafeArea(
-        child: Center(
-          child: _checking
-              ? const _GateLoader()
-              : _DebugStatusPicker(onPick: _routeFor),
-        ),
-      ),
+      body: const SafeArea(child: Center(child: _GateLoader())),
     );
   }
 }
@@ -105,46 +78,6 @@ class _GateLoader extends StatelessWidget {
           style: AppTextStyles.font14Neutral400Regular,
         ),
       ],
-    );
-  }
-}
-
-/// Debug-only entry-status picker so QA can land on any branch. Never shown in
-/// release builds (the gate auto-routes there).
-class _DebugStatusPicker extends StatelessWidget {
-  final void Function(VerificationStatus?) onPick;
-
-  const _DebugStatusPicker({required this.onPick});
-
-  static const _options = <(VerificationStatus?, String)>[
-    (null, 'لا يوجد طلب (للنموذج)'),
-    (VerificationStatus.underReview, 'قيد المراجعة'),
-    (VerificationStatus.approved, 'مقبول'),
-    (VerificationStatus.rejected, 'مرفوض'),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppDimens.screenHPadding),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            'محاكاة حالة الدخول (debug)',
-            style: AppTextStyles.font14Secondary900SemiBold,
-          ),
-          SizedBox(height: AppDimens.space16),
-          for (final (status, label) in _options)
-            Padding(
-              padding: EdgeInsets.only(bottom: AppDimens.space8),
-              child: OutlinedButton(
-                onPressed: () => onPick(status),
-                child: Text(label),
-              ),
-            ),
-        ],
-      ),
     );
   }
 }

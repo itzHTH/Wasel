@@ -1,8 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
-/// Cover-fit camera preview that fills the available space without distortion
-/// (the preview's natural size is rotated, so width/height are swapped).
 class CameraPreviewCover extends StatelessWidget {
   final CameraController controller;
 

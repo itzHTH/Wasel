@@ -6,11 +6,6 @@ import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
 import 'package:driver/features/driver_verification/ui/widgets/wizard/captured_image.dart';
 
-/// A tappable capture slot used across the verification wizard.
-///
-/// Two states: an empty placeholder (camera icon + label) and a captured
-/// thumbnail with a retake affordance. Tapping always re-runs [onTap] — opening
-/// the capture flow whether the slot is empty or being retaken.
 class UploadCard extends StatelessWidget {
   final String label;
   final IconData icon;

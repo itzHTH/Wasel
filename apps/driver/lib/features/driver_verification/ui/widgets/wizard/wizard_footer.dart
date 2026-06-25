@@ -2,9 +2,6 @@ import 'package:flutter/foundation.dart' show ValueListenable, ValueGetter;
 import 'package:flutter/material.dart';
 import 'package:driver/features/driver_verification/ui/widgets/wizard/wizard_bottom_bar.dart';
 
-/// Persistent wizard footer. Rebuilds via [gate] (a merge of the step + slots +
-/// form fields) and asks [isNextEnabled] whether the current step is complete,
-/// so a keystroke or capture rebuilds the footer alone — not the page tree.
 class WizardFooter extends StatelessWidget {
   final Listenable gate;
   final ValueListenable<int> currentStep;

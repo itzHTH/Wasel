@@ -1,24 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_core/theme/app_color.dart';
 
-/// Cutout shape for the camera overlay — oval for the selfie, rect for the
-/// license and vehicle photo.
 enum CutoutShape { oval, rect }
 
-/// Dims the full camera surface and punches a transparent cutout in the centre
-/// with a coloured border ring. The ring colour is driven by the screen
-/// (e.g. green once the face is aligned).
 class CameraOverlayPainter extends CustomPainter {
   final Color borderColor;
   final CutoutShape shape;
 
-  /// Cutout width as a fraction of the available width.
   final double widthFactor;
 
-  /// Cutout height / width.
   final double aspectRatio;
 
-  /// Vertical centre as a fraction of the available height.
   final double verticalCenterFactor;
 
   const CameraOverlayPainter({

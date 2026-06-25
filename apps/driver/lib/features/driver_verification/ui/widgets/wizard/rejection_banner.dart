@@ -3,9 +3,6 @@ import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
 
-/// Error banner shown above the wizard form when the previous submission was
-/// rejected. The [reason] is static copy for now; the slot is ready for a real
-/// reason string from the status use case later.
 class RejectionBanner extends StatelessWidget {
   final String reason;
 

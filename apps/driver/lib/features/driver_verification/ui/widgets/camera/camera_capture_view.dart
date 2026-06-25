@@ -8,11 +8,6 @@ import 'package:driver/features/driver_verification/ui/widgets/camera/camera_pre
 import 'package:driver/features/driver_verification/ui/widgets/camera/guidance_text.dart';
 import 'package:driver/features/driver_verification/ui/widgets/camera/manual_capture_button.dart';
 
-/// The live camera UI: cover-fit preview, framing overlay, close button, static
-/// guidance pill, and the manual shutter.
-///
-/// Stateless — capture/close are delegated to the parent screen; only the
-/// shutter rebuilds, driven by [isCapturing].
 class CameraCaptureView extends StatelessWidget {
   final CameraController controller;
   final CutoutShape cutoutShape;
