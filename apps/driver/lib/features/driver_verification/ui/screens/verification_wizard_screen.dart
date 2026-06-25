@@ -1,13 +1,16 @@
-import 'package:camera/camera.dart' show XFile;
+import 'package:camera/camera.dart'
+    show XFile, CameraLensDirection, ResolutionPreset;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart' show ImagePicker, ImageSource;
 import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:driver/features/driver_verification/ui/models/verification_submission.dart';
-import 'package:driver/features/driver_verification/ui/screens/selfie_camera_screen.dart';
+import 'package:driver/features/driver_verification/ui/screens/camera_capture_screen.dart';
 import 'package:driver/features/driver_verification/ui/screens/uploading_screen.dart';
-import 'package:driver/features/driver_verification/ui/utils/document_scanner_launcher.dart';
+import 'package:driver/features/driver_verification/ui/widgets/camera_overlay_painter.dart';
 import 'package:driver/features/driver_verification/ui/widgets/capture_preview_sheet.dart';
+import 'package:driver/features/driver_verification/ui/widgets/capture_source_sheet.dart';
 import 'package:driver/features/driver_verification/ui/widgets/rejection_banner.dart';
 import 'package:driver/features/driver_verification/ui/widgets/steps/license_step.dart';
 import 'package:driver/features/driver_verification/ui/widgets/steps/selfie_step.dart';
@@ -124,11 +127,54 @@ class _VerificationWizardScreenState
     }
   }
 
-  // Documents use the ML Kit scanner (Android); the selfie uses the front
-  // camera with face-driven auto-capture.
-  Future<XFile?> _captureSelfie() => Navigator.of(context).push<XFile>(
-    MaterialPageRoute(builder: (_) => const SelfieCameraScreen()),
+  /// Pushes the manual camera screen with the given framing and returns the
+  /// captured file (or null if the user backs out / denies the permission).
+  Future<XFile?> _captureFromCamera({
+    required CutoutShape cutoutShape,
+    required CameraLensDirection lens,
+    required String guidance,
+    ResolutionPreset resolution = ResolutionPreset.high,
+  }) {
+    return Navigator.of(context).push<XFile>(
+      MaterialPageRoute(
+        builder: (_) => CameraCaptureScreen(
+          cutoutShape: cutoutShape,
+          lensDirection: lens,
+          guidanceText: guidance,
+          resolution: resolution,
+        ),
+      ),
+    );
+  }
+
+  // License/selfie are camera-only; the vehicle photo also allows the gallery.
+  Future<XFile?> _captureLicense() => _captureFromCamera(
+    cutoutShape: CutoutShape.rect,
+    lens: CameraLensDirection.back,
+    guidance: 'ضع الرخصة داخل الإطار',
   );
+
+  Future<XFile?> _captureSelfie() => _captureFromCamera(
+    cutoutShape: CutoutShape.oval,
+    lens: CameraLensDirection.front,
+    guidance: 'ضع وجهك داخل الإطار',
+    resolution: ResolutionPreset.medium,
+  );
+
+  Future<XFile?> _captureVehicle() async {
+    final source = await showCaptureSourceSheet(context: context);
+    if (source == null || !mounted) return null;
+    switch (source) {
+      case CaptureSource.camera:
+        return _captureFromCamera(
+          cutoutShape: CutoutShape.rect,
+          lens: CameraLensDirection.back,
+          guidance: 'صوّر المركبة داخل الإطار',
+        );
+      case CaptureSource.gallery:
+        return ImagePicker().pickImage(source: ImageSource.gallery);
+    }
+  }
 
   // ── Navigation ───────────────────────────────────────────────────────────--
 
@@ -233,14 +279,12 @@ class _VerificationWizardScreenState
                       front: _licenseFront,
                       back: _licenseBack,
                       onTapFront: () =>
-                          _capture(_licenseFront, scanDocumentImage),
-                      onTapBack: () =>
-                          _capture(_licenseBack, scanDocumentImage),
+                          _capture(_licenseFront, _captureLicense),
+                      onTapBack: () => _capture(_licenseBack, _captureLicense),
                     ),
                     VehicleStep(
                       photo: _vehiclePhoto,
-                      onTapPhoto: () =>
-                          _capture(_vehiclePhoto, scanDocumentImage),
+                      onTapPhoto: () => _capture(_vehiclePhoto, _captureVehicle),
                       formKey: _vehicleFormKey,
                       modelCtrl: _modelCtrl,
                       yearCtrl: _yearCtrl,
