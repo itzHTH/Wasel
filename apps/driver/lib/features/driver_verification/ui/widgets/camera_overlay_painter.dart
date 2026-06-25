@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_core/theme/app_color.dart';
 
-/// Cutout shape for the camera overlay — oval for the selfie, rect for
-/// documents (kept for reuse even though documents currently use ML Kit's own
-/// scanner UI).
+/// Cutout shape for the camera overlay — oval for the selfie, rect for the
+/// license and vehicle photo.
 enum CutoutShape { oval, rect }
 
 /// Dims the full camera surface and punches a transparent cutout in the centre
