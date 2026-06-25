@@ -2,9 +2,23 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Wasel (Production)",
+            "name": "Driver (Development)",
             "request": "launch",
             "type": "dart",
+            "cwd": "apps/driver",
+            "program": "lib/main_dev.dart",
+            "args": [
+                "--flavor",
+                "development",
+                "--target",
+                "lib/main_dev.dart"
+            ]
+        },
+        {
+            "name": "Driver (Production)",
+            "request": "launch",
+            "type": "dart",
+            "cwd": "apps/driver",
             "program": "lib/main_prod.dart",
             "args": [
                 "--flavor",
@@ -14,15 +28,29 @@
             ]
         },
         {
-            "name": "Wasel (Development)",
+            "name": "Rider (Development)",
             "request": "launch",
             "type": "dart",
+            "cwd": "apps/rider",
             "program": "lib/main_dev.dart",
             "args": [
                 "--flavor",
                 "development",
                 "--target",
                 "lib/main_dev.dart"
+            ]
+        },
+        {
+            "name": "Rider (Production)",
+            "request": "launch",
+            "type": "dart",
+            "cwd": "apps/rider",
+            "program": "lib/main_prod.dart",
+            "args": [
+                "--flavor",
+                "production",
+                "--target",
+                "lib/main_prod.dart"
             ]
         }
     ]
