@@ -1,9 +1,9 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:wasel_core/wasel_core.dart';
-import 'package:driver/features/driver_verification/ui/widgets/camera_capture_view.dart';
-import 'package:driver/features/driver_verification/ui/widgets/camera_error_view.dart';
-import 'package:driver/features/driver_verification/ui/widgets/camera_overlay_painter.dart';
+import 'package:driver/features/driver_verification/ui/widgets/camera/camera_capture_view.dart';
+import 'package:driver/features/driver_verification/ui/widgets/camera/camera_error_view.dart';
+import 'package:driver/features/driver_verification/ui/widgets/camera/camera_overlay_painter.dart';
 
 /// Generalised manual camera capture used across driver verification.
 ///

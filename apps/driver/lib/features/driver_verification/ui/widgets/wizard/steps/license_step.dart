@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart' show ValueListenable;
 import 'package:flutter/material.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
-import 'package:driver/features/driver_verification/ui/widgets/upload_card.dart';
+import 'package:driver/features/driver_verification/ui/widgets/wizard/upload_card.dart';
 
 /// Wizard step 1 — driver's license: front then back capture slots.
 class LicenseStep extends StatelessWidget {
