@@ -21,6 +21,8 @@ export 'helpers/app_url_launcher.dart';
 export 'helpers/app_validators.dart';
 
 // Permissions
+export 'package:permission_handler/permission_handler.dart'
+    show Permission, PermissionStatus, openAppSettings;
 export 'permissions/permission_gate.dart';
 
 // Networking
