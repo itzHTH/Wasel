@@ -116,6 +116,5 @@ class FileThumbnail extends StatelessWidget {
         ),
       ],
     );
-    ;
   }
 }
