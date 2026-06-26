@@ -79,3 +79,56 @@ class _VerifyApiService implements VerifyApiService {
 }
 
 // dart format on
+
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(verifyApiService)
+final verifyApiServiceProvider = VerifyApiServiceProvider._();
+
+final class VerifyApiServiceProvider
+    extends
+        $FunctionalProvider<
+          VerifyApiService,
+          VerifyApiService,
+          VerifyApiService
+        >
+    with $Provider<VerifyApiService> {
+  VerifyApiServiceProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'verifyApiServiceProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$verifyApiServiceHash();
+
+  @$internal
+  @override
+  $ProviderElement<VerifyApiService> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  VerifyApiService create(Ref ref) {
+    return verifyApiService(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(VerifyApiService value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<VerifyApiService>(value),
+    );
+  }
+}
+
+String _$verifyApiServiceHash() => r'38f4ea00d90eb1388f4c1c3da4e81986c23b972c';
