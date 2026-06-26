@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasel_core/theme/app_color.dart';
 
-/// Shutter button for manual capture. Always available so the user is never
-/// stuck if auto-capture doesn't trigger. Disabled (dimmed) while a capture is
-/// in progress.
 class ManualCaptureButton extends StatelessWidget {
   final VoidCallback? onPressed;
 

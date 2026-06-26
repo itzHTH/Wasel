@@ -2,29 +2,13 @@ import 'package:camera/camera.dart' show XFile;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/theme/app_color.dart';
-import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:driver/features/driver_verification/ui/models/verification_submission.dart';
-import 'package:driver/features/driver_verification/ui/screens/selfie_camera_screen.dart';
 import 'package:driver/features/driver_verification/ui/screens/uploading_screen.dart';
-import 'package:driver/features/driver_verification/ui/utils/document_scanner_launcher.dart';
-import 'package:driver/features/driver_verification/ui/widgets/capture_preview_sheet.dart';
-import 'package:driver/features/driver_verification/ui/widgets/rejection_banner.dart';
-import 'package:driver/features/driver_verification/ui/widgets/steps/license_step.dart';
-import 'package:driver/features/driver_verification/ui/widgets/steps/selfie_step.dart';
-import 'package:driver/features/driver_verification/ui/widgets/steps/vehicle_step.dart';
-import 'package:driver/features/driver_verification/ui/widgets/wizard_bottom_bar.dart';
-import 'package:driver/features/driver_verification/ui/widgets/wizard_progress.dart';
+import 'package:driver/features/driver_verification/ui/widgets/wizard/wizard_footer.dart';
+import 'package:driver/features/driver_verification/ui/widgets/wizard/wizard_header.dart';
+import 'package:driver/features/driver_verification/ui/widgets/wizard/wizard_pages.dart';
 
-/// Driver verification wizard — three steps (license, vehicle, selfie) over a
-/// swipe-disabled [PageView], with per-step gating and a persistent footer.
-///
-/// UI-only: the captured images and vehicle fields live here locally as
-/// [ValueNotifier]s so each rebuild is scoped to the smallest widget that
-/// observes it (no top-level `setState`). The marked `// TODO(provider)` seams
-/// are where the Riverpod wizard notifier + use cases plug in later.
 class VerificationWizardScreen extends ConsumerStatefulWidget {
-  /// When non-null, a rejection banner is shown above the form (set when the
-  /// driver is routed back here after a previous submission was rejected).
   final String? rejectionReason;
 
   const VerificationWizardScreen({super.key, this.rejectionReason});
@@ -58,10 +42,7 @@ class _VerificationWizardScreenState
   final _vehiclePhoto = ValueNotifier<XFile?>(null);
   final _selfie = ValueNotifier<XFile?>(null);
 
-  /// Everything the footer's enable/label/back state derives from. Only the
-  /// bottom bar listens to this, so a keystroke or capture rebuilds the footer
-  /// alone — not the page tree.
-  late final Listenable _gateListenable = Listenable.merge([
+  late final Listenable _gate = Listenable.merge([
     _currentStep,
     _licenseFront,
     _licenseBack,
@@ -93,42 +74,11 @@ class _VerificationWizardScreenState
       _yearCtrl.text.trim().isNotEmpty &&
       _vinCtrl.text.trim().isNotEmpty;
 
-  bool get _isNextEnabled {
-    switch (_currentStep.value) {
-      case 0:
-        return _licenseFront.value != null && _licenseBack.value != null;
-      case 1:
-        return _vehiclePhoto.value != null && _vehicleFieldsFilled;
-      default:
-        return _selfie.value != null;
-    }
-  }
-
-  // ── Capture ──────────────────────────────────────────────────────────────--
-
-  /// Runs [capture] for [slot], then confirms via the preview sheet. A null
-  /// capture (cancel/unsupported) or a "retake"/dismiss leaves the slot's
-  /// previous value intact; only an explicit confirm fills it.
-  Future<void> _capture(
-    ValueNotifier<XFile?> slot,
-    Future<XFile?> Function() capture,
-  ) async {
-    final captured = await capture();
-    if (captured == null || !mounted) return;
-    final confirmed = await showCapturePreviewSheet(
-      context: context,
-      file: captured,
-    );
-    if (confirmed == true) {
-      slot.value = captured;
-    }
-  }
-
-  // Documents use the ML Kit scanner (Android); the selfie uses the front
-  // camera with face-driven auto-capture.
-  Future<XFile?> _captureSelfie() => Navigator.of(context).push<XFile>(
-    MaterialPageRoute(builder: (_) => const SelfieCameraScreen()),
-  );
+  bool get _isNextEnabled => switch (_currentStep.value) {
+    0 => _licenseFront.value != null && _licenseBack.value != null,
+    1 => _vehiclePhoto.value != null && _vehicleFieldsFilled,
+    _ => _selfie.value != null,
+  };
 
   // ── Navigation ───────────────────────────────────────────────────────────--
 
@@ -189,8 +139,7 @@ class _VerificationWizardScreenState
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, _) {
-        if (didPop) return;
-        _onBack();
+        if (!didPop) _onBack();
       },
       child: Scaffold(
         backgroundColor: AppColor.neutral0,
@@ -198,70 +147,32 @@ class _VerificationWizardScreenState
         body: SafeArea(
           child: Column(
             children: [
-              if (widget.rejectionReason != null)
-                Padding(
-                  padding: EdgeInsets.fromLTRB(
-                    AppDimens.screenHPadding,
-                    AppDimens.space16,
-                    AppDimens.screenHPadding,
-                    0,
-                  ),
-                  child: RejectionBanner(reason: widget.rejectionReason!),
-                ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(
-                  AppDimens.screenHPadding,
-                  AppDimens.space16,
-                  AppDimens.screenHPadding,
-                  0,
-                ),
-                child: ValueListenableBuilder<int>(
-                  valueListenable: _currentStep,
-                  builder: (context, step, _) => WizardProgress(
-                    currentStep: step,
-                    stepTitle: _stepTitles[step],
-                  ),
-                ),
+              WizardHeader(
+                currentStep: _currentStep,
+                stepTitles: _stepTitles,
+                rejectionReason: widget.rejectionReason,
               ),
               Expanded(
-                child: PageView(
-                  controller: _pageController,
-                  physics: const NeverScrollableScrollPhysics(),
+                child: WizardPages(
+                  pageController: _pageController,
                   onPageChanged: (index) => _currentStep.value = index,
-                  children: [
-                    LicenseStep(
-                      front: _licenseFront,
-                      back: _licenseBack,
-                      onTapFront: () =>
-                          _capture(_licenseFront, scanDocumentImage),
-                      onTapBack: () =>
-                          _capture(_licenseBack, scanDocumentImage),
-                    ),
-                    VehicleStep(
-                      photo: _vehiclePhoto,
-                      onTapPhoto: () =>
-                          _capture(_vehiclePhoto, scanDocumentImage),
-                      formKey: _vehicleFormKey,
-                      modelCtrl: _modelCtrl,
-                      yearCtrl: _yearCtrl,
-                      vinCtrl: _vinCtrl,
-                    ),
-                    SelfieStep(
-                      selfie: _selfie,
-                      onTap: () => _capture(_selfie, _captureSelfie),
-                    ),
-                  ],
+                  licenseFront: _licenseFront,
+                  licenseBack: _licenseBack,
+                  vehiclePhoto: _vehiclePhoto,
+                  selfie: _selfie,
+                  vehicleFormKey: _vehicleFormKey,
+                  modelCtrl: _modelCtrl,
+                  yearCtrl: _yearCtrl,
+                  vinCtrl: _vinCtrl,
                 ),
               ),
-              ListenableBuilder(
-                listenable: _gateListenable,
-                builder: (context, _) => WizardBottomBar(
-                  showBack: _currentStep.value > 0,
-                  isLastStep: _currentStep.value == _stepTitles.length - 1,
-                  isNextEnabled: _isNextEnabled,
-                  onBack: _onBack,
-                  onNext: _onNext,
-                ),
+              WizardFooter(
+                gate: _gate,
+                currentStep: _currentStep,
+                stepCount: _stepTitles.length,
+                isNextEnabled: () => _isNextEnabled,
+                onBack: _onBack,
+                onNext: _onNext,
               ),
             ],
           ),
