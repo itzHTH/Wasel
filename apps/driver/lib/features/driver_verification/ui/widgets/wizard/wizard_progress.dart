@@ -3,8 +3,6 @@ import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
 
-/// Top-of-wizard step indicator: three segmented bars + a "step X of 3" label
-/// and the current step's title.
 class WizardProgress extends StatelessWidget {
   final int currentStep;
   final int totalSteps;

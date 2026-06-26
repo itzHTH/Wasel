@@ -1,12 +1,6 @@
 import 'package:camera/camera.dart' show XFile;
 import 'package:flutter/foundation.dart';
 
-/// UI-only payload carried from the wizard into the uploading screen.
-///
-/// Holds the in-memory captures + vehicle fields for the whole session so a
-/// failed upload can be retried **without re-capturing**. This is a presentation
-/// DTO — it is replaced by the domain submit request when the provider/use-case
-/// layer lands (see the `// TODO(provider)` seams).
 @immutable
 class VerificationSubmission {
   final XFile licenseFront;

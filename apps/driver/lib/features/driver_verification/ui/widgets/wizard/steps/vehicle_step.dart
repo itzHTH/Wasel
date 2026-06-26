@@ -1,12 +1,12 @@
 import 'package:camera/camera.dart' show XFile;
 import 'package:flutter/foundation.dart' show ValueListenable;
 import 'package:flutter/material.dart';
+import 'package:wasel_core/helpers/app_validators.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
 import 'package:wasel_core/widgets/app_labeled_field.dart';
-import 'package:driver/features/driver_verification/ui/widgets/upload_card.dart';
+import 'package:driver/features/driver_verification/ui/widgets/wizard/upload_card.dart';
 
-/// Wizard step 2 — vehicle: a photo slot plus model / year / VIN fields.
 class VehicleStep extends StatelessWidget {
   final ValueListenable<XFile?> photo;
   final VoidCallback onTapPhoto;
@@ -57,7 +57,7 @@ class VehicleStep extends StatelessWidget {
                   hintText: 'مثال: Toyota Corolla',
                   controller: modelCtrl,
                   textInputAction: TextInputAction.next,
-                  validator: _validateModel,
+                  validator: AppValidators.required,
                 ),
                 SizedBox(height: AppDimens.space16),
                 AppLabeledFormField(
@@ -66,15 +66,16 @@ class VehicleStep extends StatelessWidget {
                   controller: yearCtrl,
                   keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.next,
-                  validator: _validateYear,
+                  validator: AppValidators.year,
                 ),
                 SizedBox(height: AppDimens.space16),
                 AppLabeledFormField(
-                  label: 'رقم الهيكل (VIN)',
-                  hintText: '17 خانة',
+                  label: 'رقم اللوحه',
+                  hintText: '234244 C / 342134 ب',
                   controller: vinCtrl,
                   textInputAction: TextInputAction.done,
-                  validator: _validateVin,
+                  validator: AppValidators
+                      .required, // TODO: make Iraqi Car Plate Vaildation
                 ),
               ],
             ),
@@ -84,40 +85,4 @@ class VehicleStep extends StatelessWidget {
       ),
     );
   }
-}
-
-// ── Field validators (feature-local; English messages mirror AppValidators) ──
-
-String? _validateModel(String? value) {
-  if (value == null || value.trim().isEmpty) {
-    return 'Vehicle model is required';
-  }
-  return null;
-}
-
-String? _validateYear(String? value) {
-  if (value == null || value.isEmpty) {
-    return 'Year is required';
-  }
-  if (!RegExp(r'^\d{4}$').hasMatch(value)) {
-    return 'Enter a 4-digit year';
-  }
-  final year = int.parse(value);
-  final maxYear = DateTime.now().year + 1;
-  if (year < 1950 || year > maxYear) {
-    return 'Enter a valid year (1950–$maxYear)';
-  }
-  return null;
-}
-
-String? _validateVin(String? value) {
-  if (value == null || value.isEmpty) {
-    return 'VIN is required';
-  }
-  final vin = value.toUpperCase();
-  // 17 chars, alphanumeric excluding I, O, Q (per VIN standard).
-  if (!RegExp(r'^[A-HJ-NPR-Z0-9]{17}$').hasMatch(vin)) {
-    return 'VIN must be 17 characters (letters/numbers, no I, O, Q)';
-  }
-  return null;
 }

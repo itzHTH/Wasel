@@ -34,6 +34,9 @@ dependencies:
   # Utils
   url_launcher: ^6.3.2
 
+  # Permissions (shared gate reused by all apps/features)
+  permission_handler: ^12.0.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -4,13 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
-import 'package:driver/features/driver_verification/ui/widgets/captured_image.dart';
+import 'package:driver/features/driver_verification/ui/widgets/wizard/captured_image.dart';
 
-/// A tappable capture slot used across the verification wizard.
-///
-/// Two states: an empty placeholder (camera icon + label) and a captured
-/// thumbnail with a retake affordance. Tapping always re-runs [onTap] — opening
-/// the capture flow whether the slot is empty or being retaken.
 class UploadCard extends StatelessWidget {
   final String label;
   final IconData icon;
@@ -43,12 +38,22 @@ class UploadCard extends StatelessWidget {
             width: 1.5,
           ),
         ),
-        child: _isFilled ? _buildThumbnail() : _buildEmpty(),
+        child: _isFilled
+            ? FileThumbnail(file: file!)
+            : EmptyThumbnail(icon: icon, label: label),
       ),
     );
   }
+}
 
-  Widget _buildEmpty() {
+class EmptyThumbnail extends StatelessWidget {
+  const EmptyThumbnail({super.key, required this.icon, required this.label});
+
+  final IconData icon;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -60,12 +65,19 @@ class UploadCard extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildThumbnail() {
+class FileThumbnail extends StatelessWidget {
+  const FileThumbnail({super.key, required this.file});
+
+  final XFile file;
+
+  @override
+  Widget build(BuildContext context) {
     return Stack(
       fit: StackFit.expand,
       children: [
-        CapturedImage(file: file!),
+        CapturedImage(file: file),
         // Bottom retake strip.
         Align(
           alignment: Alignment.bottomCenter,

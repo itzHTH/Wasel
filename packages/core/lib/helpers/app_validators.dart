@@ -89,6 +89,21 @@ class AppValidators {
     return null;
   }
 
+  static String? year(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Year is required';
+    }
+    if (!RegExp(r'^\d{4}$').hasMatch(value)) {
+      return 'Enter a 4-digit year';
+    }
+    final year = int.parse(value);
+    final maxYear = DateTime.now().year + 1;
+    if (year < 1950 || year > maxYear) {
+      return 'Enter a valid year (1950–$maxYear)';
+    }
+    return null;
+  }
+
   /// Validates full name (at least 3 words)
   static String? fullName(String? value) {
     if (value == null || value.isEmpty) {
