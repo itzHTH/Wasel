@@ -38,12 +38,22 @@ class UploadCard extends StatelessWidget {
             width: 1.5,
           ),
         ),
-        child: _isFilled ? _buildThumbnail() : _buildEmpty(),
+        child: _isFilled
+            ? FileThumbnail(file: file!)
+            : EmptyThumbnail(icon: icon, label: label),
       ),
     );
   }
+}
 
-  Widget _buildEmpty() {
+class EmptyThumbnail extends StatelessWidget {
+  const EmptyThumbnail({super.key, required this.icon, required this.label});
+
+  final IconData icon;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -55,12 +65,19 @@ class UploadCard extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildThumbnail() {
+class FileThumbnail extends StatelessWidget {
+  const FileThumbnail({super.key, required this.file});
+
+  final XFile file;
+
+  @override
+  Widget build(BuildContext context) {
     return Stack(
       fit: StackFit.expand,
       children: [
-        CapturedImage(file: file!),
+        CapturedImage(file: file),
         // Bottom retake strip.
         Align(
           alignment: Alignment.bottomCenter,
@@ -99,5 +116,6 @@ class UploadCard extends StatelessWidget {
         ),
       ],
     );
+    ;
   }
 }
