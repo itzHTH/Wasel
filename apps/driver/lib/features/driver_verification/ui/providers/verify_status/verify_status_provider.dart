@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:driver/features/driver_verification/domain/entities/verification_status.dart';
 import 'package:driver/features/driver_verification/ui/providers/driver_verification_use_case.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -7,7 +6,7 @@ import 'package:wasel_core/wasel_core.dart';
 part 'verify_status_provider.g.dart';
 
 @riverpod
-class VerifyStatusProvider extends _$VerifyStatusProvider {
+class VerifyStatus extends _$VerifyStatus {
   @override
   FutureOr<VerificationStatus?> build() {
     return null;
@@ -19,6 +18,7 @@ class VerifyStatusProvider extends _$VerifyStatusProvider {
     ref.onDispose(useCase.cancel);
 
     final result = await useCase.call(null);
+    if (!ref.mounted) return;
 
     result.when(
       success: (data) {

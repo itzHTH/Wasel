@@ -8,7 +8,7 @@ import 'package:wasel_core/networking/errors/error_handler.dart';
 part 'verify_repo.g.dart';
 
 class VerifyRepo implements BaseVerifyRepo {
-  VerifyApiService apiService;
+  final VerifyApiService apiService;
 
   VerifyRepo(this.apiService);
   @override
