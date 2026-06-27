@@ -33,7 +33,7 @@ final class VerifyStatusProvider
   VerifyStatus create() => VerifyStatus();
 }
 
-String _$verifyStatusHash() => r'1acddb1ad7c620102cb61299934a066657d2a045';
+String _$verifyStatusHash() => r'95c145a9f7bab32cfe48b35ab5b455d5037ab610';
 
 abstract class _$VerifyStatus extends $AsyncNotifier<VerificationStatus?> {
   FutureOr<VerificationStatus?> build();

@@ -41,6 +41,9 @@ dependencies:
 
   cupertino_icons: ^1.0.8
 
+  # For Files 
+  cross_file: ^0.3.5+2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
