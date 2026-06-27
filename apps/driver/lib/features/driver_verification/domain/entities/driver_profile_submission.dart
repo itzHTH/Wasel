@@ -1,23 +1,21 @@
-import 'package:camera/camera.dart' show XFile;
-import 'package:flutter/foundation.dart';
+import 'package:cross_file/cross_file.dart' show XFile;
 
-@immutable
-class VerificationSubmission {
+class DriverProfileSubmission {
   final XFile licenseFront;
   final XFile licenseBack;
-  final XFile vehiclePhoto;
   final XFile selfie;
+  final XFile vehicleImage;
   final String vehicleModel;
   final String vehicleYear;
-  final String vin;
+  final String vinNumber;
 
-  const VerificationSubmission({
+  const DriverProfileSubmission({
     required this.licenseFront,
     required this.licenseBack,
-    required this.vehiclePhoto,
     required this.selfie,
+    required this.vehicleImage,
     required this.vehicleModel,
     required this.vehicleYear,
-    required this.vin,
+    required this.vinNumber,
   });
 }

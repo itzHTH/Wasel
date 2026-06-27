@@ -7,7 +7,7 @@ class AppRoutes {
 
   static const String home = '/home';
 
-  static const String driverVerificationStatus = '/driver-verification-status';
+  static const String driverVerificationGate = '/driver-verification-gate';
 
   static const String driverVerificationWizard = '/driver-verification-wizard';
 }

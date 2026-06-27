@@ -1,51 +1,33 @@
+import 'package:driver/features/driver_verification/domain/entities/verification_status.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/extensions/navigation_extension.dart';
 import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
-import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
-import 'package:driver/features/driver_verification/ui/models/verification_status.dart';
+import 'package:driver/features/driver_verification/ui/providers/verify_status/verify_status_provider.dart';
 import 'package:driver/features/driver_verification/ui/screens/verification_wizard_screen.dart';
 import 'package:driver/features/driver_verification/ui/widgets/common/verification_status_badge.dart';
 
-class UnderReviewScreen extends StatefulWidget {
+class UnderReviewScreen extends ConsumerWidget {
   const UnderReviewScreen({super.key});
 
-  @override
-  State<UnderReviewScreen> createState() => _UnderReviewScreenState();
-}
+  Future<void> _refresh(WidgetRef ref) =>
+      ref.read(verifyStatusProvider.notifier).getVerifyStatus();
 
-class _UnderReviewScreenState extends State<UnderReviewScreen> {
-  final _refreshing = ValueNotifier<bool>(false);
-
-  @override
-  void dispose() {
-    _refreshing.dispose();
-    super.dispose();
-  }
-
-  Future<void> _checkStatus() async {
-    if (_refreshing.value) return;
-    _refreshing.value = true;
-    final status = await _pollStatus();
-    if (!mounted) return;
-    _refreshing.value = false;
-    _routeFor(status);
-  }
-
-  // TODO(provider): replace with the status-poll use case result.
-  Future<VerificationStatus> _pollStatus() async =>
-      VerificationStatus.underReview;
-
-  void _routeFor(VerificationStatus status) {
+  void _routeFor(BuildContext context, enVerificationStatus status) {
     switch (status) {
-      case VerificationStatus.approved:
+      case enVerificationStatus.approved:
         context.pushNamedAndRemoveUntil(AppRoutes.home);
-      case VerificationStatus.rejected:
-        _goToWizardRejected();
-      case VerificationStatus.pending:
-      case VerificationStatus.underReview:
+      case enVerificationStatus.rejected:
+        _goToWizard(
+          context,
+          reason: 'تم رفض طلبك السابق، يرجى مراجعة بياناتك وإعادة الإرسال.',
+        );
+      case enVerificationStatus.pending:
+        _goToWizard(context);
+      case enVerificationStatus.underReview:
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text(
@@ -56,25 +38,35 @@ class _UnderReviewScreenState extends State<UnderReviewScreen> {
     }
   }
 
-  void _goToWizardRejected() {
+  void _goToWizard(BuildContext context, {String? reason}) {
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
-        builder: (_) => const VerificationWizardScreen(
-          rejectionReason:
-              'تم رفض طلبك السابق، يرجى مراجعة بياناتك وإعادة الإرسال.',
-        ),
+        builder: (_) => VerificationWizardScreen(rejectionReason: reason),
       ),
       (route) => route.isFirst,
     );
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Re-route only when a refresh resolves; the initial state does not fire.
+    ref.listen(verifyStatusProvider, (_, next) {
+      next.whenOrNull(
+        data: (status) => _routeFor(
+          context,
+          status?.status ?? enVerificationStatus.underReview,
+        ),
+        error: (_, __) => ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('تعذّر تحديث الحالة، حاول مجدداً.')),
+        ),
+      );
+    });
+
     return Scaffold(
       backgroundColor: AppColor.neutral0,
       body: SafeArea(
         child: RefreshIndicator(
-          onRefresh: _checkStatus,
+          onRefresh: () => _refresh(ref),
           color: AppColor.primary500,
           child: LayoutBuilder(
             builder: (context, constraints) => SingleChildScrollView(
@@ -103,15 +95,6 @@ class _UnderReviewScreenState extends State<UnderReviewScreen> {
                         'نقوم بمراجعة مستنداتك، وعادةً ما يستغرق ذلك حتى ٢٤ ساعة.',
                         style: AppTextStyles.font14Neutral400Regular,
                         textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: AppDimens.space32),
-                      ValueListenableBuilder<bool>(
-                        valueListenable: _refreshing,
-                        builder: (context, refreshing, _) => AuthPrimaryButton(
-                          label: 'تحديث الحالة',
-                          isLoading: refreshing,
-                          onPressed: _checkStatus,
-                        ),
                       ),
                     ],
                   ),

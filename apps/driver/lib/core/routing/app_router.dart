@@ -22,7 +22,7 @@ class AppRouter {
       case AppRoutes.home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
 
-      case AppRoutes.driverVerificationStatus:
+      case AppRoutes.driverVerificationGate:
         return MaterialPageRoute(
           builder: (_) => const VerificationGateScreen(),
         );
