@@ -7,6 +7,7 @@ import 'package:driver/features/driver_verification/domain/entities/submit_drive
 import 'package:driver/features/driver_verification/domain/entities/verification_status.dart';
 import 'package:driver/features/driver_verification/domain/repo/base_verify_repo.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:wasel_core/helpers/app_image_compressor.dart';
 import 'package:wasel_core/networking/api_results.dart';
 import 'package:wasel_core/networking/errors/error_handler.dart';
 
@@ -34,11 +35,26 @@ class VerifyRepo implements BaseVerifyRepo {
     CancelToken? cancelToken,
   }) async {
     try {
+      // Compress before upload to keep the multipart body under the server's
+      // request-size limit (avoids 413 Request Entity Too Large).
+      final licenseFront = await AppImageCompressor.compress(
+        File(submission.licenseFront.path),
+      );
+      final licenseBack = await AppImageCompressor.compress(
+        File(submission.licenseBack.path),
+      );
+      final selfie = await AppImageCompressor.compress(
+        File(submission.selfie.path),
+      );
+      final vehicleImage = await AppImageCompressor.compress(
+        File(submission.vehicleImage.path),
+      );
+
       final response = await _apiService.submitDriverProfile(
-        licenseFront: File(submission.licenseFront.path),
-        licenseBack: File(submission.licenseBack.path),
-        selfie: File(submission.selfie.path),
-        vehicleImage: File(submission.vehicleImage.path),
+        licenseFront: licenseFront,
+        licenseBack: licenseBack,
+        selfie: selfie,
+        vehicleImage: vehicleImage,
         vehicleModel: submission.vehicleModel,
         vehicleYear: submission.vehicleYear,
         vinNumber: submission.vinNumber,
