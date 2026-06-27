@@ -25,6 +25,9 @@ Future<XFile?> captureLicense(BuildContext context) => _pushCamera(
   cutoutShape: CutoutShape.rect,
   lens: CameraLensDirection.back,
   guidance: 'ضع الرخصة داخل الإطار',
+  // Landscape ID-card frame (≈ 85.6×54mm).
+  widthFactor: 0.88,
+  aspectRatio: 0.63,
 );
 
 Future<XFile?> captureSelfie(BuildContext context) => _pushCamera(
@@ -57,6 +60,8 @@ Future<XFile?> _pushCamera(
   required CameraLensDirection lens,
   required String guidance,
   ResolutionPreset resolution = ResolutionPreset.high,
+  double widthFactor = 0.72,
+  double aspectRatio = 1.3,
 }) {
   return Navigator.of(context).push<XFile>(
     MaterialPageRoute(
@@ -65,6 +70,8 @@ Future<XFile?> _pushCamera(
         lensDirection: lens,
         guidanceText: guidance,
         resolution: resolution,
+        widthFactor: widthFactor,
+        aspectRatio: aspectRatio,
       ),
     ),
   );

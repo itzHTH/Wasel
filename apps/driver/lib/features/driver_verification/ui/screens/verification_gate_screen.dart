@@ -39,7 +39,7 @@ class _VerificationGateScreenState
           MaterialPageRoute(
             builder: (_) => VerificationWizardScreen(
               rejectionReason: status == enVerificationStatus.rejected
-                  ? 'تم رفض طلبك السابق، يرجى مراجعة بياناتك وإعادة الإرسال.'
+                  ? 'تم رفض معلوماتك ، يرجى مراجعة بياناتك وإعادة الإرسال.'
                   : null,
             ),
           ),
@@ -88,7 +88,7 @@ class _GateLoader extends StatelessWidget {
         const CircularProgressIndicator(color: AppColor.primary500),
         SizedBox(height: AppDimens.space24),
         Text(
-          'جارٍ التحقق من حالة طلبك…',
+          'جارٍ التحقق من حسابك وبعض المعلومات …',
           style: AppTextStyles.font14Neutral400Regular,
         ),
       ],
