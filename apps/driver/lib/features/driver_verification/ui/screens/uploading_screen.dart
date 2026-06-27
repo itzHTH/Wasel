@@ -1,52 +1,47 @@
-import 'package:flutter/foundation.dart' show ValueListenable;
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
 import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
-import 'package:driver/features/driver_verification/ui/models/verification_submission.dart';
+import 'package:driver/features/driver_verification/domain/entities/driver_profile_submission.dart';
+import 'package:driver/features/driver_verification/ui/providers/submit_profile/submit_profile_provider.dart';
+import 'package:driver/features/driver_verification/ui/providers/submit_profile/submit_profile_state.dart';
+import 'package:driver/features/driver_verification/ui/screens/under_review_screen.dart';
 import 'package:driver/features/driver_verification/ui/widgets/common/verification_status_badge.dart';
 
-enum _UploadPhase { uploading, success, failure }
-
-class UploadingScreen extends StatefulWidget {
-  final VerificationSubmission submission;
+class UploadingScreen extends ConsumerStatefulWidget {
+  final DriverProfileSubmission submission;
 
   const UploadingScreen({super.key, required this.submission});
 
   @override
-  State<UploadingScreen> createState() => _UploadingScreenState();
+  ConsumerState<UploadingScreen> createState() => _UploadingScreenState();
 }
 
-class _UploadingScreenState extends State<UploadingScreen> {
-  final _phase = ValueNotifier<_UploadPhase>(_UploadPhase.uploading);
-  final _progress = ValueNotifier<double>(0);
-
+class _UploadingScreenState extends ConsumerState<UploadingScreen> {
   @override
   void initState() {
     super.initState();
-    _startUpload();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _startUpload());
   }
 
-  @override
-  void dispose() {
-    _phase.dispose();
-    _progress.dispose();
-    super.dispose();
-  }
-
-  // TODO(provider): submit widget.submission via the submit use case and drive
-  // _progress / _phase from its upload-progress stream — on completion set
-  // _phase = success and route to UnderReviewScreen; on error set
-  // _phase = failure.
-  void _startUpload() {
-    _progress.value = 0;
-    _phase.value = _UploadPhase.uploading;
-  }
+  void _startUpload() =>
+      ref.read(submitProfileProvider.notifier).submit(widget.submission);
 
   @override
   Widget build(BuildContext context) {
+    // On success, move to the review screen; clears the wizard from the stack.
+    ref.listen(submitProfileProvider, (_, next) {
+      if (next is SubmitSuccess) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const UnderReviewScreen()),
+        );
+      }
+    });
+
+    final state = ref.watch(submitProfileProvider);
     return PopScope(
       // Block the system back gesture; exits go through the explicit buttons.
       canPop: false,
@@ -56,17 +51,17 @@ class _UploadingScreenState extends State<UploadingScreen> {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: AppDimens.screenHPadding),
             child: Center(
-              child: ValueListenableBuilder<_UploadPhase>(
-                valueListenable: _phase,
-                builder: (context, phase, _) => switch (phase) {
-                  _UploadPhase.uploading => _UploadingBody(progress: _progress),
-                  _UploadPhase.success => const _SuccessBody(),
-                  _UploadPhase.failure => _FailureBody(
-                    onRetry: _startUpload,
-                    onBackToForm: () => Navigator.of(context).pop(),
-                  ),
-                },
-              ),
+              child: switch (state) {
+                SubmitUploading(:final progress) => _UploadingBody(
+                  progress: progress,
+                ),
+                SubmitSuccess() => const _SuccessBody(),
+                SubmitFailure(:final message) => _FailureBody(
+                  message: message,
+                  onRetry: _startUpload,
+                  onBackToForm: () => Navigator.of(context).pop(),
+                ),
+              },
             ),
           ),
         ),
@@ -76,7 +71,7 @@ class _UploadingScreenState extends State<UploadingScreen> {
 }
 
 class _UploadingBody extends StatelessWidget {
-  final ValueListenable<double> progress;
+  final double progress;
 
   const _UploadingBody({required this.progress});
 
@@ -88,27 +83,22 @@ class _UploadingBody extends StatelessWidget {
         SizedBox(
           width: 132.r,
           height: 132.r,
-          child: ValueListenableBuilder<double>(
-            valueListenable: progress,
-            builder: (context, value, _) => Stack(
-              alignment: Alignment.center,
-              children: [
-                SizedBox.expand(
-                  child: CircularProgressIndicator(
-                    value: value,
-                    strokeWidth: 6,
-                    backgroundColor: AppColor.neutral100,
-                    valueColor: const AlwaysStoppedAnimation(
-                      AppColor.primary500,
-                    ),
-                  ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              SizedBox.expand(
+                child: CircularProgressIndicator(
+                  value: progress,
+                  strokeWidth: 6,
+                  backgroundColor: AppColor.neutral100,
+                  valueColor: const AlwaysStoppedAnimation(AppColor.primary500),
                 ),
-                Text(
-                  '${(value * 100).round()}%',
-                  style: AppTextStyles.font24Secondary900Bold,
-                ),
-              ],
-            ),
+              ),
+              Text(
+                '${(progress * 100).round()}%',
+                style: AppTextStyles.font24Secondary900Bold,
+              ),
+            ],
           ),
         ),
         SizedBox(height: AppDimens.space24),
@@ -157,10 +147,15 @@ class _SuccessBody extends StatelessWidget {
 }
 
 class _FailureBody extends StatelessWidget {
+  final String message;
   final VoidCallback onRetry;
   final VoidCallback onBackToForm;
 
-  const _FailureBody({required this.onRetry, required this.onBackToForm});
+  const _FailureBody({
+    required this.message,
+    required this.onRetry,
+    required this.onBackToForm,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -179,7 +174,7 @@ class _FailureBody extends StatelessWidget {
         ),
         SizedBox(height: AppDimens.space8),
         Text(
-          'تحقق من اتصالك بالإنترنت ثم أعد المحاولة.',
+          message,
           style: AppTextStyles.font14Neutral400Regular,
           textAlign: TextAlign.center,
         ),
