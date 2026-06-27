@@ -6,7 +6,6 @@ import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
-import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
 import 'package:driver/features/driver_verification/ui/providers/verify_status/verify_status_provider.dart';
 import 'package:driver/features/driver_verification/ui/screens/verification_wizard_screen.dart';
 import 'package:driver/features/driver_verification/ui/widgets/common/verification_status_badge.dart';
@@ -63,7 +62,6 @@ class UnderReviewScreen extends ConsumerWidget {
       );
     });
 
-    final isLoading = ref.watch(verifyStatusProvider).isLoading;
     return Scaffold(
       backgroundColor: AppColor.neutral0,
       body: SafeArea(
@@ -97,12 +95,6 @@ class UnderReviewScreen extends ConsumerWidget {
                         'نقوم بمراجعة مستنداتك، وعادةً ما يستغرق ذلك حتى ٢٤ ساعة.',
                         style: AppTextStyles.font14Neutral400Regular,
                         textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: AppDimens.space32),
-                      AuthPrimaryButton(
-                        label: 'تحديث الحالة',
-                        isLoading: isLoading,
-                        onPressed: () => _refresh(ref),
                       ),
                     ],
                   ),
