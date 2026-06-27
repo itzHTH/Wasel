@@ -78,7 +78,7 @@ class _CapturePreviewSheet extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        'إعادة الالتقاط',
+                        "الغاء",
                         style: AppTextStyles.font14Secondary900SemiBold,
                       ),
                     ),
