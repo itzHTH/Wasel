@@ -15,6 +15,7 @@ export 'flavors/flavors_config.dart';
 export 'extensions/navigation_extension.dart';
 
 // Helpers
+export 'helpers/app_image_compressor.dart';
 export 'helpers/app_local_cache.dart';
 export 'helpers/app_navigation.dart';
 export 'helpers/app_url_launcher.dart';

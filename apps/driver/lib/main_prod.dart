@@ -5,7 +5,6 @@ void main() {
   mainCommon(
     flavor: Flavor.production,
     appName: 'Wasel Driver',
-    // TODO(me): driver production base URL (using the shared backend for now).
     baseUrl: 'https://apiservice.ddns.net/wasl',
   );
 }

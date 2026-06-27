@@ -1,8 +1,8 @@
 import 'package:camera/camera.dart' show XFile;
+import 'package:driver/features/driver_verification/domain/entities/driver_profile_submission.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/theme/app_color.dart';
-import 'package:driver/features/driver_verification/ui/models/verification_submission.dart';
 import 'package:driver/features/driver_verification/ui/screens/uploading_screen.dart';
 import 'package:driver/features/driver_verification/ui/widgets/wizard/wizard_footer.dart';
 import 'package:driver/features/driver_verification/ui/widgets/wizard/wizard_header.dart';
@@ -36,7 +36,6 @@ class _VerificationWizardScreenState
   final _vinCtrl = TextEditingController();
 
   // Captured images, held for the whole wizard session.
-  // TODO(provider): lift this session state into the wizard notifier.
   final _licenseFront = ValueNotifier<XFile?>(null);
   final _licenseBack = ValueNotifier<XFile?>(null);
   final _vehiclePhoto = ValueNotifier<XFile?>(null);
@@ -114,18 +113,14 @@ class _VerificationWizardScreenState
   }
 
   void _onSubmit() {
-    // Gating guarantees every slot is filled by the time Submit is reachable.
-    // TODO(provider): replace this local payload + push with the submit use
-    // case; the uploading screen will then observe the upload-progress provider
-    // instead of its fake driver.
-    final submission = VerificationSubmission(
+    final submission = DriverProfileSubmission(
       licenseFront: _licenseFront.value!,
       licenseBack: _licenseBack.value!,
-      vehiclePhoto: _vehiclePhoto.value!,
+      vehicleImage: _vehiclePhoto.value!,
       selfie: _selfie.value!,
       vehicleModel: _modelCtrl.text.trim(),
       vehicleYear: _yearCtrl.text.trim(),
-      vin: _vinCtrl.text.trim(),
+      vinNumber: _vinCtrl.text.trim(),
     );
     Navigator.of(context).push(
       MaterialPageRoute(
