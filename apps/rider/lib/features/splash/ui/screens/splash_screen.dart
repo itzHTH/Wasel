@@ -77,7 +77,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     if (token != null && refreshToken != null) {
       if (!mounted) return;
-      Navigator.pushReplacementNamed(context, AppRoutes.home);
+      Navigator.pushReplacementNamed(context, AppRoutes.ride);
     } else {
       if (!mounted) return;
       context.pushReplacementNamed(AppRoutes.auth);
