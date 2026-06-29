@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/core/routing/app_routes_name.dart';
-import 'package:wasal/features/ride/ui/screens/ride_screen.dart';
 import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasal/features/auth/ui/providers/register/register_provider.dart';
 import 'package:wasal/features/auth/ui/widgets/register/email_page/register_email_page.dart';
