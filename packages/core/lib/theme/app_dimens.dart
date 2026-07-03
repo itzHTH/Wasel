@@ -31,6 +31,7 @@ class AppDimens {
   static double get icon20 => 20.r;
   static double get icon24 => 24.r;
   static double get icon36 => 36.r;
+  static double get icon48 => 48.r;
 
   // ── Screen
   static double get screenHPadding => 24.w;

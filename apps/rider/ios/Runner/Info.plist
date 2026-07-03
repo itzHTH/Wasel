@@ -47,5 +47,7 @@
 	<true/>
 	<key>MapsApiKey</key>
     <string>$(MAPS_API_KEY)</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to show it on the map and determine your pickup point.</string>
 </dict>
 </plist>
