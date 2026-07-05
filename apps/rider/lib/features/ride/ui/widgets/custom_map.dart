@@ -13,6 +13,7 @@ class CustomMap extends ConsumerStatefulWidget {
     this.onCameraMove,
     this.onCameraMoveStarted,
     this.onCameraIdle,
+    this.mapPadding = EdgeInsets.zero,
   }) : _controller = controller;
 
   static const LatLng initialTarget = LatLng(33.3152, 44.3661);
@@ -21,6 +22,10 @@ class CustomMap extends ConsumerStatefulWidget {
   final ValueChanged<CameraPosition>? onCameraMove;
   final VoidCallback? onCameraMoveStarted;
   final VoidCallback? onCameraIdle;
+
+  /// Shifts the map's own UI (Google logo, controls) — used to keep the
+  /// logo visible above overlays like the bottom card.
+  final EdgeInsets mapPadding;
 
   @override
   ConsumerState<CustomMap> createState() => _CustomMapState();
@@ -41,8 +46,10 @@ class _CustomMapState extends ConsumerState<CustomMap> {
       mapId: AppRiderConsts.mapStyleID,
       myLocationEnabled: true,
       myLocationButtonEnabled: false,
-      zoomControlsEnabled: kDebugMode,
+      zoomControlsEnabled: false,
       cameraTargetBounds: CameraTargetBounds(iraqBounds),
+      minMaxZoomPreference: const MinMaxZoomPreference(10, 20),
+      padding: widget.mapPadding,
       markers: markers,
       onMapCreated: (controller) {
         widget._controller.complete(controller);
@@ -51,7 +58,7 @@ class _CustomMapState extends ConsumerState<CustomMap> {
       onCameraMoveStarted: widget.onCameraMoveStarted,
       onCameraIdle: widget.onCameraIdle,
       initialCameraPosition: const CameraPosition(
-        zoom: 14,
+        zoom: 14.5,
         target: CustomMap.initialTarget,
       ),
     );

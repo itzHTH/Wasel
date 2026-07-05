@@ -47,10 +47,12 @@ class _RideScreenState extends ConsumerState<RideScreen> {
           children: [
             CustomMap(
               controller: _mapController,
+              // Lifts the Google logo above the floating bottom card
+              // (approx. card height at its tallest + its bottom margin).
+              mapPadding: EdgeInsets.zero,
               onCameraMove: (position) => _center = position.target,
-              onCameraMoveStarted: () => ref
-                  .read(isCameraMovingProvider.notifier)
-                  .setMoving(true),
+              onCameraMoveStarted: () =>
+                  ref.read(isCameraMovingProvider.notifier).setMoving(true),
               onCameraIdle: () =>
                   ref.read(isCameraMovingProvider.notifier).setMoving(false),
             ),

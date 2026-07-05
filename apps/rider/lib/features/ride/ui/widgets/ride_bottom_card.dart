@@ -13,6 +13,12 @@ class RideBottomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
+      margin: EdgeInsetsDirectional.fromSTEB(
+        AppDimens.space16,
+        0,
+        AppDimens.space16,
+        AppDimens.space24,
+      ),
       padding: EdgeInsetsDirectional.fromSTEB(
         AppDimens.screenHPadding,
         AppDimens.space16,
@@ -21,9 +27,14 @@ class RideBottomCard extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: AppColor.elementBackground,
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(AppDimens.radius24),
-        ),
+        borderRadius: BorderRadius.circular(AppDimens.radius24),
+        boxShadow: [
+          BoxShadow(
+            color: AppColor.secondary900.withValues(alpha: 0.08),
+            blurRadius: AppDimens.radius16,
+            offset: Offset(0, AppDimens.space4),
+          ),
+        ],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
