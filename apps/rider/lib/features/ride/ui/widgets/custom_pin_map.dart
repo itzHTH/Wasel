@@ -12,15 +12,15 @@ class CustomPinMap extends ConsumerWidget {
     final show = ref.watch(rideDraftProvider.select((s) => s.showMovingPin));
     if (!show) return const SizedBox.shrink();
 
-    final tint = ref.watch(rideDraftProvider.select((s) => s.pinTint));
+    final isStarterPoint = ref.watch(
+      rideDraftProvider.select((s) => s.isStarterPoint),
+    );
+
     return SvgPicture.asset(
-      "assets/icons/pin.svg",
+      isStarterPoint ? "assets/icons/pin-1.svg" : "assets/icons/pin-2.svg",
       fit: BoxFit.cover,
       height: AppDimens.icon48,
       width: AppDimens.icon48,
-      colorFilter: tint == null
-          ? null
-          : ColorFilter.mode(tint, BlendMode.srcIn),
     );
   }
 }

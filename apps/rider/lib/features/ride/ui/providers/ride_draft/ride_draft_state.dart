@@ -56,10 +56,7 @@ class RideDraftState {
 
   bool get showMovingPin => stage != PickingStage.done;
 
-  /// Tint applied to the moving pin. Null keeps the SVG's natural brand
-  /// colors (pickup); dropoff gets a solid dark pin to signal the stage.
-  Color? get pinTint =>
-      stage == PickingStage.dropoff ? AppColor.secondary500 : null;
+  bool get isStarterPoint => stage == PickingStage.pickup;
 
   String get summaryText {
     final lines = [
