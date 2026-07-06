@@ -23,10 +23,7 @@ class RideDraft extends _$RideDraft {
 
     switch (state.stage) {
       case PickingStage.pickup:
-        state = RideDraftState(
-          stage: PickingStage.dropoff,
-          pickup: center,
-        );
+        state = RideDraftState(stage: PickingStage.dropoff, pickup: center);
         _storeLabelFor(center, isPickup: true);
 
       case PickingStage.dropoff:

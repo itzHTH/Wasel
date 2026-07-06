@@ -1,7 +1,4 @@
-import 'dart:ui' show Color;
-
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:wasel_core/theme/app_color.dart';
 
 enum PickingStage { pickup, dropoff, done }
 
