@@ -5,9 +5,9 @@ part 'estimate_ride_price_response.g.dart';
 
 @JsonSerializable()
 class EstimateRidePriceResponse {
-  String estimatedPrice;
-  String distanceInKm;
-  String currency;
+  final String estimatedPrice;
+  final String distanceInKm;
+  final String currency;
 
   EstimateRidePriceResponse({
     required this.estimatedPrice,

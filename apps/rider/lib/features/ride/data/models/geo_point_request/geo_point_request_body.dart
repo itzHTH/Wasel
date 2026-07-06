@@ -4,10 +4,10 @@ part 'geo_point_request_body.g.dart';
 
 @JsonSerializable()
 class GeoPointRequestBody {
-  String pickupLat;
-  String pickupLng;
-  String dropoffLat;
-  String dropoffLng;
+  final String pickupLat;
+  final String pickupLng;
+  final String dropoffLat;
+  final String dropoffLng;
 
   GeoPointRequestBody({
     required this.pickupLat,

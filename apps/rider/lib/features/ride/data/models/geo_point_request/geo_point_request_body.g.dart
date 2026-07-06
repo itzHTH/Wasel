@@ -1,13 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_element
-
 part of 'geo_point_request_body.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
+// ignore: unused_element
 GeoPointRequestBody _$GeoPointRequestBodyFromJson(Map<String, dynamic> json) =>
     GeoPointRequestBody(
       pickupLat: json['pickupLat'] as String,

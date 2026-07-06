@@ -103,3 +103,51 @@ final class GetPointLabelUseCaseProvider
 
 String _$getPointLabelUseCaseHash() =>
     r'7bf576e2054df42765b50b19916bfb55af851708';
+
+@ProviderFor(getRidePriceUseCase)
+final getRidePriceUseCaseProvider = GetRidePriceUseCaseProvider._();
+
+final class GetRidePriceUseCaseProvider
+    extends
+        $FunctionalProvider<
+          GetRidePriceUseCase,
+          GetRidePriceUseCase,
+          GetRidePriceUseCase
+        >
+    with $Provider<GetRidePriceUseCase> {
+  GetRidePriceUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'getRidePriceUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$getRidePriceUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<GetRidePriceUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  GetRidePriceUseCase create(Ref ref) {
+    return getRidePriceUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GetRidePriceUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GetRidePriceUseCase>(value),
+    );
+  }
+}
+
+String _$getRidePriceUseCaseHash() =>
+    r'bce8894022ef0a1e5e8614620881575f3914ef5a';
