@@ -22,8 +22,6 @@ class CustomMap extends ConsumerStatefulWidget {
   final VoidCallback? onCameraMoveStarted;
   final VoidCallback? onCameraIdle;
 
-  /// Shifts the map's own UI (Google logo, controls) — used to keep the
-  /// logo visible above overlays like the bottom card.
   final EdgeInsets mapPadding;
 
   @override
@@ -38,8 +36,6 @@ class _CustomMapState extends ConsumerState<CustomMap> {
 
   @override
   Widget build(BuildContext context) {
-    // The map watches only the derived markers set — it rebuilds when a
-    // point is confirmed/removed, never on other draft-state changes.
     final markers = ref.watch(ridePointMarkersProvider);
     return GoogleMap(
       mapId: AppRiderConsts.mapStyleID,

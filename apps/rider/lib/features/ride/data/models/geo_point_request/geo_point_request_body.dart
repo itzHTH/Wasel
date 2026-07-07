@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'geo_point_request_body.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createFactory: false)
 class GeoPointRequestBody {
   final String pickupLat;
   final String pickupLng;

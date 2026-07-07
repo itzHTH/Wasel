@@ -6,12 +6,8 @@ import 'package:wasal/features/ride/ui/providers/ride_use_case_providers.dart';
 
 part 'ride_draft_provider.g.dart';
 
-/// keepAlive: the draft must survive leaving and re-entering the screen
-/// mid-flow; [reset] is the explicit way to discard it.
 @Riverpod(keepAlive: true)
 class RideDraft extends _$RideDraft {
-  /// Ignore a second confirm arriving within this window (rapid double-tap
-  /// must not advance two stages with the same point).
   static const _confirmDebounce = Duration(milliseconds: 500);
   DateTime? _lastConfirmAt;
 
@@ -36,8 +32,6 @@ class RideDraft extends _$RideDraft {
         _storeLabelFor(center, isPickup: false);
 
       case PickingStage.done:
-        // At done the confirm slot means "تعديل": step back to re-pick the
-        // dropoff, keeping the widget free of stage branching.
         goBackOneStep();
     }
   }
@@ -45,17 +39,17 @@ class RideDraft extends _$RideDraft {
   void goBackOneStep() {
     switch (state.stage) {
       case PickingStage.pickup:
-        break; // Nothing to go back to.
+        break;
 
       case PickingStage.dropoff:
-        state = const RideDraftState(); // Back to picking the pickup.
+        state = const RideDraftState();
 
       case PickingStage.done:
         state = RideDraftState(
           stage: PickingStage.dropoff,
           pickup: state.pickup,
           pickupLabel: state.pickupLabel,
-        ); // Dropoff cleared, pickup kept.
+        );
     }
   }
 
@@ -75,15 +69,11 @@ class RideDraft extends _$RideDraft {
         GeoPoint(latitude: point.latitude, longitude: point.longitude),
       );
       if (!ref.mounted) return;
-      // Drop stale results: the point may have been cleared or replaced
-      // by back navigation while the label was being resolved.
       if (isPickup && state.pickup == point) {
         state = state.withPickupLabel(label);
       } else if (!isPickup && state.dropoff == point) {
         state = state.withDropoffLabel(label);
       }
-    } catch (_) {
-      // Label stays null — the card keeps showing raw coordinates.
-    }
+    } catch (_) {}
   }
 }

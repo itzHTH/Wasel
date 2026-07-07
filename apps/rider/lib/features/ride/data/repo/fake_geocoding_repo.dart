@@ -1,8 +1,6 @@
 import 'package:wasal/features/ride/domain/entities/geo_point.dart';
 import 'package:wasal/features/ride/domain/repo/base_geocoding_repo.dart';
 
-/// Temporary stand-in until real reverse geocoding is wired; swapping it out
-/// only touches the provider in ride_use_case_providers.dart.
 class FakeGeocodingRepo implements BaseGeocodingRepo {
   @override
   Future<String> labelFor(GeoPoint point) async {
