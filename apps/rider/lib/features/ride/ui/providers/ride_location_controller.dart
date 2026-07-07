@@ -9,8 +9,6 @@ import 'package:wasel_core/permissions/permission_gate.dart' as permission_gate;
 
 part 'ride_location_controller.g.dart';
 
-/// Owns the "center the map on the user" flow so the screen only forwards
-/// the tap: permission gate → location service check → position → camera.
 class RideLocationController {
   const RideLocationController();
 
@@ -28,7 +26,6 @@ class RideLocationController {
     if (!granted) {
       final status = await Permission.location.status;
       if (!context.mounted) return;
-      // Permanently denied/restricted already got the gate's settings dialog.
       if (!status.isPermanentlyDenied && !status.isRestricted) {
         _showSnackBar(context, 'ما نگدر نوصل لموقعك بدون إذن الموقع');
       }
@@ -60,10 +57,7 @@ class RideLocationController {
           16,
         ),
       );
-    } catch (_) {
-      // Location unavailable (services toggled off mid-flow / timeout) —
-      // keep the current view.
-    }
+    } catch (_) {}
   }
 
   void _showSnackBar(

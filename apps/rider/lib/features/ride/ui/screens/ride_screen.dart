@@ -8,7 +8,7 @@ import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.
 import 'package:wasal/features/ride/ui/providers/ride_location_controller.dart';
 import 'package:wasal/features/ride/ui/widgets/custom_map.dart';
 import 'package:wasal/features/ride/ui/widgets/custom_pin_map.dart';
-import 'package:wasal/features/ride/ui/widgets/ride_bottom_card.dart';
+import 'package:wasal/features/ride/ui/widgets/ride_cards_switcher.dart';
 import 'package:wasel_core/wasel_core.dart';
 
 class RideScreen extends ConsumerStatefulWidget {
@@ -22,9 +22,8 @@ class _RideScreenState extends ConsumerState<RideScreen> {
   final Completer<GoogleMapController> _mapController =
       Completer<GoogleMapController>();
 
-  // Latest camera target; updated tens of times per second while the camera
-  // moves, so it must stay a plain field — never provider/setState-backed.
   LatLng _center = CustomMap.initialTarget;
+
   void _centerOnUserLocation() {
     ref
         .read(rideLocationControllerProvider)
@@ -82,7 +81,7 @@ class _RideScreenState extends ConsumerState<RideScreen> {
                       ),
                     ),
                   ),
-                  RideBottomCard(
+                  RideCardsSwitcher(
                     onConfirm: () => ref
                         .read(rideDraftProvider.notifier)
                         .confirmCurrentPoint(_center),

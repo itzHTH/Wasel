@@ -2,8 +2,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 enum PickingStage { pickup, dropoff, done }
 
-/// Immutable draft of the ride being composed. Plain Dart on purpose —
-/// the notifier builds each new state explicitly, so no codegen is needed.
 class RideDraftState {
   final PickingStage stage;
   final LatLng? pickup;
@@ -35,8 +33,6 @@ class RideDraftState {
     dropoffLabel: label,
   );
 
-  // ── Derived display values (widgets read these, never branch on stage) ──
-
   String get cardTitle => switch (stage) {
     PickingStage.pickup => 'حدّد نقطة الانطلاق',
     PickingStage.dropoff => 'وين تريد تروح؟',
@@ -54,6 +50,8 @@ class RideDraftState {
   bool get showMovingPin => stage != PickingStage.done;
 
   bool get isStarterPoint => stage == PickingStage.pickup;
+
+  bool get showRequestPriceButton => stage == PickingStage.done;
 
   String get summaryText {
     final lines = [

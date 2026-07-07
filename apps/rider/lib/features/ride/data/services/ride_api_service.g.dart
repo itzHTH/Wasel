@@ -26,10 +26,10 @@ class _RideApiService implements RideApiService {
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.addAll(geoPointRequest.toJson());
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(geoPointRequest.toJson());
+    const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<EstimateRidePriceResponse>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(

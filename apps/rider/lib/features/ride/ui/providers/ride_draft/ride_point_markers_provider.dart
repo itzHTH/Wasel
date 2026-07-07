@@ -5,9 +5,6 @@ import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.
 
 part 'ride_point_markers_provider.g.dart';
 
-/// Markers for the confirmed points only. The map watches this provider —
-/// never the whole draft state — so it rebuilds only when a point is
-/// added or removed.
 @riverpod
 Set<Marker> ridePointMarkers(Ref ref) {
   final pickup = ref.watch(rideDraftProvider.select((s) => s.pickup));

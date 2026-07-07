@@ -17,7 +17,7 @@ abstract class RideApiService {
 
   @GET(ApiRiderEndpoints.estimateRidePrice)
   Future<EstimateRidePriceResponse> estimateRidePrice(
-    @Body() GeoPointRequestBody geoPointRequest, {
+    @Queries() GeoPointRequestBody geoPointRequest, {
     @CancelRequest() CancelToken? cancelToken,
   });
 }

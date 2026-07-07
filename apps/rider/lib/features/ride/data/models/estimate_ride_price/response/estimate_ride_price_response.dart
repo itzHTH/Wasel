@@ -5,8 +5,8 @@ part 'estimate_ride_price_response.g.dart';
 
 @JsonSerializable()
 class EstimateRidePriceResponse {
-  final String estimatedPrice;
-  final String distanceInKm;
+  final int estimatedPrice;
+  final double distanceInKm;
   final String currency;
 
   EstimateRidePriceResponse({
@@ -16,15 +16,15 @@ class EstimateRidePriceResponse {
   });
 
   factory EstimateRidePriceResponse.fromJson(Map<String, dynamic> json) =>
-      _$EstimateRidePriceResponseFromJson(json);
-
+      _$EstimateRidePriceResponseFromJson(
+        (json['data'] ?? json) as Map<String, dynamic>,
+      );
   Map<String, dynamic> toJson() => _$EstimateRidePriceResponseToJson(this);
 
   RidePrice toEntity() {
     return RidePrice(
-      estimatedPrice: estimatedPrice,
-      distanceInKm: distanceInKm,
-      currency: currency,
+      estimatedPrice: estimatedPrice.toString(),
+      distanceInKm: distanceInKm.toString(),
     );
   }
 }
