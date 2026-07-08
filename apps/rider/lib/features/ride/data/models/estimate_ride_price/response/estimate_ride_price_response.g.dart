@@ -9,8 +9,8 @@ part of 'estimate_ride_price_response.dart';
 EstimateRidePriceResponse _$EstimateRidePriceResponseFromJson(
   Map<String, dynamic> json,
 ) => EstimateRidePriceResponse(
-  estimatedPrice: json['estimatedPrice'] as int,
-  distanceInKm: json['distanceInKm'] as double,
+  estimatedPrice: (json['estimatedPrice'] as num).toInt(),
+  distanceInKm: (json['distanceInKm'] as num).toDouble(),
   currency: json['currency'] as String,
 );
 

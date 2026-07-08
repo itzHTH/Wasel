@@ -8,18 +8,12 @@ part of 'is_camera_moving_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// Toggled by the map's onCameraMoveStarted/onCameraIdle. Watched only by
-/// the confirm button so camera drags never rebuild anything else.
 
 @ProviderFor(IsCameraMoving)
 final isCameraMovingProvider = IsCameraMovingProvider._();
 
-/// Toggled by the map's onCameraMoveStarted/onCameraIdle. Watched only by
-/// the confirm button so camera drags never rebuild anything else.
 final class IsCameraMovingProvider
     extends $NotifierProvider<IsCameraMoving, bool> {
-  /// Toggled by the map's onCameraMoveStarted/onCameraIdle. Watched only by
-  /// the confirm button so camera drags never rebuild anything else.
   IsCameraMovingProvider._()
     : super(
         from: null,
@@ -48,9 +42,6 @@ final class IsCameraMovingProvider
 }
 
 String _$isCameraMovingHash() => r'3058282764849e0abdc0362eba8304192709ad02';
-
-/// Toggled by the map's onCameraMoveStarted/onCameraIdle. Watched only by
-/// the confirm button so camera drags never rebuild anything else.
 
 abstract class _$IsCameraMoving extends $Notifier<bool> {
   bool build();
