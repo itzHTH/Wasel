@@ -6,6 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/core/consts/api_rider_endpoints.dart';
 import 'package:wasal/features/ride/data/models/estimate_ride_price/response/estimate_ride_price_response.dart';
 import 'package:wasal/features/ride/data/models/geo_point_request/geo_point_request_body.dart';
+import 'package:wasal/features/ride/data/models/request_ride/request_ride_response.dart';
 import 'package:wasel_core/wasel_core.dart';
 
 part 'ride_api_service.g.dart';
@@ -18,6 +19,12 @@ abstract class RideApiService {
   @GET(ApiRiderEndpoints.estimateRidePrice)
   Future<EstimateRidePriceResponse> estimateRidePrice(
     @Queries() GeoPointRequestBody geoPointRequest, {
+    @CancelRequest() CancelToken? cancelToken,
+  });
+
+  @POST(ApiRiderEndpoints.requestRide)
+  Future<RequestRideResponse> requestRide(
+    @Body() GeoPointRequestBody geoPointRequest, {
     @CancelRequest() CancelToken? cancelToken,
   });
 }
