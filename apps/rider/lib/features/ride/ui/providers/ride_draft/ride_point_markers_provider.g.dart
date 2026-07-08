@@ -8,23 +8,13 @@ part of 'ride_point_markers_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// Markers for the confirmed points only. The map watches this provider —
-/// never the whole draft state — so it rebuilds only when a point is
-/// added or removed.
 
 @ProviderFor(ridePointMarkers)
 final ridePointMarkersProvider = RidePointMarkersProvider._();
 
-/// Markers for the confirmed points only. The map watches this provider —
-/// never the whole draft state — so it rebuilds only when a point is
-/// added or removed.
-
 final class RidePointMarkersProvider
     extends $FunctionalProvider<Set<Marker>, Set<Marker>, Set<Marker>>
     with $Provider<Set<Marker>> {
-  /// Markers for the confirmed points only. The map watches this provider —
-  /// never the whole draft state — so it rebuilds only when a point is
-  /// added or removed.
   RidePointMarkersProvider._()
     : super(
         from: null,
