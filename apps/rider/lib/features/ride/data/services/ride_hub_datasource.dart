@@ -1,11 +1,16 @@
 import 'dart:async';
 
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/core/consts/ride_hub_methods.dart';
 import 'package:wasal/features/ride/data/models/ride_events/hub_ride_event.dart';
 import 'package:wasel_core/networking/signalR/i_signalr_client.dart';
+import 'package:wasel_core/networking/signalR/signalr_client_impl.dart';
+
+part 'ride_hub_datasource.g.dart';
 
 abstract class IRideHubDatasource {
   Stream<HubRideEvent> get events;
+  Future<void> connect({required String jwt, required String rideId});
   Future<void> trackRide(String rideId);
   Future<void> dispose();
 }
@@ -20,6 +25,7 @@ class RideHubDatasource implements IRideHubDatasource {
   @override
   Stream<HubRideEvent> get events => _controller.stream;
 
+  @override
   Future<void> connect({required String jwt, required String rideId}) async {
     _registerListeners(); // Register event listeners before connecting
 
@@ -116,4 +122,12 @@ class RideHubDatasource implements IRideHubDatasource {
     _currentRideId = rideId;
     await _client.invoke(RideHubMethods.trackRide, args: [rideId]);
   }
+}
+
+@Riverpod(keepAlive: false)
+IRideHubDatasource rideHubService(Ref ref) {
+  final signalRClient = ref.watch(signalRClientProvider);
+  final rideHub = RideHubDatasource(signalRClient);
+  ref.onDispose(rideHub.dispose);
+  return rideHub;
 }

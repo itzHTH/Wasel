@@ -1,11 +1,15 @@
 import 'dart:async';
 
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:signalr_netcore/signalr_client.dart';
+import 'package:wasel_core/networking/api_constants.dart';
 import 'package:wasel_core/networking/signalR/i_signalr_client.dart';
 
+part 'signalr_client_impl.g.dart';
+
 class SignalrClientImpl implements ISignalRClient {
-  SignalrClientImpl({String? baseUrl});
-  String? _baseUrl;
+  SignalrClientImpl(this._baseUrl);
+  final String? _baseUrl;
 
   HubConnection? _hubConnection;
   final _statusController = StreamController<SignalRStatus>.broadcast();
@@ -74,4 +78,9 @@ class SignalrClientImpl implements ISignalRClient {
   void onReconnected(void Function() callback) {
     _hubConnection?.onreconnected(({connectionId}) => callback());
   }
+}
+
+@riverpod
+ISignalRClient signalRClient(Ref ref) {
+  return SignalrClientImpl(ApiConstants.baseUrl);
 }

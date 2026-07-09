@@ -1,4 +1,6 @@
 class DriverProfile {
-  String? id;
-  String? name;
+  final String id;
+  final String name;
+
+  DriverProfile({required this.id, required this.name});
 }
