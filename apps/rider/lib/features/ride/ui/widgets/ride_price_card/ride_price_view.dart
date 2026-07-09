@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wasal/features/ride/domain/entities/ride_price.dart';
+import 'package:wasal/features/ride/ui/widgets/request_ride_card/request_ride_action.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_price_card/ride_detail_row.dart';
 import 'package:wasel_core/wasel_core.dart';
 
@@ -18,23 +19,7 @@ class RidePriceView extends StatelessWidget {
         SizedBox(height: AppDimens.space8),
         RideDetailRow(label: 'المسافة', value: '${price.distanceInKm} كم'),
         SizedBox(height: AppDimens.space24),
-        SizedBox(
-          height: AppDimens.buttonHeight,
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColor.primary500,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppDimens.radiusPill),
-              ),
-            ),
-            child: Text(
-              'تأكيد الطلب',
-              style: AppTextStyles.font16Neutral0SemiBold,
-            ),
-          ),
-        ),
+        const RequestRideAction(),
       ],
     );
   }

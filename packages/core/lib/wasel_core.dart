@@ -44,6 +44,7 @@ export 'theme/app_theme.dart';
 // Use cases
 export 'usecase/base_use_case.dart';
 export 'usecase/cancellable_use_case.dart';
+export 'usecase/stream_base_use_case.dart';
 
 // Widgets
 export 'widgets/app_back_button.dart';
