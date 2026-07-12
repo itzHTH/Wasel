@@ -9,8 +9,10 @@ import 'package:wasel_core/permissions/permission_gate.dart' as permission_gate;
 
 part 'ride_location_controller.g.dart';
 
-class RideLocationController {
-  const RideLocationController();
+@riverpod
+class RideLocationController extends _$RideLocationController {
+  @override
+  bool build() => false;
 
   Future<void> centerOnUserLocation(
     BuildContext context,
@@ -31,6 +33,8 @@ class RideLocationController {
       }
       return;
     }
+
+    if (ref.mounted) state = true;
 
     final serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!context.mounted) return;
@@ -76,7 +80,3 @@ class RideLocationController {
     );
   }
 }
-
-@riverpod
-RideLocationController rideLocationController(Ref ref) =>
-    const RideLocationController();
