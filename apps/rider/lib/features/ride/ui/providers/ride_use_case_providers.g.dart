@@ -152,6 +152,48 @@ final class GetRidePriceUseCaseProvider
 String _$getRidePriceUseCaseHash() =>
     r'bce8894022ef0a1e5e8614620881575f3914ef5a';
 
+@ProviderFor(getRouteUseCase)
+final getRouteUseCaseProvider = GetRouteUseCaseProvider._();
+
+final class GetRouteUseCaseProvider
+    extends
+        $FunctionalProvider<GetRouteUseCase, GetRouteUseCase, GetRouteUseCase>
+    with $Provider<GetRouteUseCase> {
+  GetRouteUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'getRouteUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$getRouteUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<GetRouteUseCase> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  GetRouteUseCase create(Ref ref) {
+    return getRouteUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GetRouteUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GetRouteUseCase>(value),
+    );
+  }
+}
+
+String _$getRouteUseCaseHash() => r'670f14640a234bdbc54489246e675aad9a69d9cf';
+
 @ProviderFor(requestRideUseCase)
 final requestRideUseCaseProvider = RequestRideUseCaseProvider._();
 

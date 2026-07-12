@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wasal/core/consts/app_rider_consts.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_point_markers_provider.dart';
+import 'package:wasal/features/ride/ui/providers/ride_location_controller.dart';
+import 'package:wasal/features/ride/ui/providers/route/route_polylines_provider.dart';
 
 class CustomMap extends ConsumerStatefulWidget {
   const CustomMap({
@@ -37,15 +39,22 @@ class _CustomMapState extends ConsumerState<CustomMap> {
   @override
   Widget build(BuildContext context) {
     final markers = ref.watch(ridePointMarkersProvider);
+    final polylines = ref.watch(routePolylinesProvider);
+    final myLocationEnabled = ref.watch(rideLocationControllerProvider);
+
     return GoogleMap(
       mapId: AppRiderConsts.mapStyleID,
-      myLocationEnabled: true,
+      myLocationEnabled: myLocationEnabled,
+      buildingsEnabled: false,
       myLocationButtonEnabled: false,
+      tiltGesturesEnabled: false,
+      rotateGesturesEnabled: false,
       zoomControlsEnabled: false,
       cameraTargetBounds: CameraTargetBounds(iraqBounds),
-      minMaxZoomPreference: const MinMaxZoomPreference(10, 20),
+      minMaxZoomPreference: const MinMaxZoomPreference(6, 20),
       padding: widget.mapPadding,
       markers: markers,
+      polylines: polylines,
       onMapCreated: (controller) {
         widget._controller.complete(controller);
       },

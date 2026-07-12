@@ -26,7 +26,7 @@ class _RideScreenState extends ConsumerState<RideScreen> {
 
   void _centerOnUserLocation() {
     ref
-        .read(rideLocationControllerProvider)
+        .read(rideLocationControllerProvider.notifier)
         .centerOnUserLocation(context, _mapController);
   }
 
