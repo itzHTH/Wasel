@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/features/ride/ui/widgets/ride_card_shell.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_draft_card/ride_action_buttons.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_draft_card/ride_back_button.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_draft_card/ride_card_title.dart';
@@ -17,30 +18,12 @@ class RideDraftCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      margin: EdgeInsetsDirectional.fromSTEB(
-        AppDimens.space16,
-        0,
-        AppDimens.space16,
-        AppDimens.space24,
-      ),
+    return RideCardShell(
       padding: EdgeInsetsDirectional.fromSTEB(
         AppDimens.screenHPadding,
         AppDimens.space16,
         AppDimens.screenHPadding,
         AppDimens.space24,
-      ),
-      decoration: BoxDecoration(
-        color: AppColor.elementBackground,
-        borderRadius: BorderRadius.circular(AppDimens.radius24),
-        boxShadow: [
-          BoxShadow(
-            color: AppColor.secondary900.withValues(alpha: 0.08),
-            blurRadius: AppDimens.radius16,
-            offset: Offset(0, AppDimens.space4),
-          ),
-        ],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

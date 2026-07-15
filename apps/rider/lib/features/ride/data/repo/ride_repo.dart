@@ -47,7 +47,6 @@ class RideRepo extends BaseRideRepo {
         geoPointRequest,
         cancelToken: cancelToken,
       );
-
       return ApiResults.success(response.toEntity());
     } catch (e) {
       return ApiResults.failure(ErrorHandler.handle(e));
@@ -56,20 +55,23 @@ class RideRepo extends BaseRideRepo {
 
   @override
   Stream<RideEvent> watchRide(String rideId) async* {
-    await _rideHubService.connect(
-      jwt: await AppLocalCache.getSecuredString(AppConstants.tokenKey) ?? "",
-      rideId: rideId,
-    );
+    try {
+      await _rideHubService.connect(
+        jwt: await AppLocalCache.getSecuredString(AppConstants.tokenKey) ?? "",
+      );
+    } catch (_) {}
 
     // Teardown is owned by rideHubServiceProvider's ref.onDispose.
     await for (final event in _rideHubService.events) {
       if (event is RideAccepted) {
+        await _rideHubService.trackRide(rideId);
+
         // TODO : Implemnet Driver Profile
         final driver = DriverProfile(
           id: "12345AP",
           name: "مصظفى عقيل",
         ); // fake Driver Profile //
-        yield RideEvent.accepted(rideId: rideId, driver: driver);
+        yield RideEvent.accepted(rideId: event.rideId, driver: driver);
       } else {
         yield event.toEntity();
       }
