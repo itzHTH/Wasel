@@ -2,6 +2,8 @@ import 'package:wasel_core/flavors/flavors_config.dart';
 
 class ApiConstants {
   static String get baseUrl => FlavorConfig.instance.baseUrl;
+  static String get hubUrl => "https://apiservice.ddns.net/wasl/hubs/tracking";
+
   static const String apiVersion = '1.0';
   static const String acceptEncoding = 'br';
 

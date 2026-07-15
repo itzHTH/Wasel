@@ -36,11 +36,15 @@ class RequestRideController extends _$RequestRideController {
     if (!ref.mounted) return;
 
     result.when(
-      failure: (error) => state = AsyncValue.error(
-        error.apiErrorModel.message ?? "حصل خطأ ما",
-        StackTrace.current,
-      ),
-      success: (price) => state = AsyncValue.data(price),
+      failure: (error) {
+        state = AsyncValue.error(
+          error.apiErrorModel.message ?? "حصل خطأ ما",
+          StackTrace.current,
+        );
+      },
+      success: (price) {
+        state = AsyncValue.data(price);
+      },
     );
   }
 }

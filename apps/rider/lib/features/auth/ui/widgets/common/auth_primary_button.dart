@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_color.dart';
-import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasal/core/widgets/app_primary_button.dart';
 
+/// Auth-flow primary button. Kept as a thin alias over the shared
+/// [AppPrimaryButton] so styling stays in one place.
 class AuthPrimaryButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
@@ -17,30 +17,10 @@ class AuthPrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: AppDimens.buttonHeight,
-      child: ElevatedButton(
-        onPressed: isLoading ? null : onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColor.primary500,
-          disabledBackgroundColor: AppColor.primary300,
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppDimens.radiusPill),
-          ),
-        ),
-        child: isLoading
-            ? const SizedBox(
-                width: 22,
-                height: 22,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2.5,
-                  color: AppColor.neutral0,
-                ),
-              )
-            : Text(label, style: AppTextStyles.font16Neutral0SemiBold),
-      ),
+    return AppPrimaryButton(
+      label: label,
+      onPressed: onPressed,
+      isLoading: isLoading,
     );
   }
 }
