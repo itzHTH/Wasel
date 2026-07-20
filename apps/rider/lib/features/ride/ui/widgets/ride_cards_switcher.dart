@@ -24,13 +24,14 @@ class _RideCardsSwitcherState extends ConsumerState<RideCardsSwitcher> {
       requestRideControllerProvider.select((s) => s.value != null),
     );
     if (requestSent) {
+      setState(() {
+        _showPrice = false;
+      });
       return const RideTrackingCards();
     }
 
     if (_showPrice) {
-      return RidePriceCard(
-        onClose: () => setState(() => _showPrice = false),
-      );
+      return RidePriceCard(onClose: () => setState(() => _showPrice = false));
     }
     return RideDraftCard(
       onConfirm: widget.onConfirm,

@@ -287,3 +287,50 @@ final class WatchRideUseCaseProvider
 }
 
 String _$watchRideUseCaseHash() => r'aec4e1ca5ea282a77b710308c696d5783026ec03';
+
+@ProviderFor(cancelRideUseCase)
+final cancelRideUseCaseProvider = CancelRideUseCaseProvider._();
+
+final class CancelRideUseCaseProvider
+    extends
+        $FunctionalProvider<
+          CancelRideUseCase,
+          CancelRideUseCase,
+          CancelRideUseCase
+        >
+    with $Provider<CancelRideUseCase> {
+  CancelRideUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'cancelRideUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$cancelRideUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<CancelRideUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  CancelRideUseCase create(Ref ref) {
+    return cancelRideUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(CancelRideUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<CancelRideUseCase>(value),
+    );
+  }
+}
+
+String _$cancelRideUseCaseHash() => r'e258d1e714d128977025eba354bf2700aadcde8e';
