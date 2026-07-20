@@ -48,4 +48,4 @@ final class RidePointMarkersProvider
   }
 }
 
-String _$ridePointMarkersHash() => r'4a353d9c6e4412910a4ffcace2782e2ca6c2b52f';
+String _$ridePointMarkersHash() => r'282382d48c09f08b6c517df99a1df95f4338ae36';

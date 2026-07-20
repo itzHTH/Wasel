@@ -1,11 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:wasal/features/ride/data/models/cancel_ride/cancel_ride_response.dart';
 import 'package:wasal/features/ride/data/models/estimate_ride_price/response/estimate_ride_price_response.dart';
 import 'package:wasal/features/ride/data/models/geo_point_request/geo_point_request_body.dart';
 import 'package:wasal/features/ride/data/models/request_ride/request_ride_response.dart';
 import 'package:wasal/features/ride/data/models/ride_events/hub_ride_event.dart';
 import 'package:wasal/features/ride/data/services/ride_api_service.dart';
 import 'package:wasal/features/ride/data/services/ride_hub_datasource.dart';
+import 'package:wasal/features/ride/domain/entities/cancel_ride.dart';
 import 'package:wasal/features/ride/domain/entities/driver_profile.dart';
 import 'package:wasal/features/ride/domain/entities/request_ride.dart';
 import 'package:wasal/features/ride/domain/entities/ride_event.dart'
@@ -45,6 +47,22 @@ class RideRepo extends BaseRideRepo {
     try {
       final RequestRideResponse response = await _rideApiService.requestRide(
         geoPointRequest,
+        cancelToken: cancelToken,
+      );
+      return ApiResults.success(response.toEntity());
+    } catch (e) {
+      return ApiResults.failure(ErrorHandler.handle(e));
+    }
+  }
+
+  @override
+  Future<ApiResults<CancelRide>> cancelRide(
+    String rideId, {
+    CancelToken? cancelToken,
+  }) async {
+    try {
+      final CancelRideResponse response = await _rideApiService.cancelRide(
+        rideId,
         cancelToken: cancelToken,
       );
       return ApiResults.success(response.toEntity());
