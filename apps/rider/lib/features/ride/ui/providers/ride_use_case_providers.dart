@@ -3,6 +3,7 @@ import 'package:wasal/features/ride/data/repo/fake_geocoding_repo.dart';
 import 'package:wasal/features/ride/data/repo/ride_repo.dart';
 import 'package:wasal/features/ride/data/repo/route_repo.dart';
 import 'package:wasal/features/ride/domain/repo/base_geocoding_repo.dart';
+import 'package:wasal/features/ride/domain/usecases/cancel_ride_use_case.dart';
 import 'package:wasal/features/ride/domain/usecases/get_point_label_use_case.dart';
 import 'package:wasal/features/ride/domain/usecases/get_ride_price_use_case.dart';
 import 'package:wasal/features/ride/domain/usecases/get_route_use_case.dart';
@@ -42,4 +43,10 @@ RequestRideUseCase requestRideUseCase(Ref ref) {
 WatchRideUseCase watchRideUseCase(Ref ref) {
   final rideRepo = ref.watch(rideRepoProvider);
   return WatchRideUseCase(rideRepo);
+}
+
+@riverpod
+CancelRideUseCase cancelRideUseCase(Ref ref) {
+  final rideRepo = ref.watch(rideRepoProvider);
+  return CancelRideUseCase(rideRepo);
 }

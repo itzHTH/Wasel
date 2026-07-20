@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wasal/features/ride/ui/providers/cancel_ride/cancel_ride_provider.dart';
 import 'package:wasal/features/ride/ui/providers/request_ride/request_ride_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:wasal/features/ride/ui/providers/ride_controller/ride_state.dart';
@@ -24,6 +25,15 @@ class RideTrackingCards extends ConsumerWidget {
     ref.invalidate(rideControllerProvider);
     ref.invalidate(requestRideControllerProvider);
     ref.read(rideDraftProvider.notifier).reset();
+  }
+
+  void _cancelRide(WidgetRef ref) {
+    ref.read(cancelRideControllerProvider.notifier).cancelRide();
+    final cancelRide = ref.watch(cancelRideControllerProvider);
+    if (cancelRide.value?.isCancelled != null ||
+        cancelRide.value?.isCancelled != false) {
+      _reset(ref);
+    }
   }
 
   void _openCompleted(BuildContext context, WidgetRef ref) {
@@ -77,11 +87,11 @@ class RideTrackingCards extends ConsumerWidget {
     final Widget card = switch (stage) {
       RideStage.accepted => DriverOnTheWayCard(
         driverName: driverName ?? '',
-        onCancel: () => _reset(ref),
+        onCancel: () => _cancelRide(ref),
       ),
       RideStage.arrived => DriverArrivedCard(
         driverName: driverName ?? '',
-        onCancel: () => _reset(ref),
+        onCancel: () => _cancelRide(ref),
       ),
       RideStage.inProgress || RideStage.completed => RideInProgressCard(
         destinationLabel:
@@ -89,8 +99,9 @@ class RideTrackingCards extends ConsumerWidget {
       ),
       // The dialog overlays the map; no bottom card underneath it.
       RideStage.cancelled => const SizedBox.shrink(),
-      RideStage.idel ||
-      RideStage.searching => SearchingForDriverCard(onCancel: () => _reset(ref)),
+      RideStage.idel || RideStage.searching => SearchingForDriverCard(
+        onCancel: () => _cancelRide(ref),
+      ),
     };
 
     return card;
