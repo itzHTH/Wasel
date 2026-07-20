@@ -1,0 +1,93 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /home/leader/.claude -path '*flutter-feature*' -name '*.md' 2>/dev/null; echo \"---\"; find \"/home/leader/Flutter Projects/wasel/.claude\" -path '*flutter-feature*' 2>/dev/null)",
+      "Read(//home/leader/.claude/**)",
+      "Bash(flutter analyze *)",
+      "Bash(dart analyze *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(git checkout *)",
+      "Bash(dart run *)",
+      "Bash(dart --packages=.dart_tool/package_config.json .dart_tool/build/entrypoint/build.dart build --delete-conflicting-outputs)",
+      "Bash(echo \"EXIT CODE: $?\")",
+      "Bash(dart --packages=.dart_tool/package_config.json .dart_tool/build/entrypoint/build.dart clean)",
+      "Bash(echo \"CLEAN EXIT: $?\")",
+      "Bash(echo \"BUILD EXIT: $?\")",
+      "Bash(python3 -c ' *)",
+      "Bash(cd \"/home/leader/Flutter Projects/wasel\" && flutter --version 2>/dev/null | head -n 2; echo \"---\"; ls /home/leader/.pub-cache/hosted/pub.dev/ | grep -E \"^build_runner-\" )",
+      "Read(//home/leader/.pub-cache/hosted/pub.dev/**)",
+      "Bash(git reset *)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/flutter\" test test/features/ride/ride_draft_provider_test.dart)",
+      "mcp__dart__list_devices",
+      "Skill(flutter-code-review)",
+      "Skill(flutter-code-review:*)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/dart\" run build_runner build --delete-conflicting-outputs)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/flutter\" analyze)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/flutter\" test test/features/ride/)",
+      "Bash(git status *)",
+      "Bash(git restore *)",
+      "Bash(rm -f \"/home/leader/Flutter Projects/wasel/apps/rider/tool/tmp_get_body_check.dart\")",
+      "Bash(rmdir \"/home/leader/Flutter Projects/wasel/apps/rider/tool\")",
+      "Bash(mv ride_bottom_card ride_draft_card)",
+      "Bash(mv ride_draft_card/ride_bottom_card.dart ride_draft_card/ride_draft_card.dart)",
+      "Bash(mv ride_bottom_section.dart ride_cards_switcher.dart)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/dart\" analyze lib/features/ride)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/dart\" analyze lib/networking/signalR)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/dart\" analyze lib/features/ride/data/repo/ride_repo.dart)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/dart\" analyze lib/features/ride/ui/widgets/ride_price_card/ride_price_view.dart)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/dart\" analyze lib/features/ride/ui/widgets/ride_price_card/)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/dart\" analyze lib/features/ride/ui/widgets/request_ride_card/ lib/features/ride/ui/widgets/ride_price_card/)",
+      "mcp__dart__list_running_apps",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/dart\" analyze lib/features/ride/ui/widgets/request_ride_card/)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/dart\" analyze lib/features/ride/ui/widgets/)",
+      "Bash(sed -n '1,80p' ui/providers/ride_draft/ride_draft_state.dart)",
+      "Bash(grep -rln \"class GeoPoint\" . ../../)",
+      "Bash(grep -rln \"toLatLng\" .)",
+      "Bash(awk '/String getFieldMask/,/^  }/' /home/leader/.pub-cache/hosted/pub.dev/flutter_polyline_points-3.1.0/lib/src/routes_api/routes_request.dart)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/dart\" analyze lib/features/ride/data/services/route_remote_service.dart lib/features/ride/data/repo/route_repo.dart lib/features/ride/domain/repo/base_route_repo.dart)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/dart\" run build_runner build)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/dart\" analyze lib/features/ride/domain/usecases/get_route_use_case.dart lib/features/ride/ui/providers/ride_use_case_providers.dart)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/dart\" analyze lib/features/ride/ui/providers/route lib/features/ride/ui/widgets/custom_map.dart lib/features/ride/ui/extensions)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/dart\" analyze lib/features/ride/ui/providers/ride_location_controller.dart lib/features/ride/ui/widgets/custom_map.dart)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/dart\" analyze lib/features/ride/ui/providers/ride_location_controller.dart)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/dart\" analyze lib/features/ride/ui/providers/ride_location_controller.dart lib/features/ride/ui/widgets/custom_map.dart lib/features/ride/ui/screens/ride_screen.dart)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/dart\" analyze lib/features/ride/ui/providers/route/route_polylines_provider.dart)",
+      "mcp__dart__launch_app",
+      "Bash(rm -f /tmp/claude-1000/-home-leader-Flutter-Projects-wasel/bbc964ca-432c-416a-8550-234ffa187975/scratchpad/run.log)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/flutter\" run -d 127.0.0.1:6555 --dart-define=ROUTES_API_KEY=dummy)",
+      "Bash(echo \"launched pid $!\")",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/dart\" analyze lib/features/ride/ui/providers/route/route_points_provider.dart lib/features/ride/data/repo/route_repo.dart)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/dart\" analyze lib/features/ride/ui/providers/route/route_points_provider.dart)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/dart\" analyze lib/main_common.dart lib/features/ride/data/services/route_remote_service.dart)",
+      "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/dart\" analyze lib/features/ride lib/main_common.dart)",
+      "Bash(grep -c '/\\\\.env$')",
+      "Bash(awk '/^  flutter_riverpod:/{f=1} f&&/version:/{print \"flutter_riverpod \" $2; f=0} /^  riverpod:/{r=1} r&&/version:/{print \"riverpod \" $2; r=0}' pubspec.lock)",
+      "Bash(pkill -f \"flutter run --flavor development\")",
+      "mcp__dart__connect_dart_tooling_daemon",
+      "mcp__dart__get_runtime_errors",
+      "mcp__dart__hot_restart",
+      "mcp__dart__get_widget_tree",
+      "mcp__dart__hot_reload",
+      "Bash(xargs cat)",
+      "mcp__dart__pub",
+      "Bash(rm -f apps/rider/lib/core/observers/logger_observer.dart)",
+      "Bash(rmdir apps/rider/lib/core/observers)",
+      "Bash(awk '/^  logging:/{f=1} f&&/version:/{print; exit}' pubspec.lock)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'f=\"${CLAUDE_FILE_PATHS:-}\"; if [ -n \"$f\" ]; then for file in $f; do if [[ \"$file\" == *.dart ]] && [[ \"$file\" == *datasource* || \"$file\" == *data_source* || \"$file\" == *_response.dart || \"$file\" == *_request.dart ]]; then echo \"⚠️  Code-generated file modified. Run: dart run build_runner build --delete-conflicting-outputs\"; break; fi; done; fi; exit 0'"
+          }
+        ]
+      }
+    ]
+  }
+}

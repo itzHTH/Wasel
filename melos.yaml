@@ -12,3 +12,4 @@ scripts:
       concurrency: 1
     packageFilters:
       dependsOn: build_runner
+sdkPath: .fvm/flutter_sdk
