@@ -11,7 +11,7 @@ class RideSummaryText extends ConsumerWidget {
     final summary = ref.watch(rideDraftProvider.select((s) => s.summaryText));
     if (summary.isEmpty) return const SizedBox.shrink();
     return Padding(
-      padding: EdgeInsetsDirectional.only(top: AppDimens.space8),
+      padding: EdgeInsets.only(top: AppDimens.space8),
       child: Text(summary, style: AppTextStyles.font14Secondary500Medium),
     );
   }

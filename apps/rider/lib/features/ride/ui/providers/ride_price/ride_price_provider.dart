@@ -7,7 +7,7 @@ import 'package:wasal/features/ride/ui/providers/ride_use_case_providers.dart';
 
 part 'ride_price_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class RidePriceEstimate extends _$RidePriceEstimate {
   @override
   FutureOr<RidePrice?> build() {
