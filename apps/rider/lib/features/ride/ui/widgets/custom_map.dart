@@ -1,8 +1,8 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wasal/core/consts/app_rider_consts.dart';
+import 'package:wasal/features/ride/ui/providers/map/map_controller_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_point_markers_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_location_controller.dart';
 import 'package:wasal/features/ride/ui/providers/route/route_polylines_provider.dart';
@@ -10,16 +10,14 @@ import 'package:wasal/features/ride/ui/providers/route/route_polylines_provider.
 class CustomMap extends ConsumerStatefulWidget {
   const CustomMap({
     super.key,
-    required Completer<GoogleMapController> controller,
     this.onCameraMove,
     this.onCameraMoveStarted,
     this.onCameraIdle,
     this.mapPadding = EdgeInsets.zero,
-  }) : _controller = controller;
+  });
 
   static const LatLng initialTarget = LatLng(33.3152, 44.3661);
 
-  final Completer<GoogleMapController> _controller;
   final ValueChanged<CameraPosition>? onCameraMove;
   final VoidCallback? onCameraMoveStarted;
   final VoidCallback? onCameraIdle;
@@ -55,9 +53,8 @@ class _CustomMapState extends ConsumerState<CustomMap> {
       padding: widget.mapPadding,
       markers: markers,
       polylines: polylines,
-      onMapCreated: (controller) {
-        widget._controller.complete(controller);
-      },
+      onMapCreated: (controller) =>
+          ref.read(mapControllerHolderProvider.notifier).attach(controller),
       onCameraMove: widget.onCameraMove,
       onCameraMoveStarted: widget.onCameraMoveStarted,
       onCameraIdle: widget.onCameraIdle,

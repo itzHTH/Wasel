@@ -1,10 +1,9 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:wasal/features/ride/ui/providers/map/map_controller_provider.dart';
 import 'package:wasel_core/permissions/permission_gate.dart' as permission_gate;
 
 part 'ride_location_controller.g.dart';
@@ -14,10 +13,7 @@ class RideLocationController extends _$RideLocationController {
   @override
   bool build() => false;
 
-  Future<void> centerOnUserLocation(
-    BuildContext context,
-    Completer<GoogleMapController> mapController,
-  ) async {
+  Future<void> centerOnUserLocation(BuildContext context) async {
     final granted = await permission_gate.ensurePermission(
       context,
       Permission.location,
@@ -54,7 +50,7 @@ class RideLocationController extends _$RideLocationController {
           accuracy: LocationAccuracy.high,
         ),
       );
-      final controller = await mapController.future;
+      final controller = await ref.read(mapControllerHolderProvider.future);
       await controller.animateCamera(
         CameraUpdate.newLatLngZoom(
           LatLng(position.latitude, position.longitude),
