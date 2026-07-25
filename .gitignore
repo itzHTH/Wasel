@@ -48,3 +48,15 @@ app.*.map.json
 
 # FVM Version Cache
 .fvm/
+
+# Machine-generated Flutter tooling / local config (should never be tracked)
+**/android/local.properties
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/ephemeral/
+**/ios/Flutter/flutter_export_environment.sh
+
+# Local Claude Code settings (personal, per-machine)
+.claude/settings.local.json
+
+# Xcode SwiftPM resolved packages (regenerated on resolve)
+**/xcshareddata/swiftpm/
