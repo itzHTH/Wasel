@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/features/ride/data/models/cancel_ride/cancel_ride_response.dart';
@@ -73,26 +75,40 @@ class RideRepo extends BaseRideRepo {
 
   @override
   Stream<RideEvent> watchRide(String rideId) async* {
+
+    final queue = StreamController<HubRideEvent>();
+    final subscription = _rideHubService.events.listen(
+      queue.add,
+      onError: queue.addError,
+    );
+
     try {
-      await _rideHubService.connect(
-        jwt: await AppLocalCache.getSecuredString(AppConstants.tokenKey) ?? "",
-      );
-    } catch (_) {}
+      try {
+        await _rideHubService.connect(
+          jwt: await AppLocalCache.getSecuredString(AppConstants.tokenKey) ?? "",
+        );
+      } catch (_) {}
 
-    // Teardown is owned by rideHubServiceProvider's ref.onDispose.
-    await for (final event in _rideHubService.events) {
-      if (event is RideAccepted) {
-        await _rideHubService.trackRide(rideId);
+      await for (final event in queue.stream) {
+        if (event is RideAccepted) {
+          await _rideHubService.trackRide(rideId);
 
-        // TODO : Implemnet Driver Profile
-        final driver = DriverProfile(
-          id: "12345AP",
-          name: "مصظفى عقيل",
-        ); // fake Driver Profile //
-        yield RideEvent.accepted(rideId: event.rideId, driver: driver);
-      } else {
-        yield event.toEntity();
+          final driver = DriverProfile(
+            id: event.driverId,
+            name: "مصطفى عقيل",
+            phoneNumber: "+9647700000000",
+            plateNumber: "12345 A",
+            carModel: "تويوتا كورولا",
+            carColor: "أبيض",
+          );
+          yield RideEvent.accepted(rideId: event.rideId, driver: driver);
+        } else {
+          yield event.toEntity();
+        }
       }
+    } finally {
+      await subscription.cancel();
+      await queue.close();
     }
   }
 }

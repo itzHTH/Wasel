@@ -25,6 +25,7 @@ class EstimateRidePriceResponse {
     return RidePrice(
       estimatedPrice: estimatedPrice.toString(),
       distanceInKm: distanceInKm.toString(),
+      currency: currency,
     );
   }
 }
