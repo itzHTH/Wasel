@@ -1,11 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/is_camera_moving_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_location_controller.dart';
+import 'package:wasal/features/ride/ui/providers/tracking/ride_camera_controller.dart';
 import 'package:wasal/features/ride/ui/widgets/custom_map.dart';
 import 'package:wasal/features/ride/ui/widgets/custom_pin_map.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_cards_switcher.dart';
@@ -19,15 +18,12 @@ class RideScreen extends ConsumerStatefulWidget {
 }
 
 class _RideScreenState extends ConsumerState<RideScreen> {
-  final Completer<GoogleMapController> _mapController =
-      Completer<GoogleMapController>();
-
   LatLng _center = CustomMap.initialTarget;
 
   void _centerOnUserLocation() {
     ref
         .read(rideLocationControllerProvider.notifier)
-        .centerOnUserLocation(context, _mapController);
+        .centerOnUserLocation(context);
   }
 
   @override
@@ -38,6 +34,9 @@ class _RideScreenState extends ConsumerState<RideScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    ref.watch(rideCameraControllerProvider);
+
     return Scaffold(
       body: SafeArea(
         top: false,
@@ -45,7 +44,6 @@ class _RideScreenState extends ConsumerState<RideScreen> {
           alignment: Alignment.center,
           children: [
             CustomMap(
-              controller: _mapController,
               mapPadding: EdgeInsets.zero,
               onCameraMove: (position) => _center = position.target,
               onCameraMoveStarted: () =>
@@ -64,8 +62,8 @@ class _RideScreenState extends ConsumerState<RideScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Padding(
-                    padding: EdgeInsetsDirectional.only(
-                      end: AppDimens.screenHPadding,
+                    padding: EdgeInsets.only(
+                      right: AppDimens.screenHPadding,
                       bottom: AppDimens.space16,
                     ),
                     child: Align(

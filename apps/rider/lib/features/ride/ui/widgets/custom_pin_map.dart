@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:wasal/core/consts/app_icons.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.dart';
 import 'package:wasel_core/wasel_core.dart';
 
@@ -17,7 +18,7 @@ class CustomPinMap extends ConsumerWidget {
     );
 
     return SvgPicture.asset(
-      isStarterPoint ? "assets/icons/pin-1.svg" : "assets/icons/pin-2.svg",
+      isStarterPoint ? AppIcons.pinStart : AppIcons.pinDestination,
       fit: BoxFit.cover,
       height: AppDimens.icon48,
       width: AppDimens.icon48,
