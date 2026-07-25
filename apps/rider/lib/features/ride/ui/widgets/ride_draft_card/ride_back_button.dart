@@ -11,7 +11,7 @@ class RideBackButton extends ConsumerWidget {
     final show = ref.watch(rideDraftProvider.select((s) => s.showBackButton));
     if (!show) return const SizedBox.shrink();
     return Padding(
-      padding: EdgeInsetsDirectional.only(end: AppDimens.space8),
+      padding: EdgeInsets.only(right: AppDimens.space8),
       child: IconButton(
         onPressed: () => ref.read(rideDraftProvider.notifier).goBackOneStep(),
         style: IconButton.styleFrom(backgroundColor: AppColor.neutral100),

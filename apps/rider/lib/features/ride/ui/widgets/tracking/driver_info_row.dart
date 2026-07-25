@@ -1,73 +1,107 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/features/ride/domain/entities/driver_profile.dart';
 import 'package:wasel_core/wasel_core.dart';
 
-/// Identifies the driver and vehicle so the rider can spot the car: an avatar,
-/// the driver name and plate number, and an optional rating badge. Shared by the
-/// "on the way" and "arrived" cards.
 class DriverInfoRow extends StatelessWidget {
-  const DriverInfoRow({
-    super.key,
-    required this.driverName,
-    required this.plateNumber,
-    this.rating,
-  });
+  const DriverInfoRow({super.key, required this.driver});
 
-  final String driverName;
-  final String? plateNumber;
-  final double? rating;
+  final DriverProfile driver;
 
   @override
   Widget build(BuildContext context) {
+    final vehicle = driver.vehicleLabel;
+    final plate = driver.plateNumber;
+
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          width: AppDimens.icon48,
-          height: AppDimens.icon48,
-          decoration: const BoxDecoration(
-            color: AppColor.neutral100,
-            shape: BoxShape.circle,
-          ),
-          child: Icon(
-            Icons.person_rounded,
-            color: AppColor.neutral400,
-            size: AppDimens.icon24,
-          ),
-        ),
+        _DriverAvatar(photoUrl: driver.photoUrl),
         SizedBox(width: AppDimens.space12),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(driverName, style: AppTextStyles.font20Secondary900Bold),
-              if (plateNumber != null && plateNumber!.isNotEmpty) ...[
+              Text(
+                driver.name,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppTextStyles.font20Secondary900Bold,
+              ),
+              if (vehicle != null) ...[
                 SizedBox(height: AppDimens.space4),
                 Text(
-                  plateNumber!,
+                  vehicle,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: AppTextStyles.font14Secondary500Medium,
                 ),
               ],
             ],
           ),
         ),
-        if (rating != null) ...[
+        if (plate != null && plate.isNotEmpty) ...[
           SizedBox(width: AppDimens.space8),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                Icons.star_rounded,
-                color: AppColor.alertWarning500,
-                size: AppDimens.icon20,
-              ),
-              SizedBox(width: AppDimens.space4),
-              Text(
-                rating!.toStringAsFixed(1),
-                style: AppTextStyles.font14Secondary900SemiBold,
-              ),
-            ],
-          ),
+          _PlateChip(plateNumber: plate),
         ],
       ],
+    );
+  }
+}
+
+class _DriverAvatar extends StatelessWidget {
+  const _DriverAvatar({this.photoUrl});
+
+  final String? photoUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    final placeholder = Icon(
+      Icons.person_rounded,
+      color: AppColor.neutral400,
+      size: AppDimens.icon24,
+    );
+
+    return Container(
+      width: AppDimens.icon48,
+      height: AppDimens.icon48,
+      clipBehavior: Clip.antiAlias,
+      decoration: const BoxDecoration(
+        color: AppColor.neutral100,
+        shape: BoxShape.circle,
+      ),
+      child: photoUrl == null || photoUrl!.isEmpty
+          ? placeholder
+          : Image.network(
+              photoUrl!,
+              fit: BoxFit.cover,
+
+              errorBuilder: (_, _, _) => placeholder,
+            ),
+    );
+  }
+}
+
+class _PlateChip extends StatelessWidget {
+  const _PlateChip({required this.plateNumber});
+
+  final String plateNumber;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: AppDimens.space12,
+        vertical: AppDimens.space8,
+      ),
+      decoration: BoxDecoration(
+        color: AppColor.secondary900,
+        borderRadius: BorderRadius.circular(AppDimens.radius8),
+      ),
+      child: Text(
+        plateNumber,
+        textDirection: TextDirection.ltr,
+        style: AppTextStyles.font16Neutral0SemiBold,
+      ),
     );
   }
 }

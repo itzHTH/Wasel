@@ -19,11 +19,11 @@ class RideDraftCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RideCardShell(
-      padding: EdgeInsetsDirectional.fromSTEB(
-        AppDimens.screenHPadding,
-        AppDimens.space16,
-        AppDimens.screenHPadding,
-        AppDimens.space24,
+      padding: EdgeInsets.only(
+        left: AppDimens.screenHPadding,
+        top: AppDimens.space16,
+        right: AppDimens.screenHPadding,
+        bottom: AppDimens.space24,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

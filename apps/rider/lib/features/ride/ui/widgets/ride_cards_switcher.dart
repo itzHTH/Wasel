@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/features/ride/ui/providers/request_ride/request_ride_provider.dart';
+import 'package:wasal/features/ride/ui/widgets/ride_card_transition.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_draft_card/ride_draft_card.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_price_card/ride_price_card.dart';
 import 'package:wasal/features/ride/ui/widgets/tracking/ride_tracking_cards.dart';
@@ -19,23 +20,31 @@ class _RideCardsSwitcherState extends ConsumerState<RideCardsSwitcher> {
 
   @override
   Widget build(BuildContext context) {
-    // Once the ride request is sent, hand off to the live ride-tracking cards.
+
+    ref.listen(requestRideControllerProvider.select((s) => s.value != null), (
+      previous,
+      next,
+    ) {
+      if (next && _showPrice) setState(() => _showPrice = false);
+    });
+
     final requestSent = ref.watch(
       requestRideControllerProvider.select((s) => s.value != null),
     );
-    if (requestSent) {
-      setState(() {
-        _showPrice = false;
-      });
-      return const RideTrackingCards();
-    }
 
-    if (_showPrice) {
-      return RidePriceCard(onClose: () => setState(() => _showPrice = false));
-    }
-    return RideDraftCard(
-      onConfirm: widget.onConfirm,
-      onRequestPrice: () => setState(() => _showPrice = true),
-    );
+    final Widget card = requestSent
+        ? const RideTrackingCards(key: ValueKey('tracking'))
+        : _showPrice
+        ? RidePriceCard(
+            key: const ValueKey('price'),
+            onClose: () => setState(() => _showPrice = false),
+          )
+        : RideDraftCard(
+            key: const ValueKey('draft'),
+            onConfirm: widget.onConfirm,
+            onRequestPrice: () => setState(() => _showPrice = true),
+          );
+
+    return RideCardTransition(child: card);
   }
 }

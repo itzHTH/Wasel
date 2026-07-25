@@ -20,13 +20,16 @@ class CancelRideController extends _$CancelRideController {
 
     if (rideCtrl.stage == RideStage.inProgress) return;
 
+    final rideId = ref.read(requestRideControllerProvider).value?.id;
+    if (rideId == null) {
+      state = AsyncValue.error("ما موجودة رحلة نلغيها", StackTrace.current);
+      return;
+    }
+
     state = const AsyncValue.loading();
     final useCase = ref.read(cancelRideUseCaseProvider);
     ref.onDispose(useCase.cancel);
 
-    final rideId = ref.watch(requestRideControllerProvider).value?.id;
-
-    if (rideId == null) return;
     final result = await useCase.call(rideId);
 
     if (!ref.mounted) return;

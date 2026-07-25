@@ -6,26 +6,24 @@ class RideCardShell extends StatelessWidget {
 
   final Widget child;
 
-  /// Overrides the default internal padding when a card needs tighter spacing.
   final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsetsDirectional.fromSTEB(
-        AppDimens.space16,
-        0,
-        AppDimens.space16,
-        AppDimens.space24,
+      margin: EdgeInsets.only(
+        left: AppDimens.space16,
+        right: AppDimens.space16,
+        bottom: AppDimens.space24,
       ),
       padding:
           padding ??
-          EdgeInsetsDirectional.fromSTEB(
-            AppDimens.screenHPadding,
-            AppDimens.space24,
-            AppDimens.screenHPadding,
-            AppDimens.space24,
+          EdgeInsets.only(
+            left: AppDimens.screenHPadding,
+            top: AppDimens.space16,
+            right: AppDimens.screenHPadding,
+            bottom: AppDimens.space24,
           ),
       decoration: BoxDecoration(
         color: AppColor.elementBackground,
@@ -38,6 +36,7 @@ class RideCardShell extends StatelessWidget {
           ),
         ],
       ),
+
       child: child,
     );
   }
