@@ -54,7 +54,7 @@ final class GeocodingRepoProvider
   }
 }
 
-String _$geocodingRepoHash() => r'2686cf1af06f443d3afa07c23f4c282f0983dddf';
+String _$geocodingRepoHash() => r'2644a28512139654456de865de878da9304dc23f';
 
 @ProviderFor(getPointLabelUseCase)
 final getPointLabelUseCaseProvider = GetPointLabelUseCaseProvider._();

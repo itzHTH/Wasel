@@ -1,7 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:wasal/features/ride/data/repo/fake_geocoding_repo.dart';
+import 'package:wasal/features/ride/data/repo/geocoding_repo.dart';
 import 'package:wasal/features/ride/data/repo/ride_repo.dart';
 import 'package:wasal/features/ride/data/repo/route_repo.dart';
+import 'package:wasal/features/ride/data/services/geocodng_api_service.dart';
 import 'package:wasal/features/ride/domain/repo/base_geocoding_repo.dart';
 import 'package:wasal/features/ride/domain/usecases/cancel_ride_use_case.dart';
 import 'package:wasal/features/ride/domain/usecases/get_point_label_use_case.dart';
@@ -13,7 +14,10 @@ import 'package:wasal/features/ride/domain/usecases/watch_ride_use_case.dart';
 part 'ride_use_case_providers.g.dart';
 
 @riverpod
-BaseGeocodingRepo geocodingRepo(Ref ref) => FakeGeocodingRepo();
+BaseGeocodingRepo geocodingRepo(Ref ref) {
+  final geocodingApiService = ref.watch(geocodingApiServiceProvider);
+  return GeocodingRepo(geocodingApiService);
+}
 
 @riverpod
 GetPointLabelUseCase getPointLabelUseCase(Ref ref) {
