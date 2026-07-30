@@ -7,6 +7,9 @@ import 'package:wasal/features/ride/ui/providers/ride_location_controller.dart';
 import 'package:wasal/features/ride/ui/providers/tracking/ride_camera_controller.dart';
 import 'package:wasal/features/ride/ui/widgets/custom_map.dart';
 import 'package:wasal/features/ride/ui/widgets/custom_pin_map.dart';
+import 'package:wasal/features/ride/ui/widgets/location_permission_banner.dart';
+import 'package:wasal/features/ride/ui/widgets/map_loading_overlay.dart';
+import 'package:wasal/features/ride/ui/widgets/my_location_button.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_cards_switcher.dart';
 import 'package:wasel_core/wasel_core.dart';
 
@@ -34,61 +37,52 @@ class _RideScreenState extends ConsumerState<RideScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     ref.watch(rideCameraControllerProvider);
 
     return Scaffold(
-      body: SafeArea(
-        top: false,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            CustomMap(
-              mapPadding: EdgeInsets.zero,
-              onCameraMove: (position) => _center = position.target,
-              onCameraMoveStarted: () =>
-                  ref.read(isCameraMovingProvider.notifier).setMoving(true),
-              onCameraIdle: () =>
-                  ref.read(isCameraMovingProvider.notifier).setMoving(false),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: AppDimens.space48),
-              child: CustomPinMap(),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                      right: AppDimens.screenHPadding,
-                      bottom: AppDimens.space16,
-                    ),
-                    child: Align(
-                      alignment: AlignmentDirectional.centerEnd,
-                      child: FloatingActionButton.small(
-                        backgroundColor: AppColor.neutral0,
-                        shape: const CircleBorder(),
-                        onPressed: _centerOnUserLocation,
-                        child: const Icon(
-                          Icons.my_location,
-                          color: AppColor.primary500,
-                        ),
-                      ),
-                    ),
+      body: Stack(
+        alignment: Alignment.center,
+        children: [
+          CustomMap(
+            mapPadding: EdgeInsets.zero,
+            onCameraMove: (position) => _center = position.target,
+            onCameraMoveStarted: () =>
+                ref.read(isCameraMovingProvider.notifier).setMoving(true),
+            onCameraIdle: () =>
+                ref.read(isCameraMovingProvider.notifier).setMoving(false),
+          ),
+          Padding(
+            padding: EdgeInsets.only(bottom: AppDimens.space48),
+            child: CustomPinMap(),
+          ),
+          const Positioned.fill(child: MapLoadingOverlay()),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: AppDimens.space16,
+                    right: AppDimens.screenHPadding,
+                    bottom: AppDimens.space16,
                   ),
-                  RideCardsSwitcher(
-                    onConfirm: () => ref
-                        .read(rideDraftProvider.notifier)
-                        .confirmCurrentPoint(_center),
+                  child: const Align(
+                    alignment: AlignmentDirectional.centerEnd,
+                    child: MyLocationButton(),
                   ),
-                ],
-              ),
+                ),
+                const LocationPermissionBanner(),
+                RideCardsSwitcher(
+                  onConfirm: () => ref
+                      .read(rideDraftProvider.notifier)
+                      .confirmCurrentPoint(_center),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

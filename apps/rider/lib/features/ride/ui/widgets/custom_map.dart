@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wasal/core/consts/app_rider_consts.dart';
 import 'package:wasal/features/ride/ui/providers/map/map_controller_provider.dart';
+import 'package:wasal/features/ride/ui/providers/map/map_ready_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_point_markers_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_location_controller.dart';
 import 'package:wasal/features/ride/ui/providers/route/route_polylines_provider.dart';
@@ -29,10 +32,36 @@ class CustomMap extends ConsumerStatefulWidget {
 }
 
 class _CustomMapState extends ConsumerState<CustomMap> {
+  static const _readyFallbackDelay = Duration(milliseconds: 1500);
+
   final iraqBounds = LatLngBounds(
     southwest: const LatLng(29.0, 38.8),
     northeast: const LatLng(37.4, 48.6),
   );
+
+  Timer? _readyFallback;
+
+  @override
+  void dispose() {
+    _readyFallback?.cancel();
+    super.dispose();
+  }
+
+  void _markReady() {
+    _readyFallback?.cancel();
+    if (!mounted) return;
+    ref.read(mapReadyProvider.notifier).markReady();
+  }
+
+  void _onMapCreated(GoogleMapController controller) {
+    ref.read(mapControllerHolderProvider.notifier).attach(controller);
+    _readyFallback = Timer(_readyFallbackDelay, _markReady);
+  }
+
+  void _onCameraIdle() {
+    _markReady();
+    widget.onCameraIdle?.call();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +84,10 @@ class _CustomMapState extends ConsumerState<CustomMap> {
       padding: widget.mapPadding,
       markers: markers,
       polylines: polylines,
-      onMapCreated: (controller) =>
-          ref.read(mapControllerHolderProvider.notifier).attach(controller),
+      onMapCreated: _onMapCreated,
       onCameraMove: widget.onCameraMove,
       onCameraMoveStarted: widget.onCameraMoveStarted,
-      onCameraIdle: widget.onCameraIdle,
+      onCameraIdle: _onCameraIdle,
       initialCameraPosition: const CameraPosition(
         zoom: 14.5,
         target: CustomMap.initialTarget,
