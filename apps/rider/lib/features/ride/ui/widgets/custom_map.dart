@@ -80,7 +80,7 @@ class _CustomMapState extends ConsumerState<CustomMap> {
       rotateGesturesEnabled: false,
       zoomControlsEnabled: false,
       cameraTargetBounds: CameraTargetBounds(iraqBounds),
-      minMaxZoomPreference: const MinMaxZoomPreference(6, 20),
+      minMaxZoomPreference: const MinMaxZoomPreference(10, 20),
       padding: widget.mapPadding,
       markers: markers,
       polylines: polylines,
