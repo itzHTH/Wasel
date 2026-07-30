@@ -38,7 +38,9 @@ class _CustomMapState extends ConsumerState<CustomMap> {
   Widget build(BuildContext context) {
     final markers = ref.watch(ridePointMarkersProvider);
     final polylines = ref.watch(routePolylinesProvider);
-    final myLocationEnabled = ref.watch(rideLocationControllerProvider);
+    final myLocationEnabled = ref.watch(
+      rideLocationControllerProvider.select((s) => s.myLocationEnabled),
+    );
 
     return GoogleMap(
       mapId: AppRiderConsts.mapStyleID,

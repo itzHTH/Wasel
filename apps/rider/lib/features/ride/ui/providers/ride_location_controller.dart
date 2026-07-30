@@ -1,27 +1,31 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:wasal/features/ride/ui/providers/location/location_permission_provider.dart';
 import 'package:wasal/features/ride/ui/providers/map/map_controller_provider.dart';
-import 'package:wasel_core/permissions/permission_gate.dart' as permission_gate;
+import 'package:wasal/features/ride/ui/providers/ride_location_state.dart';
 
 part 'ride_location_controller.g.dart';
 
 @riverpod
 class RideLocationController extends _$RideLocationController {
+  static const _fixTimeout = Duration(seconds: 15);
+
   @override
-  bool build() => false;
+  RideLocationState build() => const RideLocationState();
 
   Future<void> centerOnUserLocation(BuildContext context) async {
-    final granted = await permission_gate.ensurePermission(
-      context,
-      Permission.location,
-      deniedTitle: 'إذن الموقع مطلوب',
-      deniedMessage: 'يرجى تمكين إذن الموقع للوصول إلى هذه الميزة.',
-    );
+    if (state.isLocating) return;
+
+    final access = await ref
+        .read(locationPermissionProvider.notifier)
+        .request(context);
     if (!context.mounted) return;
-    if (!granted) {
+    if (access != LocationAccess.granted) {
       final status = await Permission.location.status;
       if (!context.mounted) return;
       if (!status.isPermanentlyDenied && !status.isRestricted) {
@@ -30,24 +34,27 @@ class RideLocationController extends _$RideLocationController {
       return;
     }
 
-    if (ref.mounted) state = true;
-
-    final serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!context.mounted) return;
-    if (!serviceEnabled) {
-      _showSnackBar(
-        context,
-        'خدمة الموقع مطفّية، شغّلها حتى نگدر نوصل لموقعك',
-        actionLabel: 'الإعدادات',
-        onAction: () => Geolocator.openLocationSettings(),
-      );
-      return;
+    if (ref.mounted) {
+      state = state.copyWith(myLocationEnabled: true, isLocating: true);
     }
 
     try {
+      final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!context.mounted) return;
+      if (!serviceEnabled) {
+        _showSnackBar(
+          context,
+          'خدمة الموقع مطفّية، شغّلها حتى نگدر نوصل لموقعك',
+          actionLabel: 'الإعدادات',
+          onAction: () => Geolocator.openLocationSettings(),
+        );
+        return;
+      }
+
       final position = await Geolocator.getCurrentPosition(
         locationSettings: const LocationSettings(
           accuracy: LocationAccuracy.high,
+          timeLimit: _fixTimeout,
         ),
       );
       final controller = await ref.read(mapControllerHolderProvider.future);
@@ -57,7 +64,15 @@ class RideLocationController extends _$RideLocationController {
           16,
         ),
       );
-    } catch (_) {}
+    } on TimeoutException {
+      if (!context.mounted) return;
+      _showSnackBar(context, 'ما گدرنا نلگه موقعك، جرّب مرة ثانية');
+    } catch (_) {
+      if (!context.mounted) return;
+      _showSnackBar(context, 'صار خطأ وإحنا ندوّر على موقعك');
+    } finally {
+      if (ref.mounted) state = state.copyWith(isLocating: false);
+    }
   }
 
   void _showSnackBar(

@@ -13,7 +13,7 @@ part of 'ride_location_controller.dart';
 final rideLocationControllerProvider = RideLocationControllerProvider._();
 
 final class RideLocationControllerProvider
-    extends $NotifierProvider<RideLocationController, bool> {
+    extends $NotifierProvider<RideLocationController, RideLocationState> {
   RideLocationControllerProvider._()
     : super(
         from: null,
@@ -33,28 +33,28 @@ final class RideLocationControllerProvider
   RideLocationController create() => RideLocationController();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(bool value) {
+  Override overrideWithValue(RideLocationState value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<bool>(value),
+      providerOverride: $SyncValueProvider<RideLocationState>(value),
     );
   }
 }
 
 String _$rideLocationControllerHash() =>
-    r'1fd661e3e9b779404a22ad4cc1af95cda24b8dbe';
+    r'dda6b2640554247133419c502c6b3ddf8d7e368c';
 
-abstract class _$RideLocationController extends $Notifier<bool> {
-  bool build();
+abstract class _$RideLocationController extends $Notifier<RideLocationState> {
+  RideLocationState build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref = this.ref as $Ref<bool, bool>;
+    final ref = this.ref as $Ref<RideLocationState, RideLocationState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<bool, bool>,
-              bool,
+              AnyNotifier<RideLocationState, RideLocationState>,
+              RideLocationState,
               Object?,
               Object?
             >;
