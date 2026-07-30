@@ -54,7 +54,7 @@ class _RideApiService implements RideApiService {
 
   @override
   Future<RequestRideResponse> requestRide(
-    GeoPointRequestBody geoPointRequest, {
+    RequestRideBody requestRideBody, {
     CancelToken? cancelToken,
   }) async {
     final _extra = <String, dynamic>{};
@@ -62,7 +62,7 @@ class _RideApiService implements RideApiService {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(geoPointRequest.toJson());
+    _data.addAll(requestRideBody.toJson());
     final _options = _setStreamType<RequestRideResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(

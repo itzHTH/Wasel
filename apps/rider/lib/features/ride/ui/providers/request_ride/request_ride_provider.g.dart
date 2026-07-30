@@ -34,7 +34,7 @@ final class RequestRideControllerProvider
 }
 
 String _$requestRideControllerHash() =>
-    r'3b649912819a1c47265566538d4dd4aec17eabcc';
+    r'ce3209b54905c926963194312ac9d4bda3261adb';
 
 abstract class _$RequestRideController extends $AsyncNotifier<RequestRide?> {
   FutureOr<RequestRide?> build();
