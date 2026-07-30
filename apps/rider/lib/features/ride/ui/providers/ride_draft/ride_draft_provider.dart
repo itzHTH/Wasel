@@ -1,5 +1,6 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:wasal/core/helpers/ride_formatters.dart';
 import 'package:wasal/features/ride/domain/entities/geo_point.dart';
 import 'package:wasal/features/ride/ui/providers/location/point_label_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_state.dart';
@@ -63,18 +64,34 @@ class RideDraft extends _$RideDraft {
   }
 
   Future<void> _storeLabelFor(LatLng point, {required bool isPickup}) async {
+    // A failed or nameless lookup must still leave a usable label behind: the
+    // tracking and completion screens read these and have no fallback of their
+    // own, so a null here renders as a blank origin/destination.
+    final label = await _resolveLabel(point);
+
+    if (!ref.mounted) return;
+    if (isPickup && state.pickup == point) {
+      state = state.withPickupLabel(label);
+    } else if (!isPickup && state.dropoff == point) {
+      state = state.withDropoffLabel(label);
+    }
+  }
+
+  Future<String> _resolveLabel(LatLng point) async {
+    final fallback = RideFormatters.coordinates(
+      point.latitude,
+      point.longitude,
+    );
+
     try {
       final label = await ref.read(
         pointLabelProvider(
           GeoPoint(latitude: point.latitude, longitude: point.longitude),
         ).future,
       );
-      if (!ref.mounted) return;
-      if (isPickup && state.pickup == point) {
-        state = state.withPickupLabel(label);
-      } else if (!isPickup && state.dropoff == point) {
-        state = state.withDropoffLabel(label);
-      }
-    } catch (_) {}
+      return label.isEmpty ? fallback : label;
+    } catch (_) {
+      return fallback;
+    }
   }
 }

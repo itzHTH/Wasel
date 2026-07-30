@@ -19,7 +19,7 @@ final class PointLabelProvider
     required PointLabelFamily super.from,
     required GeoPoint super.argument,
   }) : super(
-         retry: null,
+         retry: _retryLabelLookup,
          name: r'pointLabelProvider',
          isAutoDispose: false,
          dependencies: null,
@@ -58,13 +58,13 @@ final class PointLabelProvider
   }
 }
 
-String _$pointLabelHash() => r'14e17f58ca2e081073eda13507b3888333e1a2ea';
+String _$pointLabelHash() => r'f8e4e3bce8fedc3e25675ce2ea11de8e5dd3065a';
 
 final class PointLabelFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<String>, GeoPoint> {
   PointLabelFamily._()
     : super(
-        retry: null,
+        retry: _retryLabelLookup,
         name: r'pointLabelProvider',
         dependencies: null,
         $allTransitiveDependencies: null,
