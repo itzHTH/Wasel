@@ -8,33 +8,12 @@ part of 'ride_camera_controller.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// Frames the camera on (captain + pickup) once per ride, the first time the
-/// captain's location arrives. Side-effect only — the `void` state means
-/// watching this never rebuilds its consumers.
-///
-/// The trigger is the first non-null `driverPosition`, not the transition to
-/// [RideStage.accepted]: at acceptance the captain's location hasn't been
-/// broadcast yet, so framing there would have nothing to frame on.
 
 @ProviderFor(RideCameraController)
 final rideCameraControllerProvider = RideCameraControllerProvider._();
 
-/// Frames the camera on (captain + pickup) once per ride, the first time the
-/// captain's location arrives. Side-effect only — the `void` state means
-/// watching this never rebuilds its consumers.
-///
-/// The trigger is the first non-null `driverPosition`, not the transition to
-/// [RideStage.accepted]: at acceptance the captain's location hasn't been
-/// broadcast yet, so framing there would have nothing to frame on.
 final class RideCameraControllerProvider
     extends $NotifierProvider<RideCameraController, void> {
-  /// Frames the camera on (captain + pickup) once per ride, the first time the
-  /// captain's location arrives. Side-effect only — the `void` state means
-  /// watching this never rebuilds its consumers.
-  ///
-  /// The trigger is the first non-null `driverPosition`, not the transition to
-  /// [RideStage.accepted]: at acceptance the captain's location hasn't been
-  /// broadcast yet, so framing there would have nothing to frame on.
   RideCameraControllerProvider._()
     : super(
         from: null,
@@ -64,14 +43,6 @@ final class RideCameraControllerProvider
 
 String _$rideCameraControllerHash() =>
     r'ced5f89a2411678190084c71c82769a99471daac';
-
-/// Frames the camera on (captain + pickup) once per ride, the first time the
-/// captain's location arrives. Side-effect only — the `void` state means
-/// watching this never rebuilds its consumers.
-///
-/// The trigger is the first non-null `driverPosition`, not the transition to
-/// [RideStage.accepted]: at acceptance the captain's location hasn't been
-/// broadcast yet, so framing there would have nothing to frame on.
 
 abstract class _$RideCameraController extends $Notifier<void> {
   void build();

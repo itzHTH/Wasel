@@ -8,20 +8,9 @@ part of 'map_marker_icon_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// Rasterizes an SVG asset into a map marker bitmap at the device pixel ratio.
-/// Google Maps takes bitmaps only, so vector assets have to be baked once —
-/// kept alive per (asset, size) so it survives ride restarts.
-///
-/// [logicalSize] is the device-independent length of the marker's longest side.
 
 @ProviderFor(mapMarkerIcon)
 final mapMarkerIconProvider = MapMarkerIconFamily._();
-
-/// Rasterizes an SVG asset into a map marker bitmap at the device pixel ratio.
-/// Google Maps takes bitmaps only, so vector assets have to be baked once —
-/// kept alive per (asset, size) so it survives ride restarts.
-///
-/// [logicalSize] is the device-independent length of the marker's longest side.
 
 final class MapMarkerIconProvider
     extends
@@ -31,11 +20,6 @@ final class MapMarkerIconProvider
           FutureOr<BitmapDescriptor>
         >
     with $FutureModifier<BitmapDescriptor>, $FutureProvider<BitmapDescriptor> {
-  /// Rasterizes an SVG asset into a map marker bitmap at the device pixel ratio.
-  /// Google Maps takes bitmaps only, so vector assets have to be baked once —
-  /// kept alive per (asset, size) so it survives ride restarts.
-  ///
-  /// [logicalSize] is the device-independent length of the marker's longest side.
   MapMarkerIconProvider._({
     required MapMarkerIconFamily super.from,
     required (String, {double logicalSize}) super.argument,
@@ -80,13 +64,7 @@ final class MapMarkerIconProvider
   }
 }
 
-String _$mapMarkerIconHash() => r'b8966073fd5b9a12c7a2c0d15306d19621837ea7';
-
-/// Rasterizes an SVG asset into a map marker bitmap at the device pixel ratio.
-/// Google Maps takes bitmaps only, so vector assets have to be baked once —
-/// kept alive per (asset, size) so it survives ride restarts.
-///
-/// [logicalSize] is the device-independent length of the marker's longest side.
+String _$mapMarkerIconHash() => r'ace5c004811c34bad6d0ca4f674f5cfdf1c98be9';
 
 final class MapMarkerIconFamily extends $Family
     with
@@ -102,12 +80,6 @@ final class MapMarkerIconFamily extends $Family
         $allTransitiveDependencies: null,
         isAutoDispose: false,
       );
-
-  /// Rasterizes an SVG asset into a map marker bitmap at the device pixel ratio.
-  /// Google Maps takes bitmaps only, so vector assets have to be baked once —
-  /// kept alive per (asset, size) so it survives ride restarts.
-  ///
-  /// [logicalSize] is the device-independent length of the marker's longest side.
 
   MapMarkerIconProvider call(String assetPath, {double logicalSize = 56.0}) =>
       MapMarkerIconProvider._(
