@@ -9,6 +9,7 @@ import 'package:wasal/features/ride/ui/providers/map/map_ready_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_point_markers_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_location_controller.dart';
 import 'package:wasal/features/ride/ui/providers/route/route_polylines_provider.dart';
+import 'package:wasal/features/ride/ui/providers/tracking/search_radius_circles_provider.dart';
 
 class CustomMap extends ConsumerStatefulWidget {
   const CustomMap({
@@ -67,6 +68,7 @@ class _CustomMapState extends ConsumerState<CustomMap> {
   Widget build(BuildContext context) {
     final markers = ref.watch(ridePointMarkersProvider);
     final polylines = ref.watch(routePolylinesProvider);
+    final searchRadiusCircles = ref.watch(searchRadiusCirclesProvider);
     final myLocationEnabled = ref.watch(
       rideLocationControllerProvider.select((s) => s.myLocationEnabled),
     );
@@ -84,6 +86,7 @@ class _CustomMapState extends ConsumerState<CustomMap> {
       padding: widget.mapPadding,
       markers: markers,
       polylines: polylines,
+      circles: searchRadiusCircles,
       onMapCreated: _onMapCreated,
       onCameraMove: widget.onCameraMove,
       onCameraMoveStarted: widget.onCameraMoveStarted,
