@@ -42,7 +42,7 @@ final class SearchRadiusCirclesProvider
 }
 
 String _$searchRadiusCirclesHash() =>
-    r'3e3b283217bf67b22e2765256a5e3a7ddc3e6a81';
+    r'83ad6ba102d762bdc9305f9db2556ef7011ef65b';
 
 abstract class _$SearchRadiusCircles extends $Notifier<Set<Circle>> {
   Set<Circle> build();

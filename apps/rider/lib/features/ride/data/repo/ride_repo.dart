@@ -5,7 +5,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/features/ride/data/models/cancel_ride/cancel_ride_response.dart';
 import 'package:wasal/features/ride/data/models/estimate_ride_price/response/estimate_ride_price_response.dart';
 import 'package:wasal/features/ride/data/models/geo_point_request/geo_point_request_body.dart';
-import 'package:wasal/features/ride/data/models/request_ride/request_ride_response.dart';
+import 'package:wasal/features/ride/data/models/request_ride/request/request_ride_body.dart';
+import 'package:wasal/features/ride/data/models/request_ride/response/request_ride_response.dart';
 import 'package:wasal/features/ride/data/models/ride_events/hub_ride_event.dart';
 import 'package:wasal/features/ride/data/services/ride_api_service.dart';
 import 'package:wasal/features/ride/data/services/ride_hub_datasource.dart';
@@ -43,12 +44,12 @@ class RideRepo extends BaseRideRepo {
 
   @override
   Future<ApiResults<RequestRide>> requestRide(
-    GeoPointRequestBody geoPointRequest, {
+    RequestRideBody requestRideBody, {
     CancelToken? cancelToken,
   }) async {
     try {
       final RequestRideResponse response = await _rideApiService.requestRide(
-        geoPointRequest,
+        requestRideBody,
         cancelToken: cancelToken,
       );
       return ApiResults.success(response.toEntity());
@@ -75,7 +76,6 @@ class RideRepo extends BaseRideRepo {
 
   @override
   Stream<RideEvent> watchRide(String rideId) async* {
-
     final queue = StreamController<HubRideEvent>();
     final subscription = _rideHubService.events.listen(
       queue.add,
@@ -85,7 +85,8 @@ class RideRepo extends BaseRideRepo {
     try {
       try {
         await _rideHubService.connect(
-          jwt: await AppLocalCache.getSecuredString(AppConstants.tokenKey) ?? "",
+          jwt:
+              await AppLocalCache.getSecuredString(AppConstants.tokenKey) ?? "",
         );
       } catch (_) {}
 

@@ -7,7 +7,8 @@ import 'package:wasal/core/consts/api_rider_endpoints.dart';
 import 'package:wasal/features/ride/data/models/cancel_ride/cancel_ride_response.dart';
 import 'package:wasal/features/ride/data/models/estimate_ride_price/response/estimate_ride_price_response.dart';
 import 'package:wasal/features/ride/data/models/geo_point_request/geo_point_request_body.dart';
-import 'package:wasal/features/ride/data/models/request_ride/request_ride_response.dart';
+import 'package:wasal/features/ride/data/models/request_ride/request/request_ride_body.dart';
+import 'package:wasal/features/ride/data/models/request_ride/response/request_ride_response.dart';
 import 'package:wasel_core/wasel_core.dart';
 
 part 'ride_api_service.g.dart';
@@ -25,7 +26,7 @@ abstract class RideApiService {
 
   @POST(ApiRiderEndpoints.requestRide)
   Future<RequestRideResponse> requestRide(
-    @Body() GeoPointRequestBody geoPointRequest, {
+    @Body() RequestRideBody requestRideBody, {
     @CancelRequest() CancelToken? cancelToken,
   });
 

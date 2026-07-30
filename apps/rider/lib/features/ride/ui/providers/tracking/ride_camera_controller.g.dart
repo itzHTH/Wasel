@@ -42,7 +42,7 @@ final class RideCameraControllerProvider
 }
 
 String _$rideCameraControllerHash() =>
-    r'2a74dec9fef1da2aea355e9c7722c659d075a14b';
+    r'19f9e06fc7342cbf94fd3118d720ccbbcf8f15dc';
 
 abstract class _$RideCameraController extends $Notifier<void> {
   void build();

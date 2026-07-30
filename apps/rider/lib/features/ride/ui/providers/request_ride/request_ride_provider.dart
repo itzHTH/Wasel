@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/features/ride/data/models/geo_point_request/geo_point_request_body.dart';
+import 'package:wasal/features/ride/data/models/request_ride/request/request_ride_body.dart';
 import 'package:wasal/features/ride/domain/entities/request_ride.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_use_case_providers.dart';
@@ -25,11 +26,15 @@ class RequestRideController extends _$RequestRideController {
     ref.onDispose(useCase.cancel);
 
     final result = await useCase.call(
-      GeoPointRequestBody(
-        pickupLat: pickup.latitude.toString(),
-        pickupLng: pickup.longitude.toString(),
-        dropoffLat: dropoff.latitude.toString(),
-        dropoffLng: dropoff.longitude.toString(),
+      RequestRideBody(
+        geoPointRequest: GeoPointRequestBody(
+          pickupLat: pickup.latitude.toString(),
+          pickupLng: pickup.longitude.toString(),
+          dropoffLat: dropoff.latitude.toString(),
+          dropoffLng: dropoff.longitude.toString(),
+        ),
+        paymentMethod: 1,
+        paymentToken: null,
       ),
     );
 
