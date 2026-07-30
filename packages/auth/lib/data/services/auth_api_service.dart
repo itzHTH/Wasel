@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/networking/api_constants.dart';
-import 'package:wasel_core/networking/dio_factory.dart';
+import 'package:wasel_core/networking/dio/dio_factory.dart';
 import 'package:wasel_auth/data/models/logout/request/logout_request.dart';
 import 'package:wasel_auth/data/models/logout/response/logout_response.dart';
 import 'package:wasel_auth/data/models/register/complete_registration/request/complete_registration_request.dart';

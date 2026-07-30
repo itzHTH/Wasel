@@ -18,7 +18,7 @@ dependencies:
     path: ../../packages/auth
 
   # Firebase (no FCM yet — verification status is polled in driver_verification)
-  firebase_core: ^4.8.0
+  firebase_core: ^4.12.1
 
   # Serialization
   json_annotation: ^4.9.0
