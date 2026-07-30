@@ -90,4 +90,10 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
     color: AppColor.primary500,
   );
+
+  static TextStyle get font14alertError500SemiBold => _base(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w600,
+    color: AppColor.alertError500,
+  );
 }

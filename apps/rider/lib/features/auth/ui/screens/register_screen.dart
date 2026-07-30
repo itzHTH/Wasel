@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wasal/core/routing/app_routes_name.dart';
 import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasal/features/auth/ui/providers/register/register_provider.dart';
 import 'package:wasal/features/auth/ui/widgets/register/email_page/register_email_page.dart';
 import 'package:wasal/features/auth/ui/widgets/register/form_page/register_form_page.dart';
 import 'package:wasal/features/auth/ui/widgets/register/otp_page/register_otp_page.dart';
-import 'package:wasal/features/home/ui/screens/home_screen.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
@@ -121,9 +121,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(const SnackBar(content: Text('تم التسجيل بنجاح')));
-        Navigator.pushAndRemoveUntil(
+        Navigator.pushNamedAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
+          AppRoutes.ride,
           (route) => false,
         );
       }

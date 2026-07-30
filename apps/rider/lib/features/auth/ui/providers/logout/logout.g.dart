@@ -32,7 +32,7 @@ final class LogoutProvider extends $AsyncNotifierProvider<Logout, bool> {
   Logout create() => Logout();
 }
 
-String _$logoutHash() => r'2e0aa9dc10b290b88c1225cba506dd15a3145d45';
+String _$logoutHash() => r'8cf7a6a07e8859f7eca4de3a8acd89464cc06c76';
 
 abstract class _$Logout extends $AsyncNotifier<bool> {
   FutureOr<bool> build();
