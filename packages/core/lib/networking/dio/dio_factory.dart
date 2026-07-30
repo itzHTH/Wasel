@@ -3,7 +3,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/const/app_constants.dart';
 import 'package:wasel_core/networking/interceptors/auth_interceptor.dart';
-import 'api_constants.dart';
+import '../api_constants.dart';
 
 part 'dio_factory.g.dart';
 

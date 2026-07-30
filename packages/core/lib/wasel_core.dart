@@ -29,7 +29,7 @@ export 'permissions/permission_gate.dart';
 // Networking
 export 'networking/api_constants.dart';
 export 'networking/api_results.dart';
-export 'networking/dio_factory.dart';
+export 'networking/dio/dio_factory.dart';
 export 'networking/errors/api_error_model.dart';
 export 'networking/errors/api_errors.dart';
 export 'networking/errors/error_handler.dart';
