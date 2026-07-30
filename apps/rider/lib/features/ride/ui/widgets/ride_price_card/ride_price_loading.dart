@@ -8,9 +8,7 @@ class RidePriceLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: AppDimens.space24),
-      child: const Center(
-        child: CircularProgressIndicator(color: AppColor.primary500),
-      ),
+      child: const Center(child: AppInlineLoading()),
     );
   }
 }

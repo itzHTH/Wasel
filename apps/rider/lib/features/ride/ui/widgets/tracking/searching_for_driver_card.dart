@@ -28,14 +28,7 @@ class SearchingForDriverCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              SizedBox(
-                width: AppDimens.icon24,
-                height: AppDimens.icon24,
-                child: const CircularProgressIndicator(
-                  strokeWidth: 3,
-                  color: AppColor.primary500,
-                ),
-              ),
+              const AppInlineLoading(),
               SizedBox(width: AppDimens.space12),
               Expanded(
                 child: Column(
