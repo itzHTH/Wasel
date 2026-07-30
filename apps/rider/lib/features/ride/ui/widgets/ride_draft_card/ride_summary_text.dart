@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.dart';
+import 'package:wasal/features/ride/ui/widgets/point_label_row.dart';
 import 'package:wasel_core/wasel_core.dart';
 
 class RideSummaryText extends ConsumerWidget {
@@ -8,11 +9,22 @@ class RideSummaryText extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final summary = ref.watch(rideDraftProvider.select((s) => s.summaryText));
-    if (summary.isEmpty) return const SizedBox.shrink();
+    final pickup = ref.watch(rideDraftProvider.select((s) => s.pickup));
+    final dropoff = ref.watch(rideDraftProvider.select((s) => s.dropoff));
+    if (pickup == null && dropoff == null) return const SizedBox.shrink();
+
     return Padding(
       padding: EdgeInsets.only(top: AppDimens.space8),
-      child: Text(summary, style: AppTextStyles.font14Secondary500Medium),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (pickup != null) PointLabelRow(prefix: 'الانطلاق', point: pickup),
+          if (dropoff != null) ...[
+            SizedBox(height: AppDimens.space4),
+            PointLabelRow(prefix: 'الوجهة', point: dropoff),
+          ],
+        ],
+      ),
     );
   }
 }

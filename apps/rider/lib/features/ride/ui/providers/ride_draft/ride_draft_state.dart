@@ -52,15 +52,4 @@ class RideDraftState {
   bool get isStarterPoint => stage == PickingStage.pickup;
 
   bool get showRequestPriceButton => stage == PickingStage.done;
-
-  String get summaryText {
-    final lines = [
-      if (pickup != null) 'الانطلاق: ${pickupLabel ?? _format(pickup!)}',
-      if (dropoff != null) 'الوجهة: ${dropoffLabel ?? _format(dropoff!)}',
-    ];
-    return lines.join('\n');
-  }
-
-  static String _format(LatLng point) =>
-      '${point.latitude.toStringAsFixed(5)}، ${point.longitude.toStringAsFixed(5)}';
 }

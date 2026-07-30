@@ -17,4 +17,7 @@ abstract final class RideFormatters {
     final formatted = parsed == null ? km : parsed.toStringAsFixed(1);
     return '$formatted كم';
   }
+
+  static String coordinates(double latitude, double longitude) =>
+      '${latitude.toStringAsFixed(5)}، ${longitude.toStringAsFixed(5)}';
 }

@@ -1,8 +1,8 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/features/ride/domain/entities/geo_point.dart';
+import 'package:wasal/features/ride/ui/providers/location/point_label_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_state.dart';
-import 'package:wasal/features/ride/ui/providers/ride_use_case_providers.dart';
 
 part 'ride_draft_provider.g.dart';
 
@@ -63,10 +63,11 @@ class RideDraft extends _$RideDraft {
   }
 
   Future<void> _storeLabelFor(LatLng point, {required bool isPickup}) async {
-    final useCase = ref.read(getPointLabelUseCaseProvider);
     try {
-      final label = await useCase(
-        GeoPoint(latitude: point.latitude, longitude: point.longitude),
+      final label = await ref.read(
+        pointLabelProvider(
+          GeoPoint(latitude: point.latitude, longitude: point.longitude),
+        ).future,
       );
       if (!ref.mounted) return;
       if (isPickup && state.pickup == point) {
