@@ -48,4 +48,4 @@ final class SignalRClientProvider
   }
 }
 
-String _$signalRClientHash() => r'3409e133245c525feac74eefb6f085b1b84e855f';
+String _$signalRClientHash() => r'5d397d373cc26ce80e96515432dbddca53f5d35b';

@@ -8,21 +8,12 @@ part of 'map_controller_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// Holds the live [GoogleMapController] so providers — not widgets — can drive
-/// the camera. Await [MapControllerHolder.future] to get the controller once
-/// the map has been created.
 
 @ProviderFor(MapControllerHolder)
 final mapControllerHolderProvider = MapControllerHolderProvider._();
 
-/// Holds the live [GoogleMapController] so providers — not widgets — can drive
-/// the camera. Await [MapControllerHolder.future] to get the controller once
-/// the map has been created.
 final class MapControllerHolderProvider
     extends $AsyncNotifierProvider<MapControllerHolder, GoogleMapController> {
-  /// Holds the live [GoogleMapController] so providers — not widgets — can drive
-  /// the camera. Await [MapControllerHolder.future] to get the controller once
-  /// the map has been created.
   MapControllerHolderProvider._()
     : super(
         from: null,
@@ -44,10 +35,6 @@ final class MapControllerHolderProvider
 
 String _$mapControllerHolderHash() =>
     r'd9792eb1406511cc4571579a25d3d583a92ecc0b';
-
-/// Holds the live [GoogleMapController] so providers — not widgets — can drive
-/// the camera. Await [MapControllerHolder.future] to get the controller once
-/// the map has been created.
 
 abstract class _$MapControllerHolder
     extends $AsyncNotifier<GoogleMapController> {
