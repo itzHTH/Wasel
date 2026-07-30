@@ -51,5 +51,6 @@ export 'widgets/app_back_button.dart';
 export 'widgets/app_dialog.dart';
 export 'widgets/app_header_with_logo.dart';
 export 'widgets/app_labeled_field.dart';
+export 'widgets/app_loading.dart';
 export 'widgets/app_text_form_field.dart';
 export 'widgets/password_field.dart';
