@@ -1,0 +1,51 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'ride_point_markers_provider.dart';
+
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(ridePointMarkers)
+final ridePointMarkersProvider = RidePointMarkersProvider._();
+
+final class RidePointMarkersProvider
+    extends $FunctionalProvider<Set<Marker>, Set<Marker>, Set<Marker>>
+    with $Provider<Set<Marker>> {
+  RidePointMarkersProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'ridePointMarkersProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$ridePointMarkersHash();
+
+  @$internal
+  @override
+  $ProviderElement<Set<Marker>> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  Set<Marker> create(Ref ref) {
+    return ridePointMarkers(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(Set<Marker> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<Set<Marker>>(value),
+    );
+  }
+}
+
+String _$ridePointMarkersHash() => r'55248261e57b063388e873263c9245204a6fdd2e';

@@ -1,0 +1,40 @@
+name: wasel_auth
+description: "Shared auth logic for the Wasel apps: data, domain and DI providers."
+publish_to: "none"
+version: 0.1.0
+resolution: workspace
+
+environment:
+  sdk: ^3.10.8
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Shared core (ApiResults, error handling, base use cases, networking)
+  wasel_core:
+    path: ../core
+
+  # State management / DI
+  riverpod_annotation: ^4.0.2
+
+  # Networking
+  dio: ^5.9.2
+  retrofit: ^4.9.2
+
+  # Serialization
+  json_annotation: ^4.9.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+  # Code generation
+  build_runner: ^2.4.13
+  json_serializable: ^6.8.0
+  riverpod_generator: ^4.0.3
+  retrofit_generator: ^10.2.6
+
+flutter:
+  uses-material-design: true

@@ -1,0 +1,194 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/app_dimens.dart';
+import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
+import 'package:driver/features/driver_verification/domain/entities/driver_profile_submission.dart';
+import 'package:driver/features/driver_verification/ui/providers/submit_profile/submit_profile_provider.dart';
+import 'package:driver/features/driver_verification/ui/providers/submit_profile/submit_profile_state.dart';
+import 'package:driver/features/driver_verification/ui/screens/under_review_screen.dart';
+import 'package:driver/features/driver_verification/ui/widgets/common/verification_status_badge.dart';
+
+class UploadingScreen extends ConsumerStatefulWidget {
+  final DriverProfileSubmission submission;
+
+  const UploadingScreen({super.key, required this.submission});
+
+  @override
+  ConsumerState<UploadingScreen> createState() => _UploadingScreenState();
+}
+
+class _UploadingScreenState extends ConsumerState<UploadingScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _startUpload());
+  }
+
+  void _startUpload() =>
+      ref.read(submitProfileProvider.notifier).submit(widget.submission);
+
+  @override
+  Widget build(BuildContext context) {
+    // On success, move to the review screen; clears the wizard from the stack.
+    ref.listen(submitProfileProvider, (_, next) {
+      if (next is SubmitSuccess) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const UnderReviewScreen()),
+        );
+      }
+    });
+
+    final state = ref.watch(submitProfileProvider);
+    return PopScope(
+      // Block the system back gesture; exits go through the explicit buttons.
+      canPop: false,
+      child: Scaffold(
+        backgroundColor: AppColor.neutral0,
+        body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: AppDimens.screenHPadding),
+            child: Center(
+              child: switch (state) {
+                SubmitUploading(:final progress) => _UploadingBody(
+                  progress: progress,
+                ),
+                SubmitSuccess() => const _SuccessBody(),
+                SubmitFailure(:final message) => _FailureBody(
+                  message: message,
+                  onRetry: _startUpload,
+                  onBackToForm: () => Navigator.of(context).pop(),
+                ),
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _UploadingBody extends StatelessWidget {
+  final double progress;
+
+  const _UploadingBody({required this.progress});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(
+          width: 132.r,
+          height: 132.r,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              SizedBox.expand(
+                child: CircularProgressIndicator(
+                  value: progress,
+                  strokeWidth: 6,
+                  backgroundColor: AppColor.neutral100,
+                  valueColor: const AlwaysStoppedAnimation(AppColor.primary500),
+                ),
+              ),
+              Text(
+                '${(progress * 100).round()}%',
+                style: AppTextStyles.font24Secondary900Bold,
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: AppDimens.space24),
+        Text(
+          'جارٍ رفع المستندات…',
+          style: AppTextStyles.font20Secondary900Bold,
+        ),
+        SizedBox(height: AppDimens.space8),
+        Text(
+          'يرجى الانتظار وعدم إغلاق التطبيق.',
+          style: AppTextStyles.font14Neutral400Regular,
+          textAlign: TextAlign.center,
+        ),
+      ],
+    );
+  }
+}
+
+class _SuccessBody extends StatelessWidget {
+  const _SuccessBody();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const VerificationStatusBadge(
+          icon: Icons.check_rounded,
+          color: AppColor.alertSuccess500,
+          background: AppColor.alertSuccess100,
+        ),
+        SizedBox(height: AppDimens.space24),
+        Text(
+          'تم رفع المستندات بنجاح',
+          style: AppTextStyles.font20Secondary900Bold,
+        ),
+        SizedBox(height: AppDimens.space8),
+        Text(
+          'سيتم مراجعة طلبك وإشعارك بالنتيجة.',
+          style: AppTextStyles.font14Neutral400Regular,
+          textAlign: TextAlign.center,
+        ),
+      ],
+    );
+  }
+}
+
+class _FailureBody extends StatelessWidget {
+  final String message;
+  final VoidCallback onRetry;
+  final VoidCallback onBackToForm;
+
+  const _FailureBody({
+    required this.message,
+    required this.onRetry,
+    required this.onBackToForm,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const VerificationStatusBadge(
+          icon: Icons.close_rounded,
+          color: AppColor.alertError500,
+          background: AppColor.alertError100,
+        ),
+        SizedBox(height: AppDimens.space24),
+        Text(
+          'تعذّر رفع المستندات',
+          style: AppTextStyles.font20Secondary900Bold,
+        ),
+        SizedBox(height: AppDimens.space8),
+        Text(
+          message,
+          style: AppTextStyles.font14Neutral400Regular,
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(height: AppDimens.space32),
+        AuthPrimaryButton(label: 'إعادة المحاولة', onPressed: onRetry),
+        SizedBox(height: AppDimens.space12),
+        TextButton(
+          onPressed: onBackToForm,
+          child: Text(
+            'العودة للنموذج',
+            style: AppTextStyles.font14Secondary900SemiBold,
+          ),
+        ),
+      ],
+    );
+  }
+}
