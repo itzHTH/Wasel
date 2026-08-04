@@ -8,6 +8,7 @@ import 'package:wasel_core/networking/interceptors/auth_interceptor.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:driver/driver_app.dart';
 import 'package:driver/firebase_options.dart';
+import 'package:wasel_core/wasel_core.dart';
 
 void mainCommon({
   required Flavor flavor,

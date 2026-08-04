@@ -49,7 +49,7 @@ class _VerificationGateScreenState
           MaterialPageRoute(builder: (_) => const UnderReviewScreen()),
         );
       case enVerificationStatus.approved:
-        context.pushReplacementNamed(AppRoutes.home);
+        context.pushReplacementNamed(AppRoutes.ride);
     }
   }
 

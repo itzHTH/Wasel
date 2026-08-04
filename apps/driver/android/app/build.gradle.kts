@@ -16,6 +16,14 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
+// Maps API key — read from local.properties (git-ignored).
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(FileInputStream(localPropertiesFile))
+}
+val mapsApiKey: String = localProperties.getProperty("MAPS_API_KEY") ?: ""
+
 android {
     namespace = "com.zimiru.wasel.driver"
     compileSdk = flutter.compileSdkVersion
@@ -36,6 +44,9 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+
+        // Exposes ${MAPS_API_KEY} to AndroidManifest.xml.
+        manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey
     }
 
     signingConfigs {

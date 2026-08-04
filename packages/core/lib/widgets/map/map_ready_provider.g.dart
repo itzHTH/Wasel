@@ -8,11 +8,17 @@ part of 'map_ready_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
+/// `true` once the map has drawn its first settled frame, so overlays can stop
+/// covering it.
 
 @ProviderFor(MapReady)
 final mapReadyProvider = MapReadyProvider._();
 
+/// `true` once the map has drawn its first settled frame, so overlays can stop
+/// covering it.
 final class MapReadyProvider extends $NotifierProvider<MapReady, bool> {
+  /// `true` once the map has drawn its first settled frame, so overlays can stop
+  /// covering it.
   MapReadyProvider._()
     : super(
         from: null,
@@ -41,6 +47,9 @@ final class MapReadyProvider extends $NotifierProvider<MapReady, bool> {
 }
 
 String _$mapReadyHash() => r'eab03eea6026d936723099dd6fa7c0cdd935d357';
+
+/// `true` once the map has drawn its first settled frame, so overlays can stop
+/// covering it.
 
 abstract class _$MapReady extends $Notifier<bool> {
   bool build();

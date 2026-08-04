@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/is_camera_moving_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_location_controller.dart';
 import 'package:wasal/features/ride/ui/providers/tracking/ride_camera_controller.dart';
-import 'package:wasal/features/ride/ui/widgets/custom_map.dart';
 import 'package:wasal/features/ride/ui/widgets/custom_pin_map.dart';
 import 'package:wasal/features/ride/ui/widgets/location_permission_banner.dart';
-import 'package:wasal/features/ride/ui/widgets/map_loading_overlay.dart';
 import 'package:wasal/features/ride/ui/widgets/my_location_button.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_cards_switcher.dart';
+import 'package:wasal/features/ride/ui/widgets/ride_map.dart';
 import 'package:wasel_core/wasel_core.dart';
 
 class RideScreen extends ConsumerStatefulWidget {
@@ -21,7 +19,7 @@ class RideScreen extends ConsumerStatefulWidget {
 }
 
 class _RideScreenState extends ConsumerState<RideScreen> {
-  LatLng _center = CustomMap.initialTarget;
+  LatLng _center = AppMapDefaults.initialTarget;
 
   void _centerOnUserLocation() {
     ref
@@ -43,7 +41,7 @@ class _RideScreenState extends ConsumerState<RideScreen> {
       body: Stack(
         alignment: Alignment.center,
         children: [
-          CustomMap(
+          RideMap(
             mapPadding: EdgeInsets.zero,
             onCameraMove: (position) => _center = position.target,
             onCameraMoveStarted: () =>
@@ -55,7 +53,7 @@ class _RideScreenState extends ConsumerState<RideScreen> {
             padding: EdgeInsets.only(bottom: AppDimens.space48),
             child: CustomPinMap(),
           ),
-          const Positioned.fill(child: MapLoadingOverlay()),
+          const Positioned.fill(child: AppMapLoadingOverlay()),
           Align(
             alignment: Alignment.bottomCenter,
             child: Column(

@@ -6,8 +6,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/features/ride/ui/providers/location/location_permission_provider.dart';
-import 'package:wasal/features/ride/ui/providers/map/map_controller_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_location_state.dart';
+import 'package:wasel_core/widgets/map/map_controller_provider.dart';
 
 part 'ride_location_controller.g.dart';
 
