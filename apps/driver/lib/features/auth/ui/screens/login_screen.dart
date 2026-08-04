@@ -116,7 +116,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         ).showSnackBar(const SnackBar(content: Text('تم تسجيل الدخول بنجاح')));
         Navigator.pushNamedAndRemoveUntil(
           context,
-          AppRoutes.home,
+          AppRoutes.ride,
           (route) => false,
         );
       }

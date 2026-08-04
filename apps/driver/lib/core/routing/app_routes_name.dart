@@ -5,9 +5,9 @@ class AppRoutes {
   static const String auth = '/auth';
   static const String register = '/register';
 
-  static const String home = '/home';
-
   static const String driverVerificationGate = '/driver-verification-gate';
 
   static const String driverVerificationWizard = '/driver-verification-wizard';
+
+  static const String ride = '/ride';
 }
