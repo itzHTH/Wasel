@@ -1,0 +1,43 @@
+import 'package:dio/dio.dart';
+import 'package:driver/core/const/driver_api_consts.dart';
+import 'package:retrofit/dio.dart';
+import 'package:retrofit/error_logger.dart';
+import 'package:retrofit/http.dart';
+
+part 'ride_api_service.g.dart';
+
+@RestApi()
+abstract class RideApiService {
+  factory RideApiService(Dio dio, {String? baseUrl}) =>
+      _RideApiService(dio, baseUrl: baseUrl);
+
+  @GET(DriverApiConsts.acceptRide)
+  Future<void> acceptRide(
+    @Path("id") String rideId, {
+    @CancelRequest() CancelToken? cancelToken,
+  });
+
+  @POST(DriverApiConsts.arriveAtStartPoint)
+  Future<void> arriveAtDestination(
+    @Path("id") String rideId, {
+    @CancelRequest() CancelToken? cancelToken,
+  });
+
+  @POST(DriverApiConsts.startRide)
+  Future<void> startRide(
+    @Path("id") String rideId, {
+    @CancelRequest() CancelToken? cancelToken,
+  });
+
+  @POST(DriverApiConsts.completeRide)
+  Future<void> completeRide(
+    @Path("id") String rideId, {
+    @CancelRequest() CancelToken? cancelToken,
+  });
+
+  @POST(DriverApiConsts.driverCancelRide)
+  Future<void> driverCancelRide(
+    @Path("id") String rideId, {
+    @CancelRequest() CancelToken? cancelToken,
+  });
+}
