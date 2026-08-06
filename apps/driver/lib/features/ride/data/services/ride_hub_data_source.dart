@@ -108,9 +108,7 @@ class RideHubDatasource implements IRideHubDataSource {
   ) {
     return _client.invoke(
       RideHubMethods.updateLocation,
-      args: rideId != null
-          ? [latitude, longitude, rideId]
-          : [latitude, longitude],
+      args: [latitude, longitude, rideId ?? ''],
     );
   }
 

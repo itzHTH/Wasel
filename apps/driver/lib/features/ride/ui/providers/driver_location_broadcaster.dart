@@ -29,7 +29,11 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
     distanceFilter: 10,
   );
 
+  static const _heartbeat = Duration(seconds: 10);
+
   StreamSubscription<Position>? _positions;
+  Timer? _ticker;
+  Position? _lastPosition;
   ProviderSubscription<UpdateDriverLocationUseCase>? _useCase;
   int _session = 0;
 
@@ -70,13 +74,20 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
     _positions = Geolocator.getPositionStream(
       locationSettings: _settings,
     ).listen(_onPosition);
+    _ticker = Timer.periodic(_heartbeat, (_) => unawaited(_broadcast()));
   }
 
-  Future<void> _onPosition(Position position) async {
-    debugPrint('[BROADCAST] ${position.latitude}, ${position.longitude}');
+  void _onPosition(Position position) {
+    _lastPosition = position;
+    unawaited(_broadcast());
+  }
 
+  Future<void> _broadcast() async {
+    final position = _lastPosition;
     final useCase = _useCase;
-    if (useCase == null) return;
+    if (position == null || useCase == null) return;
+
+    debugPrint('[BROADCAST] ${position.latitude}, ${position.longitude}');
 
     try {
       await useCase.read().call(
@@ -107,6 +118,9 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
     final useCase = _useCase;
     _positions = null;
     _useCase = null;
+    _ticker?.cancel();
+    _ticker = null;
+    _lastPosition = null;
     _session++;
 
     if (positions == null) {
