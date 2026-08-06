@@ -20,13 +20,13 @@ class _RideApiService implements RideApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<bool> acceptRide(String rideId, {CancelToken? cancelToken}) async {
+  Future<void> acceptRide(String rideId, {CancelToken? cancelToken}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<bool>(
+    final _options = _setStreamType<void>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -37,19 +37,11 @@ class _RideApiService implements RideApiService {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
-    try {
-      _value = _result.data!;
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, response: _result);
-      rethrow;
-    }
-    return _value;
+    await _dio.fetch<void>(_options);
   }
 
   @override
-  Future<bool> arriveAtDestination(
+  Future<void> arriveAtDestination(
     String rideId, {
     CancelToken? cancelToken,
   }) async {
@@ -58,7 +50,7 @@ class _RideApiService implements RideApiService {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<bool>(
+    final _options = _setStreamType<void>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -69,25 +61,17 @@ class _RideApiService implements RideApiService {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
-    try {
-      _value = _result.data!;
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, response: _result);
-      rethrow;
-    }
-    return _value;
+    await _dio.fetch<void>(_options);
   }
 
   @override
-  Future<bool> startRide(String rideId, {CancelToken? cancelToken}) async {
+  Future<void> startRide(String rideId, {CancelToken? cancelToken}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<bool>(
+    final _options = _setStreamType<void>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -98,25 +82,17 @@ class _RideApiService implements RideApiService {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
-    try {
-      _value = _result.data!;
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, response: _result);
-      rethrow;
-    }
-    return _value;
+    await _dio.fetch<void>(_options);
   }
 
   @override
-  Future<bool> completeRide(String rideId, {CancelToken? cancelToken}) async {
+  Future<void> completeRide(String rideId, {CancelToken? cancelToken}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<bool>(
+    final _options = _setStreamType<void>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -127,19 +103,11 @@ class _RideApiService implements RideApiService {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
-    try {
-      _value = _result.data!;
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, response: _result);
-      rethrow;
-    }
-    return _value;
+    await _dio.fetch<void>(_options);
   }
 
   @override
-  Future<bool> driverCancelRide(
+  Future<void> driverCancelRide(
     String rideId, {
     CancelToken? cancelToken,
   }) async {
@@ -148,7 +116,7 @@ class _RideApiService implements RideApiService {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<bool>(
+    final _options = _setStreamType<void>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -159,15 +127,7 @@ class _RideApiService implements RideApiService {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<bool>(_options);
-    late bool _value;
-    try {
-      _value = _result.data!;
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, response: _result);
-      rethrow;
-    }
-    return _value;
+    await _dio.fetch<void>(_options);
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
@@ -199,3 +159,51 @@ class _RideApiService implements RideApiService {
 }
 
 // dart format on
+
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(rideApiService)
+final rideApiServiceProvider = RideApiServiceProvider._();
+
+final class RideApiServiceProvider
+    extends $FunctionalProvider<RideApiService, RideApiService, RideApiService>
+    with $Provider<RideApiService> {
+  RideApiServiceProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'rideApiServiceProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$rideApiServiceHash();
+
+  @$internal
+  @override
+  $ProviderElement<RideApiService> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  RideApiService create(Ref ref) {
+    return rideApiService(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(RideApiService value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<RideApiService>(value),
+    );
+  }
+}
+
+String _$rideApiServiceHash() => r'2df71d750d8bbed976c75e968ad969f2478b5748';

@@ -6,7 +6,10 @@ import 'package:driver/features/ride/data/services/ride_api_service.dart';
 import 'package:driver/features/ride/data/services/ride_hub_data_source.dart';
 import 'package:driver/features/ride/domain/entities/driver_ride_events.dart';
 import 'package:driver/features/ride/domain/repos/ride_repo.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/wasel_core.dart';
+
+part 'ride_repo.g.dart';
 
 class RideRepo implements BaseRideRepo {
   RideRepo(this._rideHubService, this._rideApiService);
@@ -14,32 +17,49 @@ class RideRepo implements BaseRideRepo {
   final RideApiService _rideApiService;
 
   @override
-  Stream<DriverRideEvent> watchRideEvents() async* {
-    final queue = StreamController<HubRideEvent>();
-    final sub = _rideHubService.events.listen(
-      queue.add,
-      onError: queue.addError,
-    );
+  Stream<DriverRideEvent> watchRideEvents() {
+    late final StreamController<DriverRideEvent> events;
+    StreamSubscription<HubRideEvent>? sub;
+    var released = false;
 
-    try {
-      final jwt =
-          await AppLocalCache.getSecuredString(AppConstants.tokenKey) ?? '';
-      await _rideHubService.connect(jwt: jwt);
-    } catch (_) {
-      await sub.cancel();
-      await queue.close();
-      rethrow;
-    }
-
-    try {
-      await for (final event in queue.stream) {
-        yield event.toEntity();
-      }
-    } finally {
-      await sub.cancel();
-      await queue.close();
+    Future<void> release() async {
+      if (released) return;
+      released = true;
+      await sub?.cancel();
       await _rideHubService.disconnect();
     }
+
+    Future<void> open() async {
+      sub = _rideHubService.events.listen(
+        (event) {
+          if (!events.isClosed) events.add(event.toEntity());
+        },
+        onError: (Object error, StackTrace stackTrace) {
+          if (!events.isClosed) events.addError(error, stackTrace);
+        },
+        onDone: () {
+          if (!events.isClosed) events.close();
+        },
+      );
+
+      try {
+        final jwt =
+            await AppLocalCache.getSecuredString(AppConstants.tokenKey) ?? '';
+        await _rideHubService.connect(jwt: jwt);
+      } catch (e, stackTrace) {
+        if (!events.isClosed) {
+          events.addError(e, stackTrace);
+          await events.close();
+        }
+      }
+    }
+
+    events = StreamController<DriverRideEvent>(
+      onListen: open,
+      onCancel: release,
+    );
+
+    return events.stream;
   }
 
   @override
@@ -84,4 +104,11 @@ class RideRepo implements BaseRideRepo {
       return ApiResults.failure(ErrorHandler.handle(e));
     }
   }
+}
+
+@riverpod
+RideRepo rideRepo(Ref ref) {
+  final rideHubService = ref.watch(rideHubServiceProvider);
+  final rideApiService = ref.watch(rideApiServiceProvider);
+  return RideRepo(rideHubService, rideApiService);
 }
