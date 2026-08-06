@@ -34,7 +34,7 @@ final class RideActionControllerProvider
 }
 
 String _$rideActionControllerHash() =>
-    r'f7d2f1900ee8bcf4a045b96ab82edd1f2c1d7c1d';
+    r'728d705ca0d8eff6be38f661f2e79e45f24ae51b';
 
 abstract class _$RideActionController extends $AsyncNotifier<void> {
   FutureOr<void> build();

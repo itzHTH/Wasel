@@ -85,7 +85,7 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
   Future<void> _broadcast() async {
     final position = _lastPosition;
     final useCase = _useCase;
-    if (position == null || useCase == null) return;
+    if (position == null || useCase == null || !ref.mounted) return;
 
     debugPrint('[BROADCAST] ${position.latitude}, ${position.longitude}');
 
@@ -94,12 +94,23 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
         UpdateLocationArg(
           lat: position.latitude,
           lng: position.longitude,
-          rideId: null,
+          rideId: _activeRideId(),
         ),
       );
     } catch (e) {
       debugPrint('[BROADCAST] update failed: $e');
     }
+  }
+
+  String _activeRideId() {
+    final ride = ref.read(rideControllerProvider);
+
+    return switch (ride.stage) {
+      DriverStage.heading ||
+      DriverStage.arrived ||
+      DriverStage.inProgress => ride.ride?.rideId ?? '',
+      _ => '',
+    };
   }
 
   void _fail(int session, String message) {

@@ -13,7 +13,7 @@ abstract class RideApiService {
   factory RideApiService(Dio dio, {String? baseUrl}) =>
       _RideApiService(dio, baseUrl: baseUrl);
 
-  @GET(DriverApiConsts.acceptRide)
+  @POST(DriverApiConsts.acceptRide)
   Future<void> acceptRide(
     @Path("id") String rideId, {
     @CancelRequest() CancelToken? cancelToken,
