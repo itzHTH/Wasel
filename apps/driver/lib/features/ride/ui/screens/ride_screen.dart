@@ -1,8 +1,10 @@
 import 'package:driver/core/const/app_driver_consts.dart';
+import 'package:driver/features/ride/domain/entities/geo_point.dart';
 import 'package:driver/features/ride/ui/providers/driver_location_broadcaster.dart';
 import 'package:driver/features/ride/ui/providers/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
+import 'package:driver/features/ride/ui/widgets/cards/ride_offer_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/wasel_core.dart';
@@ -27,6 +29,16 @@ class RideScreen extends ConsumerWidget {
       ),
     );
 
+    final isOffering = ref.watch(
+      rideControllerProvider.select(
+        (state) => state.stage == DriverStage.offerReceived,
+      ),
+    );
+
+    final offer = ref.watch(
+      rideControllerProvider.select((state) => state.ride),
+    );
+
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
@@ -44,11 +56,30 @@ class RideScreen extends ConsumerWidget {
               ),
             ),
           ),
+          if (isOffering && offer != null)
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: RideOfferCard(
+                pickupText: _coordinates(offer.position),
+                dropoffText: _coordinates(offer.dropPosition),
+                priceText: '${offer.calculatedPrice.toStringAsFixed(0)} د.ع',
+                paymentText: offer.paymentMethod,
+                onAccept: () =>
+                    ref.read(rideControllerProvider.notifier).acceptOffer(),
+                onReject: () =>
+                    ref.read(rideControllerProvider.notifier).rejectOffer(),
+              ),
+            ),
         ],
       ),
     );
   }
 }
+
+String _coordinates(GeoPoint point) =>
+    '${point.latitude.toStringAsFixed(5)}, ${point.longitude.toStringAsFixed(5)}';
 
 class _OnlineToggleCard extends StatelessWidget {
   const _OnlineToggleCard({required this.isOnline, required this.onChanged});

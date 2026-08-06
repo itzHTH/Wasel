@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:driver/features/ride/domain/entities/driver_ride_events.dart';
+import 'package:driver/features/ride/domain/entities/geo_point.dart';
 import 'package:driver/features/ride/domain/use_case/watch_ride_event_use_case.dart';
 import 'package:driver/features/ride/ui/providers/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_use_case.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -55,10 +57,40 @@ class RideController extends _$RideController {
 
   void goOffline() {
     _cancelEvents();
-    state = state.copyWith(stage: DriverStage.offline);
+    state = const DriverRideState();
   }
 
-  void _onEvent(DriverRideEvent event) {}
+  void acceptOffer() => _clearOffer();
+
+  void rejectOffer() => _clearOffer();
+
+  void _onEvent(DriverRideEvent event) {
+    debugPrint('[HUB EVENT] $event');
+    if (!ref.mounted) return;
+
+    switch (event) {
+      case final ReceiveRideRequest offer:
+        debugPrint(
+          '[HUB EVENT] pickup ${_point(offer.position)} '
+          'drop ${_point(offer.dropPosition)}',
+        );
+        state = state.copyWith(stage: DriverStage.offerReceived, ride: offer);
+      case HideRideRequest():
+        if (state.ride == null) return;
+        _clearOffer();
+      case RideCancelled():
+        _clearOffer();
+      case ProfileReviewed():
+        return;
+    }
+  }
+
+  String _point(GeoPoint point) => '${point.latitude}, ${point.longitude}';
+
+  void _clearOffer() {
+    if (!ref.mounted) return;
+    state = state.copyWith(stage: DriverStage.online, ride: null);
+  }
 
   void _dropConnection(int session, Object error, StackTrace stackTrace) {
     if (session != _session) return;

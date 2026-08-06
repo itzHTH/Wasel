@@ -48,15 +48,30 @@ class SocketFailure implements Exception {
 }
 
 class FakeApi implements RideApiService {
+  final calls = <Symbol>[];
+
   @override
-  dynamic noSuchMethod(Invocation invocation) => Future<void>.value();
+  dynamic noSuchMethod(Invocation invocation) {
+    calls.add(invocation.memberName);
+    return Future<void>.value();
+  }
 }
 
-ProviderContainer harness(FakeHub hub) {
+HubRideEvent offerEvent({String rideId = 'ride-1'}) =>
+    HubRideEvent.receiveRideRequest(
+      rideId: rideId,
+      position: const LatLngDto(lat: 33.3152, lng: 44.3661),
+      dropPosition: const LatLngDto(lat: 33.325, lng: 44.375),
+      calculatedPrice: 7500,
+      paymentMethod: 'Cash',
+      message: 'طلب جديد',
+    );
+
+ProviderContainer harness(FakeHub hub, [FakeApi? api]) {
   final container = ProviderContainer(
     overrides: [
       rideHubServiceProvider.overrideWithValue(hub),
-      rideApiServiceProvider.overrideWithValue(FakeApi()),
+      rideApiServiceProvider.overrideWithValue(api ?? FakeApi()),
     ],
   );
   addTearDown(container.dispose);
@@ -64,6 +79,8 @@ ProviderContainer harness(FakeHub hub) {
   container.listen(rideActionControllerProvider, (_, _) {});
   return container;
 }
+
+Future<void> settle() => Future<void>.delayed(const Duration(milliseconds: 50));
 
 void main() {
   final binding = TestWidgetsFlutterBinding.ensureInitialized();
@@ -146,5 +163,148 @@ void main() {
     expect(container.read(rideControllerProvider).stage, DriverStage.online);
     expect(container.read(rideActionControllerProvider).hasError, isFalse);
     expect(hub.controllers.where((c) => c.hasListener).length, 1);
+  });
+
+  test('5. an offer moves the stage to offerReceived and keeps it', () async {
+    final hub = FakeHub();
+    final container = harness(hub);
+
+    container.read(rideControllerProvider.notifier).goOnline();
+    await settle();
+
+    hub.controllers.last.add(offerEvent());
+    await settle();
+
+    final state = container.read(rideControllerProvider);
+    expect(state.stage, DriverStage.offerReceived);
+    expect(state.ride?.rideId, 'ride-1');
+    expect(state.ride?.position.latitude, 33.3152);
+    expect(state.ride?.dropPosition.longitude, 44.375);
+    expect(state.ride?.calculatedPrice, 7500);
+    expect(state.ride?.paymentMethod, 'Cash');
+    expect(state.secondsLeft, 0);
+  });
+
+  test('6. hideRideRequest clears the offer and returns to online', () async {
+    final hub = FakeHub();
+    final container = harness(hub);
+
+    container.read(rideControllerProvider.notifier).goOnline();
+    await settle();
+    hub.controllers.last.add(offerEvent());
+    await settle();
+
+    hub.controllers.last.add(const HubRideEvent.hideRideRequest('ride-1'));
+    await settle();
+
+    final state = container.read(rideControllerProvider);
+    expect(state.stage, DriverStage.online);
+    expect(state.ride, isNull);
+  });
+
+  test('6b. hideRideRequest without an offer changes nothing', () async {
+    final hub = FakeHub();
+    final container = harness(hub);
+
+    container.read(rideControllerProvider.notifier).goOnline();
+    await settle();
+
+    hub.controllers.last.add(const HubRideEvent.hideRideRequest('ride-9'));
+    await settle();
+
+    final state = container.read(rideControllerProvider);
+    expect(state.stage, DriverStage.online);
+    expect(state.ride, isNull);
+  });
+
+  test('7. cancelled clears the offer and returns to online', () async {
+    final hub = FakeHub();
+    final container = harness(hub);
+
+    container.read(rideControllerProvider.notifier).goOnline();
+    await settle();
+    hub.controllers.last.add(offerEvent());
+    await settle();
+
+    hub.controllers.last.add(const HubRideEvent.cancelled(message: 'ألغي'));
+    await settle();
+
+    final state = container.read(rideControllerProvider);
+    expect(state.stage, DriverStage.online);
+    expect(state.ride, isNull);
+  });
+
+  test('8. profileReviewed leaves a pending offer untouched', () async {
+    final hub = FakeHub();
+    final container = harness(hub);
+
+    container.read(rideControllerProvider.notifier).goOnline();
+    await settle();
+    hub.controllers.last.add(offerEvent());
+    await settle();
+
+    hub.controllers.last.add(
+      const HubRideEvent.profileReviewed(isApproved: true, message: ''),
+    );
+    await settle();
+
+    final state = container.read(rideControllerProvider);
+    expect(state.stage, DriverStage.offerReceived);
+    expect(state.ride?.rideId, 'ride-1');
+  });
+
+  test('9. acceptOffer clears locally and calls no endpoint', () async {
+    final hub = FakeHub();
+    final api = FakeApi();
+    final container = harness(hub, api);
+
+    container.read(rideControllerProvider.notifier).goOnline();
+    await settle();
+    hub.controllers.last.add(offerEvent());
+    await settle();
+
+    container.read(rideControllerProvider.notifier).acceptOffer();
+    await settle();
+
+    final state = container.read(rideControllerProvider);
+    expect(state.stage, DriverStage.online);
+    expect(state.ride, isNull);
+    expect(api.calls, isEmpty);
+  });
+
+  test('10. rejectOffer clears locally and calls no endpoint', () async {
+    final hub = FakeHub();
+    final api = FakeApi();
+    final container = harness(hub, api);
+
+    container.read(rideControllerProvider.notifier).goOnline();
+    await settle();
+    hub.controllers.last.add(offerEvent());
+    await settle();
+
+    container.read(rideControllerProvider.notifier).rejectOffer();
+    await settle();
+
+    final state = container.read(rideControllerProvider);
+    expect(state.stage, DriverStage.online);
+    expect(state.ride, isNull);
+    expect(api.calls, isEmpty);
+  });
+
+  test('11. going offline while an offer is up drops the offer', () async {
+    final hub = FakeHub();
+    final container = harness(hub);
+
+    container.read(rideControllerProvider.notifier).goOnline();
+    await settle();
+    hub.controllers.last.add(offerEvent());
+    await settle();
+
+    container.read(rideControllerProvider.notifier).goOffline();
+    await settle();
+
+    final state = container.read(rideControllerProvider);
+    expect(state.stage, DriverStage.offline);
+    expect(state.ride, isNull);
   });
 }
