@@ -240,4 +240,67 @@ void main() {
     expect(geo.positions.hasListener, isTrue);
     expect(container.read(rideControllerProvider).stage, DriverStage.online);
   });
+
+  testWidgets('7. a standing driver keeps broadcasting the last fix', (
+    tester,
+  ) async {
+    final geo = FakeGeolocator();
+    GeolocatorPlatform.instance = geo;
+    final hub = FakeHub();
+    final container = harness(hub);
+
+    container.read(rideControllerProvider.notifier).goOnline();
+    await tester.pump(const Duration(milliseconds: 50));
+
+    geo.positions.add(fixAt(33.31, 44.36));
+    await tester.pump(const Duration(milliseconds: 50));
+    expect(hub.updates.length, 1);
+
+    await tester.pump(const Duration(seconds: 30));
+
+    expect(hub.updates.length, 4);
+    expect(hub.updates.last, [33.31, 44.36, null]);
+
+    container.read(rideControllerProvider.notifier).goOffline();
+    await tester.pump(const Duration(milliseconds: 50));
+  });
+
+  testWidgets('8. going offline stops the heartbeat', (tester) async {
+    final geo = FakeGeolocator();
+    GeolocatorPlatform.instance = geo;
+    final hub = FakeHub();
+    final container = harness(hub);
+
+    container.read(rideControllerProvider.notifier).goOnline();
+    await tester.pump(const Duration(milliseconds: 50));
+    geo.positions.add(fixAt(33.31, 44.36));
+    await tester.pump(const Duration(milliseconds: 50));
+
+    container.read(rideControllerProvider.notifier).goOffline();
+    await tester.pump(const Duration(seconds: 30));
+
+    expect(hub.updates.length, 1);
+  });
+
+  testWidgets('9. a failed invoke is retried by the next tick', (tester) async {
+    final geo = FakeGeolocator();
+    GeolocatorPlatform.instance = geo;
+    final hub = FakeHub()..failUpdate = true;
+    final container = harness(hub);
+
+    container.read(rideControllerProvider.notifier).goOnline();
+    await tester.pump(const Duration(milliseconds: 50));
+    geo.positions.add(fixAt(33.31, 44.36));
+    await tester.pump(const Duration(milliseconds: 50));
+    expect(hub.updates.length, 1);
+
+    hub.failUpdate = false;
+    await tester.pump(const Duration(seconds: 10));
+
+    expect(hub.updates.length, 2);
+    expect(hub.updates.last, [33.31, 44.36, null]);
+
+    container.read(rideControllerProvider.notifier).goOffline();
+    await tester.pump(const Duration(milliseconds: 50));
+  });
 }
