@@ -65,6 +65,12 @@
 	<string>Main</string>
 	<key>MapsApiKey</key>
 	<string>$(MAPS_API_KEY)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>waze</string>
+		<string>comgooglemaps</string>
+		<string>maps</string>
+	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'ride_controller.dart';
+part of 'driver_camera_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,51 +9,52 @@ part of 'ride_controller.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(RideController)
-final rideControllerProvider = RideControllerProvider._();
+@ProviderFor(DriverCameraController)
+final driverCameraControllerProvider = DriverCameraControllerProvider._();
 
-final class RideControllerProvider
-    extends $NotifierProvider<RideController, DriverRideState> {
-  RideControllerProvider._()
+final class DriverCameraControllerProvider
+    extends $NotifierProvider<DriverCameraController, void> {
+  DriverCameraControllerProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'rideControllerProvider',
+        name: r'driverCameraControllerProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$rideControllerHash();
+  String debugGetCreateSourceHash() => _$driverCameraControllerHash();
 
   @$internal
   @override
-  RideController create() => RideController();
+  DriverCameraController create() => DriverCameraController();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(DriverRideState value) {
+  Override overrideWithValue(void value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<DriverRideState>(value),
+      providerOverride: $SyncValueProvider<void>(value),
     );
   }
 }
 
-String _$rideControllerHash() => r'eecf4dee816c21f654a68a6844bfa2ad0d4d102d';
+String _$driverCameraControllerHash() =>
+    r'e16d6f7eb4254e5c4f06678b8a7095deec7fa6a1';
 
-abstract class _$RideController extends $Notifier<DriverRideState> {
-  DriverRideState build();
+abstract class _$DriverCameraController extends $Notifier<void> {
+  void build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref = this.ref as $Ref<DriverRideState, DriverRideState>;
+    final ref = this.ref as $Ref<void, void>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<DriverRideState, DriverRideState>,
-              DriverRideState,
+              AnyNotifier<void, void>,
+              void,
               Object?,
               Object?
             >;

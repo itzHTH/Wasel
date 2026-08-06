@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'ride_controller.dart';
+part of 'driver_heading_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,51 +9,51 @@ part of 'ride_controller.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(RideController)
-final rideControllerProvider = RideControllerProvider._();
+@ProviderFor(DriverHeading)
+final driverHeadingProvider = DriverHeadingProvider._();
 
-final class RideControllerProvider
-    extends $NotifierProvider<RideController, DriverRideState> {
-  RideControllerProvider._()
+final class DriverHeadingProvider
+    extends $NotifierProvider<DriverHeading, double> {
+  DriverHeadingProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'rideControllerProvider',
+        name: r'driverHeadingProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$rideControllerHash();
+  String debugGetCreateSourceHash() => _$driverHeadingHash();
 
   @$internal
   @override
-  RideController create() => RideController();
+  DriverHeading create() => DriverHeading();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(DriverRideState value) {
+  Override overrideWithValue(double value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<DriverRideState>(value),
+      providerOverride: $SyncValueProvider<double>(value),
     );
   }
 }
 
-String _$rideControllerHash() => r'eecf4dee816c21f654a68a6844bfa2ad0d4d102d';
+String _$driverHeadingHash() => r'0383ee5b3ec8fb980b8bfc00e7d9560f58a96f42';
 
-abstract class _$RideController extends $Notifier<DriverRideState> {
-  DriverRideState build();
+abstract class _$DriverHeading extends $Notifier<double> {
+  double build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref = this.ref as $Ref<DriverRideState, DriverRideState>;
+    final ref = this.ref as $Ref<double, double>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<DriverRideState, DriverRideState>,
-              DriverRideState,
+              AnyNotifier<double, double>,
+              double,
               Object?,
               Object?
             >;

@@ -1,5 +1,7 @@
 import 'package:driver/core/const/app_driver_consts.dart';
+import 'package:driver/features/ride/ui/providers/driver_camera_controller.dart';
 import 'package:driver/features/ride/ui/providers/driver_location_broadcaster.dart';
+import 'package:driver/features/ride/ui/providers/driver_markers_provider.dart';
 import 'package:driver/features/ride/ui/providers/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
@@ -21,6 +23,9 @@ class RideScreen extends ConsumerWidget {
     });
 
     ref.watch(driverLocationBroadcasterProvider);
+    ref.watch(driverCameraControllerProvider);
+
+    final markers = ref.watch(driverMarkersProvider);
 
     final isOnline = ref.watch(
       rideControllerProvider.select(
@@ -32,7 +37,15 @@ class RideScreen extends ConsumerWidget {
       body: Stack(
         alignment: Alignment.center,
         children: [
-          const AppMap(mapId: AppDriverConsts.mapStyleID),
+          AppMap(
+            mapId: AppDriverConsts.mapStyleID,
+            markers: markers,
+            onCameraMoveStarted: () => ref
+                .read(driverCameraControllerProvider.notifier)
+                .onMoveStarted(),
+            onCameraIdle: () =>
+                ref.read(driverCameraControllerProvider.notifier).onIdle(),
+          ),
           const Positioned.fill(child: AppMapLoadingOverlay()),
           Positioned(
             top: AppDimens.space16,

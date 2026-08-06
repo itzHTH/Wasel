@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:driver/features/ride/data/models/update_location/update_location_arg.dart';
 import 'package:driver/features/ride/domain/use_case/update_driver_location_use_case.dart';
+import 'package:driver/features/ride/ui/providers/device_location_provider.dart';
 import 'package:driver/features/ride/ui/providers/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_use_case.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -22,19 +22,25 @@ class LocationUnavailableException implements Exception {
   String toString() => message;
 }
 
+class LocationBroadcastException implements Exception {
+  const LocationBroadcastException(this.message);
+
+  final String message;
+
+  @override
+  String toString() => message;
+}
+
 @riverpod
 class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
-  static const _settings = LocationSettings(
-    accuracy: LocationAccuracy.high,
-    distanceFilter: 10,
-  );
-
   static const _heartbeat = Duration(seconds: 10);
+  static const _failureLimit = 3;
 
-  StreamSubscription<Position>? _positions;
+  ProviderSubscription<AsyncValue<Position>>? _positions;
   Timer? _ticker;
   Position? _lastPosition;
   ProviderSubscription<UpdateDriverLocationUseCase>? _useCase;
+  int _failures = 0;
   int _session = 0;
 
   @override
@@ -71,9 +77,9 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
     if (session != _session || !ref.mounted) return;
 
     _useCase = ref.listen(updateDriverLocationUseCaseProvider, (_, _) {});
-    _positions = Geolocator.getPositionStream(
-      locationSettings: _settings,
-    ).listen(_onPosition);
+    _positions = ref.listen(deviceLocationProvider, (_, next) {
+      if (next case AsyncData(:final value)) _onPosition(value);
+    });
     _ticker = Timer.periodic(_heartbeat, (_) => unawaited(_broadcast()));
   }
 
@@ -87,7 +93,7 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
     final useCase = _useCase;
     if (position == null || useCase == null || !ref.mounted) return;
 
-    debugPrint('[BROADCAST] ${position.latitude}, ${position.longitude}');
+    final session = _session;
 
     try {
       await useCase.read().call(
@@ -97,9 +103,28 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
           rideId: _activeRideId(),
         ),
       );
-    } catch (e) {
-      debugPrint('[BROADCAST] update failed: $e');
+      _failures = 0;
+    } catch (_) {
+      _onBroadcastFailed(session);
     }
+  }
+
+  void _onBroadcastFailed(int session) {
+    if (session != _session) return;
+
+    _failures++;
+    if (_failures != _failureLimit) return;
+
+    if (!ref.mounted) return;
+
+    ref
+        .read(rideActionControllerProvider.notifier)
+        .reportFailure(
+          const LocationBroadcastException(
+            'ماكو اتصال بالخادم، موقعك ما يوصل للتوزيع',
+          ),
+          StackTrace.current,
+        );
   }
 
   String _activeRideId() {
@@ -125,19 +150,14 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
   }
 
   void _stop() {
-    final positions = _positions;
-    final useCase = _useCase;
+    _positions?.close();
     _positions = null;
+    _useCase?.close();
     _useCase = null;
     _ticker?.cancel();
     _ticker = null;
     _lastPosition = null;
+    _failures = 0;
     _session++;
-
-    if (positions == null) {
-      useCase?.close();
-      return;
-    }
-    unawaited(positions.cancel().whenComplete(() => useCase?.close()));
   }
 }

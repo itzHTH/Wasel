@@ -1,3 +1,4 @@
+import 'package:driver/features/ride/ui/widgets/cards/ride_card_shell.dart';
 import 'package:flutter/material.dart';
 import 'package:wasel_core/wasel_core.dart';
 
@@ -8,6 +9,7 @@ class RideOfferCard extends StatelessWidget {
     required this.dropoffText,
     required this.priceText,
     required this.paymentText,
+    required this.secondsLeft,
     required this.onAccept,
     required this.onReject,
   });
@@ -16,95 +18,51 @@ class RideOfferCard extends StatelessWidget {
   final String dropoffText;
   final String priceText;
   final String paymentText;
+  final int secondsLeft;
   final VoidCallback onAccept;
   final VoidCallback onReject;
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: AppColor.elementBackground,
-      borderRadius: BorderRadius.vertical(
-        top: Radius.circular(AppDimens.radius24),
-      ),
-      child: SafeArea(
-        top: false,
-        child: Padding(
-          padding: EdgeInsets.all(AppDimens.space24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(priceText, style: AppTextStyles.font24Secondary900Bold),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: AppDimens.space12,
-                      vertical: AppDimens.space4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColor.primary100,
-                      borderRadius: BorderRadius.circular(AppDimens.radiusPill),
-                    ),
-                    child: Text(
-                      paymentText,
-                      style: AppTextStyles.font14Primary500SemiBold,
-                    ),
-                  ),
-                ],
+    return RideCardShell(
+      primaryLabel: 'قبول الطلب ($secondsLeft)',
+      onPrimary: onAccept,
+      secondaryLabel: 'رفض',
+      onSecondary: onReject,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(priceText, style: AppTextStyles.font24Secondary900Bold),
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: AppDimens.space12,
+                vertical: AppDimens.space4,
               ),
-              SizedBox(height: AppDimens.space24),
-              _OfferPoint(
-                color: AppColor.primary500,
-                label: 'نقطة الانطلاق',
-                value: pickupText,
+              decoration: BoxDecoration(
+                color: AppColor.primary100,
+                borderRadius: BorderRadius.circular(AppDimens.radiusPill),
               ),
-              SizedBox(height: AppDimens.space16),
-              _OfferPoint(
-                color: AppColor.alertSuccess500,
-                label: 'نقطة الوصول',
-                value: dropoffText,
+              child: Text(
+                paymentText,
+                style: AppTextStyles.font14Primary500SemiBold,
               ),
-              SizedBox(height: AppDimens.space32),
-              SizedBox(
-                height: AppDimens.buttonHeight,
-                child: ElevatedButton(
-                  onPressed: onAccept,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColor.primary500,
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppDimens.radiusPill),
-                    ),
-                  ),
-                  child: Text(
-                    'قبول الطلب',
-                    style: AppTextStyles.font16Neutral0SemiBold,
-                  ),
-                ),
-              ),
-              SizedBox(height: AppDimens.space12),
-              SizedBox(
-                height: AppDimens.buttonHeight,
-                child: OutlinedButton(
-                  onPressed: onReject,
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: AppColor.neutral200),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppDimens.radiusPill),
-                    ),
-                  ),
-                  child: Text(
-                    'رفض',
-                    style: AppTextStyles.font14Secondary500Medium,
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ),
+        SizedBox(height: AppDimens.space24),
+        _OfferPoint(
+          color: AppColor.primary500,
+          label: 'نقطة الانطلاق',
+          value: pickupText,
+        ),
+        SizedBox(height: AppDimens.space16),
+        _OfferPoint(
+          color: AppColor.alertSuccess500,
+          label: 'نقطة الوصول',
+          value: dropoffText,
+        ),
+      ],
     );
   }
 }
