@@ -213,7 +213,7 @@ void main() {
     expect(state.ride?.dropPosition.longitude, 44.375);
     expect(state.ride?.calculatedPrice, 7500);
     expect(state.ride?.paymentMethod, 'Cash');
-    expect(state.secondsLeft, 0);
+    expect(state.secondsLeft, 30);
   });
 
   test('6. hideRideRequest clears the offer and returns to online', () async {
@@ -483,5 +483,82 @@ void main() {
     final state = container.read(rideControllerProvider);
     expect(state.stage, DriverStage.online);
     expect(state.ride, isNull);
+  });
+
+  testWidgets('23. the offer expires after 30 seconds with no call', (
+    tester,
+  ) async {
+    final hub = FakeHub();
+    final api = FakeApi();
+    final container = harness(hub, api);
+
+    container.read(rideControllerProvider.notifier).goOnline();
+    await tester.pump(const Duration(milliseconds: 50));
+    hub.controllers.last.add(offerEvent());
+    await tester.pump(const Duration(milliseconds: 50));
+    expect(container.read(rideControllerProvider).secondsLeft, 30);
+
+    await tester.pump(const Duration(seconds: 10));
+    expect(container.read(rideControllerProvider).secondsLeft, 20);
+
+    await tester.pump(const Duration(seconds: 20));
+
+    final state = container.read(rideControllerProvider);
+    expect(state.stage, DriverStage.online);
+    expect(state.ride, isNull);
+    expect(state.secondsLeft, 0);
+    expect(api.calls, isEmpty);
+  });
+
+  testWidgets('24. accepting stops the countdown', (tester) async {
+    final hub = FakeHub();
+    final api = FakeApi();
+    final container = harness(hub, api);
+
+    container.read(rideControllerProvider.notifier).goOnline();
+    await tester.pump(const Duration(milliseconds: 50));
+    hub.controllers.last.add(offerEvent());
+    await tester.pump(const Duration(seconds: 5));
+    expect(container.read(rideControllerProvider).secondsLeft, 25);
+
+    await container.read(rideControllerProvider.notifier).acceptOffer();
+    await tester.pump(const Duration(seconds: 40));
+
+    final state = container.read(rideControllerProvider);
+    expect(state.stage, DriverStage.heading);
+    expect(state.ride?.rideId, 'ride-1');
+    expect(state.secondsLeft, 25);
+  });
+
+  testWidgets('25. a second offer restarts the countdown at 30', (
+    tester,
+  ) async {
+    final hub = FakeHub();
+    final api = FakeApi();
+    final container = harness(hub, api);
+
+    container.read(rideControllerProvider.notifier).goOnline();
+    await tester.pump(const Duration(milliseconds: 50));
+    hub.controllers.last.add(offerEvent());
+    await tester.pump(const Duration(seconds: 10));
+    expect(container.read(rideControllerProvider).secondsLeft, 20);
+
+    hub.controllers.last.add(const HubRideEvent.hideRideRequest('ride-1'));
+    await tester.pump(const Duration(milliseconds: 50));
+    expect(container.read(rideControllerProvider).secondsLeft, 0);
+
+    hub.controllers.last.add(offerEvent(rideId: 'ride-2'));
+    await tester.pump(const Duration(milliseconds: 50));
+    expect(container.read(rideControllerProvider).secondsLeft, 30);
+
+    await tester.pump(const Duration(seconds: 5));
+
+    final state = container.read(rideControllerProvider);
+    expect(state.stage, DriverStage.offerReceived);
+    expect(state.ride?.rideId, 'ride-2');
+    expect(state.secondsLeft, 25);
+
+    container.read(rideControllerProvider.notifier).goOffline();
+    await tester.pump(const Duration(milliseconds: 50));
   });
 }

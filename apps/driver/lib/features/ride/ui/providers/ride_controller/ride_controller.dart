@@ -1,12 +1,10 @@
 import 'dart:async';
 
 import 'package:driver/features/ride/domain/entities/driver_ride_events.dart';
-import 'package:driver/features/ride/domain/entities/geo_point.dart';
 import 'package:driver/features/ride/domain/use_case/watch_ride_event_use_case.dart';
 import 'package:driver/features/ride/ui/providers/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_use_case.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/networking/api_results.dart';
@@ -24,8 +22,11 @@ class RideConnectionException implements Exception {
 
 @riverpod
 class RideController extends _$RideController {
+  static const _offerSeconds = 30;
+
   StreamSubscription<DriverRideEvent>? _events;
   ProviderSubscription<WatchRideEventUseCase>? _useCase;
+  Timer? _countdown;
   int _session = 0;
 
   @override
@@ -61,10 +62,13 @@ class RideController extends _$RideController {
     state = const DriverRideState();
   }
 
-  Future<void> acceptOffer() => _perform(
-    (rideId) => ref.read(acceptRideUseCaseProvider).call(rideId),
-    DriverStage.heading,
-  );
+  Future<void> acceptOffer() {
+    _stopCountdown();
+    return _perform(
+      (rideId) => ref.read(acceptRideUseCaseProvider).call(rideId),
+      DriverStage.heading,
+    );
+  }
 
   void rejectOffer() => _clearOffer();
 
@@ -111,16 +115,16 @@ class RideController extends _$RideController {
   }
 
   void _onEvent(DriverRideEvent event) {
-    debugPrint('[HUB EVENT] $event');
     if (!ref.mounted) return;
 
     switch (event) {
       case final ReceiveRideRequest offer:
-        debugPrint(
-          '[HUB EVENT] pickup ${_point(offer.position)} '
-          'drop ${_point(offer.dropPosition)}',
+        state = state.copyWith(
+          stage: DriverStage.offerReceived,
+          ride: offer,
+          secondsLeft: _offerSeconds,
         );
-        state = state.copyWith(stage: DriverStage.offerReceived, ride: offer);
+        _startCountdown();
       case HideRideRequest():
         if (state.stage != DriverStage.offerReceived) return;
         _clearOffer();
@@ -131,11 +135,36 @@ class RideController extends _$RideController {
     }
   }
 
-  String _point(GeoPoint point) => '${point.latitude}, ${point.longitude}';
-
   void _clearOffer() {
+    _stopCountdown();
     if (!ref.mounted) return;
-    state = state.copyWith(stage: DriverStage.online, ride: null);
+    state = state.copyWith(
+      stage: DriverStage.online,
+      ride: null,
+      secondsLeft: 0,
+    );
+  }
+
+  void _startCountdown() {
+    _stopCountdown();
+    _countdown = Timer.periodic(const Duration(seconds: 1), (_) => _tick());
+  }
+
+  void _tick() {
+    if (!ref.mounted) return;
+
+    final remaining = state.secondsLeft - 1;
+    if (remaining <= 0) {
+      _clearOffer();
+      return;
+    }
+
+    state = state.copyWith(secondsLeft: remaining);
+  }
+
+  void _stopCountdown() {
+    _countdown?.cancel();
+    _countdown = null;
   }
 
   void _dropConnection(int session, Object error, StackTrace stackTrace) {
@@ -151,6 +180,8 @@ class RideController extends _$RideController {
   }
 
   void _cancelEvents() {
+    _stopCountdown();
+
     final events = _events;
     final useCase = _useCase;
     _events = null;

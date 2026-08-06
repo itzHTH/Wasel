@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:driver/features/ride/data/models/ride_events/hub_ride_events.dart';
 import 'package:driver/features/ride/data/services/ride_api_service.dart';
 import 'package:driver/features/ride/data/services/ride_hub_data_source.dart';
+import 'package:driver/features/ride/ui/providers/device_location_provider.dart';
 import 'package:driver/features/ride/ui/providers/driver_location_broadcaster.dart';
 import 'package:driver/features/ride/ui/providers/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
@@ -348,5 +349,85 @@ void main() {
     await settle();
 
     expect(hub.updates.last, [33.34, 44.39, '']);
+  });
+
+  test('11. every consumer shares one gps stream', () async {
+    final geo = FakeGeolocator();
+    GeolocatorPlatform.instance = geo;
+    final container = harness(FakeHub());
+
+    container.read(rideControllerProvider.notifier).goOnline();
+    await settle();
+    expect(geo.streamCount, 1);
+
+    final reader = container.listen(deviceLocationProvider, (_, _) {});
+    await settle();
+
+    expect(geo.streamCount, 1);
+    expect(geo.positions.hasListener, isTrue);
+
+    container.read(rideControllerProvider.notifier).goOffline();
+    await settle();
+    expect(geo.positions.hasListener, isTrue);
+
+    reader.close();
+    await settle();
+
+    expect(geo.positions.hasListener, isFalse);
+  });
+
+  test('12. three failed broadcasts in a row reach the driver', () async {
+    final geo = FakeGeolocator();
+    GeolocatorPlatform.instance = geo;
+    final hub = FakeHub()..failUpdate = true;
+    final container = harness(hub);
+
+    container.read(rideControllerProvider.notifier).goOnline();
+    await settle();
+
+    geo.positions.add(fixAt(33.31, 44.36));
+    await settle();
+    expect(container.read(rideActionControllerProvider).hasError, isFalse);
+
+    geo.positions.add(fixAt(33.32, 44.37));
+    await settle();
+    expect(container.read(rideActionControllerProvider).hasError, isFalse);
+
+    geo.positions.add(fixAt(33.33, 44.38));
+    await settle();
+
+    expect(container.read(rideActionControllerProvider).hasError, isTrue);
+    expect(
+      container.read(rideActionControllerProvider).error.toString(),
+      'ماكو اتصال بالخادم، موقعك ما يوصل للتوزيع',
+    );
+    expect(geo.positions.hasListener, isTrue);
+  });
+
+  test('13. a success resets the failure count', () async {
+    final geo = FakeGeolocator();
+    GeolocatorPlatform.instance = geo;
+    final hub = FakeHub()..failUpdate = true;
+    final container = harness(hub);
+
+    container.read(rideControllerProvider.notifier).goOnline();
+    await settle();
+
+    geo.positions.add(fixAt(33.31, 44.36));
+    await settle();
+    geo.positions.add(fixAt(33.32, 44.37));
+    await settle();
+
+    hub.failUpdate = false;
+    geo.positions.add(fixAt(33.33, 44.38));
+    await settle();
+
+    hub.failUpdate = true;
+    geo.positions.add(fixAt(33.34, 44.39));
+    await settle();
+    geo.positions.add(fixAt(33.35, 44.40));
+    await settle();
+
+    expect(container.read(rideActionControllerProvider).hasError, isFalse);
   });
 }
