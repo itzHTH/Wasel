@@ -1,4 +1,5 @@
 import 'package:driver/core/const/app_driver_consts.dart';
+import 'package:driver/features/ride/ui/providers/driver_location_broadcaster.dart';
 import 'package:driver/features/ride/ui/providers/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
@@ -17,6 +18,8 @@ class RideScreen extends ConsumerWidget {
         context,
       ).showSnackBar(SnackBar(content: Text(next.error.toString())));
     });
+
+    ref.watch(driverLocationBroadcasterProvider);
 
     final isOnline = ref.watch(
       rideControllerProvider.select(

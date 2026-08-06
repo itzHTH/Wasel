@@ -24,6 +24,9 @@ dependencies:
   freezed_annotation: ^3.1.0
   json_annotation: ^4.9.0
 
+  # Location
+  geolocator: ^14.0.3
+
   # Networking
   dio: ^5.9.2
   retrofit: ^4.9.2
@@ -54,6 +57,7 @@ dev_dependencies:
   retrofit_generator: ^10.2.6
   build_runner: ^2.4.13
   riverpod_generator: ^4.0.3
+  plugin_platform_interface: ^2.1.8
 
 flutter:
   uses-material-design: true
