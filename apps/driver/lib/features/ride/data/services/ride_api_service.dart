@@ -3,6 +3,8 @@ import 'package:driver/core/const/driver_api_consts.dart';
 import 'package:retrofit/dio.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:wasel_core/wasel_core.dart';
 
 part 'ride_api_service.g.dart';
 
@@ -40,4 +42,10 @@ abstract class RideApiService {
     @Path("id") String rideId, {
     @CancelRequest() CancelToken? cancelToken,
   });
+}
+
+@riverpod
+RideApiService rideApiService(Ref ref) {
+  final dio = ref.watch(dioFactoryProvider);
+  return RideApiService(dio);
 }
