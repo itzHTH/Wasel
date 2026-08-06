@@ -131,7 +131,7 @@ void main() {
     expect(geo.requestCount, 0);
   });
 
-  test('2. online forwards each fix to the hub with a null rideId', () async {
+  test('2. online forwards each fix to the hub with an empty rideId', () async {
     final geo = FakeGeolocator();
     GeolocatorPlatform.instance = geo;
     final hub = FakeHub();
@@ -145,7 +145,7 @@ void main() {
     await settle();
 
     expect(hub.updates, [
-      [33.31, 44.36, null],
+      [33.31, 44.36, ''],
     ]);
     expect(container.read(rideActionControllerProvider).hasError, isFalse);
   });
@@ -165,8 +165,8 @@ void main() {
     await settle();
 
     expect(hub.updates, [
-      [33.31, 44.36, null],
-      [33.32, 44.37, null],
+      [33.31, 44.36, ''],
+      [33.32, 44.37, ''],
     ]);
   });
 
@@ -259,7 +259,7 @@ void main() {
     await tester.pump(const Duration(seconds: 30));
 
     expect(hub.updates.length, 4);
-    expect(hub.updates.last, [33.31, 44.36, null]);
+    expect(hub.updates.last, [33.31, 44.36, '']);
 
     container.read(rideControllerProvider.notifier).goOffline();
     await tester.pump(const Duration(milliseconds: 50));
@@ -298,9 +298,55 @@ void main() {
     await tester.pump(const Duration(seconds: 10));
 
     expect(hub.updates.length, 2);
-    expect(hub.updates.last, [33.31, 44.36, null]);
+    expect(hub.updates.last, [33.31, 44.36, '']);
 
     container.read(rideControllerProvider.notifier).goOffline();
     await tester.pump(const Duration(milliseconds: 50));
+  });
+
+  test('10. an accepted ride is carried in every broadcast', () async {
+    final geo = FakeGeolocator();
+    GeolocatorPlatform.instance = geo;
+    final hub = FakeHub();
+    final container = harness(hub);
+
+    container.read(rideControllerProvider.notifier).goOnline();
+    await settle();
+    hub.controllers.last.add(
+      HubRideEvent.receiveRideRequest(
+        rideId: 'ride-1',
+        position: const LatLngDto(lat: 33.3152, lng: 44.3661),
+        dropPosition: const LatLngDto(lat: 33.325, lng: 44.375),
+        calculatedPrice: 7500,
+        paymentMethod: 'Cash',
+        message: 'طلب جديد',
+      ),
+    );
+    await settle();
+
+    geo.positions.add(fixAt(33.31, 44.36));
+    await settle();
+    expect(hub.updates.last, [33.31, 44.36, '']);
+
+    await container.read(rideControllerProvider.notifier).acceptOffer();
+    geo.positions.add(fixAt(33.32, 44.37));
+    await settle();
+
+    expect(hub.updates.last, [33.32, 44.37, 'ride-1']);
+
+    final notifier = container.read(rideControllerProvider.notifier);
+    await notifier.markArrived();
+    await notifier.startRide();
+    geo.positions.add(fixAt(33.33, 44.38));
+    await settle();
+
+    expect(hub.updates.last, [33.33, 44.38, 'ride-1']);
+
+    await notifier.completeRide();
+    notifier.dismissCompleted();
+    geo.positions.add(fixAt(33.34, 44.39));
+    await settle();
+
+    expect(hub.updates.last, [33.34, 44.39, '']);
   });
 }

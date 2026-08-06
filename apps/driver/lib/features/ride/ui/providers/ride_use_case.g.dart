@@ -105,3 +105,240 @@ final class UpdateDriverLocationUseCaseProvider
 
 String _$updateDriverLocationUseCaseHash() =>
     r'f91afee09d697bbffa65921ba416cce81844dc2d';
+
+@ProviderFor(acceptRideUseCase)
+final acceptRideUseCaseProvider = AcceptRideUseCaseProvider._();
+
+final class AcceptRideUseCaseProvider
+    extends
+        $FunctionalProvider<
+          AcceptRideUseCase,
+          AcceptRideUseCase,
+          AcceptRideUseCase
+        >
+    with $Provider<AcceptRideUseCase> {
+  AcceptRideUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'acceptRideUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$acceptRideUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<AcceptRideUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  AcceptRideUseCase create(Ref ref) {
+    return acceptRideUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AcceptRideUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AcceptRideUseCase>(value),
+    );
+  }
+}
+
+String _$acceptRideUseCaseHash() => r'8a04b6b627ce3f58c09baa62df840137dafe2c12';
+
+@ProviderFor(arriveAtStartPointUseCase)
+final arriveAtStartPointUseCaseProvider = ArriveAtStartPointUseCaseProvider._();
+
+final class ArriveAtStartPointUseCaseProvider
+    extends
+        $FunctionalProvider<
+          ArriveAtStartPointUseCase,
+          ArriveAtStartPointUseCase,
+          ArriveAtStartPointUseCase
+        >
+    with $Provider<ArriveAtStartPointUseCase> {
+  ArriveAtStartPointUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'arriveAtStartPointUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$arriveAtStartPointUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<ArriveAtStartPointUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  ArriveAtStartPointUseCase create(Ref ref) {
+    return arriveAtStartPointUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(ArriveAtStartPointUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<ArriveAtStartPointUseCase>(value),
+    );
+  }
+}
+
+String _$arriveAtStartPointUseCaseHash() =>
+    r'925eeaf3db6cccfbdbdb35414b95a6b6f3cdb935';
+
+@ProviderFor(startRideUseCase)
+final startRideUseCaseProvider = StartRideUseCaseProvider._();
+
+final class StartRideUseCaseProvider
+    extends
+        $FunctionalProvider<
+          StartRideUseCase,
+          StartRideUseCase,
+          StartRideUseCase
+        >
+    with $Provider<StartRideUseCase> {
+  StartRideUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'startRideUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$startRideUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<StartRideUseCase> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  StartRideUseCase create(Ref ref) {
+    return startRideUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(StartRideUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<StartRideUseCase>(value),
+    );
+  }
+}
+
+String _$startRideUseCaseHash() => r'e74841b17ebeac2f591430af717475e09bd7539d';
+
+@ProviderFor(completeRideUseCase)
+final completeRideUseCaseProvider = CompleteRideUseCaseProvider._();
+
+final class CompleteRideUseCaseProvider
+    extends
+        $FunctionalProvider<
+          CompleteRideUseCase,
+          CompleteRideUseCase,
+          CompleteRideUseCase
+        >
+    with $Provider<CompleteRideUseCase> {
+  CompleteRideUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'completeRideUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$completeRideUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<CompleteRideUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  CompleteRideUseCase create(Ref ref) {
+    return completeRideUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(CompleteRideUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<CompleteRideUseCase>(value),
+    );
+  }
+}
+
+String _$completeRideUseCaseHash() =>
+    r'134816a0f8dded52d4fc4e260aed4013de4f40cf';
+
+@ProviderFor(driverCancelRideUseCase)
+final driverCancelRideUseCaseProvider = DriverCancelRideUseCaseProvider._();
+
+final class DriverCancelRideUseCaseProvider
+    extends
+        $FunctionalProvider<
+          DriverCancelRideUseCase,
+          DriverCancelRideUseCase,
+          DriverCancelRideUseCase
+        >
+    with $Provider<DriverCancelRideUseCase> {
+  DriverCancelRideUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'driverCancelRideUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$driverCancelRideUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<DriverCancelRideUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  DriverCancelRideUseCase create(Ref ref) {
+    return driverCancelRideUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(DriverCancelRideUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<DriverCancelRideUseCase>(value),
+    );
+  }
+}
+
+String _$driverCancelRideUseCaseHash() =>
+    r'c94c18f8b32096aa9f8210e4f75a43b0639220d5';

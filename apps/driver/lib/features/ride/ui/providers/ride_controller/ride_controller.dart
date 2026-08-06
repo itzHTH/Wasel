@@ -9,6 +9,7 @@ import 'package:driver/features/ride/ui/providers/ride_use_case.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:wasel_core/networking/api_results.dart';
 
 part 'ride_controller.g.dart';
 
@@ -60,9 +61,54 @@ class RideController extends _$RideController {
     state = const DriverRideState();
   }
 
-  void acceptOffer() => _clearOffer();
+  Future<void> acceptOffer() => _perform(
+    (rideId) => ref.read(acceptRideUseCaseProvider).call(rideId),
+    DriverStage.heading,
+  );
 
   void rejectOffer() => _clearOffer();
+
+  Future<void> markArrived() => _perform(
+    (rideId) => ref.read(arriveAtStartPointUseCaseProvider).call(rideId),
+    DriverStage.arrived,
+  );
+
+  Future<void> startRide() => _perform(
+    (rideId) => ref.read(startRideUseCaseProvider).call(rideId),
+    DriverStage.inProgress,
+  );
+
+  Future<void> completeRide() => _perform(
+    (rideId) => ref.read(completeRideUseCaseProvider).call(rideId),
+    DriverStage.completed,
+  );
+
+  Future<void> cancelRide() => _perform(
+    (rideId) => ref.read(driverCancelRideUseCaseProvider).call(rideId),
+    DriverStage.online,
+    clearRide: true,
+  );
+
+  void dismissCompleted() => _clearOffer();
+
+  Future<void> _perform(
+    Future<ApiResults<void>> Function(String rideId) action,
+    DriverStage next, {
+    bool clearRide = false,
+  }) async {
+    final rideId = state.ride?.rideId;
+    if (rideId == null) return;
+
+    final succeeded = await ref
+        .read(rideActionControllerProvider.notifier)
+        .run(() => action(rideId));
+
+    if (!succeeded || !ref.mounted) return;
+
+    state = clearRide
+        ? state.copyWith(stage: next, ride: null)
+        : state.copyWith(stage: next);
+  }
 
   void _onEvent(DriverRideEvent event) {
     debugPrint('[HUB EVENT] $event');
@@ -76,7 +122,7 @@ class RideController extends _$RideController {
         );
         state = state.copyWith(stage: DriverStage.offerReceived, ride: offer);
       case HideRideRequest():
-        if (state.ride == null) return;
+        if (state.stage != DriverStage.offerReceived) return;
         _clearOffer();
       case RideCancelled():
         _clearOffer();

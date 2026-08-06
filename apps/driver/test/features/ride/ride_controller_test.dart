@@ -49,11 +49,14 @@ class SocketFailure implements Exception {
 
 class FakeApi implements RideApiService {
   final calls = <Symbol>[];
+  bool fail = false;
 
   @override
   dynamic noSuchMethod(Invocation invocation) {
     calls.add(invocation.memberName);
-    return Future<void>.value();
+    return fail
+        ? Future<void>.error(const SocketFailure())
+        : Future<void>.value();
   }
 }
 
@@ -81,6 +84,34 @@ ProviderContainer harness(FakeHub hub, [FakeApi? api]) {
 }
 
 Future<void> settle() => Future<void>.delayed(const Duration(milliseconds: 50));
+
+Future<ProviderContainer> withOffer(FakeHub hub, FakeApi api) async {
+  final container = harness(hub, api);
+  container.read(rideControllerProvider.notifier).goOnline();
+  await settle();
+  hub.controllers.last.add(offerEvent());
+  await settle();
+  return container;
+}
+
+Future<ProviderContainer> atStage(
+  FakeHub hub,
+  FakeApi api,
+  DriverStage stage,
+) async {
+  final container = await withOffer(hub, api);
+  final notifier = container.read(rideControllerProvider.notifier);
+
+  await notifier.acceptOffer();
+  if (stage != DriverStage.heading) await notifier.markArrived();
+  if (stage != DriverStage.heading && stage != DriverStage.arrived) {
+    await notifier.startRide();
+  }
+  if (stage == DriverStage.completed) await notifier.completeRide();
+
+  api.calls.clear();
+  return container;
+}
 
 void main() {
   final binding = TestWidgetsFlutterBinding.ensureInitialized();
@@ -253,23 +284,34 @@ void main() {
     expect(state.ride?.rideId, 'ride-1');
   });
 
-  test('9. acceptOffer clears locally and calls no endpoint', () async {
+  test(
+    '9. acceptOffer calls accept and moves to heading, keeping the ride',
+    () async {
+      final hub = FakeHub();
+      final api = FakeApi();
+      final container = await withOffer(hub, api);
+
+      await container.read(rideControllerProvider.notifier).acceptOffer();
+
+      final state = container.read(rideControllerProvider);
+      expect(state.stage, DriverStage.heading);
+      expect(state.ride?.rideId, 'ride-1');
+      expect(api.calls, [#acceptRide]);
+      expect(container.read(rideActionControllerProvider).hasError, isFalse);
+    },
+  );
+
+  test('9b. a failed accept leaves the offer on screen', () async {
     final hub = FakeHub();
-    final api = FakeApi();
-    final container = harness(hub, api);
+    final api = FakeApi()..fail = true;
+    final container = await withOffer(hub, api);
 
-    container.read(rideControllerProvider.notifier).goOnline();
-    await settle();
-    hub.controllers.last.add(offerEvent());
-    await settle();
-
-    container.read(rideControllerProvider.notifier).acceptOffer();
-    await settle();
+    await container.read(rideControllerProvider.notifier).acceptOffer();
 
     final state = container.read(rideControllerProvider);
-    expect(state.stage, DriverStage.online);
-    expect(state.ride, isNull);
-    expect(api.calls, isEmpty);
+    expect(state.stage, DriverStage.offerReceived);
+    expect(state.ride?.rideId, 'ride-1');
+    expect(container.read(rideActionControllerProvider).hasError, isTrue);
   });
 
   test('10. rejectOffer clears locally and calls no endpoint', () async {
@@ -305,6 +347,141 @@ void main() {
 
     final state = container.read(rideControllerProvider);
     expect(state.stage, DriverStage.offline);
+    expect(state.ride, isNull);
+  });
+
+  test('12. markArrived calls arrive and moves to arrived', () async {
+    final api = FakeApi();
+    final container = await atStage(FakeHub(), api, DriverStage.heading);
+
+    await container.read(rideControllerProvider.notifier).markArrived();
+
+    expect(container.read(rideControllerProvider).stage, DriverStage.arrived);
+    expect(api.calls, [#arriveAtDestination]);
+  });
+
+  test('13. a failed arrive keeps the stage at heading', () async {
+    final api = FakeApi();
+    final container = await atStage(FakeHub(), api, DriverStage.heading);
+    api.fail = true;
+
+    await container.read(rideControllerProvider.notifier).markArrived();
+
+    expect(container.read(rideControllerProvider).stage, DriverStage.heading);
+    expect(container.read(rideActionControllerProvider).hasError, isTrue);
+  });
+
+  test('14. startRide calls start and moves to inProgress', () async {
+    final api = FakeApi();
+    final container = await atStage(FakeHub(), api, DriverStage.arrived);
+
+    await container.read(rideControllerProvider.notifier).startRide();
+
+    expect(
+      container.read(rideControllerProvider).stage,
+      DriverStage.inProgress,
+    );
+    expect(api.calls, [#startRide]);
+  });
+
+  test('15. a failed start keeps the stage at arrived', () async {
+    final api = FakeApi();
+    final container = await atStage(FakeHub(), api, DriverStage.arrived);
+    api.fail = true;
+
+    await container.read(rideControllerProvider.notifier).startRide();
+
+    expect(container.read(rideControllerProvider).stage, DriverStage.arrived);
+    expect(container.read(rideActionControllerProvider).hasError, isTrue);
+  });
+
+  test('16. completeRide calls complete and moves to completed', () async {
+    final api = FakeApi();
+    final container = await atStage(FakeHub(), api, DriverStage.inProgress);
+
+    await container.read(rideControllerProvider.notifier).completeRide();
+
+    final state = container.read(rideControllerProvider);
+    expect(state.stage, DriverStage.completed);
+    expect(state.ride?.rideId, 'ride-1');
+    expect(api.calls, [#completeRide]);
+  });
+
+  test('17. a failed complete keeps the stage at inProgress', () async {
+    final api = FakeApi();
+    final container = await atStage(FakeHub(), api, DriverStage.inProgress);
+    api.fail = true;
+
+    await container.read(rideControllerProvider.notifier).completeRide();
+
+    expect(
+      container.read(rideControllerProvider).stage,
+      DriverStage.inProgress,
+    );
+    expect(container.read(rideActionControllerProvider).hasError, isTrue);
+  });
+
+  test('18. cancelRide calls cancel and drops the ride', () async {
+    final api = FakeApi();
+    final container = await atStage(FakeHub(), api, DriverStage.arrived);
+
+    await container.read(rideControllerProvider.notifier).cancelRide();
+
+    final state = container.read(rideControllerProvider);
+    expect(state.stage, DriverStage.online);
+    expect(state.ride, isNull);
+    expect(api.calls, [#driverCancelRide]);
+  });
+
+  test('19. a failed cancel keeps the ride', () async {
+    final api = FakeApi();
+    final container = await atStage(FakeHub(), api, DriverStage.heading);
+    api.fail = true;
+
+    await container.read(rideControllerProvider.notifier).cancelRide();
+
+    final state = container.read(rideControllerProvider);
+    expect(state.stage, DriverStage.heading);
+    expect(state.ride?.rideId, 'ride-1');
+    expect(container.read(rideActionControllerProvider).hasError, isTrue);
+  });
+
+  test('20. dismissCompleted returns to online with no call', () async {
+    final api = FakeApi();
+    final container = await atStage(FakeHub(), api, DriverStage.completed);
+
+    container.read(rideControllerProvider.notifier).dismissCompleted();
+    await settle();
+
+    final state = container.read(rideControllerProvider);
+    expect(state.stage, DriverStage.online);
+    expect(state.ride, isNull);
+    expect(api.calls, isEmpty);
+  });
+
+  test('21. hideRideRequest during heading keeps the ride', () async {
+    final hub = FakeHub();
+    final api = FakeApi();
+    final container = await atStage(hub, api, DriverStage.heading);
+
+    hub.controllers.last.add(const HubRideEvent.hideRideRequest('ride-1'));
+    await settle();
+
+    final state = container.read(rideControllerProvider);
+    expect(state.stage, DriverStage.heading);
+    expect(state.ride?.rideId, 'ride-1');
+  });
+
+  test('22. cancelled during inProgress returns to online', () async {
+    final hub = FakeHub();
+    final api = FakeApi();
+    final container = await atStage(hub, api, DriverStage.inProgress);
+
+    hub.controllers.last.add(const HubRideEvent.cancelled(message: 'ألغي'));
+    await settle();
+
+    final state = container.read(rideControllerProvider);
+    expect(state.stage, DriverStage.online);
     expect(state.ride, isNull);
   });
 }
