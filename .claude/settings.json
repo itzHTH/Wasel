@@ -6,5 +6,27 @@
       "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/dart\" run build_runner build --delete-conflicting-outputs)",
       "Bash(\"/home/leader/Flutter Projects/wasel/.fvm/flutter_sdk/bin/flutter\" analyze)"
     ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Grep",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/leader/.local/bin/graphify hook-guard search"
+          }
+        ]
+      },
+      {
+        "matcher": "Read|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/leader/.local/bin/graphify hook-guard read"
+          }
+        ]
+      }
+    ]
   }
 }
