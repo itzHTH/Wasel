@@ -1,8 +1,10 @@
 import 'package:driver/features/ride/data/repos/ride_repo.dart';
+import 'package:driver/features/ride/data/repos/route_repo.dart';
 import 'package:driver/features/ride/domain/use_case/accept_ride_use_case.dart';
 import 'package:driver/features/ride/domain/use_case/arrive_at_start_point_use_case.dart';
 import 'package:driver/features/ride/domain/use_case/complete_ride_use_case.dart';
 import 'package:driver/features/ride/domain/use_case/driver_cancel_ride_use_case.dart';
+import 'package:driver/features/ride/domain/use_case/get_route_use_case.dart';
 import 'package:driver/features/ride/domain/use_case/start_ride_use_case.dart';
 import 'package:driver/features/ride/domain/use_case/update_driver_location_use_case.dart';
 import 'package:driver/features/ride/domain/use_case/watch_ride_event_use_case.dart';
@@ -50,4 +52,10 @@ CompleteRideUseCase completeRideUseCase(Ref ref) {
 DriverCancelRideUseCase driverCancelRideUseCase(Ref ref) {
   final repo = ref.watch(rideRepoProvider);
   return DriverCancelRideUseCase(repo);
+}
+
+@riverpod
+GetRouteUseCase getRouteUseCase(Ref ref) {
+  final repo = ref.watch(routeRepoProvider);
+  return GetRouteUseCase(repo);
 }

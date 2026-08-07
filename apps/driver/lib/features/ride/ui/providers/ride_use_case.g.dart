@@ -342,3 +342,45 @@ final class DriverCancelRideUseCaseProvider
 
 String _$driverCancelRideUseCaseHash() =>
     r'c94c18f8b32096aa9f8210e4f75a43b0639220d5';
+
+@ProviderFor(getRouteUseCase)
+final getRouteUseCaseProvider = GetRouteUseCaseProvider._();
+
+final class GetRouteUseCaseProvider
+    extends
+        $FunctionalProvider<GetRouteUseCase, GetRouteUseCase, GetRouteUseCase>
+    with $Provider<GetRouteUseCase> {
+  GetRouteUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'getRouteUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$getRouteUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<GetRouteUseCase> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  GetRouteUseCase create(Ref ref) {
+    return getRouteUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GetRouteUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GetRouteUseCase>(value),
+    );
+  }
+}
+
+String _$getRouteUseCaseHash() => r'2daddfd4abd2594979c8926b00eee7cd4b6a471b';
