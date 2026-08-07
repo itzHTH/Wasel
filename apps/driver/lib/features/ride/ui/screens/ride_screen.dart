@@ -2,6 +2,7 @@ import 'package:driver/core/const/app_driver_consts.dart';
 import 'package:driver/features/ride/ui/providers/driver_camera_controller.dart';
 import 'package:driver/features/ride/ui/providers/driver_location_broadcaster.dart';
 import 'package:driver/features/ride/ui/providers/driver_markers_provider.dart';
+import 'package:driver/features/ride/ui/providers/driver_route_polylines_provider.dart';
 import 'package:driver/features/ride/ui/providers/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
@@ -40,6 +41,8 @@ class RideScreen extends ConsumerWidget {
           AppMap(
             mapId: AppDriverConsts.mapStyleID,
             markers: markers,
+            polylines:
+                ref.watch(driverRoutePolylinesProvider).value ?? const {},
             onCameraMoveStarted: () => ref
                 .read(driverCameraControllerProvider.notifier)
                 .onMoveStarted(),

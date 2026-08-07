@@ -5,4 +5,6 @@ class AppDriverConsts {
   static const String mapStyleID = '39dc48aedde23f1f4399a6a6';
 
   static const String carIcon = 'assets/icons/car.svg';
+
+  static const String routeAPIKeyName = 'ROUTES_API_KEY';
 }
