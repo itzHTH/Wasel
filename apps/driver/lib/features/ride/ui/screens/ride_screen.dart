@@ -1,12 +1,19 @@
 import 'package:driver/core/const/app_driver_consts.dart';
+import 'package:driver/features/ride/domain/entities/geo_point.dart';
 import 'package:driver/features/ride/ui/providers/driver_camera_controller.dart';
+import 'package:driver/features/ride/ui/providers/driver_is_camera_moving_provider.dart';
 import 'package:driver/features/ride/ui/providers/driver_location_broadcaster.dart';
 import 'package:driver/features/ride/ui/providers/driver_markers_provider.dart';
 import 'package:driver/features/ride/ui/providers/driver_route_polylines_provider.dart';
+import 'package:driver/features/ride/ui/providers/navigation_handoff_provider.dart';
 import 'package:driver/features/ride/ui/providers/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
-import 'package:driver/features/ride/ui/widgets/driver_cards_switcher.dart';
+import 'package:driver/features/ride/ui/widgets/driver_ride_cards_switcher.dart';
+import 'package:driver/features/ride/ui/widgets/driver_status_bar.dart';
+import 'package:driver/features/ride/ui/widgets/my_location_button.dart';
+import 'package:driver/features/ride/ui/widgets/navigation_chooser_sheet.dart';
+import 'package:driver/features/ride/ui/widgets/navigation_fab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/wasel_core.dart';
@@ -28,12 +35,6 @@ class RideScreen extends ConsumerWidget {
 
     final markers = ref.watch(driverMarkersProvider);
 
-    final isOnline = ref.watch(
-      rideControllerProvider.select(
-        (state) => state.stage != DriverStage.offline,
-      ),
-    );
-
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
@@ -43,29 +44,44 @@ class RideScreen extends ConsumerWidget {
             markers: markers,
             polylines:
                 ref.watch(driverRoutePolylinesProvider).value ?? const {},
-            onCameraMoveStarted: () => ref
-                .read(driverCameraControllerProvider.notifier)
-                .onMoveStarted(),
-            onCameraIdle: () =>
-                ref.read(driverCameraControllerProvider.notifier).onIdle(),
+            onCameraMoveStarted: () {
+              ref
+                  .read(driverCameraControllerProvider.notifier)
+                  .onMoveStarted();
+              ref
+                  .read(driverIsCameraMovingProvider.notifier)
+                  .setMoving(true);
+            },
+            onCameraIdle: () {
+              ref.read(driverCameraControllerProvider.notifier).onIdle();
+              ref.read(driverIsCameraMovingProvider.notifier).setMoving(false);
+            },
           ),
           const Positioned.fill(child: AppMapLoadingOverlay()),
           Positioned(
             top: AppDimens.space16,
-            child: SafeArea(
-              child: _OnlineToggleCard(
-                isOnline: isOnline,
-                onChanged: (value) => value
-                    ? ref.read(rideControllerProvider.notifier).goOnline()
-                    : ref.read(rideControllerProvider.notifier).goOffline(),
-              ),
-            ),
+            child: const SafeArea(child: DriverStatusBar()),
           ),
-          const Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: DriverCardsSwitcher(),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: AppDimens.space16,
+                    right: AppDimens.screenHPadding,
+                    bottom: AppDimens.space16,
+                  ),
+                  child: const Align(
+                    alignment: AlignmentDirectional.centerStart,
+                    child: _MapControls(),
+                  ),
+                ),
+                const DriverRideCardsSwitcher(),
+              ],
+            ),
           ),
         ],
       ),
@@ -73,38 +89,69 @@ class RideScreen extends ConsumerWidget {
   }
 }
 
-class _OnlineToggleCard extends StatelessWidget {
-  const _OnlineToggleCard({required this.isOnline, required this.onChanged});
-
-  final bool isOnline;
-  final ValueChanged<bool> onChanged;
+/// Navigation hand-off sits above the recentre button, and only while there is
+/// somewhere to navigate to.
+class _MapControls extends ConsumerWidget {
+  const _MapControls();
 
   @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: AppColor.elementBackground,
-      borderRadius: BorderRadius.circular(AppDimens.radiusPill),
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: AppDimens.space16,
-          vertical: AppDimens.space8,
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              isOnline ? 'متصل' : 'غير متصل',
-              style: AppTextStyles.font14Secondary900SemiBold,
-            ),
-            SizedBox(width: AppDimens.space8),
-            Switch(
-              value: isOnline,
-              activeTrackColor: AppColor.primary500,
-              onChanged: onChanged,
-            ),
-          ],
-        ),
-      ),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final target = ref.watch(
+      rideControllerProvider.select(_navigationTarget),
+    );
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (target != null) ...[
+          NavigationFab(onTap: () => _navigateTo(context, ref, target)),
+          SizedBox(height: AppDimens.space12),
+        ],
+        const MyLocationButton(),
+      ],
     );
   }
+}
+
+/// Where the driver is headed for the current stage, or null when the stage
+/// has no destination worth navigating to.
+GeoPoint? _navigationTarget(DriverRideState state) {
+  final ride = state.ride;
+  if (ride == null) return null;
+
+  return switch (state.stage) {
+    DriverStage.heading => ride.position,
+    DriverStage.inProgress => ride.dropPosition,
+    _ => null,
+  };
+}
+
+Future<void> _navigateTo(
+  BuildContext context,
+  WidgetRef ref,
+  GeoPoint point,
+) async {
+  final apps = await ref.read(navigationHandoffProvider.future);
+  if (!context.mounted) return;
+
+  final choice = await showModalBottomSheet<NavigationApp>(
+    context: context,
+    backgroundColor: AppColor.elementBackground,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(AppDimens.radius24),
+      ),
+    ),
+    builder: (sheetContext) => NavigationChooserSheet(
+      apps: apps,
+      onSelect: (app) => Navigator.of(sheetContext).pop(app),
+    ),
+  );
+
+  if (choice == null) return;
+
+  await ref
+      .read(navigationHandoffProvider.notifier)
+      .open(choice, point.latitude, point.longitude);
 }

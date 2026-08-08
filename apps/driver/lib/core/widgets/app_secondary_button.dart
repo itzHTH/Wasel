@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_core/wasel_core.dart';
 
-class NavigateButton extends StatelessWidget {
-  const NavigateButton({super.key, required this.onPressed});
+class AppSecondaryButton extends StatelessWidget {
+  const AppSecondaryButton({
+    super.key,
+    required this.label,
+    required this.onPressed,
+  });
 
-  final VoidCallback onPressed;
+  final String label;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      width: double.infinity,
       height: AppDimens.buttonHeight,
-      width: AppDimens.buttonHeight,
       child: OutlinedButton(
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
-          padding: EdgeInsets.zero,
-          side: const BorderSide(color: AppColor.neutral200),
+          side: const BorderSide(color: AppColor.primary500),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppDimens.radiusPill),
           ),
         ),
-        child: Icon(
-          Icons.navigation_outlined,
-          size: AppDimens.icon24,
-          color: AppColor.primary500,
-        ),
+        child: Text(label, style: AppTextStyles.font14Primary500SemiBold),
       ),
     );
   }

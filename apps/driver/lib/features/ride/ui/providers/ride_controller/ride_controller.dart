@@ -22,7 +22,9 @@ class RideConnectionException implements Exception {
 
 @riverpod
 class RideController extends _$RideController {
-  static const _offerSeconds = 30;
+  /// How long a driver has to answer an offer. Public so the countdown ring
+  /// can size its arc against the same window the timer counts down.
+  static const offerSeconds = 30;
 
   StreamSubscription<DriverRideEvent>? _events;
   ProviderSubscription<WatchRideEventUseCase>? _useCase;
@@ -87,11 +89,18 @@ class RideController extends _$RideController {
     DriverStage.completed,
   );
 
-  Future<void> cancelRide() => _perform(
-    (rideId) => ref.read(driverCancelRideUseCaseProvider).call(rideId),
-    DriverStage.online,
-    clearRide: true,
-  );
+  /// Cancelling is only possible before the ride starts. Once it is under way
+  /// the backend refuses the call from either side, so the request is not
+  /// worth making — no card offers the action past this point either.
+  Future<void> cancelRide() async {
+    if (state.stage == DriverStage.inProgress) return;
+
+    await _perform(
+      (rideId) => ref.read(driverCancelRideUseCaseProvider).call(rideId),
+      DriverStage.online,
+      clearRide: true,
+    );
+  }
 
   void dismissCompleted() => _clearOffer();
 
@@ -122,7 +131,7 @@ class RideController extends _$RideController {
         state = state.copyWith(
           stage: DriverStage.offerReceived,
           ride: offer,
-          secondsLeft: _offerSeconds,
+          secondsLeft: offerSeconds,
         );
         _startCountdown();
       case HideRideRequest():
