@@ -38,12 +38,15 @@ class DriverCameraController extends _$DriverCameraController {
     });
   }
 
-  void onMoveStarted() {
-    if (_isSelfMove()) return;
+  /// Returns whether the driver moved the camera. A false means this was the
+  /// follow-camera's own animation, which callers must not treat as a gesture.
+  bool onMoveStarted() {
+    if (_isSelfMove()) return false;
 
     _resume?.cancel();
     _resume = null;
     _paused = true;
+    return true;
   }
 
   void onIdle() {
