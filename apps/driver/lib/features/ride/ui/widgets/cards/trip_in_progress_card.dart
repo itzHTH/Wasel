@@ -1,5 +1,6 @@
 import 'package:driver/core/widgets/app_primary_button.dart';
 import 'package:driver/features/ride/domain/entities/payment_method.dart';
+import 'package:driver/features/ride/ui/providers/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/static_rider_profile_provider.dart';
 import 'package:driver/features/ride/ui/widgets/cards/card_stage_header.dart';
 import 'package:driver/features/ride/ui/widgets/expandable_ride_card.dart';
@@ -30,6 +31,7 @@ class TripInProgressCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final profile = ref.watch(staticRiderProfileProvider);
+    final isBusy = ref.watch(rideActionControllerProvider).isLoading;
     final etaMinutes = this.etaMinutes;
 
     return ExpandableRideCard(
@@ -55,7 +57,11 @@ class TripInProgressCard extends ConsumerWidget {
           TripPointsList(dropoffLabel: dropoffLabel),
         ],
       ),
-      footer: AppPrimaryButton(label: 'إنهاء الرحلة', onPressed: onComplete),
+      footer: AppPrimaryButton(
+        label: 'إنهاء الرحلة',
+        onPressed: onComplete,
+        isLoading: isBusy,
+      ),
     );
   }
 }

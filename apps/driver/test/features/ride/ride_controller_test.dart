@@ -433,6 +433,19 @@ void main() {
     expect(api.calls, [#driverCancelRide]);
   });
 
+  test('17b. a double tap fires one call', () async {
+    final api = FakeApi();
+    final container = await atStage(FakeHub(), api, DriverStage.heading);
+    final controller = container.read(rideControllerProvider.notifier);
+
+    // Both taps land before the first call resolves.
+    await Future.wait([controller.markArrived(), controller.markArrived()]);
+
+    expect(api.calls, [#arriveAtDestination]);
+    expect(container.read(rideControllerProvider).stage, DriverStage.arrived);
+    expect(container.read(rideActionControllerProvider).isLoading, isFalse);
+  });
+
   test('18b. cancelRide during inProgress makes no call', () async {
     final api = FakeApi();
     final container = await atStage(FakeHub(), api, DriverStage.inProgress);

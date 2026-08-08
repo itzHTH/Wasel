@@ -9,8 +9,21 @@ class RideActionController extends _$RideActionController {
   FutureOr<void> build() => null;
 
   Future<bool> run(Future<ApiResults<void>> Function() action) async {
+    // A second tap while the first call is still in flight is a double tap,
+    // not a new intent. Dropping it here guards every caller at once.
+    if (state.isLoading) return false;
+
     state = const AsyncValue.loading();
-    final result = await action();
+
+    final ApiResults<void> result;
+    try {
+      result = await action();
+    } catch (error, stackTrace) {
+      // Without this the state would stay loading and lock every button.
+      if (ref.mounted) state = AsyncError(error, stackTrace);
+      return false;
+    }
+
     if (!ref.mounted) return false;
 
     return result.when(

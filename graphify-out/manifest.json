@@ -655,9 +655,9 @@
     "semantic_hash": "40ccb5709404009a9d6363420bc48202"
   },
   "apps/driver/lib/features/ride/ui/providers/ride_action_controller.dart": {
-    "mtime": 1786045161.8249524,
-    "ast_hash": "9247477431780d03667d57e72348d503",
-    "semantic_hash": "9247477431780d03667d57e72348d503"
+    "mtime": 1786221786.2862227,
+    "ast_hash": "ab7f243ade6095f2bcf176c5d1f549d9",
+    "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/ride_action_controller.g.dart": {
     "mtime": 1786045285.4772916,
@@ -2490,8 +2490,8 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/cards/at_pickup_card.dart": {
-    "mtime": 1786219829.3384302,
-    "ast_hash": "93d865fddfee044b6261ff1733a2232c",
+    "mtime": 1786221818.8548133,
+    "ast_hash": "566c19f4423c54c8442f605c565b6e0a",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/cards/card_stage_header.dart": {
@@ -2500,8 +2500,8 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/cards/incoming_offer_card.dart": {
-    "mtime": 1786219606.5635078,
-    "ast_hash": "4bf5492fa3ebc03d0d31d0c48fa89b4b",
+    "mtime": 1786221796.199669,
+    "ast_hash": "45e46035d4362ab6d9b31d967513ae1c",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/cards/offline_card.dart": {
@@ -2510,8 +2510,8 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/cards/pickup_on_the_way_card.dart": {
-    "mtime": 1786219788.463869,
-    "ast_hash": "8a63c0efb8c608c69c79bc0e2e7f3328",
+    "mtime": 1786221808.9413464,
+    "ast_hash": "32c431f95fbb1fab95d47b36c2b122e7",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/cards/searching_card.dart": {
@@ -2525,8 +2525,8 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/cards/trip_in_progress_card.dart": {
-    "mtime": 1786217550.8177903,
-    "ast_hash": "f5c762da2107671c2a4bee1b1d082f75",
+    "mtime": 1786221824.4406621,
+    "ast_hash": "c5823be2e97af64059deb8160efe59b2",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/driver_ride_cards_switcher.dart": {
@@ -2565,8 +2565,8 @@
     "semantic_hash": ""
   },
   "apps/driver/test/features/ride/ride_controller_test.dart": {
-    "mtime": 1786220031.2140791,
-    "ast_hash": "6a43739fa1aa18154c840520aa46821f",
+    "mtime": 1786221831.5187635,
+    "ast_hash": "a396db462889f089490999f876e15e5f",
     "semantic_hash": ""
   }
 }

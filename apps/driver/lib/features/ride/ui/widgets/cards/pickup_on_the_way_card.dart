@@ -1,6 +1,7 @@
 import 'package:driver/core/widgets/app_primary_button.dart';
 import 'package:driver/core/widgets/app_secondary_button.dart';
 import 'package:driver/features/ride/domain/entities/payment_method.dart';
+import 'package:driver/features/ride/ui/providers/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/static_rider_profile_provider.dart';
 import 'package:driver/features/ride/ui/widgets/cards/card_stage_header.dart';
 import 'package:driver/features/ride/ui/widgets/expandable_ride_card.dart';
@@ -35,6 +36,7 @@ class PickupOnTheWayCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final profile = ref.watch(staticRiderProfileProvider);
+    final isBusy = ref.watch(rideActionControllerProvider).isLoading;
     final etaMinutes = this.etaMinutes;
 
     return ExpandableRideCard(
@@ -67,9 +69,16 @@ class PickupOnTheWayCard extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          AppPrimaryButton(label: 'وصلت', onPressed: onArrived),
+          AppPrimaryButton(
+            label: 'وصلت',
+            onPressed: onArrived,
+            isLoading: isBusy,
+          ),
           SizedBox(height: AppDimens.space12),
-          AppSecondaryButton(label: 'إلغاء الرحلة', onPressed: onCancel),
+          AppSecondaryButton(
+            label: 'إلغاء الرحلة',
+            onPressed: isBusy ? null : onCancel,
+          ),
         ],
       ),
     );

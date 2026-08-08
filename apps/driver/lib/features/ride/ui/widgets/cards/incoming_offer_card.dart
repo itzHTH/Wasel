@@ -1,6 +1,7 @@
 import 'package:driver/core/widgets/app_primary_button.dart';
 import 'package:driver/core/widgets/app_secondary_button.dart';
 import 'package:driver/features/ride/domain/entities/payment_method.dart';
+import 'package:driver/features/ride/ui/providers/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/static_rider_profile_provider.dart';
 import 'package:driver/features/ride/ui/widgets/fare_hero.dart';
 import 'package:driver/features/ride/ui/widgets/offer_countdown_ring.dart';
@@ -41,6 +42,7 @@ class IncomingOfferCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final profile = ref.watch(staticRiderProfileProvider);
+    final isBusy = ref.watch(rideActionControllerProvider).isLoading;
     final maxDetailsHeight =
         MediaQuery.sizeOf(context).height * _maxDetailsFraction;
 
@@ -91,9 +93,16 @@ class IncomingOfferCard extends ConsumerWidget {
             ),
           ),
           SizedBox(height: AppDimens.space24),
-          AppPrimaryButton(label: 'قبول الطلب', onPressed: onAccept),
+          AppPrimaryButton(
+            label: 'قبول الطلب',
+            onPressed: onAccept,
+            isLoading: isBusy,
+          ),
           SizedBox(height: AppDimens.space12),
-          AppSecondaryButton(label: 'تجاهل', onPressed: onDismiss),
+          AppSecondaryButton(
+            label: 'تجاهل',
+            onPressed: isBusy ? null : onDismiss,
+          ),
         ],
       ),
     );
