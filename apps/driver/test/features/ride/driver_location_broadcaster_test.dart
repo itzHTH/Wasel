@@ -53,14 +53,36 @@ class FakeGeolocator extends GeolocatorPlatform
     this.serviceEnabled = true,
     this.permission = LocationPermission.whileInUse,
     this.permissionAfterRequest,
+    this.lastKnown,
+    this.currentFix,
   });
 
   bool serviceEnabled;
   LocationPermission permission;
   LocationPermission? permissionAfterRequest;
+
+  /// Seed fixes. Both null means neither call can produce one, which is how
+  /// the pre-existing cases keep exercising the stream alone.
+  Position? lastKnown;
+  Position? currentFix;
+
   int requestCount = 0;
   int streamCount = 0;
+  int currentFixCount = 0;
   final positions = StreamController<Position>.broadcast();
+
+  @override
+  Future<Position?> getLastKnownPosition({
+    bool forceLocationManager = false,
+  }) async => lastKnown;
+
+  @override
+  Future<Position> getCurrentPosition({LocationSettings? locationSettings}) async {
+    currentFixCount++;
+    final fix = currentFix;
+    if (fix == null) throw const LocationServiceDisabledException();
+    return fix;
+  }
 
   @override
   Future<bool> isLocationServiceEnabled() async => serviceEnabled;
@@ -429,5 +451,63 @@ void main() {
     await settle();
 
     expect(container.read(rideActionControllerProvider).hasError, isFalse);
+  });
+
+  test('a stationary driver still reaches dispatch from the last known fix', () async {
+    final geo = FakeGeolocator(lastKnown: fixAt(33.31, 44.36));
+    GeolocatorPlatform.instance = geo;
+    final hub = FakeHub();
+    final container = harness(hub);
+
+    container.read(rideControllerProvider.notifier).goOnline();
+    await settle();
+
+    // The stream never fires: the driver has not moved the distance filter.
+    expect(hub.updates, [
+      [33.31, 44.36, ''],
+    ]);
+    expect(container.read(rideActionControllerProvider).hasError, isFalse);
+  });
+
+  test('a stationary driver with no cached fix falls back to a live one', () async {
+    final geo = FakeGeolocator(currentFix: fixAt(33.40, 44.40));
+    GeolocatorPlatform.instance = geo;
+    final hub = FakeHub();
+    final container = harness(hub);
+
+    container.read(rideControllerProvider.notifier).goOnline();
+    await settle();
+
+    expect(geo.currentFixCount, 1);
+    expect(hub.updates, [
+      [33.40, 44.40, ''],
+    ]);
+  });
+
+  test('the seed never overwrites a fix the stream already delivered', () async {
+    final geo = FakeGeolocator(lastKnown: fixAt(33.31, 44.36));
+    GeolocatorPlatform.instance = geo;
+    final hub = FakeHub();
+    final container = harness(hub);
+
+    container.read(rideControllerProvider.notifier).goOnline();
+    await settle();
+    geo.positions.add(fixAt(33.50, 44.50));
+    await settle();
+
+    expect(hub.updates.last, [33.50, 44.50, '']);
+  });
+
+  test('going offline before the seed lands broadcasts nothing', () async {
+    final geo = FakeGeolocator(lastKnown: fixAt(33.31, 44.36));
+    GeolocatorPlatform.instance = geo;
+    final hub = FakeHub();
+    final container = harness(hub);
+
+    container.read(rideControllerProvider.notifier).goOnline();
+    container.read(rideControllerProvider.notifier).goOffline();
+    await settle();
+
+    expect(hub.updates, isEmpty);
   });
 }
