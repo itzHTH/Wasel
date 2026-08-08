@@ -433,6 +433,19 @@ void main() {
     expect(api.calls, [#driverCancelRide]);
   });
 
+  test('18b. cancelRide during inProgress makes no call', () async {
+    final api = FakeApi();
+    final container = await atStage(FakeHub(), api, DriverStage.inProgress);
+
+    await container.read(rideControllerProvider.notifier).cancelRide();
+
+    final state = container.read(rideControllerProvider);
+    expect(state.stage, DriverStage.inProgress);
+    expect(state.ride?.rideId, 'ride-1');
+    expect(api.calls, isEmpty);
+    expect(container.read(rideActionControllerProvider).hasError, isFalse);
+  });
+
   test('19. a failed cancel keeps the ride', () async {
     final api = FakeApi();
     final container = await atStage(FakeHub(), api, DriverStage.heading);
