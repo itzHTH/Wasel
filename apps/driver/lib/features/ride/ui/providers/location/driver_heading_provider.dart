@@ -1,4 +1,4 @@
-import 'package:driver/features/ride/ui/providers/device_location_provider.dart';
+import 'package:driver/features/ride/ui/providers/location/device_location_provider.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

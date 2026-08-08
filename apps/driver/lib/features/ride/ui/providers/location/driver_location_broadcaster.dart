@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:driver/features/ride/data/models/update_location/update_location_arg.dart';
 import 'package:driver/features/ride/domain/use_case/update_driver_location_use_case.dart';
-import 'package:driver/features/ride/ui/providers/device_location_provider.dart';
-import 'package:driver/features/ride/ui/providers/ride_action_controller.dart';
+import 'package:driver/features/ride/ui/providers/location/device_location_provider.dart';
+import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_use_case.dart';

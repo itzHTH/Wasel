@@ -1,19 +1,19 @@
 import 'package:driver/core/const/app_driver_consts.dart';
 import 'package:driver/features/ride/domain/entities/geo_point.dart';
-import 'package:driver/features/ride/ui/providers/driver_camera_controller.dart';
-import 'package:driver/features/ride/ui/providers/driver_is_camera_moving_provider.dart';
-import 'package:driver/features/ride/ui/providers/driver_location_broadcaster.dart';
-import 'package:driver/features/ride/ui/providers/driver_markers_provider.dart';
-import 'package:driver/features/ride/ui/providers/driver_route_polylines_provider.dart';
-import 'package:driver/features/ride/ui/providers/navigation_handoff_provider.dart';
-import 'package:driver/features/ride/ui/providers/ride_action_controller.dart';
+import 'package:driver/features/ride/ui/providers/map/driver_camera_controller.dart';
+import 'package:driver/features/ride/ui/providers/map/driver_is_camera_moving_provider.dart';
+import 'package:driver/features/ride/ui/providers/location/driver_location_broadcaster.dart';
+import 'package:driver/features/ride/ui/providers/map/driver_markers_provider.dart';
+import 'package:driver/features/ride/ui/providers/map/driver_route_polylines_provider.dart';
+import 'package:driver/features/ride/ui/providers/navigation/navigation_handoff_provider.dart';
+import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:driver/features/ride/ui/widgets/driver_ride_cards_switcher.dart';
 import 'package:driver/features/ride/ui/widgets/driver_status_bar.dart';
 import 'package:driver/features/ride/ui/widgets/my_location_button.dart';
-import 'package:driver/features/ride/ui/widgets/navigation_chooser_sheet.dart';
-import 'package:driver/features/ride/ui/widgets/navigation_fab.dart';
+import 'package:driver/features/ride/ui/widgets/navigation/navigation_chooser_sheet.dart';
+import 'package:driver/features/ride/ui/widgets/navigation/navigation_fab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/wasel_core.dart';
@@ -99,9 +99,7 @@ class _MapControls extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final target = ref.watch(
-      rideControllerProvider.select(_navigationTarget),
-    );
+    final target = ref.watch(rideControllerProvider.select(_navigationTarget));
 
     return Column(
       mainAxisSize: MainAxisSize.min,
