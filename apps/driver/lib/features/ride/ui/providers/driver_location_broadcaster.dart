@@ -35,6 +35,7 @@ class LocationBroadcastException implements Exception {
 class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
   static const _heartbeat = Duration(seconds: 10);
   static const _failureLimit = 3;
+  static const _fixTimeout = Duration(seconds: 15);
 
   ProviderSubscription<AsyncValue<Position>>? _positions;
   Timer? _ticker;
@@ -81,6 +82,38 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
       if (next case AsyncData(:final value)) _onPosition(value);
     });
     _ticker = Timer.periodic(_heartbeat, (_) => unawaited(_broadcast()));
+
+    await _seedPosition(session);
+  }
+
+  /// The position stream only fires once the driver has moved the distance
+  /// filter, so a driver who goes online and stays put never produces a first
+  /// fix — leaving [_lastPosition] null and every heartbeat with nothing to
+  /// send. Seed it once so dispatch sees the driver from the moment they
+  /// connect.
+  Future<void> _seedPosition(int session) async {
+    final Position position;
+
+    try {
+      position =
+          await Geolocator.getLastKnownPosition() ??
+          await Geolocator.getCurrentPosition(
+            locationSettings: const LocationSettings(
+              accuracy: LocationAccuracy.high,
+              timeLimit: _fixTimeout,
+            ),
+          );
+    } catch (_) {
+      return;
+    }
+
+    if (session != _session || !ref.mounted) return;
+
+    // The stream may have delivered a newer fix while we were waiting.
+    if (_lastPosition != null) return;
+
+    _lastPosition = position;
+    await _broadcast();
   }
 
   void _onPosition(Position position) {
