@@ -8,11 +8,17 @@ abstract final class RideFormatters {
 
   static final _groupSeparator = RegExp(r'(\d)(?=(\d{3})+$)');
 
-  static String fare(String amount, {String currency = 'IQD'}) {
+  static String fareWithCurrency(String amount, {String currency = 'IQD'}) {
     final symbol = _currencySymbols[currency] ?? currency;
     final parsed = num.tryParse(amount);
     final formatted = parsed == null ? amount : _group(parsed);
     return '$formatted $symbol';
+  }
+
+  static String fare(String amount, {String currency = 'IQD'}) {
+    final parsed = num.tryParse(amount);
+    final formatted = parsed == null ? amount : _group(parsed);
+    return formatted;
   }
 
   static String distance(String km) {

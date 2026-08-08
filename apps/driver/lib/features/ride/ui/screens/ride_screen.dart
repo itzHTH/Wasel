@@ -1,5 +1,6 @@
 import 'package:driver/core/const/app_driver_consts.dart';
 import 'package:driver/features/ride/domain/entities/geo_point.dart';
+import 'package:driver/features/ride/ui/providers/driver_balance_provider.dart';
 import 'package:driver/features/ride/ui/providers/map/driver_camera_controller.dart';
 import 'package:driver/features/ride/ui/providers/map/driver_is_camera_moving_provider.dart';
 import 'package:driver/features/ride/ui/providers/location/driver_location_broadcaster.dart';
@@ -18,11 +19,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/wasel_core.dart';
 
-class RideScreen extends ConsumerWidget {
+class RideScreen extends ConsumerStatefulWidget {
   const RideScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<RideScreen> createState() => _RideScreenState();
+}
+
+class _RideScreenState extends ConsumerState<RideScreen> {
+  @override
+  initState() {
+    super.initState();
+    ref.read(driverBalanceControllerProvider.notifier).getDriverBalance();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     ref.listen(rideActionControllerProvider, (previous, next) {
       if (!next.hasError) return;
       ScaffoldMessenger.of(

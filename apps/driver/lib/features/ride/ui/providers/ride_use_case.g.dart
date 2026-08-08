@@ -384,3 +384,51 @@ final class GetRouteUseCaseProvider
 }
 
 String _$getRouteUseCaseHash() => r'2daddfd4abd2594979c8926b00eee7cd4b6a471b';
+
+@ProviderFor(getDriverBalanceUseCase)
+final getDriverBalanceUseCaseProvider = GetDriverBalanceUseCaseProvider._();
+
+final class GetDriverBalanceUseCaseProvider
+    extends
+        $FunctionalProvider<
+          GetDriverBalanceUseCase,
+          GetDriverBalanceUseCase,
+          GetDriverBalanceUseCase
+        >
+    with $Provider<GetDriverBalanceUseCase> {
+  GetDriverBalanceUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'getDriverBalanceUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$getDriverBalanceUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<GetDriverBalanceUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  GetDriverBalanceUseCase create(Ref ref) {
+    return getDriverBalanceUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GetDriverBalanceUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GetDriverBalanceUseCase>(value),
+    );
+  }
+}
+
+String _$getDriverBalanceUseCaseHash() =>
+    r'f154f545193876ba4fa5c855581006ec8da08d94';

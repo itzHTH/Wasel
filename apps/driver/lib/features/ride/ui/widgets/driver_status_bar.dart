@@ -1,4 +1,4 @@
-import 'package:driver/features/ride/ui/providers/driver_earnings_overview_provider.dart';
+import 'package:driver/features/ride/ui/providers/driver_balance_provider.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:driver/features/ride/ui/widgets/driver_earnings_chip.dart';
@@ -16,7 +16,17 @@ class DriverStatusBar extends ConsumerWidget {
     final stage = ref.watch(
       rideControllerProvider.select((state) => state.stage),
     );
-    final earnings = ref.watch(driverEarningsOverviewProvider);
+
+    final earnings = ref.watch(driverBalanceControllerProvider);
+
+    ref.listen(rideControllerProvider.select((state) => state.stage), (
+      previous,
+      next,
+    ) {
+      if (next == DriverStage.completed) {
+        ref.read(driverBalanceControllerProvider.notifier).getDriverBalance();
+      }
+    });
 
     return Material(
       color: AppColor.elementBackground,
@@ -37,11 +47,8 @@ class DriverStatusBar extends ConsumerWidget {
               style: AppTextStyles.font14Secondary900SemiBold,
             ),
             SizedBox(width: AppDimens.space12),
-            DriverEarningsChip(
-              total: earnings.todayTotal,
-              currency: earnings.currency,
-              isPlaceholder: earnings.isPlaceholder,
-            ),
+
+            DriverEarningsChip(total: earnings, currency: "د.ع"),
           ],
         ),
       ),
