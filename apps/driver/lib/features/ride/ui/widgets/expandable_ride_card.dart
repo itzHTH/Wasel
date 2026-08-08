@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:driver/features/ride/ui/providers/driver_is_camera_moving_provider.dart';
+import 'package:driver/features/ride/ui/providers/map/driver_is_camera_moving_provider.dart';
 import 'package:driver/features/ride/ui/widgets/ride_card_shell.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -1,4 +1,4 @@
-import 'package:driver/features/ride/ui/providers/navigation_handoff_provider.dart';
+import 'package:driver/features/ride/ui/providers/navigation/navigation_handoff_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:wasel_core/wasel_core.dart';
 

@@ -1,9 +1,9 @@
 import 'dart:ui' show Offset;
 
 import 'package:driver/core/const/app_driver_consts.dart';
-import 'package:driver/features/ride/ui/providers/device_location_provider.dart';
-import 'package:driver/features/ride/ui/providers/driver_heading_provider.dart';
-import 'package:driver/features/ride/ui/providers/map_marker_icon_provider.dart';
+import 'package:driver/features/ride/ui/providers/location/device_location_provider.dart';
+import 'package:driver/features/ride/ui/providers/location/driver_heading_provider.dart';
+import 'package:driver/features/ride/ui/providers/map/map_marker_icon_provider.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

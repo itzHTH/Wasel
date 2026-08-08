@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:driver/features/ride/data/models/ride_events/hub_ride_events.dart';
 import 'package:driver/features/ride/data/services/ride_api_service.dart';
 import 'package:driver/features/ride/data/services/ride_hub_data_source.dart';
-import 'package:driver/features/ride/ui/providers/ride_action_controller.dart';
+import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:flutter/services.dart';
