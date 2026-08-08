@@ -610,9 +610,9 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/driver_location_broadcaster.g.dart": {
-    "mtime": 1786052611.9258919,
-    "ast_hash": "d0d357d66c89cebb054548073a552226",
-    "semantic_hash": "d0d357d66c89cebb054548073a552226"
+    "mtime": 1786220612.3715599,
+    "ast_hash": "08f06faab508d3b4ed7243017e3502cd",
+    "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/driver_markers_provider.dart": {
     "mtime": 1786047570.0974953,
@@ -680,9 +680,9 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/ride_controller/ride_controller.g.dart": {
-    "mtime": 1786052611.9263902,
-    "ast_hash": "c913920f90d8be3f35622304309e26a3",
-    "semantic_hash": "c913920f90d8be3f35622304309e26a3"
+    "mtime": 1786220612.3721173,
+    "ast_hash": "6ec766bda918bf703ca5bf6be40261ae",
+    "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/ride_use_case.dart": {
     "mtime": 1786052571.5906296,
@@ -2154,16 +2154,6 @@
     "ast_hash": "62da64a235bbbbb3e89fbad8fb758693",
     "semantic_hash": ""
   },
-  "apps/driver/lib/features/ride/ui/providers/driver_point_label_provider.dart": {
-    "mtime": 1786143286.2116165,
-    "ast_hash": "7da0da5b9e00a6e2266caa45a2f03353",
-    "semantic_hash": ""
-  },
-  "apps/driver/lib/features/ride/ui/providers/driver_point_label_provider.g.dart": {
-    "mtime": 1786143358.1132383,
-    "ast_hash": "2a2af45671cd4e505a7a36aeebdacd35",
-    "semantic_hash": ""
-  },
   "apps/driver/lib/features/ride/ui/providers/static_rider_profile_provider.dart": {
     "mtime": 1786143557.6896377,
     "ast_hash": "7bce85bdbf70206d38bb3b20491f48df",
@@ -2207,11 +2197,6 @@
   "apps/driver/lib/features/ride/ui/widgets/payment_method_chip.dart": {
     "mtime": 1786143429.6827703,
     "ast_hash": "e2c9089a2d5d837cfca7faef7677bcb5",
-    "semantic_hash": ""
-  },
-  "apps/driver/lib/features/ride/ui/widgets/point_label_row.dart": {
-    "mtime": 1786143334.502362,
-    "ast_hash": "407f54114731ec41d7dc0d74ef23c071",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/ride_card_shell.dart": {
