@@ -45,12 +45,15 @@ class RideScreen extends ConsumerWidget {
             polylines:
                 ref.watch(driverRoutePolylinesProvider).value ?? const {},
             onCameraMoveStarted: () {
-              ref
+              final movedByDriver = ref
                   .read(driverCameraControllerProvider.notifier)
                   .onMoveStarted();
-              ref
-                  .read(driverIsCameraMovingProvider.notifier)
-                  .setMoving(true);
+
+              // Following the driver repaints the camera constantly; only a
+              // real gesture should collapse an expanded card.
+              if (!movedByDriver) return;
+
+              ref.read(driverIsCameraMovingProvider.notifier).setMoving(true);
             },
             onCameraIdle: () {
               ref.read(driverCameraControllerProvider.notifier).onIdle();

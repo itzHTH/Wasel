@@ -585,9 +585,9 @@
     "semantic_hash": "020e95f2b6bb25fff5142d2efca0654a"
   },
   "apps/driver/lib/features/ride/ui/providers/driver_camera_controller.dart": {
-    "mtime": 1786047489.9348552,
-    "ast_hash": "fcc49fd970aba68d5aeae63b6af6db3c",
-    "semantic_hash": "fcc49fd970aba68d5aeae63b6af6db3c"
+    "mtime": 1786221384.5584857,
+    "ast_hash": "8f9351300bd26bd9221ca8ed9be723fa",
+    "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/driver_camera_controller.g.dart": {
     "mtime": 1786047541.1481493,
@@ -695,8 +695,8 @@
     "semantic_hash": "0b54d32f1725934592799fbdb015294d"
   },
   "apps/driver/lib/features/ride/ui/screens/ride_screen.dart": {
-    "mtime": 1786217672.1294644,
-    "ast_hash": "48ebea4ab24e3f2b6318dfa2a3e47129",
+    "mtime": 1786221387.6905694,
+    "ast_hash": "d7f107aad2b400ed5f963d912b6325e9",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/navigation_chooser_sheet.dart": {
