@@ -7,31 +7,25 @@ class DriverEarningsChip extends StatelessWidget {
     super.key,
     required this.total,
     this.currency = 'IQD',
-    this.isPlaceholder = false,
   });
 
   final num total;
   final String currency;
 
-  /// Dims the chip while the earnings endpoint does not exist, so the number
-  /// is not read as a real balance.
-  final bool isPlaceholder;
-
   @override
   Widget build(BuildContext context) {
-    final foreground = isPlaceholder
-        ? AppColor.neutral400
-        : AppColor.alertSuccess500;
+    final isPositive = total > 0;
 
+    final foreground = isPositive
+        ? AppColor.alertSuccess500
+        : AppColor.alertError500;
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: AppDimens.space12,
         vertical: AppDimens.space4,
       ),
       decoration: BoxDecoration(
-        color: isPlaceholder
-            ? AppColor.neutral100
-            : AppColor.alertSuccess100,
+        color: isPositive ? AppColor.alertSuccess100 : AppColor.alertError100,
         borderRadius: BorderRadius.circular(AppDimens.radiusPill),
       ),
       child: Row(
@@ -44,7 +38,15 @@ class DriverEarningsChip extends StatelessWidget {
           ),
           SizedBox(width: AppDimens.space4),
           Text(
-            RideFormatters.fare(total.toString(), currency: currency),
+            RideFormatters.fare(total.toString()),
+            textDirection: TextDirection.ltr,
+            style: AppTextStyles.font14Primary500SemiBold.copyWith(
+              color: foreground,
+            ),
+          ),
+          SizedBox(width: AppDimens.space4),
+          Text(
+            currency,
             style: AppTextStyles.font14Primary500SemiBold.copyWith(
               color: foreground,
             ),

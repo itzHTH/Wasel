@@ -7,4 +7,6 @@ class DriverApiConsts {
   static const String startRide = "/api/v1/Rides/{id}/start";
   static const String completeRide = "/api/v1/Rides/{id}/complete";
   static const String driverCancelRide = "/api/v1/Rides/{id}/driver-cancel";
+
+  static const String getDriverWalletBalance = "/api/v1/wallet/driver/balance";
 }

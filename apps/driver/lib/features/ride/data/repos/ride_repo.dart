@@ -4,6 +4,7 @@ import 'package:driver/features/ride/data/models/ride_events/hub_ride_events.dar
 import 'package:driver/features/ride/data/models/update_location/update_location_arg.dart';
 import 'package:driver/features/ride/data/services/ride_api_service.dart';
 import 'package:driver/features/ride/data/services/ride_hub_data_source.dart';
+import 'package:driver/features/ride/domain/entities/driver_balance.dart';
 import 'package:driver/features/ride/domain/entities/driver_ride_events.dart';
 import 'package:driver/features/ride/domain/repos/ride_repo.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -94,6 +95,16 @@ class RideRepo implements BaseRideRepo {
   @override
   Future<ApiResults<void>> startRide(String rideId) async {
     return _run(() => _rideApiService.startRide(rideId));
+  }
+
+  @override
+  Future<ApiResults<DriverBalance>> getDriverWalletBalance() async {
+    try {
+      final response = await _rideApiService.getDriverWalletBalance();
+      return ApiResults.success(response.toEntity());
+    } catch (e) {
+      return ApiResults.failure(ErrorHandler.handle(e));
+    }
   }
 
   Future<ApiResults<void>> _run(Future<void> Function() action) async {
