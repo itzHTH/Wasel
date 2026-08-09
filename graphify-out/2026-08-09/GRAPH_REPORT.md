@@ -1,16 +1,16 @@
-# Graph Report - wasel  (2026-08-08)
+# Graph Report - wasel  (2026-08-09)
 
 ## Corpus Check
-- 450 files · ~101,867 words
+- 450 files · ~101,865 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 3862 nodes · 5524 edges · 360 communities (221 shown, 139 thin omitted)
+- 3862 nodes · 5524 edges · 352 communities (212 shown, 140 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 40 edges (avg confidence: 0.86)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b1a1ada4`
+- Built from commit: `25285f17`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -29,7 +29,7 @@
 - upload_card.dart
 - ride_event.dart
 - error_handler.dart
-- driver/lib/features/auth/ui/widgets/register/email_page/register_email_page.dart
+- vehicle_step.dart
 - package:dio/dio.dart
 - search_radius_circles_provider.dart
 - wasel_core.dart
@@ -64,7 +64,7 @@
 - rider/lib/features/splash/ui/screens/splash_screen.dart
 - @POST
 - camera_capture_screen.dart
-- camera_overlay_painter.dart
+- offer_countdown_ring.dart
 - package:wasel_core/wasel_core.dart
 - rider/lib/features/ride/ui/widgets/expandable_ride_card.dart
 - driver_ride_cards_switcher.dart
@@ -76,14 +76,14 @@
 - address_component.dart
 - driver_route_polylines_test.dart
 - ride_controller_test.dart
-- providers/map_marker_icon_provider.dart
+- driver/lib/features/ride/ui/providers/map/map_marker_icon_provider.dart
 - driver_ride_state.dart
 - driver_map_test.dart
 - map/map_marker_icon_provider.dart
-- rider/lib/features/auth/ui/providers/register/register_provider.dart
+- driver/lib/features/auth/ui/providers/register/register_provider.dart
 - rider/lib/features/ride/ui/providers/ride_controller/ride_controller.dart
 - wizard_pages.dart
-- package:wasel_core/networking/api_results.dart
+- package:riverpod_annotation/riverpod_annotation.dart
 - rider/lib/features/ride/ui/screens/ride_screen.dart
 - search_radius_circles_provider_test.dart
 - verify_api_service.dart
@@ -102,7 +102,7 @@
 - static const
 - ride_draft_provider.dart
 - ride_camera_controller.dart
-- app_dialog.dart
+- driver_is_camera_moving_provider.dart
 - api_constants.dart
 - driver/lib/features/auth/ui/widgets/register/otp_page/otp_resend_section.dart
 - State
@@ -110,8 +110,8 @@
 - ride_completed_screen.dart
 - ride_map.dart
 - dio_factory.dart
-- driver/lib/features/auth/ui/screens/login_screen.dart
-- driver/lib/features/auth/ui/providers/register/register_provider.dart
+- capture_source_sheet.dart
+- package:wasel_core/networking/api_results.dart
 - domain/repos/ride_repo.dart
 - searching_card.dart
 - app_local_cache.dart
@@ -139,7 +139,7 @@
 - driver/lib/features/ride/data/services/ride_api_service.dart
 - submit_profile_provider.dart
 - searching_radar.dart
-- package:riverpod_annotation/riverpod_annotation.dart
+- ride_action_controller.dart
 - package:flutter/foundation.dart
 - package:wasel_core/flavors/flavors_config.dart
 - static const String
@@ -159,7 +159,7 @@
 - driver_profile_submission.dart
 - String?
 - ride_price_provider.dart
-- at_pickup_card.dart
+- dart:io
 - rider/lib/features/ride/data/services/route_remote_service.dart
 - driver_profile.dart
 - rider/lib/features/ride/data/services/ride_api_service.dart
@@ -177,19 +177,19 @@
 - driver_info_row.dart
 - ride_draft_card.dart
 - flavors_config.dart
-- capture_source_sheet.dart
+- app_dialog.dart
 - driver/lib/core/routing/app_routes_name.dart
 - staticRiderProfileProvider
 - ride_trip_summary.dart
 - driver/lib/main_common.dart
 - logger_observer.dart
 - rider/lib/core/routing/app_routes_name.dart
-- trip_in_progress_card.dart
+- at_pickup_card.dart
 - geocoding_repo.dart
 - searching_for_driver_card.dart
-- offer_countdown_ring.dart
+- build
 - const/ride_hub_methods.dart
-- request_ride_action.dart
+- package:wasal/features/ride/ui/providers/request_ride/request_ride_provider.dart
 - verification_status.dart
 - RideApiService
 - ride_in_progress_card.dart
@@ -197,12 +197,12 @@
 - payment_method_chip.dart
 - submit_driver_profile_response.dart
 - navigation_extension.dart
-- app_loading.dart
+- build
 - app_driver_consts.dart
 - uploading_screen.dart
 - api_rider_endpoints.dart
-- driver_is_camera_moving_provider.dart
-- wizard_header.dart
+- build
+- build
 - GeneratedPluginRegistrant.java
 - trip_completed_card.dart
 - request_ride_provider.dart
@@ -215,7 +215,7 @@
 - rider/lib/main_common.dart
 - rider_profile.dart
 - Real-time Driver Tracking via SignalR
-- ConsumerStatefulWidget
+- build
 - MainActivity
 - package:freezed_annotation/freezed_annotation.dart
 - MainActivity
@@ -248,10 +248,6 @@
 - driverCancelRide
 - startRide
 - cancelled
-- build
-- build
-- build
-- build
 - build
 - build
 - build
@@ -356,16 +352,12 @@
 - build
 - build
 - return
-- fare_hero.dart
 - @GET
 - IRideHubDatasource
-- card_stage_header.dart
 - getVerificationStatusUseCase
-- CustomPainter
 - PaymentMethod
 - driver/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md
 - rider/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md
-- build
 - driverIsCameraMovingProvider
 
 ## God Nodes (most connected - your core abstractions)
@@ -402,35 +394,35 @@
 - **Rider Map Overlay Marker Asset Set (vehicle + origin/destination pins)** — apps_rider_assets_icons_car_car_icon, apps_rider_assets_icons_pin_1_pin_1, apps_rider_assets_icons_pin_2_pin_2, apps_rider_assets_icons_pin_1_lollipop_map_marker_pattern [INFERRED 0.85]
 - **Assets Applying the Wasel Orange Brand Accent** — apps_rider_assets_icons_wasel_icon_wasel_icon, apps_rider_assets_icons_pin_1_pin_1, apps_rider_assets_icons_wasel_icon_brand_accent_fd683d, apps_rider_assets_icons_car_car_icon [INFERRED 0.75]
 
-## Communities (360 total, 139 thin omitted)
+## Communities (352 total, 140 thin omitted)
 
 ### Community 0 - "StatelessWidget"
 Cohesion: 0.06
-Nodes (34): _Avatar, build, _CallButton, onCall, _PlaceholderTag, profile, _Rating, RiderInfoRow (+26 more)
+Nodes (36): _Avatar, build, _CallButton, onCall, _PlaceholderTag, profile, _Rating, RiderInfoRow (+28 more)
 
 ### Community 1 - "camera_capture_view.dart"
 Cohesion: 0.05
-Nodes (39): aspectRatio, build, CameraCaptureView, controller, cutoutShape, guidanceText, isCapturing, onCapture (+31 more)
+Nodes (38): aspectRatio, build, CameraCaptureView, controller, cutoutShape, guidanceText, isCapturing, onCapture (+30 more)
 
 ### Community 2 - "@riverpod"
 Cohesion: 0.05
-Nodes (59): _, @riverpod, loginProvider, Login, logoutProvider, Logout, registerProvider, Register (+51 more)
+Nodes (61): _, @riverpod, loginProvider, Login, logoutProvider, Logout, registerProvider, Register (+53 more)
 
 ### Community 3 - "ride_use_case.dart"
 Cohesion: 0.04
 Nodes (46): acceptRideUseCase, arriveAtStartPointUseCase, completeRideUseCase, acceptRideUseCaseProvider, arriveAtStartPointUseCaseProvider, completeRideUseCaseProvider, driverCancelRideUseCaseProvider, getRouteUseCaseProvider (+38 more)
 
 ### Community 4 - "package:wasel_core/theme/app_dimens.dart"
-Cohesion: 0.06
-Nodes (38): AuthHeader, build, title, AuthPrimaryButton, build, isLoading, label, onPressed (+30 more)
+Cohesion: 0.05
+Nodes (41): AuthHeader, build, title, AuthPrimaryButton, build, isLoading, label, onPressed (+33 more)
 
 ### Community 5 - "driver app package (Wasel driver, built on wasel_core / wasel_auth)"
 Cohesion: 0.07
 Nodes (41): Android Firebase App Distribution Workflow, Build and Distribute App step (bundle exec fastlane android firebase_distribution), Decode Keystore & key.properties Injection (CI signing), CI Toolchain Pins (Flutter 3.44.0, Java 17 temurin, Ruby 3.2.3), Workspace lint rules: prefer_const_constructors / prefer_const_declarations, driver app analyzer config (flutter_lints defaults, no extra rules), driver app package (Wasel driver, built on wasel_core / wasel_auth), Navigation handoff to installed map apps (url_launcher) (+33 more)
 
 ### Community 6 - "rider/lib/features/auth/ui/widgets/register/form_page/register_form_page.dart"
-Cohesion: 0.06
-Nodes (29): build, emailCtrl, onBack, onSubmit, otpCtrl, RegisterOtpPage, build, confirmPassCtrl (+21 more)
+Cohesion: 0.07
+Nodes (27): build, emailCtrl, formKey, onSubmit, RegisterEmailPage, build, confirmPassCtrl, firstNameCtrl (+19 more)
 
 ### Community 7 - "hub_ride_events.dart"
 Cohesion: 0.06
@@ -441,28 +433,28 @@ Cohesion: 0.05
 Nodes (45): HideRideRequest, ProfileReviewed, ReceiveRideRequest, HubRideEventX, accepted, cancelled, completed, driverArrived (+37 more)
 
 ### Community 9 - "package:flutter/material.dart"
-Cohesion: 0.05
-Nodes (41): AppPrimaryButton, build, isLoading, label, onPressed, AppSecondaryButton, build, label (+33 more)
+Cohesion: 0.04
+Nodes (44): AppPrimaryButton, build, isLoading, label, onPressed, AppSecondaryButton, build, label (+36 more)
 
 ### Community 10 - "driver/lib/features/auth/ui/widgets/register/form_page/register_form_page.dart"
-Cohesion: 0.14
-Nodes (13): addressCtrl, build, cityCtrl, confirmPassCtrl, firstNameCtrl, formKey, lastNameCtrl, onBack (+5 more)
+Cohesion: 0.08
+Nodes (23): addressCtrl, build, cityCtrl, confirmPassCtrl, firstNameCtrl, formKey, lastNameCtrl, onBack (+15 more)
 
 ### Community 11 - "upload_card.dart"
 Cohesion: 0.07
 Nodes (28): build, ManualCaptureButton, onPressed, build, _CapturePreviewSheet, file, showCapturePreviewSheet, build (+20 more)
 
 ### Community 12 - "ride_event.dart"
-Cohesion: 0.07
-Nodes (32): accepted, cancelled, completed, driverArrived, driverMoved, started, DriverArrived, DriverMoved (+24 more)
+Cohesion: 0.08
+Nodes (30): accepted, cancelled, completed, driverArrived, driverMoved, started, DriverArrived, DriverMoved (+22 more)
 
 ### Community 13 - "error_handler.dart"
 Cohesion: 0.07
 Nodes (27): package:wasel_core/networking/errors/api_error_model.dart, package:wasel_core/networking/errors/api_errors.dart, apiErrorModel, ApiInternalStatus, apiLogicError, badRequest, cacheError, cancel (+19 more)
 
-### Community 14 - "driver/lib/features/auth/ui/widgets/register/email_page/register_email_page.dart"
+### Community 14 - "vehicle_step.dart"
 Cohesion: 0.05
-Nodes (44): build, emailCtrl, formKey, LoginForm, passCtrl, build, emailCtrl, formKey (+36 more)
+Nodes (50): build, emailCtrl, formKey, LoginForm, passCtrl, build, emailCtrl, formKey (+42 more)
 
 ### Community 15 - "package:dio/dio.dart"
 Cohesion: 0.07
@@ -478,7 +470,7 @@ Nodes (34): const/app_constants.dart, extensions/navigation_extension.dart, flav
 
 ### Community 18 - "driver_ride_events.dart"
 Cohesion: 0.06
-Nodes (33): cancelled, hideRideRequest, profileReviewed, receiveRideRequest, DriverRideEvent, HideRideRequest, ProfileReviewed, ReceiveRideRequest (+25 more)
+Nodes (35): cancelled, hideRideRequest, profileReviewed, receiveRideRequest, DriverRideEvent, HideRideRequest, ProfileReviewed, ReceiveRideRequest (+27 more)
 
 ### Community 19 - "driver_location_broadcaster.dart"
 Cohesion: 0.07
@@ -600,13 +592,13 @@ Nodes (15): @MultiPart, @POST, submitDriverProfile, acceptRide, arriveAtDestinat
 Cohesion: 0.08
 Nodes (23): aspectRatio, build, _capture, _controller, createState, cutoutShape, didChangeAppLifecycleState, dispose (+15 more)
 
-### Community 49 - "camera_overlay_painter.dart"
-Cohesion: 0.18
-Nodes (10): aspectRatio, borderColor, _cutoutPath, _cutoutRect, CutoutShape, paint, shape, shouldRepaint (+2 more)
+### Community 49 - "offer_countdown_ring.dart"
+Cohesion: 0.05
+Nodes (40): aspectRatio, borderColor, CameraOverlayPainter, _cutoutPath, _cutoutRect, CutoutShape, paint, shape (+32 more)
 
 ### Community 50 - "package:wasel_core/wasel_core.dart"
-Cohesion: 0.09
-Nodes (21): build, CustomPinMap, build, LocationPermissionBanner, build, MyLocationButton, build, RideBackButton (+13 more)
+Cohesion: 0.10
+Nodes (19): build, CustomPinMap, build, LocationPermissionBanner, build, RideBackButton, build, RideCardTitle (+11 more)
 
 ### Community 51 - "rider/lib/features/ride/ui/widgets/expandable_ride_card.dart"
 Cohesion: 0.10
@@ -648,7 +640,7 @@ Nodes (24): binding, checkPermission, connect, container, controllers, disconnec
 Cohesion: 0.08
 Nodes (23): acceptOffer, atStage, binding, calls, connect, connectCount, container, controllers (+15 more)
 
-### Community 61 - "providers/map_marker_icon_provider.dart"
+### Community 61 - "driver/lib/features/ride/ui/providers/map/map_marker_icon_provider.dart"
 Cohesion: 0.10
 Nodes (19): bytes, mapMarkerIconProvider, dpr, image, info, logicalSize, mapMarkerIcon, picture (+11 more)
 
@@ -664,9 +656,9 @@ Nodes (21): binding, checkPermission, connect, container, controllers, disconnec
 Cohesion: 0.10
 Nodes (19): bytes, mapMarkerIconProvider, dpr, image, info, logicalSize, mapMarkerIcon, picture (+11 more)
 
-### Community 65 - "rider/lib/features/auth/ui/providers/register/register_provider.dart"
-Cohesion: 0.09
-Nodes (20): completeRegistration, build, initiateRegistration, verifyOtp, class VerifyOtpUseCase, package:wasel_auth/data/models/register/verify_otp/request/verify_otp_request.dart, package:wasel_auth/domain/entities/verify_otp.dart, fromJson (+12 more)
+### Community 65 - "driver/lib/features/auth/ui/providers/register/register_provider.dart"
+Cohesion: 0.08
+Nodes (21): completeRegistration, build, initiateRegistration, verifyOtp, package:wasel_auth/domain/entities/initiate_registeration.dart, package:wasel_auth/domain/entities/verify_otp.dart, fromJson, InitiateRegisterationResponse (+13 more)
 
 ### Community 66 - "rider/lib/features/ride/ui/providers/ride_controller/ride_controller.dart"
 Cohesion: 0.18
@@ -676,9 +668,9 @@ Nodes (10): build, _onEvent, _rideHub, StreamSubscription, _, create, debugGetCr
 Cohesion: 0.11
 Nodes (18): build, licenseBack, licenseFront, modelCtrl, onPageChanged, pageController, selfie, vehicleFormKey (+10 more)
 
-### Community 68 - "package:wasel_core/networking/api_results.dart"
-Cohesion: 0.07
-Nodes (27): build, build, execute, BaseRouteRepo, getRoute, build, package:wasel_auth/data/models/login/request/login_request.dart, package:wasel_auth/domain/entities/login.dart (+19 more)
+### Community 68 - "package:riverpod_annotation/riverpod_annotation.dart"
+Cohesion: 0.05
+Nodes (39): build, build, execute, build, build, execute, package:riverpod_annotation/riverpod_annotation.dart, package:wasel_auth/data/models/login/request/login_request.dart (+31 more)
 
 ### Community 69 - "rider/lib/features/ride/ui/screens/ride_screen.dart"
 Cohesion: 0.17
@@ -752,9 +744,9 @@ Nodes (15): confirmCurrentPoint, _confirmDebounce, build, goBackOneStep, _isDoub
 Cohesion: 0.13
 Nodes (14): _boundsOf, _boundsPadding, build, _framed, _frameOn, _frameOnPickup, _searchFramed, _soloZoom (+6 more)
 
-### Community 87 - "app_dialog.dart"
-Cohesion: 0.22
-Nodes (8): AppDialog, build, cancelLabel, confirmLabel, icon, message, show, title
+### Community 87 - "driver_is_camera_moving_provider.dart"
+Cohesion: 0.18
+Nodes (10): build, driverIsCameraMovingProvider, DriverIsCameraMoving, setMoving, _, create, debugGetCreateSourceHash, DriverIsCameraMovingProvider (+2 more)
 
 ### Community 88 - "api_constants.dart"
 Cohesion: 0.12
@@ -769,28 +761,28 @@ Cohesion: 0.27
 Nodes (10): _OtpCountdownTimerState, _OtpResendSectionState, _SplashScreenState, _OtpCountdownTimerState, _OtpResendSectionState, _SplashScreenState, OtpCountdownTimer, OtpResendSection (+2 more)
 
 ### Community 91 - "navigation_handoff_provider.dart"
-Cohesion: 0.10
-Nodes (18): build, _isInstalled, NavigationApp, open, _urlFor, dart:io, package:flutter_image_compress/flutter_image_compress.dart, package:url_launcher/url_launcher.dart (+10 more)
+Cohesion: 0.12
+Nodes (14): build, _isInstalled, NavigationApp, open, _urlFor, package:url_launcher/url_launcher.dart, AppUrlLauncher, launch (+6 more)
 
 ### Community 92 - "ride_completed_screen.dart"
 Cohesion: 0.20
 Nodes (9): build, dropoffLabel, fare, onDone, onRatingChanged, pickupLabel, RideCompletedScreen, _summaryCard (+1 more)
 
 ### Community 93 - "ride_map.dart"
-Cohesion: 0.17
-Nodes (11): build, mapPadding, onCameraIdle, onCameraMove, onCameraMoveStarted, RideMap, EdgeInsets, package:wasal/features/ride/ui/providers/ride_draft/ride_point_markers_provider.dart (+3 more)
+Cohesion: 0.13
+Nodes (13): build, MyLocationButton, build, mapPadding, onCameraIdle, onCameraMove, onCameraMoveStarted, RideMap (+5 more)
 
 ### Community 94 - "dio_factory.dart"
 Cohesion: 0.14
 Nodes (13): ../api_constants.dart, package:pretty_dio_logger/pretty_dio_logger.dart, _addInterceptors, dioFactoryProvider, dio, DioFactory, _init, _instance (+5 more)
 
-### Community 95 - "driver/lib/features/auth/ui/screens/login_screen.dart"
-Cohesion: 0.14
-Nodes (13): build, createState, dispose, _emailCtrl, _formKey, _handleSubmit, _loginListener, _passCtrl (+5 more)
+### Community 95 - "capture_source_sheet.dart"
+Cohesion: 0.22
+Nodes (8): build, CaptureSource, _CaptureSourceSheet, icon, label, onTap, showCaptureSourceSheet, _SourceTile
 
-### Community 96 - "driver/lib/features/auth/ui/providers/register/register_provider.dart"
+### Community 96 - "package:wasel_core/networking/api_results.dart"
 Cohesion: 0.06
-Nodes (37): completeRegistration, build, initiateRegistration, verifyOtp, class CompleteRegistrationUseCase, class InitiateRegisterationUseCase, package:wasel_auth/data/models/register/complete_registration/request/complete_registration_request.dart, package:wasel_auth/data/models/register/initiate_registeration/request/initiate_registeration_request.dart (+29 more)
+Nodes (39): BaseRouteRepo, getRoute, completeRegistration, build, initiateRegistration, verifyOtp, class CompleteRegistrationUseCase, class InitiateRegisterationUseCase (+31 more)
 
 ### Community 97 - "domain/repos/ride_repo.dart"
 Cohesion: 0.14
@@ -825,8 +817,8 @@ Cohesion: 0.15
 Nodes (12): package:wasel_core/widgets/app_text_form_field.dart, AppLabeledFormField, build, controller, hintText, keyboardType, label, obscureText (+4 more)
 
 ### Community 105 - "get_verification_status_use_case.dart"
-Cohesion: 0.40
-Nodes (4): execute, GetVerificationStatusUseCase, _repo, package:driver/features/driver_verification/domain/repo/base_verify_repo.dart
+Cohesion: 0.17
+Nodes (11): verifyRepoProvider, VerifyRepo, BaseVerifyRepo, getVerificationStatus, submitProfile, execute, GetVerificationStatusUseCase, _repo (+3 more)
 
 ### Community 106 - "driver_route_polylines_provider.dart"
 Cohesion: 0.13
@@ -846,7 +838,7 @@ Nodes (10): build, child, padding, RideCardShell, build, child, padding, RideCar
 
 ### Community 110 - "login_response.dart"
 Cohesion: 0.06
-Nodes (30): apps, build, _labelFor, NavigationChooserSheet, onSelect, DateTime, List, package:driver/features/ride/ui/providers/navigation_handoff_provider.dart (+22 more)
+Nodes (30): apps, build, _labelFor, NavigationChooserSheet, onSelect, DateTime, List, package:driver/features/ride/ui/providers/navigation/navigation_handoff_provider.dart (+22 more)
 
 ### Community 111 - "auth_interceptor.dart"
 Cohesion: 0.15
@@ -854,15 +846,15 @@ Nodes (12): Dio, Interceptor, AuthInterceptor, _forceLogout, _isLoggingOut, onEr
 
 ### Community 112 - "driver_markers_provider.dart"
 Cohesion: 0.15
-Nodes (12): driverMarkersProvider, driverMarkers, icon, isOnline, position, dart:ui, package:driver/features/ride/ui/providers/driver_heading_provider.dart, package:driver/features/ride/ui/providers/map_marker_icon_provider.dart (+4 more)
+Nodes (12): driverMarkersProvider, driverMarkers, icon, isOnline, position, dart:ui, package:driver/features/ride/ui/providers/location/driver_heading_provider.dart, package:driver/features/ride/ui/providers/map/map_marker_icon_provider.dart (+4 more)
 
 ### Community 113 - "submit_profile_state.dart"
 Cohesion: 0.21
 Nodes (10): message, SubmitDriverProfile, succeeded, message, progress, result, SubmitFailure, SubmitProfileState (+2 more)
 
 ### Community 114 - "ConsumerWidget"
-Cohesion: 0.14
-Nodes (13): _MapControls, RideScreen, AtPickupCard, IncomingOfferCard, PickupOnTheWayCard, TripInProgressCard, DriverRideCardsSwitcher, RideTrackingCards (+5 more)
+Cohesion: 0.15
+Nodes (12): _MapControls, RideScreen, AtPickupCard, IncomingOfferCard, TripInProgressCard, DriverRideCardsSwitcher, RideTrackingCards, ConsumerWidget (+4 more)
 
 ### Community 115 - "driver/lib/features/ride/data/services/route_remote_service.dart"
 Cohesion: 0.15
@@ -900,9 +892,9 @@ Nodes (10): build, submit, package:driver/features/driver_verification/domain/us
 Cohesion: 0.15
 Nodes (13): AnimationController, build, coreRadius, createState, dispose, paint, _period, phase (+5 more)
 
-### Community 124 - "package:riverpod_annotation/riverpod_annotation.dart"
-Cohesion: 0.08
-Nodes (23): build, reportFailure, run, build, execute, package:riverpod_annotation/riverpod_annotation.dart, AuthUserType, authUserTypeProvider (+15 more)
+### Community 124 - "ride_action_controller.dart"
+Cohesion: 0.22
+Nodes (8): build, reportFailure, run, _, create, debugGetCreateSourceHash, RideActionControllerProvider, runBuild
 
 ### Community 125 - "package:flutter/foundation.dart"
 Cohesion: 0.22
@@ -945,16 +937,16 @@ Cohesion: 0.18
 Nodes (10): GoogleMapController, package:google_maps_flutter/google_maps_flutter.dart, attach, build, _pending, _, create, debugGetCreateSourceHash (+2 more)
 
 ### Community 135 - "ride_action_buttons.dart"
-Cohesion: 0.15
-Nodes (11): build, isLoading, RequestConfirmButton, build, onConfirm, onRequestPrice, RideActionButtons, package:wasal/core/widgets/app_primary_button.dart (+3 more)
+Cohesion: 0.17
+Nodes (10): build, isLoading, RequestConfirmButton, build, onConfirm, onRequestPrice, RideActionButtons, package:wasal/core/widgets/app_primary_button.dart (+2 more)
 
 ### Community 136 - "map_ready_provider.dart"
 Cohesion: 0.18
 Nodes (10): mapReadyProvider, build, MapReady, markReady, _, create, debugGetCreateSourceHash, MapReadyProvider (+2 more)
 
 ### Community 137 - "rider/lib/features/auth/ui/screens/login_screen.dart"
-Cohesion: 0.09
-Nodes (21): createState, dispose, _emailCtrl, _formKey, _handleSubmit, _loginListener, _passCtrl, build (+13 more)
+Cohesion: 0.07
+Nodes (28): build, createState, dispose, _emailCtrl, _formKey, _handleSubmit, _loginListener, _passCtrl (+20 more)
 
 ### Community 138 - "@RestApi"
 Cohesion: 0.20
@@ -980,9 +972,9 @@ Nodes (12): lat, lng, rideId, CompleteRegistration, email, isAuthenticated, user
 Cohesion: 0.22
 Nodes (8): build, getPrice, package:wasal/features/ride/ui/providers/ride_use_case_providers.dart, _, create, debugGetCreateSourceHash, RidePriceEstimateProvider, runBuild
 
-### Community 144 - "at_pickup_card.dart"
-Cohesion: 0.22
-Nodes (8): build, dropoffLabel, fare, onCancel, onStart, paymentMethod, package:driver/features/ride/ui/providers/ride_action_controller.dart, package:driver/features/ride/ui/widgets/trip_points_list.dart
+### Community 144 - "dart:io"
+Cohesion: 0.40
+Nodes (4): dart:io, package:flutter_image_compress/flutter_image_compress.dart, AppImageCompressor, compress
 
 ### Community 145 - "rider/lib/features/ride/data/services/route_remote_service.dart"
 Cohesion: 0.17
@@ -1001,8 +993,8 @@ Cohesion: 0.22
 Nodes (8): build, _LabelText, point, PointLabelRow, prefix, value, LatLng, package:wasal/features/ride/ui/providers/location/point_label_provider.dart
 
 ### Community 149 - "ride_price_card.dart"
-Cohesion: 0.20
-Nodes (10): build, createState, initState, onClose, RidePriceCard, _RidePriceCardState, package:wasal/features/ride/ui/widgets/ride_card_shell.dart, package:wasal/features/ride/ui/widgets/ride_price_card/ride_price_error_view.dart (+2 more)
+Cohesion: 0.12
+Nodes (17): LoginScreen, RegisterScreen, ExpandableRideCard, LoginScreen, RegisterScreen, RideScreen, ExpandableRideCard, build (+9 more)
 
 ### Community 150 - "base_ride_repo.dart"
 Cohesion: 0.15
@@ -1041,16 +1033,16 @@ Cohesion: 0.22
 Nodes (8): build, driver, _DriverAvatar, DriverInfoRow, photoUrl, _PlateChip, plateNumber, package:wasal/features/ride/domain/entities/driver_profile.dart
 
 ### Community 160 - "ride_draft_card.dart"
-Cohesion: 0.22
-Nodes (8): build, onConfirm, onRequestPrice, RideDraftCard, package:wasal/features/ride/ui/widgets/ride_draft_card/ride_action_buttons.dart, package:wasal/features/ride/ui/widgets/ride_draft_card/ride_back_button.dart, package:wasal/features/ride/ui/widgets/ride_draft_card/ride_card_title.dart, package:wasal/features/ride/ui/widgets/ride_draft_card/ride_summary_text.dart
+Cohesion: 0.20
+Nodes (9): build, onConfirm, onRequestPrice, RideDraftCard, package:wasal/features/ride/ui/widgets/ride_card_shell.dart, package:wasal/features/ride/ui/widgets/ride_draft_card/ride_action_buttons.dart, package:wasal/features/ride/ui/widgets/ride_draft_card/ride_back_button.dart, package:wasal/features/ride/ui/widgets/ride_draft_card/ride_card_title.dart (+1 more)
 
 ### Community 161 - "flavors_config.dart"
 Cohesion: 0.22
 Nodes (8): appName, baseUrl, Flavor, FlavorConfig, _instance, isDevelopment, isProduction, static FlavorConfig?
 
-### Community 162 - "capture_source_sheet.dart"
+### Community 162 - "app_dialog.dart"
 Cohesion: 0.08
-Nodes (23): background, build, color, icon, VerificationStatusBadge, build, CaptureSource, _CaptureSourceSheet (+15 more)
+Nodes (23): background, build, color, icon, VerificationStatusBadge, build, _ContactButton, DriverContactActions (+15 more)
 
 ### Community 163 - "driver/lib/core/routing/app_routes_name.dart"
 Cohesion: 0.25
@@ -1072,9 +1064,9 @@ Nodes (7): didAddProvider, didDisposeProvider, didUpdateProvider, LoggerObserver
 Cohesion: 0.25
 Nodes (7): AppRoutes, auth, home, register, registerSuccess, ride, splash
 
-### Community 169 - "trip_in_progress_card.dart"
-Cohesion: 0.22
-Nodes (8): build, dropoffLabel, etaMinutes, fare, onComplete, paymentMethod, package:driver/features/ride/ui/providers/static_rider_profile_provider.dart, package:driver/features/ride/ui/widgets/rider_info_row.dart
+### Community 169 - "at_pickup_card.dart"
+Cohesion: 0.13
+Nodes (17): build, dropoffLabel, fare, onCancel, onStart, paymentMethod, build, dropoffLabel (+9 more)
 
 ### Community 170 - "geocoding_repo.dart"
 Cohesion: 0.17
@@ -1084,17 +1076,13 @@ Nodes (11): _apiServiceProvider, GeocodingRepo, labelFor, _GeocodngApiService, B
 Cohesion: 0.15
 Nodes (11): currency, distanceInKm, estimatedPrice, RidePrice, build, dropoffLabel, onCancel, pickupLabel (+3 more)
 
-### Community 172 - "offer_countdown_ring.dart"
-Cohesion: 0.14
-Nodes (13): build, color, OfferCountdownRing, paint, progress, remaining, shouldRepaint, _startAngle (+5 more)
-
 ### Community 173 - "const/ride_hub_methods.dart"
 Cohesion: 0.29
 Nodes (6): hideRideRequest, profileReviewed, receiveRideRequest, rideCancelled, RideHubMethods, updateLocation
 
-### Community 174 - "request_ride_action.dart"
-Cohesion: 0.22
-Nodes (7): build, RequestRideAction, build, message, RequestRideErrorView, package:wasal/features/ride/ui/widgets/request_ride_card/request_confirm_button.dart, package:wasal/features/ride/ui/widgets/request_ride_card/request_ride_error_view.dart
+### Community 174 - "package:wasal/features/ride/ui/providers/request_ride/request_ride_provider.dart"
+Cohesion: 0.20
+Nodes (8): build, RequestRideAction, build, message, RequestRideErrorView, package:wasal/features/ride/ui/providers/request_ride/request_ride_provider.dart, package:wasal/features/ride/ui/widgets/request_ride_card/request_confirm_button.dart, package:wasal/features/ride/ui/widgets/request_ride_card/request_ride_error_view.dart
 
 ### Community 175 - "verification_status.dart"
 Cohesion: 0.29
@@ -1117,16 +1105,12 @@ Cohesion: 0.17
 Nodes (10): _background, build, _foreground, _icon, method, PaymentMethodChip, main, Color get (+2 more)
 
 ### Community 180 - "submit_driver_profile_response.dart"
-Cohesion: 0.29
-Nodes (6): fromJson, message, SubmitDriverProfileResponse, succeeded, toEntity, toJson
+Cohesion: 0.25
+Nodes (7): fromJson, message, SubmitDriverProfileResponse, succeeded, toEntity, toJson, package:driver/features/driver_verification/domain/entities/submit_driver_profile.dart
 
 ### Community 181 - "navigation_extension.dart"
 Cohesion: 0.29
 Nodes (6): BuildContext, NavigationExtension, pop, pushNamed, pushNamedAndRemoveUntil, pushReplacementNamed
-
-### Community 182 - "app_loading.dart"
-Cohesion: 0.22
-Nodes (8): double?, AppInlineLoading, AppLoadingOverlay, backgroundColor, build, color, size, _strokeFor
 
 ### Community 183 - "app_driver_consts.dart"
 Cohesion: 0.33
@@ -1140,21 +1124,13 @@ Nodes (15): build, createState, _FailureBody, initState, message, onBackToForm, 
 Cohesion: 0.33
 Nodes (5): ApiRiderEndpoints, cancelRide, estimateRidePrice, googleReverseGeocoding, requestRide
 
-### Community 186 - "driver_is_camera_moving_provider.dart"
-Cohesion: 0.18
-Nodes (10): build, driverIsCameraMovingProvider, DriverIsCameraMoving, setMoving, _, create, debugGetCreateSourceHash, DriverIsCameraMovingProvider (+2 more)
-
-### Community 187 - "wizard_header.dart"
-Cohesion: 0.25
-Nodes (7): build, currentStep, rejectionReason, stepTitles, WizardHeader, package:driver/features/driver_verification/ui/widgets/wizard/rejection_banner.dart, package:driver/features/driver_verification/ui/widgets/wizard/wizard_progress.dart
-
 ### Community 188 - "GeneratedPluginRegistrant.java"
 Cohesion: 0.60
 Nodes (3): GeneratedPluginRegistrant, androidx.annotation.Keep, io.flutter.embedding.engine.FlutterEngine
 
 ### Community 189 - "trip_completed_card.dart"
 Cohesion: 0.22
-Nodes (8): build, fare, onDismiss, paymentMethod, TripCompletedCard, package:driver/features/ride/ui/widgets/completed_check_badge.dart, package:driver/features/ride/ui/widgets/fare_hero.dart, package:driver/features/ride/ui/widgets/payment_method_chip.dart
+Nodes (8): build, fare, onDismiss, paymentMethod, TripCompletedCard, package:driver/features/ride/ui/widgets/cards/completed_check_badge.dart, package:driver/features/ride/ui/widgets/cards/fare_hero.dart, package:driver/features/ride/ui/widgets/cards/payment_method_chip.dart
 
 ### Community 190 - "request_ride_provider.dart"
 Cohesion: 0.11
@@ -1165,12 +1141,12 @@ Cohesion: 0.20
 Nodes (10): AppPasswordFormField, _AppPasswordFormFieldState, build, controller, createState, hintText, label, textInputAction (+2 more)
 
 ### Community 192 - "submit_driver_profile_use_case.dart"
-Cohesion: 0.15
-Nodes (14): verifyRepoProvider, VerifyRepo, BaseVerifyRepo, getVerificationStatus, submitProfile, execute, extends, _repo (+6 more)
+Cohesion: 0.29
+Nodes (7): execute, extends, _repo, submission, SubmitDriverProfileParams, SubmitDriverProfileUseCase, class SubmitDriverProfileUseCase
 
 ### Community 193 - "get_verification_status_response.dart"
-Cohesion: 0.25
-Nodes (7): data, fromJson, GetVerificationStatusResponse, message, toEntity, toJson, package:driver/features/driver_verification/domain/entities/verification_status.dart
+Cohesion: 0.29
+Nodes (6): data, fromJson, GetVerificationStatusResponse, message, toEntity, toJson
 
 ### Community 194 - "offline_card.dart"
 Cohesion: 0.29
@@ -1195,10 +1171,6 @@ Nodes (9): hashCode, isPlaceholder, name, operator, phoneNumber, photoUrl, ratin
 ### Community 199 - "Real-time Driver Tracking via SignalR"
 Cohesion: 0.50
 Nodes (4): Driver verification status polling (no FCM in driver app yet), signalr_netcore real-time transport in core, .NET Backend (external service the Flutter client consumes), Real-time Driver Tracking via SignalR
-
-### Community 200 - "ConsumerStatefulWidget"
-Cohesion: 0.25
-Nodes (8): LoginScreen, RegisterScreen, ExpandableRideCard, LoginScreen, RegisterScreen, RideScreen, ExpandableRideCard, ConsumerStatefulWidget
 
 ### Community 202 - "package:freezed_annotation/freezed_annotation.dart"
 Cohesion: 0.29
@@ -1228,10 +1200,6 @@ Nodes (7): LocationBroadcastException, LocationUnavailableException, RouteUnavai
 Cohesion: 0.33
 Nodes (5): package:wasel_core/widgets/app_dialog.dart, ensurePermission, false, status, return
 
-### Community 349 - "fare_hero.dart"
-Cohesion: 0.29
-Nodes (6): amount, build, color, currency, FareHero, Color?
-
 ### Community 350 - "@GET"
 Cohesion: 0.40
 Nodes (5): @GET, @Headers, getVerificationStatus, getLocationName, estimateRidePrice
@@ -1239,18 +1207,6 @@ Nodes (5): @GET, @Headers, getVerificationStatus, getLocationName, estimateRideP
 ### Community 351 - "IRideHubDatasource"
 Cohesion: 0.29
 Nodes (7): RideHubDatasource, FakeHub, FakeHub, FakeHub, FakeHub, IRideHubDatasource, RideHubDatasource
-
-### Community 352 - "card_stage_header.dart"
-Cohesion: 0.25
-Nodes (7): background, build, CardStageHeader, icon, subtitle, tint, title
-
-### Community 353 - "getVerificationStatusUseCase"
-Cohesion: 0.33
-Nodes (4): getVerificationStatusUseCaseProvider, getVerificationStatusUseCase, deviceLocationProvider, deviceLocation
-
-### Community 354 - "CustomPainter"
-Cohesion: 0.50
-Nodes (4): CameraOverlayPainter, _RingPainter, _RadarPainter, CustomPainter
 
 ### Community 355 - "PaymentMethod"
 Cohesion: 0.50
@@ -1275,7 +1231,7 @@ Nodes (3): fromApi, label, PaymentMethod
 ## Knowledge Gaps
 - **2357 isolated node(s):** `AppDriverConsts`, `appName`, `mapStyleID`, `carIcon`, `routeAPIKeyName` (+2352 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **139 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **140 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_

@@ -1,7 +1,7 @@
-import 'package:driver/features/ride/ui/providers/driver_balance_provider.dart';
+import 'package:driver/features/ride/ui/providers/earnings/driver_balance_provider.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
-import 'package:driver/features/ride/ui/widgets/driver_earnings_chip.dart';
+import 'package:driver/features/ride/ui/widgets/status/driver_earnings_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/wasel_core.dart';

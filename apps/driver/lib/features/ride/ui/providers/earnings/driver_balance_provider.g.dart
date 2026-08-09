@@ -42,7 +42,7 @@ final class DriverBalanceControllerProvider
 }
 
 String _$driverBalanceControllerHash() =>
-    r'4c55dc924dd670afb9c901c27aaebfddf1d34605';
+    r'2dfe55c6f8f1f3bd2506592df2ef4dcbfbffc14a';
 
 abstract class _$DriverBalanceController extends $Notifier<double> {
   double build();

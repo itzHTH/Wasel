@@ -4,7 +4,7 @@ import 'package:driver/features/ride/domain/entities/driver_ride_events.dart';
 import 'package:driver/features/ride/domain/use_case/watch_ride_event_use_case.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
-import 'package:driver/features/ride/ui/providers/ride_use_case.dart';
+import 'package:driver/features/ride/ui/providers/ride_use_case_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/networking/api_results.dart';
