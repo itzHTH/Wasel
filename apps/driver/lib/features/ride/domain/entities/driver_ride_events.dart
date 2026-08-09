@@ -11,6 +11,8 @@ sealed class DriverRideEvent with _$DriverRideEvent {
     required GeoPoint dropPosition,
     required double calculatedPrice,
     required String paymentMethod,
+    required String riderName,
+    required String riderPhone,
     required String message,
   }) = ReceiveRideRequest;
 

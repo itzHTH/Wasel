@@ -2,7 +2,7 @@ import 'package:driver/core/widgets/app_primary_button.dart';
 import 'package:driver/features/ride/domain/entities/geo_point.dart';
 import 'package:driver/features/ride/domain/entities/payment_method.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
-import 'package:driver/features/ride/ui/providers/rider_profile/static_rider_profile_provider.dart';
+import 'package:driver/features/ride/ui/providers/rider_profile/current_rider_profile_provider.dart';
 import 'package:driver/features/ride/ui/widgets/tracking/card_stage_header.dart';
 import 'package:driver/features/ride/ui/widgets/expandable_ride_card.dart';
 import 'package:driver/features/ride/ui/widgets/fare_hero.dart';
@@ -31,7 +31,7 @@ class TripInProgressCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final profile = ref.watch(staticRiderProfileProvider);
+    final profile = ref.watch(currentRiderProfileProvider);
     final isBusy = ref.watch(rideActionControllerProvider).isLoading;
     final etaMinutes = this.etaMinutes;
 
@@ -52,8 +52,10 @@ class TripInProgressCard extends ConsumerWidget {
               PaymentMethodChip(method: paymentMethod),
             ],
           ),
-          SizedBox(height: AppDimens.space24),
-          RiderInfoRow(profile: profile),
+          if (profile != null) ...[
+            SizedBox(height: AppDimens.space24),
+            RiderInfoRow(profile: profile),
+          ],
           SizedBox(height: AppDimens.space24),
           TripPointsList(dropoffPoint: dropoffPoint),
         ],

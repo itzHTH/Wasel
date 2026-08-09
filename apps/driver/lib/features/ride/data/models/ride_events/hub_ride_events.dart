@@ -12,6 +12,8 @@ sealed class HubRideEvent with _$HubRideEvent {
     required LatLngDto dropPosition,
     required double calculatedPrice,
     required String paymentMethod,
+    required String riderName,
+    required String riderPhone,
     required String message,
   }) = ReceiveRideRequest;
 
@@ -38,6 +40,8 @@ extension HubRideEventX on HubRideEvent {
       :final dropPosition,
       :final calculatedPrice,
       :final paymentMethod,
+      :final riderName,
+      :final riderPhone,
       :final message,
     ) =>
       DriverRideEvent.receiveRideRequest(
@@ -46,6 +50,8 @@ extension HubRideEventX on HubRideEvent {
         dropPosition: dropPosition.toEntity(),
         calculatedPrice: calculatedPrice,
         paymentMethod: paymentMethod,
+        riderName: riderName,
+        riderPhone: riderPhone,
         message: message,
       ),
 
