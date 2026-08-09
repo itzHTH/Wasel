@@ -3,15 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:wasel_core/wasel_core.dart';
 
 class RiderInfoRow extends StatelessWidget {
-  const RiderInfoRow({super.key, required this.profile, this.onCall});
+  const RiderInfoRow({
+    super.key,
+    required this.profile,
+    this.onCall,
+    this.canCall = true,
+  });
 
   final RiderProfile profile;
+  final bool canCall;
+
+  /// Overrides the default hand-off to the dialer. The call button is hidden
+  /// when there is neither an override nor a phone number on the profile.
   final VoidCallback? onCall;
 
   @override
   Widget build(BuildContext context) {
-    final onCall = this.onCall;
-    final rating = profile.rating;
+    final phoneNumber = profile.phoneNumber;
+    final onCall =
+        this.onCall ??
+        (phoneNumber == null ? null : () => AppUrlLauncher.dial(phoneNumber));
 
     return Row(
       children: [
@@ -21,27 +32,24 @@ class RiderInfoRow extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Flexible(
-                    child: Text(
-                      profile.name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: AppTextStyles.font14Secondary900SemiBold,
-                    ),
-                  ),
-                  if (profile.isPlaceholder) ...[
-                    SizedBox(width: AppDimens.space8),
-                    const _PlaceholderTag(),
-                  ],
-                ],
+              Text(
+                profile.name,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppTextStyles.font14Secondary900SemiBold,
               ),
-              if (rating != null) _Rating(rating: rating),
+              SizedBox(height: AppDimens.space4),
+              if (canCall)
+                Text(
+                  phoneNumber ?? 'رقم الهاتف غير متوفر',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTextStyles.font14Neutral400Medium,
+                ),
             ],
           ),
         ),
-        if (onCall != null) _CallButton(onCall: onCall),
+        if (onCall != null && canCall) _CallButton(onCall: onCall),
       ],
     );
   }
@@ -64,56 +72,6 @@ class _Avatar extends StatelessWidget {
         size: AppDimens.icon24,
         color: AppColor.neutral400,
       ),
-    );
-  }
-}
-
-/// Marks the row as fed by placeholder data until the rider-profile endpoint
-/// exists, so the static name is never mistaken for a real one.
-class _PlaceholderTag extends StatelessWidget {
-  const _PlaceholderTag();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: AppDimens.space8,
-        vertical: AppDimens.space4,
-      ),
-      decoration: BoxDecoration(
-        color: AppColor.alertWarning100,
-        borderRadius: BorderRadius.circular(AppDimens.radiusPill),
-      ),
-      child: Text(
-        'تجريبي',
-        style: AppTextStyles.font12Neutral400Regular.copyWith(
-          color: AppColor.alertWarning500,
-        ),
-      ),
-    );
-  }
-}
-
-class _Rating extends StatelessWidget {
-  const _Rating({required this.rating});
-
-  final double rating;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(
-          Icons.star_rounded,
-          size: AppDimens.icon18,
-          color: AppColor.alertWarning500,
-        ),
-        SizedBox(width: AppDimens.space4),
-        Text(
-          rating.toStringAsFixed(1),
-          style: AppTextStyles.font14Neutral400Medium,
-        ),
-      ],
     );
   }
 }

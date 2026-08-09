@@ -70,6 +70,7 @@
 		<string>waze</string>
 		<string>comgooglemaps</string>
 		<string>maps</string>
+		<string>tel</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>

@@ -58,6 +58,8 @@ class RideHubDatasource implements IRideHubDataSource {
           dropPosition: dropPosition,
           calculatedPrice: price ?? 0,
           paymentMethod: data['paymentmethod']?.toString() ?? '',
+          riderName: data['ridername']?.toString() ?? '',
+          riderPhone: data['riderphone']?.toString() ?? '',
           message: _msg(data['message']) ?? '',
         ),
       );

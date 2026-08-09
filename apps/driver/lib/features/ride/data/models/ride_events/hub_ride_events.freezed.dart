@@ -125,10 +125,10 @@ return cancelled(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String rideId,  LatLngDto position,  LatLngDto dropPosition,  double calculatedPrice,  String paymentMethod,  String message)?  receiveRideRequest,TResult Function( String rideId)?  hideRideRequest,TResult Function( bool isApproved,  String message)?  profileReviewed,TResult Function( String? message)?  cancelled,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String rideId,  LatLngDto position,  LatLngDto dropPosition,  double calculatedPrice,  String paymentMethod,  String riderName,  String riderPhone,  String message)?  receiveRideRequest,TResult Function( String rideId)?  hideRideRequest,TResult Function( bool isApproved,  String message)?  profileReviewed,TResult Function( String? message)?  cancelled,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ReceiveRideRequest() when receiveRideRequest != null:
-return receiveRideRequest(_that.rideId,_that.position,_that.dropPosition,_that.calculatedPrice,_that.paymentMethod,_that.message);case HideRideRequest() when hideRideRequest != null:
+return receiveRideRequest(_that.rideId,_that.position,_that.dropPosition,_that.calculatedPrice,_that.paymentMethod,_that.riderName,_that.riderPhone,_that.message);case HideRideRequest() when hideRideRequest != null:
 return hideRideRequest(_that.rideId);case ProfileReviewed() when profileReviewed != null:
 return profileReviewed(_that.isApproved,_that.message);case RideCancelled() when cancelled != null:
 return cancelled(_that.message);case _:
@@ -149,10 +149,10 @@ return cancelled(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String rideId,  LatLngDto position,  LatLngDto dropPosition,  double calculatedPrice,  String paymentMethod,  String message)  receiveRideRequest,required TResult Function( String rideId)  hideRideRequest,required TResult Function( bool isApproved,  String message)  profileReviewed,required TResult Function( String? message)  cancelled,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String rideId,  LatLngDto position,  LatLngDto dropPosition,  double calculatedPrice,  String paymentMethod,  String riderName,  String riderPhone,  String message)  receiveRideRequest,required TResult Function( String rideId)  hideRideRequest,required TResult Function( bool isApproved,  String message)  profileReviewed,required TResult Function( String? message)  cancelled,}) {final _that = this;
 switch (_that) {
 case ReceiveRideRequest():
-return receiveRideRequest(_that.rideId,_that.position,_that.dropPosition,_that.calculatedPrice,_that.paymentMethod,_that.message);case HideRideRequest():
+return receiveRideRequest(_that.rideId,_that.position,_that.dropPosition,_that.calculatedPrice,_that.paymentMethod,_that.riderName,_that.riderPhone,_that.message);case HideRideRequest():
 return hideRideRequest(_that.rideId);case ProfileReviewed():
 return profileReviewed(_that.isApproved,_that.message);case RideCancelled():
 return cancelled(_that.message);}
@@ -169,10 +169,10 @@ return cancelled(_that.message);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String rideId,  LatLngDto position,  LatLngDto dropPosition,  double calculatedPrice,  String paymentMethod,  String message)?  receiveRideRequest,TResult? Function( String rideId)?  hideRideRequest,TResult? Function( bool isApproved,  String message)?  profileReviewed,TResult? Function( String? message)?  cancelled,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String rideId,  LatLngDto position,  LatLngDto dropPosition,  double calculatedPrice,  String paymentMethod,  String riderName,  String riderPhone,  String message)?  receiveRideRequest,TResult? Function( String rideId)?  hideRideRequest,TResult? Function( bool isApproved,  String message)?  profileReviewed,TResult? Function( String? message)?  cancelled,}) {final _that = this;
 switch (_that) {
 case ReceiveRideRequest() when receiveRideRequest != null:
-return receiveRideRequest(_that.rideId,_that.position,_that.dropPosition,_that.calculatedPrice,_that.paymentMethod,_that.message);case HideRideRequest() when hideRideRequest != null:
+return receiveRideRequest(_that.rideId,_that.position,_that.dropPosition,_that.calculatedPrice,_that.paymentMethod,_that.riderName,_that.riderPhone,_that.message);case HideRideRequest() when hideRideRequest != null:
 return hideRideRequest(_that.rideId);case ProfileReviewed() when profileReviewed != null:
 return profileReviewed(_that.isApproved,_that.message);case RideCancelled() when cancelled != null:
 return cancelled(_that.message);case _:
@@ -187,7 +187,7 @@ return cancelled(_that.message);case _:
 
 
 class ReceiveRideRequest implements HubRideEvent {
-  const ReceiveRideRequest({required this.rideId, required this.position, required this.dropPosition, required this.calculatedPrice, required this.paymentMethod, required this.message});
+  const ReceiveRideRequest({required this.rideId, required this.position, required this.dropPosition, required this.calculatedPrice, required this.paymentMethod, required this.riderName, required this.riderPhone, required this.message});
   
 
  final  String rideId;
@@ -195,6 +195,8 @@ class ReceiveRideRequest implements HubRideEvent {
  final  LatLngDto dropPosition;
  final  double calculatedPrice;
  final  String paymentMethod;
+ final  String riderName;
+ final  String riderPhone;
  final  String message;
 
 /// Create a copy of HubRideEvent
@@ -207,16 +209,16 @@ $ReceiveRideRequestCopyWith<ReceiveRideRequest> get copyWith => _$ReceiveRideReq
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReceiveRideRequest&&(identical(other.rideId, rideId) || other.rideId == rideId)&&(identical(other.position, position) || other.position == position)&&(identical(other.dropPosition, dropPosition) || other.dropPosition == dropPosition)&&(identical(other.calculatedPrice, calculatedPrice) || other.calculatedPrice == calculatedPrice)&&(identical(other.paymentMethod, paymentMethod) || other.paymentMethod == paymentMethod)&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReceiveRideRequest&&(identical(other.rideId, rideId) || other.rideId == rideId)&&(identical(other.position, position) || other.position == position)&&(identical(other.dropPosition, dropPosition) || other.dropPosition == dropPosition)&&(identical(other.calculatedPrice, calculatedPrice) || other.calculatedPrice == calculatedPrice)&&(identical(other.paymentMethod, paymentMethod) || other.paymentMethod == paymentMethod)&&(identical(other.riderName, riderName) || other.riderName == riderName)&&(identical(other.riderPhone, riderPhone) || other.riderPhone == riderPhone)&&(identical(other.message, message) || other.message == message));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,rideId,position,dropPosition,calculatedPrice,paymentMethod,message);
+int get hashCode => Object.hash(runtimeType,rideId,position,dropPosition,calculatedPrice,paymentMethod,riderName,riderPhone,message);
 
 @override
 String toString() {
-  return 'HubRideEvent.receiveRideRequest(rideId: $rideId, position: $position, dropPosition: $dropPosition, calculatedPrice: $calculatedPrice, paymentMethod: $paymentMethod, message: $message)';
+  return 'HubRideEvent.receiveRideRequest(rideId: $rideId, position: $position, dropPosition: $dropPosition, calculatedPrice: $calculatedPrice, paymentMethod: $paymentMethod, riderName: $riderName, riderPhone: $riderPhone, message: $message)';
 }
 
 
@@ -227,7 +229,7 @@ abstract mixin class $ReceiveRideRequestCopyWith<$Res> implements $HubRideEventC
   factory $ReceiveRideRequestCopyWith(ReceiveRideRequest value, $Res Function(ReceiveRideRequest) _then) = _$ReceiveRideRequestCopyWithImpl;
 @useResult
 $Res call({
- String rideId, LatLngDto position, LatLngDto dropPosition, double calculatedPrice, String paymentMethod, String message
+ String rideId, LatLngDto position, LatLngDto dropPosition, double calculatedPrice, String paymentMethod, String riderName, String riderPhone, String message
 });
 
 
@@ -244,13 +246,15 @@ class _$ReceiveRideRequestCopyWithImpl<$Res>
 
 /// Create a copy of HubRideEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? rideId = null,Object? position = null,Object? dropPosition = null,Object? calculatedPrice = null,Object? paymentMethod = null,Object? message = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? rideId = null,Object? position = null,Object? dropPosition = null,Object? calculatedPrice = null,Object? paymentMethod = null,Object? riderName = null,Object? riderPhone = null,Object? message = null,}) {
   return _then(ReceiveRideRequest(
 rideId: null == rideId ? _self.rideId : rideId // ignore: cast_nullable_to_non_nullable
 as String,position: null == position ? _self.position : position // ignore: cast_nullable_to_non_nullable
 as LatLngDto,dropPosition: null == dropPosition ? _self.dropPosition : dropPosition // ignore: cast_nullable_to_non_nullable
 as LatLngDto,calculatedPrice: null == calculatedPrice ? _self.calculatedPrice : calculatedPrice // ignore: cast_nullable_to_non_nullable
 as double,paymentMethod: null == paymentMethod ? _self.paymentMethod : paymentMethod // ignore: cast_nullable_to_non_nullable
+as String,riderName: null == riderName ? _self.riderName : riderName // ignore: cast_nullable_to_non_nullable
+as String,riderPhone: null == riderPhone ? _self.riderPhone : riderPhone // ignore: cast_nullable_to_non_nullable
 as String,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,
   ));

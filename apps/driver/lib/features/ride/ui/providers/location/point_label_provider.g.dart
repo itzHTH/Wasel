@@ -8,32 +8,13 @@ part of 'point_label_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// The readable street for a single point — the pickup and the drop-off of the
-/// ride in hand.
-///
-/// Keyed by the point and kept alive, so the offer, the drive to the rider and
-/// the trip itself all read the same two cached lookups: the family caches per
-/// coordinate, and [GeoPoint] compares by value.
 
 @ProviderFor(pointLabel)
 final pointLabelProvider = PointLabelFamily._();
 
-/// The readable street for a single point — the pickup and the drop-off of the
-/// ride in hand.
-///
-/// Keyed by the point and kept alive, so the offer, the drive to the rider and
-/// the trip itself all read the same two cached lookups: the family caches per
-/// coordinate, and [GeoPoint] compares by value.
-
 final class PointLabelProvider
     extends $FunctionalProvider<AsyncValue<String>, String, FutureOr<String>>
     with $FutureModifier<String>, $FutureProvider<String> {
-  /// The readable street for a single point — the pickup and the drop-off of the
-  /// ride in hand.
-  ///
-  /// Keyed by the point and kept alive, so the offer, the drive to the rider and
-  /// the trip itself all read the same two cached lookups: the family caches per
-  /// coordinate, and [GeoPoint] compares by value.
   PointLabelProvider._({
     required PointLabelFamily super.from,
     required GeoPoint super.argument,
@@ -79,13 +60,6 @@ final class PointLabelProvider
 
 String _$pointLabelHash() => r'a36f0582d5ae783d13034db40f051dfdf78830cc';
 
-/// The readable street for a single point — the pickup and the drop-off of the
-/// ride in hand.
-///
-/// Keyed by the point and kept alive, so the offer, the drive to the rider and
-/// the trip itself all read the same two cached lookups: the family caches per
-/// coordinate, and [GeoPoint] compares by value.
-
 final class PointLabelFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<String>, GeoPoint> {
   PointLabelFamily._()
@@ -96,13 +70,6 @@ final class PointLabelFamily extends $Family
         $allTransitiveDependencies: null,
         isAutoDispose: false,
       );
-
-  /// The readable street for a single point — the pickup and the drop-off of the
-  /// ride in hand.
-  ///
-  /// Keyed by the point and kept alive, so the offer, the drive to the rider and
-  /// the trip itself all read the same two cached lookups: the family caches per
-  /// coordinate, and [GeoPoint] compares by value.
 
   PointLabelProvider call(GeoPoint point) =>
       PointLabelProvider._(argument: point, from: this);

@@ -3,7 +3,7 @@ import 'package:driver/core/widgets/app_secondary_button.dart';
 import 'package:driver/features/ride/domain/entities/geo_point.dart';
 import 'package:driver/features/ride/domain/entities/payment_method.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
-import 'package:driver/features/ride/ui/providers/rider_profile/static_rider_profile_provider.dart';
+import 'package:driver/features/ride/ui/providers/rider_profile/current_rider_profile_provider.dart';
 import 'package:driver/features/ride/ui/widgets/fare_hero.dart';
 import 'package:driver/features/ride/ui/widgets/incoming_offer/offer_countdown_ring.dart';
 import 'package:driver/features/ride/ui/widgets/payment_method_chip.dart';
@@ -42,7 +42,7 @@ class IncomingOfferCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final profile = ref.watch(staticRiderProfileProvider);
+    final profile = ref.watch(currentRiderProfileProvider);
     final isBusy = ref.watch(rideActionControllerProvider).isLoading;
     final maxDetailsHeight =
         MediaQuery.sizeOf(context).height * _maxDetailsFraction;
@@ -87,8 +87,10 @@ class IncomingOfferCard extends ConsumerWidget {
                     pickupPoint: pickupPoint,
                     dropoffPoint: dropoffPoint,
                   ),
-                  SizedBox(height: AppDimens.space24),
-                  RiderInfoRow(profile: profile),
+                  if (profile != null) ...[
+                    SizedBox(height: AppDimens.space24),
+                    RiderInfoRow(profile: profile, canCall: false),
+                  ],
                 ],
               ),
             ),
@@ -109,4 +111,3 @@ class IncomingOfferCard extends ConsumerWidget {
     );
   }
 }
-
