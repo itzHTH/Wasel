@@ -595,8 +595,8 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/screens/ride_screen.dart": {
-    "mtime": 1786245293.6003423,
-    "ast_hash": "d0732380ed0fa5a90a4c6c87ae33a0e0",
+    "mtime": 1786246413.7520976,
+    "ast_hash": "bb5157f76685421af3ac7c139849f11b",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/splash/ui/screens/splash_screen.dart": {
@@ -2330,8 +2330,8 @@
     "semantic_hash": ""
   },
   "apps/driver/test/features/ride/driver_map_test.dart": {
-    "mtime": 1786222709.7731144,
-    "ast_hash": "b65fda19827ca3615e1e24131ee343ba",
+    "mtime": 1786247252.0785644,
+    "ast_hash": "d283867eaf5ca1abddb06535dd0f4cf7",
     "semantic_hash": ""
   },
   "apps/driver/test/features/ride/driver_route_polylines_test.dart": {
@@ -2345,13 +2345,13 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/location/device_location_provider.dart": {
-    "mtime": 1786047092.7956672,
-    "ast_hash": "30a4dd4013ec84c26ddea82ef37815d6",
+    "mtime": 1786247189.5023117,
+    "ast_hash": "9b3fa741d17eb53f2cf4c7586be54a55",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/location/device_location_provider.g.dart": {
-    "mtime": 1786047150.8824785,
-    "ast_hash": "020e95f2b6bb25fff5142d2efca0654a",
+    "mtime": 1786247248.5490165,
+    "ast_hash": "4cadc84a75ee0f2501484f3e2f752aac",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/location/driver_heading_provider.dart": {
@@ -2375,13 +2375,13 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/map/driver_camera_controller.dart": {
-    "mtime": 1786222709.6856973,
-    "ast_hash": "f6693a214b673ce8e61de282f9ec81d6",
+    "mtime": 1786246172.6339624,
+    "ast_hash": "85faf9ad6c51d3a49a52f1dd67dc7275",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/map/driver_camera_controller.g.dart": {
-    "mtime": 1786223245.9512877,
-    "ast_hash": "ad9417810c80212d98fed6ef5730b401",
+    "mtime": 1786246210.8869896,
+    "ast_hash": "725fda0ac59eb9b23bf4b814811e5fd9",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/map/driver_is_camera_moving_provider.dart": {
@@ -2395,13 +2395,13 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/map/driver_markers_provider.dart": {
-    "mtime": 1786222709.8116481,
-    "ast_hash": "7023563f7450e712db0b8c8744426e3c",
+    "mtime": 1786247210.541454,
+    "ast_hash": "0042228eb9f428b667ede627fb12a127",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/map/driver_markers_provider.g.dart": {
-    "mtime": 1786047541.148394,
-    "ast_hash": "34df5c37f7f1fe862d9b932ae958a9ce",
+    "mtime": 1786247248.5505106,
+    "ast_hash": "992e9a2bc5440de54a5e40945235fc9e",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/map/driver_route_polylines_provider.dart": {
@@ -2597,6 +2597,16 @@
   "apps/driver/lib/features/ride/ui/widgets/trip_points_list.dart": {
     "mtime": 1786143449.2561107,
     "ast_hash": "b9271416a9f96d1323e058313642dd39",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/ui/providers/location/initial_camera_target_provider.dart": {
+    "mtime": 1786247269.7561865,
+    "ast_hash": "80cd23d34aeefeb657c9c0fac0f702c1",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/ui/providers/location/initial_camera_target_provider.g.dart": {
+    "mtime": 1786247248.5498762,
+    "ast_hash": "d763732a923327dd5bd55c979e88fca0",
     "semantic_hash": ""
   }
 }

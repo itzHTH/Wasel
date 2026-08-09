@@ -43,8 +43,16 @@ class FakeApi implements RideApiService {
 
 class FakeGeolocator extends GeolocatorPlatform
     with MockPlatformInterfaceMixin {
+  FakeGeolocator({this.lastKnown});
+
   int streamCount = 0;
   final positions = StreamController<Position>.broadcast();
+  final Position? lastKnown;
+
+  @override
+  Future<Position?> getLastKnownPosition({
+    bool forceLocationManager = false,
+  }) async => lastKnown;
 
   @override
   Future<bool> isLocationServiceEnabled() async => true;
@@ -148,7 +156,24 @@ void main() {
     expect(container.read(driverHeadingProvider), 90);
   });
 
-  test('4. offline holds no marker and opens no stream', () async {
+  test('4. offline marks the driver at the cached fix with no stream', () async {
+    final geo = FakeGeolocator(lastKnown: fixAt(33.31, 44.36, heading: 90));
+    GeolocatorPlatform.instance = geo;
+    final container = harness(FakeHub());
+    container.listen(driverMarkersProvider, (_, _) {});
+
+    await settle();
+
+    final markers = container.read(driverMarkersProvider);
+    expect(markers.length, 1);
+    expect(markers.first.position, const LatLng(33.31, 44.36));
+
+    // The cached fix carries a stale heading, so the car points north instead.
+    expect(markers.first.rotation, 0);
+    expect(geo.streamCount, 0);
+  });
+
+  test('4b. offline with no cached fix holds no marker', () async {
     final geo = FakeGeolocator();
     GeolocatorPlatform.instance = geo;
     final container = harness(FakeHub());
@@ -183,22 +208,30 @@ void main() {
     expect(marker.anchor, const Offset(0.5, 0.5));
   });
 
-  test('6. going offline drops the marker', () async {
-    final geo = FakeGeolocator();
-    GeolocatorPlatform.instance = geo;
-    final container = harness(FakeHub());
-    container.listen(driverMarkersProvider, (_, _) {});
+  test(
+    '6. going offline falls back to the cached fix and closes the stream',
+    () async {
+      final geo = FakeGeolocator(lastKnown: fixAt(31.99, 44.31));
+      GeolocatorPlatform.instance = geo;
+      final container = harness(FakeHub());
+      container.listen(driverMarkersProvider, (_, _) {});
 
-    container.read(rideControllerProvider.notifier).goOnline();
-    await settle();
-    geo.positions.add(fixAt(33.31, 44.36, heading: 45, speed: 8));
-    await settle();
-    expect(container.read(driverMarkersProvider).length, 1);
+      container.read(rideControllerProvider.notifier).goOnline();
+      await settle();
+      geo.positions.add(fixAt(33.31, 44.36, heading: 45, speed: 8));
+      await settle();
+      expect(
+        container.read(driverMarkersProvider).first.position,
+        const LatLng(33.31, 44.36),
+      );
 
-    container.read(rideControllerProvider.notifier).goOffline();
-    await settle();
+      container.read(rideControllerProvider.notifier).goOffline();
+      await settle();
 
-    expect(container.read(driverMarkersProvider), isEmpty);
-    expect(geo.positions.hasListener, isFalse);
-  });
+      final markers = container.read(driverMarkersProvider);
+      expect(markers.length, 1);
+      expect(markers.first.position, const LatLng(31.99, 44.31));
+      expect(geo.positions.hasListener, isFalse);
+    },
+  );
 }

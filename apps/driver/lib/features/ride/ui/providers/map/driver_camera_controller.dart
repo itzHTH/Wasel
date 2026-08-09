@@ -22,6 +22,10 @@ class DriverCameraController extends _$DriverCameraController {
   DateTime? _selfMoveUntil;
   bool _paused = false;
 
+  /// The camera opens on the last-known fix, so the first live position is a
+  /// small correction — a hard move avoids gliding over that gap.
+  bool _placed = false;
+
   @override
   void build() {
     ref.onDispose(_stop);
@@ -63,15 +67,21 @@ class DriverCameraController extends _$DriverCameraController {
     if (_paused || !ref.mounted) return;
 
     _selfMoveUntil = DateTime.now().add(_selfMoveWindow);
-    await controller.animateCamera(
-      CameraUpdate.newCameraPosition(
-        CameraPosition(
-          target: LatLng(position.latitude, position.longitude),
-          zoom: _zoom,
-          bearing: ref.read(driverHeadingProvider),
-        ),
+    final update = CameraUpdate.newCameraPosition(
+      CameraPosition(
+        target: LatLng(position.latitude, position.longitude),
+        zoom: _zoom,
+        bearing: ref.read(driverHeadingProvider),
       ),
     );
+
+    if (_placed) {
+      await controller.animateCamera(update);
+      return;
+    }
+
+    _placed = true;
+    await controller.moveCamera(update);
   }
 
   bool _isSelfMove() {
@@ -86,5 +96,6 @@ class DriverCameraController extends _$DriverCameraController {
     _resume = null;
     _selfMoveUntil = null;
     _paused = false;
+    _placed = false;
   }
 }
