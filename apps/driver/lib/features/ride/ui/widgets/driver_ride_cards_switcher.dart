@@ -1,6 +1,4 @@
-import 'package:driver/core/helpers/ride_formatters.dart';
 import 'package:driver/features/ride/domain/entities/driver_ride_events.dart';
-import 'package:driver/features/ride/domain/entities/geo_point.dart';
 import 'package:driver/features/ride/domain/entities/payment_method.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
@@ -49,8 +47,8 @@ class DriverRideCardsSwitcher extends ConsumerWidget {
           key: const ValueKey('offer'),
           fare: offer.calculatedPrice,
           paymentMethod: PaymentMethod.fromApi(offer.paymentMethod),
-          pickupLabel: _coordinates(offer.position),
-          dropoffLabel: _coordinates(offer.dropPosition),
+          pickupPoint: offer.position,
+          dropoffPoint: offer.dropPosition,
           total: const Duration(seconds: RideController.offerSeconds),
           remaining: Duration(seconds: secondsLeft),
           onAccept: controller.acceptOffer,
@@ -59,8 +57,8 @@ class DriverRideCardsSwitcher extends ConsumerWidget {
       (DriverStage.heading, final ReceiveRideRequest offer) =>
         PickupOnTheWayCard(
           key: const ValueKey('heading'),
-          pickupLabel: _coordinates(offer.position),
-          dropoffLabel: _coordinates(offer.dropPosition),
+          pickupPoint: offer.position,
+          dropoffPoint: offer.dropPosition,
           fare: offer.calculatedPrice,
           paymentMethod: PaymentMethod.fromApi(offer.paymentMethod),
           onArrived: controller.markArrived,
@@ -68,7 +66,7 @@ class DriverRideCardsSwitcher extends ConsumerWidget {
         ),
       (DriverStage.arrived, final ReceiveRideRequest offer) => AtPickupCard(
         key: const ValueKey('arrived'),
-        dropoffLabel: _coordinates(offer.dropPosition),
+        dropoffPoint: offer.dropPosition,
         fare: offer.calculatedPrice,
         paymentMethod: PaymentMethod.fromApi(offer.paymentMethod),
         onStart: controller.startRide,
@@ -77,7 +75,7 @@ class DriverRideCardsSwitcher extends ConsumerWidget {
       (DriverStage.inProgress, final ReceiveRideRequest offer) =>
         TripInProgressCard(
           key: const ValueKey('inProgress'),
-          dropoffLabel: _coordinates(offer.dropPosition),
+          dropoffPoint: offer.dropPosition,
           fare: offer.calculatedPrice,
           paymentMethod: PaymentMethod.fromApi(offer.paymentMethod),
           onComplete: controller.completeRide,
@@ -95,6 +93,3 @@ class DriverRideCardsSwitcher extends ConsumerWidget {
     return RideCardTransition(child: card);
   }
 }
-
-String _coordinates(GeoPoint point) =>
-    RideFormatters.coordinates(point.latitude, point.longitude);
