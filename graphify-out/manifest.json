@@ -85,8 +85,8 @@
     "semantic_hash": "bd56ffe62896954529bb563d16f35f57"
   },
   "apps/driver/lib/core/const/driver_api_consts.dart": {
-    "mtime": 1786224092.6194692,
-    "ast_hash": "bab09686db2aa97f368ba4f44e96dcc6",
+    "mtime": 1786248612.2721138,
+    "ast_hash": "d2d6a88887cd7d47937a77776e06daf0",
     "semantic_hash": ""
   },
   "apps/driver/lib/core/const/ride_hub_methods.dart": {
@@ -595,7 +595,7 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/screens/ride_screen.dart": {
-    "mtime": 1786246413.7520976,
+    "mtime": 1786249385.6621466,
     "ast_hash": "bb5157f76685421af3ac7c139849f11b",
     "semantic_hash": ""
   },
@@ -2310,8 +2310,8 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/driver_ride_cards_switcher.dart": {
-    "mtime": 1786245293.6011658,
-    "ast_hash": "402730e3bf679b6553959c544ddf82e1",
+    "mtime": 1786249377.9090972,
+    "ast_hash": "790aaeedf894838f9b6a1ca6b80524a9",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/my_location_button.dart": {
@@ -2495,13 +2495,13 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/ride_use_case_providers.dart": {
-    "mtime": 1786245303.598322,
-    "ast_hash": "53d9638b2096a786f841fc15565ffbc1",
+    "mtime": 1786248612.272579,
+    "ast_hash": "f2a7495f0780fc71e8904536b4d7c524",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/ride_use_case_providers.g.dart": {
-    "mtime": 1786245303.5988033,
-    "ast_hash": "1c5b051f15ce8eb203d7f48bd45244c6",
+    "mtime": 1786248612.2728333,
+    "ast_hash": "3548e46b3749f326ff8b7d4fd773a2c8",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/rider_profile/static_rider_profile_provider.dart": {
@@ -2520,8 +2520,8 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/incoming_offer/incoming_offer_card.dart": {
-    "mtime": 1786245293.6023872,
-    "ast_hash": "8b6e2ded3dc8b4ea16a6222cf95c00ba",
+    "mtime": 1786249338.1605704,
+    "ast_hash": "568f0e053089764a416730d424f345fe",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/incoming_offer/offer_countdown_ring.dart": {
@@ -2575,8 +2575,8 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/tracking/at_pickup_card.dart": {
-    "mtime": 1786245293.6020377,
-    "ast_hash": "6430c0ee322b5711f99bdf6db3a9a87a",
+    "mtime": 1786249338.161271,
+    "ast_hash": "045470a5938ffffe337d164e04f4c7d4",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/tracking/card_stage_header.dart": {
@@ -2585,18 +2585,18 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/tracking/pickup_on_the_way_card.dart": {
-    "mtime": 1786245293.6021867,
-    "ast_hash": "c558a773f12010e55f6fc59d183a5f95",
+    "mtime": 1786249338.1609654,
+    "ast_hash": "abbe8c04b765cfe751fcfa86d83c20ca",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/tracking/trip_in_progress_card.dart": {
-    "mtime": 1786245293.6018965,
-    "ast_hash": "82852236767b9c89fcabfdd3ead863b2",
+    "mtime": 1786249338.161601,
+    "ast_hash": "a252944d0cbb749614dc81a6a0559c5d",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/trip_points_list.dart": {
-    "mtime": 1786143449.2561107,
-    "ast_hash": "b9271416a9f96d1323e058313642dd39",
+    "mtime": 1786249316.4781048,
+    "ast_hash": "6c5bfafebca32ba09119ccb0e608d876",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/location/initial_camera_target_provider.dart": {
@@ -2605,8 +2605,83 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/location/initial_camera_target_provider.g.dart": {
-    "mtime": 1786247248.5498762,
-    "ast_hash": "d763732a923327dd5bd55c979e88fca0",
+    "mtime": 1786248612.2723813,
+    "ast_hash": "29a1db1f816e7c08bfafc66a833e0439",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/data/models/geocoding/address_component.dart": {
+    "mtime": 1786248612.293785,
+    "ast_hash": "de059c0de0f7f7749cf05efe839a8b8f",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/data/models/geocoding/address_component.freezed.dart": {
+    "mtime": 1786248612.2941818,
+    "ast_hash": "913a6fe2f8a49249714c465bd26271b2",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/data/models/geocoding/address_component.g.dart": {
+    "mtime": 1786248612.295219,
+    "ast_hash": "6a6c30ef5c735a888f7eb32cbbf92001",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/data/models/geocoding/google_geocoding_response.dart": {
+    "mtime": 1786248612.295403,
+    "ast_hash": "5eeb3d9898e3530530a14ca31cc68855",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/data/models/geocoding/google_geocoding_response.freezed.dart": {
+    "mtime": 1786248612.2956672,
+    "ast_hash": "91c6566e18417cd73c39bfe4ccad8849",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/data/models/geocoding/google_geocoding_response.g.dart": {
+    "mtime": 1786248612.2958417,
+    "ast_hash": "b3e4670601d53b3e7ed79cfc566adeb2",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/data/repos/geocoding_repo.dart": {
+    "mtime": 1786248612.2960155,
+    "ast_hash": "dba238cf64dd81f54833af715e28f65a",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/data/repos/geocoding_repo.g.dart": {
+    "mtime": 1786248612.2961662,
+    "ast_hash": "1f211848b470f955af826260cb840c70",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/data/services/geocoding_api_service.dart": {
+    "mtime": 1786248612.2963295,
+    "ast_hash": "8fdc4a5c582167e5fc8b381d16bdb7f0",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/data/services/geocoding_api_service.g.dart": {
+    "mtime": 1786248612.2966359,
+    "ast_hash": "aa11cbfc96972377a3b16f5991d57274",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/domain/repos/geocoding_repo.dart": {
+    "mtime": 1786248612.2967741,
+    "ast_hash": "0d8b851b64aa89045fcecc1fd1c3425b",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/domain/use_case/get_point_label_use_case.dart": {
+    "mtime": 1786248612.2969115,
+    "ast_hash": "d6ea7bb715b84d3defcf016cef963330",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/ui/providers/location/point_label_provider.dart": {
+    "mtime": 1786249295.6773589,
+    "ast_hash": "9f80d0a32e3bfb192e65f437a1870b17",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/ui/providers/location/point_label_provider.g.dart": {
+    "mtime": 1786249413.3053203,
+    "ast_hash": "e0af034cc65dafe8681bc3b3fb379404",
+    "semantic_hash": ""
+  },
+  "apps/driver/test/features/ride/point_label_provider_test.dart": {
+    "mtime": 1786249578.273743,
+    "ast_hash": "8939f97da8f346dde8bae600ad2d9b39",
     "semantic_hash": ""
   }
 }
