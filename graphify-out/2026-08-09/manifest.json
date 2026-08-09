@@ -85,8 +85,8 @@
     "semantic_hash": "bd56ffe62896954529bb563d16f35f57"
   },
   "apps/driver/lib/core/const/driver_api_consts.dart": {
-    "mtime": 1786224092.6194692,
-    "ast_hash": "bab09686db2aa97f368ba4f44e96dcc6",
+    "mtime": 1786248612.2721138,
+    "ast_hash": "d2d6a88887cd7d47937a77776e06daf0",
     "semantic_hash": ""
   },
   "apps/driver/lib/core/const/ride_hub_methods.dart": {
@@ -595,8 +595,8 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/screens/ride_screen.dart": {
-    "mtime": 1786246196.3806274,
-    "ast_hash": "d563384006746a2127f4a478414a71e0",
+    "mtime": 1786248612.2730827,
+    "ast_hash": "48bc7ea2369d9b084d999c787ece8d43",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/splash/ui/screens/splash_screen.dart": {
@@ -2330,8 +2330,8 @@
     "semantic_hash": ""
   },
   "apps/driver/test/features/ride/driver_map_test.dart": {
-    "mtime": 1786222709.7731144,
-    "ast_hash": "b65fda19827ca3615e1e24131ee343ba",
+    "mtime": 1786247252.0785644,
+    "ast_hash": "d283867eaf5ca1abddb06535dd0f4cf7",
     "semantic_hash": ""
   },
   "apps/driver/test/features/ride/driver_route_polylines_test.dart": {
@@ -2345,13 +2345,13 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/location/device_location_provider.dart": {
-    "mtime": 1786047092.7956672,
-    "ast_hash": "30a4dd4013ec84c26ddea82ef37815d6",
+    "mtime": 1786247189.5023117,
+    "ast_hash": "9b3fa741d17eb53f2cf4c7586be54a55",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/location/device_location_provider.g.dart": {
-    "mtime": 1786047150.8824785,
-    "ast_hash": "020e95f2b6bb25fff5142d2efca0654a",
+    "mtime": 1786247248.5490165,
+    "ast_hash": "4cadc84a75ee0f2501484f3e2f752aac",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/location/driver_heading_provider.dart": {
@@ -2395,13 +2395,13 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/map/driver_markers_provider.dart": {
-    "mtime": 1786222709.8116481,
-    "ast_hash": "7023563f7450e712db0b8c8744426e3c",
+    "mtime": 1786247210.541454,
+    "ast_hash": "0042228eb9f428b667ede627fb12a127",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/map/driver_markers_provider.g.dart": {
-    "mtime": 1786047541.148394,
-    "ast_hash": "34df5c37f7f1fe862d9b932ae958a9ce",
+    "mtime": 1786247248.5505106,
+    "ast_hash": "992e9a2bc5440de54a5e40945235fc9e",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/map/driver_route_polylines_provider.dart": {
@@ -2495,13 +2495,13 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/ride_use_case_providers.dart": {
-    "mtime": 1786245303.598322,
-    "ast_hash": "53d9638b2096a786f841fc15565ffbc1",
+    "mtime": 1786248612.272579,
+    "ast_hash": "f2a7495f0780fc71e8904536b4d7c524",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/ride_use_case_providers.g.dart": {
-    "mtime": 1786245303.5988033,
-    "ast_hash": "1c5b051f15ce8eb203d7f48bd45244c6",
+    "mtime": 1786248612.2728333,
+    "ast_hash": "3548e46b3749f326ff8b7d4fd773a2c8",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/rider_profile/static_rider_profile_provider.dart": {
@@ -2600,13 +2600,103 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/location/initial_camera_target_provider.dart": {
-    "mtime": 1786246159.8524938,
-    "ast_hash": "bbfaf668b105f392217bfc599fdc2648",
+    "mtime": 1786247269.7561865,
+    "ast_hash": "80cd23d34aeefeb657c9c0fac0f702c1",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/location/initial_camera_target_provider.g.dart": {
-    "mtime": 1786246210.8865306,
-    "ast_hash": "07d7930be2d747720f39de1f198e75be",
+    "mtime": 1786248612.2723813,
+    "ast_hash": "29a1db1f816e7c08bfafc66a833e0439",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/data/models/geocoding/address_component.dart": {
+    "mtime": 1786248612.293785,
+    "ast_hash": "de059c0de0f7f7749cf05efe839a8b8f",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/data/models/geocoding/address_component.freezed.dart": {
+    "mtime": 1786248612.2941818,
+    "ast_hash": "913a6fe2f8a49249714c465bd26271b2",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/data/models/geocoding/address_component.g.dart": {
+    "mtime": 1786248612.295219,
+    "ast_hash": "6a6c30ef5c735a888f7eb32cbbf92001",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/data/models/geocoding/google_geocoding_response.dart": {
+    "mtime": 1786248612.295403,
+    "ast_hash": "5eeb3d9898e3530530a14ca31cc68855",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/data/models/geocoding/google_geocoding_response.freezed.dart": {
+    "mtime": 1786248612.2956672,
+    "ast_hash": "91c6566e18417cd73c39bfe4ccad8849",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/data/models/geocoding/google_geocoding_response.g.dart": {
+    "mtime": 1786248612.2958417,
+    "ast_hash": "b3e4670601d53b3e7ed79cfc566adeb2",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/data/repos/geocoding_repo.dart": {
+    "mtime": 1786248612.2960155,
+    "ast_hash": "dba238cf64dd81f54833af715e28f65a",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/data/repos/geocoding_repo.g.dart": {
+    "mtime": 1786248612.2961662,
+    "ast_hash": "1f211848b470f955af826260cb840c70",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/data/services/geocoding_api_service.dart": {
+    "mtime": 1786248612.2963295,
+    "ast_hash": "8fdc4a5c582167e5fc8b381d16bdb7f0",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/data/services/geocoding_api_service.g.dart": {
+    "mtime": 1786248612.2966359,
+    "ast_hash": "aa11cbfc96972377a3b16f5991d57274",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/domain/repos/geocoding_repo.dart": {
+    "mtime": 1786248612.2967741,
+    "ast_hash": "0d8b851b64aa89045fcecc1fd1c3425b",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/domain/use_case/get_point_label_use_case.dart": {
+    "mtime": 1786248612.2969115,
+    "ast_hash": "d6ea7bb715b84d3defcf016cef963330",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/ui/providers/location/address_lookup_gate.dart": {
+    "mtime": 1786248612.2970822,
+    "ast_hash": "3343c1c64d45afed535501c9210cee1a",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/ui/providers/location/current_address_provider.dart": {
+    "mtime": 1786248612.2972476,
+    "ast_hash": "843072f087ad6a698f1fe7685a75584f",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/ui/providers/location/current_address_provider.g.dart": {
+    "mtime": 1786248612.2974567,
+    "ast_hash": "98acbe4518b0d2a0f4420f08af93b4b4",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/ui/widgets/status/current_address_label.dart": {
+    "mtime": 1786248612.297625,
+    "ast_hash": "4fc56281e516bcb6c2bf85dbd73a8459",
+    "semantic_hash": ""
+  },
+  "apps/driver/test/features/ride/address_lookup_gate_test.dart": {
+    "mtime": 1786248612.297784,
+    "ast_hash": "37ba6a0a9dcdebf7621c640e2333bf04",
+    "semantic_hash": ""
+  },
+  "apps/driver/test/features/ride/current_address_provider_test.dart": {
+    "mtime": 1786248612.2979703,
+    "ast_hash": "6f5d07a205556233da3340a253421a86",
     "semantic_hash": ""
   }
 }
