@@ -42,3 +42,47 @@ final class DeviceLocationProvider
 }
 
 String _$deviceLocationHash() => r'847c9229a476f6bc41d51fa61d028f6b1dae20aa';
+
+/// The OS cached fix — a cache read rather than a GPS acquisition, so it
+/// settles immediately and holds no position stream open. Null when the cache
+/// is empty or the permission was refused.
+
+@ProviderFor(lastKnownLocation)
+final lastKnownLocationProvider = LastKnownLocationProvider._();
+
+/// The OS cached fix — a cache read rather than a GPS acquisition, so it
+/// settles immediately and holds no position stream open. Null when the cache
+/// is empty or the permission was refused.
+
+final class LastKnownLocationProvider
+    extends $FunctionalProvider<AsyncValue<LatLng?>, LatLng?, FutureOr<LatLng?>>
+    with $FutureModifier<LatLng?>, $FutureProvider<LatLng?> {
+  /// The OS cached fix — a cache read rather than a GPS acquisition, so it
+  /// settles immediately and holds no position stream open. Null when the cache
+  /// is empty or the permission was refused.
+  LastKnownLocationProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'lastKnownLocationProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$lastKnownLocationHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<LatLng?> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<LatLng?> create(Ref ref) {
+    return lastKnownLocation(ref);
+  }
+}
+
+String _$lastKnownLocationHash() => r'e2f2fa4723f73974c6125f86f1fdb1fc6834608e';

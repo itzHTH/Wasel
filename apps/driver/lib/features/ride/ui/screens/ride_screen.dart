@@ -4,6 +4,7 @@ import 'package:driver/features/ride/ui/providers/earnings/driver_balance_provid
 import 'package:driver/features/ride/ui/providers/map/driver_camera_controller.dart';
 import 'package:driver/features/ride/ui/providers/map/driver_is_camera_moving_provider.dart';
 import 'package:driver/features/ride/ui/providers/location/driver_location_broadcaster.dart';
+import 'package:driver/features/ride/ui/providers/location/initial_camera_target_provider.dart';
 import 'package:driver/features/ride/ui/providers/map/driver_markers_provider.dart';
 import 'package:driver/features/ride/ui/providers/map/driver_route_polylines_provider.dart';
 import 'package:driver/features/ride/ui/providers/navigation/navigation_handoff_provider.dart';
@@ -46,32 +47,37 @@ class _RideScreenState extends ConsumerState<RideScreen> {
     ref.watch(driverCameraControllerProvider);
 
     final markers = ref.watch(driverMarkersProvider);
+    final initialTarget = ref.watch(initialCameraTargetProvider);
 
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
         children: [
-          AppMap(
-            mapId: AppDriverConsts.mapStyleID,
-            markers: markers,
-            polylines:
-                ref.watch(driverRoutePolylinesProvider).value ?? const {},
-            onCameraMoveStarted: () {
-              final movedByDriver = ref
-                  .read(driverCameraControllerProvider.notifier)
-                  .onMoveStarted();
+          if (initialTarget.hasValue)
+            AppMap(
+              mapId: AppDriverConsts.mapStyleID,
+              initialTarget: initialTarget.requireValue,
+              markers: markers,
+              polylines:
+                  ref.watch(driverRoutePolylinesProvider).value ?? const {},
+              onCameraMoveStarted: () {
+                final movedByDriver = ref
+                    .read(driverCameraControllerProvider.notifier)
+                    .onMoveStarted();
 
-              // Following the driver repaints the camera constantly; only a
-              // real gesture should collapse an expanded card.
-              if (!movedByDriver) return;
+                // Following the driver repaints the camera constantly; only a
+                // real gesture should collapse an expanded card.
+                if (!movedByDriver) return;
 
-              ref.read(driverIsCameraMovingProvider.notifier).setMoving(true);
-            },
-            onCameraIdle: () {
-              ref.read(driverCameraControllerProvider.notifier).onIdle();
-              ref.read(driverIsCameraMovingProvider.notifier).setMoving(false);
-            },
-          ),
+                ref.read(driverIsCameraMovingProvider.notifier).setMoving(true);
+              },
+              onCameraIdle: () {
+                ref.read(driverCameraControllerProvider.notifier).onIdle();
+                ref
+                    .read(driverIsCameraMovingProvider.notifier)
+                    .setMoving(false);
+              },
+            ),
           const Positioned.fill(child: AppMapLoadingOverlay()),
           Positioned(
             top: AppDimens.space16,

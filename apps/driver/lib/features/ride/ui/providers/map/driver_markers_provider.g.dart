@@ -48,4 +48,4 @@ final class DriverMarkersProvider
   }
 }
 
-String _$driverMarkersHash() => r'a450e0efe46b33139fa1b55379437a671109c9ac';
+String _$driverMarkersHash() => r'e0058173b20dbc135d76c61a05695ce387cc2b6a';

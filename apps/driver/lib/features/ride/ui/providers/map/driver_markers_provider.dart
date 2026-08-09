@@ -7,6 +7,7 @@ import 'package:driver/features/ride/ui/providers/map/map_marker_icon_provider.d
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/wasel_core.dart';
 
@@ -17,9 +18,14 @@ Set<Marker> driverMarkers(Ref ref) {
   final isOnline = ref.watch(
     rideControllerProvider.select((s) => s.stage != DriverStage.offline),
   );
-  if (!isOnline) return const {};
 
-  final position = ref.watch(deviceLocationProvider).value;
+  // Online follows the live fix. Offline rests on the cached one so the car is
+  // on the map from app open without holding a position stream — and without a
+  // heading, which only the stream reports.
+  final position = isOnline
+      ? ref.watch(deviceLocationProvider).value?.toLatLng()
+      : ref.watch(lastKnownLocationProvider).value;
+
   if (position == null) return const {};
 
   final icon = ref.watch(mapMarkerIconProvider(AppDriverConsts.carIcon)).value;
@@ -27,11 +33,15 @@ Set<Marker> driverMarkers(Ref ref) {
   return {
     Marker(
       markerId: const MarkerId('driver'),
-      position: LatLng(position.latitude, position.longitude),
+      position: position,
       icon: icon ?? BitmapDescriptor.defaultMarker,
-      rotation: ref.watch(driverHeadingProvider),
+      rotation: isOnline ? ref.watch(driverHeadingProvider) : 0,
       anchor: const Offset(0.5, 0.5),
       flat: true,
     ),
   };
+}
+
+extension on Position {
+  LatLng toLatLng() => LatLng(latitude, longitude);
 }
