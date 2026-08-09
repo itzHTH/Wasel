@@ -1,5 +1,6 @@
 import 'package:driver/core/widgets/app_primary_button.dart';
 import 'package:driver/core/widgets/app_secondary_button.dart';
+import 'package:driver/features/ride/domain/entities/geo_point.dart';
 import 'package:driver/features/ride/domain/entities/payment_method.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/rider_profile/static_rider_profile_provider.dart';
@@ -16,14 +17,14 @@ import 'package:wasel_core/wasel_core.dart';
 class AtPickupCard extends ConsumerWidget {
   const AtPickupCard({
     super.key,
-    required this.dropoffLabel,
+    required this.dropoffPoint,
     required this.fare,
     required this.paymentMethod,
     required this.onStart,
     required this.onCancel,
   });
 
-  final String dropoffLabel;
+  final GeoPoint dropoffPoint;
   final num fare;
   final PaymentMethod paymentMethod;
   final VoidCallback onStart;
@@ -48,7 +49,7 @@ class AtPickupCard extends ConsumerWidget {
         children: [
           RiderInfoRow(profile: profile),
           SizedBox(height: AppDimens.space24),
-          TripPointsList(dropoffLabel: dropoffLabel),
+          TripPointsList(dropoffPoint: dropoffPoint),
           SizedBox(height: AppDimens.space24),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

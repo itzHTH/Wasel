@@ -1,5 +1,6 @@
 import 'package:driver/core/widgets/app_primary_button.dart';
 import 'package:driver/core/widgets/app_secondary_button.dart';
+import 'package:driver/features/ride/domain/entities/geo_point.dart';
 import 'package:driver/features/ride/domain/entities/payment_method.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/rider_profile/static_rider_profile_provider.dart';
@@ -18,8 +19,8 @@ class IncomingOfferCard extends ConsumerWidget {
     super.key,
     required this.fare,
     required this.paymentMethod,
-    required this.pickupLabel,
-    required this.dropoffLabel,
+    required this.pickupPoint,
+    required this.dropoffPoint,
     required this.total,
     required this.remaining,
     required this.onAccept,
@@ -28,8 +29,8 @@ class IncomingOfferCard extends ConsumerWidget {
 
   final num fare;
   final PaymentMethod paymentMethod;
-  final String pickupLabel;
-  final String dropoffLabel;
+  final GeoPoint pickupPoint;
+  final GeoPoint dropoffPoint;
   final Duration total;
   final Duration remaining;
   final VoidCallback onAccept;
@@ -83,8 +84,8 @@ class IncomingOfferCard extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   TripPointsList(
-                    pickupLabel: pickupLabel,
-                    dropoffLabel: dropoffLabel,
+                    pickupPoint: pickupPoint,
+                    dropoffPoint: dropoffPoint,
                   ),
                   SizedBox(height: AppDimens.space24),
                   RiderInfoRow(profile: profile),

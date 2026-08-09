@@ -1,35 +1,39 @@
+import 'package:driver/core/helpers/ride_formatters.dart';
+import 'package:driver/features/ride/domain/entities/geo_point.dart';
+import 'package:driver/features/ride/ui/providers/location/point_label_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/wasel_core.dart';
 
 class TripPointsList extends StatelessWidget {
-  const TripPointsList({super.key, this.pickupLabel, this.dropoffLabel});
+  const TripPointsList({super.key, this.pickupPoint, this.dropoffPoint});
 
-  final String? pickupLabel;
-  final String? dropoffLabel;
+  final GeoPoint? pickupPoint;
+  final GeoPoint? dropoffPoint;
 
   @override
   Widget build(BuildContext context) {
-    final pickupLabel = this.pickupLabel;
-    final dropoffLabel = this.dropoffLabel;
+    final pickupPoint = this.pickupPoint;
+    final dropoffPoint = this.dropoffPoint;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _Rail(
-          hasPickup: pickupLabel != null,
-          hasDropoff: dropoffLabel != null,
+          hasPickup: pickupPoint != null,
+          hasDropoff: dropoffPoint != null,
         ),
         SizedBox(width: AppDimens.space12),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (pickupLabel != null)
-                _Point(title: 'نقطة الانطلاق', value: pickupLabel),
-              if (pickupLabel != null && dropoffLabel != null)
+              if (pickupPoint != null)
+                _Point(title: 'نقطة الانطلاق', point: pickupPoint),
+              if (pickupPoint != null && dropoffPoint != null)
                 SizedBox(height: AppDimens.space24),
-              if (dropoffLabel != null)
-                _Point(title: 'نقطة الوصول', value: dropoffLabel),
+              if (dropoffPoint != null)
+                _Point(title: 'نقطة الوصول', point: dropoffPoint),
             ],
           ),
         ),
@@ -88,25 +92,51 @@ class _Connector extends StatelessWidget {
   }
 }
 
-class _Point extends StatelessWidget {
-  const _Point({required this.title, required this.value});
+/// Reads its own address so a lookup landing repaints one line of the card.
+/// Coordinates stand in whenever Google has no name for the spot.
+class _Point extends ConsumerWidget {
+  const _Point({required this.title, required this.point});
 
   final String title;
-  final String value;
+  final GeoPoint point;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final label = ref.watch(pointLabelProvider(point));
+    final fallback = RideFormatters.coordinates(
+      point.latitude,
+      point.longitude,
+    );
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(title, style: AppTextStyles.font12Neutral400Regular),
-        Text(
-          value,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          style: AppTextStyles.font14Secondary900SemiBold,
+        label.when(
+          loading: () => Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: AppInlineLoading(size: AppDimens.icon18),
+          ),
+          error: (_, _) => _LabelText(fallback),
+          data: (value) => _LabelText(value.isEmpty ? fallback : value),
         ),
       ],
+    );
+  }
+}
+
+class _LabelText extends StatelessWidget {
+  const _LabelText(this.value);
+
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      value,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+      style: AppTextStyles.font14Secondary900SemiBold,
     );
   }
 }

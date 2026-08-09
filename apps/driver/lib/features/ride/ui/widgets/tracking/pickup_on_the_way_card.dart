@@ -1,5 +1,6 @@
 import 'package:driver/core/widgets/app_primary_button.dart';
 import 'package:driver/core/widgets/app_secondary_button.dart';
+import 'package:driver/features/ride/domain/entities/geo_point.dart';
 import 'package:driver/features/ride/domain/entities/payment_method.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/rider_profile/static_rider_profile_provider.dart';
@@ -16,8 +17,8 @@ import 'package:wasel_core/wasel_core.dart';
 class PickupOnTheWayCard extends ConsumerWidget {
   const PickupOnTheWayCard({
     super.key,
-    required this.pickupLabel,
-    required this.dropoffLabel,
+    required this.pickupPoint,
+    required this.dropoffPoint,
     required this.fare,
     required this.paymentMethod,
     required this.onArrived,
@@ -25,8 +26,8 @@ class PickupOnTheWayCard extends ConsumerWidget {
     this.etaMinutes,
   });
 
-  final String pickupLabel;
-  final String dropoffLabel;
+  final GeoPoint pickupPoint;
+  final GeoPoint dropoffPoint;
   final num fare;
   final PaymentMethod paymentMethod;
   final VoidCallback onArrived;
@@ -50,8 +51,8 @@ class PickupOnTheWayCard extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           TripPointsList(
-            pickupLabel: pickupLabel,
-            dropoffLabel: dropoffLabel,
+            pickupPoint: pickupPoint,
+            dropoffPoint: dropoffPoint,
           ),
           SizedBox(height: AppDimens.space24),
           RiderInfoRow(profile: profile),
