@@ -4,10 +4,10 @@ import 'package:driver/features/ride/domain/entities/geo_point.dart';
 import 'package:driver/features/ride/domain/entities/payment_method.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/rider_profile/current_rider_profile_provider.dart';
+import 'package:driver/features/ride/ui/widgets/expandable_ride_card.dart';
 import 'package:driver/features/ride/ui/widgets/fare_hero.dart';
 import 'package:driver/features/ride/ui/widgets/incoming_offer/offer_countdown_ring.dart';
 import 'package:driver/features/ride/ui/widgets/payment_method_chip.dart';
-import 'package:driver/features/ride/ui/widgets/ride_card_shell.dart';
 import 'package:driver/features/ride/ui/widgets/rider_info_row.dart';
 import 'package:driver/features/ride/ui/widgets/trip_points_list.dart';
 import 'package:flutter/material.dart';
@@ -36,19 +36,16 @@ class IncomingOfferCard extends ConsumerWidget {
   final VoidCallback onAccept;
   final VoidCallback onDismiss;
 
-  /// Share of the screen the scrollable middle may take before it scrolls,
-  /// so a long note from the rider can never push the buttons off-screen.
-  static const _maxDetailsFraction = 0.34;
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final profile = ref.watch(currentRiderProfileProvider);
     final isBusy = ref.watch(rideActionControllerProvider).isLoading;
-    final maxDetailsHeight =
-        MediaQuery.sizeOf(context).height * _maxDetailsFraction;
 
-    return RideCardShell(
-      child: Column(
+    // Collapsed, so the framed route stays visible behind the card. The fare,
+    // the countdown and the answer buttons are what the driver decides on, so
+    // those stay out; the addresses ride the card's own peek and a drag.
+    return ExpandableRideCard(
+      summary: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -75,27 +72,23 @@ class IncomingOfferCard extends ConsumerWidget {
             alignment: AlignmentDirectional.centerStart,
             child: PaymentMethodChip(method: paymentMethod),
           ),
-          SizedBox(height: AppDimens.space24),
-          ConstrainedBox(
-            constraints: BoxConstraints(maxHeight: maxDetailsHeight),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  TripPointsList(
-                    pickupPoint: pickupPoint,
-                    dropoffPoint: dropoffPoint,
-                  ),
-                  if (profile != null) ...[
-                    SizedBox(height: AppDimens.space24),
-                    RiderInfoRow(profile: profile, canCall: false),
-                  ],
-                ],
-              ),
-            ),
-          ),
-          SizedBox(height: AppDimens.space24),
+        ],
+      ),
+      details: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          TripPointsList(pickupPoint: pickupPoint, dropoffPoint: dropoffPoint),
+          if (profile != null) ...[
+            SizedBox(height: AppDimens.space24),
+            RiderInfoRow(profile: profile, canCall: false),
+          ],
+        ],
+      ),
+      footer: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
           AppPrimaryButton(
             label: 'قبول الطلب',
             onPressed: onAccept,

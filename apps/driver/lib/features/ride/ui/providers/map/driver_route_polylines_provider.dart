@@ -31,6 +31,9 @@ Future<Set<Polyline>> driverRoutePolylines(Ref ref) async {
 
   final (GeoPoint, GeoPoint)? segment = switch (stage) {
     DriverStage.heading => await _driverToPickup(ref, ride),
+    // An open offer draws the trip the driver is being asked to take, which is
+    // the same pickup-to-drop-off line the ride itself follows.
+    DriverStage.offerReceived ||
     DriverStage.inProgress => (ride.position, ride.dropPosition),
     _ => null,
   };
