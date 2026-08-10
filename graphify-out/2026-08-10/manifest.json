@@ -2480,8 +2480,8 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/incoming_offer/incoming_offer_card.dart": {
-    "mtime": 1786317855.579457,
-    "ast_hash": "4b228aacb523dd5450ac4494263eabad",
+    "mtime": 1786320006.9114535,
+    "ast_hash": "b2a2dab20822f15a7b5f9a2789170b9b",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/incoming_offer/offer_countdown_ring.dart": {
