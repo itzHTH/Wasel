@@ -8,12 +8,27 @@ part of 'driver_camera_controller.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
+/// Sole owner of the driver map's camera.
+///
+/// Two behaviours compete for it and must never run at once: the follow-camera
+/// that trails the car, and the wide frame that shows a whole offered trip.
+/// Keeping both here is what stops them from fighting over the same map.
 
 @ProviderFor(DriverCameraController)
 final driverCameraControllerProvider = DriverCameraControllerProvider._();
 
+/// Sole owner of the driver map's camera.
+///
+/// Two behaviours compete for it and must never run at once: the follow-camera
+/// that trails the car, and the wide frame that shows a whole offered trip.
+/// Keeping both here is what stops them from fighting over the same map.
 final class DriverCameraControllerProvider
     extends $NotifierProvider<DriverCameraController, void> {
+  /// Sole owner of the driver map's camera.
+  ///
+  /// Two behaviours compete for it and must never run at once: the follow-camera
+  /// that trails the car, and the wide frame that shows a whole offered trip.
+  /// Keeping both here is what stops them from fighting over the same map.
   DriverCameraControllerProvider._()
     : super(
         from: null,
@@ -42,7 +57,13 @@ final class DriverCameraControllerProvider
 }
 
 String _$driverCameraControllerHash() =>
-    r'e3f2bb9292679edd378bb035de4d61b89eff17ee';
+    r'736789aa264e5d2e09684e39e3cb7cea7ca054cd';
+
+/// Sole owner of the driver map's camera.
+///
+/// Two behaviours compete for it and must never run at once: the follow-camera
+/// that trails the car, and the wide frame that shows a whole offered trip.
+/// Keeping both here is what stops them from fighting over the same map.
 
 abstract class _$DriverCameraController extends $Notifier<void> {
   void build();
