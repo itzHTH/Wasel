@@ -10,6 +10,7 @@ import 'package:driver/features/ride/domain/use_case/get_point_label_use_case.da
 import 'package:driver/features/ride/domain/use_case/get_route_use_case.dart';
 import 'package:driver/features/ride/domain/use_case/start_ride_use_case.dart';
 import 'package:driver/features/ride/domain/use_case/update_driver_location_use_case.dart';
+import 'package:driver/features/ride/domain/use_case/watch_ride_connection_use_case.dart';
 import 'package:driver/features/ride/domain/use_case/watch_ride_event_use_case.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -19,6 +20,12 @@ part 'ride_use_case_providers.g.dart';
 WatchRideEventUseCase watchRideEventUseCase(Ref ref) {
   final repo = ref.watch(rideRepoProvider);
   return WatchRideEventUseCase(repo);
+}
+
+@riverpod
+WatchRideConnectionUseCase watchRideConnectionUseCase(Ref ref) {
+  final repo = ref.watch(rideRepoProvider);
+  return WatchRideConnectionUseCase(repo);
 }
 
 @riverpod

@@ -30,6 +30,10 @@ class SignalrClientImpl implements ISignalRClient {
   SignalrClientImpl(this._hubUrl);
   final String _hubUrl;
 
+  /// How long an invoke waits for the hub to settle before giving up. Kept
+  /// under the callers' retry cadence so pending invokes cannot stack up.
+  static const _connectionWait = Duration(seconds: 8);
+
   HubConnection? _hubConnection;
   // Handlers registered via [on] before [connect] builds the HubConnection.
   // Without this, `on()` would call `null?.on(...)` .
@@ -56,6 +60,7 @@ class SignalrClientImpl implements ISignalRClient {
       _hubUrl,
       options: HttpConnectionOptions(
         accessTokenFactory: () async => jwt,
+        requestTimeout: 15 * 1000, // 15s
         logger: logger,
       ),
     );
@@ -74,7 +79,19 @@ class SignalrClientImpl implements ISignalRClient {
     _handlers.forEach(_hubConnection!.on);
 
     _setStatus(SignalRStatus.connecting);
-    await _hubConnection!.start();
+
+    try {
+      await _hubConnection!.start();
+    } catch (_) {
+      // Release the connection so the client stays reusable. Without this a
+      // failed handshake wedges it at `connecting` forever: the guard at the
+      // top of this method turns every later connect() into a no-op, and every
+      // invoke then waits out its timeout against a hub that will never come up.
+      _hubConnection = null;
+      _setStatus(SignalRStatus.disconnected);
+      rethrow;
+    }
+
     _setStatus(SignalRStatus.connected);
   }
 
@@ -104,7 +121,35 @@ class SignalrClientImpl implements ISignalRClient {
     String methodName, {
     List<Object>? args = const [],
   }) async {
-    return _hubConnection!.invoke(methodName, args: args);
+    final connection = await _whenConnected();
+    return connection.invoke(methodName, args: args);
+  }
+
+  Future<HubConnection> _whenConnected() async {
+    if (_status != SignalRStatus.connected) {
+      // Driven by an explicit subscription rather than firstWhere().timeout():
+      // a timeout on the future leaves the underlying stream listener attached,
+      // so every invoke that gave up would leak one onto the status controller.
+      final connected = Completer<void>();
+      final subscription = _statusController.stream.listen((status) {
+        if (status == SignalRStatus.connected && !connected.isCompleted) {
+          connected.complete();
+        }
+      });
+
+      try {
+        await connected.future.timeout(_connectionWait);
+      } finally {
+        await subscription.cancel();
+      }
+    }
+
+    final connection = _hubConnection;
+    if (connection == null) {
+      throw StateError('SignalR hub connection is unavailable');
+    }
+
+    return connection;
   }
 
   @override
