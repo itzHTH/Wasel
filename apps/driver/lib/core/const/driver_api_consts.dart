@@ -9,6 +9,7 @@ class DriverApiConsts {
   static const String driverCancelRide = "/api/v1/Rides/{id}/driver-cancel";
 
   static const String getDriverWalletBalance = "/api/v1/wallet/driver/balance";
+  static const String getDriverEarnings = "/api/v1/DriverEarnings/overview";
 
   static const String googleReverseGeocoding = "/geocode/location/{lat},{lng}";
 }

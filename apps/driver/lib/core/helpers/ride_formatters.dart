@@ -21,6 +21,18 @@ abstract final class RideFormatters {
     return formatted;
   }
 
+  /// Reads a count of minutes back as "2 س 35 د", dropping the half that is
+  /// zero so short shifts stay short to read.
+  static String onlineDuration(num minutes) {
+    final total = minutes.round();
+    final hours = total ~/ 60;
+    final remainder = total % 60;
+
+    if (hours == 0) return '$remainder د';
+    if (remainder == 0) return '$hours س';
+    return '$hours س $remainder د';
+  }
+
   static String distance(String km) {
     final parsed = double.tryParse(km);
     final formatted = parsed == null ? km : parsed.toStringAsFixed(1);
