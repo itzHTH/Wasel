@@ -57,6 +57,55 @@ final class WatchRideEventUseCaseProvider
 String _$watchRideEventUseCaseHash() =>
     r'de50baeabdc2537eb725193d8bf31768ced388b6';
 
+@ProviderFor(watchRideConnectionUseCase)
+final watchRideConnectionUseCaseProvider =
+    WatchRideConnectionUseCaseProvider._();
+
+final class WatchRideConnectionUseCaseProvider
+    extends
+        $FunctionalProvider<
+          WatchRideConnectionUseCase,
+          WatchRideConnectionUseCase,
+          WatchRideConnectionUseCase
+        >
+    with $Provider<WatchRideConnectionUseCase> {
+  WatchRideConnectionUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'watchRideConnectionUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$watchRideConnectionUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<WatchRideConnectionUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  WatchRideConnectionUseCase create(Ref ref) {
+    return watchRideConnectionUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(WatchRideConnectionUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<WatchRideConnectionUseCase>(value),
+    );
+  }
+}
+
+String _$watchRideConnectionUseCaseHash() =>
+    r'4f804e9ffeeb427ad37d5268d2bee9a39c3d0315';
+
 @ProviderFor(updateDriverLocationUseCase)
 final updateDriverLocationUseCaseProvider =
     UpdateDriverLocationUseCaseProvider._();

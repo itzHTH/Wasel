@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:driver/features/ride/data/models/update_location/update_location_arg.dart';
+import 'package:driver/features/ride/domain/entities/ride_connection_status.dart';
 import 'package:driver/features/ride/domain/use_case/update_driver_location_use_case.dart';
+import 'package:driver/features/ride/domain/use_case/watch_ride_connection_use_case.dart';
 import 'package:driver/features/ride/ui/providers/location/device_location_provider.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
@@ -35,13 +37,21 @@ class LocationBroadcastException implements Exception {
 class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
   static const _heartbeat = Duration(seconds: 10);
   static const _failureLimit = 3;
+  static const _fixFailureLimit = 3;
   static const _fixTimeout = Duration(seconds: 15);
 
   ProviderSubscription<AsyncValue<Position>>? _positions;
   Timer? _ticker;
   Position? _lastPosition;
   ProviderSubscription<UpdateDriverLocationUseCase>? _useCase;
+  ProviderSubscription<WatchRideConnectionUseCase>? _connectionUseCase;
+  StreamSubscription<RideConnectionStatus>? _connection;
+  Future<Position?>? _acquisition;
+  bool _sending = false;
+  bool _connected = false;
+  bool _everConnected = false;
   int _failures = 0;
+  int _fixFailures = 0;
   int _session = 0;
 
   @override
@@ -81,39 +91,42 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
     _positions = ref.listen(deviceLocationProvider, (_, next) {
       if (next case AsyncData(:final value)) _onPosition(value);
     });
+    _watchConnection();
+
+    // Armed before the first send so a slow cold fix cannot hold the heartbeat
+    // back — the first tick is a full interval away either way.
     _ticker = Timer.periodic(_heartbeat, (_) => unawaited(_broadcast()));
 
-    await _seedPosition(session);
+    await _broadcast();
   }
 
-  /// The position stream only fires once the driver has moved the distance
-  /// filter, so a driver who goes online and stays put never produces a first
-  /// fix — leaving [_lastPosition] null and every heartbeat with nothing to
-  /// send. Seed it once so dispatch sees the driver from the moment they
-  /// connect.
-  Future<void> _seedPosition(int session) async {
-    final Position position;
+  void _watchConnection() {
+    _connectionUseCase = ref.listen(
+      watchRideConnectionUseCaseProvider,
+      (_, _) {},
+    );
+    _connection = _connectionUseCase!
+        .read()
+        .call(null)
+        .listen(
+          _onConnection,
+          // The repo forwards transport errors on this stream. They say nothing the
+          // driver can act on and the heartbeat carries on regardless, so they are
+          // absorbed here rather than escaping to the zone handler.
+          onError: (Object _, StackTrace _) {},
+        );
+  }
 
-    try {
-      position =
-          await Geolocator.getLastKnownPosition() ??
-          await Geolocator.getCurrentPosition(
-            locationSettings: const LocationSettings(
-              accuracy: LocationAccuracy.high,
-              timeLimit: _fixTimeout,
-            ),
-          );
-    } catch (_) {
-      return;
-    }
+  void _onConnection(RideConnectionStatus status) {
+    final connected = status == RideConnectionStatus.connected;
+    // The first connect is already covered by the send in [_start]; only a
+    // re-established hub needs a fresh push of its own.
+    final reconnected = connected && !_connected && _everConnected;
 
-    if (session != _session || !ref.mounted) return;
+    _connected = connected;
+    _everConnected |= connected;
 
-    // The stream may have delivered a newer fix while we were waiting.
-    if (_lastPosition != null) return;
-
-    _lastPosition = position;
-    await _broadcast();
+    if (reconnected) unawaited(_broadcast());
   }
 
   void _onPosition(Position position) {
@@ -122,11 +135,24 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
   }
 
   Future<void> _broadcast() async {
-    final position = _lastPosition;
     final useCase = _useCase;
-    if (position == null || useCase == null || !ref.mounted) return;
+    // A heartbeat that overlaps an in-flight send would queue behind it and
+    // flush a burst of stale fixes; the next tick carries fresher data anyway.
+    if (useCase == null || _sending || !ref.mounted) return;
 
     final session = _session;
+    var position = _lastPosition;
+
+    if (position == null) {
+      final acquired = await _acquirePosition(session);
+      if (session != _session || !ref.mounted) return;
+      position = _lastPosition ?? acquired;
+    }
+
+    if (position == null) return;
+
+    _lastPosition = position;
+    _sending = true;
 
     try {
       await useCase.read().call(
@@ -139,7 +165,48 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
       _failures = 0;
     } catch (_) {
       _onBroadcastFailed(session);
+    } finally {
+      _sending = false;
     }
+  }
+
+  Future<Position?> _acquirePosition(int session) {
+    // Only clear the slot if it is still ours: an acquisition left over from a
+    // previous session would otherwise null out the current one and let a
+    // second high-accuracy fix start alongside it.
+    return _acquisition ??= _coldFix(session).whenComplete(() {
+      if (session == _session) _acquisition = null;
+    });
+  }
+
+  Future<Position?> _coldFix(int session) async {
+    try {
+      final position =
+          await Geolocator.getLastKnownPosition() ??
+          await Geolocator.getCurrentPosition(
+            locationSettings: const LocationSettings(
+              accuracy: LocationAccuracy.high,
+              timeLimit: _fixTimeout,
+            ),
+          );
+
+      if (session == _session) _fixFailures = 0;
+      return position;
+    } catch (_) {
+      _onFixFailed(session);
+      return null;
+    }
+  }
+
+  /// Counted here rather than in [_broadcast] so concurrent callers sharing one
+  /// in-flight acquisition record a single failure between them.
+  void _onFixFailed(int session) {
+    if (session != _session) return;
+
+    _fixFailures++;
+    if (_fixFailures != _fixFailureLimit) return;
+
+    _fail(session, 'ما نگدر نحدد موقعك، تأكد من إشارة الـ GPS');
   }
 
   void _onBroadcastFailed(int session) {
@@ -187,10 +254,18 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
     _positions = null;
     _useCase?.close();
     _useCase = null;
+    unawaited(_connection?.cancel());
+    _connection = null;
+    _connectionUseCase?.close();
+    _connectionUseCase = null;
     _ticker?.cancel();
     _ticker = null;
     _lastPosition = null;
+    _acquisition = null;
+    _connected = false;
+    _everConnected = false;
     _failures = 0;
+    _fixFailures = 0;
     _session++;
   }
 }

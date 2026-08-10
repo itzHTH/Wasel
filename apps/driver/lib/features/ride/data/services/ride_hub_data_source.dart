@@ -10,6 +10,7 @@ part 'ride_hub_data_source.g.dart';
 
 abstract class IRideHubDataSource {
   Stream<HubRideEvent> get events;
+  Stream<SignalRStatus> get connectionStatus;
   Future<void> connect({required String jwt});
   Future<void> updateLocation(
     double latitude,
@@ -28,6 +29,24 @@ class RideHubDatasource implements IRideHubDataSource {
 
   @override
   Stream<HubRideEvent> get events => _controller.stream;
+
+  @override
+  Stream<SignalRStatus> get connectionStatus {
+    // Stream.multi rather than an async* generator: the current state has to be
+    // read and the live stream subscribed to in the same synchronous step, or a
+    // transition landing between the two would be dropped.
+    return Stream.multi((controller) {
+      controller.add(_client.status);
+
+      final subscription = _client.statusStream.listen(
+        controller.add,
+        onError: controller.addError,
+        onDone: controller.close,
+      );
+
+      controller.onCancel = subscription.cancel;
+    });
+  }
 
   @override
   Future<void> connect({required String jwt}) async {

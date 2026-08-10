@@ -6,8 +6,10 @@ import 'package:driver/features/ride/data/services/ride_api_service.dart';
 import 'package:driver/features/ride/data/services/ride_hub_data_source.dart';
 import 'package:driver/features/ride/domain/entities/driver_balance.dart';
 import 'package:driver/features/ride/domain/entities/driver_ride_events.dart';
+import 'package:driver/features/ride/domain/entities/ride_connection_status.dart';
 import 'package:driver/features/ride/domain/repos/ride_repo.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:wasel_core/networking/signalR/i_signalr_client.dart';
 import 'package:wasel_core/wasel_core.dart';
 
 part 'ride_repo.g.dart';
@@ -61,6 +63,22 @@ class RideRepo implements BaseRideRepo {
     );
 
     return events.stream;
+  }
+
+  /// [distinct] because the hub republishes its state on every transition and
+  /// callers act on changes — a repeated `connected` is not a reconnect.
+  @override
+  Stream<RideConnectionStatus> watchConnectionStatus() {
+    return _rideHubService.connectionStatus.map(_toConnectionStatus).distinct();
+  }
+
+  RideConnectionStatus _toConnectionStatus(SignalRStatus status) {
+    return switch (status) {
+      SignalRStatus.disconnected => RideConnectionStatus.disconnected,
+      SignalRStatus.connecting => RideConnectionStatus.connecting,
+      SignalRStatus.connected => RideConnectionStatus.connected,
+      SignalRStatus.reconnecting => RideConnectionStatus.reconnecting,
+    };
   }
 
   @override

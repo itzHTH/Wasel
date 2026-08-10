@@ -460,8 +460,8 @@
     "semantic_hash": "014ae9c6ee4a5bf10bd7fde4f2b6f465"
   },
   "apps/driver/lib/features/ride/data/repos/ride_repo.dart": {
-    "mtime": 1786226243.3259585,
-    "ast_hash": "ea64930dbdcc248fa3eebd52436f1c77",
+    "mtime": 1786322878.801105,
+    "ast_hash": "b270eda1174632952732ba3165380ea9",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/data/repos/ride_repo.g.dart": {
@@ -490,8 +490,8 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/data/services/ride_hub_data_source.dart": {
-    "mtime": 1786316613.3865008,
-    "ast_hash": "baef910691f8fb31c8159cf656afd002",
+    "mtime": 1786324680.7619936,
+    "ast_hash": "7a3ff3be37b0a1cbefbc4d38dfdf1935",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/data/services/ride_hub_data_source.g.dart": {
@@ -525,8 +525,8 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/domain/repos/ride_repo.dart": {
-    "mtime": 1786224384.2432642,
-    "ast_hash": "2dcb69cfbfd687216ee48a16fae7a13c",
+    "mtime": 1786324608.4222345,
+    "ast_hash": "af312e72e46d59932f1330672db7a11d",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/domain/repos/route_repo.dart": {
@@ -1780,9 +1780,9 @@
     "semantic_hash": "2b1b7db09334db39deee15151fc71d67"
   },
   "packages/core/lib/networking/signalR/signalr_client_impl.dart": {
-    "mtime": 1785967576.7122755,
-    "ast_hash": "38fff8e07b49586a89cb972c0e68b53a",
-    "semantic_hash": "38fff8e07b49586a89cb972c0e68b53a"
+    "mtime": 1786324477.6542244,
+    "ast_hash": "7db6e12eccffadd402bbcba7d335b5ef",
+    "semantic_hash": ""
   },
   "packages/core/lib/networking/signalR/signalr_client_impl.g.dart": {
     "mtime": 1785589002.834167,
@@ -2335,13 +2335,13 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/location/driver_location_broadcaster.dart": {
-    "mtime": 1786245293.5985377,
-    "ast_hash": "f203593ff7800aa8406aa5934ee6806c",
+    "mtime": 1786324668.4961305,
+    "ast_hash": "8eee72d8be262eef2bc683f6ba48e477",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/location/driver_location_broadcaster.g.dart": {
-    "mtime": 1786220612.3715599,
-    "ast_hash": "08f06faab508d3b4ed7243017e3502cd",
+    "mtime": 1786322937.7166765,
+    "ast_hash": "cdf881cdddeda6ea72376377e75a65da",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/map/driver_camera_controller.dart": {
@@ -2350,8 +2350,8 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/map/driver_camera_controller.g.dart": {
-    "mtime": 1786319356.4658694,
-    "ast_hash": "6287723b5f1c85ac3eb787c9b6a0e9f4",
+    "mtime": 1786322937.7173226,
+    "ast_hash": "b3fb50f9efb2e80f1be72bcaa2a6f795",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/map/driver_is_camera_moving_provider.dart": {
@@ -2445,13 +2445,13 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/ride_use_case_providers.dart": {
-    "mtime": 1786248612.272579,
-    "ast_hash": "f2a7495f0780fc71e8904536b4d7c524",
+    "mtime": 1786322894.670371,
+    "ast_hash": "5cbbf5f59b122393993a661869a1b7e7",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/ride_use_case_providers.g.dart": {
-    "mtime": 1786248612.2728333,
-    "ast_hash": "3548e46b3749f326ff8b7d4fd773a2c8",
+    "mtime": 1786322937.7179413,
+    "ast_hash": "b7a5a0882f52b5975cdd553959d3448b",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/fare_hero.dart": {
@@ -2642,6 +2642,16 @@
   "apps/driver/assets/icons/pin-2.svg": {
     "mtime": 1786319272.8610907,
     "ast_hash": "ad940ea91d364b3f3436cb73595db598",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/domain/entities/ride_connection_status.dart": {
+    "mtime": 1786324597.4949,
+    "ast_hash": "0c83977c5deb7de903a87ee6a81c0d65",
+    "semantic_hash": ""
+  },
+  "apps/driver/lib/features/ride/domain/use_case/watch_ride_connection_use_case.dart": {
+    "mtime": 1786322884.1169224,
+    "ast_hash": "b19f925652354712689f2085ebb7804c",
     "semantic_hash": ""
   }
 }
