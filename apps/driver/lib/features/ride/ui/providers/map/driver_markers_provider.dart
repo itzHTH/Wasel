@@ -54,9 +54,8 @@ Set<Marker> _tripPins(Ref ref) {
   if (ride == null) return const {};
 
   final (bool pickup, bool dropoff) = switch (stage) {
-    DriverStage.offerReceived => (true, true),
+    DriverStage.offerReceived || DriverStage.inProgress => (true, true),
     DriverStage.heading || DriverStage.arrived => (true, false),
-    DriverStage.inProgress => (false, true),
     _ => (false, false),
   };
 
