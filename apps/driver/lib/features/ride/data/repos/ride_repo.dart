@@ -5,7 +5,9 @@ import 'package:driver/features/ride/data/models/update_location/update_location
 import 'package:driver/features/ride/data/services/ride_api_service.dart';
 import 'package:driver/features/ride/data/services/ride_hub_data_source.dart';
 import 'package:driver/features/ride/domain/entities/driver_balance.dart';
+import 'package:driver/features/ride/domain/entities/driver_earnings.dart';
 import 'package:driver/features/ride/domain/entities/driver_ride_events.dart';
+import 'package:driver/features/ride/domain/entities/earnings_period.dart';
 import 'package:driver/features/ride/domain/entities/ride_connection_status.dart';
 import 'package:driver/features/ride/domain/repos/ride_repo.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -119,6 +121,21 @@ class RideRepo implements BaseRideRepo {
   Future<ApiResults<DriverBalance>> getDriverWalletBalance() async {
     try {
       final response = await _rideApiService.getDriverWalletBalance();
+      return ApiResults.success(response.toEntity());
+    } catch (e) {
+      return ApiResults.failure(ErrorHandler.handle(e));
+    }
+  }
+
+  @override
+  Future<ApiResults<DriverEarnings>> getDriverEarnings(
+    EarningsPeriod period,
+  ) async {
+    try {
+      final response = await _rideApiService.getDriverEarnings(
+        startDate: period.start,
+        endDate: period.end,
+      );
       return ApiResults.success(response.toEntity());
     } catch (e) {
       return ApiResults.failure(ErrorHandler.handle(e));

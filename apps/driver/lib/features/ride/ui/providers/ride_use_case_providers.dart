@@ -6,6 +6,7 @@ import 'package:driver/features/ride/domain/use_case/arrive_at_start_point_use_c
 import 'package:driver/features/ride/domain/use_case/complete_ride_use_case.dart';
 import 'package:driver/features/ride/domain/use_case/driver_cancel_ride_use_case.dart';
 import 'package:driver/features/ride/domain/use_case/get_driver_balance_use_case.dart';
+import 'package:driver/features/ride/domain/use_case/get_driver_earnings_use_case.dart';
 import 'package:driver/features/ride/domain/use_case/get_point_label_use_case.dart';
 import 'package:driver/features/ride/domain/use_case/get_route_use_case.dart';
 import 'package:driver/features/ride/domain/use_case/start_ride_use_case.dart';
@@ -74,6 +75,12 @@ GetRouteUseCase getRouteUseCase(Ref ref) {
 GetDriverBalanceUseCase getDriverBalanceUseCase(Ref ref) {
   final repo = ref.watch(rideRepoProvider);
   return GetDriverBalanceUseCase(repo);
+}
+
+@riverpod
+GetDriverEarningsUseCase getDriverEarningsUseCase(Ref ref) {
+  final repo = ref.watch(rideRepoProvider);
+  return GetDriverEarningsUseCase(repo);
 }
 
 @riverpod
