@@ -16,6 +16,9 @@ class DriverStatusBar extends ConsumerWidget {
     final stage = ref.watch(
       rideControllerProvider.select((state) => state.stage),
     );
+    final connection = ref.watch(
+      rideControllerProvider.select((state) => state.connection),
+    );
 
     final earnings = ref.watch(driverBalanceControllerProvider);
 
@@ -40,10 +43,10 @@ class DriverStatusBar extends ConsumerWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _ConnectionDot(isOnline: stage != DriverStage.offline),
+            _ConnectionDot(stage: stage, connection: connection),
             SizedBox(width: AppDimens.space8),
             Text(
-              _titleFor(stage),
+              _titleFor(stage, connection),
               style: AppTextStyles.font14Secondary900SemiBold,
             ),
             SizedBox(width: AppDimens.space12),
@@ -55,28 +58,44 @@ class DriverStatusBar extends ConsumerWidget {
     );
   }
 
-  String _titleFor(DriverStage stage) => switch (stage) {
-    DriverStage.offline => 'غير متصل',
-    DriverStage.online => 'متصل',
-    DriverStage.offerReceived => 'وصلك طلب',
-    DriverStage.heading => 'بالطريق للراكب',
-    DriverStage.arrived => 'بانتظار الراكب',
-    DriverStage.inProgress => 'رحلة جارية',
-    DriverStage.completed => 'خلصت الرحلة',
-  };
+  /// A live connection attempt outranks the stage: mid-reconnect the driver is
+  /// still on their ride, but what they need to know is that the link is down.
+  String _titleFor(DriverStage stage, DriverConnectionState connection) =>
+      switch (connection) {
+        DriverConnectionState.connecting => 'دا نتصل...',
+        DriverConnectionState.reconnecting => 'دا نعيد الاتصال...',
+        DriverConnectionState.dropped => 'انقطع الاتصال',
+        DriverConnectionState.idle => switch (stage) {
+          DriverStage.offline => 'غير متصل',
+          DriverStage.online => 'متصل',
+          DriverStage.offerReceived => 'وصلك طلب',
+          DriverStage.heading => 'بالطريق للراكب',
+          DriverStage.arrived => 'بانتظار الراكب',
+          DriverStage.inProgress => 'رحلة جارية',
+          DriverStage.completed => 'خلصت الرحلة',
+        },
+      };
 }
 
 class _ConnectionDot extends StatelessWidget {
-  const _ConnectionDot({required this.isOnline});
+  const _ConnectionDot({required this.stage, required this.connection});
 
-  final bool isOnline;
+  final DriverStage stage;
+  final DriverConnectionState connection;
 
   @override
   Widget build(BuildContext context) {
     return Icon(
       Icons.circle,
       size: AppDimens.icon18,
-      color: isOnline ? AppColor.alertSuccess500 : AppColor.neutral400,
+      color: switch (connection) {
+        DriverConnectionState.dropped => AppColor.alertError500,
+        DriverConnectionState.reconnecting => AppColor.alertWarning500,
+        DriverConnectionState.connecting => AppColor.neutral400,
+        DriverConnectionState.idle => stage == DriverStage.offline
+            ? AppColor.neutral400
+            : AppColor.alertSuccess500,
+      },
     );
   }
 }

@@ -13,10 +13,13 @@ enum DriverStage {
   completed,
 }
 
+enum DriverConnectionState { idle, connecting, reconnecting, dropped }
+
 @freezed
 abstract class DriverRideState with _$DriverRideState {
   const factory DriverRideState({
     @Default(DriverStage.offline) DriverStage stage,
+    @Default(DriverConnectionState.idle) DriverConnectionState connection,
     ReceiveRideRequest? ride,
     @Default(0) int secondsLeft,
   }) = _DriverRideState;
