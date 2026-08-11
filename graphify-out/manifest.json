@@ -460,8 +460,8 @@
     "semantic_hash": "014ae9c6ee4a5bf10bd7fde4f2b6f465"
   },
   "apps/driver/lib/features/ride/data/repos/ride_repo.dart": {
-    "mtime": 1786399125.2676456,
-    "ast_hash": "7bf13dcfab522bac58b4ab389f979da0",
+    "mtime": 1786405447.8291132,
+    "ast_hash": "4d1e2bd38797f969405af01e6d20a6be",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/data/repos/ride_repo.g.dart": {
@@ -575,23 +575,23 @@
     "semantic_hash": "8bce175e4278904035d6531c107e258c"
   },
   "apps/driver/lib/features/ride/ui/providers/ride_controller/driver_ride_state.dart": {
-    "mtime": 1785981229.789227,
-    "ast_hash": "f846df93a3f7d9e8ba7e9d6570beec89",
-    "semantic_hash": "f846df93a3f7d9e8ba7e9d6570beec89"
+    "mtime": 1786403208.036407,
+    "ast_hash": "25f4a7411e5a8b562583a49aded997a0",
+    "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/ride_controller/driver_ride_state.freezed.dart": {
-    "mtime": 1785981286.2725205,
-    "ast_hash": "571d153ff4be854ee8b589224a07d3b1",
-    "semantic_hash": "571d153ff4be854ee8b589224a07d3b1"
+    "mtime": 1786401004.5028615,
+    "ast_hash": "672438166aac2a1a53dbab925e9f01c0",
+    "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/ride_controller/ride_controller.dart": {
-    "mtime": 1786245293.59999,
-    "ast_hash": "e831e55708c149deb7ef73f0021a991a",
+    "mtime": 1786405601.5800955,
+    "ast_hash": "c8194bc4ae92924b28f844ec4a92f709",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/ride_controller/ride_controller.g.dart": {
-    "mtime": 1786220612.3721173,
-    "ast_hash": "6ec766bda918bf703ca5bf6be40261ae",
+    "mtime": 1786401004.5051646,
+    "ast_hash": "703a1dea3b63e06f6e2c0a0eed70c907",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/screens/ride_screen.dart": {
@@ -1780,8 +1780,8 @@
     "semantic_hash": "2b1b7db09334db39deee15151fc71d67"
   },
   "packages/core/lib/networking/signalR/signalr_client_impl.dart": {
-    "mtime": 1786324477.6542244,
-    "ast_hash": "7db6e12eccffadd402bbcba7d335b5ef",
+    "mtime": 1786405440.9445438,
+    "ast_hash": "814800c9a7d4a6e48d148bb47dc3d6e0",
     "semantic_hash": ""
   },
   "packages/core/lib/networking/signalR/signalr_client_impl.g.dart": {
@@ -1935,9 +1935,9 @@
     "semantic_hash": "66d03d7647c8e438164feaf5b922d44a"
   },
   "apps/driver/pubspec.yaml": {
-    "mtime": 1786052515.7377467,
-    "ast_hash": "8b95275958a6b05786c5cee91588100f",
-    "semantic_hash": "8b95275958a6b05786c5cee91588100f"
+    "mtime": 1786401821.8484874,
+    "ast_hash": "cac06da754f710df8d26fe5463c30572",
+    "semantic_hash": ""
   },
   "apps/rider/README.md": {
     "mtime": 1785589002.768496,
@@ -2295,8 +2295,8 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/driver_ride_cards_switcher.dart": {
-    "mtime": 1786249377.9090972,
-    "ast_hash": "790aaeedf894838f9b6a1ca6b80524a9",
+    "mtime": 1786401328.7610612,
+    "ast_hash": "ae8e902e23f7894d9663352fee395672",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/my_location_button.dart": {
@@ -2455,8 +2455,8 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/offline/offline_card.dart": {
-    "mtime": 1786144047.5902886,
-    "ast_hash": "d3dc373721d6cfa7214a2331d68bf438",
+    "mtime": 1786401260.0820856,
+    "ast_hash": "b74d662e1015cfaf23d382bce9bdd396",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/payment_method_chip.dart": {
@@ -2495,8 +2495,8 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/status/driver_status_bar.dart": {
-    "mtime": 1786245293.6015108,
-    "ast_hash": "7f5d53222f81f0d6d19ed64e3a8a12bb",
+    "mtime": 1786403241.0008142,
+    "ast_hash": "7cebae27e78ef6884e86806f80417476",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/tracking/at_pickup_card.dart": {
@@ -2665,13 +2665,18 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/earnings/driver_earnings_provider.g.dart": {
-    "mtime": 1786399758.024774,
+    "mtime": 1786405649.7050822,
     "ast_hash": "1ad0111af1841a26e96dd5ab3ebb0533",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/domain/entities/earnings_period.dart": {
     "mtime": 1786399958.5716352,
     "ast_hash": "b98182b3aaf1f75b947c741d3034e00a",
+    "semantic_hash": ""
+  },
+  "apps/driver/test/features/ride/ui/providers/ride_controller/ride_controller_test.dart": {
+    "mtime": 1786405577.172872,
+    "ast_hash": "ca7a465f7bbb3918c4b51d65d8a6e833",
     "semantic_hash": ""
   }
 }

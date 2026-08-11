@@ -13,10 +13,6 @@ import 'package:driver/features/ride/ui/widgets/ride_card_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-/// Picks the card for the current ride stage and cross-fades between them.
-///
-/// Branches still pointing at the pre-rebuild cards are migrated one stage at
-/// a time; each migration also deletes the card it replaces.
 class DriverRideCardsSwitcher extends ConsumerWidget {
   const DriverRideCardsSwitcher({super.key});
 
@@ -31,12 +27,17 @@ class DriverRideCardsSwitcher extends ConsumerWidget {
     final secondsLeft = ref.watch(
       rideControllerProvider.select((state) => state.secondsLeft),
     );
+    final connection = ref.watch(
+      rideControllerProvider.select((state) => state.connection),
+    );
     final controller = ref.read(rideControllerProvider.notifier);
 
     final card = switch ((stage, ride)) {
       (DriverStage.offline, _) => OfflineCard(
         key: const ValueKey('offline'),
         onGoOnline: controller.goOnline,
+        onCancel: controller.cancelConnecting,
+        isConnecting: connection == DriverConnectionState.connecting,
       ),
       (DriverStage.online, _) => SearchingCard(
         key: const ValueKey('searching'),

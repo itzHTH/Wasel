@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DriverRideState {
 
- DriverStage get stage; ReceiveRideRequest? get ride; int get secondsLeft;
+ DriverStage get stage; DriverConnectionState get connection; ReceiveRideRequest? get ride; int get secondsLeft;
 /// Create a copy of DriverRideState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $DriverRideStateCopyWith<DriverRideState> get copyWith => _$DriverRideStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DriverRideState&&(identical(other.stage, stage) || other.stage == stage)&&const DeepCollectionEquality().equals(other.ride, ride)&&(identical(other.secondsLeft, secondsLeft) || other.secondsLeft == secondsLeft));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DriverRideState&&(identical(other.stage, stage) || other.stage == stage)&&(identical(other.connection, connection) || other.connection == connection)&&const DeepCollectionEquality().equals(other.ride, ride)&&(identical(other.secondsLeft, secondsLeft) || other.secondsLeft == secondsLeft));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stage,const DeepCollectionEquality().hash(ride),secondsLeft);
+int get hashCode => Object.hash(runtimeType,stage,connection,const DeepCollectionEquality().hash(ride),secondsLeft);
 
 @override
 String toString() {
-  return 'DriverRideState(stage: $stage, ride: $ride, secondsLeft: $secondsLeft)';
+  return 'DriverRideState(stage: $stage, connection: $connection, ride: $ride, secondsLeft: $secondsLeft)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $DriverRideStateCopyWith<$Res>  {
   factory $DriverRideStateCopyWith(DriverRideState value, $Res Function(DriverRideState) _then) = _$DriverRideStateCopyWithImpl;
 @useResult
 $Res call({
- DriverStage stage, ReceiveRideRequest? ride, int secondsLeft
+ DriverStage stage, DriverConnectionState connection, ReceiveRideRequest? ride, int secondsLeft
 });
 
 
@@ -62,10 +62,11 @@ class _$DriverRideStateCopyWithImpl<$Res>
 
 /// Create a copy of DriverRideState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? stage = null,Object? ride = freezed,Object? secondsLeft = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? stage = null,Object? connection = null,Object? ride = freezed,Object? secondsLeft = null,}) {
   return _then(_self.copyWith(
 stage: null == stage ? _self.stage : stage // ignore: cast_nullable_to_non_nullable
-as DriverStage,ride: freezed == ride ? _self.ride : ride // ignore: cast_nullable_to_non_nullable
+as DriverStage,connection: null == connection ? _self.connection : connection // ignore: cast_nullable_to_non_nullable
+as DriverConnectionState,ride: freezed == ride ? _self.ride : ride // ignore: cast_nullable_to_non_nullable
 as ReceiveRideRequest?,secondsLeft: null == secondsLeft ? _self.secondsLeft : secondsLeft // ignore: cast_nullable_to_non_nullable
 as int,
   ));
@@ -152,10 +153,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DriverStage stage,  ReceiveRideRequest? ride,  int secondsLeft)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DriverStage stage,  DriverConnectionState connection,  ReceiveRideRequest? ride,  int secondsLeft)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DriverRideState() when $default != null:
-return $default(_that.stage,_that.ride,_that.secondsLeft);case _:
+return $default(_that.stage,_that.connection,_that.ride,_that.secondsLeft);case _:
   return orElse();
 
 }
@@ -173,10 +174,10 @@ return $default(_that.stage,_that.ride,_that.secondsLeft);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DriverStage stage,  ReceiveRideRequest? ride,  int secondsLeft)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DriverStage stage,  DriverConnectionState connection,  ReceiveRideRequest? ride,  int secondsLeft)  $default,) {final _that = this;
 switch (_that) {
 case _DriverRideState():
-return $default(_that.stage,_that.ride,_that.secondsLeft);case _:
+return $default(_that.stage,_that.connection,_that.ride,_that.secondsLeft);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -193,10 +194,10 @@ return $default(_that.stage,_that.ride,_that.secondsLeft);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DriverStage stage,  ReceiveRideRequest? ride,  int secondsLeft)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DriverStage stage,  DriverConnectionState connection,  ReceiveRideRequest? ride,  int secondsLeft)?  $default,) {final _that = this;
 switch (_that) {
 case _DriverRideState() when $default != null:
-return $default(_that.stage,_that.ride,_that.secondsLeft);case _:
+return $default(_that.stage,_that.connection,_that.ride,_that.secondsLeft);case _:
   return null;
 
 }
@@ -208,10 +209,11 @@ return $default(_that.stage,_that.ride,_that.secondsLeft);case _:
 
 
 class _DriverRideState implements DriverRideState {
-  const _DriverRideState({this.stage = DriverStage.offline, this.ride, this.secondsLeft = 0});
+  const _DriverRideState({this.stage = DriverStage.offline, this.connection = DriverConnectionState.idle, this.ride, this.secondsLeft = 0});
   
 
 @override@JsonKey() final  DriverStage stage;
+@override@JsonKey() final  DriverConnectionState connection;
 @override final  ReceiveRideRequest? ride;
 @override@JsonKey() final  int secondsLeft;
 
@@ -225,16 +227,16 @@ _$DriverRideStateCopyWith<_DriverRideState> get copyWith => __$DriverRideStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DriverRideState&&(identical(other.stage, stage) || other.stage == stage)&&const DeepCollectionEquality().equals(other.ride, ride)&&(identical(other.secondsLeft, secondsLeft) || other.secondsLeft == secondsLeft));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DriverRideState&&(identical(other.stage, stage) || other.stage == stage)&&(identical(other.connection, connection) || other.connection == connection)&&const DeepCollectionEquality().equals(other.ride, ride)&&(identical(other.secondsLeft, secondsLeft) || other.secondsLeft == secondsLeft));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stage,const DeepCollectionEquality().hash(ride),secondsLeft);
+int get hashCode => Object.hash(runtimeType,stage,connection,const DeepCollectionEquality().hash(ride),secondsLeft);
 
 @override
 String toString() {
-  return 'DriverRideState(stage: $stage, ride: $ride, secondsLeft: $secondsLeft)';
+  return 'DriverRideState(stage: $stage, connection: $connection, ride: $ride, secondsLeft: $secondsLeft)';
 }
 
 
@@ -245,7 +247,7 @@ abstract mixin class _$DriverRideStateCopyWith<$Res> implements $DriverRideState
   factory _$DriverRideStateCopyWith(_DriverRideState value, $Res Function(_DriverRideState) _then) = __$DriverRideStateCopyWithImpl;
 @override @useResult
 $Res call({
- DriverStage stage, ReceiveRideRequest? ride, int secondsLeft
+ DriverStage stage, DriverConnectionState connection, ReceiveRideRequest? ride, int secondsLeft
 });
 
 
@@ -262,10 +264,11 @@ class __$DriverRideStateCopyWithImpl<$Res>
 
 /// Create a copy of DriverRideState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? stage = null,Object? ride = freezed,Object? secondsLeft = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? stage = null,Object? connection = null,Object? ride = freezed,Object? secondsLeft = null,}) {
   return _then(_DriverRideState(
 stage: null == stage ? _self.stage : stage // ignore: cast_nullable_to_non_nullable
-as DriverStage,ride: freezed == ride ? _self.ride : ride // ignore: cast_nullable_to_non_nullable
+as DriverStage,connection: null == connection ? _self.connection : connection // ignore: cast_nullable_to_non_nullable
+as DriverConnectionState,ride: freezed == ride ? _self.ride : ride // ignore: cast_nullable_to_non_nullable
 as ReceiveRideRequest?,secondsLeft: null == secondsLeft ? _self.secondsLeft : secondsLeft // ignore: cast_nullable_to_non_nullable
 as int,
   ));
