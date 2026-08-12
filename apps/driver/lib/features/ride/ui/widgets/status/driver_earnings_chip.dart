@@ -17,17 +17,19 @@ class DriverEarningsChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final total = this.total;
-    final isPositive = total != null && total > 0;
 
-    final foreground = switch (total) {
-      null => AppColor.neutral400,
-      _ when isPositive => AppColor.alertSuccess500,
-      _ => AppColor.alertError500,
-    };
-    final background = switch (total) {
-      null => AppColor.neutral100,
-      _ when isPositive => AppColor.alertSuccess100,
-      _ => AppColor.alertError100,
+    // An empty wallet is not a broken one: only money owed back is worth
+    // alarming the driver about, and a balance not read yet is worth neither.
+    final (foreground, background) = switch (total) {
+      final num value when value > 0 => (
+        AppColor.alertSuccess500,
+        AppColor.alertSuccess100,
+      ),
+      final num value when value < 0 => (
+        AppColor.alertError500,
+        AppColor.alertError100,
+      ),
+      _ => (AppColor.neutral400, AppColor.neutral100),
     };
     return Container(
       padding: EdgeInsets.symmetric(
