@@ -60,3 +60,4 @@ app.*.map.json
 
 # Xcode SwiftPM resolved packages (regenerated on resolve)
 **/xcshareddata/swiftpm/
+graphify-out/
