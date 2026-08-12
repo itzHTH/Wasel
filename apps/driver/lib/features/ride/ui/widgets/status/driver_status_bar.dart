@@ -20,14 +20,14 @@ class DriverStatusBar extends ConsumerWidget {
       rideControllerProvider.select((state) => state.connection),
     );
 
-    final earnings = ref.watch(driverBalanceControllerProvider);
+    final balance = ref.watch(driverBalanceControllerProvider);
 
     ref.listen(rideControllerProvider.select((state) => state.stage), (
       previous,
       next,
     ) {
       if (next == DriverStage.completed) {
-        ref.read(driverBalanceControllerProvider.notifier).getDriverBalance();
+        ref.read(driverBalanceControllerProvider.notifier).refresh();
       }
     });
 
@@ -51,7 +51,9 @@ class DriverStatusBar extends ConsumerWidget {
             ),
             SizedBox(width: AppDimens.space12),
 
-            DriverEarningsChip(total: earnings, currency: "د.ع"),
+            // Loading and error both mean "no figure to show" — the chip is a
+            // glance, not a place to explain a failed request.
+            DriverEarningsChip(total: balance.value, currency: "د.ع"),
           ],
         ),
       ),

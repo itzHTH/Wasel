@@ -9,23 +9,33 @@ class DriverEarningsChip extends StatelessWidget {
     this.currency = 'IQD',
   });
 
-  final num total;
+  /// Null until the balance has been read — a figure the driver cannot be
+  /// shown yet is not the same as a balance of zero, so it reads as neither.
+  final num? total;
   final String currency;
 
   @override
   Widget build(BuildContext context) {
-    final isPositive = total > 0;
+    final total = this.total;
+    final isPositive = total != null && total > 0;
 
-    final foreground = isPositive
-        ? AppColor.alertSuccess500
-        : AppColor.alertError500;
+    final foreground = switch (total) {
+      null => AppColor.neutral400,
+      _ when isPositive => AppColor.alertSuccess500,
+      _ => AppColor.alertError500,
+    };
+    final background = switch (total) {
+      null => AppColor.neutral100,
+      _ when isPositive => AppColor.alertSuccess100,
+      _ => AppColor.alertError100,
+    };
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: AppDimens.space12,
         vertical: AppDimens.space4,
       ),
       decoration: BoxDecoration(
-        color: isPositive ? AppColor.alertSuccess100 : AppColor.alertError100,
+        color: background,
         borderRadius: BorderRadius.circular(AppDimens.radiusPill),
       ),
       child: Row(
@@ -38,7 +48,7 @@ class DriverEarningsChip extends StatelessWidget {
           ),
           SizedBox(width: AppDimens.space4),
           Text(
-            RideFormatters.fare(total.toString()),
+            total == null ? '—' : RideFormatters.fare(total.toString()),
             textDirection: TextDirection.ltr,
             style: AppTextStyles.font14Primary500SemiBold.copyWith(
               color: foreground,

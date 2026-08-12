@@ -13,7 +13,7 @@ part of 'driver_balance_provider.dart';
 final driverBalanceControllerProvider = DriverBalanceControllerProvider._();
 
 final class DriverBalanceControllerProvider
-    extends $NotifierProvider<DriverBalanceController, double> {
+    extends $AsyncNotifierProvider<DriverBalanceController, double> {
   DriverBalanceControllerProvider._()
     : super(
         from: null,
@@ -31,30 +31,22 @@ final class DriverBalanceControllerProvider
   @$internal
   @override
   DriverBalanceController create() => DriverBalanceController();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(double value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<double>(value),
-    );
-  }
 }
 
 String _$driverBalanceControllerHash() =>
-    r'2dfe55c6f8f1f3bd2506592df2ef4dcbfbffc14a';
+    r'9aa70a8a99f887e4139e9aea0130712158243094';
 
-abstract class _$DriverBalanceController extends $Notifier<double> {
-  double build();
+abstract class _$DriverBalanceController extends $AsyncNotifier<double> {
+  FutureOr<double> build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref = this.ref as $Ref<double, double>;
+    final ref = this.ref as $Ref<AsyncValue<double>, double>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<double, double>,
-              double,
+              AnyNotifier<AsyncValue<double>, double>,
+              AsyncValue<double>,
               Object?,
               Object?
             >;
