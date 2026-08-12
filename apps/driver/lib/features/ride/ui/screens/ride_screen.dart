@@ -1,5 +1,4 @@
 import 'package:driver/core/const/app_driver_consts.dart';
-import 'package:driver/features/ride/ui/providers/earnings/driver_balance_provider.dart';
 import 'package:driver/features/ride/ui/providers/map/driver_camera_controller.dart';
 import 'package:driver/features/ride/ui/providers/map/driver_is_camera_moving_provider.dart';
 import 'package:driver/features/ride/ui/providers/location/driver_location_broadcaster.dart';
@@ -22,12 +21,6 @@ class RideScreen extends ConsumerStatefulWidget {
 }
 
 class _RideScreenState extends ConsumerState<RideScreen> {
-  @override
-  initState() {
-    super.initState();
-    ref.read(driverBalanceControllerProvider.notifier).getDriverBalance();
-  }
-
   @override
   Widget build(BuildContext context) {
     ref.listen(rideActionControllerProvider, (previous, next) {
