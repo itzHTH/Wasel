@@ -1,13 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_auth/auth_user_type.dart';
-import 'package:wasel_core/flavors/flavors_config.dart';
-import 'package:wasel_core/helpers/app_navigation.dart';
-import 'package:wasel_core/networking/interceptors/auth_interceptor.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:driver/driver_app.dart';
 import 'package:driver/firebase_options.dart';
+import 'package:wasel_core/wasel_core.dart';
 
 void mainCommon({
   required Flavor flavor,
@@ -16,6 +15,7 @@ void mainCommon({
 }) async {
   FlavorConfig(flavor: flavor, appName: appName, baseUrl: baseUrl);
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   // The shared auth interceptor (wasel_core) is app-agnostic, but the app-specific navigation is injected here.

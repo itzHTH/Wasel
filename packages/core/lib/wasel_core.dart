@@ -14,6 +14,13 @@ export 'flavors/flavors_config.dart';
 // Extensions
 export 'extensions/navigation_extension.dart';
 
+// Map
+export 'package:google_maps_flutter/google_maps_flutter.dart';
+export 'widgets/map/app_map.dart';
+export 'widgets/map/app_map_loading_overlay.dart';
+export 'widgets/map/map_controller_provider.dart';
+export 'widgets/map/map_ready_provider.dart';
+
 // Helpers
 export 'helpers/app_image_compressor.dart';
 export 'helpers/app_local_cache.dart';

@@ -1,10 +1,10 @@
 import 'package:driver/features/driver_verification/ui/screens/verification_wizard_screen.dart';
+import 'package:driver/features/ride/ui/screens/ride_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:driver/features/auth/ui/screens/login_screen.dart';
 import 'package:driver/features/auth/ui/screens/register_screen.dart';
 import 'package:driver/features/driver_verification/ui/screens/verification_gate_screen.dart';
-import 'package:driver/features/home/ui/screens/home_screen.dart';
 import 'package:driver/features/splash/ui/screens/splash_screen.dart';
 
 class AppRouter {
@@ -19,9 +19,6 @@ class AppRouter {
       case AppRoutes.register:
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
 
-      case AppRoutes.home:
-        return MaterialPageRoute(builder: (_) => const HomeScreen());
-
       case AppRoutes.driverVerificationGate:
         return MaterialPageRoute(
           builder: (_) => const VerificationGateScreen(),
@@ -31,6 +28,9 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const VerificationWizardScreen(),
         );
+
+      case AppRoutes.ride:
+        return MaterialPageRoute(builder: (_) => const RideScreen());
 
       default:
         return MaterialPageRoute(builder: (_) => const SplashScreen());

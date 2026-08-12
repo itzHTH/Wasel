@@ -19,7 +19,7 @@ class UnderReviewScreen extends ConsumerWidget {
   void _routeFor(BuildContext context, enVerificationStatus status) {
     switch (status) {
       case enVerificationStatus.approved:
-        context.pushNamedAndRemoveUntil(AppRoutes.home);
+        context.pushNamedAndRemoveUntil(AppRoutes.ride);
       case enVerificationStatus.rejected:
         _goToWizard(
           context,
