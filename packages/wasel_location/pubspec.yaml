@@ -1,0 +1,62 @@
+name: wasel_location
+description: "Shared location logic for the Wasel apps: GPS, permissions, geocoding, routing and the map surface."
+publish_to: "none"
+version: 0.1.0
+resolution: workspace
+
+environment:
+  sdk: ^3.10.8
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Shared core (ApiResults, ErrorHandler, base use cases, Google Dio factory)
+  wasel_core:
+    path: ../core
+
+  # State management / DI — providers land in step 4
+  flutter_riverpod: ^3.3.1
+  riverpod_annotation: ^4.0.2
+
+  # Location — the only package allowed to depend on geolocator. Both apps
+  # currently declare it themselves (driver 14.0.3, rider 14.0.2); unified here.
+  geolocator: ^14.0.3
+
+  # Permissions — pairs with wasel_core's `ensurePermission` gate
+  permission_handler: ^12.0.3
+
+  # Route drawing (Google Routes API)
+  flutter_polyline_points: ^3.1.0
+
+  # Networking
+  dio: ^5.9.2
+  retrofit: ^4.9.2
+
+  # Serialization
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.9.0
+
+  # Maps — moves out of wasel_core in step 5, together with AppMap
+  google_maps_flutter: ^2.17.1
+
+  # Marker icon rasteriser — used by the presentation layer in step 4
+  flutter_svg: ^2.3.0
+
+  # ROUTES_API_KEY lookup — read by the DI providers in step 4
+  flutter_dotenv: ^6.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+  # Code generation
+  build_runner: ^2.4.13
+  freezed: ^3.2.5
+  json_serializable: ^6.8.0
+  riverpod_generator: ^4.0.3
+  retrofit_generator: ^10.2.6
+
+flutter:
+  uses-material-design: true
