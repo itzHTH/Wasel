@@ -120,12 +120,26 @@ class RideController extends _$RideController {
     goOffline();
   }
 
-  Future<void> acceptOffer() {
+  /// Takes the offer, holding the window open until the backend agrees.
+  ///
+  /// The countdown is paused rather than left running: a tick landing mid-call
+  /// would expire the offer and clear the very ride the accept is committing
+  /// to. If the call does not commit, the driver gets the rest of their window
+  /// back instead of a card frozen at the second they tapped.
+  Future<void> acceptOffer() async {
+    final secondsLeft = state.secondsLeft;
     _stopCountdown();
-    return _perform(
+
+    final succeeded = await _perform(
       (rideId) => ref.read(acceptRideUseCaseProvider).call(rideId),
       DriverStage.heading,
     );
+
+    if (succeeded || !ref.mounted) return;
+    if (state.stage != DriverStage.offerReceived) return;
+
+    state = state.copyWith(secondsLeft: secondsLeft);
+    _startCountdown();
   }
 
   void rejectOffer() => _clearOffer();
@@ -160,23 +174,27 @@ class RideController extends _$RideController {
 
   void dismissCompleted() => _clearOffer();
 
-  Future<void> _perform(
+  /// Runs [action] against the ride on screen, reporting whether it committed
+  /// so a caller can undo whatever it staged for the round trip.
+  Future<bool> _perform(
     Future<ApiResults<void>> Function(String rideId) action,
     DriverStage next, {
     bool clearRide = false,
   }) async {
     final rideId = state.ride?.rideId;
-    if (rideId == null) return;
+    if (rideId == null) return false;
 
     final succeeded = await ref
         .read(rideActionControllerProvider.notifier)
         .run(() => action(rideId));
 
-    if (!succeeded || !ref.mounted) return;
+    if (!succeeded || !ref.mounted) return false;
 
     state = clearRide
         ? state.copyWith(stage: next, ride: null)
         : state.copyWith(stage: next);
+
+    return true;
   }
 
   /// The hub's own view of the socket, which is what the UI follows.
@@ -266,6 +284,13 @@ class RideController extends _$RideController {
 
   void _tick() {
     if (!ref.mounted) return;
+
+    // Only an offer on screen has a window to run down. Anything else means a
+    // ticker outlived what it was counting, and it must not clear a live ride.
+    if (state.stage != DriverStage.offerReceived) {
+      _stopCountdown();
+      return;
+    }
 
     final remaining = state.secondsLeft - 1;
     if (remaining <= 0) {
