@@ -1,0 +1,25 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'driver_earnings_response.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+DriverEarningsResponse _$DriverEarningsResponseFromJson(
+  Map<String, dynamic> json,
+) => DriverEarningsResponse(
+  completedRides: (json['completedRides'] as num).toInt(),
+  totalEarnings: json['totalEarnings'] as num,
+  onlineMinutes: json['onlineMinutes'] as num,
+  canCashOut: json['canCashOut'] as bool,
+);
+
+Map<String, dynamic> _$DriverEarningsResponseToJson(
+  DriverEarningsResponse instance,
+) => <String, dynamic>{
+  'completedRides': instance.completedRides,
+  'totalEarnings': instance.totalEarnings,
+  'onlineMinutes': instance.onlineMinutes,
+  'canCashOut': instance.canCashOut,
+};
