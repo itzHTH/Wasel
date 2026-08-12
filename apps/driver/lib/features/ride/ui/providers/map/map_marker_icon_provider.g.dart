@@ -8,18 +8,33 @@ part of 'map_marker_icon_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
+/// Rasterises an SVG into a marker icon, or null when it cannot be encoded.
+///
+/// Every caller already falls back to a default marker for a missing icon, so
+/// a pin the map can still draw is worth more here than an error.
 
 @ProviderFor(mapMarkerIcon)
 final mapMarkerIconProvider = MapMarkerIconFamily._();
 
+/// Rasterises an SVG into a marker icon, or null when it cannot be encoded.
+///
+/// Every caller already falls back to a default marker for a missing icon, so
+/// a pin the map can still draw is worth more here than an error.
+
 final class MapMarkerIconProvider
     extends
         $FunctionalProvider<
-          AsyncValue<BitmapDescriptor>,
-          BitmapDescriptor,
-          FutureOr<BitmapDescriptor>
+          AsyncValue<BitmapDescriptor?>,
+          BitmapDescriptor?,
+          FutureOr<BitmapDescriptor?>
         >
-    with $FutureModifier<BitmapDescriptor>, $FutureProvider<BitmapDescriptor> {
+    with
+        $FutureModifier<BitmapDescriptor?>,
+        $FutureProvider<BitmapDescriptor?> {
+  /// Rasterises an SVG into a marker icon, or null when it cannot be encoded.
+  ///
+  /// Every caller already falls back to a default marker for a missing icon, so
+  /// a pin the map can still draw is worth more here than an error.
   MapMarkerIconProvider._({
     required MapMarkerIconFamily super.from,
     required (String, {double logicalSize}) super.argument,
@@ -43,12 +58,12 @@ final class MapMarkerIconProvider
 
   @$internal
   @override
-  $FutureProviderElement<BitmapDescriptor> $createElement(
+  $FutureProviderElement<BitmapDescriptor?> $createElement(
     $ProviderPointer pointer,
   ) => $FutureProviderElement(pointer);
 
   @override
-  FutureOr<BitmapDescriptor> create(Ref ref) {
+  FutureOr<BitmapDescriptor?> create(Ref ref) {
     final argument = this.argument as (String, {double logicalSize});
     return mapMarkerIcon(ref, argument.$1, logicalSize: argument.logicalSize);
   }
@@ -64,12 +79,17 @@ final class MapMarkerIconProvider
   }
 }
 
-String _$mapMarkerIconHash() => r'ace5c004811c34bad6d0ca4f674f5cfdf1c98be9';
+String _$mapMarkerIconHash() => r'1e170c461fba4beefe677ad2b595b2ab239e1424';
+
+/// Rasterises an SVG into a marker icon, or null when it cannot be encoded.
+///
+/// Every caller already falls back to a default marker for a missing icon, so
+/// a pin the map can still draw is worth more here than an error.
 
 final class MapMarkerIconFamily extends $Family
     with
         $FunctionalFamilyOverride<
-          FutureOr<BitmapDescriptor>,
+          FutureOr<BitmapDescriptor?>,
           (String, {double logicalSize})
         > {
   MapMarkerIconFamily._()
@@ -80,6 +100,11 @@ final class MapMarkerIconFamily extends $Family
         $allTransitiveDependencies: null,
         isAutoDispose: false,
       );
+
+  /// Rasterises an SVG into a marker icon, or null when it cannot be encoded.
+  ///
+  /// Every caller already falls back to a default marker for a missing icon, so
+  /// a pin the map can still draw is worth more here than an error.
 
   MapMarkerIconProvider call(String assetPath, {double logicalSize = 56.0}) =>
       MapMarkerIconProvider._(

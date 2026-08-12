@@ -7,7 +7,11 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'map_marker_icon_provider.g.dart';
 
 @Riverpod(keepAlive: true)
-Future<BitmapDescriptor> mapMarkerIcon(
+/// Rasterises an SVG into a marker icon, or null when it cannot be encoded.
+///
+/// Every caller already falls back to a default marker for a missing icon, so
+/// a pin the map can still draw is worth more here than an error.
+Future<BitmapDescriptor?> mapMarkerIcon(
   Ref ref,
   String assetPath, {
   double logicalSize = 56,
@@ -32,5 +36,7 @@ Future<BitmapDescriptor> mapMarkerIcon(
   picture.dispose();
   image.dispose();
 
-  return BitmapDescriptor.bytes(bytes!.buffer.asUint8List(), imagePixelRatio: dpr);
+  if (bytes == null) return null;
+
+  return BitmapDescriptor.bytes(bytes.buffer.asUint8List(), imagePixelRatio: dpr);
 }
