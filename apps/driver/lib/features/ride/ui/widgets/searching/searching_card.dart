@@ -89,9 +89,7 @@ class _TodayPanel extends ConsumerWidget {
           Text(
             data == null
                 ? '—'
-                : RideFormatters.fareWithCurrency(
-                    data.totalEarnings.toString(),
-                  ),
+                : RideFormatters.fare(data.totalEarnings.toString()),
             style: data == null
                 ? AppTextStyles.font24Secondary900Bold.copyWith(
                     color: AppColor.neutral400,

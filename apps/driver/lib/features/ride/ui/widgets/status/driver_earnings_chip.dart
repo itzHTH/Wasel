@@ -48,15 +48,10 @@ class DriverEarningsChip extends StatelessWidget {
           ),
           SizedBox(width: AppDimens.space4),
           Text(
-            total == null ? '—' : RideFormatters.fare(total.toString()),
+            total == null
+                ? '—'
+                : RideFormatters.fare(total.toString(), currency: currency),
             textDirection: TextDirection.ltr,
-            style: AppTextStyles.font14Primary500SemiBold.copyWith(
-              color: foreground,
-            ),
-          ),
-          SizedBox(width: AppDimens.space4),
-          Text(
-            currency,
             style: AppTextStyles.font14Primary500SemiBold.copyWith(
               color: foreground,
             ),
