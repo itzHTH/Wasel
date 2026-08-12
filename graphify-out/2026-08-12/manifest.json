@@ -585,18 +585,18 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/ride_controller/ride_controller.dart": {
-    "mtime": 1786538925.0977437,
-    "ast_hash": "ad2e43b44a18eabb33cf424f23d9db7a",
+    "mtime": 1786405601.5800955,
+    "ast_hash": "c8194bc4ae92924b28f844ec4a92f709",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/ride_controller/ride_controller.g.dart": {
-    "mtime": 1786538548.973869,
-    "ast_hash": "dff1f60a7e3f287a91272c9bd54e402d",
+    "mtime": 1786401004.5051646,
+    "ast_hash": "703a1dea3b63e06f6e2c0a0eed70c907",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/screens/ride_screen.dart": {
-    "mtime": 1786538481.4507673,
-    "ast_hash": "b257ca3bc7cb5f4695c85b553e3ea0ab",
+    "mtime": 1786321282.9734669,
+    "ast_hash": "7b35ea6fc2e5524f88df0a2d70d24461",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/splash/ui/screens/splash_screen.dart": {
@@ -1105,14 +1105,14 @@
     "semantic_hash": "7239a8d48612dcfe4d0d3831d23b8def"
   },
   "apps/rider/lib/features/ride/ui/providers/map/map_marker_icon_provider.dart": {
-    "mtime": 1786538681.785443,
-    "ast_hash": "f8e20aa61d5d8894cdddad642dc67836",
-    "semantic_hash": ""
+    "mtime": 1785979810.7961853,
+    "ast_hash": "4590f71c0ae404a12f6681459caced35",
+    "semantic_hash": "4590f71c0ae404a12f6681459caced35"
   },
   "apps/rider/lib/features/ride/ui/providers/map/map_marker_icon_provider.g.dart": {
-    "mtime": 1786538737.5365686,
-    "ast_hash": "93a759b09678a248dfb9ae2be29007ea",
-    "semantic_hash": ""
+    "mtime": 1785979810.79659,
+    "ast_hash": "b3b89184cc2f1748849facc9d6a00831",
+    "semantic_hash": "b3b89184cc2f1748849facc9d6a00831"
   },
   "apps/rider/lib/features/ride/ui/providers/request_ride/request_ride_provider.dart": {
     "mtime": 1785589002.8056996,
@@ -2010,8 +2010,8 @@
     "semantic_hash": "827009fe5d20e243397de4042a15d049"
   },
   "apps/driver/lib/core/helpers/ride_formatters.dart": {
-    "mtime": 1786538785.5259802,
-    "ast_hash": "43a728bc07130722cf458411708042e0",
+    "mtime": 1786399740.243979,
+    "ast_hash": "72ab48923509e51e17bbb076c8c2847b",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/domain/entities/payment_method.dart": {
@@ -2380,13 +2380,13 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/map/map_marker_icon_provider.dart": {
-    "mtime": 1786538692.1543577,
-    "ast_hash": "ba6e54dd0927b859ccf3ce08750c9362",
+    "mtime": 1786047470.7942774,
+    "ast_hash": "b14d0f69db5e5f98d4d9001edcce7ddf",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/map/map_marker_icon_provider.g.dart": {
-    "mtime": 1786538708.08924,
-    "ast_hash": "93a759b09678a248dfb9ae2be29007ea",
+    "mtime": 1786047541.1484804,
+    "ast_hash": "b3b89184cc2f1748849facc9d6a00831",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/ride_controller/ride_action_controller.dart": {
@@ -2420,13 +2420,13 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/earnings/driver_balance_provider.dart": {
-    "mtime": 1786538474.6819012,
-    "ast_hash": "43e90ff6ad19b7ba9ae29b4cf9214407",
+    "mtime": 1786245293.5997608,
+    "ast_hash": "693d27d6e6b7874c92252db940e7b565",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/earnings/driver_balance_provider.g.dart": {
-    "mtime": 1786538548.970964,
-    "ast_hash": "d76c484ee2d036c939e97832c40a762d",
+    "mtime": 1786245341.5998106,
+    "ast_hash": "5425d99f403443a04353585fa5557138",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/ride_use_case_providers.dart": {
@@ -2480,8 +2480,8 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/searching/searching_card.dart": {
-    "mtime": 1786538786.5413885,
-    "ast_hash": "6bc44d039975ac4cc764036c8b577601",
+    "mtime": 1786400057.4138184,
+    "ast_hash": "062447ba6b07ff3fa4f4192df1478fe4",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/searching/searching_radar.dart": {
@@ -2490,13 +2490,13 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/status/driver_earnings_chip.dart": {
-    "mtime": 1786538795.0151904,
-    "ast_hash": "1e6f503939105ab2a2aab91194086e53",
+    "mtime": 1786227284.4620514,
+    "ast_hash": "15ef47775fccf89c11f784e5dda85980",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/status/driver_status_bar.dart": {
-    "mtime": 1786538800.2001839,
-    "ast_hash": "aa0c2e1b96c5a00bcb2716e15bc79c2d",
+    "mtime": 1786403241.0008142,
+    "ast_hash": "7cebae27e78ef6884e86806f80417476",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/widgets/tracking/at_pickup_card.dart": {
@@ -2665,8 +2665,8 @@
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/ui/providers/earnings/driver_earnings_provider.g.dart": {
-    "mtime": 1786538548.9713042,
-    "ast_hash": "d05922312d771b24524dca8322b54c73",
+    "mtime": 1786405649.7050822,
+    "ast_hash": "1ad0111af1841a26e96dd5ab3ebb0533",
     "semantic_hash": ""
   },
   "apps/driver/lib/features/ride/domain/entities/earnings_period.dart": {
@@ -2674,9 +2674,9 @@
     "ast_hash": "b98182b3aaf1f75b947c741d3034e00a",
     "semantic_hash": ""
   },
-  "apps/driver/test/core/helpers/ride_formatters_test.dart": {
-    "mtime": 1786538810.19198,
-    "ast_hash": "9de332a03fb6adba01e36eaae47f8315",
+  "apps/driver/test/features/ride/ui/providers/ride_controller/ride_controller_test.dart": {
+    "mtime": 1786405577.172872,
+    "ast_hash": "ca7a465f7bbb3918c4b51d65d8a6e833",
     "semantic_hash": ""
   }
 }
