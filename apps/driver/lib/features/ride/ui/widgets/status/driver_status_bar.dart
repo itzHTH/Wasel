@@ -53,7 +53,7 @@ class DriverStatusBar extends ConsumerWidget {
 
             // Loading and error both mean "no figure to show" — the chip is a
             // glance, not a place to explain a failed request.
-            DriverEarningsChip(total: balance.value, currency: "د.ع"),
+            DriverEarningsChip(total: balance.value),
           ],
         ),
       ),
