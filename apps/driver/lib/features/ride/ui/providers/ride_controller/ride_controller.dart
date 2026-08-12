@@ -250,8 +250,12 @@ class RideController extends _$RideController {
           secondsLeft: offerSeconds,
         );
         _startCountdown();
-      case HideRideRequest():
+      // The hub broadcasts a hide to every driver it offered the ride to, so
+      // one can arrive for a ride this driver is not looking at. Clearing on
+      // that would pull a live offer out from under them.
+      case HideRideRequest(:final rideId):
         if (state.stage != DriverStage.offerReceived) return;
+        if (rideId != state.ride?.rideId) return;
         _clearOffer();
       case RideCancelled():
         _clearOffer();
