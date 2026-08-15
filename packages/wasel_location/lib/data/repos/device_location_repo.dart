@@ -9,12 +9,6 @@ import 'package:wasel_location/domain/entities/location_exception.dart';
 import 'package:wasel_location/domain/repos/base_device_location_repo.dart';
 
 /// Translates the platform's location API into domain terms.
-///
-/// Three translations happen here, and they are the whole job:
-/// `Position` → [DeviceFix], geolocator's `LocationPermission` →
-/// [LocationAccess], and assorted platform errors → [LocationException]. All of
-/// it runs against an injected [DeviceLocationService], so every branch below is
-/// reachable from a test without a device.
 class DeviceLocationRepo implements BaseDeviceLocationRepo {
   DeviceLocationRepo(this._service);
 
@@ -22,25 +16,23 @@ class DeviceLocationRepo implements BaseDeviceLocationRepo {
 
   @override
   Stream<DeviceFix> watchLocation() {
-    // Errors are mapped in-band rather than allowed through raw, so a listener
-    // handling `AsyncError` sees the same LocationException type it would get
-    // from the one-shot path instead of a bare PlatformException.
     return _service
         .positionStream()
         .map(_toFix)
         .handleError(
-          (Object error, StackTrace stackTrace) =>
-              Error.throwWithStackTrace(_toLocationException(error), stackTrace),
+          (Object error, StackTrace stackTrace) => Error.throwWithStackTrace(
+            _toLocationException(error),
+            stackTrace,
+          ),
         );
   }
 
   @override
   Future<DeviceFix> getCurrentLocation({Duration? timeout}) async {
-    // Checked before asking for a fix rather than after failing to get one: with
-    // services off the platform error is generic, and the user would be told to
-    // retry when the only thing that helps is the settings screen.
     if (!await _service.isLocationServiceEnabled()) {
-      throw const LocationException(LocationFailureReason.serviceDisabled);
+      throw const LocationException(
+        LocationFailureReason.serviceDisabled,
+      ); // to user know form settings not Internet.
     }
 
     final access = await checkAccess();
@@ -62,17 +54,16 @@ class DeviceLocationRepo implements BaseDeviceLocationRepo {
 
       return position == null ? null : _toFix(position);
     } catch (_) {
-      // Deliberately swallowed. Every caller of this treats it as "is there a
-      // cheap fix lying around?", and an empty cache, a refused permission and a
-      // hung channel are all answered the same way: no, carry on with a default.
-      // Surfacing an error here would force each caller to write that fallback
-      // itself.
+      // Intentionally swallowed. Whether the cache is empty, permission is denied,
+      // or the channel hung, we treat it simply as "no cached location available"
+      // so callers can smoothly fallback to a default map target without try-catch boilerplate.
       return null;
     }
   }
 
   @override
-  Future<bool> isLocationServiceEnabled() => _service.isLocationServiceEnabled();
+  Future<bool> isLocationServiceEnabled() =>
+      _service.isLocationServiceEnabled();
 
   @override
   Future<void> openLocationSettings() => _service.openLocationSettings();
@@ -89,38 +80,27 @@ class DeviceLocationRepo implements BaseDeviceLocationRepo {
       permission = await _service.requestPermission();
     }
 
-    // Branching on the *result* of the request rather than the status that
-    // preceded it: answering "Don't allow" on a fresh prompt can resolve
-    // straight to `deniedForever`, and treating that as an ordinary denial
-    // would send the UI back to a prompt the OS will never show again.
     return _toAccess(permission);
   }
 
+  LocationAccess _toAccess(
+    LocationPermission permission,
+  ) => switch (permission) {
+    // `whileInUse` and `always` both permit a foreground read, so both granted
+    LocationPermission.whileInUse ||
+    LocationPermission.always => LocationAccess.granted,
+    LocationPermission.denied => LocationAccess.denied,
+    LocationPermission.deniedForever ||
+    LocationPermission.unableToDetermine => LocationAccess.permanentlyDenied,
+  };
+
   DeviceFix _toFix(Position position) => DeviceFix(
-    point: GeoPoint(
-      latitude: position.latitude,
-      longitude: position.longitude,
-    ),
+    point: GeoPoint(latitude: position.latitude, longitude: position.longitude),
     heading: position.heading,
     speed: position.speed,
     accuracy: position.accuracy,
     timestamp: position.timestamp,
   );
-
-  LocationAccess _toAccess(LocationPermission permission) =>
-      switch (permission) {
-        // `whileInUse` and `always` both permit a foreground read, which is the
-        // only distinction any caller in either app cares about.
-        LocationPermission.whileInUse ||
-        LocationPermission.always => LocationAccess.granted,
-        LocationPermission.denied => LocationAccess.denied,
-        // `unableToDetermine` is grouped with the permanent cases on purpose: it
-        // means the platform will not tell us, so optimistically prompting would
-        // loop. Sending the user to settings is the only action that can resolve it.
-        LocationPermission.deniedForever ||
-        LocationPermission.unableToDetermine =>
-          LocationAccess.permanentlyDenied,
-      };
 
   LocationException _accessException(LocationAccess access) =>
       LocationException(
@@ -131,8 +111,6 @@ class DeviceLocationRepo implements BaseDeviceLocationRepo {
 
   LocationException _toLocationException(Object error) => switch (error) {
     LocationException() => error,
-    // geolocator raises this for `LocationSettings.timeLimit`, and
-    // `Future.timeout` raises the same type — a cold fix that never settled.
     TimeoutException() => LocationException(
       LocationFailureReason.fixTimeout,
       error,

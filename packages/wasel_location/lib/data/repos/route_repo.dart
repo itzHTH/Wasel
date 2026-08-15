@@ -13,13 +13,7 @@ class RouteRepo implements BaseRouteRepo {
 
   static const String _noRouteMessage = 'ما نگدر نرسم الطريق';
 
-  /// Fewer than two points cannot form a line.
-  ///
-  /// The two apps disagreed here — the rider only rejected an empty list, the
-  /// driver rejected anything under two. The driver's threshold is the correct
-  /// one: a one-point response passes the rider's check, then renders as an
-  /// invisible polyline, so the user sees a map with no route and no error.
-  /// Unifying on this turns that silent blank into a reportable failure.
+  /// Fewer than two points cannot draw a line.
   static const int _minimumRoutePoints = 2;
 
   @override
@@ -30,7 +24,8 @@ class RouteRepo implements BaseRouteRepo {
         request.destination,
       );
 
-      return points.length < _minimumRoutePoints
+      return points.length <
+              _minimumRoutePoints // if the point is less 2, then got error
           ? domainFailure<List<GeoPoint>>(_noRouteMessage)
           : ApiResults.success(points);
     } catch (e) {
