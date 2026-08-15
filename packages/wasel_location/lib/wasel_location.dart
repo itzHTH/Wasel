@@ -1,16 +1,4 @@
 /// wasel_location — shared location logic for the Wasel apps.
-///
-/// Owns every geographic concern the rider and driver apps have in common: the
-/// `GeoPoint` they both speak, device positioning and permissions, Google
-/// reverse geocoding, route drawing, and (from step 5) the shared map surface.
-///
-/// Exports are exhaustive in the style of `wasel_auth`: app UIs build requests
-/// and read entity types directly, so hiding the data layer would only force
-/// re-exports elsewhere.
-///
-/// Layering note — the presentation layer (providers and widgets) lands in
-/// steps 4 and 5. Until then this package is self-contained and unused by the
-/// apps, which still hold their own copies.
 library;
 
 // Domain — entities
@@ -33,7 +21,7 @@ export 'domain/usecases/get_route_use_case.dart';
 export 'domain/usecases/watch_device_location_use_case.dart';
 
 // Data — constants
-export 'data/const/location_api_const.dart';
+export 'core/const/location_api_const.dart';
 
 // Data — models
 export 'data/models/geocoding/address_component.dart';
@@ -48,3 +36,20 @@ export 'data/services/route_remote_service.dart';
 export 'data/repos/device_location_repo.dart';
 export 'data/repos/geocoding_repo.dart';
 export 'data/repos/route_repo.dart';
+
+// DI — the composition root: services, repos and use cases as providers
+export 'presentation/providers/location_di_providers.dart';
+
+// Presentation — extensions at the domain/map boundary
+export 'core/extensions/geo_point_map_x.dart';
+
+// Presentation — location providers
+export 'presentation/providers/location/device_location_provider.dart';
+export 'presentation/providers/location/last_known_location_provider.dart';
+export 'presentation/providers/location/location_access_provider.dart';
+export 'presentation/providers/location/point_label_provider.dart';
+export 'presentation/providers/location/recenter_controller.dart';
+
+// Presentation — map providers
+export 'presentation/providers/map/initial_camera_target_provider.dart';
+export 'presentation/providers/map/map_marker_icon_provider.dart';

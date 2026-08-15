@@ -36,21 +36,12 @@ class GeocodingRepo implements BaseGeocodingRepo {
     }
   }
 
-  /// Reduces Google's component list to a `street، locality` label.
-  ///
-  /// Two things make this less obvious than it looks:
-  ///
-  /// 1. Google returns the *same* component repeatedly, once per language it
-  ///    knows, so a naive first-match picks whichever language happened to come
-  ///    first. The app is Arabic, so an Arabic spelling always wins over one
-  ///    already held — but a non-Arabic value is still kept rather than dropped,
-  ///    since a Latin street name beats no street name at all.
-  /// 2. `sublocality` is accepted alongside `locality` because dense parts of
-  ///    Baghdad are returned only at the sublocality level; requiring `locality`
-  ///    would leave those points with a street and no area.
-  ///
-  /// Visible for testing: this is pure, and it is where the interesting
-  /// behaviour lives, so tests target it directly rather than through Dio.
+  // Extracts a localized 'Street، Locality' label from Google's geocoding response.
+  //
+  //* Handling Edge Cases:
+  //* 1. Prioritizes Arabic names over Latin ones if both exist.
+  //* 2. Accepts 'sublocality' alongside 'locality' (fixes missing areas in dense cities like Baghdad).
+  //* 3. Ignores empty components to prevent overwriting valid Latin names with nulls.
   String labelFrom(GoogleGeocodingResponse response) {
     String? street;
     var streetIsAr = false;
@@ -59,11 +50,7 @@ class GeocodingRepo implements BaseGeocodingRepo {
 
     for (final result in response.results) {
       for (final component in result.addressComponents) {
-        // A component with no text cannot improve the label, and letting one
-        // through would actively hurt: both copies being replaced here assign
-        // `longText` unconditionally once a slot is empty, so a null-texted
-        // Arabic component could overwrite a perfectly good Latin street with
-        // null and mark the slot as "already Arabic", locking the real value out.
+        // Ignore empty texts to avoid overwriting valid fallbacks.
         final text = component.longText;
         if (text == null) continue;
 
