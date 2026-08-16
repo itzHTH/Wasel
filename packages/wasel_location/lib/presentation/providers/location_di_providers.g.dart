@@ -524,3 +524,54 @@ final class GetLastKnownLocationUseCaseProvider
 
 String _$getLastKnownLocationUseCaseHash() =>
     r'28b68ae3f308a1ddf2db98a0cd1c80f63fc8f5e9';
+
+@ProviderFor(isLocationServiceEnabledUseCase)
+final isLocationServiceEnabledUseCaseProvider =
+    IsLocationServiceEnabledUseCaseProvider._();
+
+final class IsLocationServiceEnabledUseCaseProvider
+    extends
+        $FunctionalProvider<
+          IsLocationServiceEnabledUseCase,
+          IsLocationServiceEnabledUseCase,
+          IsLocationServiceEnabledUseCase
+        >
+    with $Provider<IsLocationServiceEnabledUseCase> {
+  IsLocationServiceEnabledUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'isLocationServiceEnabledUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$isLocationServiceEnabledUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<IsLocationServiceEnabledUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  IsLocationServiceEnabledUseCase create(Ref ref) {
+    return isLocationServiceEnabledUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(IsLocationServiceEnabledUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<IsLocationServiceEnabledUseCase>(
+        value,
+      ),
+    );
+  }
+}
+
+String _$isLocationServiceEnabledUseCaseHash() =>
+    r'81c370352915306c08152ed4feb50e512315d2ea';

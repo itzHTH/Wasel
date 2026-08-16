@@ -8,12 +8,24 @@ part of 'driver_heading_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
+/// The bearing the car marker is drawn at.
+///
+/// Stays driver-side: the rider's driver marker is fed by the SignalR hub, not
+/// the device stream.
 
 @ProviderFor(DriverHeading)
 final driverHeadingProvider = DriverHeadingProvider._();
 
+/// The bearing the car marker is drawn at.
+///
+/// Stays driver-side: the rider's driver marker is fed by the SignalR hub, not
+/// the device stream.
 final class DriverHeadingProvider
     extends $NotifierProvider<DriverHeading, double> {
+  /// The bearing the car marker is drawn at.
+  ///
+  /// Stays driver-side: the rider's driver marker is fed by the SignalR hub, not
+  /// the device stream.
   DriverHeadingProvider._()
     : super(
         from: null,
@@ -41,7 +53,12 @@ final class DriverHeadingProvider
   }
 }
 
-String _$driverHeadingHash() => r'0383ee5b3ec8fb980b8bfc00e7d9560f58a96f42';
+String _$driverHeadingHash() => r'1dda6f089fbc0477e45dee36199876c5a2914c3b';
+
+/// The bearing the car marker is drawn at.
+///
+/// Stays driver-side: the rider's driver marker is fed by the SignalR hub, not
+/// the device stream.
 
 abstract class _$DriverHeading extends $Notifier<double> {
   double build();

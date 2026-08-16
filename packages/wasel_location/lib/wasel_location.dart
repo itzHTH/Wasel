@@ -23,6 +23,7 @@ export 'domain/usecases/get_current_location_use_case.dart';
 export 'domain/usecases/get_last_known_location_use_case.dart';
 export 'domain/usecases/get_point_label_use_case.dart';
 export 'domain/usecases/get_route_use_case.dart';
+export 'domain/usecases/is_location_service_enabled_use_case.dart';
 export 'domain/usecases/watch_device_location_use_case.dart';
 
 // Core — constants

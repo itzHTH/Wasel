@@ -392,48 +392,6 @@ final class DriverCancelRideUseCaseProvider
 String _$driverCancelRideUseCaseHash() =>
     r'c94c18f8b32096aa9f8210e4f75a43b0639220d5';
 
-@ProviderFor(getRouteUseCase)
-final getRouteUseCaseProvider = GetRouteUseCaseProvider._();
-
-final class GetRouteUseCaseProvider
-    extends
-        $FunctionalProvider<GetRouteUseCase, GetRouteUseCase, GetRouteUseCase>
-    with $Provider<GetRouteUseCase> {
-  GetRouteUseCaseProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'getRouteUseCaseProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$getRouteUseCaseHash();
-
-  @$internal
-  @override
-  $ProviderElement<GetRouteUseCase> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
-
-  @override
-  GetRouteUseCase create(Ref ref) {
-    return getRouteUseCase(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(GetRouteUseCase value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<GetRouteUseCase>(value),
-    );
-  }
-}
-
-String _$getRouteUseCaseHash() => r'2daddfd4abd2594979c8926b00eee7cd4b6a471b';
-
 @ProviderFor(getDriverBalanceUseCase)
 final getDriverBalanceUseCaseProvider = GetDriverBalanceUseCaseProvider._();
 
@@ -529,51 +487,3 @@ final class GetDriverEarningsUseCaseProvider
 
 String _$getDriverEarningsUseCaseHash() =>
     r'328879cc24cff2d45539b06983cbbbcb070e9dcc';
-
-@ProviderFor(getPointLabelUseCase)
-final getPointLabelUseCaseProvider = GetPointLabelUseCaseProvider._();
-
-final class GetPointLabelUseCaseProvider
-    extends
-        $FunctionalProvider<
-          GetPointLabelUseCase,
-          GetPointLabelUseCase,
-          GetPointLabelUseCase
-        >
-    with $Provider<GetPointLabelUseCase> {
-  GetPointLabelUseCaseProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'getPointLabelUseCaseProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$getPointLabelUseCaseHash();
-
-  @$internal
-  @override
-  $ProviderElement<GetPointLabelUseCase> $createElement(
-    $ProviderPointer pointer,
-  ) => $ProviderElement(pointer);
-
-  @override
-  GetPointLabelUseCase create(Ref ref) {
-    return getPointLabelUseCase(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(GetPointLabelUseCase value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<GetPointLabelUseCase>(value),
-    );
-  }
-}
-
-String _$getPointLabelUseCaseHash() =>
-    r'f55ad710e507091072c17fb8e0bdba3c932dc13e';

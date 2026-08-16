@@ -8,7 +8,7 @@ part of 'map_controller_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// Holds the [GoogleMapController] of the currently mounted `AppMap`.
+/// Holds the GoogleMapController of the currently mounted `AppMap`.
 //
 //? - Exposes a [Future] rather than a nullable controller so camera work can be
 //?   queued *before* the platform view finishes creating itself — callers just
@@ -21,7 +21,7 @@ part of 'map_controller_provider.dart';
 @ProviderFor(MapControllerHolder)
 final mapControllerHolderProvider = MapControllerHolderProvider._();
 
-/// Holds the [GoogleMapController] of the currently mounted `AppMap`.
+/// Holds the GoogleMapController of the currently mounted `AppMap`.
 //
 //? - Exposes a [Future] rather than a nullable controller so camera work can be
 //?   queued *before* the platform view finishes creating itself — callers just
@@ -32,7 +32,7 @@ final mapControllerHolderProvider = MapControllerHolderProvider._();
 //?   completer the moment the last listener paused.
 final class MapControllerHolderProvider
     extends $AsyncNotifierProvider<MapControllerHolder, GoogleMapController> {
-  /// Holds the [GoogleMapController] of the currently mounted `AppMap`.
+  /// Holds the GoogleMapController of the currently mounted `AppMap`.
   //
   //? - Exposes a [Future] rather than a nullable controller so camera work can be
   //?   queued *before* the platform view finishes creating itself — callers just
@@ -63,7 +63,7 @@ final class MapControllerHolderProvider
 String _$mapControllerHolderHash() =>
     r'd9792eb1406511cc4571579a25d3d583a92ecc0b';
 
-/// Holds the [GoogleMapController] of the currently mounted `AppMap`.
+/// Holds the GoogleMapController of the currently mounted `AppMap`.
 //
 //? - Exposes a [Future] rather than a nullable controller so camera work can be
 //?   queued *before* the platform view finishes creating itself — callers just

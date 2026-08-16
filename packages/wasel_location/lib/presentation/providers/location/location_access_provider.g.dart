@@ -64,7 +64,7 @@ final class LocationAccessControllerProvider
 }
 
 String _$locationAccessControllerHash() =>
-    r'9f9e9043bfc0a733765a243ffaf91ca00ffda1b3';
+    r'7cb561b96012ebec1b61a42e209824d6e42c9383';
 
 /// Manages the global location permission state and handles prompting.
 //
