@@ -1,4 +1,4 @@
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:wasel_location/wasel_location.dart';
 
 enum PickingStage { pickup, dropoff, done }
 

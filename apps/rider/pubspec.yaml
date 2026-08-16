@@ -28,11 +28,10 @@ dependencies:
   retrofit: ^4.9.2
   pretty_dio_logger: ^1.4.0
 
-  # Maps
-  google_maps_flutter: ^2.17.1
-  geolocator: ^14.0.2
-  geocoding: ^4.0.0
-  flutter_polyline_points: ^3.1.0
+  # Maps, location and route drawing all arrive through wasel_location, which is
+  # the only package allowed to talk to google_maps_flutter / geolocator /
+  # flutter_polyline_points. The native permission and API-key entries in
+  # android/ and ios/ stay app-owned.
 
   # Notifications & Firebase
   firebase_core: ^4.12.1

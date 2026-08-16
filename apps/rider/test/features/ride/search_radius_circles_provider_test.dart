@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:fake_async/fake_async.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:wasel_location/wasel_location.dart';
 import 'package:wasal/features/ride/domain/entities/request_ride.dart';
 import 'package:wasal/features/ride/ui/providers/request_ride/request_ride_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_controller/ride_controller.dart';
