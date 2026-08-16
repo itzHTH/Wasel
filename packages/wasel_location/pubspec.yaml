@@ -33,9 +33,9 @@ dependencies:
   dio: ^5.9.2
   retrofit: ^4.9.2
 
-  # Serialization
+  # Serialization — freezed_annotation re-exports what the generated
+  # fromJson/toJson need, so json_annotation is not a direct dependency.
   freezed_annotation: ^3.1.0
-  json_annotation: ^4.9.0
 
   # Maps — this package owns the map surface; wasel_core no longer depends on it
   google_maps_flutter: ^2.17.1

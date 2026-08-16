@@ -110,9 +110,18 @@ class RecenterController extends _$RecenterController {
   }
 
   /// Prefers a fix that is already streaming, falling back to a cold acquisition.
+  //
+  //! `exists` before `read`: [deviceLocationProvider] is auto-dispose, so
+  //! reading it blind would *create* it — opening an OS position stream, handing
+  //! back `AsyncLoading` in the same breath, and closing it again moments later.
+  //? In the driver that read is free (the broadcaster already holds the stream
+  //? open); in the rider nothing listens, so every tap paid for a stream whose
+  //? value was always null.
   Future<LatLng> _resolveTarget() async {
-    final streamed = ref.read(deviceLocationProvider).value;
-    if (streamed != null) return streamed.toLatLng();
+    if (ref.exists(deviceLocationProvider)) {
+      final streamed = ref.read(deviceLocationProvider).value;
+      if (streamed != null) return streamed.toLatLng();
+    }
 
     final fix = await ref.read(getCurrentLocationUseCaseProvider).call(null);
     return fix.toLatLng();

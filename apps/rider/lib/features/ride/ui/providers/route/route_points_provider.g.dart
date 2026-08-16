@@ -9,6 +9,7 @@ part of 'route_points_provider.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 /// The drawn route between the draft's pickup and dropoff.
+
 @ProviderFor(routePoints)
 final routePointsProvider = RoutePointsProvider._();
 
@@ -23,7 +24,6 @@ final class RoutePointsProvider
         >
     with $FutureModifier<List<GeoPoint>>, $FutureProvider<List<GeoPoint>> {
   /// The drawn route between the draft's pickup and dropoff.
-
   RoutePointsProvider._()
     : super(
         from: null,
