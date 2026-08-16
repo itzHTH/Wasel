@@ -18,6 +18,8 @@ dependencies:
     path: ../../packages/auth
   wasel_location:
     path: ../../packages/wasel_location
+  wasel_profile:
+    path: ../../packages/wasel_profile
 
   # State Management
   flutter_riverpod: ^3.3.1
