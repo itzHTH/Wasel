@@ -2,17 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/is_camera_moving_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.dart';
-import 'package:wasal/features/ride/ui/providers/ride_location_controller.dart';
 import 'package:wasal/features/ride/ui/providers/tracking/ride_camera_controller.dart';
 import 'package:wasal/features/ride/ui/widgets/custom_pin_map.dart';
-import 'package:wasal/features/ride/ui/widgets/location_permission_banner.dart';
-import 'package:wasal/features/ride/ui/widgets/my_location_button.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_cards_switcher.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_map.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wasel_core/wasel_core.dart';
-import 'package:wasel_location/core/const/app_map_defaults.dart';
-import 'package:wasel_location/presentation/widgets/app_map_loading_overlay.dart';
+import 'package:wasel_location/wasel_location.dart';
 
 class RideScreen extends ConsumerStatefulWidget {
   const RideScreen({super.key});
@@ -25,9 +20,7 @@ class _RideScreenState extends ConsumerState<RideScreen> {
   LatLng _center = AppMapDefaults.initialTarget;
 
   void _centerOnUserLocation() {
-    ref
-        .read(rideLocationControllerProvider.notifier)
-        .centerOnUserLocation(context);
+    ref.read(recenterControllerProvider.notifier).centerOnUser(context);
   }
 
   @override

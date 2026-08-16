@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/core/consts/app_rider_consts.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_point_markers_provider.dart';
-import 'package:wasal/features/ride/ui/providers/ride_location_controller.dart';
 import 'package:wasal/features/ride/ui/providers/route/route_polylines_provider.dart';
 import 'package:wasal/features/ride/ui/providers/tracking/search_radius_circles_provider.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:wasel_location/presentation/widgets/app_map.dart';
+import 'package:wasel_location/wasel_location.dart';
 
 /// Feeds the shared [AppMap] with the rider ride layers (pickup/dropoff pins,
 /// the active route, and the driver search radius).
@@ -32,9 +30,6 @@ class RideMap extends ConsumerWidget {
       markers: ref.watch(ridePointMarkersProvider),
       polylines: ref.watch(routePolylinesProvider),
       circles: ref.watch(searchRadiusCirclesProvider),
-      myLocationEnabled: ref.watch(
-        rideLocationControllerProvider.select((s) => s.myLocationEnabled),
-      ),
       padding: mapPadding,
       onCameraMove: onCameraMove,
       onCameraMoveStarted: onCameraMoveStarted,

@@ -1,4 +1,4 @@
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:wasel_location/wasel_location.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/features/ride/ui/providers/route/route_points_provider.dart';
 import 'package:wasel_core/wasel_core.dart';

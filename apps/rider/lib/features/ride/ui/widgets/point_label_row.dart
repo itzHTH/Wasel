@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wasal/core/helpers/ride_formatters.dart';
-import 'package:wasal/features/ride/domain/entities/geo_point.dart';
-import 'package:wasal/features/ride/ui/providers/location/point_label_provider.dart';
+import 'package:wasel_location/wasel_location.dart';
 import 'package:wasel_core/wasel_core.dart';
 
 class PointLabelRow extends ConsumerWidget {
