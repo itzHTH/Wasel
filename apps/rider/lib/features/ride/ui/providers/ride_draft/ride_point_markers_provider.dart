@@ -1,13 +1,12 @@
 import 'dart:ui' show Offset;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/core/consts/app_icons.dart';
-import 'package:wasal/features/ride/ui/providers/map/map_marker_icon_provider.dart';
 import 'package:wasal/features/ride/ui/providers/request_ride/request_ride_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.dart';
+import 'package:wasel_location/wasel_location.dart';
 
 part 'ride_point_markers_provider.g.dart';
 

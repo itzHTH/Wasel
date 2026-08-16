@@ -16,6 +16,8 @@ dependencies:
     path: ../../packages/core
   wasel_auth:
     path: ../../packages/auth
+  wasel_location:
+    path: ../../packages/wasel_location
 
   # Firebase (no FCM yet — verification status is polled in driver_verification)
   firebase_core: ^4.12.1
@@ -24,11 +26,10 @@ dependencies:
   freezed_annotation: ^3.1.0
   json_annotation: ^4.9.0
 
-  # Location
-  geolocator: ^14.0.3
-
-  # Route drawing (Google Routes API)
-  flutter_polyline_points: ^3.1.0
+  # Location, maps and route drawing all arrive through wasel_location, which is
+  # the only package allowed to talk to geolocator / google_maps_flutter /
+  # flutter_polyline_points. The native permission and API-key entries in
+  # android/ and ios/ stay app-owned.
 
   # Networking
   dio: ^5.9.2

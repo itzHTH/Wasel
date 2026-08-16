@@ -8,9 +8,12 @@ part of 'route_points_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
+/// The drawn route between the draft's pickup and dropoff.
 
 @ProviderFor(routePoints)
 final routePointsProvider = RoutePointsProvider._();
+
+/// The drawn route between the draft's pickup and dropoff.
 
 final class RoutePointsProvider
     extends
@@ -20,6 +23,7 @@ final class RoutePointsProvider
           FutureOr<List<GeoPoint>>
         >
     with $FutureModifier<List<GeoPoint>>, $FutureProvider<List<GeoPoint>> {
+  /// The drawn route between the draft's pickup and dropoff.
   RoutePointsProvider._()
     : super(
         from: null,
@@ -46,4 +50,4 @@ final class RoutePointsProvider
   }
 }
 
-String _$routePointsHash() => r'd2d4ecbc1bdb6d66a99b0c6fd8ee63f4bae65685';
+String _$routePointsHash() => r'a82016fe744e39b2cf9e4263d2196cc236a366ea';

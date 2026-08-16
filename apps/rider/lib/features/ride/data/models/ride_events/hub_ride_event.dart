@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wasal/features/ride/domain/entities/geo_point.dart';
+import 'package:wasel_location/domain/entities/geo_point.dart';
 import 'package:wasal/features/ride/domain/entities/ride_event.dart';
 
 part 'hub_ride_event.freezed.dart';
