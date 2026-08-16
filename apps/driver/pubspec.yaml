@@ -26,16 +26,10 @@ dependencies:
   freezed_annotation: ^3.1.0
   json_annotation: ^4.9.0
 
-  # Location
-  geolocator: ^14.0.3
-
-  # Maps — was reaching this transitively through wasel_core, which no longer
-  # depends on it. Declared until the ride providers move onto the
-  # wasel_location barrel.
-  google_maps_flutter: ^2.17.1
-
-  # Route drawing (Google Routes API)
-  flutter_polyline_points: ^3.1.0
+  # Location, maps and route drawing all arrive through wasel_location, which is
+  # the only package allowed to talk to geolocator / google_maps_flutter /
+  # flutter_polyline_points. The native permission and API-key entries in
+  # android/ and ios/ stay app-owned.
 
   # Networking
   dio: ^5.9.2

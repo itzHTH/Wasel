@@ -1,4 +1,4 @@
-import 'package:driver/features/ride/domain/entities/geo_point.dart';
+import 'package:wasel_location/domain/entities/geo_point.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'driver_ride_events.freezed.dart';

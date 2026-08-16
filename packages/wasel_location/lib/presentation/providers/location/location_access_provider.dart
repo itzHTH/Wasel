@@ -43,6 +43,14 @@ class LocationAccessController extends _$LocationAccessController {
     return access;
   }
 
+  /// Prompts without a BuildContext, for callers that have none (like the driver broadcaster).
+  Future<LocationAccess> ensure() async {
+    final access = await ref.read(deviceLocationRepoProvider).requestAccess();
+
+    if (ref.mounted) state = AsyncValue.data(access);
+    return access;
+  }
+
   /// Silently re-reads the permission (useful for App Lifecycle resumes).
   Future<void> refresh() async {
     final access = await _read();

@@ -1,15 +1,12 @@
-import 'package:driver/features/ride/data/models/route_request/route_request_arg.dart';
 import 'package:driver/features/ride/domain/entities/driver_ride_events.dart';
-import 'package:driver/features/ride/domain/entities/geo_point.dart';
-import 'package:driver/features/ride/ui/providers/location/device_location_provider.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
-import 'package:driver/features/ride/ui/providers/ride_use_case_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:wasel_core/wasel_core.dart';
+import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/networking/api_results.dart';
+import 'package:wasel_location/wasel_location.dart';
 
 part 'driver_route_polylines_provider.g.dart';
 
@@ -43,7 +40,7 @@ Future<Set<Polyline>> driverRoutePolylines(Ref ref) async {
   try {
     final result = await ref
         .read(getRouteUseCaseProvider)
-        .call(RouteRequestArg(origin: segment.$1, destination: segment.$2));
+        .call(RouteRequest(origin: segment.$1, destination: segment.$2));
 
     return result.when(
       success: _polylines,
@@ -65,10 +62,7 @@ Future<(GeoPoint, GeoPoint)?> _driverToPickup(
         .read(deviceLocationProvider.future)
         .timeout(_positionWait);
 
-    return (
-      GeoPoint(latitude: position.latitude, longitude: position.longitude),
-      ride.position,
-    );
+    return (position.point, ride.position);
   } catch (_) {
     _report(ref, 'ماكو موقع، ما نگدر نرسم الطريق');
     return null;

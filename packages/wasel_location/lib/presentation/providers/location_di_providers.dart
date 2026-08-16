@@ -15,6 +15,7 @@ import 'package:wasel_location/domain/usecases/get_current_location_use_case.dar
 import 'package:wasel_location/domain/usecases/get_last_known_location_use_case.dart';
 import 'package:wasel_location/domain/usecases/get_point_label_use_case.dart';
 import 'package:wasel_location/domain/usecases/get_route_use_case.dart';
+import 'package:wasel_location/domain/usecases/is_location_service_enabled_use_case.dart';
 import 'package:wasel_location/domain/usecases/watch_device_location_use_case.dart';
 
 part 'location_di_providers.g.dart';
@@ -62,3 +63,7 @@ GetCurrentLocationUseCase getCurrentLocationUseCase(Ref ref) =>
 @riverpod
 GetLastKnownLocationUseCase getLastKnownLocationUseCase(Ref ref) =>
     GetLastKnownLocationUseCase(ref.watch(deviceLocationRepoProvider));
+
+@riverpod
+IsLocationServiceEnabledUseCase isLocationServiceEnabledUseCase(Ref ref) =>
+    IsLocationServiceEnabledUseCase(ref.watch(deviceLocationRepoProvider));

@@ -1,6 +1,5 @@
 import 'package:driver/core/helpers/ride_formatters.dart';
-import 'package:driver/features/ride/domain/entities/geo_point.dart';
-import 'package:driver/features/ride/ui/providers/location/point_label_provider.dart';
+import 'package:wasel_location/wasel_location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/wasel_core.dart';

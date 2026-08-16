@@ -42,7 +42,7 @@ final class DriverCameraControllerProvider
 }
 
 String _$driverCameraControllerHash() =>
-    r'736789aa264e5d2e09684e39e3cb7cea7ca054cd';
+    r'3cd9bdd54ef95e9b2c9b9a9b10e6bbeab104f8b0';
 
 abstract class _$DriverCameraController extends $Notifier<void> {
   void build();
