@@ -8,7 +8,7 @@ import 'package:wasal/features/ride/ui/providers/request_ride/request_ride_provi
 import 'package:wasal/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:wasal/features/ride/ui/providers/ride_controller/ride_state.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.dart';
-import 'package:wasel_core/widgets/map/map_controller_provider.dart';
+import 'package:wasel_location/presentation/providers/map/map_controller_provider.dart';
 
 part 'ride_camera_controller.g.dart';
 

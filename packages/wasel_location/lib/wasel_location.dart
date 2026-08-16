@@ -1,6 +1,11 @@
 /// wasel_location — shared location logic for the Wasel apps.
 library;
 
+// The map package itself. Re-exported so a screen needs a single import to get
+// both the coordinates and the types they are drawn with; `wasel_core` used to
+// carry this and no longer knows what a map is.
+export 'package:google_maps_flutter/google_maps_flutter.dart';
+
 // Domain — entities
 export 'domain/entities/device_fix.dart';
 export 'domain/entities/geo_point.dart';
@@ -20,7 +25,8 @@ export 'domain/usecases/get_point_label_use_case.dart';
 export 'domain/usecases/get_route_use_case.dart';
 export 'domain/usecases/watch_device_location_use_case.dart';
 
-// Data — constants
+// Core — constants
+export 'core/const/app_map_defaults.dart';
 export 'core/const/location_api_const.dart';
 
 // Data — models
@@ -40,7 +46,7 @@ export 'data/repos/route_repo.dart';
 // DI — the composition root: services, repos and use cases as providers
 export 'presentation/providers/location_di_providers.dart';
 
-// Presentation — extensions at the domain/map boundary
+// Core — extensions at the domain/map boundary
 export 'core/extensions/geo_point_map_x.dart';
 
 // Presentation — location providers
@@ -52,4 +58,12 @@ export 'presentation/providers/location/recenter_controller.dart';
 
 // Presentation — map providers
 export 'presentation/providers/map/initial_camera_target_provider.dart';
+export 'presentation/providers/map/map_controller_provider.dart';
 export 'presentation/providers/map/map_marker_icon_provider.dart';
+export 'presentation/providers/map/map_ready_provider.dart';
+
+// Presentation — widgets
+export 'presentation/widgets/app_map.dart';
+export 'presentation/widgets/app_map_loading_overlay.dart';
+export 'presentation/widgets/location_permission_banner.dart';
+export 'presentation/widgets/my_location_button.dart';

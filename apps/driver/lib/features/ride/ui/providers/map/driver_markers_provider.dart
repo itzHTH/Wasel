@@ -9,9 +9,9 @@ import 'package:driver/features/ride/ui/providers/map/map_marker_icon_provider.d
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:wasel_core/wasel_core.dart';
 
 part 'driver_markers_provider.g.dart';
 

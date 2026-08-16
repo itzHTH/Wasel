@@ -8,32 +8,9 @@ part of 'location_di_providers.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// Retrofit client for Google reverse geocoding.
-///
-/// **Data flow:** reads the Google-flavoured Dio from `wasel_core`
-/// (`googleDioFactoryProvider`) — which already carries the geocoding base URL
-/// and the interceptor that appends the API key — and exposes a typed API
-/// surface to `geocodingRepoProvider`.
-///
-/// **Why a plain provider:** construction is synchronous and pure, so there is
-/// nothing to await and no state to hold. A `FutureProvider` would force every
-/// downstream consumer into `AsyncValue` handling for a value that is never
-/// actually asynchronous.
 
 @ProviderFor(geocodingApiService)
 final geocodingApiServiceProvider = GeocodingApiServiceProvider._();
-
-/// Retrofit client for Google reverse geocoding.
-///
-/// **Data flow:** reads the Google-flavoured Dio from `wasel_core`
-/// (`googleDioFactoryProvider`) — which already carries the geocoding base URL
-/// and the interceptor that appends the API key — and exposes a typed API
-/// surface to `geocodingRepoProvider`.
-///
-/// **Why a plain provider:** construction is synchronous and pure, so there is
-/// nothing to await and no state to hold. A `FutureProvider` would force every
-/// downstream consumer into `AsyncValue` handling for a value that is never
-/// actually asynchronous.
 
 final class GeocodingApiServiceProvider
     extends
@@ -43,17 +20,6 @@ final class GeocodingApiServiceProvider
           GeocodingApiService
         >
     with $Provider<GeocodingApiService> {
-  /// Retrofit client for Google reverse geocoding.
-  ///
-  /// **Data flow:** reads the Google-flavoured Dio from `wasel_core`
-  /// (`googleDioFactoryProvider`) — which already carries the geocoding base URL
-  /// and the interceptor that appends the API key — and exposes a typed API
-  /// surface to `geocodingRepoProvider`.
-  ///
-  /// **Why a plain provider:** construction is synchronous and pure, so there is
-  /// nothing to await and no state to hold. A `FutureProvider` would force every
-  /// downstream consumer into `AsyncValue` handling for a value that is never
-  /// actually asynchronous.
   GeocodingApiServiceProvider._()
     : super(
         from: null,
@@ -91,34 +57,8 @@ final class GeocodingApiServiceProvider
 String _$geocodingApiServiceHash() =>
     r'cdac9b00ae5e6365d0d1fade013094d5c4a3d255';
 
-/// Google Routes API client.
-///
-/// **Data flow:** resolves `ROUTES_API_KEY` from the app's loaded `.env` and
-/// hands it to the service; exposes route fetching to `routeRepoProvider`.
-///
-/// **Why the key is read here:** `RouteRemoteService` takes the key by
-/// constructor so it stays a pure function of its inputs and can be built in a
-/// test without an `.env` on disk. Reading the environment is an
-/// application-composition concern, which is precisely what this DI layer is.
-///
-/// Requires `dotenv.load()` to have run during app start-up — both apps already
-/// do this before `runApp`.
-
 @ProviderFor(routeRemoteService)
 final routeRemoteServiceProvider = RouteRemoteServiceProvider._();
-
-/// Google Routes API client.
-///
-/// **Data flow:** resolves `ROUTES_API_KEY` from the app's loaded `.env` and
-/// hands it to the service; exposes route fetching to `routeRepoProvider`.
-///
-/// **Why the key is read here:** `RouteRemoteService` takes the key by
-/// constructor so it stays a pure function of its inputs and can be built in a
-/// test without an `.env` on disk. Reading the environment is an
-/// application-composition concern, which is precisely what this DI layer is.
-///
-/// Requires `dotenv.load()` to have run during app start-up — both apps already
-/// do this before `runApp`.
 
 final class RouteRemoteServiceProvider
     extends
@@ -128,18 +68,6 @@ final class RouteRemoteServiceProvider
           RouteRemoteService
         >
     with $Provider<RouteRemoteService> {
-  /// Google Routes API client.
-  ///
-  /// **Data flow:** resolves `ROUTES_API_KEY` from the app's loaded `.env` and
-  /// hands it to the service; exposes route fetching to `routeRepoProvider`.
-  ///
-  /// **Why the key is read here:** `RouteRemoteService` takes the key by
-  /// constructor so it stays a pure function of its inputs and can be built in a
-  /// test without an `.env` on disk. Reading the environment is an
-  /// application-composition concern, which is precisely what this DI layer is.
-  ///
-  /// Requires `dotenv.load()` to have run during app start-up — both apps already
-  /// do this before `runApp`.
   RouteRemoteServiceProvider._()
     : super(
         from: null,
@@ -177,30 +105,8 @@ final class RouteRemoteServiceProvider
 String _$routeRemoteServiceHash() =>
     r'8cf9250542d8e4ca820db262d7f92324a31570fa';
 
-/// The sole wrapper around geolocator's static API.
-///
-/// **Data flow:** talks to the platform's location sensors; consumed only by
-/// `deviceLocationRepoProvider`.
-///
-/// **Why this provider matters most:** it is the seam. Overriding just this one
-/// provider in a `ProviderContainer` puts a fake device under the entire graph
-/// above it, which is what makes cold-fix timeouts, denied permissions and
-/// service-disabled paths testable without a phone. Nothing else in the
-/// codebase is allowed to touch `Geolocator`.
-
 @ProviderFor(deviceLocationService)
 final deviceLocationServiceProvider = DeviceLocationServiceProvider._();
-
-/// The sole wrapper around geolocator's static API.
-///
-/// **Data flow:** talks to the platform's location sensors; consumed only by
-/// `deviceLocationRepoProvider`.
-///
-/// **Why this provider matters most:** it is the seam. Overriding just this one
-/// provider in a `ProviderContainer` puts a fake device under the entire graph
-/// above it, which is what makes cold-fix timeouts, denied permissions and
-/// service-disabled paths testable without a phone. Nothing else in the
-/// codebase is allowed to touch `Geolocator`.
 
 final class DeviceLocationServiceProvider
     extends
@@ -210,16 +116,6 @@ final class DeviceLocationServiceProvider
           DeviceLocationService
         >
     with $Provider<DeviceLocationService> {
-  /// The sole wrapper around geolocator's static API.
-  ///
-  /// **Data flow:** talks to the platform's location sensors; consumed only by
-  /// `deviceLocationRepoProvider`.
-  ///
-  /// **Why this provider matters most:** it is the seam. Overriding just this one
-  /// provider in a `ProviderContainer` puts a fake device under the entire graph
-  /// above it, which is what makes cold-fix timeouts, denied permissions and
-  /// service-disabled paths testable without a phone. Nothing else in the
-  /// codebase is allowed to touch `Geolocator`.
   DeviceLocationServiceProvider._()
     : super(
         from: null,
@@ -257,14 +153,8 @@ final class DeviceLocationServiceProvider
 String _$deviceLocationServiceHash() =>
     r'4f0efd047e476c0c591515be9dd487049070dfb6';
 
-/// **Data flow:** `geocodingApiService` → maps Google's component list into a
-/// `street، locality` label → `ApiResults<String>` for the use case above it.
-
 @ProviderFor(geocodingRepo)
 final geocodingRepoProvider = GeocodingRepoProvider._();
-
-/// **Data flow:** `geocodingApiService` → maps Google's component list into a
-/// `street، locality` label → `ApiResults<String>` for the use case above it.
 
 final class GeocodingRepoProvider
     extends
@@ -274,8 +164,6 @@ final class GeocodingRepoProvider
           BaseGeocodingRepo
         >
     with $Provider<BaseGeocodingRepo> {
-  /// **Data flow:** `geocodingApiService` → maps Google's component list into a
-  /// `street، locality` label → `ApiResults<String>` for the use case above it.
   GeocodingRepoProvider._()
     : super(
         from: null,
@@ -312,20 +200,12 @@ final class GeocodingRepoProvider
 
 String _$geocodingRepoHash() => r'9a9540fd3cec9b44d418adf1e798ce1194eb6096';
 
-/// **Data flow:** `routeRemoteService` → decoded polyline points →
-/// `ApiResults<List<GeoPoint>>`, failing when fewer than two points came back.
-
 @ProviderFor(routeRepo)
 final routeRepoProvider = RouteRepoProvider._();
-
-/// **Data flow:** `routeRemoteService` → decoded polyline points →
-/// `ApiResults<List<GeoPoint>>`, failing when fewer than two points came back.
 
 final class RouteRepoProvider
     extends $FunctionalProvider<BaseRouteRepo, BaseRouteRepo, BaseRouteRepo>
     with $Provider<BaseRouteRepo> {
-  /// **Data flow:** `routeRemoteService` → decoded polyline points →
-  /// `ApiResults<List<GeoPoint>>`, failing when fewer than two points came back.
   RouteRepoProvider._()
     : super(
         from: null,
@@ -361,16 +241,8 @@ final class RouteRepoProvider
 
 String _$routeRepoHash() => r'843bfcbb3b5ecf482f3d10081ef49cbec20fbd15';
 
-/// **Data flow:** `deviceLocationService` → translates `Position` into
-/// `DeviceFix`, geolocator's `LocationPermission` into `LocationAccess`, and
-/// platform errors into `LocationException`.
-
 @ProviderFor(deviceLocationRepo)
 final deviceLocationRepoProvider = DeviceLocationRepoProvider._();
-
-/// **Data flow:** `deviceLocationService` → translates `Position` into
-/// `DeviceFix`, geolocator's `LocationPermission` into `LocationAccess`, and
-/// platform errors into `LocationException`.
 
 final class DeviceLocationRepoProvider
     extends
@@ -380,9 +252,6 @@ final class DeviceLocationRepoProvider
           BaseDeviceLocationRepo
         >
     with $Provider<BaseDeviceLocationRepo> {
-  /// **Data flow:** `deviceLocationService` → translates `Position` into
-  /// `DeviceFix`, geolocator's `LocationPermission` into `LocationAccess`, and
-  /// platform errors into `LocationException`.
   DeviceLocationRepoProvider._()
     : super(
         from: null,
@@ -420,14 +289,8 @@ final class DeviceLocationRepoProvider
 String _$deviceLocationRepoHash() =>
     r'324da7334e468cb96db01dda971ca8395b1123b6';
 
-/// **Data flow:** `geocodingRepo` → a cancellable point-to-label lookup consumed
-/// by `pointLabelProvider`.
-
 @ProviderFor(getPointLabelUseCase)
 final getPointLabelUseCaseProvider = GetPointLabelUseCaseProvider._();
-
-/// **Data flow:** `geocodingRepo` → a cancellable point-to-label lookup consumed
-/// by `pointLabelProvider`.
 
 final class GetPointLabelUseCaseProvider
     extends
@@ -437,8 +300,6 @@ final class GetPointLabelUseCaseProvider
           GetPointLabelUseCase
         >
     with $Provider<GetPointLabelUseCase> {
-  /// **Data flow:** `geocodingRepo` → a cancellable point-to-label lookup consumed
-  /// by `pointLabelProvider`.
   GetPointLabelUseCaseProvider._()
     : super(
         from: null,
@@ -476,21 +337,13 @@ final class GetPointLabelUseCaseProvider
 String _$getPointLabelUseCaseHash() =>
     r'31cfc1531ca2b555b0c7a77dc4c6f54df2651392';
 
-/// **Data flow:** `routeRepo` → route points for whichever app-side provider is
-/// drawing a polyline.
-
 @ProviderFor(getRouteUseCase)
 final getRouteUseCaseProvider = GetRouteUseCaseProvider._();
-
-/// **Data flow:** `routeRepo` → route points for whichever app-side provider is
-/// drawing a polyline.
 
 final class GetRouteUseCaseProvider
     extends
         $FunctionalProvider<GetRouteUseCase, GetRouteUseCase, GetRouteUseCase>
     with $Provider<GetRouteUseCase> {
-  /// **Data flow:** `routeRepo` → route points for whichever app-side provider is
-  /// drawing a polyline.
   GetRouteUseCaseProvider._()
     : super(
         from: null,
@@ -526,15 +379,9 @@ final class GetRouteUseCaseProvider
 
 String _$getRouteUseCaseHash() => r'8b806898b7690185a5446979af6556395450b16f';
 
-/// **Data flow:** `deviceLocationRepo` → the continuous position stream behind
-/// `deviceLocationProvider`.
-
 @ProviderFor(watchDeviceLocationUseCase)
 final watchDeviceLocationUseCaseProvider =
     WatchDeviceLocationUseCaseProvider._();
-
-/// **Data flow:** `deviceLocationRepo` → the continuous position stream behind
-/// `deviceLocationProvider`.
 
 final class WatchDeviceLocationUseCaseProvider
     extends
@@ -544,8 +391,6 @@ final class WatchDeviceLocationUseCaseProvider
           WatchDeviceLocationUseCase
         >
     with $Provider<WatchDeviceLocationUseCase> {
-  /// **Data flow:** `deviceLocationRepo` → the continuous position stream behind
-  /// `deviceLocationProvider`.
   WatchDeviceLocationUseCaseProvider._()
     : super(
         from: null,
@@ -583,12 +428,8 @@ final class WatchDeviceLocationUseCaseProvider
 String _$watchDeviceLocationUseCaseHash() =>
     r'187d9b473c1e5f9ee567a9db6720082b171d0e70';
 
-/// **Data flow:** `deviceLocationRepo` → a single cold fix for `recenterController`.
-
 @ProviderFor(getCurrentLocationUseCase)
 final getCurrentLocationUseCaseProvider = GetCurrentLocationUseCaseProvider._();
-
-/// **Data flow:** `deviceLocationRepo` → a single cold fix for `recenterController`.
 
 final class GetCurrentLocationUseCaseProvider
     extends
@@ -598,7 +439,6 @@ final class GetCurrentLocationUseCaseProvider
           GetCurrentLocationUseCase
         >
     with $Provider<GetCurrentLocationUseCase> {
-  /// **Data flow:** `deviceLocationRepo` → a single cold fix for `recenterController`.
   GetCurrentLocationUseCaseProvider._()
     : super(
         from: null,
@@ -636,15 +476,9 @@ final class GetCurrentLocationUseCaseProvider
 String _$getCurrentLocationUseCaseHash() =>
     r'59636ebcb7d351918140b39abbced8440ccc00a7';
 
-/// **Data flow:** `deviceLocationRepo` → the OS's cached fix behind
-/// `lastKnownLocationProvider`.
-
 @ProviderFor(getLastKnownLocationUseCase)
 final getLastKnownLocationUseCaseProvider =
     GetLastKnownLocationUseCaseProvider._();
-
-/// **Data flow:** `deviceLocationRepo` → the OS's cached fix behind
-/// `lastKnownLocationProvider`.
 
 final class GetLastKnownLocationUseCaseProvider
     extends
@@ -654,8 +488,6 @@ final class GetLastKnownLocationUseCaseProvider
           GetLastKnownLocationUseCase
         >
     with $Provider<GetLastKnownLocationUseCase> {
-  /// **Data flow:** `deviceLocationRepo` → the OS's cached fix behind
-  /// `lastKnownLocationProvider`.
   GetLastKnownLocationUseCaseProvider._()
     : super(
         from: null,

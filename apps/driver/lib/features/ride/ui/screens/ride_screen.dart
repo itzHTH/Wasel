@@ -12,6 +12,8 @@ import 'package:driver/features/ride/ui/widgets/my_location_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/wasel_core.dart';
+import 'package:wasel_location/presentation/widgets/app_map.dart';
+import 'package:wasel_location/presentation/widgets/app_map_loading_overlay.dart';
 
 class RideScreen extends ConsumerStatefulWidget {
   const RideScreen({super.key});

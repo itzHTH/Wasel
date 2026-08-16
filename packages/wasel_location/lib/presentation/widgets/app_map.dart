@@ -3,26 +3,29 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:wasel_core/widgets/map/map_controller_provider.dart';
-import 'package:wasel_core/widgets/map/map_ready_provider.dart';
+import 'package:wasel_location/core/const/app_map_defaults.dart';
+import 'package:wasel_location/presentation/providers/location/recenter_controller.dart';
+import 'package:wasel_location/presentation/providers/map/initial_camera_target_provider.dart';
+import 'package:wasel_location/presentation/providers/map/map_controller_provider.dart';
+import 'package:wasel_location/presentation/providers/map/map_ready_provider.dart';
 
-/// Camera defaults shared by every Wasel map — one service area (Iraq) for all
-/// apps, so the rider and the driver always open on the same view.
-class AppMapDefaults {
-  const AppMapDefaults._();
-
-  static const LatLng initialTarget = LatLng(33.3152, 44.3661);
-
-  static const double initialZoom = 14.5;
-
-  static const MinMaxZoomPreference zoomRange = MinMaxZoomPreference(10, 20);
-
-  static final LatLngBounds serviceBounds = LatLngBounds(
-    southwest: const LatLng(29.0, 38.8),
-    northeast: const LatLng(37.4, 48.6),
-  );
-}
-
+/// The one Google Map surface both apps draw on.
+///
+/// Layers (markers, polylines, circles) stay caller-supplied because they carry
+/// ride semantics; everything that is purely *about the map or the device* is
+/// resolved here from the package's own providers, so neither app has to
+/// re-derive it:
+///
+/// - **Opening camera** — [initialCameraTargetProvider] (last known fix, else
+///   the Iraq default). `GoogleMap` reads `initialCameraPosition` exactly once,
+///   at creation, so the platform view is deliberately not built until the
+///   target resolves; [AppMapLoadingOverlay] is what the user sees meanwhile.
+/// - **Blue dot** — [RecenterController.myLocationEnabled], which only flips to
+///   `true` after permission was verified in-app. Letting `GoogleMap` own this
+///   would trigger its own unlocalized native permission prompt.
+/// - **Controller + readiness** — published to [mapControllerHolderProvider]
+///   and [mapReadyProvider] so cameras, recentre and overlays can be driven
+///   from providers instead of widget callbacks.
 class AppMap extends ConsumerStatefulWidget {
   const AppMap({
     super.key,
@@ -30,9 +33,9 @@ class AppMap extends ConsumerStatefulWidget {
     this.markers = const {},
     this.polylines = const {},
     this.circles = const {},
-    this.myLocationEnabled = false,
+    this.myLocationEnabled,
     this.padding = EdgeInsets.zero,
-    this.initialTarget = AppMapDefaults.initialTarget,
+    this.initialTarget,
     this.initialZoom = AppMapDefaults.initialZoom,
     this.onCameraMove,
     this.onCameraMoveStarted,
@@ -46,12 +49,15 @@ class AppMap extends ConsumerStatefulWidget {
   final Set<Polyline> polylines;
   final Set<Circle> circles;
 
-  final bool myLocationEnabled;
+  /// Overrides the blue dot.
+  final bool? myLocationEnabled;
 
   /// Keeps the visible camera clear of the cards stacked over the map.
   final EdgeInsets padding;
 
-  final LatLng initialTarget;
+  /// Overrides the opening camera.
+  final LatLng? initialTarget;
+
   final double initialZoom;
 
   final ValueChanged<CameraPosition>? onCameraMove;
@@ -93,9 +99,20 @@ class _AppMapState extends ConsumerState<AppMap> {
 
   @override
   Widget build(BuildContext context) {
+    final target =
+        widget.initialTarget ?? ref.watch(initialCameraTargetProvider).value;
+
+    if (target == null) return const SizedBox.shrink();
+
+    final bool myLocationEnabled =
+        widget.myLocationEnabled ??
+        ref.watch(
+          recenterControllerProvider.select((s) => s.myLocationEnabled),
+        );
+
     return GoogleMap(
       mapId: widget.mapId,
-      myLocationEnabled: widget.myLocationEnabled,
+      myLocationEnabled: myLocationEnabled,
       buildingsEnabled: false,
       myLocationButtonEnabled: false,
       tiltGesturesEnabled: false,
@@ -113,7 +130,7 @@ class _AppMapState extends ConsumerState<AppMap> {
       onCameraIdle: _onCameraIdle,
       initialCameraPosition: CameraPosition(
         zoom: widget.initialZoom,
-        target: widget.initialTarget,
+        target: target,
       ),
     );
   }

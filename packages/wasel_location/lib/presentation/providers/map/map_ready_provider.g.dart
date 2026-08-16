@@ -10,15 +10,24 @@ part of 'map_ready_provider.dart';
 // ignore_for_file: type=lint, type=warning
 /// `true` once the map has drawn its first settled frame, so overlays can stop
 /// covering it.
+//
+//? A plain [Notifier] over a bool: the value is a latch flipped by the map
+//? widget itself, never fetched, so there is nothing async to model.
 
 @ProviderFor(MapReady)
 final mapReadyProvider = MapReadyProvider._();
 
 /// `true` once the map has drawn its first settled frame, so overlays can stop
 /// covering it.
+//
+//? A plain [Notifier] over a bool: the value is a latch flipped by the map
+//? widget itself, never fetched, so there is nothing async to model.
 final class MapReadyProvider extends $NotifierProvider<MapReady, bool> {
   /// `true` once the map has drawn its first settled frame, so overlays can stop
   /// covering it.
+  //
+  //? A plain [Notifier] over a bool: the value is a latch flipped by the map
+  //? widget itself, never fetched, so there is nothing async to model.
   MapReadyProvider._()
     : super(
         from: null,
@@ -50,6 +59,9 @@ String _$mapReadyHash() => r'eab03eea6026d936723099dd6fa7c0cdd935d357';
 
 /// `true` once the map has drawn its first settled frame, so overlays can stop
 /// covering it.
+//
+//? A plain [Notifier] over a bool: the value is a latch flipped by the map
+//? widget itself, never fetched, so there is nothing async to model.
 
 abstract class _$MapReady extends $Notifier<bool> {
   bool build();
