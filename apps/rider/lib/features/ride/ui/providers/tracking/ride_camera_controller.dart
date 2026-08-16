@@ -1,14 +1,12 @@
 import 'dart:math' as math;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:wasal/features/ride/domain/entities/geo_point.dart';
+import 'package:wasel_location/wasel_location.dart';
 import 'package:wasal/features/ride/ui/providers/request_ride/request_ride_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:wasal/features/ride/ui/providers/ride_controller/ride_state.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.dart';
-import 'package:wasel_core/widgets/map/map_controller_provider.dart';
 
 part 'ride_camera_controller.g.dart';
 

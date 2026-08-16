@@ -1,6 +1,6 @@
 import 'package:driver/core/widgets/app_primary_button.dart';
 import 'package:driver/core/widgets/app_secondary_button.dart';
-import 'package:driver/features/ride/domain/entities/geo_point.dart';
+import 'package:wasel_location/wasel_location.dart';
 import 'package:driver/features/ride/domain/entities/payment_method.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/rider_profile/current_rider_profile_provider.dart';

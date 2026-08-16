@@ -4,14 +4,13 @@ import 'package:driver/features/ride/data/models/update_location/update_location
 import 'package:driver/features/ride/domain/entities/ride_connection_status.dart';
 import 'package:driver/features/ride/domain/use_case/update_driver_location_use_case.dart';
 import 'package:driver/features/ride/domain/use_case/watch_ride_connection_use_case.dart';
-import 'package:driver/features/ride/ui/providers/location/device_location_provider.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_use_case_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:wasel_location/wasel_location.dart';
 
 part 'driver_location_broadcaster.g.dart';
 
@@ -40,13 +39,13 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
   static const _fixFailureLimit = 3;
   static const _fixTimeout = Duration(seconds: 15);
 
-  ProviderSubscription<AsyncValue<Position>>? _positions;
+  ProviderSubscription<AsyncValue<DeviceFix>>? _positions;
   Timer? _ticker;
-  Position? _lastPosition;
+  DeviceFix? _lastPosition;
   ProviderSubscription<UpdateDriverLocationUseCase>? _useCase;
   ProviderSubscription<WatchRideConnectionUseCase>? _connectionUseCase;
   StreamSubscription<RideConnectionStatus>? _connection;
-  Future<Position?>? _acquisition;
+  Future<DeviceFix?>? _acquisition;
   bool _sending = false;
   bool _connected = false;
   bool _everConnected = false;
@@ -69,18 +68,25 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
   }
 
   Future<void> _start(int session) async {
-    if (!await Geolocator.isLocationServiceEnabled()) {
+    // Checked before the permission prompt, and separately from it: a granted
+    // app whose OS location service is off still reads the cache successfully,
+    // so an acquisition failure would never reveal the real problem.
+    final serviceEnabled = await ref
+        .read(isLocationServiceEnabledUseCaseProvider)
+        .call(null);
+    if (!serviceEnabled) {
       _fail(session, 'خدمة الموقع مطفّية، شغّلها حتى نگدر نبعث موقعك');
       return;
     }
 
-    var permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-    }
-
-    if (permission == LocationPermission.denied ||
-        permission == LocationPermission.deniedForever) {
+    // The broadcaster starts from a provider, not a widget, so it takes the
+    // context-free path. `permanentlyDenied` collapses into the same message:
+    // the driver cannot go online either way, and app settings are one tap from
+    // the OS prompt they already dismissed.
+    final access = await ref
+        .read(locationAccessControllerProvider.notifier)
+        .ensure();
+    if (!access.isGranted) {
       _fail(session, 'ما نگدر نبعث موقعك بدون إذن الموقع');
       return;
     }
@@ -129,7 +135,7 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
     if (reconnected) unawaited(_broadcast());
   }
 
-  void _onPosition(Position position) {
+  void _onPosition(DeviceFix position) {
     _lastPosition = position;
     unawaited(_broadcast());
   }
@@ -170,7 +176,7 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
     }
   }
 
-  Future<Position?> _acquirePosition(int session) {
+  Future<DeviceFix?> _acquirePosition(int session) {
     // Only clear the slot if it is still ours: an acquisition left over from a
     // previous session would otherwise null out the current one and let a
     // second high-accuracy fix start alongside it.
@@ -179,16 +185,11 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
     });
   }
 
-  Future<Position?> _coldFix(int session) async {
+  Future<DeviceFix?> _coldFix(int session) async {
     try {
       final position =
-          await Geolocator.getLastKnownPosition() ??
-          await Geolocator.getCurrentPosition(
-            locationSettings: const LocationSettings(
-              accuracy: LocationAccuracy.high,
-              timeLimit: _fixTimeout,
-            ),
-          );
+          await ref.read(getLastKnownLocationUseCaseProvider).call(null) ??
+          await ref.read(getCurrentLocationUseCaseProvider).call(_fixTimeout);
 
       if (session == _session) _fixFailures = 0;
       return position;

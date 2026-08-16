@@ -1,8 +1,6 @@
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/core/helpers/ride_formatters.dart';
-import 'package:wasal/features/ride/domain/entities/geo_point.dart';
-import 'package:wasal/features/ride/ui/providers/location/point_label_provider.dart';
+import 'package:wasel_location/wasel_location.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_state.dart';
 
 part 'ride_draft_provider.g.dart';

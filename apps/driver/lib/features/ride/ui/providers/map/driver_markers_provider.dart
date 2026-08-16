@@ -1,17 +1,12 @@
 import 'dart:ui' show Offset;
 
 import 'package:driver/core/const/app_driver_consts.dart';
-import 'package:driver/core/helpers/geo_point_map_x.dart';
-import 'package:driver/features/ride/domain/entities/geo_point.dart';
-import 'package:driver/features/ride/ui/providers/location/device_location_provider.dart';
 import 'package:driver/features/ride/ui/providers/location/driver_heading_provider.dart';
-import 'package:driver/features/ride/ui/providers/map/map_marker_icon_provider.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:wasel_core/wasel_core.dart';
+import 'package:wasel_location/wasel_location.dart';
 
 part 'driver_markers_provider.g.dart';
 
@@ -30,7 +25,7 @@ Set<Marker> _car(Ref ref) {
   // heading, which only the stream reports.
   final position = isOnline
       ? ref.watch(deviceLocationProvider).value?.toLatLng()
-      : ref.watch(lastKnownLocationProvider).value;
+      : ref.watch(lastKnownLocationProvider).value?.toLatLng();
 
   if (position == null) return const {};
 
@@ -76,8 +71,4 @@ Marker _pin(Ref ref, String id, GeoPoint point, String asset) {
     position: point.toLatLng(),
     icon: icon ?? BitmapDescriptor.defaultMarker,
   );
-}
-
-extension on Position {
-  LatLng toLatLng() => LatLng(latitude, longitude);
 }

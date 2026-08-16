@@ -1,16 +1,13 @@
 import 'dart:async';
 import 'dart:math' as math;
 
-import 'package:driver/core/helpers/geo_point_map_x.dart';
-import 'package:driver/features/ride/ui/providers/location/device_location_provider.dart';
 import 'package:driver/features/ride/ui/providers/location/driver_heading_provider.dart';
 import 'package:driver/features/ride/ui/providers/map/driver_route_polylines_provider.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:wasel_core/wasel_core.dart';
+import 'package:wasel_location/wasel_location.dart';
 
 part 'driver_camera_controller.g.dart';
 
@@ -26,7 +23,7 @@ class DriverCameraController extends _$DriverCameraController {
   /// Fallback zoom for a trip whose endpoints landed on the same spot.
   static const _frameZoom = 14.0;
 
-  ProviderSubscription<AsyncValue<Position>>? _positions;
+  ProviderSubscription<AsyncValue<DeviceFix>>? _positions;
   Timer? _resume;
   DateTime? _selfMoveUntil;
   bool _paused = false;
@@ -112,7 +109,7 @@ class DriverCameraController extends _$DriverCameraController {
     }
   }
 
-  Future<void> _follow(Position position) async {
+  Future<void> _follow(DeviceFix position) async {
     if (_paused || !ref.mounted) return;
 
     final controller = await ref.read(mapControllerHolderProvider.future);
@@ -121,7 +118,7 @@ class DriverCameraController extends _$DriverCameraController {
     _selfMoveUntil = DateTime.now().add(_selfMoveWindow);
     final update = CameraUpdate.newCameraPosition(
       CameraPosition(
-        target: LatLng(position.latitude, position.longitude),
+        target: position.toLatLng(),
         zoom: _zoom,
         bearing: ref.read(driverHeadingProvider),
       ),
