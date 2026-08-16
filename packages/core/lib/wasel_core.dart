@@ -15,6 +15,7 @@ export 'flavors/flavors_config.dart';
 export 'extensions/navigation_extension.dart';
 
 // Helpers
+export 'helpers/app_amount_format.dart';
 export 'helpers/app_image_compressor.dart';
 export 'helpers/app_local_cache.dart';
 export 'helpers/app_navigation.dart';
@@ -50,8 +51,10 @@ export 'usecase/stream_base_use_case.dart';
 // Widgets
 export 'widgets/app_back_button.dart';
 export 'widgets/app_dialog.dart';
+export 'widgets/app_editable_avatar.dart';
 export 'widgets/app_error_retry.dart';
 export 'widgets/app_header_with_logo.dart';
+export 'widgets/app_info_card.dart';
 export 'widgets/app_labeled_field.dart';
 export 'widgets/app_loading.dart';
 export 'widgets/app_map_profile_button.dart';

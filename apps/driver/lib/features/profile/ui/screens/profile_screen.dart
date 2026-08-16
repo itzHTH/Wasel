@@ -3,6 +3,7 @@ import 'package:driver/features/auth/ui/providers/logout/logout.dart';
 import 'package:driver/features/profile/ui/widgets/driver_profile_summary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wasel_core/extensions/navigation_extension.dart';
 import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/widgets/app_loading.dart';
@@ -27,18 +28,13 @@ class ProfileScreen extends ConsumerWidget {
         children: [
           const DriverProfileSummary(),
           SizedBox(height: AppDimens.space8),
-          const AppMenuTile(
+          AppMenuTile(
             icon: Icons.person_outline_rounded,
             label: 'الملف الشخصي',
+            onTap: () => context.pushNamed(AppRoutes.profileDetails),
           ),
-          const AppMenuTile(
-            icon: Icons.settings_outlined,
-            label: 'الإعدادات',
-          ),
-          const AppMenuTile(
-            icon: Icons.brightness_6_outlined,
-            label: 'المظهر',
-          ),
+          const AppMenuTile(icon: Icons.settings_outlined, label: 'الإعدادات'),
+          const AppMenuTile(icon: Icons.brightness_6_outlined, label: 'المظهر'),
           const Divider(height: 1),
           AppMenuTile(
             icon: Icons.logout_rounded,

@@ -7,4 +7,5 @@ class AppRoutes {
   static const String registerSuccess = '/register-success';
   static const String ride = '/ride';
   static const String profile = '/profile';
+  static const String profileDetails = '/profile-details';
 }

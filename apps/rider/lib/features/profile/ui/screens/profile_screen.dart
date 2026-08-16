@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/core/routing/app_routes_name.dart';
 import 'package:wasal/features/auth/ui/providers/logout/logout.dart';
 import 'package:wasal/features/profile/ui/widgets/rider_profile_summary.dart';
+import 'package:wasel_core/extensions/navigation_extension.dart';
 import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/widgets/app_loading.dart';
@@ -27,9 +28,10 @@ class ProfileScreen extends ConsumerWidget {
         children: [
           const RiderProfileSummary(),
           SizedBox(height: AppDimens.space8),
-          const AppMenuTile(
+          AppMenuTile(
             icon: Icons.person_outline_rounded,
             label: 'الملف الشخصي',
+            onTap: () => context.pushNamed(AppRoutes.profileDetails),
           ),
           const AppMenuTile(icon: Icons.settings_outlined, label: 'الإعدادات'),
           const AppMenuTile(icon: Icons.brightness_6_outlined, label: 'المظهر'),

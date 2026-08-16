@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart' show NumberFormat;
+import 'package:wasel_core/helpers/app_amount_format.dart';
 import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
@@ -30,7 +30,7 @@ class RiderBalanceChip extends StatelessWidget {
           ),
           SizedBox(width: AppDimens.space4),
           Text(
-            NumberFormat.decimalPattern('ar').format(balance),
+            formatAmount(balance),
             style: AppTextStyles.font14Primary500SemiBold,
           ),
         ],
