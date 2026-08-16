@@ -69,7 +69,7 @@ final class RecenterControllerProvider
 }
 
 String _$recenterControllerHash() =>
-    r'2c4499b0d934464d9bdd4f045b6e3cc9d0a93937';
+    r'5e299921d394633197e10ba9ef57dad14f5ef859';
 
 /// Manages the "My Location" interaction flow: verifies permissions, acquires a fix,
 /// and animates the map camera.
