@@ -33,6 +33,7 @@ export 'networking/dio/dio_factory.dart';
 export 'networking/errors/api_error_model.dart';
 export 'networking/errors/api_errors.dart';
 export 'networking/errors/error_handler.dart';
+export 'networking/errors/error_message.dart';
 export 'networking/interceptors/auth_interceptor.dart';
 
 // Theme
@@ -49,8 +50,12 @@ export 'usecase/stream_base_use_case.dart';
 // Widgets
 export 'widgets/app_back_button.dart';
 export 'widgets/app_dialog.dart';
+export 'widgets/app_error_retry.dart';
 export 'widgets/app_header_with_logo.dart';
 export 'widgets/app_labeled_field.dart';
 export 'widgets/app_loading.dart';
+export 'widgets/app_map_profile_button.dart';
+export 'widgets/app_menu_tile.dart';
+export 'widgets/app_profile_avatar.dart';
 export 'widgets/app_text_form_field.dart';
 export 'widgets/password_field.dart';

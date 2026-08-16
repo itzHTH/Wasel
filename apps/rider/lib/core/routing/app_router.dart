@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wasal/core/routing/app_routes_name.dart';
 import 'package:wasal/features/auth/ui/screens/login_screen.dart';
 import 'package:wasal/features/auth/ui/screens/register_screen.dart';
-import 'package:wasal/features/home/ui/screens/home_screen.dart';
+import 'package:wasal/features/profile/ui/screens/profile_screen.dart';
 import 'package:wasal/features/ride/ui/screens/ride_screen.dart';
 import 'package:wasal/features/splash/ui/screens/splash_screen.dart';
 
@@ -18,11 +18,11 @@ class AppRouter {
       case AppRoutes.register:
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
 
-      case AppRoutes.home:
-        return MaterialPageRoute(builder: (_) => const HomeScreen());
-
       case AppRoutes.ride:
         return MaterialPageRoute(builder: (_) => const RideScreen());
+
+      case AppRoutes.profile:
+        return MaterialPageRoute(builder: (_) => const ProfileScreen());
 
       default:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
