@@ -10,4 +10,6 @@ class AppRoutes {
   static const String driverVerificationWizard = '/driver-verification-wizard';
 
   static const String ride = '/ride';
+
+  static const String profile = '/profile';
 }

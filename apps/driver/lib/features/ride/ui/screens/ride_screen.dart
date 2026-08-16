@@ -1,4 +1,5 @@
 import 'package:driver/core/const/app_driver_consts.dart';
+import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:driver/features/ride/ui/providers/map/driver_camera_controller.dart';
 import 'package:driver/features/ride/ui/providers/map/driver_is_camera_moving_provider.dart';
 import 'package:driver/features/ride/ui/providers/location/driver_location_broadcaster.dart';
@@ -61,9 +62,23 @@ class _RideScreenState extends ConsumerState<RideScreen> {
             },
           ),
           const Positioned.fill(child: AppMapLoadingOverlay()),
-          Positioned(
+          PositionedDirectional(
             top: AppDimens.space16,
-            child: const SafeArea(child: DriverStatusBar()),
+            start: AppDimens.space16,
+            end: AppDimens.space16,
+            child: SafeArea(
+              child: Row(
+                children: [
+                  AppMapProfileButton(
+                    heroTag: 'driver_profile_button',
+                    onPressed: () =>
+                        Navigator.pushNamed(context, AppRoutes.profile),
+                  ),
+                  SizedBox(width: AppDimens.space8),
+                  const Flexible(child: Align(child: DriverStatusBar())),
+                ],
+              ),
+            ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
@@ -72,13 +87,13 @@ class _RideScreenState extends ConsumerState<RideScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(
-                    left: AppDimens.space16,
-                    right: AppDimens.screenHPadding,
+                  padding: EdgeInsetsDirectional.only(
+                    start: AppDimens.screenHPadding,
+                    end: AppDimens.space16,
                     bottom: AppDimens.space16,
                   ),
                   child: const Align(
-                    alignment: AlignmentDirectional.centerStart,
+                    alignment: AlignmentDirectional.centerEnd,
                     child: MyLocationButton(
                       heroTag: 'driver_my_location_button',
                       zoom: 17,

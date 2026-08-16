@@ -1,4 +1,5 @@
 import 'package:driver/features/driver_verification/ui/screens/verification_wizard_screen.dart';
+import 'package:driver/features/profile/ui/screens/profile_screen.dart';
 import 'package:driver/features/ride/ui/screens/ride_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
@@ -31,6 +32,9 @@ class AppRouter {
 
       case AppRoutes.ride:
         return MaterialPageRoute(builder: (_) => const RideScreen());
+
+      case AppRoutes.profile:
+        return MaterialPageRoute(builder: (_) => const ProfileScreen());
 
       default:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
