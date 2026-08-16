@@ -1,6 +1,6 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:wasel_core/widgets/map/app_map.dart';
+import 'package:wasel_location/core/const/app_map_defaults.dart';
 import 'package:wasel_location/core/extensions/geo_point_map_x.dart';
 import 'package:wasel_location/presentation/providers/location/last_known_location_provider.dart';
 

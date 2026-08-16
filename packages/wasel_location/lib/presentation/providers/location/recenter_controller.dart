@@ -1,12 +1,12 @@
 import 'package:flutter/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:wasel_core/widgets/map/map_controller_provider.dart';
-import 'package:wasel_location/domain/entities/location_exception.dart';
 import 'package:wasel_location/core/extensions/geo_point_map_x.dart';
+import 'package:wasel_location/domain/entities/location_exception.dart';
 import 'package:wasel_location/presentation/providers/location/device_location_provider.dart';
 import 'package:wasel_location/presentation/providers/location/location_access_provider.dart';
 import 'package:wasel_location/presentation/providers/location_di_providers.dart';
+import 'package:wasel_location/presentation/providers/map/map_controller_provider.dart';
 
 part 'recenter_controller.g.dart';
 

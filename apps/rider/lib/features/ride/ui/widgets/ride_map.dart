@@ -5,7 +5,8 @@ import 'package:wasal/features/ride/ui/providers/ride_draft/ride_point_markers_p
 import 'package:wasal/features/ride/ui/providers/ride_location_controller.dart';
 import 'package:wasal/features/ride/ui/providers/route/route_polylines_provider.dart';
 import 'package:wasal/features/ride/ui/providers/tracking/search_radius_circles_provider.dart';
-import 'package:wasel_core/wasel_core.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:wasel_location/presentation/widgets/app_map.dart';
 
 /// Feeds the shared [AppMap] with the rider ride layers (pickup/dropoff pins,
 /// the active route, and the driver search radius).

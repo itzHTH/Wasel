@@ -5,10 +5,15 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'map_controller_provider.g.dart';
 
-/// Holds the [GoogleMapController] of the currently mounted [AppMap].
-///
-/// Callers `await` the future so camera work can be queued before the map
-/// finishes creating itself.
+/// Holds the GoogleMapController of the currently mounted `AppMap`.
+//
+//? - Exposes a [Future] rather than a nullable controller so camera work can be
+//?   queued *before* the platform view finishes creating itself — callers just
+//?   `await` and the animation runs as soon as the map exists.
+//
+//? - Kept alive (`keepAlive: true`) because the controller outlives any single
+//?   widget that wants to drive it; an auto-disposing holder would drop the
+//?   completer the moment the last listener paused.
 @Riverpod(keepAlive: true)
 class MapControllerHolder extends _$MapControllerHolder {
   final _pending = Completer<GoogleMapController>();

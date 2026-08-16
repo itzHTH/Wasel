@@ -8,83 +8,50 @@ part of 'initial_camera_target_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// **What it does:** decides where a map should open its camera, before any live
-/// fix exists.
-///
-/// **Data flow:** [lastKnownLocationProvider] → the cached coordinate if there
-/// is one, otherwise `AppMapDefaults.initialTarget` (the service-area centre).
-/// Exposes `AsyncValue<LatLng>` to whichever screen is constructing an `AppMap`.
-///
-/// **Why `FutureProvider`:** the answer depends on an awaited cache read, but it
-/// is asked exactly once per map. There is no action to perform and no later
-/// event to deliver, which is precisely the shape `FutureProvider` exists for —
-/// an `AsyncNotifier` would add a mutation surface nothing would call.
-///
-/// **Why `keepAlive`:** it inherits the lifetime of its only dependency. Since
-/// `lastKnownLocation` is kept alive, auto-disposing this one would recompute a
-/// cheap derivation for no benefit while adding a loading frame each time a map
-/// is rebuilt.
-///
-/// **Why it cannot fail:** falling back to the service centre is always
-/// possible, so this resolves to a usable camera target in every case — a map
-/// that opens *somewhere* beats one that opens on an error state.
-///
-/// Returns `LatLng` rather than `GeoPoint` because its only consumer is a map
-/// widget; the conversion happens here so callers do not each repeat it.
+/// Determines the initial camera position for the map upon app launch.
+//
+//? - Checks the OS location cache first (via [lastKnownLocationProvider]).
+//
+//? - Falls back seamlessly to the default service area (e.g., Baghdad center)
+//?   if the cache is empty or permission is denied.
+//
+//? - Never fails: guarantees the map always opens on a valid [LatLng] target
+//?   without displaying error states to the user.
+//
+//? - Kept alive (`keepAlive: true`) to match its dependency and prevent
+//?  loading flickers on map remounts.
 
 @ProviderFor(initialCameraTarget)
 final initialCameraTargetProvider = InitialCameraTargetProvider._();
 
-/// **What it does:** decides where a map should open its camera, before any live
-/// fix exists.
-///
-/// **Data flow:** [lastKnownLocationProvider] → the cached coordinate if there
-/// is one, otherwise `AppMapDefaults.initialTarget` (the service-area centre).
-/// Exposes `AsyncValue<LatLng>` to whichever screen is constructing an `AppMap`.
-///
-/// **Why `FutureProvider`:** the answer depends on an awaited cache read, but it
-/// is asked exactly once per map. There is no action to perform and no later
-/// event to deliver, which is precisely the shape `FutureProvider` exists for —
-/// an `AsyncNotifier` would add a mutation surface nothing would call.
-///
-/// **Why `keepAlive`:** it inherits the lifetime of its only dependency. Since
-/// `lastKnownLocation` is kept alive, auto-disposing this one would recompute a
-/// cheap derivation for no benefit while adding a loading frame each time a map
-/// is rebuilt.
-///
-/// **Why it cannot fail:** falling back to the service centre is always
-/// possible, so this resolves to a usable camera target in every case — a map
-/// that opens *somewhere* beats one that opens on an error state.
-///
-/// Returns `LatLng` rather than `GeoPoint` because its only consumer is a map
-/// widget; the conversion happens here so callers do not each repeat it.
+/// Determines the initial camera position for the map upon app launch.
+//
+//? - Checks the OS location cache first (via [lastKnownLocationProvider]).
+//
+//? - Falls back seamlessly to the default service area (e.g., Baghdad center)
+//?   if the cache is empty or permission is denied.
+//
+//? - Never fails: guarantees the map always opens on a valid [LatLng] target
+//?   without displaying error states to the user.
+//
+//? - Kept alive (`keepAlive: true`) to match its dependency and prevent
+//?  loading flickers on map remounts.
 
 final class InitialCameraTargetProvider
     extends $FunctionalProvider<AsyncValue<LatLng>, LatLng, FutureOr<LatLng>>
     with $FutureModifier<LatLng>, $FutureProvider<LatLng> {
-  /// **What it does:** decides where a map should open its camera, before any live
-  /// fix exists.
-  ///
-  /// **Data flow:** [lastKnownLocationProvider] → the cached coordinate if there
-  /// is one, otherwise `AppMapDefaults.initialTarget` (the service-area centre).
-  /// Exposes `AsyncValue<LatLng>` to whichever screen is constructing an `AppMap`.
-  ///
-  /// **Why `FutureProvider`:** the answer depends on an awaited cache read, but it
-  /// is asked exactly once per map. There is no action to perform and no later
-  /// event to deliver, which is precisely the shape `FutureProvider` exists for —
-  /// an `AsyncNotifier` would add a mutation surface nothing would call.
-  ///
-  /// **Why `keepAlive`:** it inherits the lifetime of its only dependency. Since
-  /// `lastKnownLocation` is kept alive, auto-disposing this one would recompute a
-  /// cheap derivation for no benefit while adding a loading frame each time a map
-  /// is rebuilt.
-  ///
-  /// **Why it cannot fail:** falling back to the service centre is always
-  /// possible, so this resolves to a usable camera target in every case — a map
-  /// that opens *somewhere* beats one that opens on an error state.
-  ///
-  /// Returns `LatLng` rather than `GeoPoint` because its only consumer is a map
-  /// widget; the conversion happens here so callers do not each repeat it.
+  /// Determines the initial camera position for the map upon app launch.
+  //
+  //? - Checks the OS location cache first (via [lastKnownLocationProvider]).
+  //
+  //? - Falls back seamlessly to the default service area (e.g., Baghdad center)
+  //?   if the cache is empty or permission is denied.
+  //
+  //? - Never fails: guarantees the map always opens on a valid [LatLng] target
+  //?   without displaying error states to the user.
+  //
+  //? - Kept alive (`keepAlive: true`) to match its dependency and prevent
+  //?  loading flickers on map remounts.
   InitialCameraTargetProvider._()
     : super(
         from: null,

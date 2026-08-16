@@ -8,64 +8,34 @@ part of 'map_marker_icon_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// **What it does:** rasterises an SVG asset into a `BitmapDescriptor` the map
-/// can draw as a marker, at the device's pixel density.
-///
-/// **Data flow:** reads an asset from the *host app's* bundle by path and
-/// exposes `AsyncValue<BitmapDescriptor?>` to marker-building providers. Note
-/// the direction: this package never names an asset, it only knows how to
-/// convert one. Icon paths stay app-owned (`AppIcons`, `AppDriverConsts`),
-/// which is what keeps rider and driver artwork independent.
-///
-/// **Why a family keyed by asset path and size:** the rasterisation is a pure
-/// function of those two inputs, so they make a natural cache key. Both apps
-/// draw the same pin repeatedly across rebuilds; the family turns that into one
-/// decode per icon for the session.
-///
-/// **Why `FutureProvider`:** decoding is a genuinely async, one-shot operation
-/// with no follow-up events and no action to expose.
-///
-/// **Why `keepAlive`:** this is the expensive one. Each miss costs an asset
-/// load, a picture record, a raster and a PNG encode — all on the UI isolate.
-/// Auto-disposing would repeat that work every time the last marker using an
-/// icon left the screen, producing visible jank on a map that pans in and out
-/// of showing a pin.
-///
-/// **Why it resolves to null instead of throwing:** every caller falls back to
-/// `BitmapDescriptor.defaultMarker`. A default pin the map can still draw is
-/// worth more to the user than an error state, so an unencodable icon degrades
-/// rather than fails.
+/// Converts an SVG asset into a [BitmapDescriptor] for Google Maps markers.
+//
+//? - Uses a family provider keyed by `assetPath` and `logicalSize` to cache
+//?   the expensive SVG-to-Bitmap rasterization process (decodes once per icon).
+//
+//? - Scales the drawing using the device's pixel ratio for crisp Retina/High-DPI rendering.
+//
+//? - Manually disposes Native graphics memory (Picture, Image) to prevent
+//?   OOM (Out Of Memory) crashes during rapid map interactions.
+//
+//? - Fails gracefully by returning `null`, allowing callers to fall back to
+//?   the default Google Maps red pin rather than crashing the UI.
 
 @ProviderFor(mapMarkerIcon)
 final mapMarkerIconProvider = MapMarkerIconFamily._();
 
-/// **What it does:** rasterises an SVG asset into a `BitmapDescriptor` the map
-/// can draw as a marker, at the device's pixel density.
-///
-/// **Data flow:** reads an asset from the *host app's* bundle by path and
-/// exposes `AsyncValue<BitmapDescriptor?>` to marker-building providers. Note
-/// the direction: this package never names an asset, it only knows how to
-/// convert one. Icon paths stay app-owned (`AppIcons`, `AppDriverConsts`),
-/// which is what keeps rider and driver artwork independent.
-///
-/// **Why a family keyed by asset path and size:** the rasterisation is a pure
-/// function of those two inputs, so they make a natural cache key. Both apps
-/// draw the same pin repeatedly across rebuilds; the family turns that into one
-/// decode per icon for the session.
-///
-/// **Why `FutureProvider`:** decoding is a genuinely async, one-shot operation
-/// with no follow-up events and no action to expose.
-///
-/// **Why `keepAlive`:** this is the expensive one. Each miss costs an asset
-/// load, a picture record, a raster and a PNG encode — all on the UI isolate.
-/// Auto-disposing would repeat that work every time the last marker using an
-/// icon left the screen, producing visible jank on a map that pans in and out
-/// of showing a pin.
-///
-/// **Why it resolves to null instead of throwing:** every caller falls back to
-/// `BitmapDescriptor.defaultMarker`. A default pin the map can still draw is
-/// worth more to the user than an error state, so an unencodable icon degrades
-/// rather than fails.
+/// Converts an SVG asset into a [BitmapDescriptor] for Google Maps markers.
+//
+//? - Uses a family provider keyed by `assetPath` and `logicalSize` to cache
+//?   the expensive SVG-to-Bitmap rasterization process (decodes once per icon).
+//
+//? - Scales the drawing using the device's pixel ratio for crisp Retina/High-DPI rendering.
+//
+//? - Manually disposes Native graphics memory (Picture, Image) to prevent
+//?   OOM (Out Of Memory) crashes during rapid map interactions.
+//
+//? - Fails gracefully by returning `null`, allowing callers to fall back to
+//?   the default Google Maps red pin rather than crashing the UI.
 
 final class MapMarkerIconProvider
     extends
@@ -77,33 +47,18 @@ final class MapMarkerIconProvider
     with
         $FutureModifier<BitmapDescriptor?>,
         $FutureProvider<BitmapDescriptor?> {
-  /// **What it does:** rasterises an SVG asset into a `BitmapDescriptor` the map
-  /// can draw as a marker, at the device's pixel density.
-  ///
-  /// **Data flow:** reads an asset from the *host app's* bundle by path and
-  /// exposes `AsyncValue<BitmapDescriptor?>` to marker-building providers. Note
-  /// the direction: this package never names an asset, it only knows how to
-  /// convert one. Icon paths stay app-owned (`AppIcons`, `AppDriverConsts`),
-  /// which is what keeps rider and driver artwork independent.
-  ///
-  /// **Why a family keyed by asset path and size:** the rasterisation is a pure
-  /// function of those two inputs, so they make a natural cache key. Both apps
-  /// draw the same pin repeatedly across rebuilds; the family turns that into one
-  /// decode per icon for the session.
-  ///
-  /// **Why `FutureProvider`:** decoding is a genuinely async, one-shot operation
-  /// with no follow-up events and no action to expose.
-  ///
-  /// **Why `keepAlive`:** this is the expensive one. Each miss costs an asset
-  /// load, a picture record, a raster and a PNG encode — all on the UI isolate.
-  /// Auto-disposing would repeat that work every time the last marker using an
-  /// icon left the screen, producing visible jank on a map that pans in and out
-  /// of showing a pin.
-  ///
-  /// **Why it resolves to null instead of throwing:** every caller falls back to
-  /// `BitmapDescriptor.defaultMarker`. A default pin the map can still draw is
-  /// worth more to the user than an error state, so an unencodable icon degrades
-  /// rather than fails.
+  /// Converts an SVG asset into a [BitmapDescriptor] for Google Maps markers.
+  //
+  //? - Uses a family provider keyed by `assetPath` and `logicalSize` to cache
+  //?   the expensive SVG-to-Bitmap rasterization process (decodes once per icon).
+  //
+  //? - Scales the drawing using the device's pixel ratio for crisp Retina/High-DPI rendering.
+  //
+  //? - Manually disposes Native graphics memory (Picture, Image) to prevent
+  //?   OOM (Out Of Memory) crashes during rapid map interactions.
+  //
+  //? - Fails gracefully by returning `null`, allowing callers to fall back to
+  //?   the default Google Maps red pin rather than crashing the UI.
   MapMarkerIconProvider._({
     required MapMarkerIconFamily super.from,
     required (String, {double logicalSize}) super.argument,
@@ -150,33 +105,18 @@ final class MapMarkerIconProvider
 
 String _$mapMarkerIconHash() => r'1e170c461fba4beefe677ad2b595b2ab239e1424';
 
-/// **What it does:** rasterises an SVG asset into a `BitmapDescriptor` the map
-/// can draw as a marker, at the device's pixel density.
-///
-/// **Data flow:** reads an asset from the *host app's* bundle by path and
-/// exposes `AsyncValue<BitmapDescriptor?>` to marker-building providers. Note
-/// the direction: this package never names an asset, it only knows how to
-/// convert one. Icon paths stay app-owned (`AppIcons`, `AppDriverConsts`),
-/// which is what keeps rider and driver artwork independent.
-///
-/// **Why a family keyed by asset path and size:** the rasterisation is a pure
-/// function of those two inputs, so they make a natural cache key. Both apps
-/// draw the same pin repeatedly across rebuilds; the family turns that into one
-/// decode per icon for the session.
-///
-/// **Why `FutureProvider`:** decoding is a genuinely async, one-shot operation
-/// with no follow-up events and no action to expose.
-///
-/// **Why `keepAlive`:** this is the expensive one. Each miss costs an asset
-/// load, a picture record, a raster and a PNG encode — all on the UI isolate.
-/// Auto-disposing would repeat that work every time the last marker using an
-/// icon left the screen, producing visible jank on a map that pans in and out
-/// of showing a pin.
-///
-/// **Why it resolves to null instead of throwing:** every caller falls back to
-/// `BitmapDescriptor.defaultMarker`. A default pin the map can still draw is
-/// worth more to the user than an error state, so an unencodable icon degrades
-/// rather than fails.
+/// Converts an SVG asset into a [BitmapDescriptor] for Google Maps markers.
+//
+//? - Uses a family provider keyed by `assetPath` and `logicalSize` to cache
+//?   the expensive SVG-to-Bitmap rasterization process (decodes once per icon).
+//
+//? - Scales the drawing using the device's pixel ratio for crisp Retina/High-DPI rendering.
+//
+//? - Manually disposes Native graphics memory (Picture, Image) to prevent
+//?   OOM (Out Of Memory) crashes during rapid map interactions.
+//
+//? - Fails gracefully by returning `null`, allowing callers to fall back to
+//?   the default Google Maps red pin rather than crashing the UI.
 
 final class MapMarkerIconFamily extends $Family
     with
@@ -193,33 +133,18 @@ final class MapMarkerIconFamily extends $Family
         isAutoDispose: false,
       );
 
-  /// **What it does:** rasterises an SVG asset into a `BitmapDescriptor` the map
-  /// can draw as a marker, at the device's pixel density.
-  ///
-  /// **Data flow:** reads an asset from the *host app's* bundle by path and
-  /// exposes `AsyncValue<BitmapDescriptor?>` to marker-building providers. Note
-  /// the direction: this package never names an asset, it only knows how to
-  /// convert one. Icon paths stay app-owned (`AppIcons`, `AppDriverConsts`),
-  /// which is what keeps rider and driver artwork independent.
-  ///
-  /// **Why a family keyed by asset path and size:** the rasterisation is a pure
-  /// function of those two inputs, so they make a natural cache key. Both apps
-  /// draw the same pin repeatedly across rebuilds; the family turns that into one
-  /// decode per icon for the session.
-  ///
-  /// **Why `FutureProvider`:** decoding is a genuinely async, one-shot operation
-  /// with no follow-up events and no action to expose.
-  ///
-  /// **Why `keepAlive`:** this is the expensive one. Each miss costs an asset
-  /// load, a picture record, a raster and a PNG encode — all on the UI isolate.
-  /// Auto-disposing would repeat that work every time the last marker using an
-  /// icon left the screen, producing visible jank on a map that pans in and out
-  /// of showing a pin.
-  ///
-  /// **Why it resolves to null instead of throwing:** every caller falls back to
-  /// `BitmapDescriptor.defaultMarker`. A default pin the map can still draw is
-  /// worth more to the user than an error state, so an unencodable icon degrades
-  /// rather than fails.
+  /// Converts an SVG asset into a [BitmapDescriptor] for Google Maps markers.
+  //
+  //? - Uses a family provider keyed by `assetPath` and `logicalSize` to cache
+  //?   the expensive SVG-to-Bitmap rasterization process (decodes once per icon).
+  //
+  //? - Scales the drawing using the device's pixel ratio for crisp Retina/High-DPI rendering.
+  //
+  //? - Manually disposes Native graphics memory (Picture, Image) to prevent
+  //?   OOM (Out Of Memory) crashes during rapid map interactions.
+  //
+  //? - Fails gracefully by returning `null`, allowing callers to fall back to
+  //?   the default Google Maps red pin rather than crashing the UI.
 
   MapMarkerIconProvider call(String assetPath, {double logicalSize = 56.0}) =>
       MapMarkerIconProvider._(

@@ -8,9 +8,11 @@ import 'package:driver/features/ride/ui/providers/map/driver_route_polylines_pro
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:wasel_core/wasel_core.dart';
+import 'package:wasel_location/presentation/providers/map/map_controller_provider.dart';
+import 'package:wasel_location/presentation/providers/map/map_ready_provider.dart';
 
 part 'driver_camera_controller.g.dart';
 

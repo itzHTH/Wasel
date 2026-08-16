@@ -8,111 +8,39 @@ part of 'recenter_controller.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// **What it does:** implements the "my location" action — ensure permission,
-/// obtain a position, fly the map camera to it — and publishes enough state for
-/// a button to render itself.
-///
-/// **Data flow:**
-/// - *Reads* permission from `locationAccessControllerProvider`, a live fix from
-///   [deviceLocationProvider] when one is already flowing, and otherwise a cold
-///   fix from `getCurrentLocationUseCaseProvider`.
-/// - *Writes* to the map through `mapControllerHolderProvider`'s
-///   `animateCamera`.
-/// - *Exposes* [RecenterState] to `MyLocationButton` (landing in step 5) and
-///   `myLocationEnabled` to whichever widget builds the `AppMap`.
-///
-/// **Why `Notifier` (`@riverpod` over a class) and not `AsyncNotifier`:** the
-/// state here is not "a value being loaded" — it is a small UI machine with an
-/// in-flight flag and a last-failure slot, whose result is a *side effect* (the
-/// camera moved) rather than data anyone reads. Modelling it as `AsyncValue`
-/// would misrepresent that: there is no `data` to hold, and an `AsyncError`
-/// would leave the button stuck in an error state that nothing clears. A plain
-/// synchronous `Notifier` with an explicit `build()` default says exactly what
-/// this is.
-///
-/// **Why auto-dispose:** this is per-screen interaction state. When the map is
-/// gone, an in-flight flag and a stale failure should go with it — carrying them
-/// to the next screen would show a spinner or an error nobody triggered.
-///
-/// **Why the live-fix fast path exists:** the driver app already holds an open
-/// position stream whenever it is online, so asking the platform for a *fresh*
-/// high-accuracy fix would spend seconds and battery re-deriving something
-/// already in memory. Reading [deviceLocationProvider] first collapses the
-/// driver's case to an instant camera move, while the rider — which holds no
-/// stream on the booking screen — falls through to the cold-fix path. One
-/// controller, both behaviours, no branching by app.
+/// Manages the "My Location" interaction flow: verifies permissions, acquires a fix,
+/// and animates the map camera.
+//
+//? - Uses [Notifier] (not AsyncNotifier) because the core outcome is a side effect
+//?   (camera animation), not readable data./
+//
+//? - Implements a "Fast Path": silently checks if a live location stream is
+//?   already open (e.g., in the driver app) and uses it to avoid a cold GPS
+//?   startup, falling back to a fresh acquisition (e.g., rider app) if not.
 
 @ProviderFor(RecenterController)
 final recenterControllerProvider = RecenterControllerProvider._();
 
-/// **What it does:** implements the "my location" action — ensure permission,
-/// obtain a position, fly the map camera to it — and publishes enough state for
-/// a button to render itself.
-///
-/// **Data flow:**
-/// - *Reads* permission from `locationAccessControllerProvider`, a live fix from
-///   [deviceLocationProvider] when one is already flowing, and otherwise a cold
-///   fix from `getCurrentLocationUseCaseProvider`.
-/// - *Writes* to the map through `mapControllerHolderProvider`'s
-///   `animateCamera`.
-/// - *Exposes* [RecenterState] to `MyLocationButton` (landing in step 5) and
-///   `myLocationEnabled` to whichever widget builds the `AppMap`.
-///
-/// **Why `Notifier` (`@riverpod` over a class) and not `AsyncNotifier`:** the
-/// state here is not "a value being loaded" — it is a small UI machine with an
-/// in-flight flag and a last-failure slot, whose result is a *side effect* (the
-/// camera moved) rather than data anyone reads. Modelling it as `AsyncValue`
-/// would misrepresent that: there is no `data` to hold, and an `AsyncError`
-/// would leave the button stuck in an error state that nothing clears. A plain
-/// synchronous `Notifier` with an explicit `build()` default says exactly what
-/// this is.
-///
-/// **Why auto-dispose:** this is per-screen interaction state. When the map is
-/// gone, an in-flight flag and a stale failure should go with it — carrying them
-/// to the next screen would show a spinner or an error nobody triggered.
-///
-/// **Why the live-fix fast path exists:** the driver app already holds an open
-/// position stream whenever it is online, so asking the platform for a *fresh*
-/// high-accuracy fix would spend seconds and battery re-deriving something
-/// already in memory. Reading [deviceLocationProvider] first collapses the
-/// driver's case to an instant camera move, while the rider — which holds no
-/// stream on the booking screen — falls through to the cold-fix path. One
-/// controller, both behaviours, no branching by app.
+/// Manages the "My Location" interaction flow: verifies permissions, acquires a fix,
+/// and animates the map camera.
+//
+//? - Uses [Notifier] (not AsyncNotifier) because the core outcome is a side effect
+//?   (camera animation), not readable data./
+//
+//? - Implements a "Fast Path": silently checks if a live location stream is
+//?   already open (e.g., in the driver app) and uses it to avoid a cold GPS
+//?   startup, falling back to a fresh acquisition (e.g., rider app) if not.
 final class RecenterControllerProvider
     extends $NotifierProvider<RecenterController, RecenterState> {
-  /// **What it does:** implements the "my location" action — ensure permission,
-  /// obtain a position, fly the map camera to it — and publishes enough state for
-  /// a button to render itself.
-  ///
-  /// **Data flow:**
-  /// - *Reads* permission from `locationAccessControllerProvider`, a live fix from
-  ///   [deviceLocationProvider] when one is already flowing, and otherwise a cold
-  ///   fix from `getCurrentLocationUseCaseProvider`.
-  /// - *Writes* to the map through `mapControllerHolderProvider`'s
-  ///   `animateCamera`.
-  /// - *Exposes* [RecenterState] to `MyLocationButton` (landing in step 5) and
-  ///   `myLocationEnabled` to whichever widget builds the `AppMap`.
-  ///
-  /// **Why `Notifier` (`@riverpod` over a class) and not `AsyncNotifier`:** the
-  /// state here is not "a value being loaded" — it is a small UI machine with an
-  /// in-flight flag and a last-failure slot, whose result is a *side effect* (the
-  /// camera moved) rather than data anyone reads. Modelling it as `AsyncValue`
-  /// would misrepresent that: there is no `data` to hold, and an `AsyncError`
-  /// would leave the button stuck in an error state that nothing clears. A plain
-  /// synchronous `Notifier` with an explicit `build()` default says exactly what
-  /// this is.
-  ///
-  /// **Why auto-dispose:** this is per-screen interaction state. When the map is
-  /// gone, an in-flight flag and a stale failure should go with it — carrying them
-  /// to the next screen would show a spinner or an error nobody triggered.
-  ///
-  /// **Why the live-fix fast path exists:** the driver app already holds an open
-  /// position stream whenever it is online, so asking the platform for a *fresh*
-  /// high-accuracy fix would spend seconds and battery re-deriving something
-  /// already in memory. Reading [deviceLocationProvider] first collapses the
-  /// driver's case to an instant camera move, while the rider — which holds no
-  /// stream on the booking screen — falls through to the cold-fix path. One
-  /// controller, both behaviours, no branching by app.
+  /// Manages the "My Location" interaction flow: verifies permissions, acquires a fix,
+  /// and animates the map camera.
+  //
+  //? - Uses [Notifier] (not AsyncNotifier) because the core outcome is a side effect
+  //?   (camera animation), not readable data./
+  //
+  //? - Implements a "Fast Path": silently checks if a live location stream is
+  //?   already open (e.g., in the driver app) and uses it to avoid a cold GPS
+  //?   startup, falling back to a fresh acquisition (e.g., rider app) if not.
   RecenterControllerProvider._()
     : super(
         from: null,
@@ -143,39 +71,15 @@ final class RecenterControllerProvider
 String _$recenterControllerHash() =>
     r'2c4499b0d934464d9bdd4f045b6e3cc9d0a93937';
 
-/// **What it does:** implements the "my location" action — ensure permission,
-/// obtain a position, fly the map camera to it — and publishes enough state for
-/// a button to render itself.
-///
-/// **Data flow:**
-/// - *Reads* permission from `locationAccessControllerProvider`, a live fix from
-///   [deviceLocationProvider] when one is already flowing, and otherwise a cold
-///   fix from `getCurrentLocationUseCaseProvider`.
-/// - *Writes* to the map through `mapControllerHolderProvider`'s
-///   `animateCamera`.
-/// - *Exposes* [RecenterState] to `MyLocationButton` (landing in step 5) and
-///   `myLocationEnabled` to whichever widget builds the `AppMap`.
-///
-/// **Why `Notifier` (`@riverpod` over a class) and not `AsyncNotifier`:** the
-/// state here is not "a value being loaded" — it is a small UI machine with an
-/// in-flight flag and a last-failure slot, whose result is a *side effect* (the
-/// camera moved) rather than data anyone reads. Modelling it as `AsyncValue`
-/// would misrepresent that: there is no `data` to hold, and an `AsyncError`
-/// would leave the button stuck in an error state that nothing clears. A plain
-/// synchronous `Notifier` with an explicit `build()` default says exactly what
-/// this is.
-///
-/// **Why auto-dispose:** this is per-screen interaction state. When the map is
-/// gone, an in-flight flag and a stale failure should go with it — carrying them
-/// to the next screen would show a spinner or an error nobody triggered.
-///
-/// **Why the live-fix fast path exists:** the driver app already holds an open
-/// position stream whenever it is online, so asking the platform for a *fresh*
-/// high-accuracy fix would spend seconds and battery re-deriving something
-/// already in memory. Reading [deviceLocationProvider] first collapses the
-/// driver's case to an instant camera move, while the rider — which holds no
-/// stream on the booking screen — falls through to the cold-fix path. One
-/// controller, both behaviours, no branching by app.
+/// Manages the "My Location" interaction flow: verifies permissions, acquires a fix,
+/// and animates the map camera.
+//
+//? - Uses [Notifier] (not AsyncNotifier) because the core outcome is a side effect
+//?   (camera animation), not readable data./
+//
+//? - Implements a "Fast Path": silently checks if a live location stream is
+//?   already open (e.g., in the driver app) and uses it to avoid a cold GPS
+//?   startup, falling back to a fresh acquisition (e.g., rider app) if not.
 
 abstract class _$RecenterController extends $Notifier<RecenterState> {
   RecenterState build();

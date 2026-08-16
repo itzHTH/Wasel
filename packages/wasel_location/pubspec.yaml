@@ -15,7 +15,7 @@ dependencies:
   wasel_core:
     path: ../core
 
-  # State management / DI — providers land in step 4
+  # State management / DI
   flutter_riverpod: ^3.3.1
   riverpod_annotation: ^4.0.2
 
@@ -37,13 +37,13 @@ dependencies:
   freezed_annotation: ^3.1.0
   json_annotation: ^4.9.0
 
-  # Maps — moves out of wasel_core in step 5, together with AppMap
+  # Maps — this package owns the map surface; wasel_core no longer depends on it
   google_maps_flutter: ^2.17.1
 
-  # Marker icon rasteriser — used by the presentation layer in step 4
+  # Marker icon rasteriser — SVG assets into BitmapDescriptor
   flutter_svg: ^2.3.0
 
-  # ROUTES_API_KEY lookup — read by the DI providers in step 4
+  # ROUTES_API_KEY lookup — read by the DI providers
   flutter_dotenv: ^6.0.1
 
 dev_dependencies:
