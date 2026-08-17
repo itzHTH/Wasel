@@ -11,6 +11,7 @@ import 'package:wasel_core/widgets/app_error_retry.dart';
 import 'package:wasel_core/widgets/app_group_card.dart';
 import 'package:wasel_core/widgets/app_info_row.dart';
 import 'package:wasel_core/widgets/app_loading.dart';
+import 'package:wasel_core/widgets/app_stat_cards.dart';
 import 'package:wasel_core/widgets/app_surface_card.dart';
 import 'package:wasel_profile/domain/entities/rider_profile.dart';
 import 'package:wasel_profile/presentation/providers/profile/rider_profile_provider.dart';
@@ -103,6 +104,19 @@ class _RiderProfileDetailsBody extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: AppTextStyles.font20Secondary900Bold,
               ),
+              SizedBox(height: AppDimens.space16),
+              AppStatCards(
+                stats: [
+                  AppStat(
+                    icon: Icons.account_balance_wallet_rounded,
+                    iconColor: AppColor.primary500,
+                    background: AppColor.primary100,
+                    label: 'الرصيد',
+                    value: formatAmount(profile.balance),
+                    valueTextDirection: TextDirection.ltr,
+                  ),
+                ],
+              ),
             ],
           ),
         ),
@@ -129,12 +143,6 @@ class _RiderProfileDetailsBody extends StatelessWidget {
               icon: Icons.mail_outline_rounded,
               label: 'البريد الإلكتروني',
               value: profile.email,
-              valueTextDirection: TextDirection.ltr,
-            ),
-            AppInfoRow(
-              icon: Icons.account_balance_wallet_outlined,
-              label: 'الرصيد',
-              value: formatAmount(profile.balance),
               valueTextDirection: TextDirection.ltr,
             ),
           ],

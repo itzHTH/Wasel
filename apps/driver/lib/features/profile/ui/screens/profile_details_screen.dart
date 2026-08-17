@@ -12,6 +12,7 @@ import 'package:wasel_core/widgets/app_group_card.dart';
 import 'package:wasel_core/widgets/app_info_row.dart';
 import 'package:wasel_core/widgets/app_loading.dart';
 import 'package:wasel_core/widgets/app_profile_avatar.dart';
+import 'package:wasel_core/widgets/app_stat_cards.dart';
 import 'package:wasel_core/widgets/app_surface_card.dart';
 import 'package:wasel_profile/domain/entities/driver_profile.dart';
 import 'package:wasel_profile/presentation/providers/profile/driver_profile_provider.dart';
@@ -103,6 +104,29 @@ class _DriverProfileDetailsBody extends StatelessWidget {
               ),
               SizedBox(height: AppDimens.space8),
               DriverApprovalBadge(status: profile.approvalStatus),
+              SizedBox(height: AppDimens.space16),
+              AppStatCards(
+                stats: [
+                  AppStat(
+                    icon: Icons.account_balance_wallet_rounded,
+                    iconColor: AppColor.primary500,
+                    background: AppColor.primary100,
+                    label: 'الرصيد',
+                    value: formatAmount(profile.balance),
+                    valueTextDirection: TextDirection.ltr,
+                  ),
+                  AppStat(
+                    icon: Icons.star_rounded,
+                    iconColor: AppColor.alertWarning500,
+                    background: AppColor.alertWarning100,
+                    label: 'التقييم',
+                    value:
+                        '${profile.averageRating.toStringAsFixed(1)} '
+                        '(${profile.totalReviews})',
+                    valueTextDirection: TextDirection.ltr,
+                  ),
+                ],
+              ),
             ],
           ),
         ),
@@ -140,20 +164,6 @@ class _DriverProfileDetailsBody extends StatelessWidget {
               icon: Icons.location_on_outlined,
               label: 'العنوان',
               value: profile.address,
-            ),
-            AppInfoRow(
-              icon: Icons.star_outline_rounded,
-              label: 'التقييم',
-              value:
-                  '${profile.averageRating.toStringAsFixed(1)} '
-                  '(${profile.totalReviews} تقييم)',
-              valueTextDirection: TextDirection.ltr,
-            ),
-            AppInfoRow(
-              icon: Icons.account_balance_wallet_outlined,
-              label: 'الرصيد',
-              value: formatAmount(profile.balance),
-              valueTextDirection: TextDirection.ltr,
             ),
           ],
         ),
