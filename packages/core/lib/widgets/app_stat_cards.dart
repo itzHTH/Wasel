@@ -33,7 +33,12 @@ class AppStatCards extends StatelessWidget {
       cards.add(Expanded(child: _AppStatCard(stat: stats[i])));
     }
 
-    return Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: cards);
+    return IntrinsicHeight(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: cards,
+      ),
+    );
   }
 }
 
