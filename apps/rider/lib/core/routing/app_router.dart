@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wasal/core/routing/app_routes_name.dart';
 import 'package:wasal/features/auth/ui/screens/login_screen.dart';
 import 'package:wasal/features/auth/ui/screens/register_screen.dart';
+import 'package:wasal/features/auth/ui/screens/reset_password_screen.dart';
 import 'package:wasal/features/profile/ui/screens/profile_details_screen.dart';
 import 'package:wasal/features/profile/ui/screens/profile_screen.dart';
 import 'package:wasal/features/ride/ui/screens/ride_screen.dart';
@@ -18,6 +19,9 @@ class AppRouter {
 
       case AppRoutes.register:
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
+
+      case AppRoutes.resetPassword:
+        return MaterialPageRoute(builder: (_) => const ResetPasswordScreen());
 
       case AppRoutes.ride:
         return MaterialPageRoute(builder: (_) => const RideScreen());

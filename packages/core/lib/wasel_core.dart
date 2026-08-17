@@ -58,6 +58,7 @@ export 'widgets/app_group_card.dart';
 export 'widgets/app_header_with_logo.dart';
 export 'widgets/app_image_source_sheet.dart';
 export 'widgets/app_info_row.dart';
+export 'widgets/app_inline_error.dart';
 export 'widgets/app_labeled_field.dart';
 export 'widgets/app_loading.dart';
 export 'widgets/app_map_profile_button.dart';
@@ -65,6 +66,13 @@ export 'widgets/app_menu_tile.dart';
 export 'widgets/app_profile_avatar.dart';
 export 'widgets/app_soon_badge.dart';
 export 'widgets/app_stat_cards.dart';
+export 'widgets/app_step_indicator.dart';
 export 'widgets/app_surface_card.dart';
 export 'widgets/app_text_form_field.dart';
 export 'widgets/password_field.dart';
+
+// Widgets — OTP (shared by the register and reset-password flows)
+export 'widgets/otp/otp_countdown_timer.dart';
+export 'widgets/otp/otp_pin_input.dart';
+export 'widgets/otp/otp_resend_section.dart';
+export 'widgets/otp/resend_otp_row.dart';

@@ -16,6 +16,11 @@ class AppTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
   final Widget? prefixIcon;
+
+  /// Lets the OS offer autofill (password managers, one-time codes). Required
+  /// by WCAG 2.2 "Accessible Authentication" — see [AutofillHints].
+  final List<String>? autofillHints;
+
   const AppTextFormField({
     super.key,
     this.contentPadding,
@@ -32,6 +37,7 @@ class AppTextFormField extends StatelessWidget {
     this.keyboardType,
     this.textInputAction,
     this.prefixIcon,
+    this.autofillHints,
   });
 
   @override
@@ -55,6 +61,7 @@ class AppTextFormField extends StatelessWidget {
       obscureText: isObscureText ?? false,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
+      autofillHints: autofillHints,
       style: inputTextStyle,
       validator: (value) {
         return validator(value);

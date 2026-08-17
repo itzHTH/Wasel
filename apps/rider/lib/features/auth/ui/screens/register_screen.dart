@@ -93,15 +93,17 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   }
 
   // Page 2 - OTP page resend handler
-  Future<void> _handleOtpResend() async {
+  Future<bool> _handleOtpResend() async {
     final result = await ref
         .read(registerProvider.notifier)
         .initiateRegistration(_emailCtrl.text.trim());
 
-    if (result != null && mounted) {
+    if (result == null) return false;
+    if (mounted) {
       _sessionToken = result.sessionToken;
       _otpCtrl.clear();
     }
+    return true;
   }
 
   // Page 3 - Form page handlers
@@ -113,7 +115,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             registrationToken: _registrationToken!,
             firstName: _firstNameCtrl.text.trim(),
             lastName: _lastNameCtrl.text.trim(),
-            password: _passwordCtrl.text.trim(),
+            password: _passwordCtrl.text,
             phone: _phoneCtrl.text.trim(),
           );
 

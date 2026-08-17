@@ -14,6 +14,7 @@ class ApiConstants {
   static const String refreshToken = '/api/v1/Auth/refresh-token';
   static const String revokeToken = '/api/v1/Auth/revoke-token';
   static const String forgotPassword = '/api/v1/Auth/forgot-password';
+  static const String verifyResetOtp = '/api/v1/Auth/verify-reset-otp';
   static const String resetPassword = '/api/v1/Auth/reset-password';
 
   // Registration — the `{userType}` segment ('rider' | 'driver') is substituted

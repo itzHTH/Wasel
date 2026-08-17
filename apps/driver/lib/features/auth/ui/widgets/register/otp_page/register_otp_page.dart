@@ -5,15 +5,15 @@ import 'package:wasel_core/theme/app_text_styles.dart';
 import 'package:wasel_core/widgets/app_back_button.dart';
 import 'package:driver/features/auth/ui/providers/register/register_provider.dart';
 import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
-import 'package:driver/features/auth/ui/widgets/register/otp_page/otp_pin_input.dart';
-import 'package:driver/features/auth/ui/widgets/register/otp_page/otp_resend_section.dart';
+import 'package:wasel_core/widgets/otp/otp_pin_input.dart';
+import 'package:wasel_core/widgets/otp/otp_resend_section.dart';
 
 class RegisterOtpPage extends StatelessWidget {
   final TextEditingController emailCtrl;
   final TextEditingController otpCtrl;
   final VoidCallback onSubmit;
   final VoidCallback onBack;
-  final Future<void> Function() onResend;
+  final Future<bool> Function() onResend;
 
   const RegisterOtpPage({
     super.key,

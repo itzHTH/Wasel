@@ -32,7 +32,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     if (_formKey.currentState?.validate() ?? false) {
       ref
           .read(loginProvider.notifier)
-          .login(_emailCtrl.text.trim(), _passCtrl.text.trim());
+          .login(_emailCtrl.text.trim(), _passCtrl.text);
     }
   }
 
@@ -58,7 +58,28 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   emailCtrl: _emailCtrl,
                   passCtrl: _passCtrl,
                 ),
-                SizedBox(height: AppDimens.space24),
+                SizedBox(height: AppDimens.space8),
+
+                Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () => Navigator.pushNamed(
+                      context,
+                      AppRoutes.resetPassword,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: AppDimens.space12,
+                      ),
+                      child: Text(
+                        'نسيت كلمة المرور؟',
+                        style: AppTextStyles.font14Primary500SemiBold,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: AppDimens.space16),
 
                 // Submit Button
                 Consumer(
