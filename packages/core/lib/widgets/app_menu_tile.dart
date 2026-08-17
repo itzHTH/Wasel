@@ -11,6 +11,7 @@ class AppMenuTile extends StatelessWidget {
     this.onTap,
     this.trailing,
     this.isDestructive = false,
+    this.isMuted = false,
   });
 
   static double get leadingExtent =>
@@ -21,6 +22,7 @@ class AppMenuTile extends StatelessWidget {
   final VoidCallback? onTap;
   final Widget? trailing;
   final bool isDestructive;
+  final bool isMuted;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +31,13 @@ class AppMenuTile extends StatelessWidget {
 
     final foreground = isDestructive
         ? AppColor.alertError700
+        : isMuted
+        ? AppColor.neutral600
         : AppColor.primary500;
     final badgeBackground = isDestructive
         ? AppColor.neutral0
+        : isMuted
+        ? AppColor.neutral100
         : AppColor.primary100;
     final labelStyle = isDestructive
         ? AppTextStyles.font14alertError500SemiBold.copyWith(

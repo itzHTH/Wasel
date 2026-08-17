@@ -56,14 +56,6 @@ class DriverProfileInfo extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(width: AppDimens.space12),
-              ExcludeSemantics(
-                child: Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  size: AppDimens.icon18,
-                  color: AppColor.neutral400,
-                ),
-              ),
             ],
           ),
         ),

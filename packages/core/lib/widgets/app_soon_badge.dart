@@ -19,7 +19,7 @@ class AppSoonBadge extends StatelessWidget {
         color: AppColor.neutral100,
         borderRadius: BorderRadius.circular(AppDimens.radiusPill),
       ),
-      child: Text(label, style: AppTextStyles.font12Secondary500SemiBold),
+      child: Text(label, style: AppTextStyles.font12Neutral600SemiBold),
     );
   }
 }

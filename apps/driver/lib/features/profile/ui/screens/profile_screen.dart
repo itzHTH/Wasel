@@ -48,11 +48,13 @@ class ProfileScreen extends ConsumerWidget {
               const AppMenuTile(
                 icon: Icons.settings_outlined,
                 label: 'الإعدادات',
+                isMuted: true,
                 trailing: AppSoonBadge(),
               ),
               const AppMenuTile(
                 icon: Icons.brightness_6_outlined,
                 label: 'المظهر',
+                isMuted: true,
                 trailing: AppSoonBadge(),
               ),
             ],

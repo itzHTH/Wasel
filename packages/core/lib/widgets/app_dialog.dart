@@ -114,7 +114,7 @@ class AppDialog extends StatelessWidget {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: isDestructive
-                      ? AppColor.alertError500
+                      ? AppColor.alertError700
                       : AppColor.primary500,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
@@ -136,7 +136,9 @@ class AppDialog extends StatelessWidget {
                   onPressed: () => Navigator.of(context).pop(false),
                   child: Text(
                     cancelLabel!,
-                    style: AppTextStyles.font14Primary500SemiBold,
+                    style: isDestructive
+                        ? AppTextStyles.font14Secondary900SemiBold
+                        : AppTextStyles.font14Primary500SemiBold,
                   ),
                 ),
               ),
