@@ -49,5 +49,9 @@
 	<string>$(MAPS_API_KEY)</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need your location to show it on the map and determine your pickup point.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>نحتاج إذن الكاميرا لالتقاط صورتك الشخصية.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>نحتاج إذن الصور لاختيار صورتك الشخصية من المعرض.</string>
 </dict>
 </plist>

@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasel_core/helpers/app_amount_format.dart';
+import 'package:wasel_core/helpers/app_image_picker.dart';
 import 'package:wasel_core/networking/errors/error_message.dart';
 import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
@@ -9,11 +12,13 @@ import 'package:wasel_core/theme/app_text_styles.dart';
 import 'package:wasel_core/widgets/app_editable_avatar.dart';
 import 'package:wasel_core/widgets/app_error_retry.dart';
 import 'package:wasel_core/widgets/app_group_card.dart';
+import 'package:wasel_core/widgets/app_image_source_sheet.dart';
 import 'package:wasel_core/widgets/app_info_row.dart';
 import 'package:wasel_core/widgets/app_loading.dart';
 import 'package:wasel_core/widgets/app_stat_cards.dart';
 import 'package:wasel_core/widgets/app_surface_card.dart';
 import 'package:wasel_profile/domain/entities/rider_profile.dart';
+import 'package:wasel_profile/presentation/providers/profile/rider_photo_upload_provider.dart';
 import 'package:wasel_profile/presentation/providers/profile/rider_profile_provider.dart';
 
 class ProfileDetailsScreen extends ConsumerWidget {
@@ -25,6 +30,15 @@ class ProfileDetailsScreen extends ConsumerWidget {
 
     void refresh() =>
         ref.read(riderProfileControllerProvider.notifier).refresh();
+
+    ref.listen(riderPhotoUploadProvider, (previous, next) {
+      if (previous?.isLoading != true || next.isLoading) return;
+
+      _showMessage(
+        context,
+        next.hasError ? errorMessageOf(next.error!) : 'تم تحديث الصورة بنجاح',
+      );
+    });
 
     return Scaffold(
       backgroundColor: AppColor.screenBackground,
@@ -66,6 +80,49 @@ class _ErrorState extends StatelessWidget {
   }
 }
 
+void _showMessage(BuildContext context, String message) {
+  ScaffoldMessenger.of(context)
+    ..hideCurrentSnackBar()
+    ..showSnackBar(SnackBar(content: Text(message)));
+}
+
+class _EditableProfilePhoto extends ConsumerWidget {
+  const _EditableProfilePhoto({required this.photoUrl});
+
+  final String? photoUrl;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isUploading = ref.watch(
+      riderPhotoUploadProvider.select((state) => state.isLoading),
+    );
+
+    return AppEditableAvatar(
+      photoUrl: photoUrl,
+      size: 96.r,
+      isLoading: isUploading,
+      onTap: () => _pickAndUpload(context, ref),
+    );
+  }
+
+  Future<void> _pickAndUpload(BuildContext context, WidgetRef ref) async {
+    final source = await showAppImageSourceSheet(context: context);
+    if (source == null) return;
+
+    final File? photo;
+    try {
+      photo = await AppImagePicker.pick(source);
+    } on AppImagePickerException catch (e) {
+      if (context.mounted) _showMessage(context, e.message);
+      return;
+    }
+
+    if (photo == null || !context.mounted) return;
+
+    await ref.read(riderPhotoUploadProvider.notifier).upload(photo);
+  }
+}
+
 class _RiderProfileDetailsBody extends StatelessWidget {
   const _RiderProfileDetailsBody({required this.profile});
 
@@ -92,10 +149,7 @@ class _RiderProfileDetailsBody extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              AppEditableAvatar(
-                photoUrl: profile.profilePictureUrl,
-                size: 96.r,
-              ),
+              _EditableProfilePhoto(photoUrl: profile.profilePictureUrl),
               SizedBox(height: AppDimens.space16),
               Text(
                 fullName.isNotEmpty ? fullName : 'مستخدم وَصَل',
