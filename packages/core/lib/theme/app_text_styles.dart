@@ -47,6 +47,12 @@ class AppTextStyles {
     color: AppColor.secondary500,
   );
 
+  static TextStyle get font16Secondary900Bold => _base(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColor.secondary900,
+  );
+
   static TextStyle get font16Neutral0SemiBold => _base(
     fontSize: 16.sp,
     fontWeight: FontWeight.w600,
@@ -82,6 +88,12 @@ class AppTextStyles {
     fontSize: 12.sp,
     fontWeight: FontWeight.w400,
     color: AppColor.neutral400,
+  );
+
+  static TextStyle get font12Neutral600SemiBold => _base(
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w600,
+    color: AppColor.neutral600,
   );
 
   // ── Accent ────────────────────────────────────────────────────────────────

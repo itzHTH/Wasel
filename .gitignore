@@ -57,6 +57,7 @@ app.*.map.json
 
 # Local Claude Code settings (personal, per-machine)
 .claude/settings.local.json
+.claude/skills
 
 # Xcode SwiftPM resolved packages (regenerated on resolve)
 **/xcshareddata/swiftpm/

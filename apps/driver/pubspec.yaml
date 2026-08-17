@@ -18,6 +18,8 @@ dependencies:
     path: ../../packages/auth
   wasel_location:
     path: ../../packages/wasel_location
+  wasel_profile:
+    path: ../../packages/wasel_profile
 
   # Firebase (no FCM yet — verification status is polled in driver_verification)
   firebase_core: ^4.12.1

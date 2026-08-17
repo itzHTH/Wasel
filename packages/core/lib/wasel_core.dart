@@ -15,7 +15,9 @@ export 'flavors/flavors_config.dart';
 export 'extensions/navigation_extension.dart';
 
 // Helpers
+export 'helpers/app_amount_format.dart';
 export 'helpers/app_image_compressor.dart';
+export 'helpers/app_image_picker.dart';
 export 'helpers/app_local_cache.dart';
 export 'helpers/app_navigation.dart';
 export 'helpers/app_url_launcher.dart';
@@ -33,6 +35,7 @@ export 'networking/dio/dio_factory.dart';
 export 'networking/errors/api_error_model.dart';
 export 'networking/errors/api_errors.dart';
 export 'networking/errors/error_handler.dart';
+export 'networking/errors/error_message.dart';
 export 'networking/interceptors/auth_interceptor.dart';
 
 // Theme
@@ -49,8 +52,19 @@ export 'usecase/stream_base_use_case.dart';
 // Widgets
 export 'widgets/app_back_button.dart';
 export 'widgets/app_dialog.dart';
+export 'widgets/app_editable_avatar.dart';
+export 'widgets/app_error_retry.dart';
+export 'widgets/app_group_card.dart';
 export 'widgets/app_header_with_logo.dart';
+export 'widgets/app_image_source_sheet.dart';
+export 'widgets/app_info_row.dart';
 export 'widgets/app_labeled_field.dart';
 export 'widgets/app_loading.dart';
+export 'widgets/app_map_profile_button.dart';
+export 'widgets/app_menu_tile.dart';
+export 'widgets/app_profile_avatar.dart';
+export 'widgets/app_soon_badge.dart';
+export 'widgets/app_stat_cards.dart';
+export 'widgets/app_surface_card.dart';
 export 'widgets/app_text_form_field.dart';
 export 'widgets/password_field.dart';
