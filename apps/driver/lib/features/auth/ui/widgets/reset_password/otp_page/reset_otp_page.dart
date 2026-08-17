@@ -13,7 +13,7 @@ class ResetOtpPage extends ConsumerWidget {
   final TextEditingController otpCtrl;
   final VoidCallback onSubmit;
   final VoidCallback onBack;
-  final Future<void> Function() onResend;
+  final Future<bool> Function() onResend;
   final VoidCallback onExpiredRestart;
 
   const ResetOtpPage({

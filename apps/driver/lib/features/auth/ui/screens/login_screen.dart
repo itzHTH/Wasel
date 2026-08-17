@@ -32,7 +32,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     if (_formKey.currentState?.validate() ?? false) {
       ref
           .read(loginProvider.notifier)
-          .login(_emailCtrl.text.trim(), _passCtrl.text.trim());
+          .login(_emailCtrl.text.trim(), _passCtrl.text);
     }
   }
 

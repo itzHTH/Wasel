@@ -7,6 +7,7 @@ import 'package:driver/features/auth/ui/widgets/reset_password/password_page/cre
 import 'package:wasel_auth/presentation/providers/reset_password/reset_password_controller.dart';
 import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
+import 'package:wasel_core/widgets/app_dialog.dart';
 import 'package:wasel_core/widgets/app_step_indicator.dart';
 
 class ResetPasswordScreen extends ConsumerStatefulWidget {
@@ -42,7 +43,15 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
     super.dispose();
   }
 
+  ResetPasswordController get _controller =>
+      ref.read(resetPasswordControllerProvider.notifier);
+
+  bool get _isSubmitting =>
+      ref.read(resetPasswordControllerProvider).isSubmitting;
+
+  // Errors are per-step, so they must not follow the user to the next page.
   void _goToPage(int page) {
+    _controller.clearError();
     _pageController.animateToPage(
       page,
       duration: const Duration(milliseconds: 300),
@@ -50,12 +59,31 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
     );
   }
 
+  /// Verifying the OTP rotates the token server-side, so there is no usable way
+  /// back into the OTP step — leaving the password step abandons the flow, and
+  /// the user has to request a fresh code. Confirm before discarding it.
+  Future<void> _exitFlow() async {
+    final confirmed = await AppDialog.show(
+      context,
+      title: 'هل أنت متأكد من الإلغاء؟',
+      message: 'ستحتاج إلى طلب رمز جديد',
+      confirmLabel: 'إلغاء العملية',
+      cancelLabel: 'متابعة',
+      icon: Icons.warning_amber_rounded,
+      isDestructive: true,
+    );
+
+    if (!confirmed || !mounted) return;
+
+    _controller.restart();
+    Navigator.of(context).pop();
+  }
+
   Future<void> _handleEmailSubmit() async {
+    if (_isSubmitting) return;
     if (!(_emailFormKey.currentState?.validate() ?? false)) return;
 
-    final sent = await ref
-        .read(resetPasswordControllerProvider.notifier)
-        .requestOtp(_emailCtrl.text.trim());
+    final sent = await _controller.requestOtp(_emailCtrl.text.trim());
 
     if (!sent || !mounted) return;
     _otpCtrl.clear();
@@ -63,31 +91,31 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
   }
 
   Future<void> _handleOtpSubmit() async {
-    if (_otpCtrl.text.length != 6) return;
+    // onCompleted also fires on paste/autofill, so guard against a double send.
+    if (_isSubmitting || _otpCtrl.text.length != 6) return;
 
-    final verified = await ref
-        .read(resetPasswordControllerProvider.notifier)
-        .verifyOtp(_otpCtrl.text.trim());
+    final verified = await _controller.verifyOtp(_otpCtrl.text.trim());
 
     if (!verified || !mounted) return;
     _goToPage(2);
   }
 
-  Future<void> _handleOtpResend() async {
-    await ref
-        .read(resetPasswordControllerProvider.notifier)
-        .requestOtp(ref.read(resetPasswordControllerProvider).email);
+  Future<bool> _handleOtpResend() async {
+    if (_isSubmitting) return false;
 
-    if (!mounted) return;
-    _otpCtrl.clear();
+    final email = ref.read(resetPasswordControllerProvider).email;
+    final sent = await _controller.requestOtp(email);
+
+    if (sent && mounted) _otpCtrl.clear();
+    return sent;
   }
 
   Future<void> _handlePasswordSubmit() async {
+    if (_isSubmitting) return;
     if (!(_passwordFormKey.currentState?.validate() ?? false)) return;
 
-    final reset = await ref
-        .read(resetPasswordControllerProvider.notifier)
-        .setNewPassword(_passwordCtrl.text.trim());
+    // Sent verbatim: trimming would silently store a different credential.
+    final reset = await _controller.setNewPassword(_passwordCtrl.text);
 
     if (!reset || !mounted) return;
 
@@ -101,13 +129,23 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
     );
   }
 
-  // The token died server-side, so the flow has to start over from the email.
   void _handleExpiredRestart() {
-    ref.read(resetPasswordControllerProvider.notifier).restart();
+    _controller.restart();
     _otpCtrl.clear();
     _passwordCtrl.clear();
     _confirmPassCtrl.clear();
     _goToPage(0);
+  }
+
+  void _handleSystemBack() {
+    switch (_currentPage) {
+      case 1:
+        _goToPage(0);
+      case 2:
+        _exitFlow();
+      default:
+        Navigator.of(context).pop();
+    }
   }
 
   @override
@@ -116,12 +154,7 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
       canPop: false,
       onPopInvokedWithResult: (didPop, _) {
         if (didPop) return;
-
-        if (_currentPage > 0) {
-          _goToPage(_currentPage - 1);
-        } else {
-          Navigator.of(context).pop();
-        }
+        _handleSystemBack();
       },
       child: Scaffold(
         backgroundColor: AppColor.neutral0,
@@ -163,7 +196,7 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
                       passwordCtrl: _passwordCtrl,
                       confirmPassCtrl: _confirmPassCtrl,
                       onSubmit: _handlePasswordSubmit,
-                      onBack: () => _goToPage(1),
+                      onBack: _exitFlow,
                       onExpiredRestart: _handleExpiredRestart,
                     ),
                   ],

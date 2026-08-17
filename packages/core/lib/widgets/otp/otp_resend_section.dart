@@ -4,7 +4,8 @@ import 'package:wasel_core/widgets/otp/otp_countdown_timer.dart';
 import 'package:wasel_core/widgets/otp/resend_otp_row.dart';
 
 class OtpResendSection extends StatefulWidget {
-  final Future<void> Function() onResend;
+  /// Returns whether a new code was actually sent.
+  final Future<bool> Function() onResend;
 
   /// Passed through to [OtpCountdownTimer]; defaults to that widget's own value.
   final Duration? countdown;
@@ -21,9 +22,17 @@ class _OtpResendSectionState extends State<OtpResendSection> {
 
   Future<void> _handleResend() async {
     setState(() => _canResend = false);
-    await widget.onResend();
+    final sent = await widget.onResend();
     if (!mounted) return;
-    setState(() => _timerResetKey++);
+
+    // Only restart the countdown if a code went out; otherwise let them retry.
+    setState(() {
+      if (sent) {
+        _timerResetKey++;
+      } else {
+        _canResend = true;
+      }
+    });
   }
 
   @override

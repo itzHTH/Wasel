@@ -23,6 +23,12 @@ class ResetPasswordController extends _$ResetPasswordController {
 
   void restart() => state = const ResetPasswordState();
 
+  /// Call when leaving a step so its error does not surface on the next one.
+  void clearError() {
+    if (state.fieldError == null) return;
+    state = state.copyWith(clearFieldError: true);
+  }
+
   Future<bool> requestOtp(String email) async {
     state = state.copyWith(isSubmitting: true, clearFieldError: true);
 
@@ -138,12 +144,28 @@ class ResetPasswordController extends _$ResetPasswordController {
     return error.apiErrorModel.message ?? _fallbackError;
   }
 
-  // The reset token and its OTP live in a 10-minute server-side cache.
+  // The reset token and its OTP live in a 10-minute server-side cache. The API
+  // may report the expiry either as `message` or inside the `errors` map.
+  //
+  // TODO: replace this string matching with a stable machine-readable code
+  // (e.g. errorCode == 'TOKEN_EXPIRED') once the backend team exposes one.
+  // Matching on human-readable text breaks the moment the copy or the
+  // Accept-Language header changes, and a miss costs the user the
+  // "طلب رمز جديد" recovery action.
   bool _isExpired(ErrorHandler error) {
-    final message = error.apiErrorModel.message?.toLowerCase() ?? '';
-    return message.contains('expired') ||
-        message.contains('invalid token') ||
-        message.contains('انتهت') ||
-        message.contains('منتهي');
+    final model = error.apiErrorModel;
+    final candidates = <String>[
+      if (model.message != null) model.message!,
+      ...?model.errors?.values.expand((messages) => messages),
+    ];
+    return candidates.any(_readsAsExpired);
+  }
+
+  bool _readsAsExpired(String value) {
+    final text = value.toLowerCase();
+    return text.contains('expired') ||
+        text.contains('invalid token') ||
+        text.contains('انتهت') ||
+        text.contains('منتهي');
   }
 }

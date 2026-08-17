@@ -13,7 +13,7 @@ class RegisterOtpPage extends StatelessWidget {
   final TextEditingController otpCtrl;
   final VoidCallback onSubmit;
   final VoidCallback onBack;
-  final Future<void> Function() onResend;
+  final Future<bool> Function() onResend;
 
   const RegisterOtpPage({
     super.key,

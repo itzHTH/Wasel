@@ -12,22 +12,26 @@ class AppBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.centerRight,
-      child: GestureDetector(
-        onTap: onTap ?? () => Navigator.pop(context),
-        child: Container(
-          width: 40.r,
-          height: 40.r,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: AppColor.neutral200, width: 1.5),
-          ),
-          child: Directionality(
-            textDirection: TextDirection.ltr,
-            child: Icon(
-              Icons.arrow_forward_rounded,
-              size: AppDimens.icon20,
-              color: AppColor.secondary900,
+      child: Semantics(
+        button: true,
+        label: 'رجوع',
+        child: GestureDetector(
+          onTap: onTap ?? () => Navigator.pop(context),
+          child: Container(
+            width: 44.r,
+            height: 44.r,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: AppColor.neutral200, width: 1.5),
+            ),
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: Icon(
+                Icons.arrow_forward_rounded,
+                size: AppDimens.icon20,
+                color: AppColor.secondary900,
+              ),
             ),
           ),
         ),
