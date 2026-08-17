@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:driver/features/auth/ui/screens/login_screen.dart';
 import 'package:driver/features/auth/ui/screens/register_screen.dart';
+import 'package:driver/features/auth/ui/screens/reset_password_screen.dart';
 import 'package:driver/features/driver_verification/ui/screens/verification_gate_screen.dart';
 import 'package:driver/features/splash/ui/screens/splash_screen.dart';
 
@@ -20,6 +21,9 @@ class AppRouter {
 
       case AppRoutes.register:
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
+
+      case AppRoutes.resetPassword:
+        return MaterialPageRoute(builder: (_) => const ResetPasswordScreen());
 
       case AppRoutes.driverVerificationGate:
         return MaterialPageRoute(
