@@ -5,7 +5,7 @@ import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
 import 'package:wasel_core/widgets/app_profile_avatar.dart';
-import 'package:wasel_core/widgets/app_stat_strip.dart';
+import 'package:wasel_core/widgets/app_stat_cards.dart';
 import 'package:wasel_profile/domain/entities/rider_profile.dart';
 
 class RiderProfileInfo extends StatelessWidget {
@@ -21,7 +21,12 @@ class RiderProfileInfo extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Padding(
-          padding: EdgeInsets.all(AppDimens.space16),
+          padding: EdgeInsets.fromLTRB(
+            AppDimens.space16,
+            AppDimens.space16,
+            AppDimens.space16,
+            AppDimens.space12,
+          ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -59,20 +64,27 @@ class RiderProfileInfo extends StatelessWidget {
             ],
           ),
         ),
-        if (profile != null) ...[
-          const Divider(height: 1, thickness: 1, color: AppColor.neutral200),
-          AppStatStrip(
-            stats: [
-              AppStat(
-                icon: Icons.account_balance_wallet_rounded,
-                iconColor: AppColor.primary500,
-                label: 'الرصيد',
-                value: formatAmount(profile.balance),
-                valueTextDirection: TextDirection.ltr,
-              ),
-            ],
+        if (profile != null)
+          Padding(
+            padding: EdgeInsets.fromLTRB(
+              AppDimens.space16,
+              0,
+              AppDimens.space16,
+              AppDimens.space16,
+            ),
+            child: AppStatCards(
+              stats: [
+                AppStat(
+                  icon: Icons.account_balance_wallet_rounded,
+                  iconColor: AppColor.primary500,
+                  background: AppColor.primary100,
+                  label: 'الرصيد',
+                  value: formatAmount(profile.balance),
+                  valueTextDirection: TextDirection.ltr,
+                ),
+              ],
+            ),
           ),
-        ],
       ],
     );
   }

@@ -62,7 +62,7 @@ export 'widgets/app_map_profile_button.dart';
 export 'widgets/app_menu_tile.dart';
 export 'widgets/app_profile_avatar.dart';
 export 'widgets/app_soon_badge.dart';
-export 'widgets/app_stat_strip.dart';
+export 'widgets/app_stat_cards.dart';
 export 'widgets/app_surface_card.dart';
 export 'widgets/app_text_form_field.dart';
 export 'widgets/password_field.dart';

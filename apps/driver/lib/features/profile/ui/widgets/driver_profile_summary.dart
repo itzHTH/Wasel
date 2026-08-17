@@ -14,7 +14,7 @@ import 'package:wasel_profile/presentation/providers/profile/driver_profile_prov
 class DriverProfileSummary extends ConsumerWidget {
   const DriverProfileSummary({super.key});
 
-  static double get _placeholderHeight => 148.h;
+  static double get _placeholderHeight => 178.h;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

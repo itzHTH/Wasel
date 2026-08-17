@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
 
@@ -7,6 +6,7 @@ class AppStat {
   const AppStat({
     required this.icon,
     required this.iconColor,
+    required this.background,
     required this.label,
     required this.value,
     this.valueTextDirection,
@@ -14,80 +14,70 @@ class AppStat {
 
   final IconData icon;
   final Color iconColor;
+  final Color background;
   final String label;
   final String value;
   final TextDirection? valueTextDirection;
 }
 
-class AppStatStrip extends StatelessWidget {
-  const AppStatStrip({super.key, required this.stats});
+class AppStatCards extends StatelessWidget {
+  const AppStatCards({super.key, required this.stats});
 
   final List<AppStat> stats;
 
   @override
   Widget build(BuildContext context) {
-    final cells = <Widget>[];
+    final cards = <Widget>[];
     for (var i = 0; i < stats.length; i++) {
-      if (i > 0) {
-        cells.add(
-          const VerticalDivider(
-            width: 1,
-            thickness: 1,
-            color: AppColor.neutral200,
-          ),
-        );
-      }
-      cells.add(Expanded(child: _AppStatCell(stat: stats[i])));
+      if (i > 0) cards.add(SizedBox(width: AppDimens.space12));
+      cards.add(Expanded(child: _AppStatCard(stat: stats[i])));
     }
 
-    return IntrinsicHeight(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: cells,
-      ),
-    );
+    return Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: cards);
   }
 }
 
-class _AppStatCell extends StatelessWidget {
-  const _AppStatCell({required this.stat});
+class _AppStatCard extends StatelessWidget {
+  const _AppStatCard({required this.stat});
 
   final AppStat stat;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
       padding: EdgeInsets.symmetric(
         horizontal: AppDimens.space12,
         vertical: AppDimens.space12,
       ),
+      decoration: BoxDecoration(
+        color: stat.background,
+        borderRadius: BorderRadius.circular(AppDimens.radius12),
+      ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(stat.icon, size: AppDimens.icon18, color: stat.iconColor),
               SizedBox(width: AppDimens.space4),
-              Flexible(
+              Expanded(
                 child: Text(
-                  stat.value,
-                  textDirection: stat.valueTextDirection,
+                  stat.label,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: AppTextStyles.font14Secondary900SemiBold,
+                  style: AppTextStyles.font12Neutral600SemiBold,
                 ),
               ),
             ],
           ),
           SizedBox(height: AppDimens.space4),
           Text(
-            stat.label,
+            stat.value,
+            textDirection: stat.valueTextDirection,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: AppTextStyles.font12Neutral400Regular,
+            style: AppTextStyles.font16Secondary900Bold,
           ),
         ],
       ),
