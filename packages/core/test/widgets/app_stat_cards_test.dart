@@ -16,8 +16,8 @@ void main() {
 
   const rating = AppStat(
     icon: Icons.star_rounded,
-    iconColor: AppColor.alertWarning500,
-    background: AppColor.alertWarning100,
+    iconColor: AppColor.primary500,
+    background: AppColor.neutral100,
     label: 'التقييم',
     value: '0.0 (0)',
     valueTextDirection: TextDirection.ltr,

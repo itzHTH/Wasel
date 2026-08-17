@@ -84,8 +84,8 @@ class DriverProfileInfo extends StatelessWidget {
                 ),
                 AppStat(
                   icon: Icons.star_rounded,
-                  iconColor: AppColor.alertWarning500,
-                  background: AppColor.alertWarning100,
+                  iconColor: AppColor.primary500,
+                  background: AppColor.neutral100,
                   label: 'التقييم',
                   value:
                       '${profile.averageRating.toStringAsFixed(1)} '
