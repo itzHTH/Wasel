@@ -14,6 +14,7 @@ class AppLabeledFormField extends StatelessWidget {
   final bool obscureText;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
+  final List<String>? autofillHints;
 
   const AppLabeledFormField({
     super.key,
@@ -26,6 +27,7 @@ class AppLabeledFormField extends StatelessWidget {
     this.obscureText = false,
     this.keyboardType,
     this.textInputAction,
+    this.autofillHints,
   });
 
   @override
@@ -44,6 +46,7 @@ class AppLabeledFormField extends StatelessWidget {
           isObscureText: obscureText,
           keyboardType: keyboardType,
           textInputAction: textInputAction,
+          autofillHints: autofillHints,
           backgroundColor: AppColor.neutral50,
           hintStyle: AppTextStyles.font14Neutral400Regular,
           inputTextStyle: AppTextStyles.font14Secondary900SemiBold,

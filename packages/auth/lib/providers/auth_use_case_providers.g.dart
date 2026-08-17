@@ -234,3 +234,147 @@ final class LogoutUseCaseProvider
 }
 
 String _$logoutUseCaseHash() => r'd1bdbc4c836f8ce0ab1742f89cf325ef30a6fbf3';
+
+@ProviderFor(forgotPasswordUseCase)
+final forgotPasswordUseCaseProvider = ForgotPasswordUseCaseProvider._();
+
+final class ForgotPasswordUseCaseProvider
+    extends
+        $FunctionalProvider<
+          ForgotPasswordUseCase,
+          ForgotPasswordUseCase,
+          ForgotPasswordUseCase
+        >
+    with $Provider<ForgotPasswordUseCase> {
+  ForgotPasswordUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'forgotPasswordUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$forgotPasswordUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<ForgotPasswordUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  ForgotPasswordUseCase create(Ref ref) {
+    return forgotPasswordUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(ForgotPasswordUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<ForgotPasswordUseCase>(value),
+    );
+  }
+}
+
+String _$forgotPasswordUseCaseHash() =>
+    r'f67e842cfc12bd9ddaf209b214876e564630911a';
+
+@ProviderFor(verifyResetOtpUseCase)
+final verifyResetOtpUseCaseProvider = VerifyResetOtpUseCaseProvider._();
+
+final class VerifyResetOtpUseCaseProvider
+    extends
+        $FunctionalProvider<
+          VerifyResetOtpUseCase,
+          VerifyResetOtpUseCase,
+          VerifyResetOtpUseCase
+        >
+    with $Provider<VerifyResetOtpUseCase> {
+  VerifyResetOtpUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'verifyResetOtpUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$verifyResetOtpUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<VerifyResetOtpUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  VerifyResetOtpUseCase create(Ref ref) {
+    return verifyResetOtpUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(VerifyResetOtpUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<VerifyResetOtpUseCase>(value),
+    );
+  }
+}
+
+String _$verifyResetOtpUseCaseHash() =>
+    r'a8853cef7a81d4a010094f656b35b6489713e0f9';
+
+@ProviderFor(resetPasswordUseCase)
+final resetPasswordUseCaseProvider = ResetPasswordUseCaseProvider._();
+
+final class ResetPasswordUseCaseProvider
+    extends
+        $FunctionalProvider<
+          ResetPasswordUseCase,
+          ResetPasswordUseCase,
+          ResetPasswordUseCase
+        >
+    with $Provider<ResetPasswordUseCase> {
+  ResetPasswordUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'resetPasswordUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$resetPasswordUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<ResetPasswordUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  ResetPasswordUseCase create(Ref ref) {
+    return resetPasswordUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(ResetPasswordUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<ResetPasswordUseCase>(value),
+    );
+  }
+}
+
+String _$resetPasswordUseCaseHash() =>
+    r'c7ced852a4321326847616ede143523e33bee610';

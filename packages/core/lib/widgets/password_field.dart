@@ -9,6 +9,7 @@ class AppPasswordFormField extends StatefulWidget {
   final TextEditingController controller;
   final TextInputAction textInputAction;
   final String? Function(String?) validator;
+  final List<String>? autofillHints;
 
   const AppPasswordFormField({
     super.key,
@@ -17,6 +18,7 @@ class AppPasswordFormField extends StatefulWidget {
     required this.controller,
     this.textInputAction = TextInputAction.done,
     required this.validator,
+    this.autofillHints,
   });
 
   @override
@@ -34,6 +36,7 @@ class _AppPasswordFormFieldState extends State<AppPasswordFormField> {
       controller: widget.controller,
       obscureText: !_visible,
       textInputAction: widget.textInputAction,
+      autofillHints: widget.autofillHints,
       validator: widget.validator,
       prefixIcon: Icon(
         Icons.lock_outline_rounded,

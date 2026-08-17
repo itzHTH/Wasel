@@ -13,13 +13,22 @@ import 'package:wasel_auth/data/models/login/request/login_request.dart';
 import 'package:wasel_auth/data/models/login/response/login_response.dart';
 import 'package:wasel_auth/data/models/register/verify_otp/request/verify_otp_request.dart';
 import 'package:wasel_auth/data/models/register/verify_otp/response/verify_otp_respons.dart';
+import 'package:wasel_auth/data/models/reset_password/forgot_password/request/forgot_password_request.dart';
+import 'package:wasel_auth/data/models/reset_password/forgot_password/response/forgot_password_response.dart';
+import 'package:wasel_auth/data/models/reset_password/set_new_password/request/reset_password_request.dart';
+import 'package:wasel_auth/data/models/reset_password/set_new_password/response/reset_password_response.dart';
+import 'package:wasel_auth/data/models/reset_password/verify_reset_otp/request/verify_reset_otp_request.dart';
+import 'package:wasel_auth/data/models/reset_password/verify_reset_otp/response/verify_reset_otp_response.dart';
 import 'package:wasel_auth/auth_user_type.dart';
 import 'package:wasel_auth/data/services/auth_api_service.dart';
 import 'package:wasel_auth/domain/entities/complete_registration.dart';
+import 'package:wasel_auth/domain/entities/forgot_password.dart';
 import 'package:wasel_auth/domain/entities/initiate_registeration.dart';
 import 'package:wasel_auth/domain/entities/login.dart';
 import 'package:wasel_auth/domain/entities/logout.dart';
+import 'package:wasel_auth/domain/entities/reset_password.dart';
 import 'package:wasel_auth/domain/entities/verify_otp.dart';
+import 'package:wasel_auth/domain/entities/verify_reset_otp.dart';
 import 'package:wasel_auth/domain/repo/base_auth_repo.dart';
 
 part 'auth_repo.g.dart';
@@ -138,6 +147,51 @@ class AuthRepo implements BaseAuthRepo {
 
       // Clear the stored tokens from local cache
       await AppLocalCache.clearAllSecuredData();
+
+      return ApiResults.success(response.toEntity());
+    } catch (e) {
+      return ApiResults.failure(ErrorHandler.handle(e));
+    }
+  }
+
+  @override
+  Future<ApiResults<ForgotPassword>> forgotPassword(
+    ForgotPasswordRequest request, {
+    CancelToken? cancelToken,
+  }) async {
+    try {
+      final ForgotPasswordResponse response = await _authApiService
+          .forgotPassword(request, cancelToken: cancelToken);
+
+      return ApiResults.success(response.toEntity());
+    } catch (e) {
+      return ApiResults.failure(ErrorHandler.handle(e));
+    }
+  }
+
+  @override
+  Future<ApiResults<VerifyResetOtp>> verifyResetOtp(
+    VerifyResetOtpRequest request, {
+    CancelToken? cancelToken,
+  }) async {
+    try {
+      final VerifyResetOtpResponse response = await _authApiService
+          .verifyResetOtp(request, cancelToken: cancelToken);
+
+      return ApiResults.success(response.toEntity());
+    } catch (e) {
+      return ApiResults.failure(ErrorHandler.handle(e));
+    }
+  }
+
+  @override
+  Future<ApiResults<ResetPassword>> resetPassword(
+    ResetPasswordRequest request, {
+    CancelToken? cancelToken,
+  }) async {
+    try {
+      final ResetPasswordResponse response = await _authApiService
+          .resetPassword(request, cancelToken: cancelToken);
 
       return ApiResults.success(response.toEntity());
     } catch (e) {

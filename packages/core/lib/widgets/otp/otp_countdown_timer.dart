@@ -5,15 +5,22 @@ import 'package:wasel_core/theme/app_text_styles.dart';
 class OtpCountdownTimer extends StatefulWidget {
   final VoidCallback? onExpired;
 
-  const OtpCountdownTimer({super.key, this.onExpired});
+  /// How long the user waits before resending. Defaults to the register flow's
+  /// original 02:39; the reset flow passes a shorter window.
+  final Duration duration;
+
+  const OtpCountdownTimer({
+    super.key,
+    this.onExpired,
+    this.duration = const Duration(seconds: 159),
+  });
 
   @override
   State<OtpCountdownTimer> createState() => _OtpCountdownTimerState();
 }
 
 class _OtpCountdownTimerState extends State<OtpCountdownTimer> {
-  static const _initialSeconds = 159; // 02:39
-  int _remaining = _initialSeconds;
+  late int _remaining = widget.duration.inSeconds;
   Timer? _timer;
 
   @override
