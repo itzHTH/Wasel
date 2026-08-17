@@ -17,6 +17,7 @@ export 'extensions/navigation_extension.dart';
 // Helpers
 export 'helpers/app_amount_format.dart';
 export 'helpers/app_image_compressor.dart';
+export 'helpers/app_image_picker.dart';
 export 'helpers/app_local_cache.dart';
 export 'helpers/app_navigation.dart';
 export 'helpers/app_url_launcher.dart';
@@ -55,6 +56,7 @@ export 'widgets/app_editable_avatar.dart';
 export 'widgets/app_error_retry.dart';
 export 'widgets/app_group_card.dart';
 export 'widgets/app_header_with_logo.dart';
+export 'widgets/app_image_source_sheet.dart';
 export 'widgets/app_info_row.dart';
 export 'widgets/app_labeled_field.dart';
 export 'widgets/app_loading.dart';
