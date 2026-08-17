@@ -8,9 +8,11 @@ import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
 import 'package:wasel_core/widgets/app_error_retry.dart';
-import 'package:wasel_core/widgets/app_info_card.dart';
+import 'package:wasel_core/widgets/app_group_card.dart';
+import 'package:wasel_core/widgets/app_info_row.dart';
 import 'package:wasel_core/widgets/app_loading.dart';
 import 'package:wasel_core/widgets/app_profile_avatar.dart';
+import 'package:wasel_core/widgets/app_surface_card.dart';
 import 'package:wasel_profile/domain/entities/driver_profile.dart';
 import 'package:wasel_profile/presentation/providers/profile/driver_profile_provider.dart';
 
@@ -74,80 +76,86 @@ class _DriverProfileDetailsBody extends StatelessWidget {
     final fullName = profile.fullName;
 
     return ListView(
-      padding: EdgeInsets.symmetric(
-        horizontal: AppDimens.space24,
-        vertical: AppDimens.space24,
+      padding: EdgeInsets.fromLTRB(
+        AppDimens.space16,
+        AppDimens.space16,
+        AppDimens.space16,
+        AppDimens.space32,
       ),
       children: [
-        Center(
-          child: AppProfileAvatar(
-            photoUrl: profile.profilePictureUrl,
-            size: 96.r,
+        AppSurfaceCard(
+          borderRadius: AppDimens.radius24,
+          padding: EdgeInsets.symmetric(
+            horizontal: AppDimens.space16,
+            vertical: AppDimens.space24,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AppProfileAvatar(photoUrl: profile.profilePictureUrl, size: 96.r),
+              SizedBox(height: AppDimens.space16),
+              Text(
+                fullName.isNotEmpty ? fullName : 'سائق وَصَل',
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppTextStyles.font20Secondary900Bold,
+              ),
+              SizedBox(height: AppDimens.space8),
+              DriverApprovalBadge(status: profile.approvalStatus),
+            ],
           ),
         ),
-        SizedBox(height: AppDimens.space16),
-        Text(
-          fullName.isNotEmpty ? fullName : 'سائق وَصَل',
-          textAlign: TextAlign.center,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: AppTextStyles.font20Secondary900Bold,
-        ),
-        SizedBox(height: AppDimens.space8),
-        Center(child: DriverApprovalBadge(status: profile.approvalStatus)),
         SizedBox(height: AppDimens.space24),
-        AppInfoCard(
-          icon: Icons.person_outline_rounded,
-          label: 'الاسم الأول',
-          value: profile.firstName,
-        ),
-        SizedBox(height: AppDimens.space12),
-        AppInfoCard(
-          icon: Icons.badge_outlined,
-          label: 'اسم العائلة',
-          value: profile.lastName,
-        ),
-        SizedBox(height: AppDimens.space12),
-        AppInfoCard(
-          icon: Icons.phone_outlined,
-          label: 'رقم الهاتف',
-          value: profile.phoneNumber,
-          valueTextDirection: TextDirection.ltr,
-        ),
-        SizedBox(height: AppDimens.space12),
-        AppInfoCard(
-          icon: Icons.mail_outline_rounded,
-          label: 'البريد الإلكتروني',
-          value: profile.email,
-          valueTextDirection: TextDirection.ltr,
-        ),
-        SizedBox(height: AppDimens.space12),
-        AppInfoCard(
-          icon: Icons.location_city_outlined,
-          label: 'المدينة',
-          value: profile.city,
-        ),
-        SizedBox(height: AppDimens.space12),
-        AppInfoCard(
-          icon: Icons.location_on_outlined,
-          label: 'العنوان',
-          value: profile.address,
-        ),
-        SizedBox(height: AppDimens.space12),
-        AppInfoCard(
-          icon: Icons.star_outline_rounded,
-          label: 'التقييم',
-          value:
-              '${profile.averageRating.toStringAsFixed(1)} '
-              '(${profile.totalReviews} تقييم)',
-          valueTextDirection: TextDirection.ltr,
-        ),
-        SizedBox(height: AppDimens.space12),
-        AppInfoCard(
-          icon: Icons.account_balance_wallet_outlined,
-          label: 'الرصيد',
-          value: formatAmount(profile.balance),
-          valueTextDirection: TextDirection.ltr,
+        AppGroupCard(
+          children: [
+            AppInfoRow(
+              icon: Icons.person_outline_rounded,
+              label: 'الاسم الأول',
+              value: profile.firstName,
+            ),
+            AppInfoRow(
+              icon: Icons.badge_outlined,
+              label: 'اسم العائلة',
+              value: profile.lastName,
+            ),
+            AppInfoRow(
+              icon: Icons.phone_outlined,
+              label: 'رقم الهاتف',
+              value: profile.phoneNumber,
+              valueTextDirection: TextDirection.ltr,
+            ),
+            AppInfoRow(
+              icon: Icons.mail_outline_rounded,
+              label: 'البريد الإلكتروني',
+              value: profile.email,
+              valueTextDirection: TextDirection.ltr,
+            ),
+            AppInfoRow(
+              icon: Icons.location_city_outlined,
+              label: 'المدينة',
+              value: profile.city,
+            ),
+            AppInfoRow(
+              icon: Icons.location_on_outlined,
+              label: 'العنوان',
+              value: profile.address,
+            ),
+            AppInfoRow(
+              icon: Icons.star_outline_rounded,
+              label: 'التقييم',
+              value:
+                  '${profile.averageRating.toStringAsFixed(1)} '
+                  '(${profile.totalReviews} تقييم)',
+              valueTextDirection: TextDirection.ltr,
+            ),
+            AppInfoRow(
+              icon: Icons.account_balance_wallet_outlined,
+              label: 'الرصيد',
+              value: formatAmount(profile.balance),
+              valueTextDirection: TextDirection.ltr,
+            ),
+          ],
         ),
       ],
     );
