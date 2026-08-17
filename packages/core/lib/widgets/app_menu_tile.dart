@@ -13,6 +13,9 @@ class AppMenuTile extends StatelessWidget {
     this.isDestructive = false,
   });
 
+  static double get leadingExtent =>
+      AppDimens.space16 + AppDimens.icon40 + AppDimens.space12;
+
   final IconData icon;
   final String label;
   final VoidCallback? onTap;
@@ -21,27 +24,68 @@ class AppMenuTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isEnabled = onTap != null;
+    final onTap = this.onTap;
+    final trailing = this.trailing;
 
-    final color = isDestructive
-        ? AppColor.alertError500
-        : isEnabled
-        ? AppColor.secondary900
-        : AppColor.neutral400;
+    final foreground = isDestructive
+        ? AppColor.alertError700
+        : AppColor.primary500;
+    final badgeBackground = isDestructive
+        ? AppColor.neutral0
+        : AppColor.primary100;
+    final labelStyle = isDestructive
+        ? AppTextStyles.font14alertError500SemiBold.copyWith(
+            color: AppColor.alertError700,
+          )
+        : AppTextStyles.font14Secondary900SemiBold;
 
-    return ListTile(
-      onTap: onTap,
-      contentPadding: EdgeInsets.symmetric(horizontal: AppDimens.space24),
-      leading: Icon(icon, size: AppDimens.icon24, color: color),
-      title: Text(
-        label,
-        style: isDestructive
-            ? AppTextStyles.font14alertError500SemiBold
-            : isEnabled
-            ? AppTextStyles.font14Secondary900SemiBold
-            : AppTextStyles.font14Neutral400Regular,
+    return Material(
+      type: MaterialType.transparency,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: AppDimens.space16,
+            vertical: AppDimens.space12,
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: AppDimens.icon40,
+                height: AppDimens.icon40,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: badgeBackground,
+                  borderRadius: BorderRadius.circular(AppDimens.radius12),
+                ),
+                child: Icon(icon, size: AppDimens.icon20, color: foreground),
+              ),
+              SizedBox(width: AppDimens.space12),
+              Expanded(
+                child: Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: labelStyle,
+                ),
+              ),
+              if (trailing != null) ...[
+                SizedBox(width: AppDimens.space12),
+                trailing,
+              ] else if (onTap != null) ...[
+                SizedBox(width: AppDimens.space12),
+                ExcludeSemantics(
+                  child: Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: AppDimens.icon18,
+                    color: AppColor.neutral400,
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
       ),
-      trailing: trailing,
     );
   }
 }

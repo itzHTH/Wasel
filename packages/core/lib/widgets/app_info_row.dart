@@ -3,8 +3,8 @@ import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
 
-class AppInfoCard extends StatelessWidget {
-  const AppInfoCard({
+class AppInfoRow extends StatelessWidget {
+  const AppInfoRow({
     super.key,
     required this.icon,
     required this.label,
@@ -27,17 +27,17 @@ class AppInfoCard extends StatelessWidget {
     final hasValue = value != null && value.isNotEmpty;
     final trailing = this.trailing;
 
-    return Container(
-      padding: EdgeInsets.all(AppDimens.space16),
-      decoration: BoxDecoration(
-        color: AppColor.neutral0,
-        borderRadius: BorderRadius.circular(AppDimens.radius16),
-        border: Border.all(color: AppColor.neutral200),
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: AppDimens.space16,
+        vertical: AppDimens.space12,
       ),
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(AppDimens.space8),
+            width: AppDimens.icon40,
+            height: AppDimens.icon40,
+            alignment: Alignment.center,
             decoration: BoxDecoration(
               color: AppColor.primary100,
               borderRadius: BorderRadius.circular(AppDimens.radius12),

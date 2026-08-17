@@ -19,6 +19,7 @@ class AppDialog extends StatelessWidget {
   final IconData? icon;
   final String confirmLabel;
   final String? cancelLabel;
+  final bool isDestructive;
 
   const AppDialog({
     super.key,
@@ -27,9 +28,13 @@ class AppDialog extends StatelessWidget {
     required this.confirmLabel,
     this.icon,
     this.cancelLabel,
+    this.isDestructive = false,
   });
 
   /// Shows the dialog. Returns `true` if the confirm action was tapped.
+  ///
+  /// Set [isDestructive] for irreversible actions: the confirm action and the
+  /// icon switch to the error palette.
   static Future<bool> show(
     BuildContext context, {
     required String title,
@@ -38,6 +43,7 @@ class AppDialog extends StatelessWidget {
     IconData? icon,
     String? cancelLabel,
     bool barrierDismissible = true,
+    bool isDestructive = false,
   }) async {
     final confirmed = await showDialog<bool>(
       context: context,
@@ -48,6 +54,7 @@ class AppDialog extends StatelessWidget {
         confirmLabel: confirmLabel,
         icon: icon,
         cancelLabel: cancelLabel,
+        isDestructive: isDestructive,
       ),
     );
     return confirmed ?? false;
@@ -73,14 +80,18 @@ class AppDialog extends StatelessWidget {
                   width: 56.r,
                   height: 56.r,
                   alignment: Alignment.center,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: AppColor.primary100,
+                    color: isDestructive
+                        ? AppColor.alertError100
+                        : AppColor.primary100,
                   ),
                   child: Icon(
                     icon,
                     size: AppDimens.icon24,
-                    color: AppColor.primary500,
+                    color: isDestructive
+                        ? AppColor.alertError700
+                        : AppColor.primary500,
                   ),
                 ),
               ),
@@ -102,7 +113,9 @@ class AppDialog extends StatelessWidget {
               height: AppDimens.buttonHeight,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColor.primary500,
+                  backgroundColor: isDestructive
+                      ? AppColor.alertError500
+                      : AppColor.primary500,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(AppDimens.radius12),

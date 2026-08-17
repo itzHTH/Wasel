@@ -30,4 +30,5 @@ class AppColor {
 
   static const Color alertError100 = Color(0xFFFCE0DC);
   static const Color alertError500 = Color(0xFFD7372E);
+  static const Color alertError700 = Color(0xFFA3241D);
 }
