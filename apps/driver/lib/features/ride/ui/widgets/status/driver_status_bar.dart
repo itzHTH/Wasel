@@ -45,9 +45,13 @@ class DriverStatusBar extends ConsumerWidget {
           children: [
             _ConnectionDot(stage: stage, connection: connection),
             SizedBox(width: AppDimens.space8),
-            Text(
-              _titleFor(stage, connection),
-              style: AppTextStyles.font14Secondary900SemiBold,
+            Flexible(
+              child: Text(
+                _titleFor(stage, connection),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppTextStyles.font14Secondary900SemiBold,
+              ),
             ),
             SizedBox(width: AppDimens.space12),
 
