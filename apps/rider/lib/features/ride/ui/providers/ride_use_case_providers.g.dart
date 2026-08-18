@@ -197,3 +197,50 @@ final class CancelRideUseCaseProvider
 }
 
 String _$cancelRideUseCaseHash() => r'e258d1e714d128977025eba354bf2700aadcde8e';
+
+@ProviderFor(reviewRideUseCase)
+final reviewRideUseCaseProvider = ReviewRideUseCaseProvider._();
+
+final class ReviewRideUseCaseProvider
+    extends
+        $FunctionalProvider<
+          ReviewRideUseCase,
+          ReviewRideUseCase,
+          ReviewRideUseCase
+        >
+    with $Provider<ReviewRideUseCase> {
+  ReviewRideUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'reviewRideUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$reviewRideUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<ReviewRideUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  ReviewRideUseCase create(Ref ref) {
+    return reviewRideUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(ReviewRideUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<ReviewRideUseCase>(value),
+    );
+  }
+}
+
+String _$reviewRideUseCaseHash() => r'255efcd86468279ed1232de855b83263ab2cf3f6';

@@ -7,12 +7,15 @@ import 'package:wasal/features/ride/data/models/estimate_ride_price/response/est
 import 'package:wasal/features/ride/data/models/geo_point_request/geo_point_request_body.dart';
 import 'package:wasal/features/ride/data/models/request_ride/request/request_ride_body.dart';
 import 'package:wasal/features/ride/data/models/request_ride/response/request_ride_response.dart';
+import 'package:wasal/features/ride/data/models/review_ride/request/review_ride_body.dart';
+import 'package:wasal/features/ride/data/models/review_ride/response/review_ride_response.dart';
 import 'package:wasal/features/ride/data/models/ride_events/hub_ride_event.dart';
 import 'package:wasal/features/ride/data/services/ride_api_service.dart';
 import 'package:wasal/features/ride/data/services/ride_hub_datasource.dart';
 import 'package:wasal/features/ride/domain/entities/cancel_ride.dart';
 import 'package:wasal/features/ride/domain/entities/driver_profile.dart';
 import 'package:wasal/features/ride/domain/entities/request_ride.dart';
+import 'package:wasal/features/ride/domain/entities/review_ride.dart';
 import 'package:wasal/features/ride/domain/entities/ride_event.dart'
     hide RideAccepted;
 import 'package:wasal/features/ride/domain/entities/ride_price.dart';
@@ -75,6 +78,24 @@ class RideRepo extends BaseRideRepo {
   }
 
   @override
+  Future<ApiResults<ReviewRide>> reviewRide(
+    String rideId,
+    ReviewRideBody reviewRideBody, {
+    CancelToken? cancelToken,
+  }) async {
+    try {
+      final ReviewRideResponse response = await _rideApiService.reviewRide(
+        rideId,
+        reviewRideBody,
+        cancelToken: cancelToken,
+      );
+      return ApiResults.success(response.toEntity());
+    } catch (e) {
+      return ApiResults.failure(ErrorHandler.handle(e));
+    }
+  }
+
+  @override
   Stream<RideEvent> watchRide(String rideId) async* {
     final queue = StreamController<HubRideEvent>();
     final subscription = _rideHubService.events.listen(
@@ -96,13 +117,17 @@ class RideRepo extends BaseRideRepo {
 
           final driver = DriverProfile(
             id: event.driverId,
-            name: "مصطفى عقيل",
-            phoneNumber: "+9647700000000",
-            plateNumber: "12345 A",
-            carModel: "تويوتا كورولا",
-            carColor: "أبيض",
+            name: event.driverName ?? 'سائق وصل',
+            phoneNumber: event.phoneNumber,
+            photoUrl: event.driverProfilePictureUrl,
+            plateNumber: event.vinNumber,
+            carModel: event.vehicleModel,
           );
-          yield RideEvent.accepted(rideId: event.rideId, driver: driver);
+          yield RideEvent.accepted(
+            rideId: event.rideId,
+            driver: driver,
+            driverPosition: event.driverPosition?.toEntity(),
+          );
         } else {
           yield event.toEntity();
         }

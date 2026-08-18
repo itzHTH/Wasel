@@ -131,10 +131,10 @@ return cancelled(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String rideId,  String driverId,  String message)?  accepted,TResult Function( LatLngDto position)?  driverMoved,TResult Function( String rideId,  String message)?  driverArrived,TResult Function( String rideId,  String message)?  started,TResult Function( String rideId,  String message)?  completed,TResult Function( String? message)?  cancelled,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String rideId,  String driverId,  String message,  LatLngDto? driverPosition,  String? driverName,  String? driverProfilePictureUrl,  String? vehicleModel,  String? vinNumber,  String? phoneNumber)?  accepted,TResult Function( LatLngDto position)?  driverMoved,TResult Function( String rideId,  String message)?  driverArrived,TResult Function( String rideId,  String message)?  started,TResult Function( String rideId,  String message)?  completed,TResult Function( String? message)?  cancelled,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case RideAccepted() when accepted != null:
-return accepted(_that.rideId,_that.driverId,_that.message);case DriverMoved() when driverMoved != null:
+return accepted(_that.rideId,_that.driverId,_that.message,_that.driverPosition,_that.driverName,_that.driverProfilePictureUrl,_that.vehicleModel,_that.vinNumber,_that.phoneNumber);case DriverMoved() when driverMoved != null:
 return driverMoved(_that.position);case DriverArrived() when driverArrived != null:
 return driverArrived(_that.rideId,_that.message);case RideStarted() when started != null:
 return started(_that.rideId,_that.message);case RideCompleted() when completed != null:
@@ -157,10 +157,10 @@ return cancelled(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String rideId,  String driverId,  String message)  accepted,required TResult Function( LatLngDto position)  driverMoved,required TResult Function( String rideId,  String message)  driverArrived,required TResult Function( String rideId,  String message)  started,required TResult Function( String rideId,  String message)  completed,required TResult Function( String? message)  cancelled,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String rideId,  String driverId,  String message,  LatLngDto? driverPosition,  String? driverName,  String? driverProfilePictureUrl,  String? vehicleModel,  String? vinNumber,  String? phoneNumber)  accepted,required TResult Function( LatLngDto position)  driverMoved,required TResult Function( String rideId,  String message)  driverArrived,required TResult Function( String rideId,  String message)  started,required TResult Function( String rideId,  String message)  completed,required TResult Function( String? message)  cancelled,}) {final _that = this;
 switch (_that) {
 case RideAccepted():
-return accepted(_that.rideId,_that.driverId,_that.message);case DriverMoved():
+return accepted(_that.rideId,_that.driverId,_that.message,_that.driverPosition,_that.driverName,_that.driverProfilePictureUrl,_that.vehicleModel,_that.vinNumber,_that.phoneNumber);case DriverMoved():
 return driverMoved(_that.position);case DriverArrived():
 return driverArrived(_that.rideId,_that.message);case RideStarted():
 return started(_that.rideId,_that.message);case RideCompleted():
@@ -179,10 +179,10 @@ return cancelled(_that.message);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String rideId,  String driverId,  String message)?  accepted,TResult? Function( LatLngDto position)?  driverMoved,TResult? Function( String rideId,  String message)?  driverArrived,TResult? Function( String rideId,  String message)?  started,TResult? Function( String rideId,  String message)?  completed,TResult? Function( String? message)?  cancelled,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String rideId,  String driverId,  String message,  LatLngDto? driverPosition,  String? driverName,  String? driverProfilePictureUrl,  String? vehicleModel,  String? vinNumber,  String? phoneNumber)?  accepted,TResult? Function( LatLngDto position)?  driverMoved,TResult? Function( String rideId,  String message)?  driverArrived,TResult? Function( String rideId,  String message)?  started,TResult? Function( String rideId,  String message)?  completed,TResult? Function( String? message)?  cancelled,}) {final _that = this;
 switch (_that) {
 case RideAccepted() when accepted != null:
-return accepted(_that.rideId,_that.driverId,_that.message);case DriverMoved() when driverMoved != null:
+return accepted(_that.rideId,_that.driverId,_that.message,_that.driverPosition,_that.driverName,_that.driverProfilePictureUrl,_that.vehicleModel,_that.vinNumber,_that.phoneNumber);case DriverMoved() when driverMoved != null:
 return driverMoved(_that.position);case DriverArrived() when driverArrived != null:
 return driverArrived(_that.rideId,_that.message);case RideStarted() when started != null:
 return started(_that.rideId,_that.message);case RideCompleted() when completed != null:
@@ -199,12 +199,18 @@ return cancelled(_that.message);case _:
 
 
 class RideAccepted implements HubRideEvent {
-  const RideAccepted({required this.rideId, required this.driverId, required this.message});
+  const RideAccepted({required this.rideId, required this.driverId, required this.message, this.driverPosition, this.driverName, this.driverProfilePictureUrl, this.vehicleModel, this.vinNumber, this.phoneNumber});
   
 
  final  String rideId;
  final  String driverId;
  final  String message;
+ final  LatLngDto? driverPosition;
+ final  String? driverName;
+ final  String? driverProfilePictureUrl;
+ final  String? vehicleModel;
+ final  String? vinNumber;
+ final  String? phoneNumber;
 
 /// Create a copy of HubRideEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -216,16 +222,16 @@ $RideAcceptedCopyWith<RideAccepted> get copyWith => _$RideAcceptedCopyWithImpl<R
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RideAccepted&&(identical(other.rideId, rideId) || other.rideId == rideId)&&(identical(other.driverId, driverId) || other.driverId == driverId)&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RideAccepted&&(identical(other.rideId, rideId) || other.rideId == rideId)&&(identical(other.driverId, driverId) || other.driverId == driverId)&&(identical(other.message, message) || other.message == message)&&(identical(other.driverPosition, driverPosition) || other.driverPosition == driverPosition)&&(identical(other.driverName, driverName) || other.driverName == driverName)&&(identical(other.driverProfilePictureUrl, driverProfilePictureUrl) || other.driverProfilePictureUrl == driverProfilePictureUrl)&&(identical(other.vehicleModel, vehicleModel) || other.vehicleModel == vehicleModel)&&(identical(other.vinNumber, vinNumber) || other.vinNumber == vinNumber)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,rideId,driverId,message);
+int get hashCode => Object.hash(runtimeType,rideId,driverId,message,driverPosition,driverName,driverProfilePictureUrl,vehicleModel,vinNumber,phoneNumber);
 
 @override
 String toString() {
-  return 'HubRideEvent.accepted(rideId: $rideId, driverId: $driverId, message: $message)';
+  return 'HubRideEvent.accepted(rideId: $rideId, driverId: $driverId, message: $message, driverPosition: $driverPosition, driverName: $driverName, driverProfilePictureUrl: $driverProfilePictureUrl, vehicleModel: $vehicleModel, vinNumber: $vinNumber, phoneNumber: $phoneNumber)';
 }
 
 
@@ -236,11 +242,11 @@ abstract mixin class $RideAcceptedCopyWith<$Res> implements $HubRideEventCopyWit
   factory $RideAcceptedCopyWith(RideAccepted value, $Res Function(RideAccepted) _then) = _$RideAcceptedCopyWithImpl;
 @useResult
 $Res call({
- String rideId, String driverId, String message
+ String rideId, String driverId, String message, LatLngDto? driverPosition, String? driverName, String? driverProfilePictureUrl, String? vehicleModel, String? vinNumber, String? phoneNumber
 });
 
 
-
+$LatLngDtoCopyWith<$Res>? get driverPosition;
 
 }
 /// @nodoc
@@ -253,16 +259,34 @@ class _$RideAcceptedCopyWithImpl<$Res>
 
 /// Create a copy of HubRideEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? rideId = null,Object? driverId = null,Object? message = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? rideId = null,Object? driverId = null,Object? message = null,Object? driverPosition = freezed,Object? driverName = freezed,Object? driverProfilePictureUrl = freezed,Object? vehicleModel = freezed,Object? vinNumber = freezed,Object? phoneNumber = freezed,}) {
   return _then(RideAccepted(
 rideId: null == rideId ? _self.rideId : rideId // ignore: cast_nullable_to_non_nullable
 as String,driverId: null == driverId ? _self.driverId : driverId // ignore: cast_nullable_to_non_nullable
 as String,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,
+as String,driverPosition: freezed == driverPosition ? _self.driverPosition : driverPosition // ignore: cast_nullable_to_non_nullable
+as LatLngDto?,driverName: freezed == driverName ? _self.driverName : driverName // ignore: cast_nullable_to_non_nullable
+as String?,driverProfilePictureUrl: freezed == driverProfilePictureUrl ? _self.driverProfilePictureUrl : driverProfilePictureUrl // ignore: cast_nullable_to_non_nullable
+as String?,vehicleModel: freezed == vehicleModel ? _self.vehicleModel : vehicleModel // ignore: cast_nullable_to_non_nullable
+as String?,vinNumber: freezed == vinNumber ? _self.vinNumber : vinNumber // ignore: cast_nullable_to_non_nullable
+as String?,phoneNumber: freezed == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
+/// Create a copy of HubRideEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LatLngDtoCopyWith<$Res>? get driverPosition {
+    if (_self.driverPosition == null) {
+    return null;
+  }
 
+  return $LatLngDtoCopyWith<$Res>(_self.driverPosition!, (value) {
+    return _then(_self.copyWith(driverPosition: value));
+  });
+}
 }
 
 /// @nodoc

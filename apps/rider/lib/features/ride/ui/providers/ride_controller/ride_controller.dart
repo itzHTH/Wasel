@@ -27,8 +27,9 @@ class RideController extends _$RideController {
 
   void _onEvent(RideEvent event) {
     state = switch (event) {
-      RideAccepted(:final driver) => state.copyWith(
+      RideAccepted(:final driver, :final driverPosition) => state.copyWith(
         driver: driver,
+        driverPosition: driverPosition ?? state.driverPosition,
         stage: RideStage.accepted,
       ),
 

@@ -5,23 +5,37 @@ import 'package:wasal/features/ride/ui/widgets/ride_price_card/ride_detail_row.d
 import 'package:wasel_core/wasel_core.dart';
 
 /// The post-ride screen (pushed on completion): shows the fare and trip summary,
-/// collects a 1–5 star rating, and confirms via [onDone]. Pure — the parent owns
-/// navigation and submitting the rating.
-class RideCompletedScreen extends StatelessWidget {
+/// collects a 1–5 star rating with an optional comment, and hands both to
+/// [onDone]. Pure — the parent owns navigation, submission, and [isSubmitting].
+class RideCompletedScreen extends StatefulWidget {
   const RideCompletedScreen({
     super.key,
     required this.fare,
     required this.pickupLabel,
     required this.dropoffLabel,
-    required this.onRatingChanged,
     required this.onDone,
+    this.isSubmitting = false,
   });
 
   final String fare;
   final String pickupLabel;
   final String dropoffLabel;
-  final ValueChanged<int> onRatingChanged;
-  final VoidCallback onDone;
+  final void Function(int rating, String comment) onDone;
+  final bool isSubmitting;
+
+  @override
+  State<RideCompletedScreen> createState() => _RideCompletedScreenState();
+}
+
+class _RideCompletedScreenState extends State<RideCompletedScreen> {
+  final _commentController = TextEditingController();
+  int _rating = 0;
+
+  @override
+  void dispose() {
+    _commentController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +71,7 @@ class RideCompletedScreen extends StatelessWidget {
               ),
               SizedBox(height: AppDimens.space8),
               Text(
-                fare,
+                widget.fare,
                 textAlign: TextAlign.center,
                 style: AppTextStyles.font32Secondary900Bold,
               ),
@@ -70,12 +84,43 @@ class RideCompletedScreen extends StatelessWidget {
                 style: AppTextStyles.font20Secondary900Bold,
               ),
               SizedBox(height: AppDimens.space16),
-              StarRatingBar(onRatingChanged: onRatingChanged),
+              StarRatingBar(
+                onRatingChanged: (value) => setState(() => _rating = value),
+              ),
+              SizedBox(height: AppDimens.space16),
+              _commentField(),
               const Spacer(),
-              AppPrimaryButton(label: 'تم', onPressed: onDone),
+              AppPrimaryButton(
+                label: 'تم',
+                isLoading: widget.isSubmitting,
+                onPressed: () =>
+                    widget.onDone(_rating, _commentController.text.trim()),
+              ),
               SizedBox(height: AppDimens.space24),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _commentField() {
+    return TextField(
+      controller: _commentController,
+      maxLines: 3,
+      maxLength: 500,
+      textInputAction: TextInputAction.newline,
+      style: AppTextStyles.font14Secondary900SemiBold,
+      decoration: InputDecoration(
+        hintText: 'اكتب ملاحظاتك (اختياري)',
+        hintStyle: AppTextStyles.font14Neutral400Regular,
+        counterText: '',
+        filled: true,
+        fillColor: AppColor.elementBackground,
+        contentPadding: EdgeInsets.all(AppDimens.space16),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppDimens.radius16),
+          borderSide: BorderSide.none,
         ),
       ),
     );
@@ -90,9 +135,9 @@ class RideCompletedScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
-          RideDetailRow(label: 'من', value: pickupLabel),
+          RideDetailRow(label: 'من', value: widget.pickupLabel),
           SizedBox(height: AppDimens.space12),
-          RideDetailRow(label: 'إلى', value: dropoffLabel),
+          RideDetailRow(label: 'إلى', value: widget.dropoffLabel),
         ],
       ),
     );

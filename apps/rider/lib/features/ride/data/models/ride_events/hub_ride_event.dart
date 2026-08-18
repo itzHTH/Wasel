@@ -10,6 +10,12 @@ sealed class HubRideEvent with _$HubRideEvent {
     required String rideId,
     required String driverId,
     required String message,
+    LatLngDto? driverPosition,
+    String? driverName,
+    String? driverProfilePictureUrl,
+    String? vehicleModel,
+    String? vinNumber,
+    String? phoneNumber,
   }) = RideAccepted;
 
   const factory HubRideEvent.driverMoved(LatLngDto position) = DriverMoved;
