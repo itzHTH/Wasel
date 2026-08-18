@@ -95,9 +95,7 @@ class AppLocalCache {
   static Future<void> setSecuredString(String key, String value) async {
     const flutterSecureStorage = FlutterSecureStorage();
     if (AppConstants.isDebug) {
-      debugPrint(
-        "🔐 FlutterSecureStorage | setSecuredString with key : $key and value : $value",
-      );
+      debugPrint("🔐 FlutterSecureStorage | setSecuredString with key : $key");
     }
     await flutterSecureStorage.write(key: key, value: value);
   }
