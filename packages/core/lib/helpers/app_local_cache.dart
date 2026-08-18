@@ -95,9 +95,7 @@ class AppLocalCache {
   static Future<void> setSecuredString(String key, String value) async {
     const flutterSecureStorage = FlutterSecureStorage();
     if (AppConstants.isDebug) {
-      debugPrint(
-        "🔐 FlutterSecureStorage | setSecuredString with key : $key and value : $value",
-      );
+      debugPrint("🔐 FlutterSecureStorage | setSecuredString with key : $key");
     }
     await flutterSecureStorage.write(key: key, value: value);
   }
@@ -109,6 +107,28 @@ class AppLocalCache {
       debugPrint('🔐 FlutterSecureStorage | getSecuredString with key : $key');
     }
     return await flutterSecureStorage.read(key: key);
+  }
+
+  /// Removes a value from the FlutterSecureStorage with given [key].
+  static Future<void> removeSecuredData(String key) async {
+    const flutterSecureStorage = FlutterSecureStorage();
+    if (AppConstants.isDebug) {
+      debugPrint('🔐 FlutterSecureStorage | removed key : $key');
+    }
+    await flutterSecureStorage.delete(key: key);
+  }
+
+  /// Removes only the auth session keys from the FlutterSecureStorage.
+  static Future<void> clearSession() async {
+    const flutterSecureStorage = FlutterSecureStorage();
+    if (AppConstants.isDebug) {
+      debugPrint('🔐 FlutterSecureStorage | session cleared');
+    }
+    await Future.wait(
+      AppConstants.sessionKeys.map(
+        (key) => flutterSecureStorage.delete(key: key),
+      ),
+    );
   }
 
   /// Removes all keys and values in the FlutterSecureStorage

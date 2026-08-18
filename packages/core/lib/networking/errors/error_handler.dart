@@ -102,12 +102,19 @@ extension DataSourceExtension on DataSource {
 class ErrorHandler implements Exception {
   late ApiErrorModel apiErrorModel;
 
+  bool isCancelled = false;
+
   ErrorHandler.handle(dynamic error) {
     if (error is DioException) {
+      isCancelled = error.type == DioExceptionType.cancel;
       apiErrorModel = _handleDioError(error);
     } else {
       apiErrorModel = DataSource.defaultError.getFailure();
     }
+  }
+
+  ErrorHandler.message(String message) {
+    apiErrorModel = ApiErrorModel(succeeded: false, message: message);
   }
 
   /// convert DioException to ApiErrorModel according to the error type

@@ -30,22 +30,15 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   onPressed: () async {
-                    ref.read(logoutProvider.notifier).execute().then((
-                      isLoggedOut,
-                    ) {
-                      if (isLoggedOut && context.mounted) {
-                        Navigator.pushReplacementNamed(context, AppRoutes.auth);
-                      } else {
-                        if (context.mounted) {
-                          // Handle logout failure (e.g., show an error message)
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('فشل تسجيل الخروج. حاول مرة أخرى.'),
-                            ),
-                          );
-                        }
-                      }
-                    });
+                    await ref.read(logoutProvider.notifier).execute();
+
+                    if (!context.mounted) return;
+
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      AppRoutes.auth,
+                      (route) => false,
+                    );
                   },
                   child: ref
                       .watch(logoutProvider)

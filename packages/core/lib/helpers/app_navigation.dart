@@ -6,6 +6,10 @@ class AppNavigation {
 
   static NavigatorState get navigator => navigatorKey.currentState!;
 
+  /// Null while no navigator is mounted, e.g. a 401 arriving before the app's
+  /// MaterialApp has built.
+  static NavigatorState? get maybeNavigator => navigatorKey.currentState;
+
   static BuildContext get context => navigatorKey.currentContext!;
 
   static void pushNamed(String routeName, {Object? arguments}) {

@@ -8,7 +8,14 @@ class AppConstants {
   // Local Cache Keys
   static const String tokenKey = 'token';
   static const String refreshTokenKey = 'refreshToken';
+  static const String refreshTokenExpirationKey = 'refreshTokenExpiration';
   static const String isFirstTimeKey = 'isFirstTime';
+
+  static const List<String> sessionKeys = [
+    tokenKey,
+    refreshTokenKey,
+    refreshTokenExpirationKey,
+  ];
 
   static const bool isDebug = kDebugMode;
 }

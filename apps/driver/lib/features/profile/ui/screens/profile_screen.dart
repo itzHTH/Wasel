@@ -12,7 +12,6 @@ import 'package:wasel_core/widgets/app_loading.dart';
 import 'package:wasel_core/widgets/app_menu_tile.dart';
 import 'package:wasel_core/widgets/app_soon_badge.dart';
 import 'package:wasel_core/widgets/app_surface_card.dart';
-import 'package:wasel_profile/presentation/providers/profile/driver_profile_provider.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -95,27 +94,14 @@ class ProfileScreen extends ConsumerWidget {
 
     if (!confirmed || !context.mounted) return;
 
-    final isLoggedOut = await ref.read(logoutProvider.notifier).execute();
+    await ref.read(logoutProvider.notifier).execute();
 
     if (!context.mounted) return;
-
-    if (!isLoggedOut) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('فشل تسجيل الخروج. حاول مرة أخرى.')),
-      );
-      return;
-    }
-
-    final container = ProviderScope.containerOf(context, listen: false);
 
     Navigator.pushNamedAndRemoveUntil(
       context,
       AppRoutes.auth,
       (route) => false,
     );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      container.invalidate(driverProfileControllerProvider);
-    });
   }
 }

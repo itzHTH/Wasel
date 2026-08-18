@@ -19,8 +19,9 @@ void mainCommon({
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   // The shared auth interceptor (wasel_core) is app-agnostic, but the app-specific navigation is injected here.
-  AuthInterceptor.onSessionExpired = () =>
-      AppNavigation.pushReplacementNamed(AppRoutes.auth);
+  // The whole stack is dropped so no authed screen stays reachable via back.
+  AuthInterceptor.onSessionExpired = () => AppNavigation.maybeNavigator
+      ?.pushNamedAndRemoveUntil(AppRoutes.auth, (route) => false);
 
   // Point the shared registration flow at the driver endpoints. This single
   runApp(

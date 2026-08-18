@@ -23,6 +23,10 @@ class DioFactory {
     return _instance!;
   }
 
+  /// A standalone client with its own AuthInterceptor state. Tests use this
+  /// so a forced logout in one case cannot leak into the next.
+  static Dio create() => (DioFactory._().._init()).dio;
+
   void _init() {
     dio = Dio(
       BaseOptions(
@@ -46,7 +50,7 @@ class DioFactory {
       AuthInterceptor(),
       // Logs requests, responses, and errors in a readable format
       PrettyDioLogger(
-        requestHeader: true,
+        requestHeader: false,
         requestBody: true,
         responseBody: true,
         responseHeader: false,

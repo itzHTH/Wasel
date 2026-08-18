@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:wasel_core/const/app_constants.dart';
-import 'package:wasel_core/extensions/navigation_extension.dart';
-import 'package:wasel_core/helpers/app_local_cache.dart';
+import 'package:wasel_core/helpers/session_store.dart';
 import 'package:wasal/core/routing/app_routes_name.dart';
 import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
@@ -70,18 +68,15 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   void handleIsAuthenticatedUser() async {
-    final token = await AppLocalCache.getSecuredString(AppConstants.tokenKey);
-    final refreshToken = await AppLocalCache.getSecuredString(
-      AppConstants.refreshTokenKey,
-    );
+    final hasSession = await SessionStore.hasUsableSession();
+    if (!hasSession) await SessionStore.clear();
 
-    if (token != null && refreshToken != null) {
-      if (!mounted) return;
-      Navigator.pushReplacementNamed(context, AppRoutes.ride);
-    } else {
-      if (!mounted) return;
-      context.pushReplacementNamed(AppRoutes.auth);
-    }
+    if (!mounted) return;
+
+    Navigator.pushReplacementNamed(
+      context,
+      hasSession ? AppRoutes.ride : AppRoutes.auth,
+    );
   }
 
   @override

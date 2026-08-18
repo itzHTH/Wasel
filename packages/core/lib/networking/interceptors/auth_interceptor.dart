@@ -1,28 +1,37 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:wasel_core/const/app_constants.dart';
-import 'package:wasel_core/helpers/app_local_cache.dart';
+import 'package:wasel_core/helpers/session_store.dart';
 import 'package:wasel_core/networking/api_constants.dart';
 
-/// Injects the stored access token into every outgoing request and, on a 401,
-/// transparently refreshes the session and replays the original request.
-///
-/// If the refresh fails (expired/invalid refresh token), the stored session is
-/// cleared and [onSessionExpired] is invoked so the host app can route the user
-/// back to its auth screen.
+/// Attaches the stored access token, and on a 401 refreshes the session and
+/// replays the request. When the session cannot be refreshed it is cleared and
+/// onSessionExpired fires.
 class AuthInterceptor extends Interceptor {
-  /// Called once when the session can no longer be refreshed (forced logout).
-  ///
-  /// This package is app-agnostic: it does not know about any app's routes or
-  /// navigator. Each host app registers its own handler at startup, e.g.
-  /// `AuthInterceptor.onSessionExpired = () =>
-  ///     AppNavigation.pushReplacementNamed(AppRoutes.auth);`
+  /// plainDio exists for tests; production uses the internal client.
+  AuthInterceptor({Dio? plainDio}) : _plainDio = plainDio ?? _buildPlainDio();
+
+  /// Registered once per app at startup — this package knows no routes.
   static void Function()? onSessionExpired;
 
-  /// Plain Dio used ONLY for the refresh call and for replaying the original
-  /// request. It has no [AuthInterceptor], so a 401 here can never re-enter
-  /// this interceptor and cause an infinite loop.
-  final Dio _plainDio =
+  static const String _authorizationHeader = 'Authorization';
+  static const String _bearerPrefix = 'Bearer ';
+
+  static const String _epochKey = 'authEpoch';
+
+  static const String _tokenField = 'token';
+  static const String _refreshTokenField = 'refreshToken';
+  static const String _refreshTokenExpirationField = 'refreshTokenExpiration';
+
+  /// Carries no AuthInterceptor, so a 401 here cannot re-enter this one.
+  /// Bodies stay unlogged because the refresh call trades live tokens.
+  final Dio _plainDio;
+
+  Future<String?>? _refreshFuture;
+
+  bool _isLoggingOut = false;
+
+  static Dio _buildPlainDio() =>
       Dio(
           BaseOptions(
             baseUrl: ApiConstants.baseUrl,
@@ -38,110 +47,161 @@ class AuthInterceptor extends Interceptor {
         ..interceptors.add(
           PrettyDioLogger(
             enabled: AppConstants.isDebug,
-            requestBody: true,
-            responseBody: true,
+            requestBody: false,
+            responseBody: false,
             error: true,
             compact: true,
           ),
         );
-
-  /// Single-flight guard: while a refresh is in progress, all concurrent 401s
-  /// await this same future instead of each firing their own refresh (which,
-  /// with refresh-token rotation, would invalidate each other).
-  Future<String?>? _refreshFuture;
-
-  /// Prevents multiple redirects to the auth screen when several requests fail
-  /// at once.
-  bool _isLoggingOut = false;
 
   @override
   void onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    final token = await AppLocalCache.getSecuredString(AppConstants.tokenKey);
-    if (token != null && token.isNotEmpty) {
-      options.headers['Authorization'] = 'Bearer $token';
+    final token = await SessionStore.readToken();
+    if (token != null) {
+      options.headers[_authorizationHeader] = '$_bearerPrefix$token';
+      _isLoggingOut = false;
     }
+    options.extra[_epochKey] = SessionStore.epoch;
     handler.next(options);
   }
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
-    // Only handle 401s. The refresh call runs on [_plainDio] (no
-    // AuthInterceptor), so a failed refresh never re-enters here as a 401 —
-    // it throws a DioException that is caught by the try/catch below and
-    // turned into a forced logout. Hence no need to special-case the refresh
-    // path here.
-    if (err.response?.statusCode != 401) {
+    if (err.response?.statusCode != 401) return handler.next(err);
+
+    // Retrying a revoke would send an already-rotated refresh token, leaving
+    // the newly issued one live on the server.
+    if (err.requestOptions.path.contains(ApiConstants.revokeToken)) {
       return handler.next(err);
     }
 
+    // The session was cleared while this request was in flight, so it belongs
+    // to a sign-in that no longer exists and must not be replayed.
+    if (err.requestOptions.extra[_epochKey] != SessionStore.epoch) {
+      return handler.next(err);
+    }
+
+    final storedToken = await SessionStore.readToken();
+    final storedRefreshToken = await SessionStore.readRefreshToken();
+
+    if (storedToken == null && storedRefreshToken == null) {
+      // to prevent double Navigation
+      return handler.next(err);
+    }
+
+    String? token;
     try {
-      final newAccessToken = await _refreshSession();
+      // A concurrent request already rotated the session, so this 401 is stale
+      // and replaying beats burning the fresh refresh token.
+      final attempted = _bearerOf(err.requestOptions);
+      final rotated =
+          storedToken != null && attempted != null && attempted != storedToken;
 
-      // Refresh failed (no/invalid refresh token) → force logout.
-      if (newAccessToken == null) {
-        await _forceLogout();
-        return handler.next(err);
-      }
-
-      // Replay the original request with the new access token.
-      final opts = err.requestOptions;
-      opts.headers['Authorization'] = 'Bearer $newAccessToken';
-      final retried = await _plainDio.fetch(opts);
-      return handler.resolve(retried);
+      token = rotated ? storedToken : await _refresh();
     } catch (_) {
-      // Refresh threw (e.g. backend returned 401/400 for an expired refresh
-      // token) → force logout.
+      token = null;
+    }
+
+    if (token == null) {
       await _forceLogout();
       return handler.next(err);
     }
+
+    // The session is healthy from here, so a failing replay is the endpoint's
+    // problem and must not tear it down.
+    try {
+      final replayed = await _replay(err.requestOptions, token);
+      return replayed == null ? handler.next(err) : handler.resolve(replayed);
+    } on DioException catch (e) {
+      return handler.next(e);
+    } catch (_) {
+      return handler.next(err);
+    }
   }
 
-  /// Returns the new access token, or `null` if refresh is not possible.
-  /// Concurrent callers share the same in-flight future.
-  Future<String?> _refreshSession() {
-    // a ??= b means: if a is null, set a = b; otherwise leave a alone
-    _refreshFuture ??= _performRefresh().whenComplete(
-      () => _refreshFuture = null, // reset for next time
+  /// Returns the token in the Authorization header, or null if not present.
+  String? _bearerOf(RequestOptions options) {
+    final header = options.headers[_authorizationHeader];
+    if (header is! String || !header.startsWith(_bearerPrefix)) return null;
+    return header.substring(_bearerPrefix.length);
+  }
+
+  /// Replays the request with the new token.
+  Future<Response<dynamic>?> _replay(
+    RequestOptions options,
+    String token,
+  ) async {
+    // A body already streamed to the socket cannot be resent; only FormData
+    // can be rebuilt, so anything else stream-backed is left alone.
+    var body = options.data;
+    if (body is Stream) return null;
+    if (body is FormData) {
+      try {
+        body = body.clone();
+      } catch (_) {
+        return null;
+      }
+    }
+
+    return _plainDio.fetch(
+      options.copyWith(
+        headers: {
+          ...options.headers,
+          _authorizationHeader: '$_bearerPrefix$token',
+        },
+        data: body,
+      ),
     );
-    return _refreshFuture!;
   }
 
+  /// Concurrent 401s share one in-flight refresh.
+  Future<String?> _refresh() => _refreshFuture ??= _performRefresh()
+      .whenComplete(() => _refreshFuture = null);
+
+  /// Refreshes the token and returns the new one.
   Future<String?> _performRefresh() async {
-    final refreshToken = await AppLocalCache.getSecuredString(
-      AppConstants.refreshTokenKey,
-    );
-    if (refreshToken == null || refreshToken.isEmpty) return null;
+    final refreshToken = await SessionStore.readRefreshToken();
+    if (refreshToken == null) return null;
 
     final response = await _plainDio.post(
       ApiConstants.refreshToken,
       data: {'token': refreshToken},
     );
+    if (response.statusCode != 200) return null;
 
-    if (response.statusCode == 200) {
-      final data = response.data['data'] as Map<String, dynamic>;
-      final newAccessToken = data[AppConstants.tokenKey] as String;
-      final newRefreshToken = data[AppConstants.refreshTokenKey] as String;
+    final payload = response.data;
+    final data = payload is Map ? payload['data'] : null;
+    if (data is! Map) return null;
 
-      await AppLocalCache.setSecuredString(
-        AppConstants.tokenKey,
-        newAccessToken,
-      );
-      await AppLocalCache.setSecuredString(
-        AppConstants.refreshTokenKey,
-        newRefreshToken,
-      );
-      return newAccessToken;
-    }
-    return null;
+    final token = _nonEmpty(data[_tokenField]);
+    final newRefreshToken = _nonEmpty(data[_refreshTokenField]);
+    if (token == null || newRefreshToken == null) return null;
+
+    final expiration = _nonEmpty(data[_refreshTokenExpirationField]);
+
+    await SessionStore.save(
+      token: token,
+      refreshToken: newRefreshToken,
+      refreshTokenExpiration: expiration == null
+          ? null
+          : DateTime.tryParse(expiration),
+    );
+
+    return token;
   }
 
+  /// Returns the first non-empty string, or null if none.
+  static String? _nonEmpty(Object? value) =>
+      value is String && value.isNotEmpty ? value : null;
+
+  /// Clears the session and fires onSessionExpired.
   Future<void> _forceLogout() async {
     if (_isLoggingOut) return;
     _isLoggingOut = true;
-    await AppLocalCache.clearAllSecuredData();
+    await SessionStore.clear();
     onSessionExpired?.call();
   }
 }

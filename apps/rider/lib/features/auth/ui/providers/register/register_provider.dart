@@ -6,30 +6,33 @@ import 'package:wasel_auth/data/models/register/verify_otp/request/verify_otp_re
 import 'package:wasel_auth/domain/entities/complete_registration.dart';
 import 'package:wasel_auth/domain/entities/initiate_registeration.dart';
 import 'package:wasel_auth/domain/entities/verify_otp.dart';
+import 'package:wasel_auth/domain/usecases/complete_registration_use_case.dart';
+import 'package:wasel_auth/domain/usecases/initiate_registeration_use_case.dart';
+import 'package:wasel_auth/domain/usecases/verify_otp_use_case.dart';
 import 'package:wasel_auth/providers/auth_use_case_providers.dart';
+import 'package:wasel_profile/presentation/providers/profile/rider_profile_provider.dart';
 
 part 'register_provider.g.dart';
 
 @riverpod
 class Register extends _$Register {
-  Future<InitiateRegisteration?> initiateRegistration(
-    String email,
-  ) async {
+  Future<InitiateRegisteration?> initiateRegistration(String email) async {
     state = const AsyncValue<InitiateRegisteration>.loading();
 
-    final useCase = ref.read(initiateRegistrationUseCaseProvider);
-    ref.onDispose(useCase.cancel);
+    final result = await ref
+        .read(initiateRegistrationUseCaseProvider)
+        .call(InitiateRegisterationRequest(email: email.toLowerCase()));
 
-    final result = await useCase.call(
-      InitiateRegisterationRequest(email: email),
-    );
+    if (!ref.mounted) return null;
 
     return result.when(
       failure: (error) {
-        state = AsyncValue<InitiateRegisteration>.error(
-          error.apiErrorModel.message ?? "حصل خطأ ما",
-          StackTrace.current,
-        );
+        if (!error.isCancelled) {
+          state = AsyncValue<InitiateRegisteration>.error(
+            error.apiErrorModel.message ?? "حصل خطأ ما",
+            StackTrace.current,
+          );
+        }
         return null;
       },
 
@@ -46,19 +49,20 @@ class Register extends _$Register {
   }) async {
     state = const AsyncValue<VerifyOtp>.loading();
 
-    final useCase = ref.read(verifyOtpUseCaseProvider);
-    ref.onDispose(useCase.cancel);
-
-    final result = await useCase.call(
+    final result = await _verifyOtp.call(
       VerifyOtpRequest(sessionToken: sessionToken, otpCode: otp),
     );
 
+    if (!ref.mounted) return null;
+
     return result.when(
       failure: (error) {
-        state = AsyncValue<VerifyOtp>.error(
-          error.apiErrorModel.message ?? "حصل خطأ ما",
-          StackTrace.current,
-        );
+        if (!error.isCancelled) {
+          state = AsyncValue<VerifyOtp>.error(
+            error.apiErrorModel.message ?? "حصل خطأ ما",
+            StackTrace.current,
+          );
+        }
         return null;
       },
 
@@ -78,37 +82,51 @@ class Register extends _$Register {
   }) async {
     state = const AsyncValue<CompleteRegistration>.loading();
 
-    final useCase = ref.read(completeRegistrationUseCaseProvider);
-    ref.onDispose(useCase.cancel);
+    final result = await _complete.call(
+          CompleteRegistrationRequest(
+            registerToken: registrationToken,
+            firstName: firstName,
+            lastName: lastName,
+            password: password,
+            phoneNumber: phone,
+          ),
+        );
 
-    final result = await useCase.call(
-      CompleteRegistrationRequest(
-        registerToken: registrationToken,
-        firstName: firstName,
-        lastName: lastName,
-        password: password,
-        phoneNumber: phone,
-      ),
-    );
+    if (!ref.mounted) return null;
 
     return result.when(
       failure: (error) {
-        state = AsyncValue<CompleteRegistration>.error(
-          error.apiErrorModel.message ?? "حصل خطأ ما",
-          StackTrace.current,
-        );
+        if (!error.isCancelled) {
+          state = AsyncValue<CompleteRegistration>.error(
+            error.apiErrorModel.message ?? "حصل خطأ ما",
+            StackTrace.current,
+          );
+        }
         return null;
       },
 
       success: (response) {
+        ref.invalidate(riderProfileControllerProvider);
         state = AsyncValue<CompleteRegistration>.data(response);
         return response;
       },
     );
   }
 
+  late final InitiateRegisterationUseCase _initiate;
+  late final VerifyOtpUseCase _verifyOtp;
+  late final CompleteRegistrationUseCase _complete;
+
   @override
   FutureOr<void> build() {
+    // Held so cancel-on-dispose targets the instances that run the requests.
+    _initiate = ref.read(initiateRegistrationUseCaseProvider);
+    _verifyOtp = ref.read(verifyOtpUseCaseProvider);
+    _complete = ref.read(completeRegistrationUseCaseProvider);
+
+    ref.onDispose(_initiate.cancel);
+    ref.onDispose(_verifyOtp.cancel);
+    ref.onDispose(_complete.cancel);
     return null;
   }
 }
