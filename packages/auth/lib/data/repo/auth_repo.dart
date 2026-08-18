@@ -134,11 +134,12 @@ class AuthRepo implements BaseAuthRepo {
         cancelToken: cancelToken,
       );
 
-      await SessionStore.clear();
-
       return ApiResults.success(response.toEntity());
     } catch (e) {
       return ApiResults.failure(ErrorHandler.handle(e));
+    } finally {
+      // Signing out locally must not depend on the revoke call succeeding.
+      await SessionStore.clear();
     }
   }
 
