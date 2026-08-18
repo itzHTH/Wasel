@@ -4,6 +4,7 @@ import 'package:wasal/core/helpers/ride_formatters.dart';
 import 'package:wasal/features/ride/domain/entities/driver_profile.dart';
 import 'package:wasal/features/ride/ui/providers/cancel_ride/cancel_ride_provider.dart';
 import 'package:wasal/features/ride/ui/providers/request_ride/request_ride_provider.dart';
+import 'package:wasal/features/ride/ui/providers/review_ride/review_ride_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:wasal/features/ride/ui/providers/ride_controller/ride_state.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.dart';
@@ -37,26 +38,55 @@ class RideTrackingCards extends ConsumerWidget {
   void _openCompleted(BuildContext context, WidgetRef ref) {
     final draft = ref.read(rideDraftProvider);
     final price = ref.read(ridePriceEstimateProvider).value;
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => RideCompletedScreen(
-          fare: price == null
-              ? '—'
-              : RideFormatters.fare(
-                  price.estimatedPrice,
-                  currency: price.currency,
-                ),
-          pickupLabel: draft.pickupLabel ?? '',
-          dropoffLabel: draft.dropoffLabel ?? '',
-          onRatingChanged: (_) {},
-          onDone: () {
-            Navigator.of(context).pop();
-            _reset(ref);
-          },
-        ),
-      ),
-    );
+    Navigator.of(context)
+        .push(
+          MaterialPageRoute(
+            builder: (routeContext) => Consumer(
+              builder: (consumerContext, routeRef, _) {
+                final review = routeRef.watch(reviewRideControllerProvider);
+
+                routeRef.listen(reviewRideControllerProvider, (previous, next) {
+                  if (next.hasError) {
+                    ScaffoldMessenger.of(consumerContext).showSnackBar(
+                      SnackBar(
+                        content: Text(next.error?.toString() ?? 'حصل خطأ ما'),
+                      ),
+                    );
+                    return;
+                  }
+                  if (next.value?.isReviewed == true) _close(routeContext);
+                });
+
+                return RideCompletedScreen(
+                  fare: price == null
+                      ? '—'
+                      : RideFormatters.fare(
+                          price.estimatedPrice,
+                          currency: price.currency,
+                        ),
+                  pickupLabel: draft.pickupLabel ?? '',
+                  dropoffLabel: draft.dropoffLabel ?? '',
+                  isSubmitting: review.isLoading,
+                  onDone: (rating, comment) {
+                    if (rating == 0) {
+                      _close(routeContext);
+                      return;
+                    }
+                    routeRef
+                        .read(reviewRideControllerProvider.notifier)
+                        .submit(rating: rating, comment: comment);
+                  },
+                );
+              },
+            ),
+          ),
+        )
+        .then((_) {
+          if (context.mounted) _reset(ref);
+        });
   }
+
+  void _close(BuildContext routeContext) => Navigator.of(routeContext).pop();
 
   void _showCancelled(BuildContext context, WidgetRef ref) {
     final reason =
