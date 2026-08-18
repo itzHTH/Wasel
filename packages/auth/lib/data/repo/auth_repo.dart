@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:wasel_core/const/app_constants.dart';
-import 'package:wasel_core/helpers/app_local_cache.dart';
+import 'package:wasel_core/helpers/session_store.dart';
 import 'package:wasel_core/networking/api_results.dart';
 import 'package:wasel_core/networking/errors/error_handler.dart';
 import 'package:wasel_auth/data/models/logout/request/logout_request.dart';
@@ -52,14 +51,10 @@ class AuthRepo implements BaseAuthRepo {
         cancelToken: cancelToken,
       );
 
-      // Store the token and refresh token securely in local cache
-      await AppLocalCache.setSecuredString(
-        AppConstants.tokenKey,
-        response.token,
-      );
-      await AppLocalCache.setSecuredString(
-        AppConstants.refreshTokenKey,
-        response.refreshToken,
+      await SessionStore.save(
+        token: response.token,
+        refreshToken: response.refreshToken,
+        refreshTokenExpiration: response.refreshTokenExpiration,
       );
 
       return ApiResults.success(response.toEntity());
@@ -118,14 +113,10 @@ class AuthRepo implements BaseAuthRepo {
             cancelToken: cancelToken,
           );
 
-      // Store the token and refresh token securely in local cache
-      await AppLocalCache.setSecuredString(
-        AppConstants.tokenKey,
-        response.token,
-      );
-      await AppLocalCache.setSecuredString(
-        AppConstants.refreshTokenKey,
-        response.refreshToken,
+      await SessionStore.save(
+        token: response.token,
+        refreshToken: response.refreshToken,
+        refreshTokenExpiration: response.refreshTokenExpiration,
       );
 
       return ApiResults.success(response.toEntity());
@@ -137,16 +128,13 @@ class AuthRepo implements BaseAuthRepo {
   @override
   Future<ApiResults<Logout>> logout({CancelToken? cancelToken}) async {
     try {
-      final refreshToken =
-          await AppLocalCache.getSecuredString(AppConstants.refreshTokenKey) ??
-          '';
+      final refreshToken = await SessionStore.readRefreshToken() ?? '';
       final response = await _authApiService.logout(
         LogoutRequest(refreshToken: refreshToken),
         cancelToken: cancelToken,
       );
 
-      // Clear the stored tokens from local cache
-      await AppLocalCache.clearAllSecuredData();
+      await SessionStore.clear();
 
       return ApiResults.success(response.toEntity());
     } catch (e) {
