@@ -94,16 +94,9 @@ class ProfileScreen extends ConsumerWidget {
 
     if (!confirmed || !context.mounted) return;
 
-    final isLoggedOut = await ref.read(logoutProvider.notifier).execute();
+    await ref.read(logoutProvider.notifier).execute();
 
     if (!context.mounted) return;
-
-    if (!isLoggedOut) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('فشل تسجيل الخروج. حاول مرة أخرى.')),
-      );
-      return;
-    }
 
     Navigator.pushNamedAndRemoveUntil(
       context,

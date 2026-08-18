@@ -11,23 +11,23 @@ class Logout extends _$Logout {
     return false; // Initial state is false, indicating not logged out
   }
 
+  /// Always reports the device as signed out: the repo drops the local session
+  /// even when revoking the refresh token server-side fails.
   Future<bool> execute() async {
     state = const AsyncValue.loading();
-    final logoutUseCase = ref.watch(logoutUseCaseProvider);
+    final logoutUseCase = ref.read(logoutUseCaseProvider);
     ref.onDispose(logoutUseCase.cancel);
+
     final result = await logoutUseCase.call(null);
-    return result.when(
-      success: (data) {
-        state = AsyncValue.data(data.success);
-        return data.success;
-      },
-      failure: (error) {
-        state = AsyncValue.error(
-          error.apiErrorModel.message ?? "حصل خطأ ما",
-          StackTrace.current,
-        );
-        return false;
-      },
+
+    result.when(
+      success: (data) => state = AsyncValue.data(data.success),
+      failure: (error) => state = AsyncValue.error(
+        error.apiErrorModel.message ?? "حصل خطأ ما",
+        StackTrace.current,
+      ),
     );
+
+    return true;
   }
 }
