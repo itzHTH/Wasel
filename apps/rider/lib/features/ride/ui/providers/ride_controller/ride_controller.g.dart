@@ -41,7 +41,7 @@ final class RideControllerProvider
   }
 }
 
-String _$rideControllerHash() => r'a39f470ece76871d8cf7dc8b636f0e72efc8c294';
+String _$rideControllerHash() => r'835bafeae9557e8737d519d5c351a6ab25db096b';
 
 abstract class _$RideController extends $Notifier<RideState> {
   RideState build();

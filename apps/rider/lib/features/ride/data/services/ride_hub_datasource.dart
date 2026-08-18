@@ -56,11 +56,27 @@ class RideHubDatasource implements IRideHubDatasource {
       if (_controller.isClosed) return;
       final d = _obj(args);
       if (d == null) return;
+      final rideId = _str(d['rideid']);
+      final driverId = _str(d['driverid']);
+      if (rideId == null || driverId == null) {
+        debugPrint('🚕 RideAccepted: unrecognized payload → $args');
+        return;
+      }
+      final lat = _coord(d['driverlatitude']);
+      final lng = _coord(d['driverlongitude']);
       _controller.add(
         HubRideEvent.accepted(
-          rideId: d['rideid'] as String,
-          driverId: d['driverid'] as String,
+          rideId: rideId,
+          driverId: driverId,
           message: _msg(d['message']) ?? '',
+          driverPosition: (lat != null && lng != null)
+              ? LatLngDto(lat: lat, lng: lng)
+              : null,
+          driverName: _str(d['drivername']),
+          driverProfilePictureUrl: _str(d['driverprofilepictureurl']),
+          vehicleModel: _str(d['vehiclemodel']),
+          vinNumber: _str(d['vinnumber']),
+          phoneNumber: _str(d['phonenumber']),
         ),
       );
     });
@@ -110,6 +126,12 @@ class RideHubDatasource implements IRideHubDatasource {
         ),
       );
     });
+  }
+
+  String? _str(Object? raw) {
+    if (raw is! String) return null;
+    final trimmed = raw.trim();
+    return trimmed.isEmpty ? null : trimmed;
   }
 
   String? _msg(Object? raw) {

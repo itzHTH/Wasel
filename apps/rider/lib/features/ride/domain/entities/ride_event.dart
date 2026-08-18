@@ -9,6 +9,7 @@ sealed class RideEvent with _$RideEvent {
   const factory RideEvent.accepted({
     required String rideId,
     required DriverProfile driver,
+    GeoPoint? driverPosition,
   }) = RideAccepted;
 
   const factory RideEvent.driverMoved(GeoPoint position) = DriverMoved;

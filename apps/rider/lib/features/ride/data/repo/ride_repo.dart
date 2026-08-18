@@ -117,13 +117,17 @@ class RideRepo extends BaseRideRepo {
 
           final driver = DriverProfile(
             id: event.driverId,
-            name: "مصطفى عقيل",
-            phoneNumber: "+9647700000000",
-            plateNumber: "12345 A",
-            carModel: "تويوتا كورولا",
-            carColor: "أبيض",
+            name: event.driverName ?? 'سائق وصل',
+            phoneNumber: event.phoneNumber,
+            photoUrl: event.driverProfilePictureUrl,
+            plateNumber: event.vinNumber,
+            carModel: event.vehicleModel,
           );
-          yield RideEvent.accepted(rideId: event.rideId, driver: driver);
+          yield RideEvent.accepted(
+            rideId: event.rideId,
+            driver: driver,
+            driverPosition: event.driverPosition?.toEntity(),
+          );
         } else {
           yield event.toEntity();
         }
