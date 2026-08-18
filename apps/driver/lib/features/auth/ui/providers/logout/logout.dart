@@ -1,13 +1,19 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/networking/api_results.dart';
+import 'package:wasel_auth/domain/usecases/logout_use_case.dart';
 import 'package:wasel_auth/providers/auth_use_case_providers.dart';
 
 part 'logout.g.dart';
 
 @riverpod
 class Logout extends _$Logout {
+  late final LogoutUseCase _useCase;
+
   @override
   Future<bool> build() async {
+    // Held so cancel-on-dispose targets the instance that runs the request.
+    _useCase = ref.read(logoutUseCaseProvider);
+    ref.onDispose(_useCase.cancel);
     return false; // Initial state is false, indicating not logged out
   }
 
@@ -15,10 +21,10 @@ class Logout extends _$Logout {
   /// even when revoking the refresh token server-side fails.
   Future<bool> execute() async {
     state = const AsyncValue.loading();
-    final logoutUseCase = ref.read(logoutUseCaseProvider);
-    ref.onDispose(logoutUseCase.cancel);
 
-    final result = await logoutUseCase.call(null);
+    final result = await _useCase.call(null);
+
+    if (!ref.mounted) return true;
 
     result.when(
       success: (data) => state = AsyncValue.data(data.success),
