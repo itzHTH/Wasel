@@ -7,6 +7,7 @@ import 'package:wasel_auth/domain/entities/complete_registration.dart';
 import 'package:wasel_auth/domain/entities/initiate_registeration.dart';
 import 'package:wasel_auth/domain/entities/verify_otp.dart';
 import 'package:wasel_auth/providers/auth_use_case_providers.dart';
+import 'package:wasel_profile/presentation/providers/profile/driver_profile_provider.dart';
 
 part 'register_provider.g.dart';
 
@@ -109,6 +110,7 @@ class Register extends _$Register {
       },
 
       success: (response) {
+        ref.invalidate(driverProfileControllerProvider);
         state = AsyncValue<CompleteRegistration>.data(response);
         return response;
       },

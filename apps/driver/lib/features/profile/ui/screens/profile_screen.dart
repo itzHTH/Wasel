@@ -12,7 +12,6 @@ import 'package:wasel_core/widgets/app_loading.dart';
 import 'package:wasel_core/widgets/app_menu_tile.dart';
 import 'package:wasel_core/widgets/app_soon_badge.dart';
 import 'package:wasel_core/widgets/app_surface_card.dart';
-import 'package:wasel_profile/presentation/providers/profile/driver_profile_provider.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -106,16 +105,10 @@ class ProfileScreen extends ConsumerWidget {
       return;
     }
 
-    final container = ProviderScope.containerOf(context, listen: false);
-
     Navigator.pushNamedAndRemoveUntil(
       context,
       AppRoutes.auth,
       (route) => false,
     );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      container.invalidate(driverProfileControllerProvider);
-    });
   }
 }

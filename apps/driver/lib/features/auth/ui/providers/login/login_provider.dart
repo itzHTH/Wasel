@@ -3,6 +3,7 @@ import 'package:wasel_core/networking/api_results.dart';
 import 'package:wasel_auth/data/models/login/request/login_request.dart';
 import 'package:wasel_auth/domain/entities/login.dart' as entity;
 import 'package:wasel_auth/providers/auth_use_case_providers.dart';
+import 'package:wasel_profile/presentation/providers/profile/driver_profile_provider.dart';
 
 part 'login_provider.g.dart';
 
@@ -22,7 +23,12 @@ class Login extends _$Login {
         error.apiErrorModel.message ?? "حصل خطأ ما",
         StackTrace.current,
       ),
-      success: (response) => state = AsyncValue.data(response),
+      success: (response) {
+        // Drop any profile cached for the previous account before the UI
+        // navigates to a screen that reads it.
+        ref.invalidate(driverProfileControllerProvider);
+        state = AsyncValue.data(response);
+      },
     );
   }
 
