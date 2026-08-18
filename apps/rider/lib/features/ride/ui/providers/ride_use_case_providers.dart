@@ -3,6 +3,7 @@ import 'package:wasal/features/ride/data/repo/ride_repo.dart';
 import 'package:wasal/features/ride/domain/usecases/cancel_ride_use_case.dart';
 import 'package:wasal/features/ride/domain/usecases/get_ride_price_use_case.dart';
 import 'package:wasal/features/ride/domain/usecases/request_ride_use_case.dart';
+import 'package:wasal/features/ride/domain/usecases/review_ride_use_case.dart';
 import 'package:wasal/features/ride/domain/usecases/watch_ride_use_case.dart';
 
 part 'ride_use_case_providers.g.dart';
@@ -29,4 +30,10 @@ WatchRideUseCase watchRideUseCase(Ref ref) {
 CancelRideUseCase cancelRideUseCase(Ref ref) {
   final rideRepo = ref.watch(rideRepoProvider);
   return CancelRideUseCase(rideRepo);
+}
+
+@riverpod
+ReviewRideUseCase reviewRideUseCase(Ref ref) {
+  final rideRepo = ref.watch(rideRepoProvider);
+  return ReviewRideUseCase(rideRepo);
 }
