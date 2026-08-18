@@ -23,8 +23,9 @@ void mainCommon({
 
   // The shared auth interceptor (wasel_core) is app-agnostic; tell it how this
   // app should react to a non-refreshable session (forced logout → auth screen).
-  AuthInterceptor.onSessionExpired = () =>
-      AppNavigation.pushReplacementNamed(AppRoutes.auth);
+  // The whole stack is dropped so no authed screen stays reachable via back.
+  AuthInterceptor.onSessionExpired = () => AppNavigation.maybeNavigator
+      ?.pushNamedAndRemoveUntil(AppRoutes.auth, (route) => false);
 
   runApp(
     ProviderScope(
