@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTextFormField extends StatelessWidget {
@@ -16,6 +17,7 @@ class AppTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
   final Widget? prefixIcon;
+  final List<TextInputFormatter>? inputFormatters;
 
   /// Lets the OS offer autofill (password managers, one-time codes). Required
   /// by WCAG 2.2 "Accessible Authentication" — see [AutofillHints].
@@ -38,6 +40,7 @@ class AppTextFormField extends StatelessWidget {
     this.textInputAction,
     this.prefixIcon,
     this.autofillHints,
+    this.inputFormatters,
   });
 
   @override
@@ -61,6 +64,7 @@ class AppTextFormField extends StatelessWidget {
       obscureText: isObscureText ?? false,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
+      inputFormatters: inputFormatters,
       autofillHints: autofillHints,
       style: inputTextStyle,
       validator: (value) {
