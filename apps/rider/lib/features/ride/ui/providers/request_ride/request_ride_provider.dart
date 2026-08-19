@@ -7,7 +7,7 @@ import 'package:wasal/features/ride/ui/providers/ride_draft/selected_payment_met
 import 'package:wasal/features/ride/ui/providers/ride_price/ride_price_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_use_case_providers.dart';
 import 'package:wasel_core/networking/api_results.dart';
-import 'package:wasel_core/networking/errors/api_error_message.dart';
+import 'package:wasel_core/networking/errors/error_message.dart';
 import 'package:wasel_payments/core/policies/payment_eligibility_policy.dart';
 import 'package:wasel_payments/domain/entities/payment_method.dart';
 import 'package:wasel_payments/presentation/providers/tokenize/tokenize_card_provider.dart';
@@ -22,7 +22,7 @@ class RequestRideController extends _$RequestRideController {
     return null;
   }
 
-  Future<void> requetsRide() async {
+  Future<void> requestRide() async {
     final draft = ref.read(rideDraftProvider);
     final pickup = draft.pickup;
     final dropoff = draft.dropoff;
@@ -60,10 +60,7 @@ class RequestRideController extends _$RequestRideController {
 
     result.when(
       failure: (error) {
-        state = AsyncValue.error(
-          error.apiErrorModel.displayMessage ?? "حصل خطأ ما",
-          StackTrace.current,
-        );
+        state = AsyncValue.error(errorMessageOf(error), StackTrace.current);
       },
       success: (price) {
         state = AsyncValue.data(price);

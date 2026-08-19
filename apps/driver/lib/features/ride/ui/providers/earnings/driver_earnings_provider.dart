@@ -6,6 +6,7 @@ import 'package:driver/features/ride/ui/providers/ride_use_case_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/networking/api_results.dart';
+import 'package:wasel_core/networking/errors/error_message.dart';
 
 part 'driver_earnings_provider.g.dart';
 
@@ -41,8 +42,7 @@ class DriverEarningsController extends _$DriverEarningsController {
 
     return result.when(
       success: (earnings) => earnings,
-      failure: (error) =>
-          throw Exception(error.apiErrorModel.message ?? 'حصل خطأ ما'),
+      failure: (error) => throw Exception(errorMessageOf(error)),
     );
   }
 }

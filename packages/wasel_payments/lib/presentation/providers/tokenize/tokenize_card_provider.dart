@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/networking/api_results.dart';
-import 'package:wasel_core/networking/errors/api_error_message.dart';
+import 'package:wasel_core/networking/errors/error_message.dart';
 import 'package:wasel_core/networking/errors/error_handler.dart';
 import 'package:wasel_payments/domain/usecases/tokenize_card_use_case.dart';
 import 'package:wasel_payments/data/models/tokenize_card/request/tokenize_card_request.dart';
@@ -48,8 +48,7 @@ class TokenizeCardController extends _$TokenizeCardController {
       // on a spinner with nothing to explain it.
       if (ref.mounted) {
         state = AsyncValue.error(
-          ErrorHandler.handle(error).apiErrorModel.displayMessage ??
-              _failedMessage,
+          errorMessageOf(ErrorHandler.handle(error), fallback: _failedMessage),
           stackTrace,
         );
       }
@@ -60,7 +59,7 @@ class TokenizeCardController extends _$TokenizeCardController {
 
     state = result.when(
       failure: (error) => AsyncValue.error(
-        error.apiErrorModel.displayMessage ?? _failedMessage,
+        errorMessageOf(error, fallback: _failedMessage),
         StackTrace.current,
       ),
       success: (token) => token == null

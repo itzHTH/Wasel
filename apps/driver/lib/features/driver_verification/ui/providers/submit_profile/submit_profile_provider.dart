@@ -4,6 +4,7 @@ import 'package:driver/features/driver_verification/ui/providers/driver_verifica
 import 'package:driver/features/driver_verification/ui/providers/submit_profile/submit_profile_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/networking/api_results.dart';
+import 'package:wasel_core/networking/errors/error_message.dart';
 
 part 'submit_profile_provider.g.dart';
 
@@ -29,8 +30,9 @@ class SubmitProfile extends _$SubmitProfile {
 
     result.when(
       success: (data) => state = SubmitSuccess(data),
-      failure: (error) =>
-          state = SubmitFailure(error.apiErrorModel.message ?? 'تعذّر رفع المستندات'),
+      failure: (error) => state = SubmitFailure(
+        errorMessageOf(error, fallback: 'تعذّر رفع المستندات'),
+      ),
     );
   }
 }

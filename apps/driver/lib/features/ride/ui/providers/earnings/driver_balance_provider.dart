@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:driver/features/ride/ui/providers/ride_use_case_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/networking/api_results.dart';
+import 'package:wasel_core/networking/errors/error_message.dart';
 
 part 'driver_balance_provider.g.dart';
 
@@ -20,8 +21,7 @@ class DriverBalanceController extends _$DriverBalanceController {
 
     return result.when(
       success: (data) => data.balance,
-      failure: (error) =>
-          throw Exception(error.apiErrorModel.message ?? 'حصل خطأ ما'),
+      failure: (error) => throw Exception(errorMessageOf(error)),
     );
   }
 }

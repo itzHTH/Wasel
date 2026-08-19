@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/networking/api_results.dart';
+import 'package:wasel_core/networking/errors/error_message.dart';
 import 'package:wasel_auth/domain/usecases/logout_use_case.dart';
 import 'package:wasel_auth/providers/auth_use_case_providers.dart';
 
@@ -28,10 +29,8 @@ class Logout extends _$Logout {
 
     result.when(
       success: (data) => state = AsyncValue.data(data.success),
-      failure: (error) => state = AsyncValue.error(
-        error.apiErrorModel.message ?? "حصل خطأ ما",
-        StackTrace.current,
-      ),
+      failure: (error) =>
+          state = AsyncValue.error(errorMessageOf(error), StackTrace.current),
     );
 
     return true;

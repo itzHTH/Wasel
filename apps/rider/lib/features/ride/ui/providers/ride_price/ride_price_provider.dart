@@ -1,6 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/features/ride/data/models/geo_point_request/geo_point_request_body.dart';
 import 'package:wasel_core/networking/api_results.dart';
+import 'package:wasel_core/networking/errors/error_message.dart';
 import 'package:wasal/features/ride/domain/entities/ride_price.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_use_case_providers.dart';
@@ -36,10 +37,8 @@ class RidePriceEstimate extends _$RidePriceEstimate {
     if (!ref.mounted) return;
 
     result.when(
-      failure: (error) => state = AsyncValue.error(
-        error.apiErrorModel.message ?? "حصل خطأ ما",
-        StackTrace.current,
-      ),
+      failure: (error) =>
+          state = AsyncValue.error(errorMessageOf(error), StackTrace.current),
       success: (price) => state = AsyncValue.data(price),
     );
   }
