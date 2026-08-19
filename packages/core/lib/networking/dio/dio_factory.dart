@@ -44,6 +44,19 @@ class DioFactory {
     _addInterceptors();
   }
 
+  // Card numbers, CVVs, payment tokens and passwords travel these paths; the
+  // logger must never print either side of the exchange.
+  static const _secretPaths = [
+    '/Payments/',
+    '/Auth/login',
+    '/Auth/reset-password',
+    '/Auth/refresh-token',
+    '/Auth/revoke-token',
+    '/complete-registration',
+  ];
+
+  static bool _carriesSecrets(String path) => _secretPaths.any(path.contains);
+
   void _addInterceptors() {
     dio.interceptors.addAll([
       // Injects the access token and handles 401 → refresh → retry.
@@ -57,6 +70,7 @@ class DioFactory {
         error: true,
         compact: true,
         enabled: AppConstants.isDebug,
+        filter: (options, _) => !_carriesSecrets(options.path),
       ),
     ]);
   }

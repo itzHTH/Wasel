@@ -20,6 +20,8 @@ dependencies:
     path: ../../packages/wasel_location
   wasel_profile:
     path: ../../packages/wasel_profile
+  wasel_payments:
+    path: ../../packages/wasel_payments
 
   # State Management
   flutter_riverpod: ^3.3.1

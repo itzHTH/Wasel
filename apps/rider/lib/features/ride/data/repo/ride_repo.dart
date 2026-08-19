@@ -122,6 +122,7 @@ class RideRepo extends BaseRideRepo {
             photoUrl: event.driverProfilePictureUrl,
             plateNumber: event.vinNumber,
             carModel: event.vehicleModel,
+            vehicleYear: event.vehicleYear,
           );
           yield RideEvent.accepted(
             rideId: event.rideId,

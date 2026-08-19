@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
@@ -15,6 +16,7 @@ class AppLabeledFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
   final List<String>? autofillHints;
+  final List<TextInputFormatter>? inputFormatters;
 
   const AppLabeledFormField({
     super.key,
@@ -28,6 +30,7 @@ class AppLabeledFormField extends StatelessWidget {
     this.keyboardType,
     this.textInputAction,
     this.autofillHints,
+    this.inputFormatters,
   });
 
   @override
@@ -47,6 +50,7 @@ class AppLabeledFormField extends StatelessWidget {
           keyboardType: keyboardType,
           textInputAction: textInputAction,
           autofillHints: autofillHints,
+          inputFormatters: inputFormatters,
           backgroundColor: AppColor.neutral50,
           hintStyle: AppTextStyles.font14Neutral400Regular,
           inputTextStyle: AppTextStyles.font14Secondary900SemiBold,

@@ -32,7 +32,7 @@ final class LoginProvider extends $AsyncNotifierProvider<Login, entity.Login?> {
   Login create() => Login();
 }
 
-String _$loginHash() => r'e605840547123397e8e3eb25646e125e22cd4803';
+String _$loginHash() => r'0e3c4786ac3e072667a18425ec8bc01347803cb3';
 
 abstract class _$Login extends $AsyncNotifier<entity.Login?> {
   FutureOr<entity.Login?> build();

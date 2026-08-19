@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:driver/features/ride/data/models/change_payment/change_payment_arg.dart';
+import 'package:driver/features/ride/data/models/change_payment/change_payment_body.dart';
 import 'package:driver/features/ride/data/models/ride_events/hub_ride_events.dart';
 import 'package:driver/features/ride/data/models/update_location/update_location_arg.dart';
 import 'package:driver/features/ride/data/services/ride_api_service.dart';
@@ -117,6 +119,23 @@ class RideRepo implements BaseRideRepo {
   @override
   Future<ApiResults<void>> driverCancelRide(String rideId) async {
     return _run(() => _rideApiService.driverCancelRide(rideId));
+  }
+
+  @override
+  Future<ApiResults<void>> changePaymentMethod(ChangePaymentArg arg) async {
+    final code = arg.method.code;
+    if (code == null) {
+      return ApiResults.failure(
+        ErrorHandler.message('طريقة دفع غير مدعومة'),
+      );
+    }
+
+    return _run(
+      () => _rideApiService.changePaymentMethod(
+        arg.rideId,
+        ChangePaymentBody(newPaymentMethod: code),
+      ),
+    );
   }
 
   @override

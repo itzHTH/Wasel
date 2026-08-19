@@ -75,6 +75,7 @@ class RideHubDatasource implements IRideHubDatasource {
           driverName: _str(d['drivername']),
           driverProfilePictureUrl: _str(d['driverprofilepictureurl']),
           vehicleModel: _str(d['vehiclemodel']),
+          vehicleYear: _loose(d['vehicleyear']),
           vinNumber: _str(d['vinnumber']),
           phoneNumber: _str(d['phonenumber']),
         ),
@@ -132,6 +133,13 @@ class RideHubDatasource implements IRideHubDatasource {
     if (raw is! String) return null;
     final trimmed = raw.trim();
     return trimmed.isEmpty ? null : trimmed;
+  }
+
+  // The hub sends vehicleYear as a number, which _str drops.
+  String? _loose(Object? raw) {
+    if (raw == null) return null;
+    final text = raw.toString().trim();
+    return text.isEmpty ? null : text;
   }
 
   String? _msg(Object? raw) {

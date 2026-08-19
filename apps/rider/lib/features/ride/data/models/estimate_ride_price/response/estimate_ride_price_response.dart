@@ -23,7 +23,7 @@ class EstimateRidePriceResponse {
 
   RidePrice toEntity() {
     return RidePrice(
-      estimatedPrice: estimatedPrice.toString(),
+      estimatedPrice: estimatedPrice,
       distanceInKm: distanceInKm.toString(),
       currency: currency,
     );

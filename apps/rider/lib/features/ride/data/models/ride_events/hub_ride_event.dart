@@ -14,6 +14,7 @@ sealed class HubRideEvent with _$HubRideEvent {
     String? driverName,
     String? driverProfilePictureUrl,
     String? vehicleModel,
+    String? vehicleYear,
     String? vinNumber,
     String? phoneNumber,
   }) = RideAccepted;

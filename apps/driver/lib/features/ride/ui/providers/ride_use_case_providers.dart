@@ -1,6 +1,7 @@
 import 'package:driver/features/ride/data/repos/ride_repo.dart';
 import 'package:driver/features/ride/domain/use_case/accept_ride_use_case.dart';
 import 'package:driver/features/ride/domain/use_case/arrive_at_start_point_use_case.dart';
+import 'package:driver/features/ride/domain/use_case/change_payment_method_use_case.dart';
 import 'package:driver/features/ride/domain/use_case/complete_ride_use_case.dart';
 import 'package:driver/features/ride/domain/use_case/driver_cancel_ride_use_case.dart';
 import 'package:driver/features/ride/domain/use_case/get_driver_balance_use_case.dart';
@@ -47,6 +48,12 @@ ArriveAtStartPointUseCase arriveAtStartPointUseCase(Ref ref) {
 StartRideUseCase startRideUseCase(Ref ref) {
   final repo = ref.watch(rideRepoProvider);
   return StartRideUseCase(repo);
+}
+
+@riverpod
+ChangePaymentMethodUseCase changePaymentMethodUseCase(Ref ref) {
+  final repo = ref.watch(rideRepoProvider);
+  return ChangePaymentMethodUseCase(repo);
 }
 
 @riverpod

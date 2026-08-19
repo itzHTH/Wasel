@@ -104,9 +104,14 @@ class ErrorHandler implements Exception {
 
   bool isCancelled = false;
 
+  /// Null whenever the request never reached a response — a timeout, a dropped
+  /// connection, a cancellation.
+  int? statusCode;
+
   ErrorHandler.handle(dynamic error) {
     if (error is DioException) {
       isCancelled = error.type == DioExceptionType.cancel;
+      statusCode = error.response?.statusCode;
       apiErrorModel = _handleDioError(error);
     } else {
       apiErrorModel = DataSource.defaultError.getFailure();

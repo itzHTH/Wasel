@@ -87,7 +87,7 @@ class RideHubDatasource implements IRideHubDataSource {
     _client.on(RideHubMethods.hideRideRequest, (args) {
       if (_controller.isClosed) return;
 
-      final rideId = _obj(args)?['rideid'];
+      final rideId = _obj(args)?['rideid'] ?? args?.firstOrNull;
       if (rideId is! String) return;
 
       _controller.add(HubRideEvent.hideRideRequest(rideId));

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:driver/core/const/driver_api_consts.dart';
+import 'package:driver/features/ride/data/models/change_payment/change_payment_body.dart';
 import 'package:driver/features/ride/data/models/driver_balance/driver_balance_response.dart';
 import 'package:driver/features/ride/data/models/driver_earnings/driver_earnings_response.dart';
 import 'package:retrofit/dio.dart';
@@ -42,6 +43,13 @@ abstract class RideApiService {
   @POST(DriverApiConsts.driverCancelRide)
   Future<void> driverCancelRide(
     @Path("id") String rideId, {
+    @CancelRequest() CancelToken? cancelToken,
+  });
+
+  @POST(DriverApiConsts.changePaymentMethod)
+  Future<void> changePaymentMethod(
+    @Path("id") String rideId,
+    @Body() ChangePaymentBody body, {
     @CancelRequest() CancelToken? cancelToken,
   });
 
