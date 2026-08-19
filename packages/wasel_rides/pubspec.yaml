@@ -1,0 +1,32 @@
+name: wasel_rides
+description: "Shared ride logic for the Wasel apps: ride history data, domain, providers and UI."
+publish_to: "none"
+version: 0.1.0
+resolution: workspace
+
+environment:
+  sdk: ^3.10.8
+
+dependencies:
+  flutter:
+    sdk: flutter
+  wasel_core:
+    path: ../core
+  flutter_riverpod: ^3.3.1
+  riverpod_annotation: ^4.0.2
+  flutter_screenutil: ^5.9.3
+  dio: ^5.9.2
+  retrofit: ^4.9.2
+  json_annotation: ^4.9.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.13
+  json_serializable: ^6.8.0
+  riverpod_generator: ^4.0.3
+  retrofit_generator: ^10.2.6
+
+flutter:
+  uses-material-design: true
