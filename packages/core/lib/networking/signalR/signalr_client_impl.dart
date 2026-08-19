@@ -8,8 +8,10 @@ import 'package:flutter/foundation.dart';
 import 'package:logging/logging.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:signalr_netcore/signalr_client.dart';
+import 'package:wasel_core/helpers/session_store.dart';
 import 'package:wasel_core/networking/api_constants.dart';
 import 'package:wasel_core/networking/signalR/i_signalr_client.dart';
+import 'package:wasel_core/networking/signalR/refreshing_signalr_http_client.dart';
 
 part 'signalr_client_impl.g.dart';
 
@@ -68,14 +70,18 @@ class SignalrClientImpl implements ISignalRClient {
   Stream<SignalRStatus> get statusStream => _statusController.stream;
 
   @override
-  Future<void> connect({required String jwt}) async {
+  Future<void> connect() async {
     if (_hubConnection != null) return;
     final generation = _generation;
     final logger = _debugSignalrLogger();
     final builder = HubConnectionBuilder().withUrl(
       _hubUrl,
       options: HttpConnectionOptions(
-        accessTokenFactory: () async => jwt,
+        // Read per call, never captured: signalr_netcore re-invokes this on
+        // every negotiation, reconnect attempts included, so a token rotated
+        // since the last attempt is picked up rather than replayed dead.
+        accessTokenFactory: () async => await SessionStore.readToken() ?? '',
+        httpClient: RefreshingSignalRHttpClient(logger: logger),
         requestTimeout: 15 * 1000, // 15s
         logger: logger,
       ),

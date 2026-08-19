@@ -11,7 +11,7 @@ part 'ride_hub_data_source.g.dart';
 abstract class IRideHubDataSource {
   Stream<HubRideEvent> get events;
   Stream<SignalRStatus> get connectionStatus;
-  Future<void> connect({required String jwt});
+  Future<void> connect();
   Future<void> updateLocation(
     double latitude,
     double longitude,
@@ -49,9 +49,9 @@ class RideHubDatasource implements IRideHubDataSource {
   }
 
   @override
-  Future<void> connect({required String jwt}) async {
+  Future<void> connect() async {
     _registerListeners();
-    await _client.connect(jwt: jwt);
+    await _client.connect();
   }
 
   void _registerListeners() {
