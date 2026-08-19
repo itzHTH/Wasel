@@ -1,0 +1,47 @@
+import 'package:flutter/material.dart';
+import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/app_dimens.dart';
+import 'package:wasel_core/theme/app_text_styles.dart';
+
+/// The primary call-to-action button for the Wasel apps.
+class AppPrimaryButton extends StatelessWidget {
+  const AppPrimaryButton({
+    super.key,
+    required this.label,
+    required this.onPressed,
+    this.isLoading = false,
+  });
+
+  final String label;
+  final VoidCallback? onPressed;
+  final bool isLoading;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: AppDimens.buttonHeight,
+      child: ElevatedButton(
+        onPressed: isLoading ? null : onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColor.primary500,
+          disabledBackgroundColor: AppColor.primary300,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppDimens.radiusPill),
+          ),
+        ),
+        child: isLoading
+            ? SizedBox(
+                width: AppDimens.icon24,
+                height: AppDimens.icon24,
+                child: const CircularProgressIndicator(
+                  strokeWidth: 2.5,
+                  color: AppColor.neutral0,
+                ),
+              )
+            : Text(label, style: AppTextStyles.font16Neutral0SemiBold),
+      ),
+    );
+  }
+}

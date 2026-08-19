@@ -2,7 +2,7 @@
 ///
 /// Public surface: constants, flavors, helpers, networking (Dio/Retrofit
 /// plumbing, results, error handling, interceptors), theming, base use cases,
-/// and shared widgets. Routing stays app-owned (each app has its own routes).
+/// shared widgets, and shared page transitions (route tables stay app-owned).
 library;
 
 // Constants
@@ -32,6 +32,7 @@ export 'permissions/permission_gate.dart';
 // Networking
 export 'networking/api_constants.dart';
 export 'networking/api_results.dart';
+export 'networking/base_response.dart';
 export 'networking/dio/dio_factory.dart';
 export 'networking/errors/api_error_message.dart';
 export 'networking/errors/api_error_model.dart';
@@ -39,7 +40,13 @@ export 'networking/errors/api_errors.dart';
 export 'networking/errors/error_handler.dart';
 export 'networking/errors/error_message.dart';
 export 'networking/interceptors/auth_interceptor.dart';
+export 'networking/json_num_converters.dart';
+export 'networking/paged/paged_list.dart';
+export 'networking/paged/paged_list_response.dart';
 export 'networking/session_refresher.dart';
+
+// Routing — shared transitions only; each app still owns its route table.
+export 'routing/app_page_transitions.dart';
 
 // Theme
 export 'theme/app_color.dart';
@@ -56,7 +63,9 @@ export 'usecase/stream_base_use_case.dart';
 export 'widgets/app_back_button.dart';
 export 'widgets/app_dialog.dart';
 export 'widgets/app_editable_avatar.dart';
+export 'widgets/app_entrance_fade.dart';
 export 'widgets/app_error_retry.dart';
+export 'widgets/app_error_state.dart';
 export 'widgets/app_group_card.dart';
 export 'widgets/app_header_with_logo.dart';
 export 'widgets/app_image_source_sheet.dart';
@@ -66,7 +75,9 @@ export 'widgets/app_labeled_field.dart';
 export 'widgets/app_loading.dart';
 export 'widgets/app_map_profile_button.dart';
 export 'widgets/app_menu_tile.dart';
+export 'widgets/app_primary_button.dart';
 export 'widgets/app_profile_avatar.dart';
+export 'widgets/app_skeleton.dart';
 export 'widgets/app_soon_badge.dart';
 export 'widgets/app_stat_cards.dart';
 export 'widgets/app_step_indicator.dart';
