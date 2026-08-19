@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wasal/core/helpers/ride_formatters.dart';
 import 'package:wasel_core/wasel_core.dart';
 import 'package:wasel_payments/domain/entities/payment_method.dart';
+import 'package:wasel_payments/presentation/providers/wallet/rider_wallet_balance_provider.dart';
 import 'package:wasel_payments/presentation/widgets/payment_method_style.dart';
 
 const _selectableMethods = [
@@ -68,13 +71,10 @@ class _PaymentMethodSheet extends StatelessWidget {
                   AppMenuTile(
                     icon: paymentMethodIcon(method),
                     label: method.label,
-                    trailing: method == selected
-                        ? Icon(
-                            Icons.check_circle_rounded,
-                            color: AppColor.primary500,
-                            size: AppDimens.icon20,
-                          )
-                        : const SizedBox.shrink(),
+                    trailing: _MethodTrailing(
+                      method: method,
+                      isSelected: method == selected,
+                    ),
                     onTap: () => Navigator.of(context).pop(method),
                   ),
               ],
@@ -82,6 +82,45 @@ class _PaymentMethodSheet extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _MethodTrailing extends ConsumerWidget {
+  const _MethodTrailing({required this.method, required this.isSelected});
+
+  final PaymentMethod method;
+  final bool isSelected;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final check = isSelected
+        ? Icon(
+            Icons.check_circle_rounded,
+            color: AppColor.primary500,
+            size: AppDimens.icon20,
+          )
+        : const SizedBox.shrink();
+
+    if (method != PaymentMethod.wallet) return check;
+
+    // A balance that has not arrived yet is not a balance of zero, so the row
+    // stays bare until the figure is real.
+    final wallet = ref.watch(riderWalletBalanceControllerProvider);
+    final balance = wallet.hasError ? null : wallet.value?.balance;
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (balance != null) ...[
+          Text(
+            RideFormatters.fare(balance),
+            style: AppTextStyles.font14Secondary500Medium,
+          ),
+          SizedBox(width: AppDimens.space8),
+        ],
+        check,
+      ],
     );
   }
 }

@@ -5,9 +5,9 @@ import 'package:wasal/features/ride/ui/widgets/payment/card_form_sheet.dart';
 import 'package:wasal/features/ride/ui/widgets/payment/payment_method_sheet.dart';
 import 'package:wasel_core/wasel_core.dart';
 import 'package:wasel_payments/core/policies/payment_eligibility_policy.dart';
-import 'package:wasel_payments/presentation/widgets/payment_method_style.dart';
 import 'package:wasel_payments/presentation/providers/tokenize/tokenize_card_provider.dart';
 import 'package:wasel_payments/presentation/providers/wallet/rider_wallet_balance_provider.dart';
+import 'package:wasel_payments/presentation/widgets/payment_method_style.dart';
 
 class PaymentMethodRow extends ConsumerWidget {
   const PaymentMethodRow({super.key});
@@ -44,10 +44,7 @@ class PaymentMethodRow extends ConsumerWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'طريقة الدفع',
-              style: AppTextStyles.font14Secondary500Medium,
-            ),
+            Text('طريقة الدفع', style: AppTextStyles.font14Secondary500Medium),
             Row(
               children: [
                 Icon(
