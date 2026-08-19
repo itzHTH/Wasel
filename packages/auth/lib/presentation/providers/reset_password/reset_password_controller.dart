@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/networking/api_results.dart';
+import 'package:wasel_core/networking/errors/error_message.dart';
 import 'package:wasel_core/networking/errors/error_handler.dart';
 import 'package:wasel_auth/data/models/reset_password/forgot_password/request/forgot_password_request.dart';
 import 'package:wasel_auth/data/models/reset_password/set_new_password/request/reset_password_request.dart';
@@ -141,7 +142,7 @@ class ResetPasswordController extends _$ResetPasswordController {
       );
       if (match.value.isNotEmpty) return match.value.first;
     }
-    return error.apiErrorModel.message ?? _fallbackError;
+    return errorMessageOf(error, fallback: _fallbackError);
   }
 
   // The reset token and its OTP live in a 10-minute server-side cache. The API

@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/networking/api_results.dart';
+import 'package:wasel_core/networking/errors/error_message.dart';
 import 'package:wasel_auth/data/models/login/request/login_request.dart';
 import 'package:wasel_auth/domain/entities/login.dart' as entity;
 import 'package:wasel_auth/domain/usecases/login_use_case.dart';
@@ -22,10 +23,7 @@ class Login extends _$Login {
     result.when(
       failure: (error) {
         if (error.isCancelled) return;
-        state = AsyncValue.error(
-          error.apiErrorModel.message ?? "حصل خطأ ما",
-          StackTrace.current,
-        );
+        state = AsyncValue.error(errorMessageOf(error), StackTrace.current);
       },
       success: (response) {
         // Drop any profile cached for the previous account before the UI

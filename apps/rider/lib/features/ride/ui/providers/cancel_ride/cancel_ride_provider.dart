@@ -5,6 +5,7 @@ import 'package:wasal/features/ride/ui/providers/ride_controller/ride_controller
 import 'package:wasal/features/ride/ui/providers/ride_controller/ride_state.dart';
 import 'package:wasal/features/ride/ui/providers/ride_use_case_providers.dart';
 import 'package:wasel_core/networking/api_results.dart';
+import 'package:wasel_core/networking/errors/error_message.dart';
 
 part 'cancel_ride_provider.g.dart';
 
@@ -36,10 +37,7 @@ class CancelRideController extends _$CancelRideController {
 
     result.when(
       failure: (error) {
-        state = AsyncValue.error(
-          error.apiErrorModel.message ?? "حصل خطأ ما",
-          StackTrace.current,
-        );
+        state = AsyncValue.error(errorMessageOf(error), StackTrace.current);
       },
       success: (price) {
         state = AsyncValue.data(price);

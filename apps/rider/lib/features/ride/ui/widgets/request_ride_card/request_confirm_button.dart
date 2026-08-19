@@ -14,7 +14,7 @@ class RequestConfirmButton extends ConsumerWidget {
       label: 'تأكيد الطلب',
       isLoading: isLoading,
       onPressed: () =>
-          ref.read(requestRideControllerProvider.notifier).requetsRide(),
+          ref.read(requestRideControllerProvider.notifier).requestRide(),
     );
   }
 }

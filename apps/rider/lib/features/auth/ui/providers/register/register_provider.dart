@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/networking/api_results.dart';
+import 'package:wasel_core/networking/errors/error_message.dart';
 import 'package:wasel_auth/data/models/register/complete_registration/request/complete_registration_request.dart';
 import 'package:wasel_auth/data/models/register/initiate_registeration/request/initiate_registeration_request.dart';
 import 'package:wasel_auth/data/models/register/verify_otp/request/verify_otp_request.dart';
@@ -29,7 +30,7 @@ class Register extends _$Register {
       failure: (error) {
         if (!error.isCancelled) {
           state = AsyncValue<InitiateRegisteration>.error(
-            error.apiErrorModel.message ?? "حصل خطأ ما",
+            errorMessageOf(error),
             StackTrace.current,
           );
         }
@@ -59,7 +60,7 @@ class Register extends _$Register {
       failure: (error) {
         if (!error.isCancelled) {
           state = AsyncValue<VerifyOtp>.error(
-            error.apiErrorModel.message ?? "حصل خطأ ما",
+            errorMessageOf(error),
             StackTrace.current,
           );
         }
@@ -98,7 +99,7 @@ class Register extends _$Register {
       failure: (error) {
         if (!error.isCancelled) {
           state = AsyncValue<CompleteRegistration>.error(
-            error.apiErrorModel.message ?? "حصل خطأ ما",
+            errorMessageOf(error),
             StackTrace.current,
           );
         }

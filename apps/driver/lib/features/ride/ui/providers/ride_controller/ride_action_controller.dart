@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/networking/api_results.dart';
+import 'package:wasel_core/networking/errors/error_message.dart';
 
 part 'ride_action_controller.g.dart';
 
@@ -32,10 +33,7 @@ class RideActionController extends _$RideActionController {
         return true;
       },
       failure: (error) {
-        state = AsyncError(
-          error.apiErrorModel.message ?? 'حصل خطأ ما',
-          StackTrace.current,
-        );
+        state = AsyncError(errorMessageOf(error), StackTrace.current);
         return false;
       },
     );
