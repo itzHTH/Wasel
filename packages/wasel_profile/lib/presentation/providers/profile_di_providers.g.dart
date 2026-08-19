@@ -241,3 +241,100 @@ final class UpdateRiderPhotoUseCaseProvider
 
 String _$updateRiderPhotoUseCaseHash() =>
     r'a933ad63b1a9e80d6f934b42f15a6007f3f1bc79';
+
+@ProviderFor(updateRiderProfileUseCase)
+final updateRiderProfileUseCaseProvider = UpdateRiderProfileUseCaseProvider._();
+
+final class UpdateRiderProfileUseCaseProvider
+    extends
+        $FunctionalProvider<
+          UpdateRiderProfileUseCase,
+          UpdateRiderProfileUseCase,
+          UpdateRiderProfileUseCase
+        >
+    with $Provider<UpdateRiderProfileUseCase> {
+  UpdateRiderProfileUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'updateRiderProfileUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$updateRiderProfileUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<UpdateRiderProfileUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  UpdateRiderProfileUseCase create(Ref ref) {
+    return updateRiderProfileUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(UpdateRiderProfileUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<UpdateRiderProfileUseCase>(value),
+    );
+  }
+}
+
+String _$updateRiderProfileUseCaseHash() =>
+    r'c7c9c0d5a9fad12bd20ae98a9468ed9451f2ddba';
+
+@ProviderFor(updateDriverProfileUseCase)
+final updateDriverProfileUseCaseProvider =
+    UpdateDriverProfileUseCaseProvider._();
+
+final class UpdateDriverProfileUseCaseProvider
+    extends
+        $FunctionalProvider<
+          UpdateDriverProfileUseCase,
+          UpdateDriverProfileUseCase,
+          UpdateDriverProfileUseCase
+        >
+    with $Provider<UpdateDriverProfileUseCase> {
+  UpdateDriverProfileUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'updateDriverProfileUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$updateDriverProfileUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<UpdateDriverProfileUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  UpdateDriverProfileUseCase create(Ref ref) {
+    return updateDriverProfileUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(UpdateDriverProfileUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<UpdateDriverProfileUseCase>(value),
+    );
+  }
+}
+
+String _$updateDriverProfileUseCaseHash() =>
+    r'b5e158fa669a89fa681d51442744fabd743192b6';

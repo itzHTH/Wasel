@@ -1,25 +1,21 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:wasal/core/routing/app_routes_name.dart';
+import 'package:wasel_core/extensions/navigation_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasel_core/helpers/app_amount_format.dart';
-import 'package:wasel_core/helpers/app_image_picker.dart';
 import 'package:wasel_core/networking/errors/error_message.dart';
 import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
-import 'package:wasel_core/widgets/app_editable_avatar.dart';
-import 'package:wasel_core/widgets/app_error_retry.dart';
+import 'package:wasel_core/widgets/app_error_state.dart';
 import 'package:wasel_core/widgets/app_group_card.dart';
-import 'package:wasel_core/widgets/app_image_source_sheet.dart';
 import 'package:wasel_core/widgets/app_info_row.dart';
 import 'package:wasel_core/widgets/app_loading.dart';
 import 'package:wasel_core/widgets/app_stat_cards.dart';
 import 'package:wasel_core/widgets/app_surface_card.dart';
 import 'package:wasel_profile/domain/entities/rider_profile.dart';
-import 'package:wasel_profile/presentation/providers/profile/rider_photo_upload_provider.dart';
 import 'package:wasel_profile/presentation/providers/profile/rider_profile_provider.dart';
+import 'package:wasel_profile/presentation/widgets/edit/profile_edit_avatar_section.dart';
 
 class ProfileDetailsScreen extends ConsumerWidget {
   const ProfileDetailsScreen({super.key});
@@ -28,17 +24,10 @@ class ProfileDetailsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final profile = ref.watch(riderProfileControllerProvider);
 
+    final isRefreshing = profile.isLoading;
+
     void refresh() =>
         ref.read(riderProfileControllerProvider.notifier).refresh();
-
-    ref.listen(riderPhotoUploadProvider, (previous, next) {
-      if (previous?.isLoading != true || next.isLoading) return;
-
-      _showMessage(
-        context,
-        next.hasError ? errorMessageOf(next.error!) : 'تم تحديث الصورة بنجاح',
-      );
-    });
 
     return Scaffold(
       backgroundColor: AppColor.screenBackground,
@@ -46,35 +35,30 @@ class ProfileDetailsScreen extends ConsumerWidget {
         title: const Text('الملف الشخصي'),
         backgroundColor: AppColor.screenBackground,
         surfaceTintColor: AppColor.screenBackground,
+        actions: [
+          IconButton(
+            tooltip: 'تعديل',
+            icon: const Icon(Icons.edit_outlined),
+            color: AppColor.primary500,
+            onPressed: () => context.pushNamed(AppRoutes.profileEdit),
+          ),
+        ],
       ),
       body: profile.when(
-        skipLoadingOnRefresh: false,
+        skipLoadingOnRefresh: true,
         loading: () => const Center(child: AppInlineLoading()),
-        error: (error, _) =>
-            _ErrorState(message: errorMessageOf(error), onRetry: refresh),
+        error: (error, _) => AppErrorState(
+          message: errorMessageOf(error),
+          onRetry: refresh,
+          isRetrying: isRefreshing,
+        ),
         data: (profile) => profile == null
-            ? _ErrorState(
+            ? AppErrorState(
                 message: 'تعذّر تحميل بيانات الملف الشخصي',
                 onRetry: refresh,
+                isRetrying: isRefreshing,
               )
             : _RiderProfileDetailsBody(profile: profile),
-      ),
-    );
-  }
-}
-
-class _ErrorState extends StatelessWidget {
-  const _ErrorState({required this.message, required this.onRetry});
-
-  final String message;
-  final VoidCallback onRetry;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: AppDimens.space24),
-        child: AppErrorRetry(message: message, onRetry: onRetry),
       ),
     );
   }
@@ -84,43 +68,6 @@ void _showMessage(BuildContext context, String message) {
   ScaffoldMessenger.of(context)
     ..hideCurrentSnackBar()
     ..showSnackBar(SnackBar(content: Text(message)));
-}
-
-class _EditableProfilePhoto extends ConsumerWidget {
-  const _EditableProfilePhoto({required this.photoUrl});
-
-  final String? photoUrl;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final isUploading = ref.watch(
-      riderPhotoUploadProvider.select((state) => state.isLoading),
-    );
-
-    return AppEditableAvatar(
-      photoUrl: photoUrl,
-      size: 96.r,
-      isLoading: isUploading,
-      onTap: () => _pickAndUpload(context, ref),
-    );
-  }
-
-  Future<void> _pickAndUpload(BuildContext context, WidgetRef ref) async {
-    final source = await showAppImageSourceSheet(context: context);
-    if (source == null) return;
-
-    final File? photo;
-    try {
-      photo = await AppImagePicker.pick(source);
-    } on AppImagePickerException catch (e) {
-      if (context.mounted) _showMessage(context, e.message);
-      return;
-    }
-
-    if (photo == null || !context.mounted) return;
-
-    await ref.read(riderPhotoUploadProvider.notifier).upload(photo);
-  }
 }
 
 class _RiderProfileDetailsBody extends StatelessWidget {
@@ -149,7 +96,10 @@ class _RiderProfileDetailsBody extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _EditableProfilePhoto(photoUrl: profile.profilePictureUrl),
+              ProfileEditAvatarSection(
+                photoUrl: profile.profilePictureUrl,
+                onMessage: (message) => _showMessage(context, message),
+              ),
               SizedBox(height: AppDimens.space16),
               Text(
                 fullName.isNotEmpty ? fullName : 'مستخدم وَصَل',

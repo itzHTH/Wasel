@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'rider_photo_upload_provider.dart';
+part of 'rider_profile_edit_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,43 +9,43 @@ part of 'rider_photo_upload_provider.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(RiderPhotoUpload)
-final riderPhotoUploadProvider = RiderPhotoUploadProvider._();
+@ProviderFor(RiderProfileEdit)
+final riderProfileEditProvider = RiderProfileEditProvider._();
 
-final class RiderPhotoUploadProvider
-    extends $AsyncNotifierProvider<RiderPhotoUpload, String?> {
-  RiderPhotoUploadProvider._()
+final class RiderProfileEditProvider
+    extends $AsyncNotifierProvider<RiderProfileEdit, void> {
+  RiderProfileEditProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'riderPhotoUploadProvider',
+        name: r'riderProfileEditProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$riderPhotoUploadHash();
+  String debugGetCreateSourceHash() => _$riderProfileEditHash();
 
   @$internal
   @override
-  RiderPhotoUpload create() => RiderPhotoUpload();
+  RiderProfileEdit create() => RiderProfileEdit();
 }
 
-String _$riderPhotoUploadHash() => r'2d8fa7798132afefa700fe5e943056e6eeb2702d';
+String _$riderProfileEditHash() => r'83f232f6eafb540abf77f4ae9bcd5708b1f8cdfa';
 
-abstract class _$RiderPhotoUpload extends $AsyncNotifier<String?> {
-  FutureOr<String?> build();
+abstract class _$RiderProfileEdit extends $AsyncNotifier<void> {
+  FutureOr<void> build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref = this.ref as $Ref<AsyncValue<String?>, String?>;
+    final ref = this.ref as $Ref<AsyncValue<void>, void>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue<String?>, String?>,
-              AsyncValue<String?>,
+              AnyNotifier<AsyncValue<void>, void>,
+              AsyncValue<void>,
               Object?,
               Object?
             >;

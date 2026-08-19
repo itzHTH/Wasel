@@ -34,7 +34,7 @@ final class RiderProfileControllerProvider
 }
 
 String _$riderProfileControllerHash() =>
-    r'ef6ed1cfee1305f2ea921c31ca0405dad353d75c';
+    r'c8c23cf3ce68eb691caf50c3a2637e5d80ae1fb3';
 
 abstract class _$RiderProfileController extends $AsyncNotifier<RiderProfile?> {
   FutureOr<RiderProfile?> build();
