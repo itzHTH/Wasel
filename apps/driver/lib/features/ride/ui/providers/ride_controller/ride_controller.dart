@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:driver/features/ride/data/models/change_payment/change_payment_arg.dart';
 import 'package:driver/features/ride/domain/entities/driver_ride_events.dart';
 import 'package:driver/features/ride/domain/entities/ride_connection_status.dart';
 import 'package:driver/features/ride/domain/use_case/watch_ride_connection_use_case.dart';
@@ -10,8 +11,14 @@ import 'package:driver/features/ride/ui/providers/ride_use_case_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/networking/api_results.dart';
+import 'package:wasel_core/networking/errors/error_handler.dart';
+import 'package:wasel_payments/domain/entities/payment_method.dart';
 
 part 'ride_controller.g.dart';
+
+/// Only [rejected] means the backend refused the trip on its merits, which is
+/// the single case where offering a switch to cash makes sense.
+enum CompletionOutcome { completed, rejected, failed }
 
 class RideConnectionException implements Exception {
   const RideConnectionException(this.message);
@@ -154,10 +161,64 @@ class RideController extends _$RideController {
     DriverStage.inProgress,
   );
 
-  Future<void> completeRide() => _perform(
-    (rideId) => ref.read(completeRideUseCaseProvider).call(rideId),
-    DriverStage.completed,
-  );
+  Future<CompletionOutcome> completeRide() async {
+    final rideId = state.ride?.rideId;
+    if (rideId == null) return CompletionOutcome.failed;
+
+    ErrorHandler? failure;
+
+    final succeeded = await ref
+        .read(rideActionControllerProvider.notifier)
+        .run(() async {
+          final result = await ref
+              .read(completeRideUseCaseProvider)
+              .call(rideId);
+          result.when(success: (_) {}, failure: (error) => failure = error);
+          return result;
+        });
+
+    if (!ref.mounted) return CompletionOutcome.failed;
+
+    if (succeeded) {
+      state = state.copyWith(stage: DriverStage.completed);
+      return CompletionOutcome.completed;
+    }
+
+    // A timeout or a dropped connection carries no status code, so it can
+    // never be mistaken for the backend refusing the payment.
+    return failure?.statusCode == 400
+        ? CompletionOutcome.rejected
+        : CompletionOutcome.failed;
+  }
+
+  /// The local method follows only once the server has taken the switch.
+  Future<bool> switchToCashAndComplete() async {
+    final rideId = state.ride?.rideId;
+    if (rideId == null) return false;
+
+    final switched = await ref
+        .read(rideActionControllerProvider.notifier)
+        .run(
+          () => ref
+              .read(changePaymentMethodUseCaseProvider)
+              .call(
+                ChangePaymentArg(
+                  rideId: rideId,
+                  method: PaymentMethod.cash,
+                ),
+              ),
+        );
+
+    if (!switched || !ref.mounted) return false;
+
+    state = state.copyWith(
+      ride: state.ride?.copyWith(
+        paymentMethod: '${PaymentMethod.cash.code}',
+      ),
+    );
+
+    return await completeRide() == CompletionOutcome.completed;
+  }
 
   /// Cancelling is only possible before the ride starts. Once it is under way
   /// the backend refuses the call from either side, so the request is not

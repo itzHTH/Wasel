@@ -1,5 +1,5 @@
 import 'package:driver/features/ride/domain/entities/driver_ride_events.dart';
-import 'package:driver/features/ride/domain/entities/payment_method.dart';
+import 'package:wasel_payments/domain/entities/payment_method.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:driver/features/ride/ui/widgets/tracking/at_pickup_card.dart';
@@ -12,9 +12,38 @@ import 'package:driver/features/ride/ui/widgets/tracking/trip_in_progress_card.d
 import 'package:driver/features/ride/ui/widgets/ride_card_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wasel_core/widgets/app_dialog.dart';
 
 class DriverRideCardsSwitcher extends ConsumerWidget {
   const DriverRideCardsSwitcher({super.key});
+
+  /// The refusal reason is already on screen, so the dialog only asks.
+  Future<void> _complete(
+    BuildContext context,
+    WidgetRef ref,
+    ReceiveRideRequest offer,
+  ) async {
+    final controller = ref.read(rideControllerProvider.notifier);
+
+    if (await controller.completeRide() != CompletionOutcome.rejected) return;
+    if (!context.mounted) return;
+
+    final method = PaymentMethod.fromApi(offer.paymentMethod);
+    if (method != PaymentMethod.card && method != PaymentMethod.wallet) return;
+
+    final switchToCash = await AppDialog.show(
+      context,
+      title: 'تعذّر تحصيل الدفع',
+      message: 'تحويل الرحلة إلى الدفع نقدًا وإنهاؤها؟',
+      confirmLabel: 'تحويل إلى نقدي',
+      cancelLabel: 'إلغاء',
+      icon: Icons.credit_card_off,
+    );
+
+    if (!switchToCash) return;
+
+    await controller.switchToCashAndComplete();
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -79,7 +108,7 @@ class DriverRideCardsSwitcher extends ConsumerWidget {
           dropoffPoint: offer.dropPosition,
           fare: offer.calculatedPrice,
           paymentMethod: PaymentMethod.fromApi(offer.paymentMethod),
-          onComplete: controller.completeRide,
+          onComplete: () => _complete(context, ref, offer),
         ),
       (DriverStage.completed, final ReceiveRideRequest offer) =>
         TripCompletedCard(

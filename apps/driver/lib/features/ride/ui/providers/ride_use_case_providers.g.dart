@@ -296,6 +296,55 @@ final class StartRideUseCaseProvider
 
 String _$startRideUseCaseHash() => r'e74841b17ebeac2f591430af717475e09bd7539d';
 
+@ProviderFor(changePaymentMethodUseCase)
+final changePaymentMethodUseCaseProvider =
+    ChangePaymentMethodUseCaseProvider._();
+
+final class ChangePaymentMethodUseCaseProvider
+    extends
+        $FunctionalProvider<
+          ChangePaymentMethodUseCase,
+          ChangePaymentMethodUseCase,
+          ChangePaymentMethodUseCase
+        >
+    with $Provider<ChangePaymentMethodUseCase> {
+  ChangePaymentMethodUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'changePaymentMethodUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$changePaymentMethodUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<ChangePaymentMethodUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  ChangePaymentMethodUseCase create(Ref ref) {
+    return changePaymentMethodUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(ChangePaymentMethodUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<ChangePaymentMethodUseCase>(value),
+    );
+  }
+}
+
+String _$changePaymentMethodUseCaseHash() =>
+    r'5af4d6191c1ae5c5c735f152c569719a899a3088';
+
 @ProviderFor(completeRideUseCase)
 final completeRideUseCaseProvider = CompleteRideUseCaseProvider._();
 

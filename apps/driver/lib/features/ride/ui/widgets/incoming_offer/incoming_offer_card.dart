@@ -1,13 +1,13 @@
 import 'package:driver/core/widgets/app_primary_button.dart';
 import 'package:driver/core/widgets/app_secondary_button.dart';
 import 'package:wasel_location/wasel_location.dart';
-import 'package:driver/features/ride/domain/entities/payment_method.dart';
+import 'package:wasel_payments/domain/entities/payment_method.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/rider_profile/current_rider_profile_provider.dart';
 import 'package:driver/features/ride/ui/widgets/expandable_ride_card.dart';
 import 'package:driver/features/ride/ui/widgets/fare_hero.dart';
 import 'package:driver/features/ride/ui/widgets/incoming_offer/offer_countdown_ring.dart';
-import 'package:driver/features/ride/ui/widgets/payment_method_chip.dart';
+import 'package:wasel_payments/presentation/widgets/payment_method_chip.dart';
 import 'package:driver/features/ride/ui/widgets/rider_info_row.dart';
 import 'package:driver/features/ride/ui/widgets/trip_points_list.dart';
 import 'package:flutter/material.dart';

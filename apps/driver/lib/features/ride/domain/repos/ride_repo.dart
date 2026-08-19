@@ -1,3 +1,4 @@
+import 'package:driver/features/ride/data/models/change_payment/change_payment_arg.dart';
 import 'package:driver/features/ride/data/models/update_location/update_location_arg.dart';
 import 'package:driver/features/ride/domain/entities/driver_balance.dart';
 import 'package:driver/features/ride/domain/entities/driver_earnings.dart';
@@ -15,6 +16,7 @@ abstract class BaseRideRepo {
   Future<ApiResults<void>> startRide(String rideId);
   Future<ApiResults<void>> completeRide(String rideId);
   Future<ApiResults<void>> driverCancelRide(String rideId);
+  Future<ApiResults<void>> changePaymentMethod(ChangePaymentArg arg);
   Future<ApiResults<DriverBalance>> getDriverWalletBalance();
   Future<ApiResults<DriverEarnings>> getDriverEarnings(EarningsPeriod period);
 }
