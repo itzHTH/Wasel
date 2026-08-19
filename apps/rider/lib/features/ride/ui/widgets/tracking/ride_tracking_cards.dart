@@ -8,6 +8,7 @@ import 'package:wasal/features/ride/ui/providers/review_ride/review_ride_provide
 import 'package:wasal/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:wasal/features/ride/ui/providers/ride_controller/ride_state.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.dart';
+import 'package:wasal/features/ride/ui/providers/ride_draft/selected_payment_method_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_price/ride_price_provider.dart';
 import 'package:wasal/features/ride/ui/screens/ride_completed_screen.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_card_transition.dart';
@@ -17,6 +18,8 @@ import 'package:wasal/features/ride/ui/widgets/tracking/ride_cancelled_dialog.da
 import 'package:wasal/features/ride/ui/widgets/tracking/ride_in_progress_card.dart';
 import 'package:wasal/features/ride/ui/widgets/tracking/searching_for_driver_card.dart';
 import 'package:wasel_core/wasel_core.dart';
+import 'package:wasel_payments/presentation/providers/tokenize/tokenize_card_provider.dart';
+import 'package:wasel_payments/presentation/providers/wallet/rider_wallet_balance_provider.dart';
 
 class RideTrackingCards extends ConsumerWidget {
   const RideTrackingCards({super.key});
@@ -28,6 +31,9 @@ class RideTrackingCards extends ConsumerWidget {
     ref.invalidate(cancelRideControllerProvider);
 
     ref.invalidate(ridePriceEstimateProvider);
+    ref.invalidate(selectedPaymentMethodProvider);
+    ref.invalidate(tokenizeCardControllerProvider);
+    ref.invalidate(riderWalletBalanceControllerProvider);
     ref.read(rideDraftProvider.notifier).reset();
   }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wasal/core/helpers/ride_formatters.dart';
 import 'package:wasal/features/ride/domain/entities/ride_price.dart';
 import 'package:wasal/features/ride/ui/widgets/request_ride_card/request_ride_action.dart';
+import 'package:wasal/features/ride/ui/widgets/payment/payment_method_row.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_price_card/ride_detail_row.dart';
 import 'package:wasel_core/wasel_core.dart';
 
@@ -48,6 +49,8 @@ class RidePriceView extends StatelessWidget {
           label: 'المسافة',
           value: RideFormatters.distance(price.distanceInKm),
         ),
+        SizedBox(height: AppDimens.space12),
+        const PaymentMethodRow(),
         SizedBox(height: AppDimens.space24),
         const RequestRideAction(),
       ],
