@@ -3,33 +3,38 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:wasel_core/const/app_constants.dart';
 import 'package:wasel_core/helpers/session_store.dart';
 import 'package:wasel_core/networking/api_constants.dart';
+import 'package:wasel_core/networking/session_refresher.dart';
 
 /// Attaches the stored access token, and on a 401 refreshes the session and
 /// replays the request. When the session cannot be refreshed it is cleared and
 /// onSessionExpired fires.
+///
+/// The refresh itself lives in SessionRefresher, shared with the SignalR hub
+/// so both meet a 401 through one in-flight refresh.
 class AuthInterceptor extends Interceptor {
   /// plainDio exists for tests; production uses the internal client.
-  AuthInterceptor({Dio? plainDio}) : _plainDio = plainDio ?? _buildPlainDio();
+  AuthInterceptor({Dio? plainDio, SessionRefresher? refresher})
+    : _plainDio = plainDio ?? _buildPlainDio(),
+      _refresher = refresher ?? SessionRefresher.instance;
 
   /// Registered once per app at startup — this package knows no routes.
-  static void Function()? onSessionExpired;
+  /// Forwards to SessionRefresher so a hub-triggered logout reaches the same
+  /// handler the apps already register here.
+  static void Function()? get onSessionExpired =>
+      SessionRefresher.onSessionExpired;
+
+  static set onSessionExpired(void Function()? callback) =>
+      SessionRefresher.onSessionExpired = callback;
 
   static const String _authorizationHeader = 'Authorization';
   static const String _bearerPrefix = 'Bearer ';
 
   static const String _epochKey = 'authEpoch';
 
-  static const String _tokenField = 'token';
-  static const String _refreshTokenField = 'refreshToken';
-  static const String _refreshTokenExpirationField = 'refreshTokenExpiration';
-
   /// Carries no AuthInterceptor, so a 401 here cannot re-enter this one.
-  /// Bodies stay unlogged because the refresh call trades live tokens.
   final Dio _plainDio;
 
-  Future<String?>? _refreshFuture;
-
-  bool _isLoggingOut = false;
+  final SessionRefresher _refresher;
 
   static Dio _buildPlainDio() =>
       Dio(
@@ -62,7 +67,7 @@ class AuthInterceptor extends Interceptor {
     final token = await SessionStore.readToken();
     if (token != null) {
       options.headers[_authorizationHeader] = '$_bearerPrefix$token';
-      _isLoggingOut = false;
+      _refresher.armLogout();
     }
     options.extra[_epochKey] = SessionStore.epoch;
     handler.next(options);
@@ -100,13 +105,13 @@ class AuthInterceptor extends Interceptor {
       final rotated =
           storedToken != null && attempted != null && attempted != storedToken;
 
-      token = rotated ? storedToken : await _refresh();
+      token = rotated ? storedToken : await _refresher.refresh();
     } catch (_) {
       token = null;
     }
 
     if (token == null) {
-      await _forceLogout();
+      await _refresher.forceLogout();
       return handler.next(err);
     }
 
@@ -155,53 +160,5 @@ class AuthInterceptor extends Interceptor {
         data: body,
       ),
     );
-  }
-
-  /// Concurrent 401s share one in-flight refresh.
-  Future<String?> _refresh() => _refreshFuture ??= _performRefresh()
-      .whenComplete(() => _refreshFuture = null);
-
-  /// Refreshes the token and returns the new one.
-  Future<String?> _performRefresh() async {
-    final refreshToken = await SessionStore.readRefreshToken();
-    if (refreshToken == null) return null;
-
-    final response = await _plainDio.post(
-      ApiConstants.refreshToken,
-      data: {'token': refreshToken},
-    );
-    if (response.statusCode != 200) return null;
-
-    final payload = response.data;
-    final data = payload is Map ? payload['data'] : null;
-    if (data is! Map) return null;
-
-    final token = _nonEmpty(data[_tokenField]);
-    final newRefreshToken = _nonEmpty(data[_refreshTokenField]);
-    if (token == null || newRefreshToken == null) return null;
-
-    final expiration = _nonEmpty(data[_refreshTokenExpirationField]);
-
-    await SessionStore.save(
-      token: token,
-      refreshToken: newRefreshToken,
-      refreshTokenExpiration: expiration == null
-          ? null
-          : DateTime.tryParse(expiration),
-    );
-
-    return token;
-  }
-
-  /// Returns the first non-empty string, or null if none.
-  static String? _nonEmpty(Object? value) =>
-      value is String && value.isNotEmpty ? value : null;
-
-  /// Clears the session and fires onSessionExpired.
-  Future<void> _forceLogout() async {
-    if (_isLoggingOut) return;
-    _isLoggingOut = true;
-    await SessionStore.clear();
-    onSessionExpired?.call();
   }
 }

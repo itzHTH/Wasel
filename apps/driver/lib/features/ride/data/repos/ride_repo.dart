@@ -50,16 +50,7 @@ class RideRepo implements BaseRideRepo {
       );
 
       try {
-        final jwt =
-            await AppLocalCache.getSecuredString(AppConstants.tokenKey) ?? '';
-
-        // Reading the token is asynchronous, so a listener that cancels inside
-        // that window releases before there is anything to release. Connecting
-        // now would leave a socket no one holds — and the client keeps at most
-        // one, so every later attempt would find it taken and quietly no-op.
-        if (released) return;
-
-        await _rideHubService.connect(jwt: jwt);
+        await _rideHubService.connect();
       } catch (e, stackTrace) {
         if (!events.isClosed) {
           events.addError(e, stackTrace);

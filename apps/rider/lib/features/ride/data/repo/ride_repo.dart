@@ -105,10 +105,7 @@ class RideRepo extends BaseRideRepo {
 
     try {
       try {
-        await _rideHubService.connect(
-          jwt:
-              await AppLocalCache.getSecuredString(AppConstants.tokenKey) ?? "",
-        );
+        await _rideHubService.connect();
       } catch (_) {}
 
       await for (final event in queue.stream) {

@@ -11,7 +11,7 @@ part 'ride_hub_datasource.g.dart';
 
 abstract class IRideHubDatasource {
   Stream<HubRideEvent> get events;
-  Future<void> connect({required String jwt});
+  Future<void> connect();
   Future<void> trackRide(String rideId);
   Future<void> dispose();
 }
@@ -27,10 +27,10 @@ class RideHubDatasource implements IRideHubDatasource {
   Stream<HubRideEvent> get events => _controller.stream;
 
   @override
-  Future<void> connect({required String jwt}) async {
+  Future<void> connect() async {
     _registerListeners();
 
-    await _client.connect(jwt: jwt);
+    await _client.connect();
 
     _client.onReconnected(() {
 

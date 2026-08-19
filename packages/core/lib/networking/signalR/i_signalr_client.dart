@@ -4,7 +4,7 @@ abstract class ISignalRClient {
   SignalRStatus get status;
   Stream<SignalRStatus> get statusStream;
 
-  Future<void> connect({required String jwt});
+  Future<void> connect();
   Future<void> disconnect();
 
   void on(String methodName, void Function(List<Object?>? args) handler);
