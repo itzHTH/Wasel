@@ -5,11 +5,9 @@ abstract final class RideFormatters {
 
   static const _currencySymbols = {'IQD': 'د.ع'};
 
-  static String fare(String amount, {String currency = 'IQD'}) {
+  static String fare(num amount, {String currency = 'IQD'}) {
     final symbol = _currencySymbols[currency] ?? currency;
-    final parsed = num.tryParse(amount);
-    final formatted = parsed == null ? amount : _grouped.format(parsed);
-    return '$formatted $symbol';
+    return '${_grouped.format(amount)} $symbol';
   }
 
   static String distance(String km) {

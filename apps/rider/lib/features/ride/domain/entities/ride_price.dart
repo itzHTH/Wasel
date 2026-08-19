@@ -1,5 +1,5 @@
 class RidePrice {
-  final String estimatedPrice;
+  final num estimatedPrice;
   final String distanceInKm;
   final String currency;
 
