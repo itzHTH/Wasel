@@ -44,6 +44,11 @@ class ProfileScreen extends ConsumerWidget {
                 label: 'الملف الشخصي',
                 onTap: () => context.pushNamed(AppRoutes.profileDetails),
               ),
+              AppMenuTile(
+                icon: Icons.history_rounded,
+                label: 'سجل الرحلات',
+                onTap: () => context.pushNamed(AppRoutes.rideHistory),
+              ),
               const AppMenuTile(
                 icon: Icons.settings_outlined,
                 label: 'الإعدادات',
