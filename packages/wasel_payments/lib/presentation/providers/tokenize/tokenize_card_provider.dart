@@ -1,6 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/networking/api_results.dart';
 import 'package:wasel_core/networking/errors/api_error_message.dart';
+import 'package:wasel_core/networking/errors/error_handler.dart';
 import 'package:wasel_payments/domain/usecases/tokenize_card_use_case.dart';
 import 'package:wasel_payments/data/models/tokenize_card/request/tokenize_card_request.dart';
 import 'package:wasel_payments/presentation/providers/payments_di_providers.dart';
@@ -45,7 +46,13 @@ class TokenizeCardController extends _$TokenizeCardController {
     } catch (error, stackTrace) {
       // Without this the state would stay loading and the sheet would sit
       // on a spinner with nothing to explain it.
-      if (ref.mounted) state = AsyncValue.error(error, stackTrace);
+      if (ref.mounted) {
+        state = AsyncValue.error(
+          ErrorHandler.handle(error).apiErrorModel.displayMessage ??
+              _failedMessage,
+          stackTrace,
+        );
+      }
       return;
     }
 
@@ -70,6 +77,4 @@ class TokenizeCardController extends _$TokenizeCardController {
     _useCase.cancel();
     ref.invalidateSelf();
   }
-
-  void clear() => ref.invalidateSelf();
 }
