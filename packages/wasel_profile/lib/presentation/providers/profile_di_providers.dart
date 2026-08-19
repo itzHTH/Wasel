@@ -5,7 +5,9 @@ import 'package:wasel_profile/data/services/profile_api_service.dart';
 import 'package:wasel_profile/domain/repos/base_profile_repo.dart';
 import 'package:wasel_profile/domain/usecases/get_driver_profile_use_case.dart';
 import 'package:wasel_profile/domain/usecases/get_rider_profile_use_case.dart';
+import 'package:wasel_profile/domain/usecases/update_driver_profile_use_case.dart';
 import 'package:wasel_profile/domain/usecases/update_rider_photo_use_case.dart';
+import 'package:wasel_profile/domain/usecases/update_rider_profile_use_case.dart';
 
 part 'profile_di_providers.g.dart';
 
@@ -37,4 +39,16 @@ GetDriverProfileUseCase getDriverProfileUseCase(Ref ref) {
 UpdateRiderPhotoUseCase updateRiderPhotoUseCase(Ref ref) {
   final profileRepo = ref.watch(profileRepoProvider);
   return UpdateRiderPhotoUseCase(profileRepo);
+}
+
+@riverpod
+UpdateRiderProfileUseCase updateRiderProfileUseCase(Ref ref) {
+  final profileRepo = ref.watch(profileRepoProvider);
+  return UpdateRiderProfileUseCase(profileRepo);
+}
+
+@riverpod
+UpdateDriverProfileUseCase updateDriverProfileUseCase(Ref ref) {
+  final profileRepo = ref.watch(profileRepoProvider);
+  return UpdateDriverProfileUseCase(profileRepo);
 }

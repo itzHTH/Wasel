@@ -12,6 +12,18 @@ abstract class BaseProfileRepo {
     CancelToken? cancelToken,
   });
 
+  Future<ApiResults<void>> updateRiderProfile({
+    required String firstName,
+    required String lastName,
+    required String phoneNumber,
+    CancelToken? cancelToken,
+  });
+
+  Future<ApiResults<void>> updateDriverProfile({
+    required String phoneNumber,
+    CancelToken? cancelToken,
+  });
+
   Future<ApiResults<String?>> updateRiderPhoto(
     File photo, {
     void Function(double)? onProgress,

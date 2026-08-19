@@ -1,4 +1,3 @@
-import 'package:driver/core/widgets/app_primary_button.dart';
 import 'package:driver/core/widgets/app_secondary_button.dart';
 import 'package:wasel_location/wasel_location.dart';
 import 'package:wasel_payments/domain/entities/payment_method.dart';

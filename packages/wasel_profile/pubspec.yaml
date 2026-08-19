@@ -17,6 +17,7 @@ dependencies:
   dio: ^5.9.2
   retrofit: ^4.9.2
   json_annotation: ^4.9.0
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:

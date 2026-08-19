@@ -15,4 +15,8 @@ class AppRoutes {
   static const String profile = '/profile';
 
   static const String profileDetails = '/profile-details';
+
+  static const String profileEdit = '/profile-edit';
+
+  static const String rideHistory = '/ride-history';
 }

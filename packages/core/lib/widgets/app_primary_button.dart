@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/wasel_core.dart';
+import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/app_dimens.dart';
+import 'package:wasel_core/theme/app_text_styles.dart';
 
+/// The primary call-to-action button for the Wasel apps.
 class AppPrimaryButton extends StatelessWidget {
   const AppPrimaryButton({
     super.key,

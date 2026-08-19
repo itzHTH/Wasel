@@ -33,7 +33,7 @@ final class RiderPhotoUploadProvider
   RiderPhotoUpload create() => RiderPhotoUpload();
 }
 
-String _$riderPhotoUploadHash() => r'3d1b5763602f02bbca76ba37d1e1e45d4c97e3ef';
+String _$riderPhotoUploadHash() => r'2d8fa7798132afefa700fe5e943056e6eeb2702d';
 
 abstract class _$RiderPhotoUpload extends $AsyncNotifier<String?> {
   FutureOr<String?> build();

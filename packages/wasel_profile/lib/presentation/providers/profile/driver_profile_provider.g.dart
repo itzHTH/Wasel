@@ -34,7 +34,7 @@ final class DriverProfileControllerProvider
 }
 
 String _$driverProfileControllerHash() =>
-    r'acfa1c9c8a8412193b19894005578e7c981e9ad8';
+    r'ad77f59fc6eed1a8cdfd7b9b2d24299a58d60c4e';
 
 abstract class _$DriverProfileController
     extends $AsyncNotifier<DriverProfile?> {

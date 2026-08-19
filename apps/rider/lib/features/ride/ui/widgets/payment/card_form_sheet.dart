@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wasal/core/widgets/app_primary_button.dart';
 import 'package:wasal/features/ride/ui/widgets/payment/card_input_formatters.dart';
 import 'package:wasel_core/wasel_core.dart';
 import 'package:wasel_payments/presentation/providers/tokenize/tokenize_card_provider.dart';

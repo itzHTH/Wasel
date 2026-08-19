@@ -1,5 +1,7 @@
 import 'package:driver/features/profile/ui/widgets/driver_approval_badge.dart';
 import 'package:flutter/material.dart';
+import 'package:driver/core/routing/app_routes_name.dart';
+import 'package:wasel_core/extensions/navigation_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasel_core/helpers/app_amount_format.dart';
@@ -7,7 +9,7 @@ import 'package:wasel_core/networking/errors/error_message.dart';
 import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/app_text_styles.dart';
-import 'package:wasel_core/widgets/app_error_retry.dart';
+import 'package:wasel_core/widgets/app_error_state.dart';
 import 'package:wasel_core/widgets/app_group_card.dart';
 import 'package:wasel_core/widgets/app_info_row.dart';
 import 'package:wasel_core/widgets/app_loading.dart';
@@ -24,6 +26,8 @@ class ProfileDetailsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final profile = ref.watch(driverProfileControllerProvider);
 
+    final isRefreshing = profile.isLoading;
+
     void refresh() =>
         ref.read(driverProfileControllerProvider.notifier).refresh();
 
@@ -33,16 +37,28 @@ class ProfileDetailsScreen extends ConsumerWidget {
         title: const Text('الملف الشخصي'),
         backgroundColor: AppColor.screenBackground,
         surfaceTintColor: AppColor.screenBackground,
+        actions: [
+          IconButton(
+            tooltip: 'تعديل',
+            icon: const Icon(Icons.edit_outlined),
+            color: AppColor.primary500,
+            onPressed: () => context.pushNamed(AppRoutes.profileEdit),
+          ),
+        ],
       ),
       body: profile.when(
-        skipLoadingOnRefresh: false,
+        skipLoadingOnRefresh: true,
         loading: () => const Center(child: AppInlineLoading()),
-        error: (error, _) =>
-            _ErrorState(message: errorMessageOf(error), onRetry: refresh),
+        error: (error, _) => AppErrorState(
+          message: errorMessageOf(error),
+          onRetry: refresh,
+          isRetrying: isRefreshing,
+        ),
         data: (profile) => profile == null
-            ? _ErrorState(
+            ? AppErrorState(
                 message: 'تعذّر تحميل بيانات الملف الشخصي',
                 onRetry: refresh,
+                isRetrying: isRefreshing,
               )
             : _DriverProfileDetailsBody(profile: profile),
       ),
@@ -50,22 +66,6 @@ class ProfileDetailsScreen extends ConsumerWidget {
   }
 }
 
-class _ErrorState extends StatelessWidget {
-  const _ErrorState({required this.message, required this.onRetry});
-
-  final String message;
-  final VoidCallback onRetry;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: AppDimens.space24),
-        child: AppErrorRetry(message: message, onRetry: onRetry),
-      ),
-    );
-  }
-}
 
 class _DriverProfileDetailsBody extends StatelessWidget {
   const _DriverProfileDetailsBody({required this.profile});

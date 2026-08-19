@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wasal/core/widgets/app_primary_button.dart';
+import 'package:wasel_core/widgets/app_primary_button.dart';
 import 'package:wasal/features/ride/ui/providers/request_ride/request_ride_provider.dart';
 
 class RequestConfirmButton extends ConsumerWidget {
