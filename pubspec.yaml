@@ -15,6 +15,7 @@ workspace:
   - apps/driver
   - packages/wasel_location
   - packages/wasel_profile
+  - packages/wasel_payments
 
 dev_dependencies:
   melos: ^6.0.0
