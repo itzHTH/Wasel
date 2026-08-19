@@ -1,4 +1,3 @@
-import 'package:driver/core/widgets/app_primary_button.dart';
 import 'package:wasel_payments/domain/entities/payment_method.dart';
 import 'package:driver/features/ride/ui/widgets/ride_completed/completed_check_badge.dart';
 import 'package:driver/features/ride/ui/widgets/fare_hero.dart';

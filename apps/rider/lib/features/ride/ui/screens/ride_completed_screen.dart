@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wasal/core/widgets/app_primary_button.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_completed/star_rating_bar.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_price_card/ride_detail_row.dart';
 import 'package:wasel_core/wasel_core.dart';
