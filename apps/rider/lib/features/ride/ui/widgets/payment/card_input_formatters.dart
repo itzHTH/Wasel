@@ -51,8 +51,6 @@ class ExpiryInputFormatter extends TextInputFormatter {
 
     if (capped.length <= 2) return _collapsedAtEnd(capped);
 
-    return _collapsedAtEnd(
-      '${capped.substring(0, 2)}/${capped.substring(2)}',
-    );
+    return _collapsedAtEnd('${capped.substring(0, 2)}/${capped.substring(2)}');
   }
 }

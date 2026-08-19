@@ -88,6 +88,7 @@ class _CardFormSheetState extends ConsumerState<_CardFormSheet> {
   }
 
   Future<void> _submit() async {
+    FocusScope.of(context).unfocus();
     setState(() => _showErrors = true);
 
     if (!(_formKey.currentState?.validate() ?? false)) return;
@@ -123,91 +124,103 @@ class _CardFormSheetState extends ConsumerState<_CardFormSheet> {
           bottom: MediaQuery.viewInsetsOf(context).bottom,
         ),
         child: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           padding: EdgeInsets.fromLTRB(
             AppDimens.space16,
             AppDimens.space12,
             AppDimens.space16,
             AppDimens.space24,
           ),
-          child: Form(
-            key: _formKey,
-            autovalidateMode: _showErrors
-                ? AutovalidateMode.onUserInteraction
-                : AutovalidateMode.disabled,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Center(
-                  child: Container(
-                    width: AppDimens.space40,
-                    height: AppDimens.space4,
-                    decoration: BoxDecoration(
-                      color: AppColor.neutral200,
-                      borderRadius: BorderRadius.circular(AppDimens.radiusPill),
+          child: AutofillGroup(
+            child: Form(
+              key: _formKey,
+              autovalidateMode: _showErrors
+                  ? AutovalidateMode.onUserInteraction
+                  : AutovalidateMode.disabled,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Center(
+                    child: Container(
+                      width: AppDimens.space40,
+                      height: AppDimens.space4,
+                      decoration: BoxDecoration(
+                        color: AppColor.neutral200,
+                        borderRadius: BorderRadius.circular(
+                          AppDimens.radiusPill,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: AppDimens.space24),
-                Text(
-                  'بيانات البطاقة',
-                  textAlign: TextAlign.center,
-                  style: AppTextStyles.font16Secondary900Bold,
-                ),
-                SizedBox(height: AppDimens.space16),
-                AppLabeledFormField(
-                  label: 'رقم البطاقة',
-                  hintText: '0000 0000 0000 0000',
-                  controller: _cardNumber,
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.next,
-                  inputFormatters: const [CardNumberInputFormatter()],
-                  validator: _validateCardNumber,
-                ),
-                SizedBox(height: AppDimens.space12),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: AppLabeledFormField(
-                        label: 'تاريخ الانتهاء',
-                        hintText: 'MM/YY',
-                        controller: _expiry,
-                        keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.next,
-                        inputFormatters: const [ExpiryInputFormatter()],
-                        validator: _validateExpiry,
-                      ),
-                    ),
-                    SizedBox(width: AppDimens.space8),
-                    Expanded(
-                      child: AppLabeledFormField(
-                        label: 'CVV',
-                        hintText: '123',
-                        controller: _cvv,
-                        obscureText: true,
-                        keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.done,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                          LengthLimitingTextInputFormatter(4),
-                        ],
-                        validator: _validateCvv,
-                      ),
-                    ),
-                  ],
-                ),
-                if (state.hasError) ...[
+                  SizedBox(height: AppDimens.space24),
+                  Text(
+                    'بيانات البطاقة',
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.font16Secondary900Bold,
+                  ),
+                  SizedBox(height: AppDimens.space16),
+                  AppLabeledFormField(
+                    label: 'رقم البطاقة',
+                    hintText: '0000 0000 0000 0000',
+                    controller: _cardNumber,
+                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.next,
+                    autofillHints: const [AutofillHints.creditCardNumber],
+                    inputFormatters: const [CardNumberInputFormatter()],
+                    validator: _validateCardNumber,
+                  ),
                   SizedBox(height: AppDimens.space12),
-                  AppInlineError(message: state.error.toString()),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: AppLabeledFormField(
+                          label: 'تاريخ الانتهاء',
+                          hintText: 'MM/YY',
+                          controller: _expiry,
+                          keyboardType: TextInputType.number,
+                          textInputAction: TextInputAction.next,
+                          autofillHints: const [
+                            AutofillHints.creditCardExpirationDate,
+                          ],
+                          inputFormatters: const [ExpiryInputFormatter()],
+                          validator: _validateExpiry,
+                        ),
+                      ),
+                      SizedBox(width: AppDimens.space8),
+                      Expanded(
+                        child: AppLabeledFormField(
+                          label: 'CVV',
+                          hintText: '123',
+                          controller: _cvv,
+                          obscureText: true,
+                          keyboardType: TextInputType.number,
+                          textInputAction: TextInputAction.done,
+                          autofillHints: const [
+                            AutofillHints.creditCardSecurityCode,
+                          ],
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            LengthLimitingTextInputFormatter(4),
+                          ],
+                          validator: _validateCvv,
+                        ),
+                      ),
+                    ],
+                  ),
+                  if (state.hasError) ...[
+                    SizedBox(height: AppDimens.space12),
+                    AppInlineError(message: state.error.toString()),
+                  ],
+                  SizedBox(height: AppDimens.space24),
+                  AppPrimaryButton(
+                    label: 'حفظ البطاقة',
+                    isLoading: state.isLoading,
+                    onPressed: _submit,
+                  ),
                 ],
-                SizedBox(height: AppDimens.space24),
-                AppPrimaryButton(
-                  label: 'حفظ البطاقة',
-                  isLoading: state.isLoading,
-                  onPressed: _submit,
-                ),
-              ],
+              ),
             ),
           ),
         ),
