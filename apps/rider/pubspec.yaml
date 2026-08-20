@@ -88,5 +88,5 @@ flutter:
 
   assets:
   - assets/icons/
-  - assets/json/rider_map_style.json
+  - assets/map_styles/
   - .env
