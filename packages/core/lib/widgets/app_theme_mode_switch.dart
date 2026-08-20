@@ -7,82 +7,80 @@ import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/providers/theme_mode_provider.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 
+const _orderedModes = [ThemeMode.light, ThemeMode.dark, ThemeMode.system];
+
+const _modeLabels = {
+  ThemeMode.light: 'فاتح',
+  ThemeMode.dark: 'داكن',
+  ThemeMode.system: 'النظام',
+};
+
+const _modeIcons = {
+  ThemeMode.light: Icons.light_mode_rounded,
+  ThemeMode.dark: Icons.dark_mode_rounded,
+  ThemeMode.system: Icons.brightness_auto_rounded,
+};
+
+const _slideDuration = Duration(milliseconds: 280);
+const _slideCurve = Curves.easeOutCubic;
+
 /// A three-segment Light / Dark / System control with a thumb that slides
 /// between segments.
 class AppThemeModeSwitch extends ConsumerWidget {
   const AppThemeModeSwitch({super.key});
 
-  static const _modes = [ThemeMode.light, ThemeMode.dark, ThemeMode.system];
-  static const _duration = Duration(milliseconds: 280);
-  static const _curve = Curves.easeOutCubic;
+  void _selectMode(WidgetRef ref, ThemeMode mode) {
+    HapticFeedback.selectionClick();
+    unawaited(ref.read(themeModeControllerProvider.notifier).setMode(mode));
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colors = context.colors;
-    final selected = ref.watch(themeModeControllerProvider);
-    final reduceMotion = MediaQuery.disableAnimationsOf(context);
-    final duration = reduceMotion ? Duration.zero : _duration;
-
-    // -1 / 0 / 1 along the track, mirrored under RTL so the thumb tracks the
-    // segment the reader actually sees.
-    final index = _modes.indexOf(selected);
-    final ltr = Directionality.of(context) == TextDirection.ltr;
-    final x = (index * 2 / (_modes.length - 1)) - 1;
+    final selectedMode = ref.watch(themeModeControllerProvider);
+    final motionDuration = MediaQuery.disableAnimationsOf(context)
+        ? Duration.zero
+        : _slideDuration;
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        final trackPadding = AppDimens.space4;
+        final trackInset = AppDimens.space4;
         final segmentWidth =
-            (constraints.maxWidth - trackPadding * 2) / _modes.length;
+            (constraints.maxWidth - trackInset * 2) / _orderedModes.length;
 
-        // The track is explicitly sized: a bare Stack in a min-height Column
-        // leaves the sliding thumb with unbounded height.
-        final trackHeight = AppDimens.buttonHeight - trackPadding * 2;
+        // Sized explicitly: a bare Stack inside a min-height Column leaves the
+        // sliding thumb with unbounded height.
+        final segmentHeight = AppDimens.buttonHeight - trackInset * 2;
 
         return Container(
-          padding: EdgeInsets.all(trackPadding),
+          padding: EdgeInsets.all(trackInset),
           decoration: BoxDecoration(
             color: colors.neutral100,
             borderRadius: BorderRadius.circular(AppDimens.radiusPill),
             border: Border.all(color: colors.neutral200),
           ),
           child: SizedBox(
-            height: trackHeight,
+            height: segmentHeight,
             child: Stack(
               children: [
-                AnimatedAlign(
-                  duration: duration,
-                  curve: _curve,
-                  alignment: Alignment(ltr ? x : -x, 0),
-                  child: AnimatedContainer(
-                    duration: duration,
-                    curve: _curve,
-                    width: segmentWidth,
-                    height: trackHeight,
-                    decoration: BoxDecoration(
-                      color: colors.primary500,
-                      borderRadius: BorderRadius.circular(AppDimens.radiusPill),
-                    ),
-                  ),
+                _SlidingThumb(
+                  selectedMode: selectedMode,
+                  width: segmentWidth,
+                  height: segmentHeight,
+                  motionDuration: motionDuration,
                 ),
                 Row(
                   children: [
-                    for (final mode in _modes)
+                    for (final mode in _orderedModes)
                       Expanded(
-                        child: _Segment(
+                        child: _ModeSegment(
                           mode: mode,
-                          isSelected: mode == selected,
-                          height: trackHeight,
-                          duration: duration,
-                          onTap: () {
-                            if (mode == selected) return;
-                            HapticFeedback.selectionClick();
-                            unawaited(
-                              ref
-                                  .read(themeModeControllerProvider.notifier)
-                                  .setMode(mode),
-                            );
-                          },
+                          isSelected: mode == selectedMode,
+                          height: segmentHeight,
+                          motionDuration: motionDuration,
+                          onTap: mode == selectedMode
+                              ? null
+                              : () => _selectMode(ref, mode),
                         ),
                       ),
                   ],
@@ -96,42 +94,74 @@ class AppThemeModeSwitch extends ConsumerWidget {
   }
 }
 
-class _Segment extends StatelessWidget {
-  const _Segment({
+/// The filled pill that travels to the selected segment.
+class _SlidingThumb extends StatelessWidget {
+  const _SlidingThumb({
+    required this.selectedMode,
+    required this.width,
+    required this.height,
+    required this.motionDuration,
+  });
+
+  final ThemeMode selectedMode;
+  final double width;
+  final double height;
+  final Duration motionDuration;
+
+  @override
+  Widget build(BuildContext context) {
+    final selectedIndex = _orderedModes.indexOf(selectedMode);
+
+    // -1 / 0 / 1 along the track, mirrored under RTL so the thumb lands on the
+    // segment the reader actually sees.
+    final trackPosition = (selectedIndex * 2 / (_orderedModes.length - 1)) - 1;
+    final isLtr = Directionality.of(context) == TextDirection.ltr;
+
+    return AnimatedAlign(
+      duration: motionDuration,
+      curve: _slideCurve,
+      alignment: Alignment(isLtr ? trackPosition : -trackPosition, 0),
+      child: AnimatedContainer(
+        duration: motionDuration,
+        curve: _slideCurve,
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: context.colors.primary500,
+          borderRadius: BorderRadius.circular(AppDimens.radiusPill),
+        ),
+      ),
+    );
+  }
+}
+
+/// One tappable segment. [onTap] is null for the selected mode, which also
+/// suppresses the ripple on a segment that has nothing to do.
+class _ModeSegment extends StatelessWidget {
+  const _ModeSegment({
     required this.mode,
     required this.isSelected,
     required this.height,
-    required this.duration,
+    required this.motionDuration,
     required this.onTap,
   });
 
   final ThemeMode mode;
   final bool isSelected;
   final double height;
-  final Duration duration;
-  final VoidCallback onTap;
-
-  static const _labels = {
-    ThemeMode.light: 'فاتح',
-    ThemeMode.dark: 'داكن',
-    ThemeMode.system: 'النظام',
-  };
-
-  static const _icons = {
-    ThemeMode.light: Icons.light_mode_rounded,
-    ThemeMode.dark: Icons.dark_mode_rounded,
-    ThemeMode.system: Icons.brightness_auto_rounded,
-  };
+  final Duration motionDuration;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     final colors = context.colors;
-    final foreground = isSelected ? colors.onPrimary : colors.neutral600;
+    final foregroundColor = isSelected ? colors.onPrimary : colors.neutral600;
+    final label = _modeLabels[mode]!;
 
     return Semantics(
       button: true,
       selected: isSelected,
-      label: _labels[mode],
+      label: label,
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(AppDimens.radiusPill),
@@ -141,23 +171,23 @@ class _Segment extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AnimatedSwitcher(
-                duration: duration,
+                duration: motionDuration,
                 child: Icon(
-                  _icons[mode],
+                  _modeIcons[mode],
                   key: ValueKey(isSelected),
                   size: AppDimens.icon18,
-                  color: foreground,
+                  color: foregroundColor,
                 ),
               ),
               SizedBox(width: AppDimens.space4),
               Flexible(
                 child: AnimatedDefaultTextStyle(
-                  duration: duration,
+                  duration: motionDuration,
                   style: context.styles.font14Secondary900SemiBold.copyWith(
-                    color: foreground,
+                    color: foregroundColor,
                   ),
                   child: Text(
-                    _labels[mode]!,
+                    label,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
