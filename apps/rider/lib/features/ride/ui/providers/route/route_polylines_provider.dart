@@ -7,6 +7,7 @@ part 'route_polylines_provider.g.dart';
 
 @riverpod
 Set<Polyline> routePolylines(Ref ref) {
+  final palette = ref.watch(appPaletteProvider);
   final points = ref.watch(routePointsProvider).value ?? const [];
   if (points.length < 2) return const {};
 
@@ -14,7 +15,7 @@ Set<Polyline> routePolylines(Ref ref) {
     Polyline(
       polylineId: const PolylineId('active_route'),
       points: points.map((p) => LatLng(p.latitude, p.longitude)).toList(),
-      color: AppColor.primary500,
+      color: palette.primary500,
       width: 4,
       startCap: Cap.roundCap,
       endCap: Cap.roundCap,

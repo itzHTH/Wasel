@@ -17,7 +17,7 @@ class RidePriceErrorView extends ConsumerWidget {
         Text(
           message,
           textAlign: TextAlign.center,
-          style: AppTextStyles.font14Secondary500Medium,
+          style: context.styles.font14Secondary500Medium,
         ),
         SizedBox(height: AppDimens.space16),
         SizedBox(
@@ -26,7 +26,7 @@ class RidePriceErrorView extends ConsumerWidget {
             onPressed: () =>
                 ref.read(ridePriceEstimateProvider.notifier).getPrice(),
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColor.primary500,
+              backgroundColor: context.colors.primary500,
               elevation: 0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(AppDimens.radiusPill),
@@ -34,7 +34,7 @@ class RidePriceErrorView extends ConsumerWidget {
             ),
             child: Text(
               'إعادة المحاولة',
-              style: AppTextStyles.font16Neutral0SemiBold,
+              style: context.styles.font16Neutral0SemiBold,
             ),
           ),
         ),

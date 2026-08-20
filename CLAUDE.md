@@ -128,7 +128,11 @@ These rules describe how `wasal` is actually built — keep them in sync with th
 - Use `Consumer` / `ref.watch(provider.select(...))` on the smallest widget that needs the state — never at the top of the tree
 
 ## 10) Theming & Localization
-- Use `AppColor`, `AppDimens` (flutter_screenutil `.r/.h/.w`), `AppTextStyles`, and `AppTheme` — never hardcode colors or sizes
+- Colors and text styles are theme-scoped: use `context.colors.<token>` and `context.styles.<style>` (from `theme_context_extension.dart`) — the static `AppColor` class is gone
+- Each app injects its brand at the root `ProviderScope` via `appBrandProvider`; palettes live in `packages/core/lib/theme/palettes/`
+- New tokens go in `AppColorsExtension` (`app_colors_extension.dart`) with a value for BOTH brands and BOTH brightnesses — never a raw `Color(0x…)` at a call site
+- Use `AppDimens` (flutter_screenutil `.r/.h/.w`) and `AppTheme` — never hardcode sizes
+- Both apps support light/dark/system; the mode is persisted and restored before `runApp`. Anything drawn outside the widget tree (map overlays, `CustomPainter`) must take resolved colors as parameters
 - App is RTL (Arabic). Localization is not yet wired; the planned approach is **Flutter's built-in localization** (`flutter_localizations` + `intl` / `gen_l10n`), NOT `easy_localization` (currently declared but unused, to be removed when localization is implemented)
 
 ## graphify

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/widgets/app_back_button.dart';
 import 'package:wasal/features/auth/ui/providers/register/register_provider.dart';
 import 'package:wasal/features/auth/ui/widgets/common/auth_primary_button.dart';
@@ -40,11 +40,11 @@ class RegisterFormPage extends StatelessWidget {
           AppBackButton(onTap: onBack),
           SizedBox(height: AppDimens.space24),
 
-          Text('أكمل بياناتك', style: AppTextStyles.font24Secondary900Bold),
+          Text('أكمل بياناتك', style: context.styles.font24Secondary900Bold),
           SizedBox(height: AppDimens.space8),
           Text(
             'أدخل معلوماتك الشخصية لإكمال التسجيل',
-            style: AppTextStyles.font14Neutral400Regular,
+            style: context.styles.font14Neutral400Regular,
           ),
           SizedBox(height: AppDimens.space32),
 

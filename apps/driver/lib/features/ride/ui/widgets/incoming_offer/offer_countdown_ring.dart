@@ -28,8 +28,8 @@ class OfferCountdownRing extends StatelessWidget {
         ? 0.0
         : (remaining.inMilliseconds / totalMs).clamp(0.0, 1.0);
     final color = progress <= _urgentFraction
-        ? AppColor.alertError500
-        : AppColor.primary500;
+        ? context.colors.alertError500
+        : context.colors.primary500;
     final size = AppDimens.icon48;
 
     return SizedBox(
@@ -39,12 +39,13 @@ class OfferCountdownRing extends StatelessWidget {
         painter: _RingPainter(
           progress: progress,
           color: color,
+          trackColor: context.colors.neutral200,
           strokeWidth: AppDimens.space4,
         ),
         child: Center(
           child: Text(
             '${remaining.inSeconds}',
-            style: AppTextStyles.font14Secondary900SemiBold.copyWith(
+            style: context.styles.font14Secondary900SemiBold.copyWith(
               color: color,
             ),
           ),
@@ -58,11 +59,13 @@ class _RingPainter extends CustomPainter {
   const _RingPainter({
     required this.progress,
     required this.color,
+    required this.trackColor,
     required this.strokeWidth,
   });
 
   final double progress;
   final Color color;
+  final Color trackColor;
   final double strokeWidth;
 
   static const _startAngle = -math.pi / 2;
@@ -76,7 +79,7 @@ class _RingPainter extends CustomPainter {
     final track = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth
-      ..color = AppColor.neutral200;
+      ..color = trackColor;
 
     canvas.drawCircle(center, radius, track);
 
@@ -101,5 +104,6 @@ class _RingPainter extends CustomPainter {
   bool shouldRepaint(_RingPainter oldDelegate) =>
       oldDelegate.progress != progress ||
       oldDelegate.color != color ||
+      oldDelegate.trackColor != trackColor ||
       oldDelegate.strokeWidth != strokeWidth;
 }

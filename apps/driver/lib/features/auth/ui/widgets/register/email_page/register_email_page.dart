@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/helpers/app_validators.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/widgets/app_labeled_field.dart';
 import 'package:driver/features/auth/ui/providers/register/register_provider.dart';
 import 'package:driver/features/auth/ui/widgets/common/auth_header.dart';
@@ -46,7 +45,7 @@ class RegisterEmailPage extends StatelessWidget {
                 validator: AppValidators.email,
                 prefixIcon: Icon(
                   Icons.email_outlined,
-                  color: AppColor.neutral400,
+                  color: context.colors.neutral400,
                   size: AppDimens.icon20,
                 ),
               ),
@@ -72,13 +71,13 @@ class RegisterEmailPage extends StatelessWidget {
               children: [
                 Text(
                   'لديك حساب بالفعل؟ ',
-                  style: AppTextStyles.font14Neutral400Regular,
+                  style: context.styles.font14Neutral400Regular,
                 ),
                 GestureDetector(
                   onTap: () => Navigator.pop(context),
                   child: Text(
                     'تسجيل الدخول',
-                    style: AppTextStyles.font14Primary500SemiBold,
+                    style: context.styles.font14Primary500SemiBold,
                   ),
                 ),
               ],

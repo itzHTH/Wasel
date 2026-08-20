@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 
 class AppSoonBadge extends StatelessWidget {
   const AppSoonBadge({super.key, this.label = 'قريبًا'});
@@ -16,10 +15,10 @@ class AppSoonBadge extends StatelessWidget {
         vertical: AppDimens.space4,
       ),
       decoration: BoxDecoration(
-        color: AppColor.neutral100,
+        color: context.colors.neutral100,
         borderRadius: BorderRadius.circular(AppDimens.radiusPill),
       ),
-      child: Text(label, style: AppTextStyles.font12Neutral600SemiBold),
+      child: Text(label, style: context.styles.font12Neutral600SemiBold),
     );
   }
 }

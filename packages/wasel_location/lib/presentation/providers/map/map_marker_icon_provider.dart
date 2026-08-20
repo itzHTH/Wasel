@@ -9,7 +9,7 @@ part 'map_marker_icon_provider.g.dart';
 /// Converts an SVG asset into a [BitmapDescriptor] for Google Maps markers.
 //
 //? - Uses a family provider keyed by `assetPath` and `logicalSize` to cache
-//?   the expensive SVG-to-Bitmap rasterization process (decodes once per icon).
+//?   the expensive SVG-to-Bitmap rasterization process.
 //
 //? - Scales the drawing using the device's pixel ratio for crisp Retina/High-DPI rendering.
 //

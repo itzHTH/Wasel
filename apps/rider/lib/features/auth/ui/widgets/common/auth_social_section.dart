@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 
 class AuthSocialSection extends StatelessWidget {
   final VoidCallback? onGoogleTap;
@@ -34,18 +33,18 @@ class _DividerRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Expanded(
-          child: Divider(color: AppColor.neutral200, thickness: 1),
+        Expanded(
+          child: Divider(color: context.colors.neutral200, thickness: 1),
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 12.w),
           child: Text(
             'أو سجل باستخدام',
-            style: AppTextStyles.font12Neutral400Regular,
+            style: context.styles.font12Neutral400Regular,
           ),
         ),
-        const Expanded(
-          child: Divider(color: AppColor.neutral200, thickness: 1),
+        Expanded(
+          child: Divider(color: context.colors.neutral200, thickness: 1),
         ),
       ],
     );
@@ -66,16 +65,16 @@ class _GoogleButton extends StatelessWidget {
         width: double.infinity,
         height: AppDimens.buttonHeight,
         decoration: BoxDecoration(
-          color: AppColor.neutral0,
+          color: context.colors.neutral0,
           borderRadius: BorderRadius.circular(AppDimens.radiusPill),
-          border: Border.all(color: AppColor.neutral200),
+          border: Border.all(color: context.colors.neutral200),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SvgPicture.asset('assets/icons/google_logo.svg'),
             SizedBox(width: 10.w),
-            Text(label, style: AppTextStyles.font14Secondary500Medium),
+            Text(label, style: context.styles.font14Secondary500Medium),
           ],
         ),
       ),

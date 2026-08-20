@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/networking/errors/error_message.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/widgets/app_error_state.dart';
 import 'package:wasel_core/widgets/app_loading.dart';
 import 'package:wasel_profile/domain/entities/profile_edit_capabilities.dart';
@@ -23,11 +23,11 @@ class ProfileEditScreen extends ConsumerWidget {
         ref.read(riderProfileControllerProvider.notifier).refresh();
 
     return Scaffold(
-      backgroundColor: AppColor.screenBackground,
+      backgroundColor: context.colors.screenBackground,
       appBar: AppBar(
         title: const Text('تعديل الملف الشخصي'),
-        backgroundColor: AppColor.screenBackground,
-        surfaceTintColor: AppColor.screenBackground,
+        backgroundColor: context.colors.screenBackground,
+        surfaceTintColor: context.colors.screenBackground,
       ),
       body: profile.when(
         loading: () => const Center(child: AppInlineLoading()),

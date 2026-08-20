@@ -3,9 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
 import 'package:wasel_auth/presentation/providers/reset_password/reset_password_controller.dart';
 import 'package:wasel_core/helpers/app_validators.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/widgets/app_back_button.dart';
 import 'package:wasel_core/widgets/app_inline_error.dart';
 import 'package:wasel_core/widgets/app_labeled_field.dart';
@@ -35,12 +34,12 @@ class ForgotPasswordPage extends StatelessWidget {
 
           Text(
             'نسيت كلمة المرور؟',
-            style: AppTextStyles.font24Secondary900Bold,
+            style: context.styles.font24Secondary900Bold,
           ),
           SizedBox(height: AppDimens.space8),
           Text(
             'أدخل بريدك الإلكتروني وسنرسل لك رمز تحقق لإعادة تعيين كلمة المرور',
-            style: AppTextStyles.font14Neutral400Regular,
+            style: context.styles.font14Neutral400Regular,
           ),
           SizedBox(height: AppDimens.space32),
 
@@ -60,7 +59,7 @@ class ForgotPasswordPage extends StatelessWidget {
                 validator: AppValidators.email,
                 prefixIcon: Icon(
                   Icons.email_outlined,
-                  color: AppColor.neutral400,
+                  color: context.colors.neutral400,
                   size: AppDimens.icon20,
                 ),
               ),
@@ -96,13 +95,13 @@ class ForgotPasswordPage extends StatelessWidget {
             children: [
               Text(
                 'تذكرت كلمة المرور؟ ',
-                style: AppTextStyles.font14Neutral400Regular,
+                style: context.styles.font14Neutral400Regular,
               ),
               GestureDetector(
                 onTap: () => Navigator.pop(context),
                 child: Text(
                   'تسجيل الدخول',
-                  style: AppTextStyles.font14Primary500SemiBold,
+                  style: context.styles.font14Primary500SemiBold,
                 ),
               ),
             ],

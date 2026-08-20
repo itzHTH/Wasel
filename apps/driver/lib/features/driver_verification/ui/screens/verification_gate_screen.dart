@@ -2,9 +2,8 @@ import 'package:driver/features/driver_verification/domain/entities/verification
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/extensions/navigation_extension.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
 import 'package:driver/features/driver_verification/ui/providers/verify_status/verify_status_provider.dart';
@@ -63,7 +62,7 @@ class _VerificationGateScreenState
 
     final state = ref.watch(verifyStatusProvider);
     return Scaffold(
-      backgroundColor: AppColor.neutral0,
+      backgroundColor: context.colors.neutral0,
       body: SafeArea(
         child: Center(
           child: state.when(
@@ -85,11 +84,11 @@ class _GateLoader extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const CircularProgressIndicator(color: AppColor.primary500),
+        CircularProgressIndicator(color: context.colors.primary500),
         SizedBox(height: AppDimens.space24),
         Text(
           'جارٍ التحقق من حسابك وبعض المعلومات …',
-          style: AppTextStyles.font14Neutral400Regular,
+          style: context.styles.font14Neutral400Regular,
         ),
       ],
     );
@@ -108,21 +107,21 @@ class _GateError extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const VerificationStatusBadge(
+          VerificationStatusBadge(
             icon: Icons.error_outline_rounded,
-            color: AppColor.alertError500,
-            background: AppColor.alertError100,
+            color: context.colors.alertError500,
+            background: context.colors.alertError100,
           ),
           SizedBox(height: AppDimens.space24),
           Text(
             'تعذّر التحقق من حالة طلبك',
-            style: AppTextStyles.font20Secondary900Bold,
+            style: context.styles.font20Secondary900Bold,
             textAlign: TextAlign.center,
           ),
           SizedBox(height: AppDimens.space8),
           Text(
             'تحقق من اتصالك بالإنترنت ثم أعد المحاولة.',
-            style: AppTextStyles.font14Neutral400Regular,
+            style: context.styles.font14Neutral400Regular,
             textAlign: TextAlign.center,
           ),
           SizedBox(height: AppDimens.space32),

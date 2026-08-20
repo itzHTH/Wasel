@@ -26,7 +26,6 @@ class ExpandableRideCard extends ConsumerStatefulWidget {
 
 class _ExpandableRideCardState extends ConsumerState<ExpandableRideCard>
     with SingleTickerProviderStateMixin {
-
   static const _flingVelocity = 300.0;
 
   static const _peekDelay = Duration(milliseconds: 340);
@@ -156,7 +155,7 @@ class _Grabber extends StatelessWidget {
         width: AppDimens.space40,
         height: AppDimens.space4,
         decoration: BoxDecoration(
-          color: AppColor.neutral200,
+          color: context.colors.neutral200,
           borderRadius: BorderRadius.circular(AppDimens.radiusPill),
         ),
       ),

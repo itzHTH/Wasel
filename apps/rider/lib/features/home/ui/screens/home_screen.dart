@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/core/routing/app_routes_name.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasal/features/auth/ui/providers/logout/logout.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -22,8 +22,8 @@ class HomeScreen extends StatelessWidget {
                 ref.watch(logoutProvider);
                 return ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColor.primary500,
-                    foregroundColor: AppColor.neutral200,
+                    backgroundColor: context.colors.primary500,
+                    foregroundColor: context.colors.neutral200,
                     fixedSize: const Size(250, 50),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -44,8 +44,8 @@ class HomeScreen extends StatelessWidget {
                       .watch(logoutProvider)
                       .when(
                         data: (isLoggedOut) => const Text("تسجيل الخروج"),
-                        loading: () => const CircularProgressIndicator(
-                          color: AppColor.neutral200,
+                        loading: () => CircularProgressIndicator(
+                          color: context.colors.neutral200,
                         ),
                         error: (error, stackTrace) =>
                             const Text("فشل تسجيل الخروج"),

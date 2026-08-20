@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:camera/camera.dart' show XFile;
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 
 class CapturedImage extends StatefulWidget {
   final XFile file;
@@ -33,7 +33,7 @@ class _CapturedImageState extends State<CapturedImage> {
       future: _bytes,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return Container(color: AppColor.neutral100);
+          return Container(color: context.colors.neutral100);
         }
         return Image.memory(snapshot.data!, fit: widget.fit);
       },

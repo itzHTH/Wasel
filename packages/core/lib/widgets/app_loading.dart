@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 
 /// The single loading identity for the Wasel apps.
@@ -22,7 +22,7 @@ class AppInlineLoading extends StatelessWidget {
       height: resolvedSize,
       child: CircularProgressIndicator(
         strokeWidth: _strokeFor(resolvedSize),
-        color: color ?? AppColor.primary500,
+        color: color ?? context.colors.primary500,
       ),
     );
   }
@@ -39,7 +39,7 @@ class AppLoadingOverlay extends StatelessWidget {
   Widget build(BuildContext context) {
     return AbsorbPointer(
       child: ColoredBox(
-        color: backgroundColor ?? AppColor.screenBackground,
+        color: backgroundColor ?? context.colors.screenBackground,
         child: const Center(child: AppInlineLoading()),
       ),
     );

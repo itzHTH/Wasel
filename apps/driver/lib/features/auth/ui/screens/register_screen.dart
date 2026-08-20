@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:driver/features/auth/ui/providers/register/register_provider.dart';
 import 'package:driver/features/auth/ui/widgets/register/email_page/register_email_page.dart';
@@ -162,7 +162,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
         }
       },
       child: Scaffold(
-        backgroundColor: AppColor.neutral0,
+        backgroundColor: context.colors.neutral0,
         body: SafeArea(
           child: PageView(
             controller: _pageController,

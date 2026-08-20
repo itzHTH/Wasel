@@ -8,19 +8,21 @@ class CardStageHeader extends StatelessWidget {
     required this.icon,
     required this.title,
     this.subtitle,
-    this.tint = AppColor.primary500,
-    this.background = AppColor.primary100,
+    this.tint,
+    this.background,
   });
 
   final IconData icon;
   final String title;
   final String? subtitle;
-  final Color tint;
-  final Color background;
+  final Color? tint;
+  final Color? background;
 
   @override
   Widget build(BuildContext context) {
     final subtitle = this.subtitle;
+    final tint = this.tint ?? context.colors.primary500;
+    final background = this.background ?? context.colors.primary100;
 
     return Row(
       children: [
@@ -37,9 +39,9 @@ class CardStageHeader extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: AppTextStyles.font20Secondary900Bold),
+              Text(title, style: context.styles.font20Secondary900Bold),
               if (subtitle != null)
-                Text(subtitle, style: AppTextStyles.font14Neutral400Regular),
+                Text(subtitle, style: context.styles.font14Neutral400Regular),
             ],
           ),
         ),

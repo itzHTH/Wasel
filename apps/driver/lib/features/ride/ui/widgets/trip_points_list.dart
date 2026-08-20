@@ -18,10 +18,7 @@ class TripPointsList extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _Rail(
-          hasPickup: pickupPoint != null,
-          hasDropoff: dropoffPoint != null,
-        ),
+        _Rail(hasPickup: pickupPoint != null, hasDropoff: dropoffPoint != null),
         SizedBox(width: AppDimens.space12),
         Expanded(
           child: Column(
@@ -59,14 +56,14 @@ class _Rail extends StatelessWidget {
             Icon(
               Icons.circle,
               size: AppDimens.icon18,
-              color: AppColor.primary500,
+              color: context.colors.primary500,
             ),
           if (hasPickup && hasDropoff) const _Connector(),
           if (hasDropoff)
             Icon(
               Icons.circle,
               size: AppDimens.icon18,
-              color: AppColor.alertSuccess500,
+              color: context.colors.secondary900,
             ),
         ],
       ),
@@ -84,7 +81,7 @@ class _Connector extends StatelessWidget {
       height: AppDimens.space32,
       margin: EdgeInsets.symmetric(vertical: AppDimens.space4),
       decoration: BoxDecoration(
-        color: AppColor.neutral200,
+        color: context.colors.neutral200,
         borderRadius: BorderRadius.circular(AppDimens.radiusPill),
       ),
     );
@@ -110,7 +107,7 @@ class _Point extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: AppTextStyles.font12Neutral400Regular),
+        Text(title, style: context.styles.font12Neutral400Regular),
         label.when(
           loading: () => Align(
             alignment: AlignmentDirectional.centerStart,
@@ -135,7 +132,7 @@ class _LabelText extends StatelessWidget {
       value,
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
-      style: AppTextStyles.font14Secondary900SemiBold,
+      style: context.styles.font14Secondary900SemiBold,
     );
   }
 }

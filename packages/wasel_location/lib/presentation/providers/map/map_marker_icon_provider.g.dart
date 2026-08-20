@@ -11,7 +11,7 @@ part of 'map_marker_icon_provider.dart';
 /// Converts an SVG asset into a [BitmapDescriptor] for Google Maps markers.
 //
 //? - Uses a family provider keyed by `assetPath` and `logicalSize` to cache
-//?   the expensive SVG-to-Bitmap rasterization process (decodes once per icon).
+//?   the expensive SVG-to-Bitmap rasterization process.
 //
 //? - Scales the drawing using the device's pixel ratio for crisp Retina/High-DPI rendering.
 //
@@ -27,7 +27,7 @@ final mapMarkerIconProvider = MapMarkerIconFamily._();
 /// Converts an SVG asset into a [BitmapDescriptor] for Google Maps markers.
 //
 //? - Uses a family provider keyed by `assetPath` and `logicalSize` to cache
-//?   the expensive SVG-to-Bitmap rasterization process (decodes once per icon).
+//?   the expensive SVG-to-Bitmap rasterization process.
 //
 //? - Scales the drawing using the device's pixel ratio for crisp Retina/High-DPI rendering.
 //
@@ -50,7 +50,7 @@ final class MapMarkerIconProvider
   /// Converts an SVG asset into a [BitmapDescriptor] for Google Maps markers.
   //
   //? - Uses a family provider keyed by `assetPath` and `logicalSize` to cache
-  //?   the expensive SVG-to-Bitmap rasterization process (decodes once per icon).
+  //?   the expensive SVG-to-Bitmap rasterization process.
   //
   //? - Scales the drawing using the device's pixel ratio for crisp Retina/High-DPI rendering.
   //
@@ -108,7 +108,7 @@ String _$mapMarkerIconHash() => r'1e170c461fba4beefe677ad2b595b2ab239e1424';
 /// Converts an SVG asset into a [BitmapDescriptor] for Google Maps markers.
 //
 //? - Uses a family provider keyed by `assetPath` and `logicalSize` to cache
-//?   the expensive SVG-to-Bitmap rasterization process (decodes once per icon).
+//?   the expensive SVG-to-Bitmap rasterization process.
 //
 //? - Scales the drawing using the device's pixel ratio for crisp Retina/High-DPI rendering.
 //
@@ -136,7 +136,7 @@ final class MapMarkerIconFamily extends $Family
   /// Converts an SVG asset into a [BitmapDescriptor] for Google Maps markers.
   //
   //? - Uses a family provider keyed by `assetPath` and `logicalSize` to cache
-  //?   the expensive SVG-to-Bitmap rasterization process (decodes once per icon).
+  //?   the expensive SVG-to-Bitmap rasterization process.
   //
   //? - Scales the drawing using the device's pixel ratio for crisp Retina/High-DPI rendering.
   //

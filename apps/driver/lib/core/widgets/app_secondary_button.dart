@@ -19,12 +19,12 @@ class AppSecondaryButton extends StatelessWidget {
       child: OutlinedButton(
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
-          side: const BorderSide(color: AppColor.primary500),
+          side: BorderSide(color: context.colors.primary500),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppDimens.radiusPill),
           ),
         ),
-        child: Text(label, style: AppTextStyles.font14Primary500SemiBold),
+        child: Text(label, style: context.styles.font14Primary500SemiBold),
       ),
     );
   }

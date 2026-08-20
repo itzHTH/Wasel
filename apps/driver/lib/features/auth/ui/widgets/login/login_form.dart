@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_core/helpers/app_validators.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/widgets/app_labeled_field.dart';
 import 'package:wasel_core/widgets/password_field.dart';
@@ -32,7 +32,7 @@ class LoginForm extends StatelessWidget {
             validator: AppValidators.email,
             prefixIcon: Icon(
               Icons.email_outlined,
-              color: AppColor.neutral400,
+              color: context.colors.neutral400,
               size: AppDimens.icon20,
             ),
           ),

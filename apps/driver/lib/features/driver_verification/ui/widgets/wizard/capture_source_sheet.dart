@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 
 enum CaptureSource { camera, gallery }
 
 Future<CaptureSource?> showCaptureSourceSheet({required BuildContext context}) {
   return showModalBottomSheet<CaptureSource>(
     context: context,
-    backgroundColor: AppColor.neutral0,
+    backgroundColor: context.colors.neutral0,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
         top: Radius.circular(AppDimens.radius24),
@@ -33,7 +32,7 @@ class _CaptureSourceSheet extends StatelessWidget {
             Text(
               'اختر مصدر الصورة',
               textAlign: TextAlign.center,
-              style: AppTextStyles.font20Secondary900Bold,
+              style: context.styles.font20Secondary900Bold,
             ),
             SizedBox(height: AppDimens.space24),
             _SourceTile(
@@ -73,15 +72,19 @@ class _SourceTile extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(AppDimens.space16),
         decoration: BoxDecoration(
-          color: AppColor.neutral50,
+          color: context.colors.neutral50,
           borderRadius: BorderRadius.circular(AppDimens.radius16),
-          border: Border.all(color: AppColor.neutral200),
+          border: Border.all(color: context.colors.neutral200),
         ),
         child: Row(
           children: [
-            Icon(icon, size: AppDimens.icon24, color: AppColor.primary500),
+            Icon(
+              icon,
+              size: AppDimens.icon24,
+              color: context.colors.primary500,
+            ),
             SizedBox(width: AppDimens.space16),
-            Text(label, style: AppTextStyles.font16Secondary500Regular),
+            Text(label, style: context.styles.font16Secondary500Regular),
           ],
         ),
       ),

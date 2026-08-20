@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_core/networking/errors/error_message.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/widgets/app_error_retry.dart';
 import 'package:wasel_core/widgets/app_loading.dart';
 import 'package:wasel_rides/presentation/providers/history/ride_history_state.dart';
@@ -69,18 +68,26 @@ class _EndOfListRow extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: AppDimens.space24),
       child: Row(
         children: [
-          const Expanded(
-            child: Divider(height: 1, thickness: 1, color: AppColor.neutral200),
+          Expanded(
+            child: Divider(
+              height: 1,
+              thickness: 1,
+              color: context.colors.neutral200,
+            ),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: AppDimens.space12),
             child: Text(
               'لا مزيد من الرحلات',
-              style: AppTextStyles.font12Neutral400Regular,
+              style: context.styles.font12Neutral400Regular,
             ),
           ),
-          const Expanded(
-            child: Divider(height: 1, thickness: 1, color: AppColor.neutral200),
+          Expanded(
+            child: Divider(
+              height: 1,
+              thickness: 1,
+              color: context.colors.neutral200,
+            ),
           ),
         ],
       ),

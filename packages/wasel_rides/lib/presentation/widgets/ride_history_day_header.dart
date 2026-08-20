@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_rides/core/formatters/ride_history_labels.dart';
 
 class RideHistoryDayHeader extends StatelessWidget {
@@ -18,7 +18,7 @@ class RideHistoryDayHeader extends StatelessWidget {
       ),
       child: Text(
         RideHistoryLabels.dayLabel(day),
-        style: AppTextStyles.font12Neutral600SemiBold,
+        style: context.styles.font12Neutral600SemiBold,
       ),
     );
   }

@@ -9,6 +9,6 @@ class RideCardTitle extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final title = ref.watch(rideDraftProvider.select((s) => s.cardTitle));
-    return Text(title, style: AppTextStyles.font20Secondary900Bold);
+    return Text(title, style: context.styles.font20Secondary900Bold);
   }
 }

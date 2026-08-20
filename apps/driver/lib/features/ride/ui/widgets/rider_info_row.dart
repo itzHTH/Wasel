@@ -36,7 +36,7 @@ class RiderInfoRow extends StatelessWidget {
                 profile.name,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.font14Secondary900SemiBold,
+                style: context.styles.font14Secondary900SemiBold,
               ),
               SizedBox(height: AppDimens.space4),
               if (canCall)
@@ -44,7 +44,7 @@ class RiderInfoRow extends StatelessWidget {
                   phoneNumber ?? 'رقم الهاتف غير متوفر',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: AppTextStyles.font14Neutral400Medium,
+                  style: context.styles.font14Neutral400Medium,
                 ),
             ],
           ),
@@ -63,14 +63,14 @@ class _Avatar extends StatelessWidget {
     return Container(
       width: AppDimens.icon48,
       height: AppDimens.icon48,
-      decoration: const BoxDecoration(
-        color: AppColor.neutral100,
+      decoration: BoxDecoration(
+        color: context.colors.neutral100,
         shape: BoxShape.circle,
       ),
       child: Icon(
         Icons.person_outline,
         size: AppDimens.icon24,
-        color: AppColor.neutral400,
+        color: context.colors.neutral400,
       ),
     );
   }
@@ -86,13 +86,13 @@ class _CallButton extends StatelessWidget {
     return IconButton(
       onPressed: onCall,
       style: IconButton.styleFrom(
-        backgroundColor: AppColor.primary100,
+        backgroundColor: context.colors.primary100,
         shape: const CircleBorder(),
       ),
       icon: Icon(
         Icons.call_outlined,
         size: AppDimens.icon20,
-        color: AppColor.primary500,
+        color: context.colors.primary500,
       ),
     );
   }

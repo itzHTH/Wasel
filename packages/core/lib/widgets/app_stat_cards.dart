@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 
 class AppStat {
   const AppStat({
@@ -71,7 +71,7 @@ class _AppStatCard extends StatelessWidget {
                   stat.label,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: AppTextStyles.font12Neutral600SemiBold,
+                  style: context.styles.font12Neutral600SemiBold,
                 ),
               ),
             ],
@@ -82,7 +82,7 @@ class _AppStatCard extends StatelessWidget {
             textDirection: stat.valueTextDirection,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: AppTextStyles.font16Secondary900Bold,
+            style: context.styles.font16Secondary900Bold,
           ),
         ],
       ),

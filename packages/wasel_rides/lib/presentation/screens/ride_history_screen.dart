@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/networking/errors/error_message.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/widgets/app_error_state.dart';
 import 'package:wasel_core/widgets/app_skeleton.dart';
@@ -21,11 +21,11 @@ class RideHistoryScreen extends ConsumerWidget {
     final controller = ref.read(rideHistoryControllerProvider.notifier);
 
     return Scaffold(
-      backgroundColor: AppColor.screenBackground,
+      backgroundColor: context.colors.screenBackground,
       appBar: AppBar(
         title: const Text('سجل الرحلات'),
-        backgroundColor: AppColor.screenBackground,
-        surfaceTintColor: AppColor.screenBackground,
+        backgroundColor: context.colors.screenBackground,
+        surfaceTintColor: context.colors.screenBackground,
       ),
       body: AnimatedSwitcher(
         duration: const Duration(milliseconds: 260),

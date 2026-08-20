@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 
 /// The primary call-to-action button for the Wasel apps.
 class AppPrimaryButton extends StatelessWidget {
@@ -24,8 +23,11 @@ class AppPrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColor.primary500,
-          disabledBackgroundColor: AppColor.primary300,
+          backgroundColor: context.colors.primary500,
+          // Loading is not disabled: a spinner on primary300 sits near 1.5:1.
+          disabledBackgroundColor: isLoading
+              ? context.colors.primary500
+              : context.colors.primary300,
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppDimens.radiusPill),
@@ -35,12 +37,12 @@ class AppPrimaryButton extends StatelessWidget {
             ? SizedBox(
                 width: AppDimens.icon24,
                 height: AppDimens.icon24,
-                child: const CircularProgressIndicator(
+                child: CircularProgressIndicator(
                   strokeWidth: 2.5,
-                  color: AppColor.neutral0,
+                  color: context.colors.onPrimary,
                 ),
               )
-            : Text(label, style: AppTextStyles.font16Neutral0SemiBold),
+            : Text(label, style: context.styles.font16Neutral0SemiBold),
       ),
     );
   }

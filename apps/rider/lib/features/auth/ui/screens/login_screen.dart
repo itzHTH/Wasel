@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/core/routing/app_routes_name.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasal/features/auth/ui/providers/login/login_provider.dart';
 import 'package:wasal/features/auth/ui/widgets/common/auth_header.dart';
 import 'package:wasal/features/auth/ui/widgets/common/auth_primary_button.dart';
@@ -42,7 +41,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     _loginListener(context);
 
     return Scaffold(
-      backgroundColor: AppColor.neutral0,
+      backgroundColor: context.colors.neutral0,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -66,17 +65,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   alignment: AlignmentDirectional.centerEnd,
                   child: GestureDetector(
                     behavior: HitTestBehavior.opaque,
-                    onTap: () => Navigator.pushNamed(
-                      context,
-                      AppRoutes.resetPassword,
-                    ),
+                    onTap: () =>
+                        Navigator.pushNamed(context, AppRoutes.resetPassword),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                         vertical: AppDimens.space12,
                       ),
                       child: Text(
                         'نسيت كلمة المرور؟',
-                        style: AppTextStyles.font14Primary500SemiBold,
+                        style: context.styles.font14Primary500SemiBold,
                       ),
                     ),
                   ),
@@ -107,14 +104,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   children: [
                     Text(
                       'ليس لديك حساب؟ ',
-                      style: AppTextStyles.font14Neutral400Regular,
+                      style: context.styles.font14Neutral400Regular,
                     ),
                     GestureDetector(
                       onTap: () =>
                           Navigator.pushNamed(context, AppRoutes.register),
                       child: Text(
                         'إنشاء حساب',
-                        style: AppTextStyles.font14Primary500SemiBold,
+                        style: context.styles.font14Primary500SemiBold,
                       ),
                     ),
                   ],

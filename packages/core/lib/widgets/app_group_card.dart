@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/widgets/app_menu_tile.dart';
 import 'package:wasel_core/widgets/app_surface_card.dart';
@@ -20,10 +20,10 @@ class AppGroupCard extends StatelessWidget {
         rows.add(
           Padding(
             padding: EdgeInsetsDirectional.only(start: indent),
-            child: const Divider(
+            child: Divider(
               height: 1,
               thickness: 1,
-              color: AppColor.neutral200,
+              color: context.colors.neutral200,
             ),
           ),
         );

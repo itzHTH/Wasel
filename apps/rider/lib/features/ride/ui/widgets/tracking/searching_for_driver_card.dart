@@ -36,12 +36,12 @@ class SearchingForDriverCard extends StatelessWidget {
                   children: [
                     Text(
                       'نبحث عن كابتن قريب...',
-                      style: AppTextStyles.font20Secondary900Bold,
+                      style: context.styles.font20Secondary900Bold,
                     ),
                     SizedBox(height: AppDimens.space4),
                     Text(
                       'خليك على الخط، راح نلگه لك كابتن بأسرع وقت',
-                      style: AppTextStyles.font14Secondary500Medium,
+                      style: context.styles.font14Secondary500Medium,
                     ),
                   ],
                 ),

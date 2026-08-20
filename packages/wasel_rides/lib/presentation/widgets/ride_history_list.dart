@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/widgets/app_entrance_fade.dart';
 import 'package:wasel_rides/core/formatters/ride_history_labels.dart';
@@ -31,7 +31,7 @@ class _RideHistoryListState extends ConsumerState<RideHistoryList> {
 
     return RefreshIndicator(
       onRefresh: _controller.refresh,
-      color: AppColor.primary500,
+      color: context.colors.primary500,
       child: ListView.builder(
         physics: const AlwaysScrollableScrollPhysics(),
         padding: EdgeInsets.fromLTRB(

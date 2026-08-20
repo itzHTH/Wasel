@@ -1,9 +1,8 @@
 import 'package:camera/camera.dart' show XFile;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
 import 'package:driver/features/driver_verification/ui/widgets/wizard/captured_image.dart';
 
@@ -14,7 +13,7 @@ Future<bool?> showCapturePreviewSheet({
   return showModalBottomSheet<bool>(
     context: context,
     isScrollControlled: true,
-    backgroundColor: AppColor.neutral0,
+    backgroundColor: context.colors.neutral0,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
         top: Radius.circular(AppDimens.radius24),
@@ -40,13 +39,13 @@ class _CapturePreviewSheet extends StatelessWidget {
           children: [
             Text(
               'تأكيد الصورة',
-              style: AppTextStyles.font20Secondary900Bold,
+              style: context.styles.font20Secondary900Bold,
               textAlign: TextAlign.center,
             ),
             SizedBox(height: AppDimens.space8),
             Text(
               'تأكد أن الصورة واضحة ومقروءة قبل المتابعة.',
-              style: AppTextStyles.font14Neutral400Regular,
+              style: context.styles.font14Neutral400Regular,
               textAlign: TextAlign.center,
             ),
             SizedBox(height: AppDimens.space24),
@@ -68,7 +67,7 @@ class _CapturePreviewSheet extends StatelessWidget {
                       onPressed: () => Navigator.of(context).pop(false),
                       style: OutlinedButton.styleFrom(
                         side: BorderSide(
-                          color: AppColor.neutral200,
+                          color: context.colors.neutral200,
                           width: 1.5,
                         ),
                         shape: RoundedRectangleBorder(
@@ -79,7 +78,7 @@ class _CapturePreviewSheet extends StatelessWidget {
                       ),
                       child: Text(
                         "الغاء",
-                        style: AppTextStyles.font14Secondary900SemiBold,
+                        style: context.styles.font14Secondary900SemiBold,
                       ),
                     ),
                   ),

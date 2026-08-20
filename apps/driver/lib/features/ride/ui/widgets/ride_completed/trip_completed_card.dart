@@ -30,19 +30,22 @@ class TripCompletedCard extends StatelessWidget {
           Center(
             child: Text(
               'خلصت الرحلة',
-              style: AppTextStyles.font20Secondary900Bold,
+              style: context.styles.font20Secondary900Bold,
             ),
           ),
           SizedBox(height: AppDimens.space4),
           Center(
             child: Text(
               'اجمع الأجرة من الراكب',
-              style: AppTextStyles.font14Neutral400Regular,
+              style: context.styles.font14Neutral400Regular,
             ),
           ),
           SizedBox(height: AppDimens.space24),
           Center(
-            child: FareHero(amount: fare, color: AppColor.alertSuccess500),
+            child: FareHero(
+              amount: fare,
+              color: context.colors.alertSuccess500,
+            ),
           ),
           SizedBox(height: AppDimens.space12),
           Center(child: PaymentMethodChip(method: paymentMethod)),

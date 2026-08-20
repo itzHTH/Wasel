@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 
 class AppInfoRow extends StatelessWidget {
   const AppInfoRow({
@@ -39,13 +38,13 @@ class AppInfoRow extends StatelessWidget {
             height: AppDimens.icon40,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: AppColor.primary100,
+              color: context.colors.primary100,
               borderRadius: BorderRadius.circular(AppDimens.radius12),
             ),
             child: Icon(
               icon,
               size: AppDimens.icon20,
-              color: AppColor.primary500,
+              color: context.colors.primary500,
             ),
           ),
           SizedBox(width: AppDimens.space12),
@@ -54,7 +53,7 @@ class AppInfoRow extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(label, style: AppTextStyles.font12Neutral400Regular),
+                Text(label, style: context.styles.font12Neutral400Regular),
                 SizedBox(height: AppDimens.space4),
                 Text(
                   hasValue ? value : emptyPlaceholder,
@@ -62,8 +61,8 @@ class AppInfoRow extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: hasValue
-                      ? AppTextStyles.font14Secondary900SemiBold
-                      : AppTextStyles.font14Neutral400Regular,
+                      ? context.styles.font14Secondary900SemiBold
+                      : context.styles.font14Neutral400Regular,
                 ),
               ],
             ),

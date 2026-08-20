@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:wasel_core/theme/app_brand.dart';
+import 'package:wasel_core/theme/app_theme.dart';
 import 'package:wasel_core/widgets/app_editable_avatar.dart';
 import 'package:wasel_core/widgets/app_loading.dart';
 
@@ -8,6 +10,7 @@ void main() {
   Widget wrap(Widget child) => ScreenUtilInit(
     designSize: const Size(375, 812),
     builder: (_, _) => MaterialApp(
+      theme: AppTheme.light(AppBrand.rider),
       home: Directionality(
         textDirection: TextDirection.rtl,
         child: Scaffold(body: Center(child: child)),

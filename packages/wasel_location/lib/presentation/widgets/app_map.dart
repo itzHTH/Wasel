@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:wasel_core/theme/app_map_style.dart';
 import 'package:wasel_location/core/const/app_map_defaults.dart';
 import 'package:wasel_location/presentation/providers/location/recenter_controller.dart';
 import 'package:wasel_location/presentation/providers/map/initial_camera_target_provider.dart';
@@ -23,13 +24,16 @@ import 'package:wasel_location/presentation/providers/map/map_ready_provider.dar
 /// - **Blue dot** — [RecenterController.myLocationEnabled], which only flips to
 ///   `true` after permission was verified in-app. Letting `GoogleMap` own this
 ///   would trigger its own unlocalized native permission prompt.
+/// - **Style** — [AppMapStyle] for the active brightness, so the map follows
+///   light/dark with the rest of the app. Declarative: passing it to
+///   `GoogleMap.style` re-applies it on rebuild, which is why there is no
+///   controller call here.
 /// - **Controller + readiness** — published to [mapControllerHolderProvider]
 ///   and [mapReadyProvider] so cameras, recentre and overlays can be driven
 ///   from providers instead of widget callbacks.
 class AppMap extends ConsumerStatefulWidget {
   const AppMap({
     super.key,
-    required this.mapId,
     this.markers = const {},
     this.polylines = const {},
     this.circles = const {},
@@ -41,9 +45,6 @@ class AppMap extends ConsumerStatefulWidget {
     this.onCameraMoveStarted,
     this.onCameraIdle,
   });
-
-  /// Cloud-styled map id of the host app.
-  final String mapId;
 
   final Set<Marker> markers;
   final Set<Polyline> polylines;
@@ -111,7 +112,7 @@ class _AppMapState extends ConsumerState<AppMap> {
         );
 
     return GoogleMap(
-      mapId: widget.mapId,
+      style: AppMapStyle.of(Theme.of(context).brightness),
       myLocationEnabled: myLocationEnabled,
       buildingsEnabled: false,
       myLocationButtonEnabled: false,

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
 import 'package:driver/features/driver_verification/domain/entities/driver_profile_submission.dart';
 import 'package:driver/features/driver_verification/ui/providers/submit_profile/submit_profile_provider.dart';
@@ -46,7 +45,7 @@ class _UploadingScreenState extends ConsumerState<UploadingScreen> {
       // Block the system back gesture; exits go through the explicit buttons.
       canPop: false,
       child: Scaffold(
-        backgroundColor: AppColor.neutral0,
+        backgroundColor: context.colors.neutral0,
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: AppDimens.screenHPadding),
@@ -90,13 +89,13 @@ class _UploadingBody extends StatelessWidget {
                 child: CircularProgressIndicator(
                   value: progress,
                   strokeWidth: 6,
-                  backgroundColor: AppColor.neutral100,
-                  valueColor: const AlwaysStoppedAnimation(AppColor.primary500),
+                  backgroundColor: context.colors.neutral100,
+                  valueColor: AlwaysStoppedAnimation(context.colors.primary500),
                 ),
               ),
               Text(
                 '${(progress * 100).round()}%',
-                style: AppTextStyles.font24Secondary900Bold,
+                style: context.styles.font24Secondary900Bold,
               ),
             ],
           ),
@@ -104,12 +103,12 @@ class _UploadingBody extends StatelessWidget {
         SizedBox(height: AppDimens.space24),
         Text(
           'جارٍ رفع المستندات…',
-          style: AppTextStyles.font20Secondary900Bold,
+          style: context.styles.font20Secondary900Bold,
         ),
         SizedBox(height: AppDimens.space8),
         Text(
           'يرجى الانتظار وعدم إغلاق التطبيق.',
-          style: AppTextStyles.font14Neutral400Regular,
+          style: context.styles.font14Neutral400Regular,
           textAlign: TextAlign.center,
         ),
       ],
@@ -125,20 +124,20 @@ class _SuccessBody extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const VerificationStatusBadge(
+        VerificationStatusBadge(
           icon: Icons.check_rounded,
-          color: AppColor.alertSuccess500,
-          background: AppColor.alertSuccess100,
+          color: context.colors.alertSuccess500,
+          background: context.colors.alertSuccess100,
         ),
         SizedBox(height: AppDimens.space24),
         Text(
           'تم رفع المستندات بنجاح',
-          style: AppTextStyles.font20Secondary900Bold,
+          style: context.styles.font20Secondary900Bold,
         ),
         SizedBox(height: AppDimens.space8),
         Text(
           'سيتم مراجعة طلبك وإشعارك بالنتيجة.',
-          style: AppTextStyles.font14Neutral400Regular,
+          style: context.styles.font14Neutral400Regular,
           textAlign: TextAlign.center,
         ),
       ],
@@ -162,20 +161,20 @@ class _FailureBody extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const VerificationStatusBadge(
+        VerificationStatusBadge(
           icon: Icons.close_rounded,
-          color: AppColor.alertError500,
-          background: AppColor.alertError100,
+          color: context.colors.alertError500,
+          background: context.colors.alertError100,
         ),
         SizedBox(height: AppDimens.space24),
         Text(
           'تعذّر رفع المستندات',
-          style: AppTextStyles.font20Secondary900Bold,
+          style: context.styles.font20Secondary900Bold,
         ),
         SizedBox(height: AppDimens.space8),
         Text(
           message,
-          style: AppTextStyles.font14Neutral400Regular,
+          style: context.styles.font14Neutral400Regular,
           textAlign: TextAlign.center,
         ),
         SizedBox(height: AppDimens.space32),
@@ -185,7 +184,7 @@ class _FailureBody extends StatelessWidget {
           onPressed: onBackToForm,
           child: Text(
             'العودة للنموذج',
-            style: AppTextStyles.font14Secondary900SemiBold,
+            style: context.styles.font14Secondary900SemiBold,
           ),
         ),
       ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/widgets/app_loading.dart';
 import 'package:wasel_location/domain/entities/location_exception.dart';
@@ -29,7 +29,7 @@ class MyLocationButton extends ConsumerWidget {
 
     return FloatingActionButton.small(
       heroTag: heroTag,
-      backgroundColor: AppColor.neutral0,
+      backgroundColor: context.colors.neutral0,
       shape: const CircleBorder(),
       onPressed: isLocating
           ? null
@@ -41,7 +41,7 @@ class MyLocationButton extends ConsumerWidget {
           : Icon(
               Icons.my_location,
               size: AppDimens.icon20,
-              color: AppColor.primary500,
+              color: context.colors.primary500,
             ),
     );
   }

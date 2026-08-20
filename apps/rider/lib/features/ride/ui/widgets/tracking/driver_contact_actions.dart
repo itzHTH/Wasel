@@ -52,10 +52,12 @@ class _ContactButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final foreground = filled ? AppColor.neutral0 : AppColor.primary500;
+    final foreground = filled
+        ? context.colors.onPrimary
+        : context.colors.primary500;
 
     return Material(
-      color: filled ? AppColor.primary500 : AppColor.primary100,
+      color: filled ? context.colors.primary500 : context.colors.primary100,
       borderRadius: BorderRadius.circular(AppDimens.radius12),
       child: InkWell(
         onTap: onPressed,
@@ -70,8 +72,8 @@ class _ContactButton extends StatelessWidget {
               Text(
                 label,
                 style: filled
-                    ? AppTextStyles.font16Neutral0SemiBold
-                    : AppTextStyles.font14Primary500SemiBold,
+                    ? context.styles.font16Neutral0SemiBold
+                    : context.styles.font14Primary500SemiBold,
               ),
             ],
           ),

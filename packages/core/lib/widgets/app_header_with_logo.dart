@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 
 class AppHeaderWithLogo extends StatelessWidget {
   const AppHeaderWithLogo({super.key});
@@ -17,7 +17,7 @@ class AppHeaderWithLogo extends StatelessWidget {
           height: AppDimens.icon36,
         ),
         SizedBox(width: AppDimens.space8),
-        Text("وَصَل", style: AppTextStyles.font24Secondary900Bold),
+        Text("وَصَل", style: context.styles.font24Secondary900Bold),
       ],
     );
   }

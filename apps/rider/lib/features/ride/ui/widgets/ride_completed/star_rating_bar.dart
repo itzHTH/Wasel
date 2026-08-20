@@ -34,7 +34,9 @@ class _StarRatingBarState extends State<StarRatingBar> {
           onPressed: () => _select(value),
           icon: Icon(
             selected ? Icons.star_rounded : Icons.star_outline_rounded,
-            color: selected ? AppColor.alertWarning500 : AppColor.neutral400,
+            color: selected
+                ? context.colors.alertWarning500
+                : context.colors.neutral400,
             size: AppDimens.icon36,
           ),
         );

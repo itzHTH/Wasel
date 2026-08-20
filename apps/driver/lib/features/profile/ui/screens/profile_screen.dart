@@ -4,8 +4,10 @@ import 'package:driver/features/profile/ui/widgets/driver_profile_summary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/extensions/navigation_extension.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
+import 'package:wasel_core/widgets/app_appearance_sheet.dart';
+import 'package:wasel_core/theme/providers/theme_mode_provider.dart';
 import 'package:wasel_core/widgets/app_dialog.dart';
 import 'package:wasel_core/widgets/app_group_card.dart';
 import 'package:wasel_core/widgets/app_loading.dart';
@@ -21,11 +23,11 @@ class ProfileScreen extends ConsumerWidget {
     final isLoggingOut = ref.watch(logoutProvider).isLoading;
 
     return Scaffold(
-      backgroundColor: AppColor.screenBackground,
+      backgroundColor: context.colors.screenBackground,
       appBar: AppBar(
         title: const Text('حسابي'),
-        backgroundColor: AppColor.screenBackground,
-        surfaceTintColor: AppColor.screenBackground,
+        backgroundColor: context.colors.screenBackground,
+        surfaceTintColor: context.colors.screenBackground,
       ),
       body: ListView(
         padding: EdgeInsets.fromLTRB(
@@ -55,11 +57,14 @@ class ProfileScreen extends ConsumerWidget {
                 isMuted: true,
                 trailing: AppSoonBadge(),
               ),
-              const AppMenuTile(
+              AppMenuTile(
                 icon: Icons.brightness_6_outlined,
                 label: 'المظهر',
-                isMuted: true,
-                trailing: AppSoonBadge(),
+                onTap: () => showAppAppearanceSheet(context),
+                trailing: Text(
+                  appThemeModeLabel(ref.watch(themeModeControllerProvider)),
+                  style: context.styles.font14Neutral400Regular,
+                ),
               ),
             ],
           ),
@@ -67,7 +72,7 @@ class ProfileScreen extends ConsumerWidget {
           AppSurfaceCard(
             padding: EdgeInsets.zero,
             clipBehavior: Clip.antiAlias,
-            backgroundColor: AppColor.alertError100,
+            backgroundColor: context.colors.alertError100,
             child: AppMenuTile(
               icon: Icons.logout_rounded,
               label: 'تسجيل الخروج',
@@ -76,7 +81,7 @@ class ProfileScreen extends ConsumerWidget {
               trailing: isLoggingOut
                   ? AppInlineLoading(
                       size: AppDimens.icon20,
-                      color: AppColor.alertError700,
+                      color: context.colors.alertError700,
                     )
                   : const SizedBox.shrink(),
             ),

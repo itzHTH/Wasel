@@ -1,4 +1,3 @@
-import 'package:driver/core/const/app_driver_consts.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:driver/features/ride/ui/providers/map/driver_camera_controller.dart';
 import 'package:driver/features/ride/ui/providers/map/driver_is_camera_moving_provider.dart';
@@ -43,7 +42,6 @@ class _RideScreenState extends ConsumerState<RideScreen> {
           // the platform view back until it lands — the gate that used to sit
           // here.
           AppMap(
-            mapId: AppDriverConsts.mapStyleID,
             markers: markers,
             polylines:
                 ref.watch(driverRoutePolylinesProvider).value ?? const {},

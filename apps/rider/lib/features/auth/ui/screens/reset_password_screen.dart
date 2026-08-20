@@ -5,7 +5,7 @@ import 'package:wasal/features/auth/ui/widgets/reset_password/email_page/forgot_
 import 'package:wasal/features/auth/ui/widgets/reset_password/otp_page/reset_otp_page.dart';
 import 'package:wasal/features/auth/ui/widgets/reset_password/password_page/create_new_password_page.dart';
 import 'package:wasel_auth/presentation/providers/reset_password/reset_password_controller.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/widgets/app_dialog.dart';
 import 'package:wasel_core/widgets/app_step_indicator.dart';
@@ -119,9 +119,9 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
 
     if (!reset || !mounted) return;
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('تم تغيير كلمة المرور بنجاح')),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('تم تغيير كلمة المرور بنجاح')));
     Navigator.pushNamedAndRemoveUntil(
       context,
       AppRoutes.auth,
@@ -157,7 +157,7 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
         _handleSystemBack();
       },
       child: Scaffold(
-        backgroundColor: AppColor.neutral0,
+        backgroundColor: context.colors.neutral0,
         body: SafeArea(
           child: Column(
             children: [

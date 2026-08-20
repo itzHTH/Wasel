@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_core/helpers/app_image_picker.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/widgets/app_group_card.dart';
 import 'package:wasel_core/widgets/app_menu_tile.dart';
 
@@ -14,7 +13,7 @@ Future<AppImageSource?> showAppImageSourceSheet({
 }) {
   return showModalBottomSheet<AppImageSource>(
     context: context,
-    backgroundColor: AppColor.screenBackground,
+    backgroundColor: context.colors.screenBackground,
     useSafeArea: true,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
@@ -59,7 +58,7 @@ class _AppImageSourceSheet extends StatelessWidget {
                 width: AppDimens.space40,
                 height: AppDimens.space4,
                 decoration: BoxDecoration(
-                  color: AppColor.neutral200,
+                  color: context.colors.neutral200,
                   borderRadius: BorderRadius.circular(AppDimens.radiusPill),
                 ),
               ),
@@ -68,7 +67,7 @@ class _AppImageSourceSheet extends StatelessWidget {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: AppTextStyles.font16Secondary900Bold,
+              style: context.styles.font16Secondary900Bold,
             ),
             SizedBox(height: AppDimens.space16),
             AppGroupCard(
