@@ -34,7 +34,7 @@ final class DriverEarningsControllerProvider
 }
 
 String _$driverEarningsControllerHash() =>
-    r'8d4ea1dd74ee3d83b04968e9ee3f89a465dd6e68';
+    r'0d5a58f9f9c15befb069d56cb3f247debd5f3e8a';
 
 abstract class _$DriverEarningsController
     extends $AsyncNotifier<DriverEarnings?> {

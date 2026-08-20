@@ -42,18 +42,18 @@ class _RidePriceCardState extends ConsumerState<RidePriceCard> {
                 child: IconButton(
                   onPressed: widget.onClose,
                   style: IconButton.styleFrom(
-                    backgroundColor: AppColor.neutral100,
+                    backgroundColor: context.colors.neutral100,
                   ),
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.arrow_back,
-                    color: AppColor.secondary900,
+                    color: context.colors.secondary900,
                   ),
                 ),
               ),
               Expanded(
                 child: Text(
                   'تفاصيل الرحلة',
-                  style: AppTextStyles.font20Secondary900Bold,
+                  style: context.styles.font20Secondary900Bold,
                 ),
               ),
             ],

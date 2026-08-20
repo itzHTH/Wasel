@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wasal/core/consts/app_rider_consts.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_point_markers_provider.dart';
 import 'package:wasal/features/ride/ui/providers/route/route_polylines_provider.dart';
 import 'package:wasal/features/ride/ui/providers/tracking/search_radius_circles_provider.dart';
@@ -26,7 +25,6 @@ class RideMap extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AppMap(
-      mapId: AppRiderConsts.mapStyleID,
       markers: ref.watch(ridePointMarkersProvider),
       polylines: ref.watch(routePolylinesProvider),
       circles: ref.watch(searchRadiusCirclesProvider),

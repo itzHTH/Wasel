@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 
 /// A general-purpose, themed dialog for the Wasel apps.
 ///
@@ -63,7 +62,7 @@ class AppDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: AppColor.neutral0,
+      backgroundColor: context.colors.elementBackground,
       insetPadding: EdgeInsets.symmetric(horizontal: AppDimens.screenHPadding),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppDimens.radius24),
@@ -83,15 +82,15 @@ class AppDialog extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: isDestructive
-                        ? AppColor.alertError100
-                        : AppColor.primary100,
+                        ? context.colors.alertError100
+                        : context.colors.primary100,
                   ),
                   child: Icon(
                     icon,
                     size: AppDimens.icon24,
                     color: isDestructive
-                        ? AppColor.alertError700
-                        : AppColor.primary500,
+                        ? context.colors.alertError700
+                        : context.colors.primary500,
                   ),
                 ),
               ),
@@ -100,13 +99,13 @@ class AppDialog extends StatelessWidget {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: AppTextStyles.font20Secondary900Bold,
+              style: context.styles.font20Secondary900Bold,
             ),
             SizedBox(height: AppDimens.space8),
             Text(
               message,
               textAlign: TextAlign.center,
-              style: AppTextStyles.font16Secondary500Regular,
+              style: context.styles.font16Secondary500Regular,
             ),
             SizedBox(height: AppDimens.space24),
             SizedBox(
@@ -114,8 +113,8 @@ class AppDialog extends StatelessWidget {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: isDestructive
-                      ? AppColor.alertError700
-                      : AppColor.primary500,
+                      ? context.colors.alertError700
+                      : context.colors.primary500,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(AppDimens.radius12),
@@ -124,7 +123,7 @@ class AppDialog extends StatelessWidget {
                 onPressed: () => Navigator.of(context).pop(true),
                 child: Text(
                   confirmLabel,
-                  style: AppTextStyles.font16Neutral0SemiBold,
+                  style: context.styles.font16Neutral0SemiBold,
                 ),
               ),
             ),
@@ -137,8 +136,8 @@ class AppDialog extends StatelessWidget {
                   child: Text(
                     cancelLabel!,
                     style: isDestructive
-                        ? AppTextStyles.font14Secondary900SemiBold
-                        : AppTextStyles.font14Primary500SemiBold,
+                        ? context.styles.font14Secondary900SemiBold
+                        : context.styles.font14Primary500SemiBold,
                   ),
                 ),
               ),

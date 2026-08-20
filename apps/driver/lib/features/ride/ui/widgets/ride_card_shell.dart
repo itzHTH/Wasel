@@ -26,11 +26,11 @@ class RideCardShell extends StatelessWidget {
             bottom: AppDimens.space24,
           ),
       decoration: BoxDecoration(
-        color: AppColor.elementBackground,
+        color: context.colors.elementBackground,
         borderRadius: BorderRadius.circular(AppDimens.radius24),
         boxShadow: [
           BoxShadow(
-            color: AppColor.secondary900.withValues(alpha: 0.08),
+            color: context.colors.scrim.withValues(alpha: 0.08),
             blurRadius: AppDimens.radius16,
             offset: Offset(0, AppDimens.space4),
           ),

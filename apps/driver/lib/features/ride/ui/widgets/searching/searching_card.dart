@@ -29,11 +29,11 @@ class SearchingCard extends ConsumerWidget {
                   children: [
                     Text(
                       'دا ندوّر على طلبات',
-                      style: AppTextStyles.font20Secondary900Bold,
+                      style: context.styles.font20Secondary900Bold,
                     ),
                     Text(
                       'خليك بمكان زحمة حتى توصلك طلبات أكثر',
-                      style: AppTextStyles.font14Neutral400Regular,
+                      style: context.styles.font14Neutral400Regular,
                     ),
                   ],
                 ),
@@ -64,16 +64,19 @@ class _TodayPanel extends ConsumerWidget {
     return Container(
       padding: EdgeInsets.all(AppDimens.space16),
       decoration: BoxDecoration(
-        color: AppColor.neutral50,
+        color: context.colors.neutral50,
         borderRadius: BorderRadius.circular(AppDimens.radius16),
-        border: Border.all(color: AppColor.neutral200),
+        border: Border.all(color: context.colors.neutral200),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Text('أرباح اليوم', style: AppTextStyles.font12Neutral400Regular),
+              Text(
+                'أرباح اليوم',
+                style: context.styles.font12Neutral400Regular,
+              ),
               SizedBox(width: AppDimens.space8),
               if (earnings.isLoading)
                 const _PanelSpinner()
@@ -91,12 +94,12 @@ class _TodayPanel extends ConsumerWidget {
                 ? '—'
                 : RideFormatters.fare(data.totalEarnings.toString()),
             style: data == null
-                ? AppTextStyles.font24Secondary900Bold.copyWith(
-                    color: AppColor.neutral400,
+                ? context.styles.font24Secondary900Bold.copyWith(
+                    color: context.colors.neutral400,
                   )
-                : AppTextStyles.font24Secondary900Bold,
+                : context.styles.font24Secondary900Bold,
           ),
-          Divider(color: AppColor.neutral200, height: AppDimens.space24),
+          Divider(color: context.colors.neutral200, height: AppDimens.space24),
           IntrinsicHeight(
             child: Row(
               children: [
@@ -108,7 +111,7 @@ class _TodayPanel extends ConsumerWidget {
                   ),
                 ),
                 VerticalDivider(
-                  color: AppColor.neutral200,
+                  color: context.colors.neutral200,
                   width: AppDimens.space16,
                 ),
                 Expanded(
@@ -146,17 +149,21 @@ class _Metric extends StatelessWidget {
       children: [
         Row(
           children: [
-            Icon(icon, size: AppDimens.icon18, color: AppColor.neutral400),
+            Icon(
+              icon,
+              size: AppDimens.icon18,
+              color: context.colors.neutral400,
+            ),
             SizedBox(width: AppDimens.space4),
-            Text(label, style: AppTextStyles.font12Neutral400Regular),
+            Text(label, style: context.styles.font12Neutral400Regular),
           ],
         ),
         SizedBox(height: AppDimens.space4),
         Text(
           value ?? '—',
           style: value == null
-              ? AppTextStyles.font14Neutral400Medium
-              : AppTextStyles.font14Secondary900SemiBold,
+              ? context.styles.font14Neutral400Medium
+              : context.styles.font14Secondary900SemiBold,
         ),
       ],
     );
@@ -174,7 +181,7 @@ class _PanelSpinner extends StatelessWidget {
       height: AppDimens.icon18,
       child: CircularProgressIndicator(
         strokeWidth: AppDimens.space4 / 2,
-        color: AppColor.neutral400,
+        color: context.colors.neutral400,
       ),
     );
   }
@@ -201,13 +208,13 @@ class _RetryButton extends StatelessWidget {
             Icon(
               Icons.refresh,
               size: AppDimens.icon18,
-              color: AppColor.primary500,
+              color: context.colors.primary500,
             ),
             SizedBox(width: AppDimens.space4),
             Text(
               'إعادة المحاولة',
-              style: AppTextStyles.font12Neutral400Regular.copyWith(
-                color: AppColor.primary500,
+              style: context.styles.font12Neutral400Regular.copyWith(
+                color: context.colors.primary500,
               ),
             ),
           ],

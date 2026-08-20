@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 
 class ManualCaptureButton extends StatelessWidget {
   final VoidCallback? onPressed;
@@ -22,14 +22,14 @@ class ManualCaptureButton extends StatelessWidget {
             height: 72.r,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: AppColor.neutral0, width: 4),
+              border: Border.all(color: context.colors.onScrim, width: 4),
             ),
             child: Padding(
               padding: EdgeInsets.all(4.r),
-              child: const DecoratedBox(
+              child: DecoratedBox(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColor.neutral0,
+                  color: context.colors.onScrim,
                 ),
               ),
             ),

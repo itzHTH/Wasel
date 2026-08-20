@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 
 class WizardProgress extends StatelessWidget {
   final int currentStep;
@@ -30,7 +29,9 @@ class WizardProgress extends StatelessWidget {
                   end: index == totalSteps - 1 ? 0 : AppDimens.space8,
                 ),
                 decoration: BoxDecoration(
-                  color: isActive ? AppColor.primary500 : AppColor.neutral200,
+                  color: isActive
+                      ? context.colors.primary500
+                      : context.colors.neutral200,
                   borderRadius: BorderRadius.circular(AppDimens.radiusPill),
                 ),
               ),
@@ -40,10 +41,10 @@ class WizardProgress extends StatelessWidget {
         SizedBox(height: AppDimens.space12),
         Text(
           'الخطوة ${currentStep + 1} من $totalSteps',
-          style: AppTextStyles.font12Neutral400Regular,
+          style: context.styles.font12Neutral400Regular,
         ),
         SizedBox(height: AppDimens.space4),
-        Text(stepTitle, style: AppTextStyles.font20Secondary900Bold),
+        Text(stepTitle, style: context.styles.font20Secondary900Bold),
       ],
     );
   }

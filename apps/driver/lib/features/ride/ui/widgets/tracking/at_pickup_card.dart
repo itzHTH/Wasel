@@ -35,12 +35,12 @@ class AtPickupCard extends ConsumerWidget {
     final isBusy = ref.watch(rideActionControllerProvider).isLoading;
 
     return ExpandableRideCard(
-      summary: const CardStageHeader(
+      summary: CardStageHeader(
         icon: Icons.check_circle_outline_rounded,
         title: 'وصلت لنقطة الانطلاق',
         subtitle: 'انتظر الراكب يركب وبعدين ابدأ الرحلة',
-        tint: AppColor.alertSuccess500,
-        background: AppColor.alertSuccess100,
+        tint: context.colors.alertSuccess500,
+        background: context.colors.alertSuccess100,
       ),
       details: Column(
         mainAxisSize: MainAxisSize.min,

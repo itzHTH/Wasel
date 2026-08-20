@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasel_core/helpers/app_amount_format.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/widgets/app_profile_avatar.dart';
 import 'package:wasel_core/widgets/app_stat_cards.dart';
 import 'package:wasel_profile/domain/entities/rider_profile.dart';
@@ -46,7 +45,7 @@ class RiderProfileInfo extends StatelessWidget {
                           : 'مستخدم وَصَل',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: AppTextStyles.font20Secondary900Bold,
+                      style: context.styles.font20Secondary900Bold,
                     ),
                     if (profile != null) ...[
                       SizedBox(height: AppDimens.space4),
@@ -55,7 +54,7 @@ class RiderProfileInfo extends StatelessWidget {
                         textDirection: TextDirection.ltr,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: AppTextStyles.font14Secondary500Medium,
+                        style: context.styles.font14Secondary500Medium,
                       ),
                     ],
                   ],
@@ -76,8 +75,8 @@ class RiderProfileInfo extends StatelessWidget {
               stats: [
                 AppStat(
                   icon: Icons.account_balance_wallet_rounded,
-                  iconColor: AppColor.primary500,
-                  background: AppColor.primary100,
+                  iconColor: context.colors.primary500,
+                  background: context.colors.primary100,
                   label: 'الرصيد',
                   value: formatAmount(profile.balance),
                   valueTextDirection: TextDirection.ltr,

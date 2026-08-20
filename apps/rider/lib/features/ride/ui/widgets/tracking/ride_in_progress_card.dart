@@ -36,12 +36,12 @@ class RideInProgressCard extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(AppDimens.space8),
                 decoration: BoxDecoration(
-                  color: AppColor.primary100,
+                  color: context.colors.primary100,
                   borderRadius: BorderRadius.circular(AppDimens.radius12),
                 ),
                 child: Icon(
                   Icons.navigation_rounded,
-                  color: AppColor.primary500,
+                  color: context.colors.primary500,
                   size: AppDimens.icon20,
                 ),
               ),
@@ -52,13 +52,13 @@ class RideInProgressCard extends StatelessWidget {
                   children: [
                     Text(
                       'رحلة موفقة',
-                      style: AppTextStyles.font20Secondary900Bold,
+                      style: context.styles.font20Secondary900Bold,
                     ),
                     if (etaMinutes != null) ...[
                       SizedBox(height: AppDimens.space4),
                       Text(
                         'الوصول خلال $etaMinutes دقائق تقريباً',
-                        style: AppTextStyles.font14Secondary500Medium,
+                        style: context.styles.font14Secondary500Medium,
                       ),
                     ],
                   ],

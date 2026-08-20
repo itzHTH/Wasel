@@ -18,7 +18,7 @@ Future<PaymentMethod?> showPaymentMethodSheet({
 }) {
   return showModalBottomSheet<PaymentMethod>(
     context: context,
-    backgroundColor: AppColor.screenBackground,
+    backgroundColor: context.colors.screenBackground,
     useSafeArea: true,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
@@ -53,7 +53,7 @@ class _PaymentMethodSheet extends StatelessWidget {
                 width: AppDimens.space40,
                 height: AppDimens.space4,
                 decoration: BoxDecoration(
-                  color: AppColor.neutral200,
+                  color: context.colors.neutral200,
                   borderRadius: BorderRadius.circular(AppDimens.radiusPill),
                 ),
               ),
@@ -62,7 +62,7 @@ class _PaymentMethodSheet extends StatelessWidget {
             Text(
               'طريقة الدفع',
               textAlign: TextAlign.center,
-              style: AppTextStyles.font16Secondary900Bold,
+              style: context.styles.font16Secondary900Bold,
             ),
             SizedBox(height: AppDimens.space16),
             AppGroupCard(
@@ -97,7 +97,7 @@ class _MethodTrailing extends ConsumerWidget {
     final check = isSelected
         ? Icon(
             Icons.check_circle_rounded,
-            color: AppColor.primary500,
+            color: context.colors.primary500,
             size: AppDimens.icon20,
           )
         : const SizedBox.shrink();
@@ -115,7 +115,7 @@ class _MethodTrailing extends ConsumerWidget {
         if (balance != null) ...[
           Text(
             RideFormatters.fare(balance),
-            style: AppTextStyles.font14Secondary500Medium,
+            style: context.styles.font14Secondary500Medium,
           ),
           SizedBox(width: AppDimens.space8),
         ],

@@ -29,7 +29,7 @@ class RideTripSummary extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(AppDimens.space16),
       decoration: BoxDecoration(
-        color: AppColor.neutral50,
+        color: context.colors.neutral50,
         borderRadius: BorderRadius.circular(AppDimens.radius16),
       ),
       child: Column(
@@ -38,20 +38,20 @@ class RideTripSummary extends StatelessWidget {
           if (pickup != null && pickup.isNotEmpty)
             _RoutePoint(
               label: pickup,
-              color: AppColor.primary500,
+              color: context.colors.primary500,
 
               showConnector: dropoff != null && dropoff.isNotEmpty,
             ),
           if (dropoff != null && dropoff.isNotEmpty)
             _RoutePoint(
               label: dropoff,
-              color: AppColor.alertError500,
+              color: context.colors.secondary900,
               showConnector: false,
             ),
           if (fare != null) ...[
             if (hasRoute) ...[
               SizedBox(height: AppDimens.space12),
-              Divider(height: 1, color: AppColor.neutral200),
+              Divider(height: 1, color: context.colors.neutral200),
               SizedBox(height: AppDimens.space12),
             ],
             Row(
@@ -59,14 +59,14 @@ class RideTripSummary extends StatelessWidget {
               children: [
                 Text(
                   'الأجرة التقديرية',
-                  style: AppTextStyles.font14Secondary500Medium,
+                  style: context.styles.font14Secondary500Medium,
                 ),
                 Text(
                   RideFormatters.fare(
                     fare.estimatedPrice,
                     currency: fare.currency,
                   ),
-                  style: AppTextStyles.font20Secondary900Bold,
+                  style: context.styles.font20Secondary900Bold,
                 ),
               ],
             ),
@@ -107,7 +107,7 @@ class _RoutePoint extends StatelessWidget {
                   child: Container(
                     width: 2,
                     margin: EdgeInsets.symmetric(vertical: AppDimens.space4),
-                    color: AppColor.neutral200,
+                    color: context.colors.neutral200,
                   ),
                 ),
             ],
@@ -122,7 +122,7 @@ class _RoutePoint extends StatelessWidget {
                 label,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.font14Secondary900SemiBold,
+                style: context.styles.font14Secondary900SemiBold,
               ),
             ),
           ),

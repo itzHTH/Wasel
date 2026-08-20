@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 
 class AppMenuTile extends StatelessWidget {
   const AppMenuTile({
@@ -30,20 +29,20 @@ class AppMenuTile extends StatelessWidget {
     final trailing = this.trailing;
 
     final foreground = isDestructive
-        ? AppColor.alertError700
+        ? context.colors.alertError700
         : isMuted
-        ? AppColor.neutral600
-        : AppColor.primary500;
+        ? context.colors.neutral600
+        : context.colors.primary500;
     final badgeBackground = isDestructive
-        ? AppColor.neutral0
+        ? context.colors.elementBackground
         : isMuted
-        ? AppColor.neutral100
-        : AppColor.primary100;
+        ? context.colors.neutral100
+        : context.colors.primary100;
     final labelStyle = isDestructive
-        ? AppTextStyles.font14alertError500SemiBold.copyWith(
-            color: AppColor.alertError700,
+        ? context.styles.font14alertError500SemiBold.copyWith(
+            color: context.colors.alertError700,
           )
-        : AppTextStyles.font14Secondary900SemiBold;
+        : context.styles.font14Secondary900SemiBold;
 
     return Material(
       type: MaterialType.transparency,
@@ -84,7 +83,7 @@ class AppMenuTile extends StatelessWidget {
                   child: Icon(
                     Icons.arrow_forward_ios_rounded,
                     size: AppDimens.icon18,
-                    color: AppColor.neutral400,
+                    color: context.colors.neutral400,
                   ),
                 ),
               ],

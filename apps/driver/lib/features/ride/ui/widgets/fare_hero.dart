@@ -21,8 +21,8 @@ class FareHero extends StatelessWidget {
     return Text(
       RideFormatters.fare(amount.toString(), currency: currency),
       style: color == null
-          ? AppTextStyles.font32Secondary900Bold
-          : AppTextStyles.font32Secondary900Bold.copyWith(color: color),
+          ? context.styles.font32Secondary900Bold
+          : context.styles.font32Secondary900Bold.copyWith(color: color),
     );
   }
 }

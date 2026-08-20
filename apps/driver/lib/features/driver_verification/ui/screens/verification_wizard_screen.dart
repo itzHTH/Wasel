@@ -2,7 +2,7 @@ import 'package:camera/camera.dart' show XFile;
 import 'package:driver/features/driver_verification/domain/entities/driver_profile_submission.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:driver/features/driver_verification/ui/screens/uploading_screen.dart';
 import 'package:driver/features/driver_verification/ui/widgets/wizard/wizard_footer.dart';
 import 'package:driver/features/driver_verification/ui/widgets/wizard/wizard_header.dart';
@@ -137,7 +137,7 @@ class _VerificationWizardScreenState
         if (!didPop) _onBack();
       },
       child: Scaffold(
-        backgroundColor: AppColor.neutral0,
+        backgroundColor: context.colors.neutral0,
         appBar: AppBar(title: const Text('توثيق السائق')),
         body: SafeArea(
           child: Column(

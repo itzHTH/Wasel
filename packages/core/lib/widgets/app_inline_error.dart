@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 
 /// Persistent error shown next to the field that caused it.
 ///
@@ -35,13 +34,13 @@ class AppInlineError extends StatelessWidget {
             Icon(
               Icons.error_outline_rounded,
               size: AppDimens.icon18,
-              color: AppColor.alertError500,
+              color: context.colors.alertError500,
             ),
             SizedBox(width: AppDimens.space8),
             Flexible(
               child: Text(
                 text,
-                style: AppTextStyles.font14alertError500SemiBold,
+                style: context.styles.font14alertError500SemiBold,
                 textAlign: textAlign,
               ),
             ),

@@ -39,7 +39,7 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.screenBackground,
+      backgroundColor: context.colors.screenBackground,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: AppDimens.screenHPadding),
@@ -51,13 +51,13 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
                 child: Container(
                   width: AppDimens.icon48,
                   height: AppDimens.icon48,
-                  decoration: const BoxDecoration(
-                    color: AppColor.alertSuccess100,
+                  decoration: BoxDecoration(
+                    color: context.colors.alertSuccess100,
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
                     Icons.check_rounded,
-                    color: AppColor.alertSuccess500,
+                    color: context.colors.alertSuccess500,
                     size: AppDimens.icon24,
                   ),
                 ),
@@ -66,13 +66,13 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
               Text(
                 'وصلت بالسلامة',
                 textAlign: TextAlign.center,
-                style: AppTextStyles.font24Secondary900Bold,
+                style: context.styles.font24Secondary900Bold,
               ),
               SizedBox(height: AppDimens.space8),
               Text(
                 widget.fare,
                 textAlign: TextAlign.center,
-                style: AppTextStyles.font32Secondary900Bold,
+                style: context.styles.font32Secondary900Bold,
               ),
               SizedBox(height: AppDimens.space32),
               _summaryCard(),
@@ -80,7 +80,7 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
               Text(
                 'شلون كانت رحلتك؟',
                 textAlign: TextAlign.center,
-                style: AppTextStyles.font20Secondary900Bold,
+                style: context.styles.font20Secondary900Bold,
               ),
               SizedBox(height: AppDimens.space16),
               StarRatingBar(
@@ -109,13 +109,13 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
       maxLines: 3,
       maxLength: 500,
       textInputAction: TextInputAction.newline,
-      style: AppTextStyles.font14Secondary900SemiBold,
+      style: context.styles.font14Secondary900SemiBold,
       decoration: InputDecoration(
         hintText: 'اكتب ملاحظاتك (اختياري)',
-        hintStyle: AppTextStyles.font14Neutral400Regular,
+        hintStyle: context.styles.font14Neutral400Regular,
         counterText: '',
         filled: true,
-        fillColor: AppColor.elementBackground,
+        fillColor: context.colors.elementBackground,
         contentPadding: EdgeInsets.all(AppDimens.space16),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppDimens.radius16),
@@ -129,7 +129,7 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
     return Container(
       padding: EdgeInsets.all(AppDimens.space16),
       decoration: BoxDecoration(
-        color: AppColor.elementBackground,
+        color: context.colors.elementBackground,
         borderRadius: BorderRadius.circular(AppDimens.radius16),
       ),
       child: Column(

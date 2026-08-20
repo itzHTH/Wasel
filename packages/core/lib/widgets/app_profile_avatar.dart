@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 
 class AppProfileAvatar extends StatelessWidget {
@@ -14,7 +14,7 @@ class AppProfileAvatar extends StatelessWidget {
 
     final placeholder = Icon(
       Icons.person_rounded,
-      color: AppColor.neutral400,
+      color: context.colors.neutral400,
       size: resolvedSize / 2,
     );
 
@@ -22,8 +22,8 @@ class AppProfileAvatar extends StatelessWidget {
       width: resolvedSize,
       height: resolvedSize,
       clipBehavior: Clip.antiAlias,
-      decoration: const BoxDecoration(
-        color: AppColor.neutral100,
+      decoration: BoxDecoration(
+        color: context.colors.neutral100,
         shape: BoxShape.circle,
       ),
       child: photoUrl == null || photoUrl!.isEmpty

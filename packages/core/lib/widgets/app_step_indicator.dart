@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 
 /// Segmented progress bar for multi-step wizards.
@@ -32,7 +32,9 @@ class AppStepIndicator extends StatelessWidget {
                   curve: Curves.easeInOut,
                   height: 4.h,
                   decoration: BoxDecoration(
-                    color: isFilled ? AppColor.primary500 : AppColor.neutral200,
+                    color: isFilled
+                        ? context.colors.primary500
+                        : context.colors.neutral200,
                     borderRadius: BorderRadius.circular(AppDimens.radiusPill),
                   ),
                 ),

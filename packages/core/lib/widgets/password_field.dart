@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/widgets/app_labeled_field.dart';
 
@@ -40,14 +40,14 @@ class _AppPasswordFormFieldState extends State<AppPasswordFormField> {
       validator: widget.validator,
       prefixIcon: Icon(
         Icons.lock_outline_rounded,
-        color: AppColor.neutral400,
+        color: context.colors.neutral400,
         size: AppDimens.icon20,
       ),
       suffixIcon: GestureDetector(
         onTap: () => setState(() => _visible = !_visible),
         child: Icon(
           _visible ? Icons.visibility_outlined : Icons.visibility_off_outlined,
-          color: AppColor.neutral400,
+          color: context.colors.neutral400,
           size: AppDimens.icon20,
         ),
       ),

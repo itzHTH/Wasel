@@ -33,7 +33,7 @@ final class RidePriceEstimateProvider
   RidePriceEstimate create() => RidePriceEstimate();
 }
 
-String _$ridePriceEstimateHash() => r'96a7f273c959a93dad90569c535a8d247335fac3';
+String _$ridePriceEstimateHash() => r'2358a2031a03f267fc6891e65316b27d39183613';
 
 abstract class _$RidePriceEstimate extends $AsyncNotifier<RidePrice?> {
   FutureOr<RidePrice?> build();

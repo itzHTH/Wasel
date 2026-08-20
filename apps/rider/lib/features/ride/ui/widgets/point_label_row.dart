@@ -25,7 +25,7 @@ class PointLabelRow extends ConsumerWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('$prefix: ', style: AppTextStyles.font14Secondary500Medium),
+        Text('$prefix: ', style: context.styles.font14Secondary500Medium),
         Expanded(
           child: label.when(
             loading: () => Align(
@@ -52,7 +52,7 @@ class _LabelText extends StatelessWidget {
       value,
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
-      style: AppTextStyles.font14Secondary900SemiBold,
+      style: context.styles.font14Secondary900SemiBold,
     );
   }
 }

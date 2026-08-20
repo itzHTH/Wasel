@@ -14,8 +14,8 @@ class RideBackButton extends ConsumerWidget {
       padding: EdgeInsets.only(right: AppDimens.space8),
       child: IconButton(
         onPressed: () => ref.read(rideDraftProvider.notifier).goBackOneStep(),
-        style: IconButton.styleFrom(backgroundColor: AppColor.neutral100),
-        icon: const Icon(Icons.arrow_back, color: AppColor.secondary900),
+        style: IconButton.styleFrom(backgroundColor: context.colors.neutral100),
+        icon: Icon(Icons.arrow_back, color: context.colors.secondary900),
       ),
     );
   }

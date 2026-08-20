@@ -2,7 +2,7 @@ import 'package:camera/camera.dart' show XFile;
 import 'package:flutter/foundation.dart' show ValueListenable;
 import 'package:flutter/material.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:driver/features/driver_verification/ui/widgets/wizard/upload_card.dart';
 
 class LicenseStep extends StatelessWidget {
@@ -29,7 +29,7 @@ class LicenseStep extends StatelessWidget {
           SizedBox(height: AppDimens.space24),
           Text(
             'صوّر رخصة القيادة من الأمام والخلف داخل الإطار.',
-            style: AppTextStyles.font14Neutral400Regular,
+            style: context.styles.font14Neutral400Regular,
           ),
           SizedBox(height: AppDimens.space24),
           ValueListenableBuilder<XFile?>(

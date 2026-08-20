@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 
 class AppMapProfileButton extends StatelessWidget {
@@ -12,13 +12,13 @@ class AppMapProfileButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton.small(
       heroTag: heroTag,
-      backgroundColor: AppColor.neutral0,
+      backgroundColor: context.colors.elementBackground,
       shape: const CircleBorder(),
       onPressed: onPressed,
       child: Icon(
         Icons.person_outline,
         size: AppDimens.icon20,
-        color: AppColor.primary500,
+        color: context.colors.primary500,
       ),
     );
   }

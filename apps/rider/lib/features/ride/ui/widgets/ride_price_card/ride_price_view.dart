@@ -23,14 +23,14 @@ class RidePriceView extends StatelessWidget {
             horizontal: AppDimens.space16,
           ),
           decoration: BoxDecoration(
-            color: AppColor.primary100,
+            color: context.colors.primary100,
             borderRadius: BorderRadius.circular(AppDimens.radius16),
           ),
           child: Column(
             children: [
               Text(
                 'الأجرة التقديرية',
-                style: AppTextStyles.font14Secondary500Medium,
+                style: context.styles.font14Secondary500Medium,
               ),
               SizedBox(height: AppDimens.space4),
               Text(
@@ -38,7 +38,7 @@ class RidePriceView extends StatelessWidget {
                   price.estimatedPrice,
                   currency: price.currency,
                 ),
-                style: AppTextStyles.font32Secondary900Bold,
+                style: context.styles.font32Secondary900Bold,
               ),
             ],
           ),

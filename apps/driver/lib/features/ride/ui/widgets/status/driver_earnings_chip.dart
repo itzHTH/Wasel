@@ -22,14 +22,14 @@ class DriverEarningsChip extends StatelessWidget {
     // alarming the driver about, and a balance not read yet is worth neither.
     final (foreground, background) = switch (total) {
       final num value when value > 0 => (
-        AppColor.alertSuccess500,
-        AppColor.alertSuccess100,
+        context.colors.alertSuccess500,
+        context.colors.alertSuccess100,
       ),
       final num value when value < 0 => (
-        AppColor.alertError500,
-        AppColor.alertError100,
+        context.colors.alertError500,
+        context.colors.alertError100,
       ),
-      _ => (AppColor.neutral400, AppColor.neutral100),
+      _ => (context.colors.neutral400, context.colors.neutral100),
     };
     return Container(
       padding: EdgeInsets.symmetric(
@@ -54,7 +54,7 @@ class DriverEarningsChip extends StatelessWidget {
                 ? '—'
                 : RideFormatters.fare(total.toString(), currency: currency),
             textDirection: TextDirection.ltr,
-            style: AppTextStyles.font14Primary500SemiBold.copyWith(
+            style: context.styles.font14Primary500SemiBold.copyWith(
               color: foreground,
             ),
           ),

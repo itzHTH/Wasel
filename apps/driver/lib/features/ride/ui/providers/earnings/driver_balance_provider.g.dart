@@ -34,7 +34,7 @@ final class DriverBalanceControllerProvider
 }
 
 String _$driverBalanceControllerHash() =>
-    r'9aa70a8a99f887e4139e9aea0130712158243094';
+    r'beed681ab8c6a612d88485d4f4a61af9ba07ee3a';
 
 abstract class _$DriverBalanceController extends $AsyncNotifier<double> {
   FutureOr<double> build();

@@ -6,6 +6,7 @@ import 'package:wasel_auth/auth_user_type.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:driver/driver_app.dart';
 import 'package:driver/firebase_options.dart';
+import 'package:wasel_core/theme/app_map_style.dart';
 import 'package:wasel_core/wasel_core.dart';
 
 void mainCommon({
@@ -23,10 +24,20 @@ void mainCommon({
   AuthInterceptor.onSessionExpired = () => AppNavigation.maybeNavigator
       ?.pushNamedAndRemoveUntil(AppRoutes.auth, (route) => false);
 
-  // Point the shared registration flow at the driver endpoints. This single
+  // Restored before the first frame so a cold start never flashes the wrong
+  // theme — AppLocalCache has no synchronous read.
+  final themeMode = await ThemeModeController.restore();
+  await AppMapStyle.preload();
+
   runApp(
     ProviderScope(
-      overrides: [authUserTypeProvider.overrideWithValue(AuthUserType.driver)],
+      overrides: [
+        // Points the shared registration flow at the driver endpoints, and the
+        // shared theme at the driver palette.
+        authUserTypeProvider.overrideWithValue(AuthUserType.driver),
+        appBrandProvider.overrideWithValue(AppBrand.driver),
+        initialThemeModeProvider.overrideWithValue(themeMode),
+      ],
       child: const DriverApp(),
     ),
   );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 
 class AppBackButton extends StatelessWidget {
@@ -23,14 +23,14 @@ class AppBackButton extends StatelessWidget {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: AppColor.neutral200, width: 1.5),
+              border: Border.all(color: context.colors.neutral200, width: 1.5),
             ),
             child: Directionality(
               textDirection: TextDirection.ltr,
               child: Icon(
                 Icons.arrow_forward_rounded,
                 size: AppDimens.icon20,
-                color: AppColor.secondary900,
+                color: context.colors.secondary900,
               ),
             ),
           ),

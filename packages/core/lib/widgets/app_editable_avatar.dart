@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/widgets/app_loading.dart';
 import 'package:wasel_core/widgets/app_profile_avatar.dart';
@@ -26,14 +26,14 @@ class AppEditableAvatar extends StatelessWidget {
     final badge = Container(
       padding: EdgeInsets.all(AppDimens.space8),
       decoration: BoxDecoration(
-        color: AppColor.primary500,
+        color: context.colors.primary500,
         shape: BoxShape.circle,
-        border: Border.all(color: AppColor.neutral0, width: 2),
+        border: Border.all(color: context.colors.elementBackground, width: 2),
       ),
       child: Icon(
         Icons.photo_camera_rounded,
         size: AppDimens.icon18,
-        color: AppColor.neutral0,
+        color: context.colors.onPrimary,
       ),
     );
 
@@ -45,13 +45,13 @@ class AppEditableAvatar extends StatelessWidget {
           Positioned.fill(
             child: DecoratedBox(
               decoration: BoxDecoration(
-                color: AppColor.secondary900.withValues(alpha: 0.5),
+                color: context.colors.scrim.withValues(alpha: 0.5),
                 shape: BoxShape.circle,
               ),
               child: Center(
                 child: AppInlineLoading(
                   size: resolvedSize / 3,
-                  color: AppColor.neutral0,
+                  color: context.colors.onScrim,
                 ),
               ),
             ),

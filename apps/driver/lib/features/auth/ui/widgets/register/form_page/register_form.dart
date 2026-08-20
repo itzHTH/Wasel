@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_core/helpers/app_validators.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/widgets/app_labeled_field.dart';
 import 'package:wasel_core/widgets/password_field.dart';
@@ -44,7 +44,7 @@ class RegisterForm extends StatelessWidget {
                 AppValidators.name(value, fieldName: 'الاسم الأول'),
             prefixIcon: Icon(
               Icons.person_outline_rounded,
-              color: AppColor.neutral400,
+              color: context.colors.neutral400,
               size: AppDimens.icon20,
             ),
           ),
@@ -61,7 +61,7 @@ class RegisterForm extends StatelessWidget {
                 AppValidators.name(value, fieldName: 'الاسم الأخير'),
             prefixIcon: Icon(
               Icons.person_outline_rounded,
-              color: AppColor.neutral400,
+              color: context.colors.neutral400,
               size: AppDimens.icon20,
             ),
           ),
@@ -77,7 +77,7 @@ class RegisterForm extends StatelessWidget {
             validator: AppValidators.phone,
             prefixIcon: Icon(
               Icons.phone_outlined,
-              color: AppColor.neutral400,
+              color: context.colors.neutral400,
               size: AppDimens.icon20,
             ),
           ),
@@ -94,7 +94,7 @@ class RegisterForm extends StatelessWidget {
                 AppValidators.name(value, fieldName: 'المدينة'),
             prefixIcon: Icon(
               Icons.location_city_outlined,
-              color: AppColor.neutral400,
+              color: context.colors.neutral400,
               size: AppDimens.icon20,
             ),
           ),
@@ -111,7 +111,7 @@ class RegisterForm extends StatelessWidget {
                 AppValidators.name(value, fieldName: 'العنوان'),
             prefixIcon: Icon(
               Icons.location_on_outlined,
-              color: AppColor.neutral400,
+              color: context.colors.neutral400,
               size: AppDimens.icon20,
             ),
           ),

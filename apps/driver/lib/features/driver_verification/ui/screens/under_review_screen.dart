@@ -2,9 +2,8 @@ import 'package:driver/features/driver_verification/domain/entities/verification
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/extensions/navigation_extension.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:driver/features/driver_verification/ui/providers/verify_status/verify_status_provider.dart';
 import 'package:driver/features/driver_verification/ui/screens/verification_wizard_screen.dart';
@@ -63,11 +62,11 @@ class UnderReviewScreen extends ConsumerWidget {
     });
 
     return Scaffold(
-      backgroundColor: AppColor.neutral0,
+      backgroundColor: context.colors.neutral0,
       body: SafeArea(
         child: RefreshIndicator(
           onRefresh: () => _refresh(ref),
-          color: AppColor.primary500,
+          color: context.colors.primary500,
           child: LayoutBuilder(
             builder: (context, constraints) => SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
@@ -80,20 +79,20 @@ class UnderReviewScreen extends ConsumerWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const VerificationStatusBadge(
+                      VerificationStatusBadge(
                         icon: Icons.hourglass_top_rounded,
-                        color: AppColor.alertInfo500,
-                        background: AppColor.alertInfo100,
+                        color: context.colors.alertInfo500,
+                        background: context.colors.alertInfo100,
                       ),
                       SizedBox(height: AppDimens.space24),
                       Text(
                         'طلبك قيد المراجعة',
-                        style: AppTextStyles.font20Secondary900Bold,
+                        style: context.styles.font20Secondary900Bold,
                       ),
                       SizedBox(height: AppDimens.space8),
                       Text(
                         'نقوم بمراجعة مستنداتك، وعادةً ما يستغرق ذلك حتى ٢٤ ساعة.',
-                        style: AppTextStyles.font14Neutral400Regular,
+                        style: context.styles.font14Neutral400Regular,
                         textAlign: TextAlign.center,
                       ),
                     ],

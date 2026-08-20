@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 
 class AppSurfaceCard extends StatelessWidget {
@@ -30,11 +30,11 @@ class AppSurfaceCard extends StatelessWidget {
       padding: padding,
       clipBehavior: clipBehavior,
       decoration: BoxDecoration(
-        color: backgroundColor ?? AppColor.elementBackground,
+        color: backgroundColor ?? context.colors.elementBackground,
         borderRadius: radius,
         boxShadow: [
           BoxShadow(
-            color: AppColor.secondary900.withValues(alpha: 0.06),
+            color: context.colors.scrim.withValues(alpha: 0.06),
             blurRadius: AppDimens.radius16,
             offset: Offset(0, AppDimens.space4),
           ),

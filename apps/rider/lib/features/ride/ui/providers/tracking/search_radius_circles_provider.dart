@@ -151,6 +151,7 @@ class SearchRadiusCircles extends _$SearchRadiusCircles {
     final pickup = ref.read(rideDraftProvider).pickup;
     if (pickup == null) return const {};
 
+    final palette = ref.read(appPaletteProvider);
     final pulse = _pulse;
 
     return {
@@ -158,10 +159,10 @@ class SearchRadiusCircles extends _$SearchRadiusCircles {
         circleId: const CircleId('search_radius'),
         center: pickup,
         radius: _radiusMeters,
-        fillColor: AppColor.primary500.withValues(
+        fillColor: palette.primary500.withValues(
           alpha: _fillAlpha + _fillPulseSwing * pulse,
         ),
-        strokeColor: AppColor.primary500.withValues(
+        strokeColor: palette.primary500.withValues(
           alpha: _strokeAlpha + _strokePulseSwing * pulse,
         ),
         strokeWidth: 1,

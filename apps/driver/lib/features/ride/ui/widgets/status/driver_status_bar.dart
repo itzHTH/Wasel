@@ -32,7 +32,7 @@ class DriverStatusBar extends ConsumerWidget {
     });
 
     return Material(
-      color: AppColor.elementBackground,
+      color: context.colors.elementBackground,
       borderRadius: BorderRadius.circular(AppDimens.radiusPill),
       elevation: 0,
       child: Padding(
@@ -50,7 +50,7 @@ class DriverStatusBar extends ConsumerWidget {
                 _titleFor(stage, connection),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.font14Secondary900SemiBold,
+                style: context.styles.font14Secondary900SemiBold,
               ),
             ),
             SizedBox(width: AppDimens.space12),
@@ -95,12 +95,13 @@ class _ConnectionDot extends StatelessWidget {
       Icons.circle,
       size: AppDimens.icon18,
       color: switch (connection) {
-        DriverConnectionState.dropped => AppColor.alertError500,
-        DriverConnectionState.reconnecting => AppColor.alertWarning500,
-        DriverConnectionState.connecting => AppColor.neutral400,
-        DriverConnectionState.idle => stage == DriverStage.offline
-            ? AppColor.neutral400
-            : AppColor.alertSuccess500,
+        DriverConnectionState.dropped => context.colors.alertError500,
+        DriverConnectionState.reconnecting => context.colors.alertWarning500,
+        DriverConnectionState.connecting => context.colors.neutral400,
+        DriverConnectionState.idle =>
+          stage == DriverStage.offline
+              ? context.colors.statusOffline
+              : context.colors.statusOnline,
       },
     );
   }

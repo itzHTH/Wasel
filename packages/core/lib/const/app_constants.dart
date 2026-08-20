@@ -10,6 +10,7 @@ class AppConstants {
   static const String refreshTokenKey = 'refreshToken';
   static const String refreshTokenExpirationKey = 'refreshTokenExpiration';
   static const String isFirstTimeKey = 'isFirstTime';
+  static const String themeModeKey = 'themeMode';
 
   static const List<String> sessionKeys = [
     tokenKey,

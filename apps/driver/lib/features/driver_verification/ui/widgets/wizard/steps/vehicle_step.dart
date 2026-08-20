@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart' show ValueListenable;
 import 'package:flutter/material.dart';
 import 'package:wasel_core/helpers/app_validators.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/widgets/app_labeled_field.dart';
 import 'package:driver/features/driver_verification/ui/widgets/wizard/upload_card.dart';
 
@@ -35,7 +35,7 @@ class VehicleStep extends StatelessWidget {
           SizedBox(height: AppDimens.space24),
           Text(
             'صوّر مركبتك وأدخل بياناتها.',
-            style: AppTextStyles.font14Neutral400Regular,
+            style: context.styles.font14Neutral400Regular,
           ),
           SizedBox(height: AppDimens.space24),
           ValueListenableBuilder<XFile?>(

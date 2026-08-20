@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_rides/domain/entities/ride_history_status.dart';
 
 class RideHistoryStatusChip extends StatelessWidget {
@@ -15,20 +14,20 @@ class RideHistoryStatusChip extends StatelessWidget {
       RideHistoryStatus.completed => (
         'مكتملة',
         Icons.check_circle_rounded,
-        AppColor.alertSuccess500,
-        AppColor.alertSuccess100,
+        context.colors.alertSuccess500,
+        context.colors.alertSuccess100,
       ),
       RideHistoryStatus.cancelled => (
         'ملغاة',
         Icons.cancel_rounded,
-        AppColor.alertError500,
-        AppColor.alertError100,
+        context.colors.alertError500,
+        context.colors.alertError100,
       ),
       RideHistoryStatus.unknown => (
         'غير معروفة',
         Icons.help_outline_rounded,
-        AppColor.neutral600,
-        AppColor.neutral100,
+        context.colors.neutral600,
+        context.colors.neutral100,
       ),
     };
 
@@ -48,7 +47,7 @@ class RideHistoryStatusChip extends StatelessWidget {
           SizedBox(width: AppDimens.space4),
           Text(
             label,
-            style: AppTextStyles.font12Neutral600SemiBold.copyWith(
+            style: context.styles.font12Neutral600SemiBold.copyWith(
               color: foreground,
             ),
           ),

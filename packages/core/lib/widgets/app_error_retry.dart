@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/widgets/app_loading.dart';
 
 class AppErrorRetry extends StatelessWidget {
@@ -28,7 +27,7 @@ class AppErrorRetry extends StatelessWidget {
           message,
           maxLines: 3,
           overflow: TextOverflow.ellipsis,
-          style: AppTextStyles.font14alertError500SemiBold,
+          style: context.styles.font14alertError500SemiBold,
         ),
         SizedBox(height: AppDimens.space8),
         TextButton.icon(
@@ -38,11 +37,11 @@ class AppErrorRetry extends StatelessWidget {
               : Icon(
                   Icons.refresh_rounded,
                   size: AppDimens.icon18,
-                  color: AppColor.primary500,
+                  color: context.colors.primary500,
                 ),
           label: Text(
             isRetrying ? 'جارٍ إعادة المحاولة…' : 'إعادة المحاولة',
-            style: AppTextStyles.font14Primary500SemiBold,
+            style: context.styles.font14Primary500SemiBold,
           ),
           style: TextButton.styleFrom(padding: EdgeInsets.zero),
         ),

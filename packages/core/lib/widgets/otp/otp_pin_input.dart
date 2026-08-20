@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 
 /// Six-box OTP entry, shared by the register and reset-password flows.
 class OtpPinInput extends StatelessWidget {
@@ -25,18 +24,18 @@ class OtpPinInput extends StatelessWidget {
     final defaultTheme = PinTheme(
       width: AppDimens.otpBoxSize,
       height: AppDimens.otpBoxSize,
-      textStyle: AppTextStyles.font24Secondary900Bold,
+      textStyle: context.styles.font24Secondary900Bold,
       decoration: BoxDecoration(
-        color: AppColor.neutral50,
+        color: context.colors.neutral50,
         borderRadius: BorderRadius.circular(AppDimens.radius12),
-        border: Border.all(color: AppColor.neutral200),
+        border: Border.all(color: context.colors.neutral200),
       ),
     );
 
     final errorTheme = defaultTheme.copyWith(
       decoration: defaultTheme.decoration!.copyWith(
-        color: AppColor.alertError100,
-        border: Border.all(color: AppColor.alertError500, width: 1.5),
+        color: context.colors.alertError100,
+        border: Border.all(color: context.colors.alertError500, width: 1.5),
       ),
     );
 
@@ -48,14 +47,14 @@ class OtpPinInput extends StatelessWidget {
       defaultPinTheme: defaultTheme,
       focusedPinTheme: defaultTheme.copyWith(
         decoration: defaultTheme.decoration!.copyWith(
-          color: AppColor.neutral0,
-          border: Border.all(color: AppColor.primary500, width: 1.5),
+          color: context.colors.elementBackground,
+          border: Border.all(color: context.colors.primary500, width: 1.5),
         ),
       ),
       submittedPinTheme: defaultTheme.copyWith(
         decoration: defaultTheme.decoration!.copyWith(
-          color: AppColor.primary100,
-          border: Border.all(color: AppColor.primary300),
+          color: context.colors.primary100,
+          border: Border.all(color: context.colors.primary300),
         ),
       ),
       errorPinTheme: errorTheme,
@@ -68,7 +67,7 @@ class OtpPinInput extends StatelessWidget {
             width: 2.w,
             height: 28.h,
             decoration: BoxDecoration(
-              color: AppColor.primary500,
+              color: context.colors.primary500,
               borderRadius: BorderRadius.circular(6.r),
             ),
           ),

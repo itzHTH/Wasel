@@ -49,10 +49,16 @@ export 'networking/session_refresher.dart';
 export 'routing/app_page_transitions.dart';
 
 // Theme
-export 'theme/app_color.dart';
+export 'theme/app_brand.dart';
+export 'theme/app_colors_extension.dart';
 export 'theme/app_dimens.dart';
 export 'theme/app_text_styles.dart';
 export 'theme/app_theme.dart';
+export 'theme/palettes/alert_tokens.dart';
+export 'theme/palettes/driver_palette.dart';
+export 'theme/palettes/rider_palette.dart';
+export 'theme/providers/theme_mode_provider.dart';
+export 'theme/theme_context_extension.dart';
 
 // Use cases
 export 'usecase/base_use_case.dart';
@@ -60,6 +66,7 @@ export 'usecase/cancellable_use_case.dart';
 export 'usecase/stream_base_use_case.dart';
 
 // Widgets
+export 'widgets/app_appearance_sheet.dart';
 export 'widgets/app_back_button.dart';
 export 'widgets/app_dialog.dart';
 export 'widgets/app_editable_avatar.dart';
@@ -79,10 +86,12 @@ export 'widgets/app_primary_button.dart';
 export 'widgets/app_profile_avatar.dart';
 export 'widgets/app_skeleton.dart';
 export 'widgets/app_soon_badge.dart';
+export 'widgets/app_splash_branding.dart';
 export 'widgets/app_stat_cards.dart';
 export 'widgets/app_step_indicator.dart';
 export 'widgets/app_surface_card.dart';
 export 'widgets/app_text_form_field.dart';
+export 'widgets/app_theme_mode_switch.dart';
 export 'widgets/password_field.dart';
 
 // Widgets — OTP (shared by the register and reset-password flows)

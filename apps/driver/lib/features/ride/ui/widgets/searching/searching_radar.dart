@@ -42,6 +42,7 @@ class _SearchingRadarState extends State<SearchingRadar>
           painter: _RadarPainter(
             phase: _pulse.value,
             coreRadius: AppDimens.icon18 / 2,
+            color: context.colors.primary500,
           ),
         ),
       ),
@@ -50,10 +51,15 @@ class _SearchingRadarState extends State<SearchingRadar>
 }
 
 class _RadarPainter extends CustomPainter {
-  const _RadarPainter({required this.phase, required this.coreRadius});
+  const _RadarPainter({
+    required this.phase,
+    required this.coreRadius,
+    required this.color,
+  });
 
   final double phase;
   final double coreRadius;
+  final Color color;
 
   /// Rings in flight at once, evenly spread across the cycle.
   static const _ringCount = 3;
@@ -69,19 +75,17 @@ class _RadarPainter extends CustomPainter {
       final ring = Paint()
         ..style = PaintingStyle.stroke
         ..strokeWidth = AppDimens.space4 / 2
-        ..color = AppColor.primary500.withValues(alpha: (1 - t) * 0.6);
+        ..color = color.withValues(alpha: (1 - t) * 0.6);
 
       canvas.drawCircle(center, radius, ring);
     }
 
-    canvas.drawCircle(
-      center,
-      coreRadius,
-      Paint()..color = AppColor.primary500,
-    );
+    canvas.drawCircle(center, coreRadius, Paint()..color = color);
   }
 
   @override
   bool shouldRepaint(_RadarPainter oldDelegate) =>
-      oldDelegate.phase != phase || oldDelegate.coreRadius != coreRadius;
+      oldDelegate.phase != phase ||
+      oldDelegate.coreRadius != coreRadius ||
+      oldDelegate.color != color;
 }

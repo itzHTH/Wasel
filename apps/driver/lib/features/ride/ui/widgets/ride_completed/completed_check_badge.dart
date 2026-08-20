@@ -9,14 +9,14 @@ class CompletedCheckBadge extends StatelessWidget {
     return Container(
       width: AppDimens.icon48,
       height: AppDimens.icon48,
-      decoration: const BoxDecoration(
-        color: AppColor.alertSuccess100,
+      decoration: BoxDecoration(
+        color: context.colors.alertSuccess100,
         shape: BoxShape.circle,
       ),
       child: Icon(
         Icons.check_rounded,
         size: AppDimens.icon24,
-        color: AppColor.alertSuccess500,
+        color: context.colors.alertSuccess500,
       ),
     );
   }

@@ -56,7 +56,7 @@ class IncomingOfferCard extends ConsumerWidget {
                   children: [
                     Text(
                       'وصلك طلب جديد',
-                      style: AppTextStyles.font14Neutral400Regular,
+                      style: context.styles.font14Neutral400Regular,
                     ),
                     SizedBox(height: AppDimens.space4),
                     FareHero(amount: fare),

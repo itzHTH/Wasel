@@ -10,7 +10,7 @@ Future<bool> showCardFormSheet(BuildContext context, WidgetRef ref) async {
 
   final tokenized = await showModalBottomSheet<bool>(
     context: context,
-    backgroundColor: AppColor.screenBackground,
+    backgroundColor: context.colors.screenBackground,
     useSafeArea: true,
     isScrollControlled: true,
     shape: RoundedRectangleBorder(
@@ -145,7 +145,7 @@ class _CardFormSheetState extends ConsumerState<_CardFormSheet> {
                       width: AppDimens.space40,
                       height: AppDimens.space4,
                       decoration: BoxDecoration(
-                        color: AppColor.neutral200,
+                        color: context.colors.neutral200,
                         borderRadius: BorderRadius.circular(
                           AppDimens.radiusPill,
                         ),
@@ -156,7 +156,7 @@ class _CardFormSheetState extends ConsumerState<_CardFormSheet> {
                   Text(
                     'بيانات البطاقة',
                     textAlign: TextAlign.center,
-                    style: AppTextStyles.font16Secondary900Bold,
+                    style: context.styles.font16Secondary900Bold,
                   ),
                   SizedBox(height: AppDimens.space16),
                   AppLabeledFormField(

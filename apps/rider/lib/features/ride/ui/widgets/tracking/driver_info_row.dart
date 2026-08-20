@@ -25,7 +25,7 @@ class DriverInfoRow extends StatelessWidget {
                 driver.name,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.font20Secondary900Bold,
+                style: context.styles.font20Secondary900Bold,
               ),
               if (vehicle != null) ...[
                 SizedBox(height: AppDimens.space4),
@@ -33,7 +33,7 @@ class DriverInfoRow extends StatelessWidget {
                   vehicle,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: AppTextStyles.font14Secondary500Medium,
+                  style: context.styles.font14Secondary500Medium,
                 ),
               ],
             ],
@@ -57,7 +57,7 @@ class _DriverAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     final placeholder = Icon(
       Icons.person_rounded,
-      color: AppColor.neutral400,
+      color: context.colors.neutral400,
       size: AppDimens.icon24,
     );
 
@@ -65,8 +65,8 @@ class _DriverAvatar extends StatelessWidget {
       width: AppDimens.icon48,
       height: AppDimens.icon48,
       clipBehavior: Clip.antiAlias,
-      decoration: const BoxDecoration(
-        color: AppColor.neutral100,
+      decoration: BoxDecoration(
+        color: context.colors.neutral100,
         shape: BoxShape.circle,
       ),
       child: photoUrl == null || photoUrl!.isEmpty
@@ -94,13 +94,13 @@ class _PlateChip extends StatelessWidget {
         vertical: AppDimens.space8,
       ),
       decoration: BoxDecoration(
-        color: AppColor.secondary900,
+        color: context.colors.secondary900,
         borderRadius: BorderRadius.circular(AppDimens.radius8),
       ),
       child: Text(
         plateNumber,
         textDirection: TextDirection.ltr,
-        style: AppTextStyles.font16Neutral0SemiBold,
+        style: context.styles.font16Neutral0SemiBold,
       ),
     );
   }

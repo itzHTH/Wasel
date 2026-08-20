@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/palettes/alert_tokens.dart';
 
 enum CutoutShape { oval, rect }
 
@@ -54,7 +54,7 @@ class CameraOverlayPainter extends CustomPainter {
     );
     canvas.drawPath(
       dim,
-      Paint()..color = AppColor.secondary900.withValues(alpha: 0.6),
+      Paint()..color = AlertTokens.scrim.withValues(alpha: 0.6),
     );
 
     // Border ring around the cutout.

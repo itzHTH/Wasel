@@ -6,9 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasel_core/helpers/app_amount_format.dart';
 import 'package:wasel_core/networking/errors/error_message.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/widgets/app_error_state.dart';
 import 'package:wasel_core/widgets/app_group_card.dart';
 import 'package:wasel_core/widgets/app_info_row.dart';
@@ -32,16 +31,16 @@ class ProfileDetailsScreen extends ConsumerWidget {
         ref.read(driverProfileControllerProvider.notifier).refresh();
 
     return Scaffold(
-      backgroundColor: AppColor.screenBackground,
+      backgroundColor: context.colors.screenBackground,
       appBar: AppBar(
         title: const Text('الملف الشخصي'),
-        backgroundColor: AppColor.screenBackground,
-        surfaceTintColor: AppColor.screenBackground,
+        backgroundColor: context.colors.screenBackground,
+        surfaceTintColor: context.colors.screenBackground,
         actions: [
           IconButton(
             tooltip: 'تعديل',
             icon: const Icon(Icons.edit_outlined),
-            color: AppColor.primary500,
+            color: context.colors.primary500,
             onPressed: () => context.pushNamed(AppRoutes.profileEdit),
           ),
         ],
@@ -65,7 +64,6 @@ class ProfileDetailsScreen extends ConsumerWidget {
     );
   }
 }
-
 
 class _DriverProfileDetailsBody extends StatelessWidget {
   const _DriverProfileDetailsBody({required this.profile});
@@ -100,7 +98,7 @@ class _DriverProfileDetailsBody extends StatelessWidget {
                 textAlign: TextAlign.center,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.font20Secondary900Bold,
+                style: context.styles.font20Secondary900Bold,
               ),
               SizedBox(height: AppDimens.space8),
               DriverApprovalBadge(status: profile.approvalStatus),
@@ -109,16 +107,16 @@ class _DriverProfileDetailsBody extends StatelessWidget {
                 stats: [
                   AppStat(
                     icon: Icons.account_balance_wallet_rounded,
-                    iconColor: AppColor.primary500,
-                    background: AppColor.primary100,
+                    iconColor: context.colors.primary500,
+                    background: context.colors.primary100,
                     label: 'الرصيد',
                     value: formatAmount(profile.balance),
                     valueTextDirection: TextDirection.ltr,
                   ),
                   AppStat(
                     icon: Icons.star_rounded,
-                    iconColor: AppColor.primary500,
-                    background: AppColor.neutral100,
+                    iconColor: context.colors.primary500,
+                    background: context.colors.neutral100,
                     label: 'التقييم',
                     value:
                         '${profile.averageRating.toStringAsFixed(1)} '

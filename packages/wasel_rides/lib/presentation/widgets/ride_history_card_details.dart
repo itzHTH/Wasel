@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_rides/domain/entities/ride_history_entry.dart';
 import 'package:wasel_rides/core/formatters/ride_history_labels.dart';
 import 'package:wasel_rides/presentation/widgets/ride_history_amount.dart';
@@ -19,13 +18,13 @@ class RideHistoryCardDetails extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(height: AppDimens.space12),
-        const Divider(height: 1, thickness: 1, color: AppColor.neutral100),
+        Divider(height: 1, thickness: 1, color: context.colors.neutral100),
         SizedBox(height: AppDimens.space12),
         _DetailRow(
           label: 'التاريخ',
           value: Text(
             RideHistoryLabels.fullDateLabel(entry.requestedAt),
-            style: AppTextStyles.font14Secondary900SemiBold,
+            style: context.styles.font14Secondary900SemiBold,
           ),
         ),
         SizedBox(height: AppDimens.space8),
@@ -33,7 +32,7 @@ class RideHistoryCardDetails extends StatelessWidget {
           label: 'وقت الطلب',
           value: Text(
             RideHistoryLabels.timeLabel(entry.requestedAt),
-            style: AppTextStyles.font14Secondary900SemiBold,
+            style: context.styles.font14Secondary900SemiBold,
           ),
         ),
         SizedBox(height: AppDimens.space8),
@@ -41,7 +40,7 @@ class RideHistoryCardDetails extends StatelessWidget {
           label: 'قيمة الرحلة',
           value: RideHistoryAmount(
             price: entry.price,
-            style: AppTextStyles.font14Secondary900SemiBold,
+            style: context.styles.font14Secondary900SemiBold,
           ),
         ),
       ],
@@ -61,7 +60,7 @@ class _DetailRow extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: Text(label, style: AppTextStyles.font12Neutral400Regular),
+          child: Text(label, style: context.styles.font12Neutral400Regular),
         ),
         SizedBox(width: AppDimens.space12),
         Flexible(child: value),

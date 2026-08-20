@@ -1,7 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:driver/features/driver_verification/ui/widgets/camera/camera_overlay_painter.dart';
 import 'package:driver/features/driver_verification/ui/widgets/camera/camera_preview_cover.dart';
@@ -41,7 +41,7 @@ class CameraCaptureView extends StatelessWidget {
         // Dim + framing cutout + ring.
         CustomPaint(
           painter: CameraOverlayPainter(
-            borderColor: AppColor.neutral0,
+            borderColor: context.colors.onScrim,
             shape: cutoutShape,
             widthFactor: widthFactor,
             aspectRatio: aspectRatio,
@@ -55,7 +55,7 @@ class CameraCaptureView extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.all(AppDimens.space8),
               child: IconButton(
-                icon: const Icon(Icons.close, color: AppColor.neutral0),
+                icon: Icon(Icons.close, color: context.colors.onScrim),
                 onPressed: onClose,
               ),
             ),

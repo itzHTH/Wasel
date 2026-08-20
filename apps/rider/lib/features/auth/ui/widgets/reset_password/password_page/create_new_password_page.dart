@@ -4,7 +4,7 @@ import 'package:wasal/features/auth/ui/widgets/common/auth_primary_button.dart';
 import 'package:wasal/features/auth/ui/widgets/reset_password/password_page/new_password_form.dart';
 import 'package:wasel_auth/presentation/providers/reset_password/reset_password_controller.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/widgets/app_back_button.dart';
 import 'package:wasel_core/widgets/app_inline_error.dart';
 
@@ -39,14 +39,11 @@ class CreateNewPasswordPage extends ConsumerWidget {
           AppBackButton(onTap: onBack),
           SizedBox(height: AppDimens.space24),
 
-          Text(
-            'كلمة مرور جديدة',
-            style: AppTextStyles.font24Secondary900Bold,
-          ),
+          Text('كلمة مرور جديدة', style: context.styles.font24Secondary900Bold),
           SizedBox(height: AppDimens.space8),
           Text(
             'اختر كلمة مرور جديدة لحسابك',
-            style: AppTextStyles.font14Neutral400Regular,
+            style: context.styles.font14Neutral400Regular,
           ),
           SizedBox(height: AppDimens.space32),
 
@@ -63,7 +60,7 @@ class CreateNewPasswordPage extends ConsumerWidget {
               onPressed: onExpiredRestart,
               child: Text(
                 'طلب رمز جديد',
-                style: AppTextStyles.font14Primary500SemiBold,
+                style: context.styles.font14Primary500SemiBold,
               ),
             )
           else

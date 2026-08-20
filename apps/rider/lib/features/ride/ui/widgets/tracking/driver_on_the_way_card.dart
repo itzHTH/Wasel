@@ -47,12 +47,12 @@ class DriverOnTheWayCard extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(AppDimens.space8),
                 decoration: BoxDecoration(
-                  color: AppColor.primary100,
+                  color: context.colors.primary100,
                   borderRadius: BorderRadius.circular(AppDimens.radius12),
                 ),
                 child: Icon(
                   Icons.directions_car_rounded,
-                  color: AppColor.primary500,
+                  color: context.colors.primary500,
                   size: AppDimens.icon20,
                 ),
               ),
@@ -62,7 +62,7 @@ class DriverOnTheWayCard extends StatelessWidget {
                   etaMinutes != null
                       ? 'الكابتن يوصل خلال $etaMinutes دقائق'
                       : 'الكابتن بالطريق إلك',
-                  style: AppTextStyles.font20Secondary900Bold,
+                  style: context.styles.font20Secondary900Bold,
                 ),
               ),
             ],

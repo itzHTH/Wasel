@@ -1,9 +1,8 @@
 import 'package:camera/camera.dart' show XFile;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:wasel_core/theme/app_color.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/app_text_styles.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:driver/features/driver_verification/ui/widgets/wizard/captured_image.dart';
 
 class UploadCard extends StatelessWidget {
@@ -31,10 +30,12 @@ class UploadCard extends StatelessWidget {
         width: double.infinity,
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
-          color: _isFilled ? AppColor.neutral0 : AppColor.neutral50,
+          color: _isFilled ? context.colors.neutral0 : context.colors.neutral50,
           borderRadius: BorderRadius.circular(AppDimens.radius16),
           border: Border.all(
-            color: _isFilled ? AppColor.primary300 : AppColor.neutral200,
+            color: _isFilled
+                ? context.colors.primary300
+                : context.colors.neutral200,
             width: 1.5,
           ),
         ),
@@ -58,9 +59,9 @@ class EmptyThumbnail extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: AppDimens.icon36, color: AppColor.neutral400),
+          Icon(icon, size: AppDimens.icon36, color: context.colors.neutral400),
           SizedBox(height: AppDimens.space8),
-          Text(label, style: AppTextStyles.font14Neutral400Regular),
+          Text(label, style: context.styles.font14Neutral400Regular),
         ],
       ),
     );
@@ -86,19 +87,19 @@ class FileThumbnail extends StatelessWidget {
               horizontal: AppDimens.space12,
               vertical: AppDimens.space8,
             ),
-            color: AppColor.secondary900.withValues(alpha: 0.55),
+            color: context.colors.scrim.withValues(alpha: 0.55),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(
                   Icons.refresh_rounded,
                   size: AppDimens.icon18,
-                  color: AppColor.neutral0,
+                  color: context.colors.onScrim,
                 ),
                 SizedBox(width: AppDimens.space8),
                 Text(
                   'إعادة الالتقاط',
-                  style: AppTextStyles.font16Neutral0SemiBold,
+                  style: context.styles.font16OnScrimSemiBold,
                 ),
               ],
             ),
@@ -111,7 +112,7 @@ class FileThumbnail extends StatelessWidget {
           child: Icon(
             Icons.check_circle_rounded,
             size: AppDimens.icon24,
-            color: AppColor.primary500,
+            color: context.colors.primary500,
           ),
         ),
       ],

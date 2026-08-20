@@ -35,13 +35,13 @@ class OfflineCard extends StatelessWidget {
                   children: [
                     Text(
                       isConnecting ? 'دا نتصل بالخادم' : 'إنت غير متصل',
-                      style: AppTextStyles.font20Secondary900Bold,
+                      style: context.styles.font20Secondary900Bold,
                     ),
                     Text(
                       isConnecting
                           ? 'ثانية وحدة، دا نكمل الاتصال'
                           : 'ما راح توصلك طلبات وإنت غير متصل',
-                      style: AppTextStyles.font14Neutral400Regular,
+                      style: context.styles.font14Neutral400Regular,
                     ),
                   ],
                 ),
@@ -75,13 +75,17 @@ class _OfflineBadge extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(AppDimens.space8),
       decoration: BoxDecoration(
-        color: isConnecting ? AppColor.primary100 : AppColor.neutral100,
+        color: isConnecting
+            ? context.colors.primary100
+            : context.colors.neutral100,
         borderRadius: BorderRadius.circular(AppDimens.radius12),
       ),
       child: Icon(
         Icons.power_settings_new_rounded,
         size: AppDimens.icon20,
-        color: isConnecting ? AppColor.primary500 : AppColor.neutral400,
+        color: isConnecting
+            ? context.colors.primary500
+            : context.colors.neutral400,
       ),
     );
   }

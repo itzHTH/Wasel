@@ -4,7 +4,8 @@ import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_st
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:wasel_core/theme/app_color.dart';
+import 'package:wasel_core/theme/providers/theme_mode_provider.dart';
+import 'package:wasel_core/theme/app_colors_extension.dart';
 import 'package:wasel_core/networking/api_results.dart';
 import 'package:wasel_location/wasel_location.dart';
 
@@ -42,8 +43,10 @@ Future<Set<Polyline>> driverRoutePolylines(Ref ref) async {
         .read(getRouteUseCaseProvider)
         .call(RouteRequest(origin: segment.$1, destination: segment.$2));
 
+    final palette = ref.read(appPaletteProvider);
+
     return result.when(
-      success: _polylines,
+      success: (points) => _polylines(points, palette),
       failure: (error) => _report(ref, error.apiErrorModel.message),
     );
   } catch (_) {
@@ -84,11 +87,11 @@ Set<Polyline> _report(Ref ref, String? message) {
   return const {};
 }
 
-Set<Polyline> _polylines(List<GeoPoint> points) => {
+Set<Polyline> _polylines(List<GeoPoint> points, AppColorsExtension palette) => {
   Polyline(
     polylineId: const PolylineId('driver_route'),
     points: points.map((p) => LatLng(p.latitude, p.longitude)).toList(),
-    color: AppColor.primary500,
+    color: palette.primary500,
     width: 4,
     startCap: Cap.roundCap,
     endCap: Cap.roundCap,

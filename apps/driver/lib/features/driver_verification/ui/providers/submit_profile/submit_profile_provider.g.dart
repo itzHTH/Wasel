@@ -41,7 +41,7 @@ final class SubmitProfileProvider
   }
 }
 
-String _$submitProfileHash() => r'69a888e0c44e9f6567925436681a418fd3d35c9c';
+String _$submitProfileHash() => r'89eebdfb0da54352cdd428c60d13a5ad30c0ee43';
 
 abstract class _$SubmitProfile extends $Notifier<SubmitProfileState> {
   SubmitProfileState build();

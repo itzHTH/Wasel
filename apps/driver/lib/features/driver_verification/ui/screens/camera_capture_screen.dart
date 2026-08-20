@@ -146,7 +146,7 @@ class _CameraCaptureScreenState extends State<CameraCaptureScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.secondary900,
+      backgroundColor: context.colors.scrim,
       body: ListenableBuilder(
         listenable: Listenable.merge([_controller, _error]),
         builder: (context, _) {
@@ -159,8 +159,8 @@ class _CameraCaptureScreenState extends State<CameraCaptureScreen>
             );
           }
           if (controller == null || !controller.value.isInitialized) {
-            return const Center(
-              child: CircularProgressIndicator(color: AppColor.neutral0),
+            return Center(
+              child: CircularProgressIndicator(color: context.colors.onScrim),
             );
           }
           return CameraCaptureView(
