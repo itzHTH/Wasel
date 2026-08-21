@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math' as math;
 
-import 'package:driver/features/ride/ui/providers/location/driver_heading_provider.dart';
+import 'package:driver/features/ride/ui/providers/map/driver_car_motion_provider.dart';
 import 'package:driver/features/ride/ui/providers/map/driver_route_polylines_provider.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
@@ -115,22 +115,31 @@ class DriverCameraController extends _$DriverCameraController {
     final controller = await ref.read(mapControllerHolderProvider.future);
     if (_paused || !ref.mounted) return;
 
+    // Read after the await: the marker's animator listens to the same stream,
+    // and suspending here lets its update land first.
+    final motion = ref.read(driverCarMotionProvider);
+
     _selfMoveUntil = DateTime.now().add(_selfMoveWindow);
     final update = CameraUpdate.newCameraPosition(
       CameraPosition(
         target: position.toLatLng(),
         zoom: _zoom,
-        bearing: ref.read(driverHeadingProvider),
+        bearing: motion.targetBearing,
       ),
     );
 
-    if (_placed) {
-      await controller.animateCamera(update);
+    // A snapped marker has no glide to match, so the camera cuts with it
+    // rather than crawling toward a car that has already arrived.
+    if (!_placed || motion.glideDuration == Duration.zero) {
+      _placed = true;
+      await controller.moveCamera(update);
       return;
     }
 
-    _placed = true;
-    await controller.moveCamera(update);
+    // Borrowing the marker's glide keeps the car still in the frame. Left to
+    // its default the camera lands in a fraction of the time and the car
+    // visibly drifts across the viewport while it catches up.
+    await controller.animateCamera(update, duration: motion.glideDuration);
   }
 
   /// The controller lands at `onMapCreated`, which is before the map surface
