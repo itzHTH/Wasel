@@ -8,13 +8,20 @@ part of 'ride_point_markers_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
+/// The markers that sit still. The driver's car is animated between hub
+/// updates, so it is drawn from `driverCarMotionProvider` instead.
 
 @ProviderFor(ridePointMarkers)
 final ridePointMarkersProvider = RidePointMarkersProvider._();
 
+/// The markers that sit still. The driver's car is animated between hub
+/// updates, so it is drawn from `driverCarMotionProvider` instead.
+
 final class RidePointMarkersProvider
     extends $FunctionalProvider<Set<Marker>, Set<Marker>, Set<Marker>>
     with $Provider<Set<Marker>> {
+  /// The markers that sit still. The driver's car is animated between hub
+  /// updates, so it is drawn from `driverCarMotionProvider` instead.
   RidePointMarkersProvider._()
     : super(
         from: null,
@@ -48,4 +55,4 @@ final class RidePointMarkersProvider
   }
 }
 
-String _$ridePointMarkersHash() => r'84e52142fc68b549e6414f1dcc8c5494cb28340c';
+String _$ridePointMarkersHash() => r'38768faea1126241f61447d79713c73d245f003a';

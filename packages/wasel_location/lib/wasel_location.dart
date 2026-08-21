@@ -13,6 +13,9 @@ export 'domain/entities/location_access.dart';
 export 'domain/entities/location_exception.dart';
 export 'domain/entities/route_request.dart';
 
+// Domain — movement maths
+export 'domain/geo/geo_interpolation.dart';
+
 // Domain — abstract repos
 export 'domain/repos/base_device_location_repo.dart';
 export 'domain/repos/base_geocoding_repo.dart';
@@ -49,6 +52,13 @@ export 'presentation/providers/location_di_providers.dart';
 
 // Core — extensions at the domain/map boundary
 export 'core/extensions/geo_point_map_x.dart';
+export 'core/extensions/vehicle_pose_map_x.dart';
+
+// Presentation — animation
+export 'presentation/animation/config/vehicle_motion_config.dart';
+export 'presentation/animation/models/vehicle_pose.dart';
+export 'presentation/animation/utils/motion_vsync.dart';
+export 'presentation/animation/vehicle_motion.dart';
 
 // Presentation — location providers
 export 'presentation/providers/location/device_location_provider.dart';

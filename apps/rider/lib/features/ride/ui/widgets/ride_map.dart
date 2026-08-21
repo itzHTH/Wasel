@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wasal/core/consts/app_icons.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_point_markers_provider.dart';
 import 'package:wasal/features/ride/ui/providers/route/route_polylines_provider.dart';
+import 'package:wasal/features/ride/ui/providers/tracking/driver_car_motion_provider.dart';
 import 'package:wasal/features/ride/ui/providers/tracking/search_radius_circles_provider.dart';
 import 'package:wasel_location/wasel_location.dart';
 
@@ -24,14 +26,26 @@ class RideMap extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return AppMap(
-      markers: ref.watch(ridePointMarkersProvider),
-      polylines: ref.watch(routePolylinesProvider),
-      circles: ref.watch(searchRadiusCirclesProvider),
-      padding: mapPadding,
-      onCameraMove: onCameraMove,
-      onCameraMoveStarted: onCameraMoveStarted,
-      onCameraIdle: onCameraIdle,
+    final pins = ref.watch(ridePointMarkersProvider);
+    final polylines = ref.watch(routePolylinesProvider);
+    final circles = ref.watch(searchRadiusCirclesProvider);
+    final motion = ref.watch(driverCarMotionProvider);
+    final carIcon = ref.watch(mapMarkerIconProvider(AppIcons.car)).value;
+
+    return AnimatedBuilder(
+      animation: motion,
+      builder: (context, _) => AppMap(
+        markers: {
+          ...pins,
+          if (motion.hasFix) motion.value.toMarker(icon: carIcon),
+        },
+        polylines: polylines,
+        circles: circles,
+        padding: mapPadding,
+        onCameraMove: onCameraMove,
+        onCameraMoveStarted: onCameraMoveStarted,
+        onCameraIdle: onCameraIdle,
+      ),
     );
   }
 }

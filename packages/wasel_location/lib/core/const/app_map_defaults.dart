@@ -11,6 +11,8 @@ class AppMapDefaults {
 
   static const MinMaxZoomPreference zoomRange = MinMaxZoomPreference(10, 20);
 
+  static const MarkerId vehicleMarkerId = MarkerId('driver');
+
   static final LatLngBounds serviceBounds = LatLngBounds(
     southwest: const LatLng(29.0, 38.8),
     northeast: const LatLng(37.4, 48.6),
