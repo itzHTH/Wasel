@@ -50,6 +50,9 @@ class _RideScreenState extends ConsumerState<RideScreen> {
           AnimatedBuilder(
             animation: motion,
             builder: (context, _) => AppMap(
+              // The animated car marker already shows where the driver is; the
+              // native blue dot underneath it reads as a second vehicle.
+              myLocationEnabled: false,
               markers: {
                 ...markers,
                 if (motion.hasFix) motion.value.toMarker(icon: carIcon),
