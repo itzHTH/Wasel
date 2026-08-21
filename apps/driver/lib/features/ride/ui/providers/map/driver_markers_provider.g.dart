@@ -8,13 +8,20 @@ part of 'driver_markers_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
+/// The markers that sit still. The car is animated between fixes, so it is
+/// drawn from [driverCarMotionProvider] instead of rebuilt through here.
 
 @ProviderFor(driverMarkers)
 final driverMarkersProvider = DriverMarkersProvider._();
 
+/// The markers that sit still. The car is animated between fixes, so it is
+/// drawn from [driverCarMotionProvider] instead of rebuilt through here.
+
 final class DriverMarkersProvider
     extends $FunctionalProvider<Set<Marker>, Set<Marker>, Set<Marker>>
     with $Provider<Set<Marker>> {
+  /// The markers that sit still. The car is animated between fixes, so it is
+  /// drawn from [driverCarMotionProvider] instead of rebuilt through here.
   DriverMarkersProvider._()
     : super(
         from: null,
@@ -48,4 +55,4 @@ final class DriverMarkersProvider
   }
 }
 
-String _$driverMarkersHash() => r'5620a2030b4ccfea4569905b21f7b33e1a70e99b';
+String _$driverMarkersHash() => r'99e4939a4e5b2f1826f8d60f2d31505b2273efcd';

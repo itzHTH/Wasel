@@ -1,4 +1,6 @@
+import 'package:driver/core/const/app_driver_consts.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
+import 'package:driver/features/ride/ui/providers/map/driver_car_motion_provider.dart';
 import 'package:driver/features/ride/ui/providers/map/driver_camera_controller.dart';
 import 'package:driver/features/ride/ui/providers/map/driver_is_camera_moving_provider.dart';
 import 'package:driver/features/ride/ui/providers/location/driver_location_broadcaster.dart';
@@ -33,6 +35,11 @@ class _RideScreenState extends ConsumerState<RideScreen> {
     ref.watch(driverCameraControllerProvider);
 
     final markers = ref.watch(driverMarkersProvider);
+    final polylines = ref.watch(driverRoutePolylinesProvider).value ?? const {};
+    final motion = ref.watch(driverCarMotionProvider);
+    final carIcon = ref
+        .watch(mapMarkerIconProvider(AppDriverConsts.carIcon))
+        .value;
 
     return Scaffold(
       body: Stack(
@@ -40,24 +47,30 @@ class _RideScreenState extends ConsumerState<RideScreen> {
         children: [
           // The opening camera is resolved inside AppMap now, which also holds
           // the platform view back until it lands — the gate that used to sit
-          // here.
-          AppMap(
-            markers: markers,
-            polylines:
-                ref.watch(driverRoutePolylinesProvider).value ?? const {},
-            onCameraMoveStarted: () {
-              final movedByDriver = ref
-                  .read(driverCameraControllerProvider.notifier)
-                  .onMoveStarted();
+          AnimatedBuilder(
+            animation: motion,
+            builder: (context, _) => AppMap(
+              markers: {
+                ...markers,
+                if (motion.hasFix) motion.value.toMarker(icon: carIcon),
+              },
+              polylines: polylines,
+              onCameraMoveStarted: () {
+                final movedByDriver = ref
+                    .read(driverCameraControllerProvider.notifier)
+                    .onMoveStarted();
 
-              if (!movedByDriver) return;
+                if (!movedByDriver) return;
 
-              ref.read(driverIsCameraMovingProvider.notifier).setMoving(true);
-            },
-            onCameraIdle: () {
-              ref.read(driverCameraControllerProvider.notifier).onIdle();
-              ref.read(driverIsCameraMovingProvider.notifier).setMoving(false);
-            },
+                ref.read(driverIsCameraMovingProvider.notifier).setMoving(true);
+              },
+              onCameraIdle: () {
+                ref.read(driverCameraControllerProvider.notifier).onIdle();
+                ref
+                    .read(driverIsCameraMovingProvider.notifier)
+                    .setMoving(false);
+              },
+            ),
           ),
           const Positioned.fill(child: AppMapLoadingOverlay()),
           PositionedDirectional(
