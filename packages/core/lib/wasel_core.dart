@@ -24,6 +24,12 @@ export 'helpers/app_url_launcher.dart';
 export 'helpers/app_validators.dart';
 export 'helpers/session_store.dart';
 
+// Localization
+export 'l10n/core_localizations.dart';
+export 'l10n/core_l10n_extension.dart';
+export 'localization/app_local_type.dart';
+export 'localization/providers/app_localization_provider.dart';
+
 // Permissions
 export 'package:permission_handler/permission_handler.dart'
     show Permission, PermissionStatus, openAppSettings;
@@ -78,6 +84,8 @@ export 'widgets/app_header_with_logo.dart';
 export 'widgets/app_image_source_sheet.dart';
 export 'widgets/app_info_row.dart';
 export 'widgets/app_inline_error.dart';
+export 'widgets/app_language_sheet.dart';
+export 'widgets/app_language_switch.dart';
 export 'widgets/app_labeled_field.dart';
 export 'widgets/app_loading.dart';
 export 'widgets/app_map_profile_button.dart';
