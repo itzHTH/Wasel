@@ -1,0 +1,6 @@
+{
+    "waselDriver": "Wasel Driver",
+    "@waselDriver": {
+        "description": "The app name"
+    }
+}

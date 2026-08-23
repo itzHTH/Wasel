@@ -152,6 +152,8 @@ class ErrorHandler implements Exception {
         error.response?.data != null
             ? ApiErrorModel.fromJson(error.response!.data)
             : DataSource.defaultError.getFailure(),
+      // TODO: Handle this case.
+      DioExceptionType.transformTimeout => throw UnimplementedError(),
     };
   }
 }

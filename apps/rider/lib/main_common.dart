@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wasel_core/localization/providers/app_localization_provider.dart';
 import 'package:wasel_core/theme/app_map_style.dart';
 import 'package:wasel_core/helpers/app_navigation.dart';
 import 'package:wasel_core/networking/interceptors/auth_interceptor.dart';
@@ -34,11 +35,16 @@ void mainCommon({
   final themeMode = await ThemeModeController.restore();
   await AppMapStyle.preload();
 
+  final locale = await AppLocalizationController.restore();
+
   runApp(
     ProviderScope(
       // Provider lifecycle logging in debug builds only; release stays silent.
       observers: kDebugMode ? const [LoggerObserver()] : const [],
-      overrides: [initialThemeModeProvider.overrideWithValue(themeMode)],
+      overrides: [
+        initialThemeModeProvider.overrideWithValue(themeMode),
+        initialLocaleProvider.overrideWithValue(locale),
+      ],
       child: const WasalApp(),
     ),
   );

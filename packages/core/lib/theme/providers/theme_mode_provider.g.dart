@@ -189,7 +189,7 @@ final class PlatformBrightnessProvider
 }
 
 String _$platformBrightnessHash() =>
-    r'd09f8b825b9234d0e3ca0e5e5422519fda2b12aa';
+    r'e0547701dfdfd6b84f6ac80d530b51594fad974b';
 
 /// The OS-level brightness, kept live so `system` mode reacts to the user
 /// flipping appearance while the app is foregrounded.
