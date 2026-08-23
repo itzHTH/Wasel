@@ -6,7 +6,6 @@ import 'package:wasel_auth/auth_user_type.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:driver/driver_app.dart';
 import 'package:driver/firebase_options.dart';
-import 'package:wasel_core/localization/providers/app_localization_provider.dart';
 import 'package:wasel_core/theme/app_map_style.dart';
 import 'package:wasel_core/wasel_core.dart';
 
