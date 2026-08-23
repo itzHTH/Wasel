@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/theme_context_extension.dart';
+import 'package:wasel_core/wasel_core.dart';
 
 class CameraErrorView extends StatelessWidget {
   final String message;
@@ -35,7 +34,7 @@ class CameraErrorView extends StatelessWidget {
             TextButton(
               onPressed: onBack,
               child: Text(
-                'رجوع',
+                context.coreL10n.back,
                 style: context.styles.font14Primary500SemiBold,
               ),
             ),

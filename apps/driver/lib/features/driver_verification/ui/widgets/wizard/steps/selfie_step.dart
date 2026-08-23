@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart' show XFile;
 import 'package:flutter/foundation.dart' show ValueListenable;
 import 'package:flutter/material.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:driver/features/driver_verification/ui/widgets/wizard/upload_card.dart';
@@ -20,14 +21,14 @@ class SelfieStep extends StatelessWidget {
         children: [
           SizedBox(height: AppDimens.space24),
           Text(
-            'التقط صورة شخصية واضحة لمطابقة هويتك.',
+            context.l10n.takeClearSelfie,
             style: context.styles.font14Neutral400Regular,
           ),
           SizedBox(height: AppDimens.space24),
           ValueListenableBuilder<XFile?>(
             valueListenable: selfie,
             builder: (context, file, _) => UploadCard(
-              label: 'صورة شخصية',
+              label: context.l10n.selfiePhoto,
               icon: Icons.face_outlined,
               file: file,
               onTap: onTap,

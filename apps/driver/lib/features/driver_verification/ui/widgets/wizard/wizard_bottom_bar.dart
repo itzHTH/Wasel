@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_auth/wasel_auth.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
@@ -47,7 +49,7 @@ class WizardBottomBar extends StatelessWidget {
               ],
               Expanded(
                 child: AuthPrimaryButton(
-                  label: isLastStep ? 'إرسال' : 'التالي',
+                  label: isLastStep ? context.authL10n.send : context.l10n.next,
                   onPressed: isNextEnabled ? onNext : null,
                 ),
               ),
@@ -76,7 +78,10 @@ class _BackButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppDimens.radiusPill),
           ),
         ),
-        child: Text('السابق', style: context.styles.font14Secondary900SemiBold),
+        child: Text(
+          context.l10n.previous,
+          style: context.styles.font14Secondary900SemiBold,
+        ),
       ),
     );
   }

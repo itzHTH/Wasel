@@ -1,8 +1,8 @@
 import 'package:camera/camera.dart' show XFile;
 import 'package:flutter/material.dart';
+import 'package:wasel_core/wasel_core.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
 import 'package:driver/features/driver_verification/ui/widgets/wizard/captured_image.dart';
 
@@ -38,13 +38,13 @@ class _CapturePreviewSheet extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              'تأكيد الصورة',
+              context.l10n.confirmPhoto,
               style: context.styles.font20Secondary900Bold,
               textAlign: TextAlign.center,
             ),
             SizedBox(height: AppDimens.space8),
             Text(
-              'تأكد أن الصورة واضحة ومقروءة قبل المتابعة.',
+              context.l10n.ensurePhotoClear,
               style: context.styles.font14Neutral400Regular,
               textAlign: TextAlign.center,
             ),
@@ -77,7 +77,7 @@ class _CapturePreviewSheet extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        "الغاء",
+                        context.coreL10n.cancel,
                         style: context.styles.font14Secondary900SemiBold,
                       ),
                     ),
@@ -86,7 +86,7 @@ class _CapturePreviewSheet extends StatelessWidget {
                 SizedBox(width: AppDimens.space12),
                 Expanded(
                   child: AuthPrimaryButton(
-                    label: 'تأكيد',
+                    label: context.coreL10n.confirm,
                     onPressed: () => Navigator.of(context).pop(true),
                   ),
                 ),

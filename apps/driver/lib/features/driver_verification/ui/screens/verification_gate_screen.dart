@@ -1,9 +1,8 @@
 import 'package:driver/features/driver_verification/domain/entities/verification_status.dart';
 import 'package:flutter/material.dart';
+import 'package:wasel_core/wasel_core.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wasel_core/extensions/navigation_extension.dart';
-import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
 import 'package:driver/features/driver_verification/ui/providers/verify_status/verify_status_provider.dart';
@@ -38,7 +37,7 @@ class _VerificationGateScreenState
           MaterialPageRoute(
             builder: (_) => VerificationWizardScreen(
               rejectionReason: status == enVerificationStatus.rejected
-                  ? 'تم رفض معلوماتك ، يرجى مراجعة بياناتك وإعادة الإرسال.'
+                  ? context.l10n.infoRejected
                   : null,
             ),
           ),
@@ -87,7 +86,7 @@ class _GateLoader extends StatelessWidget {
         CircularProgressIndicator(color: context.colors.primary500),
         SizedBox(height: AppDimens.space24),
         Text(
-          'جارٍ التحقق من حسابك وبعض المعلومات …',
+          context.l10n.verifyingAccount,
           style: context.styles.font14Neutral400Regular,
         ),
       ],
@@ -114,18 +113,18 @@ class _GateError extends StatelessWidget {
           ),
           SizedBox(height: AppDimens.space24),
           Text(
-            'تعذّر التحقق من حالة طلبك',
+            context.l10n.statusCheckFailed,
             style: context.styles.font20Secondary900Bold,
             textAlign: TextAlign.center,
           ),
           SizedBox(height: AppDimens.space8),
           Text(
-            'تحقق من اتصالك بالإنترنت ثم أعد المحاولة.',
+            context.l10n.checkYourConnection,
             style: context.styles.font14Neutral400Regular,
             textAlign: TextAlign.center,
           ),
           SizedBox(height: AppDimens.space32),
-          AuthPrimaryButton(label: 'إعادة المحاولة', onPressed: onRetry),
+          AuthPrimaryButton(label: context.coreL10n.retry, onPressed: onRetry),
         ],
       ),
     );

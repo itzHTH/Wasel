@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/theme_context_extension.dart';
+import 'package:wasel_core/wasel_core.dart';
 
 class WizardProgress extends StatelessWidget {
   final int currentStep;
@@ -40,7 +39,7 @@ class WizardProgress extends StatelessWidget {
         ),
         SizedBox(height: AppDimens.space12),
         Text(
-          'الخطوة ${currentStep + 1} من $totalSteps',
+          context.coreL10n.stepOfSteps(currentStep + 1, totalSteps),
           style: context.styles.font12Neutral400Regular,
         ),
         SizedBox(height: AppDimens.space4),

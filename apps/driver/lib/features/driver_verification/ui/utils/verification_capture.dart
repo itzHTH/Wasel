@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart'
     show XFile, CameraLensDirection, ResolutionPreset;
 import 'package:flutter/material.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:image_picker/image_picker.dart' show ImagePicker, ImageSource;
 import 'package:driver/features/driver_verification/ui/screens/camera_capture_screen.dart';
 import 'package:driver/features/driver_verification/ui/widgets/camera/camera_overlay_painter.dart';
@@ -24,7 +25,7 @@ Future<XFile?> captureLicense(BuildContext context) => _pushCamera(
   context,
   cutoutShape: CutoutShape.rect,
   lens: CameraLensDirection.back,
-  guidance: 'ضع الرخصة داخل الإطار',
+  guidance: context.l10n.placeLicenseInFrame,
   // Landscape ID-card frame (≈ 85.6×54mm).
   widthFactor: 0.88,
   aspectRatio: 0.63,
@@ -34,7 +35,7 @@ Future<XFile?> captureSelfie(BuildContext context) => _pushCamera(
   context,
   cutoutShape: CutoutShape.oval,
   lens: CameraLensDirection.front,
-  guidance: 'ضع وجهك داخل الإطار',
+  guidance: context.l10n.placeFaceInFrame,
   resolution: ResolutionPreset.medium,
 );
 
@@ -47,7 +48,7 @@ Future<XFile?> captureVehicle(BuildContext context) async {
         context,
         cutoutShape: CutoutShape.rect,
         lens: CameraLensDirection.back,
-        guidance: 'صوّر المركبة داخل الإطار',
+        guidance: context.l10n.placeVehicleInFrame,
       );
     case CaptureSource.gallery:
       return ImagePicker().pickImage(source: ImageSource.gallery);
