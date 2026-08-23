@@ -42,7 +42,7 @@ export 'networking/base_response.dart';
 export 'networking/dio/dio_factory.dart';
 export 'networking/errors/api_error_message.dart';
 export 'networking/errors/api_error_model.dart';
-export 'networking/errors/api_errors.dart';
+export 'networking/errors/api_error_reason.dart';
 export 'networking/errors/error_handler.dart';
 export 'networking/errors/error_message.dart';
 export 'networking/interceptors/auth_interceptor.dart';
