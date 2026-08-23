@@ -5,6 +5,10 @@
 /// both apps.
 library;
 
+// Localization
+export 'l10n/rides_localizations.dart';
+export 'l10n/rides_l10n_extension.dart';
+
 // Constants
 export 'core/const/rides_api_const.dart';
 

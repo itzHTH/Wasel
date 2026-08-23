@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_rides/l10n/rides_l10n_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
@@ -46,13 +47,13 @@ class RideHistoryEmptyState extends StatelessWidget {
                       ),
                       SizedBox(height: AppDimens.space24),
                       Text(
-                        'لا توجد رحلات بعد',
+                        context.ridesL10n.noRidesYet,
                         textAlign: TextAlign.center,
                         style: context.styles.font20Secondary900Bold,
                       ),
                       SizedBox(height: AppDimens.space8),
                       Text(
-                        'ستظهر هنا رحلاتك المكتملة والملغاة فور انتهائها.',
+                        context.ridesL10n.noRidesYetDescription,
                         textAlign: TextAlign.center,
                         style: context.styles.font14Neutral400Regular,
                       ),
