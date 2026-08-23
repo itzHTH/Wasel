@@ -1,3 +1,4 @@
+import 'package:wasel_core/l10n/core_l10n_extension.dart';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
@@ -36,7 +37,7 @@ class AppImagePicker {
     } on PlatformException catch (e) {
       throw AppImagePickerException(
         _accessDeniedCodes.contains(e.code)
-            ? 'يرجى السماح بالوصول للكاميرا أو الصور من إعدادات التطبيق.'
+            ? coreL10nNow.mediaPermissionDenied
             : defaultErrorMessage,
       );
     }

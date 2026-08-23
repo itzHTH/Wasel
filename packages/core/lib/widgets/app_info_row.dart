@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_core/l10n/core_l10n_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 
@@ -9,7 +10,7 @@ class AppInfoRow extends StatelessWidget {
     required this.label,
     required this.value,
     this.valueTextDirection,
-    this.emptyPlaceholder = 'غير محدد',
+    this.emptyPlaceholder,
     this.trailing,
   });
 
@@ -17,7 +18,7 @@ class AppInfoRow extends StatelessWidget {
   final String label;
   final String? value;
   final TextDirection? valueTextDirection;
-  final String emptyPlaceholder;
+  final String? emptyPlaceholder;
   final Widget? trailing;
 
   @override
@@ -56,7 +57,9 @@ class AppInfoRow extends StatelessWidget {
                 Text(label, style: context.styles.font12Neutral400Regular),
                 SizedBox(height: AppDimens.space4),
                 Text(
-                  hasValue ? value : emptyPlaceholder,
+                  hasValue
+                      ? value
+                      : (emptyPlaceholder ?? context.coreL10n.notSpecified),
                   textDirection: hasValue ? valueTextDirection : null,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,

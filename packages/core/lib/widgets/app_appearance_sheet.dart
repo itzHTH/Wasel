@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_core/l10n/core_l10n_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/widgets/app_theme_mode_switch.dart';
 
 /// Bottom sheet holding the Light / Dark / System control.
-Future<void> showAppAppearanceSheet(
-  BuildContext context, {
-  String title = 'المظهر',
-  String description = 'اختر مظهر التطبيق أو اتركه يتبع إعدادات جهازك.',
-}) {
+Future<void> showAppAppearanceSheet(BuildContext context) {
   return showModalBottomSheet<void>(
     context: context,
     useSafeArea: true,
@@ -34,9 +31,15 @@ Future<void> showAppAppearanceSheet(
             ),
           ),
           SizedBox(height: AppDimens.space24),
-          Text(title, style: context.styles.font20Secondary900Bold),
+          Text(
+            context.coreL10n.appearance,
+            style: context.styles.font20Secondary900Bold,
+          ),
           SizedBox(height: AppDimens.space8),
-          Text(description, style: context.styles.font14Neutral400Regular),
+          Text(
+            context.coreL10n.appearanceSheetDescription,
+            style: context.styles.font14Neutral400Regular,
+          ),
           SizedBox(height: AppDimens.space24),
           const AppThemeModeSwitch(),
         ],
@@ -46,8 +49,9 @@ Future<void> showAppAppearanceSheet(
 }
 
 /// The active mode, for the trailing label on the appearance menu tile.
-String appThemeModeLabel(ThemeMode mode) => switch (mode) {
-  ThemeMode.light => 'فاتح',
-  ThemeMode.dark => 'داكن',
-  ThemeMode.system => 'النظام',
-};
+String appThemeModeLabel(BuildContext context, ThemeMode mode) =>
+    switch (mode) {
+      ThemeMode.light => context.coreL10n.themeLight,
+      ThemeMode.dark => context.coreL10n.themeDark,
+      ThemeMode.system => context.coreL10n.themeSystem,
+    };

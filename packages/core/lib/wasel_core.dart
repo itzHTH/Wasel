@@ -81,7 +81,6 @@ export 'widgets/app_entrance_fade.dart';
 export 'widgets/app_error_retry.dart';
 export 'widgets/app_error_state.dart';
 export 'widgets/app_group_card.dart';
-export 'widgets/app_header_with_logo.dart';
 export 'widgets/app_image_source_sheet.dart';
 export 'widgets/app_info_row.dart';
 export 'widgets/app_inline_error.dart';

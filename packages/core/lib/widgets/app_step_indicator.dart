@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_core/l10n/core_l10n_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
@@ -17,7 +18,7 @@ class AppStepIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      label: 'الخطوة ${currentStep + 1} من $totalSteps',
+      label: context.coreL10n.stepOfSteps(currentStep + 1, totalSteps),
       child: ExcludeSemantics(
         child: Row(
           children: List.generate(totalSteps, (index) {

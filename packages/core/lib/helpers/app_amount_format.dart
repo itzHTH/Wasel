@@ -1,13 +1,13 @@
+import 'package:wasel_core/l10n/core_l10n_extension.dart';
 import 'package:intl/intl.dart' show NumberFormat;
-
-const _currencySymbols = {'IQD': 'د.ع'};
 
 /// Formats a money amount the one way the Wasel apps display money.
 String formatAmount(double amount) =>
     NumberFormat.decimalPattern('ar').format(amount);
 
-String currencySymbolOf(String currency) =>
-    _currencySymbols[currency] ?? currency;
+/// Only IQD has a symbol of its own; anything else shows its code.
+String _currencySymbolOf(String currency) =>
+    currency == 'IQD' ? coreL10nNow.currencyIqd : currency;
 
 String formatAmountWithCurrency(double amount, {String currency = 'IQD'}) =>
-    '${formatAmount(amount)} ${currencySymbolOf(currency)}';
+    '${formatAmount(amount)} ${_currencySymbolOf(currency)}';
