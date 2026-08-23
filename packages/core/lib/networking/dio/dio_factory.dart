@@ -3,6 +3,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/const/app_constants.dart';
 import 'package:wasel_core/networking/interceptors/auth_interceptor.dart';
+import 'package:wasel_core/networking/interceptors/localization_interceptor.dart';
 import '../api_constants.dart';
 
 part 'dio_factory.g.dart';
@@ -59,6 +60,8 @@ class DioFactory {
 
   void _addInterceptors() {
     dio.interceptors.addAll([
+      // Asks the API to answer in the language the user is reading.
+      const LocalizationInterceptor(),
       // Injects the access token and handles 401 → refresh → retry.
       AuthInterceptor(),
       // Logs requests, responses, and errors in a readable format

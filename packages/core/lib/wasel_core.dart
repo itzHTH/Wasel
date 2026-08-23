@@ -46,6 +46,7 @@ export 'networking/errors/api_errors.dart';
 export 'networking/errors/error_handler.dart';
 export 'networking/errors/error_message.dart';
 export 'networking/interceptors/auth_interceptor.dart';
+export 'networking/interceptors/localization_interceptor.dart';
 export 'networking/json_num_converters.dart';
 export 'networking/paged/paged_list.dart';
 export 'networking/paged/paged_list_response.dart';
