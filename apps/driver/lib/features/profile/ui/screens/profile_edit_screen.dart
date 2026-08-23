@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/networking/errors/error_message.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
@@ -26,7 +27,7 @@ class ProfileEditScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: context.colors.screenBackground,
       appBar: AppBar(
-        title: const Text('تعديل الملف الشخصي'),
+        title: Text(context.l10n.editProfile),
         backgroundColor: context.colors.screenBackground,
         surfaceTintColor: context.colors.screenBackground,
       ),
@@ -39,7 +40,7 @@ class ProfileEditScreen extends ConsumerWidget {
         ),
         data: (profile) => profile == null
             ? AppErrorState(
-                message: 'تعذّر تحميل بيانات الملف الشخصي',
+                message: context.l10n.profileLoadFailed,
                 onRetry: refresh,
                 isRetrying: isRefreshing,
               )
@@ -51,9 +52,7 @@ class ProfileEditScreen extends ConsumerWidget {
                 photoUrl: profile.profilePictureUrl,
                 isSaving: edit.isLoading,
                 saveError: edit.hasError ? errorMessageOf(edit.error!) : null,
-                lockedNote:
-                    'يمكنك تعديل رقم هاتفك فقط. لتغيير اسمك أو بيانات '
-                    'مركبتك تواصل مع الدعم.',
+                lockedNote: context.l10n.editPhoneOnlyDriver,
                 onSave: (values) => ref
                     .read(driverProfileEditProvider.notifier)
                     .save(phoneNumber: values.phoneNumber),

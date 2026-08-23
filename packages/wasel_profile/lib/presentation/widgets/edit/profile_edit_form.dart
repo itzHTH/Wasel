@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_profile/l10n/profile_l10n_extension.dart';
 import 'package:flutter/services.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/widgets/app_dialog.dart';
@@ -105,10 +106,10 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
   Future<void> _confirmDiscard() async {
     final discard = await AppDialog.show(
       context,
-      title: 'تجاهل التعديلات؟',
-      message: 'لديك تغييرات لم يتم حفظها. هل تريد الخروج وتجاهلها؟',
-      confirmLabel: 'تجاهل',
-      cancelLabel: 'متابعة التعديل',
+      title: context.profileL10n.discardChangesTitle,
+      message: context.profileL10n.discardChangesMessage,
+      confirmLabel: context.profileL10n.discard,
+      cancelLabel: context.profileL10n.keepEditing,
       icon: Icons.edit_off_rounded,
       isDestructive: true,
     );
@@ -138,27 +139,33 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
           mainAxisSize: MainAxisSize.min,
           children: [
             ProfileEditField(
-              label: 'الاسم الأول',
-              hintText: 'أدخل اسمك الأول',
+              label: context.profileL10n.firstName,
+              hintText: context.profileL10n.enterFirstName,
               controller: _firstNameController,
               isEditable: capabilities.canEditFirstName,
               textInputAction: TextInputAction.next,
-              validator: (value) =>
-                  ProfileEditValidators.name(value, fieldLabel: 'الاسم الأول'),
+              validator: (value) => ProfileEditValidators.name(
+                value,
+                fieldLabel: context.profileL10n.firstName,
+                l10n: context.profileL10n,
+              ),
             ),
             SizedBox(height: AppDimens.space16),
             ProfileEditField(
-              label: 'اسم العائلة',
-              hintText: 'أدخل اسم عائلتك',
+              label: context.profileL10n.lastName,
+              hintText: context.profileL10n.enterLastName,
               controller: _lastNameController,
               isEditable: capabilities.canEditLastName,
               textInputAction: TextInputAction.next,
-              validator: (value) =>
-                  ProfileEditValidators.name(value, fieldLabel: 'اسم العائلة'),
+              validator: (value) => ProfileEditValidators.name(
+                value,
+                fieldLabel: context.profileL10n.lastName,
+                l10n: context.profileL10n,
+              ),
             ),
             SizedBox(height: AppDimens.space16),
             ProfileEditField(
-              label: 'رقم الهاتف',
+              label: context.profileL10n.phoneNumber,
               hintText: '07XXXXXXXXX',
               controller: _phoneNumberController,
               isEditable: capabilities.canEditPhoneNumber,
@@ -169,7 +176,8 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
                 FilteringTextInputFormatter.digitsOnly,
                 LengthLimitingTextInputFormatter(11),
               ],
-              validator: ProfileEditValidators.phoneNumber,
+              validator: (value) =>
+                  ProfileEditValidators.phoneNumber(value, context.profileL10n),
             ),
             SizedBox(height: AppDimens.space32),
             ProfileEditSaveButton(

@@ -1,19 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/core/routing/app_routes_name.dart';
 import 'package:wasal/features/auth/ui/providers/logout/logout.dart';
 import 'package:wasal/features/profile/ui/widgets/rider_profile_summary.dart';
-import 'package:wasel_core/extensions/navigation_extension.dart';
-import 'package:wasel_core/theme/theme_context_extension.dart';
-import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/widgets/app_appearance_sheet.dart';
-import 'package:wasel_core/theme/providers/theme_mode_provider.dart';
-import 'package:wasel_core/widgets/app_dialog.dart';
-import 'package:wasel_core/widgets/app_group_card.dart';
-import 'package:wasel_core/widgets/app_loading.dart';
-import 'package:wasel_core/widgets/app_menu_tile.dart';
-import 'package:wasel_core/widgets/app_soon_badge.dart';
-import 'package:wasel_core/widgets/app_surface_card.dart';
+import 'package:wasel_core/wasel_core.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -25,7 +16,7 @@ class ProfileScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: context.colors.screenBackground,
       appBar: AppBar(
-        title: const Text('حسابي'),
+        title: Text(context.l10n.myAccount),
         backgroundColor: context.colors.screenBackground,
         surfaceTintColor: context.colors.screenBackground,
       ),
@@ -43,26 +34,38 @@ class ProfileScreen extends ConsumerWidget {
             children: [
               AppMenuTile(
                 icon: Icons.person_outline_rounded,
-                label: 'الملف الشخصي',
+                label: context.l10n.profileDetails,
                 onTap: () => context.pushNamed(AppRoutes.profileDetails),
               ),
               AppMenuTile(
                 icon: Icons.history_rounded,
-                label: 'سجل الرحلات',
+                label: context.l10n.rideHistory,
                 onTap: () => context.pushNamed(AppRoutes.rideHistory),
               ),
-              const AppMenuTile(
+              AppMenuTile(
                 icon: Icons.settings_outlined,
-                label: 'الإعدادات',
+                label: context.l10n.settings,
                 isMuted: true,
-                trailing: AppSoonBadge(),
+                trailing: const AppSoonBadge(),
               ),
               AppMenuTile(
                 icon: Icons.brightness_6_outlined,
-                label: 'المظهر',
+                label: context.coreL10n.appearance,
                 onTap: () => showAppAppearanceSheet(context),
                 trailing: Text(
-                  appThemeModeLabel(ref.watch(themeModeControllerProvider)),
+                  appThemeModeLabel(
+                    context,
+                    ref.watch(themeModeControllerProvider),
+                  ),
+                  style: context.styles.font14Neutral400Regular,
+                ),
+              ),
+              AppMenuTile(
+                icon: Icons.language_rounded,
+                label: context.coreL10n.language,
+                onTap: () => showAppLanguageSheet(context),
+                trailing: Text(
+                  appLocaleLabel(ref.watch(appLocalizationControllerProvider)),
                   style: context.styles.font14Neutral400Regular,
                 ),
               ),
@@ -75,7 +78,7 @@ class ProfileScreen extends ConsumerWidget {
             backgroundColor: context.colors.alertError100,
             child: AppMenuTile(
               icon: Icons.logout_rounded,
-              label: 'تسجيل الخروج',
+              label: context.l10n.logout,
               isDestructive: true,
               onTap: isLoggingOut ? null : () => _logout(context, ref),
               trailing: isLoggingOut
@@ -94,10 +97,10 @@ class ProfileScreen extends ConsumerWidget {
   Future<void> _logout(BuildContext context, WidgetRef ref) async {
     final confirmed = await AppDialog.show(
       context,
-      title: 'تسجيل الخروج',
-      message: 'هل أنت متأكد من تسجيل الخروج من حسابك؟',
-      confirmLabel: 'تسجيل الخروج',
-      cancelLabel: 'إلغاء',
+      title: context.l10n.logout,
+      message: context.l10n.logoutConfirmMessage,
+      confirmLabel: context.l10n.logout,
+      cancelLabel: context.coreL10n.cancel,
       icon: Icons.logout_rounded,
       isDestructive: true,
     );

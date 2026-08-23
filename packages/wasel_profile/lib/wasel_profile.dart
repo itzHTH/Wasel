@@ -1,5 +1,9 @@
 library;
 
+// Localization
+export 'l10n/profile_localizations.dart';
+export 'l10n/profile_l10n_extension.dart';
+
 export 'core/const/profile_api_const.dart';
 export 'data/models/driver_profile/response/driver_profile_response.dart';
 export 'data/models/json_num_converters.dart';
