@@ -48,7 +48,7 @@ final class InitialLocaleProvider
   }
 }
 
-String _$initialLocaleHash() => r'2365fa40aaf3b58a973a62c28c5c9e728804fff5';
+String _$initialLocaleHash() => r'b2763c6a56dc868bd328ceba6821a1dea46e2043';
 
 @ProviderFor(AppLocalizationController)
 final appLocalizationControllerProvider = AppLocalizationControllerProvider._();
@@ -61,7 +61,7 @@ final class AppLocalizationControllerProvider
         argument: null,
         retry: null,
         name: r'appLocalizationControllerProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -83,7 +83,7 @@ final class AppLocalizationControllerProvider
 }
 
 String _$appLocalizationControllerHash() =>
-    r'0f9a3f92ec13e7b5c33910da23d075b3a3e6f63f';
+    r'a4b3b03e62c856a13c415e2b0e860d695c9b3387';
 
 abstract class _$AppLocalizationController extends $Notifier<Locale> {
   Locale build();
