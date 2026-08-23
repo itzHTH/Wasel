@@ -27,7 +27,11 @@ class _RideScreenState extends ConsumerState<RideScreen> {
   @override
   void initState() {
     super.initState();
-    _centerOnUserLocation();
+    // Deferred a frame: centering asks for location permission, whose prompt
+    // reads Localizations, and those cannot be looked up during initState.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) _centerOnUserLocation();
+    });
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/core/helpers/ride_formatters.dart';
 import 'package:wasel_location/wasel_location.dart';
@@ -18,6 +19,7 @@ class PointLabelRow extends ConsumerWidget {
       ),
     );
     final fallback = RideFormatters.coordinates(
+      context.l10n,
       point.latitude,
       point.longitude,
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/features/ride/ui/providers/ride_price/ride_price_provider.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_card_shell.dart';
@@ -38,7 +39,7 @@ class _RidePriceCardState extends ConsumerState<RidePriceCard> {
           Row(
             children: [
               Padding(
-                padding: EdgeInsets.only(right: AppDimens.space8),
+                padding: EdgeInsetsDirectional.only(start: AppDimens.space8),
                 child: IconButton(
                   onPressed: widget.onClose,
                   style: IconButton.styleFrom(
@@ -52,7 +53,7 @@ class _RidePriceCardState extends ConsumerState<RidePriceCard> {
               ),
               Expanded(
                 child: Text(
-                  'تفاصيل الرحلة',
+                  context.l10n.rideDetails,
                   style: context.styles.font20Secondary900Bold,
                 ),
               ),

@@ -10,6 +10,7 @@ import 'package:wasel_payments/presentation/widgets/payment_method_chip.dart';
 import 'package:driver/features/ride/ui/widgets/rider_info_row.dart';
 import 'package:driver/features/ride/ui/widgets/trip_points_list.dart';
 import 'package:flutter/material.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/wasel_core.dart';
 
@@ -42,8 +43,10 @@ class PickupOnTheWayCard extends ConsumerWidget {
     return ExpandableRideCard(
       summary: CardStageHeader(
         icon: Icons.directions_car_rounded,
-        title: 'بالطريق لنقطة الانطلاق',
-        subtitle: etaMinutes != null ? 'توصل خلال $etaMinutes دقائق' : null,
+        title: context.l10n.onWayToPickup,
+        subtitle: etaMinutes != null
+            ? context.l10n.riderEtaMinutes(etaMinutes.toString())
+            : null,
       ),
       details: Column(
         mainAxisSize: MainAxisSize.min,
@@ -69,13 +72,13 @@ class PickupOnTheWayCard extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AppPrimaryButton(
-            label: 'وصلت',
+            label: context.l10n.arrived,
             onPressed: onArrived,
             isLoading: isBusy,
           ),
           SizedBox(height: AppDimens.space12),
           AppSecondaryButton(
-            label: 'إلغاء الرحلة',
+            label: context.l10n.cancelRide,
             onPressed: isBusy ? null : onCancel,
           ),
         ],

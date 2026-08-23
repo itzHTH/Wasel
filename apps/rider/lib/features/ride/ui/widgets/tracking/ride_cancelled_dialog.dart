@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/l10n/l10n_extension.dart';
 import 'package:wasel_core/wasel_core.dart';
 
 /// Presents the "ride cancelled" alert over the map using the shared [AppDialog].
@@ -12,9 +13,9 @@ Future<void> showRideCancelledDialog(
 }) async {
   await AppDialog.show(
     context,
-    title: 'انلغت الرحلة',
+    title: context.l10n.rideCancelled,
     message: reason,
-    confirmLabel: 'العودة للرئيسية',
+    confirmLabel: context.l10n.backToHome,
     icon: Icons.cancel_outlined,
     barrierDismissible: false,
   );

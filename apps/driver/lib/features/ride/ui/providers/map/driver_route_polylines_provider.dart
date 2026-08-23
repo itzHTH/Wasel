@@ -1,12 +1,11 @@
+import 'package:wasel_core/wasel_core.dart';
+import 'package:driver/l10n/driver_localizations.dart';
 import 'package:driver/features/ride/domain/entities/driver_ride_events.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:wasel_core/theme/providers/theme_mode_provider.dart';
-import 'package:wasel_core/theme/app_colors_extension.dart';
-import 'package:wasel_core/networking/api_results.dart';
 import 'package:wasel_location/wasel_location.dart';
 
 part 'driver_route_polylines_provider.g.dart';
@@ -47,7 +46,8 @@ Future<Set<Polyline>> driverRoutePolylines(Ref ref) async {
 
     return result.when(
       success: (points) => _polylines(points, palette),
-      failure: (error) => _report(ref, error.apiErrorModel.message),
+      failure: (error) =>
+          _report(ref, errorMessageOf(error, fallback: _l10n.cannotDrawRoute)),
     );
   } catch (_) {
     return _report(ref, null);
@@ -67,7 +67,7 @@ Future<(GeoPoint, GeoPoint)?> _driverToPickup(
 
     return (position.point, ride.position);
   } catch (_) {
-    _report(ref, 'ماكو موقع، ما نگدر نرسم الطريق');
+    _report(ref, _l10n.noLocationNoRoute);
     return null;
   } finally {
     positions.close();
@@ -80,7 +80,7 @@ Set<Polyline> _report(Ref ref, String? message) {
   ref
       .read(rideActionControllerProvider.notifier)
       .reportFailure(
-        RouteUnavailableException(message ?? 'ما نگدر نرسم الطريق'),
+        RouteUnavailableException(message ?? _l10n.cannotDrawRoute),
         StackTrace.current,
       );
 
@@ -98,3 +98,10 @@ Set<Polyline> _polylines(List<GeoPoint> points, AppColorsExtension palette) => {
     geodesic: true,
   ),
 };
+
+/// Localizations for a notifier, which has no BuildContext of its own.
+///
+/// Reads the active locale directly rather than through the Ref: these are
+/// called after long awaits, when the Ref may already be unmounted.
+DriverLocalizations get _l10n =>
+    lookupDriverLocalizations(AppLocalizationController.currentLocale);

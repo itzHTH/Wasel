@@ -4,6 +4,7 @@ import 'package:driver/features/ride/ui/providers/earnings/driver_earnings_provi
 import 'package:driver/features/ride/ui/widgets/ride_card_shell.dart';
 import 'package:driver/features/ride/ui/widgets/searching/searching_radar.dart';
 import 'package:flutter/material.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/wasel_core.dart';
 
@@ -28,11 +29,11 @@ class SearchingCard extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'دا ندوّر على طلبات',
+                      context.l10n.searchingForRequests,
                       style: context.styles.font20Secondary900Bold,
                     ),
                     Text(
-                      'خليك بمكان زحمة حتى توصلك طلبات أكثر',
+                      context.l10n.stayInBusyArea,
                       style: context.styles.font14Neutral400Regular,
                     ),
                   ],
@@ -43,7 +44,10 @@ class SearchingCard extends ConsumerWidget {
           SizedBox(height: AppDimens.space24),
           const _TodayPanel(),
           SizedBox(height: AppDimens.space24),
-          AppSecondaryButton(label: 'إيقاف الاستلام', onPressed: onGoOffline),
+          AppSecondaryButton(
+            label: context.l10n.stopAcceptingRides,
+            onPressed: onGoOffline,
+          ),
         ],
       ),
     );
@@ -74,7 +78,7 @@ class _TodayPanel extends ConsumerWidget {
           Row(
             children: [
               Text(
-                'أرباح اليوم',
+                context.l10n.todayEarnings,
                 style: context.styles.font12Neutral400Regular,
               ),
               SizedBox(width: AppDimens.space8),
@@ -92,7 +96,10 @@ class _TodayPanel extends ConsumerWidget {
           Text(
             data == null
                 ? '—'
-                : RideFormatters.fare(data.totalEarnings.toString()),
+                : RideFormatters.fare(
+                    context.l10n,
+                    data.totalEarnings.toString(),
+                  ),
             style: data == null
                 ? context.styles.font24Secondary900Bold.copyWith(
                     color: context.colors.neutral400,
@@ -106,7 +113,7 @@ class _TodayPanel extends ConsumerWidget {
                 Expanded(
                   child: _Metric(
                     icon: Icons.local_taxi_outlined,
-                    label: 'رحلات اليوم',
+                    label: context.l10n.todayRides,
                     value: data?.completedRides.toString(),
                   ),
                 ),
@@ -117,10 +124,13 @@ class _TodayPanel extends ConsumerWidget {
                 Expanded(
                   child: _Metric(
                     icon: Icons.schedule_outlined,
-                    label: "مدة الاتصال اليوم",
+                    label: context.l10n.todayOnlineTime,
                     value: data == null
                         ? null
-                        : RideFormatters.onlineDuration(data.onlineMinutes),
+                        : RideFormatters.onlineDuration(
+                            context.l10n,
+                            data.onlineMinutes,
+                          ),
                   ),
                 ),
               ],
@@ -212,7 +222,7 @@ class _RetryButton extends StatelessWidget {
             ),
             SizedBox(width: AppDimens.space4),
             Text(
-              'إعادة المحاولة',
+              context.coreL10n.retry,
               style: context.styles.font12Neutral400Regular.copyWith(
                 color: context.colors.primary500,
               ),

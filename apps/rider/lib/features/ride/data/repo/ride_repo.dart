@@ -114,7 +114,7 @@ class RideRepo extends BaseRideRepo {
 
           final driver = DriverProfile(
             id: event.driverId,
-            name: event.driverName ?? 'سائق وصل',
+            name: event.driverName ?? '',
             phoneNumber: event.phoneNumber,
             photoUrl: event.driverProfilePictureUrl,
             plateNumber: event.vinNumber,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/l10n/l10n_extension.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_completed/star_rating_bar.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_price_card/ride_detail_row.dart';
 import 'package:wasel_core/wasel_core.dart';
@@ -64,7 +65,7 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
               ),
               SizedBox(height: AppDimens.space16),
               Text(
-                'وصلت بالسلامة',
+                context.l10n.arrivedSafely,
                 textAlign: TextAlign.center,
                 style: context.styles.font24Secondary900Bold,
               ),
@@ -78,7 +79,7 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
               _summaryCard(),
               SizedBox(height: AppDimens.space32),
               Text(
-                'شلون كانت رحلتك؟',
+                context.l10n.howWasYourRide,
                 textAlign: TextAlign.center,
                 style: context.styles.font20Secondary900Bold,
               ),
@@ -90,7 +91,7 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
               _commentField(),
               const Spacer(),
               AppPrimaryButton(
-                label: 'تم',
+                label: context.coreL10n.done,
                 isLoading: widget.isSubmitting,
                 onPressed: () =>
                     widget.onDone(_rating, _commentController.text.trim()),
@@ -111,7 +112,7 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
       textInputAction: TextInputAction.newline,
       style: context.styles.font14Secondary900SemiBold,
       decoration: InputDecoration(
-        hintText: 'اكتب ملاحظاتك (اختياري)',
+        hintText: context.l10n.writeNotesOptional,
         hintStyle: context.styles.font14Neutral400Regular,
         counterText: '',
         filled: true,
@@ -134,9 +135,15 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
       ),
       child: Column(
         children: [
-          RideDetailRow(label: 'من', value: widget.pickupLabel),
+          RideDetailRow(
+            label: context.l10n.fromLabel,
+            value: widget.pickupLabel,
+          ),
           SizedBox(height: AppDimens.space12),
-          RideDetailRow(label: 'إلى', value: widget.dropoffLabel),
+          RideDetailRow(
+            label: context.l10n.toLabel,
+            value: widget.dropoffLabel,
+          ),
         ],
       ),
     );

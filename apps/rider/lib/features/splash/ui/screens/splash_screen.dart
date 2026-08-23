@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/l10n/l10n_extension.dart';
 import 'package:wasel_core/helpers/session_store.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/widgets/app_splash_branding.dart';
@@ -32,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
         child: AppSplashBranding(
           logoAsset: AppIcons.logo,
-          label: "وَصَل",
+          label: context.l10n.brandName,
           onCompleted: _handleIsAuthenticatedUser,
         ),
       ),

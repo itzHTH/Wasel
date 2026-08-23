@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/core/widgets/app_secondary_button.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/is_camera_moving_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.dart';
+import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_state.dart';
 import 'package:wasel_core/wasel_core.dart';
 
 class RideActionButtons extends ConsumerWidget {
@@ -17,9 +19,9 @@ class RideActionButtons extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final label = ref.watch(
-      rideDraftProvider.select((s) => s.confirmButtonLabel),
-    );
+    final label = ref
+        .watch(rideDraftProvider.select((s) => s.stage))
+        .confirmButtonLabel(context.l10n);
     final showRequestPrice = ref.watch(
       rideDraftProvider.select((s) => s.showRequestPriceButton),
     );
@@ -35,7 +37,10 @@ class RideActionButtons extends ConsumerWidget {
     return Row(
       children: [
         Expanded(
-          child: AppPrimaryButton(label: 'تأكيد', onPressed: onRequestPrice),
+          child: AppPrimaryButton(
+            label: context.coreL10n.confirm,
+            onPressed: onRequestPrice,
+          ),
         ),
         SizedBox(width: AppDimens.space8),
         Expanded(

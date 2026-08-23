@@ -10,6 +10,7 @@ import 'package:wasel_payments/presentation/widgets/payment_method_chip.dart';
 import 'package:driver/features/ride/ui/widgets/rider_info_row.dart';
 import 'package:driver/features/ride/ui/widgets/trip_points_list.dart';
 import 'package:flutter/material.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/wasel_core.dart';
 
@@ -37,8 +38,8 @@ class AtPickupCard extends ConsumerWidget {
     return ExpandableRideCard(
       summary: CardStageHeader(
         icon: Icons.check_circle_outline_rounded,
-        title: 'وصلت لنقطة الانطلاق',
-        subtitle: 'انتظر الراكب يركب وبعدين ابدأ الرحلة',
+        title: context.l10n.arrivedAtPickup,
+        subtitle: context.l10n.waitForRiderThenStart,
         tint: context.colors.alertSuccess500,
         background: context.colors.alertSuccess100,
       ),
@@ -66,13 +67,13 @@ class AtPickupCard extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AppPrimaryButton(
-            label: 'ابدأ الرحلة',
+            label: context.l10n.startRide,
             onPressed: onStart,
             isLoading: isBusy,
           ),
           SizedBox(height: AppDimens.space12),
           AppSecondaryButton(
-            label: 'إلغاء الرحلة',
+            label: context.l10n.cancelRide,
             onPressed: isBusy ? null : onCancel,
           ),
         ],

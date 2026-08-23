@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/l10n/l10n_extension.dart';
 import 'package:wasal/core/widgets/app_secondary_button.dart';
 import 'package:wasal/features/ride/domain/entities/driver_profile.dart';
 import 'package:wasal/features/ride/domain/entities/ride_price.dart';
@@ -63,12 +64,12 @@ class DriverArrivedCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'الكابتن وصل — اطلع اله',
+                        context.l10n.captainArrived,
                         style: context.styles.font20Secondary900Bold,
                       ),
                       SizedBox(height: AppDimens.space4),
                       Text(
-                        'دور على السيارة برقم اللوحة',
+                        context.l10n.findCarByPlate,
                         style: context.styles.font14Secondary500Medium,
                       ),
                     ],
@@ -96,7 +97,10 @@ class DriverArrivedCard extends StatelessWidget {
           ),
         ],
       ),
-      footer: AppSecondaryButton(label: 'إلغاء الطلب', onPressed: onCancel),
+      footer: AppSecondaryButton(
+        label: context.l10n.cancelRequest,
+        onPressed: onCancel,
+      ),
     );
   }
 }

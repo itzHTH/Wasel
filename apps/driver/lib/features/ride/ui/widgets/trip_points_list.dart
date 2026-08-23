@@ -1,6 +1,7 @@
 import 'package:driver/core/helpers/ride_formatters.dart';
 import 'package:wasel_location/wasel_location.dart';
 import 'package:flutter/material.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/wasel_core.dart';
 
@@ -25,11 +26,11 @@ class TripPointsList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (pickupPoint != null)
-                _Point(title: 'نقطة الانطلاق', point: pickupPoint),
+                _Point(title: context.l10n.pickupPoint, point: pickupPoint),
               if (pickupPoint != null && dropoffPoint != null)
                 SizedBox(height: AppDimens.space24),
               if (dropoffPoint != null)
-                _Point(title: 'نقطة الوصول', point: dropoffPoint),
+                _Point(title: context.l10n.dropoffPoint, point: dropoffPoint),
             ],
           ),
         ),
@@ -100,6 +101,7 @@ class _Point extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final label = ref.watch(pointLabelProvider(point));
     final fallback = RideFormatters.coordinates(
+      context.l10n,
       point.latitude,
       point.longitude,
     );

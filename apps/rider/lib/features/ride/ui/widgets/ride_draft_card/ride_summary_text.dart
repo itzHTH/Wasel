@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.dart';
 import 'package:wasal/features/ride/ui/widgets/point_label_row.dart';
@@ -18,10 +19,14 @@ class RideSummaryText extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if (pickup != null) PointLabelRow(prefix: 'الانطلاق', point: pickup),
+          if (pickup != null)
+            PointLabelRow(prefix: context.l10n.pickupLabel, point: pickup),
           if (dropoff != null) ...[
             SizedBox(height: AppDimens.space4),
-            PointLabelRow(prefix: 'الوجهة', point: dropoff),
+            PointLabelRow(
+              prefix: context.l10n.destinationLabel,
+              point: dropoff,
+            ),
           ],
         ],
       ),

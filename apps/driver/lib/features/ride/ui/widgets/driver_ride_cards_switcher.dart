@@ -11,8 +11,9 @@ import 'package:driver/features/ride/ui/widgets/ride_completed/trip_completed_ca
 import 'package:driver/features/ride/ui/widgets/tracking/trip_in_progress_card.dart';
 import 'package:driver/features/ride/ui/widgets/ride_card_transition.dart';
 import 'package:flutter/material.dart';
+import 'package:wasel_core/wasel_core.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wasel_core/widgets/app_dialog.dart';
 
 class DriverRideCardsSwitcher extends ConsumerWidget {
   const DriverRideCardsSwitcher({super.key});
@@ -33,10 +34,10 @@ class DriverRideCardsSwitcher extends ConsumerWidget {
 
     final switchToCash = await AppDialog.show(
       context,
-      title: 'تعذّر تحصيل الدفع',
-      message: 'تحويل الرحلة إلى الدفع نقدًا وإنهاؤها؟',
-      confirmLabel: 'تحويل إلى نقدي',
-      cancelLabel: 'إلغاء',
+      title: context.l10n.paymentCollectFailed,
+      message: context.l10n.switchToCashConfirm,
+      confirmLabel: context.l10n.switchToCash,
+      cancelLabel: context.coreL10n.cancel,
       icon: Icons.credit_card_off,
     );
 

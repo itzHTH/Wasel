@@ -1,6 +1,7 @@
 import 'package:driver/core/widgets/app_secondary_button.dart';
 import 'package:driver/features/ride/ui/widgets/ride_card_shell.dart';
 import 'package:flutter/material.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:wasel_core/wasel_core.dart';
 
 class OfflineCard extends StatelessWidget {
@@ -34,13 +35,15 @@ class OfflineCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      isConnecting ? 'دا نتصل بالخادم' : 'إنت غير متصل',
+                      isConnecting
+                          ? context.l10n.connectingToServer
+                          : context.l10n.youAreOffline,
                       style: context.styles.font20Secondary900Bold,
                     ),
                     Text(
                       isConnecting
-                          ? 'ثانية وحدة، دا نكمل الاتصال'
-                          : 'ما راح توصلك طلبات وإنت غير متصل',
+                          ? context.l10n.oneMomentConnecting
+                          : context.l10n.noRequestsWhileOffline,
                       style: context.styles.font14Neutral400Regular,
                     ),
                   ],
@@ -50,14 +53,17 @@ class OfflineCard extends StatelessWidget {
           ),
           SizedBox(height: AppDimens.space24),
           AppPrimaryButton(
-            label: 'ابدأ استلام الرحلات',
+            label: context.l10n.startAcceptingRides,
 
             onPressed: isConnecting ? null : onGoOnline,
             isLoading: isConnecting,
           ),
           if (isConnecting) ...[
             SizedBox(height: AppDimens.space12),
-            AppSecondaryButton(label: 'إلغاء', onPressed: onCancel),
+            AppSecondaryButton(
+              label: context.coreL10n.cancel,
+              onPressed: onCancel,
+            ),
           ],
         ],
       ),

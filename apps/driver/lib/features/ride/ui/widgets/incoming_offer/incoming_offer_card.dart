@@ -10,6 +10,7 @@ import 'package:wasel_payments/presentation/widgets/payment_method_chip.dart';
 import 'package:driver/features/ride/ui/widgets/rider_info_row.dart';
 import 'package:driver/features/ride/ui/widgets/trip_points_list.dart';
 import 'package:flutter/material.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/wasel_core.dart';
 
@@ -55,7 +56,7 @@ class IncomingOfferCard extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'وصلك طلب جديد',
+                      context.l10n.newRequest,
                       style: context.styles.font14Neutral400Regular,
                     ),
                     SizedBox(height: AppDimens.space4),
@@ -89,13 +90,13 @@ class IncomingOfferCard extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AppPrimaryButton(
-            label: 'قبول الطلب',
+            label: context.l10n.acceptRequest,
             onPressed: onAccept,
             isLoading: isBusy,
           ),
           SizedBox(height: AppDimens.space12),
           AppSecondaryButton(
-            label: 'تجاهل',
+            label: context.l10n.discard,
             onPressed: isBusy ? null : onDismiss,
           ),
         ],

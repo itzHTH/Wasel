@@ -1,10 +1,10 @@
+import 'package:wasel_core/wasel_core.dart';
+import 'package:wasal/l10n/rider_localizations.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/features/ride/domain/entities/review_ride.dart';
 import 'package:wasal/features/ride/domain/usecases/review_ride_use_case.dart';
 import 'package:wasal/features/ride/ui/providers/request_ride/request_ride_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_use_case_providers.dart';
-import 'package:wasel_core/networking/api_results.dart';
-import 'package:wasel_core/networking/errors/error_message.dart';
 
 part 'review_ride_provider.g.dart';
 
@@ -22,7 +22,7 @@ class ReviewRideController extends _$ReviewRideController {
   Future<void> submit({required int rating, String comment = ''}) async {
     final rideId = ref.read(requestRideControllerProvider).value?.id;
     if (rideId == null) {
-      state = AsyncValue.error("ما موجودة رحلة نقيمها", StackTrace.current);
+      state = AsyncValue.error(_l10n(ref).noRideToRate, StackTrace.current);
       return;
     }
 
@@ -44,3 +44,7 @@ class ReviewRideController extends _$ReviewRideController {
     );
   }
 }
+
+/// Localizations for a notifier, which has no BuildContext of its own.
+RiderLocalizations _l10n(Ref ref) =>
+    lookupRiderLocalizations(ref.read(appLocalizationControllerProvider));
