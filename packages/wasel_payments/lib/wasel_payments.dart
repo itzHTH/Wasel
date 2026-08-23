@@ -1,5 +1,10 @@
 library;
 
+// Localization
+export 'l10n/payments_localizations.dart';
+export 'l10n/payments_l10n_extension.dart';
+export 'l10n/payment_labels.dart';
+
 export 'core/const/payments_api_const.dart';
 export 'core/policies/payment_eligibility_policy.dart';
 
@@ -9,6 +14,7 @@ export 'data/models/wallet_balance/response/wallet_balance_response.dart';
 export 'data/repos/payments_repo.dart';
 export 'data/services/payments_api_service.dart';
 
+export 'domain/entities/payment_blocker.dart';
 export 'domain/entities/payment_method.dart';
 export 'domain/entities/wallet_balance.dart';
 export 'domain/repos/base_payments_repo.dart';

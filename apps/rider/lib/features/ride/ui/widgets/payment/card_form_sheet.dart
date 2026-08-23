@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/l10n/l10n_extension.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/features/ride/ui/widgets/payment/card_input_formatters.dart';
@@ -57,23 +58,23 @@ class _CardFormSheetState extends ConsumerState<_CardFormSheet> {
 
   String? _validateCardNumber(String? value) {
     final digits = digitsOnly(value ?? '');
-    if (digits.isEmpty) return 'أدخل رقم البطاقة';
-    if (digits.length != cardNumberDigits) return 'رقم البطاقة 16 رقمًا';
+    if (digits.isEmpty) return context.l10n.enterCardNumber;
+    if (digits.length != cardNumberDigits) return context.l10n.cardNumberLength;
     return null;
   }
 
   String? _validateExpiry(String? value) {
     final digits = digitsOnly(value ?? '');
-    if (digits.isEmpty) return 'أدخل تاريخ الانتهاء';
-    if (digits.length != expiryDigits) return 'الصيغة MM/YY';
+    if (digits.isEmpty) return context.l10n.enterExpiryDate;
+    if (digits.length != expiryDigits) return context.l10n.expiryFormat;
 
     final month = int.parse(digits.substring(0, 2));
-    if (month < 1 || month > 12) return 'شهر غير صحيح';
+    if (month < 1 || month > 12) return context.l10n.invalidMonth;
 
     final now = DateTime.now();
     final expiry = DateTime(2000 + int.parse(digits.substring(2)), month + 1);
     if (!expiry.isAfter(DateTime(now.year, now.month))) {
-      return 'البطاقة منتهية';
+      return context.l10n.cardExpired;
     }
 
     return null;
@@ -81,8 +82,8 @@ class _CardFormSheetState extends ConsumerState<_CardFormSheet> {
 
   String? _validateCvv(String? value) {
     final digits = digitsOnly(value ?? '');
-    if (digits.isEmpty) return 'أدخل الرمز';
-    if (digits.length < 3 || digits.length > 4) return 'من 3 إلى 4 أرقام';
+    if (digits.isEmpty) return context.l10n.enterCvv;
+    if (digits.length < 3 || digits.length > 4) return context.l10n.cvvLength;
     return null;
   }
 
@@ -154,13 +155,13 @@ class _CardFormSheetState extends ConsumerState<_CardFormSheet> {
                   ),
                   SizedBox(height: AppDimens.space24),
                   Text(
-                    'بيانات البطاقة',
+                    context.l10n.cardDetails,
                     textAlign: TextAlign.center,
                     style: context.styles.font16Secondary900Bold,
                   ),
                   SizedBox(height: AppDimens.space16),
                   AppLabeledFormField(
-                    label: 'رقم البطاقة',
+                    label: context.l10n.cardNumber,
                     hintText: '0000 0000 0000 0000',
                     controller: _cardNumber,
                     keyboardType: TextInputType.number,
@@ -175,7 +176,7 @@ class _CardFormSheetState extends ConsumerState<_CardFormSheet> {
                     children: [
                       Expanded(
                         child: AppLabeledFormField(
-                          label: 'تاريخ الانتهاء',
+                          label: context.l10n.expiryDate,
                           hintText: 'MM/YY',
                           controller: _expiry,
                           keyboardType: TextInputType.number,
@@ -214,7 +215,7 @@ class _CardFormSheetState extends ConsumerState<_CardFormSheet> {
                   ],
                   SizedBox(height: AppDimens.space24),
                   AppPrimaryButton(
-                    label: 'حفظ البطاقة',
+                    label: context.l10n.saveCard,
                     isLoading: state.isLoading,
                     onPressed: _submit,
                   ),

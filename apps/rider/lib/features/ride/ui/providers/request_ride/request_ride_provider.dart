@@ -1,3 +1,4 @@
+import 'package:wasel_payments/wasel_payments.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/features/ride/data/models/geo_point_request/geo_point_request_body.dart';
 import 'package:wasal/features/ride/data/models/request_ride/request/request_ride_body.dart';
@@ -8,10 +9,6 @@ import 'package:wasal/features/ride/ui/providers/ride_price/ride_price_provider.
 import 'package:wasal/features/ride/ui/providers/ride_use_case_providers.dart';
 import 'package:wasel_core/networking/api_results.dart';
 import 'package:wasel_core/networking/errors/error_message.dart';
-import 'package:wasel_payments/core/policies/payment_eligibility_policy.dart';
-import 'package:wasel_payments/domain/entities/payment_method.dart';
-import 'package:wasel_payments/presentation/providers/tokenize/tokenize_card_provider.dart';
-import 'package:wasel_payments/presentation/providers/wallet/rider_wallet_balance_provider.dart';
 
 part 'request_ride_provider.g.dart';
 
@@ -68,7 +65,10 @@ class RequestRideController extends _$RequestRideController {
     );
   }
 
-  Future<String?> _blockerFor(PaymentMethod method, String? token) async {
+  Future<PaymentBlocker?> _blockerFor(
+    PaymentMethod method,
+    String? token,
+  ) async {
     double? balance;
     if (method == PaymentMethod.wallet) {
       try {

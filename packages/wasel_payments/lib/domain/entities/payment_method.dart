@@ -1,12 +1,10 @@
 enum PaymentMethod {
-  cash('نقدي', 1),
-  card('بطاقة', 2),
-  wallet('المحفظة', 3),
-  unknown('غير محدد', null);
+  cash(1),
+  card(2),
+  wallet(3),
+  unknown(null);
 
-  const PaymentMethod(this.label, this.code);
-
-  final String label;
+  const PaymentMethod(this.code);
 
   /// The value the API expects for this method, or null when it has none.
   final int? code;

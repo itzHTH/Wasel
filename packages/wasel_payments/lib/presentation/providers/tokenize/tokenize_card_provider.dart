@@ -1,3 +1,4 @@
+import 'package:wasel_payments/l10n/payments_l10n_extension.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/networking/api_results.dart';
 import 'package:wasel_core/networking/errors/error_message.dart';
@@ -48,7 +49,10 @@ class TokenizeCardController extends _$TokenizeCardController {
       // on a spinner with nothing to explain it.
       if (ref.mounted) {
         state = AsyncValue.error(
-          errorMessageOf(ErrorHandler.handle(error), fallback: _failedMessage),
+          errorMessageOf(
+            ErrorHandler.handle(error),
+            fallback: paymentsL10nNow.cardVerificationFailed,
+          ),
           stackTrace,
         );
       }
@@ -59,16 +63,17 @@ class TokenizeCardController extends _$TokenizeCardController {
 
     state = result.when(
       failure: (error) => AsyncValue.error(
-        errorMessageOf(error, fallback: _failedMessage),
+        errorMessageOf(error, fallback: paymentsL10nNow.cardVerificationFailed),
         StackTrace.current,
       ),
       success: (token) => token == null
-          ? AsyncValue.error(_failedMessage, StackTrace.current)
+          ? AsyncValue.error(
+              paymentsL10nNow.cardVerificationFailed,
+              StackTrace.current,
+            )
           : AsyncValue.data(token),
     );
   }
-
-  static const _failedMessage = 'تعذّر التحقق من البطاقة';
 
   /// Drops any in-flight request along with the state, so a sheet reopened
   /// after a dismissal never inherits a spinner or a stale error.
