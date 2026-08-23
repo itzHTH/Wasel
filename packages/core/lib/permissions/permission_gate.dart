@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_core/l10n/core_l10n_extension.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:wasel_core/widgets/app_dialog.dart';
 
@@ -42,8 +43,8 @@ Future<bool> ensurePermission(
       title: deniedTitle,
       message: deniedMessage,
       icon: Icons.lock_outline_rounded,
-      confirmLabel: 'فتح الإعدادات',
-      cancelLabel: 'إلغاء',
+      confirmLabel: context.coreL10n.openSettings,
+      cancelLabel: context.coreL10n.cancel,
     );
     if (openSettings) await openAppSettings();
   }

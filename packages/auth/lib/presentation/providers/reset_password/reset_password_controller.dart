@@ -1,3 +1,4 @@
+import 'package:wasel_auth/l10n/auth_l10n_extension.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/networking/api_results.dart';
 import 'package:wasel_core/networking/errors/error_message.dart';
@@ -9,9 +10,6 @@ import 'package:wasel_auth/presentation/providers/reset_password/reset_password_
 import 'package:wasel_auth/providers/auth_use_case_providers.dart';
 
 part 'reset_password_controller.g.dart';
-
-const _fallbackError = 'حصل خطأ ما';
-const _expiredError = 'انتهت صلاحية الرمز. يرجى طلب رمز جديد للمتابعة.';
 
 /// Drives the 3-step reset flow and owns the reset token between steps.
 ///
@@ -102,7 +100,7 @@ class ResetPasswordController extends _$ResetPasswordController {
         if (!response.success) {
           state = state.copyWith(
             isSubmitting: false,
-            fieldError: _fallbackError,
+            fieldError: defaultErrorMessage,
           );
           return false;
         }
@@ -115,7 +113,7 @@ class ResetPasswordController extends _$ResetPasswordController {
   bool _markExpired() {
     state = state.copyWith(
       isSubmitting: false,
-      fieldError: _expiredError,
+      fieldError: authL10nNow.otpExpired,
       tokenExpired: true,
     );
     return false;
@@ -142,7 +140,7 @@ class ResetPasswordController extends _$ResetPasswordController {
       );
       if (match.value.isNotEmpty) return match.value.first;
     }
-    return errorMessageOf(error, fallback: _fallbackError);
+    return errorMessageOf(error, fallback: defaultErrorMessage);
   }
 
   // The reset token and its OTP live in a 10-minute server-side cache. The API

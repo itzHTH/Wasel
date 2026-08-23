@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasel_core/helpers/app_amount_format.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
@@ -42,7 +43,7 @@ class DriverProfileInfo extends StatelessWidget {
                     Text(
                       profile?.fullName.isNotEmpty == true
                           ? profile!.fullName
-                          : 'سائق وَصَل',
+                          : context.l10n.waselDriverName,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: context.styles.font20Secondary900Bold,
@@ -77,7 +78,7 @@ class DriverProfileInfo extends StatelessWidget {
                   icon: Icons.account_balance_wallet_rounded,
                   iconColor: context.colors.primary500,
                   background: context.colors.primary100,
-                  label: 'الرصيد',
+                  label: context.l10n.balance,
                   value: formatAmount(profile.balance),
                   valueTextDirection: TextDirection.ltr,
                 ),
@@ -85,7 +86,7 @@ class DriverProfileInfo extends StatelessWidget {
                   icon: Icons.star_rounded,
                   iconColor: context.colors.primary500,
                   background: context.colors.neutral100,
-                  label: 'التقييم',
+                  label: context.l10n.rating,
                   value:
                       '${profile.averageRating.toStringAsFixed(1)} '
                       '(${profile.totalReviews})',

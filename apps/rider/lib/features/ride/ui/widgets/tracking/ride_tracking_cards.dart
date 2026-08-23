@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/core/helpers/ride_formatters.dart';
 import 'package:wasal/features/ride/domain/entities/driver_profile.dart';
@@ -55,7 +56,10 @@ class RideTrackingCards extends ConsumerWidget {
                   if (next.hasError) {
                     ScaffoldMessenger.of(consumerContext).showSnackBar(
                       SnackBar(
-                        content: Text(next.error?.toString() ?? 'حصل خطأ ما'),
+                        content: Text(
+                          next.error?.toString() ??
+                              context.coreL10n.genericError,
+                        ),
                       ),
                     );
                     return;
@@ -67,6 +71,7 @@ class RideTrackingCards extends ConsumerWidget {
                   fare: price == null
                       ? '—'
                       : RideFormatters.fare(
+                          context.l10n,
                           price.estimatedPrice,
                           currency: price.currency,
                         ),
@@ -97,7 +102,7 @@ class RideTrackingCards extends ConsumerWidget {
   void _showCancelled(BuildContext context, WidgetRef ref) {
     final reason =
         ref.read(rideControllerProvider.select((s) => s.error)) ??
-        'اعتذر الكابتن عن الرحلة، جرب مرة ثانية';
+        context.l10n.captainDeclined;
     showRideCancelledDialog(
       context,
       reason: reason,
@@ -107,7 +112,6 @@ class RideTrackingCards extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     ref.listen(rideControllerProvider.select((s) => s.stage), (prev, next) {
       if (prev == next) return;
       if (next == RideStage.completed) {

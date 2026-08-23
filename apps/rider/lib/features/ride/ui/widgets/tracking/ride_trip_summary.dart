@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/l10n/l10n_extension.dart';
 import 'package:wasal/core/helpers/ride_formatters.dart';
 import 'package:wasal/features/ride/domain/entities/ride_price.dart';
 import 'package:wasel_core/wasel_core.dart';
@@ -58,11 +59,12 @@ class RideTripSummary extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'الأجرة التقديرية',
+                  context.l10n.estimatedFare,
                   style: context.styles.font14Secondary500Medium,
                 ),
                 Text(
                   RideFormatters.fare(
+                    context.l10n,
                     fare.estimatedPrice,
                     currency: fare.currency,
                   ),

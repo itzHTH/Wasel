@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_location/l10n/location_l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart'
     show openAppSettings;
@@ -48,7 +49,7 @@ class LocationPermissionBanner extends ConsumerWidget {
               SizedBox(width: AppDimens.space8),
               Expanded(
                 child: Text(
-                  'شغّل الموقع حتى نلگه مكانك',
+                  context.locationL10n.turnOnLocation,
                   style: context.styles.font14Secondary500Medium,
                 ),
               ),
@@ -59,7 +60,9 @@ class LocationPermissionBanner extends ConsumerWidget {
                           .read(locationAccessControllerProvider.notifier)
                           .request(context),
                 child: Text(
-                  needsSettings ? 'الإعدادات' : 'تمكين',
+                  needsSettings
+                      ? context.locationL10n.settings
+                      : context.locationL10n.enable,
                   style: context.styles.font14Primary500SemiBold,
                 ),
               ),

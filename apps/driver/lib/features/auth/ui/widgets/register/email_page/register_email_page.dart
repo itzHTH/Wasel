@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:driver/l10n/l10n_extension.dart';
+import 'package:wasel_auth/wasel_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/helpers/app_validators.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
@@ -30,15 +32,15 @@ class RegisterEmailPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: AppDimens.space16),
-            const AuthHeader(title: 'أنشئ حساب سائق'),
+            AuthHeader(title: context.l10n.registerTagline),
             SizedBox(height: AppDimens.space32),
 
             // Email field
             Form(
               key: formKey,
               child: AppLabeledFormField(
-                label: 'البريد الإلكتروني',
-                hintText: 'أدخل بريدك الإلكتروني',
+                label: context.authL10n.email,
+                hintText: context.authL10n.enterEmail,
                 controller: emailCtrl,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.done,
@@ -58,7 +60,7 @@ class RegisterEmailPage extends StatelessWidget {
                 final state = ref.watch(registerProvider);
                 return AuthPrimaryButton(
                   isLoading: state.isLoading,
-                  label: 'إنشاء حساب',
+                  label: context.authL10n.createAccount,
                   onPressed: onSubmit,
                 );
               },
@@ -70,13 +72,13 @@ class RegisterEmailPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'لديك حساب بالفعل؟ ',
+                  context.authL10n.alreadyHaveAccount,
                   style: context.styles.font14Neutral400Regular,
                 ),
                 GestureDetector(
                   onTap: () => Navigator.pop(context),
                   child: Text(
-                    'تسجيل الدخول',
+                    context.authL10n.login,
                     style: context.styles.font14Primary500SemiBold,
                   ),
                 ),

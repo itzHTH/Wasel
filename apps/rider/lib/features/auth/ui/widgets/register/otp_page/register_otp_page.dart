@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_auth/wasel_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
@@ -36,13 +37,13 @@ class RegisterOtpPage extends StatelessWidget {
           const Spacer(),
 
           Text(
-            'رمز التحقق',
+            context.authL10n.verificationCode,
             style: context.styles.font24Secondary900Bold,
             textAlign: TextAlign.center,
           ),
           SizedBox(height: AppDimens.space8),
           Text(
-            'لقد أرسلنا رمز التحقق إلى بريدك الإلكتروني\n ${emailCtrl.text}',
+            context.authL10n.otpSentToEmail(emailCtrl.text),
             style: context.styles.font14Neutral400Regular,
             textAlign: TextAlign.center,
           ),
@@ -55,7 +56,7 @@ class RegisterOtpPage extends StatelessWidget {
             builder: (context, ref, child) {
               final isLoading = ref.watch(registerProvider).isLoading;
               return AuthPrimaryButton(
-                label: 'إرسال',
+                label: context.authL10n.send,
                 onPressed: isLoading ? null : onSubmit,
                 isLoading: isLoading,
               );

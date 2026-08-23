@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_core/l10n/core_l10n_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/widgets/app_loading.dart';
@@ -40,7 +41,7 @@ class AppErrorRetry extends StatelessWidget {
                   color: context.colors.primary500,
                 ),
           label: Text(
-            isRetrying ? 'جارٍ إعادة المحاولة…' : 'إعادة المحاولة',
+            isRetrying ? context.coreL10n.retrying : context.coreL10n.retry,
             style: context.styles.font14Primary500SemiBold,
           ),
           style: TextButton.styleFrom(padding: EdgeInsets.zero),

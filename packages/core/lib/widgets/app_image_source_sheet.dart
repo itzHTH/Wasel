@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_core/helpers/app_image_picker.dart';
+import 'package:wasel_core/l10n/core_l10n_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/widgets/app_group_card.dart';
@@ -7,10 +8,16 @@ import 'package:wasel_core/widgets/app_menu_tile.dart';
 
 Future<AppImageSource?> showAppImageSourceSheet({
   required BuildContext context,
-  String title = 'اختر مصدر الصورة',
-  String cameraLabel = 'التقط صورة',
-  String galleryLabel = 'اختر من المعرض',
+  String? title,
+  String? cameraLabel,
+  String? galleryLabel,
 }) {
+  // Read into locals: a nullable parameter does not promote inside the
+  // builder closure below.
+  final sheetTitle = title ?? context.coreL10n.chooseImageSource;
+  final camera = cameraLabel ?? context.coreL10n.takePhoto;
+  final gallery = galleryLabel ?? context.coreL10n.chooseFromGallery;
+
   return showModalBottomSheet<AppImageSource>(
     context: context,
     backgroundColor: context.colors.screenBackground,
@@ -21,9 +28,9 @@ Future<AppImageSource?> showAppImageSourceSheet({
       ),
     ),
     builder: (context) => _AppImageSourceSheet(
-      title: title,
-      cameraLabel: cameraLabel,
-      galleryLabel: galleryLabel,
+      title: sheetTitle,
+      cameraLabel: camera,
+      galleryLabel: gallery,
     ),
   );
 }

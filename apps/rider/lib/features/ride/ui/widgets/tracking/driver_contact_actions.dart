@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/l10n/l10n_extension.dart';
 import 'package:wasel_core/wasel_core.dart';
 
 class DriverContactActions extends StatelessWidget {
@@ -18,7 +19,7 @@ class DriverContactActions extends StatelessWidget {
         Expanded(
           child: _ContactButton(
             icon: Icons.phone_rounded,
-            label: 'اتصال',
+            label: context.l10n.call,
             onPressed: onCall,
             filled: true,
           ),
@@ -27,7 +28,7 @@ class DriverContactActions extends StatelessWidget {
         Expanded(
           child: _ContactButton(
             icon: Icons.chat_bubble_rounded,
-            label: 'رسالة',
+            label: context.l10n.message,
             onPressed: onMessage,
             filled: false,
           ),

@@ -1,5 +1,6 @@
 import 'package:driver/core/helpers/ride_formatters.dart';
 import 'package:flutter/material.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:wasel_core/wasel_core.dart';
 
 class FareHero extends StatelessWidget {
@@ -19,7 +20,7 @@ class FareHero extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      RideFormatters.fare(amount.toString(), currency: currency),
+      RideFormatters.fare(context.l10n, amount.toString(), currency: currency),
       style: color == null
           ? context.styles.font32Secondary900Bold
           : context.styles.font32Secondary900Bold.copyWith(color: color),

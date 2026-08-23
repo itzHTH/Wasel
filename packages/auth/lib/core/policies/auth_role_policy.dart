@@ -7,9 +7,6 @@ abstract final class AuthRolePolicy {
   static const String riderRole = 'Rider';
   static const String driverRole = 'Driver';
 
-  static const String deniedMessage =
-      'هذا الحساب غير مصرح له بالدخول لهذا التطبيق';
-
   static String roleOf(AuthUserType userType) => switch (userType) {
     AuthUserType.rider => riderRole,
     AuthUserType.driver => driverRole,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/l10n/l10n_extension.dart';
 import 'package:wasal/core/widgets/app_secondary_button.dart';
 import 'package:wasal/features/ride/domain/entities/driver_profile.dart';
 import 'package:wasal/features/ride/domain/entities/ride_price.dart';
@@ -60,8 +61,8 @@ class DriverOnTheWayCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   etaMinutes != null
-                      ? 'الكابتن يوصل خلال $etaMinutes دقائق'
-                      : 'الكابتن بالطريق إلك',
+                      ? context.l10n.captainEtaMinutes(etaMinutes.toString())
+                      : context.l10n.captainOnWay,
                   style: context.styles.font20Secondary900Bold,
                 ),
               ),
@@ -86,7 +87,10 @@ class DriverOnTheWayCard extends StatelessWidget {
           ),
         ],
       ),
-      footer: AppSecondaryButton(label: 'إلغاء الطلب', onPressed: onCancel),
+      footer: AppSecondaryButton(
+        label: context.l10n.cancelRequest,
+        onPressed: onCancel,
+      ),
     );
   }
 }

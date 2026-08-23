@@ -1,5 +1,6 @@
 import 'package:driver/features/ride/domain/entities/rider_profile.dart';
 import 'package:flutter/material.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:wasel_core/wasel_core.dart';
 
 class RiderInfoRow extends StatelessWidget {
@@ -41,7 +42,7 @@ class RiderInfoRow extends StatelessWidget {
               SizedBox(height: AppDimens.space4),
               if (canCall)
                 Text(
-                  phoneNumber ?? 'رقم الهاتف غير متوفر',
+                  phoneNumber ?? context.l10n.phoneUnavailable,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: context.styles.font14Neutral400Medium,

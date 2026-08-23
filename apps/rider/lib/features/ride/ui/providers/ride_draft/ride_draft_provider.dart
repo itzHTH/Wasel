@@ -1,3 +1,5 @@
+import 'package:wasel_core/wasel_core.dart';
+import 'package:wasal/l10n/rider_localizations.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/core/helpers/ride_formatters.dart';
 import 'package:wasel_location/wasel_location.dart';
@@ -77,6 +79,7 @@ class RideDraft extends _$RideDraft {
 
   Future<String> _resolveLabel(LatLng point) async {
     final fallback = RideFormatters.coordinates(
+      lookupRiderLocalizations(ref.read(appLocalizationControllerProvider)),
       point.latitude,
       point.longitude,
     );

@@ -1,5 +1,6 @@
 import 'package:driver/core/helpers/ride_formatters.dart';
 import 'package:flutter/material.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:wasel_core/wasel_core.dart';
 
 class DriverEarningsChip extends StatelessWidget {
@@ -52,7 +53,11 @@ class DriverEarningsChip extends StatelessWidget {
           Text(
             total == null
                 ? '—'
-                : RideFormatters.fare(total.toString(), currency: currency),
+                : RideFormatters.fare(
+                    context.l10n,
+                    total.toString(),
+                    currency: currency,
+                  ),
             textDirection: TextDirection.ltr,
             style: context.styles.font14Primary500SemiBold.copyWith(
               color: foreground,

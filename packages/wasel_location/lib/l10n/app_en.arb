@@ -1,0 +1,13 @@
+{
+  "@@locale": "en",
+  "settings": "Settings",
+  "enable": "Enable",
+  "locationPermissionRequired": "Location permission required",
+  "locationPermissionRequiredMessage": "Please enable location permission to use this feature.",
+  "turnOnLocation": "Turn on location so we can find you",
+  "locationServiceOff": "Location services are off. Turn them on so we can find you.",
+  "locationPermissionMissing": "We can't reach your location without permission",
+  "locationNotFound": "We couldn't find your location. Try again.",
+  "locationError": "Something went wrong while finding your location",
+  "addressSeparator": ", "
+}

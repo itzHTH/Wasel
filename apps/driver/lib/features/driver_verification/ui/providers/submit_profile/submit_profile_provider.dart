@@ -1,10 +1,10 @@
+import 'package:wasel_core/wasel_core.dart';
+import 'package:driver/l10n/driver_localizations.dart';
 import 'package:driver/features/driver_verification/domain/entities/driver_profile_submission.dart';
 import 'package:driver/features/driver_verification/domain/usecases/submit_driver_profile_use_case.dart';
 import 'package:driver/features/driver_verification/ui/providers/driver_verification_use_case.dart';
 import 'package:driver/features/driver_verification/ui/providers/submit_profile/submit_profile_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:wasel_core/networking/api_results.dart';
-import 'package:wasel_core/networking/errors/error_message.dart';
 
 part 'submit_profile_provider.g.dart';
 
@@ -31,8 +31,15 @@ class SubmitProfile extends _$SubmitProfile {
     result.when(
       success: (data) => state = SubmitSuccess(data),
       failure: (error) => state = SubmitFailure(
-        errorMessageOf(error, fallback: 'تعذّر رفع المستندات'),
+        errorMessageOf(error, fallback: _l10n.uploadFailed),
       ),
     );
   }
 }
+
+/// Localizations for a notifier, which has no BuildContext of its own.
+///
+/// Reads the active locale directly rather than through the Ref: these are
+/// called after long awaits, when the Ref may already be unmounted.
+DriverLocalizations get _l10n =>
+    lookupDriverLocalizations(AppLocalizationController.currentLocale);

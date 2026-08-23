@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/l10n/l10n_extension.dart';
+import 'package:wasel_payments/wasel_payments.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/core/helpers/ride_formatters.dart';
 import 'package:wasel_core/wasel_core.dart';
-import 'package:wasel_payments/domain/entities/payment_method.dart';
-import 'package:wasel_payments/presentation/providers/wallet/rider_wallet_balance_provider.dart';
-import 'package:wasel_payments/presentation/widgets/payment_method_style.dart';
 
 const _selectableMethods = [
   PaymentMethod.cash,
@@ -60,7 +59,7 @@ class _PaymentMethodSheet extends StatelessWidget {
             ),
             SizedBox(height: AppDimens.space24),
             Text(
-              'طريقة الدفع',
+              context.l10n.paymentMethodLabel,
               textAlign: TextAlign.center,
               style: context.styles.font16Secondary900Bold,
             ),
@@ -70,7 +69,7 @@ class _PaymentMethodSheet extends StatelessWidget {
                 for (final method in _selectableMethods)
                   AppMenuTile(
                     icon: paymentMethodIcon(method),
-                    label: method.label,
+                    label: method.label(context.paymentsL10n),
                     trailing: _MethodTrailing(
                       method: method,
                       isSelected: method == selected,
@@ -114,7 +113,7 @@ class _MethodTrailing extends ConsumerWidget {
       children: [
         if (balance != null) ...[
           Text(
-            RideFormatters.fare(balance),
+            RideFormatters.fare(context.l10n, balance),
             style: context.styles.font14Secondary500Medium,
           ),
           SizedBox(width: AppDimens.space8),

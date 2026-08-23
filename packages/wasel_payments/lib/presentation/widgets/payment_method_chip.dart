@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_payments/l10n/payment_labels.dart';
+import 'package:wasel_payments/l10n/payments_l10n_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_payments/domain/entities/payment_method.dart';
@@ -32,7 +34,7 @@ class PaymentMethodChip extends StatelessWidget {
           ),
           SizedBox(width: AppDimens.space4),
           Text(
-            method.label,
+            method.label(context.paymentsL10n),
             style: context.styles.font14Primary500SemiBold.copyWith(
               color: foreground,
             ),

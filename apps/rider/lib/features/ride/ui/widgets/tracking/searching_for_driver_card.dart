@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/l10n/l10n_extension.dart';
 import 'package:wasal/core/widgets/app_secondary_button.dart';
 import 'package:wasal/features/ride/domain/entities/ride_price.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_card_shell.dart';
@@ -35,12 +36,12 @@ class SearchingForDriverCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'نبحث عن كابتن قريب...',
+                      context.l10n.searchingForCaptain,
                       style: context.styles.font20Secondary900Bold,
                     ),
                     SizedBox(height: AppDimens.space4),
                     Text(
-                      'خليك على الخط، راح نلگه لك كابتن بأسرع وقت',
+                      context.l10n.stayOnline,
                       style: context.styles.font14Secondary500Medium,
                     ),
                   ],
@@ -55,7 +56,10 @@ class SearchingForDriverCard extends StatelessWidget {
             price: price,
           ),
           SizedBox(height: AppDimens.space24),
-          AppSecondaryButton(label: 'إلغاء الطلب', onPressed: onCancel),
+          AppSecondaryButton(
+            label: context.l10n.cancelRequest,
+            onPressed: onCancel,
+          ),
         ],
       ),
     );

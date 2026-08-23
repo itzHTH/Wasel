@@ -24,6 +24,12 @@ export 'helpers/app_url_launcher.dart';
 export 'helpers/app_validators.dart';
 export 'helpers/session_store.dart';
 
+// Localization
+export 'l10n/core_localizations.dart';
+export 'l10n/core_l10n_extension.dart';
+export 'localization/app_local_type.dart';
+export 'localization/providers/app_localization_provider.dart';
+
 // Permissions
 export 'package:permission_handler/permission_handler.dart'
     show Permission, PermissionStatus, openAppSettings;
@@ -36,10 +42,11 @@ export 'networking/base_response.dart';
 export 'networking/dio/dio_factory.dart';
 export 'networking/errors/api_error_message.dart';
 export 'networking/errors/api_error_model.dart';
-export 'networking/errors/api_errors.dart';
+export 'networking/errors/api_error_reason.dart';
 export 'networking/errors/error_handler.dart';
 export 'networking/errors/error_message.dart';
 export 'networking/interceptors/auth_interceptor.dart';
+export 'networking/interceptors/localization_interceptor.dart';
 export 'networking/json_num_converters.dart';
 export 'networking/paged/paged_list.dart';
 export 'networking/paged/paged_list_response.dart';
@@ -74,10 +81,11 @@ export 'widgets/app_entrance_fade.dart';
 export 'widgets/app_error_retry.dart';
 export 'widgets/app_error_state.dart';
 export 'widgets/app_group_card.dart';
-export 'widgets/app_header_with_logo.dart';
 export 'widgets/app_image_source_sheet.dart';
 export 'widgets/app_info_row.dart';
 export 'widgets/app_inline_error.dart';
+export 'widgets/app_language_sheet.dart';
+export 'widgets/app_language_switch.dart';
 export 'widgets/app_labeled_field.dart';
 export 'widgets/app_loading.dart';
 export 'widgets/app_map_profile_button.dart';

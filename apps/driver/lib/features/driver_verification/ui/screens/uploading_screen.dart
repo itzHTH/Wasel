@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_core/wasel_core.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
 import 'package:driver/features/driver_verification/domain/entities/driver_profile_submission.dart';
 import 'package:driver/features/driver_verification/ui/providers/submit_profile/submit_profile_provider.dart';
@@ -102,12 +102,12 @@ class _UploadingBody extends StatelessWidget {
         ),
         SizedBox(height: AppDimens.space24),
         Text(
-          'جارٍ رفع المستندات…',
+          context.l10n.uploadingDocuments,
           style: context.styles.font20Secondary900Bold,
         ),
         SizedBox(height: AppDimens.space8),
         Text(
-          'يرجى الانتظار وعدم إغلاق التطبيق.',
+          context.l10n.pleaseWaitDontClose,
           style: context.styles.font14Neutral400Regular,
           textAlign: TextAlign.center,
         ),
@@ -131,12 +131,12 @@ class _SuccessBody extends StatelessWidget {
         ),
         SizedBox(height: AppDimens.space24),
         Text(
-          'تم رفع المستندات بنجاح',
+          context.l10n.documentsUploaded,
           style: context.styles.font20Secondary900Bold,
         ),
         SizedBox(height: AppDimens.space8),
         Text(
-          'سيتم مراجعة طلبك وإشعارك بالنتيجة.',
+          context.l10n.willNotifyResult,
           style: context.styles.font14Neutral400Regular,
           textAlign: TextAlign.center,
         ),
@@ -168,7 +168,7 @@ class _FailureBody extends StatelessWidget {
         ),
         SizedBox(height: AppDimens.space24),
         Text(
-          'تعذّر رفع المستندات',
+          context.l10n.uploadFailed,
           style: context.styles.font20Secondary900Bold,
         ),
         SizedBox(height: AppDimens.space8),
@@ -178,12 +178,12 @@ class _FailureBody extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         SizedBox(height: AppDimens.space32),
-        AuthPrimaryButton(label: 'إعادة المحاولة', onPressed: onRetry),
+        AuthPrimaryButton(label: context.coreL10n.retry, onPressed: onRetry),
         SizedBox(height: AppDimens.space12),
         TextButton(
           onPressed: onBackToForm,
           child: Text(
-            'العودة للنموذج',
+            context.l10n.backToForm,
             style: context.styles.font14Secondary900SemiBold,
           ),
         ),

@@ -4,6 +4,7 @@ import 'package:driver/features/ride/ui/widgets/fare_hero.dart';
 import 'package:wasel_payments/presentation/widgets/payment_method_chip.dart';
 import 'package:driver/features/ride/ui/widgets/ride_card_shell.dart';
 import 'package:flutter/material.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:wasel_core/wasel_core.dart';
 
 class TripCompletedCard extends StatelessWidget {
@@ -29,14 +30,14 @@ class TripCompletedCard extends StatelessWidget {
           SizedBox(height: AppDimens.space16),
           Center(
             child: Text(
-              'خلصت الرحلة',
+              context.l10n.rideFinished,
               style: context.styles.font20Secondary900Bold,
             ),
           ),
           SizedBox(height: AppDimens.space4),
           Center(
             child: Text(
-              'اجمع الأجرة من الراكب',
+              context.l10n.collectFareFromRider,
               style: context.styles.font14Neutral400Regular,
             ),
           ),
@@ -50,7 +51,10 @@ class TripCompletedCard extends StatelessWidget {
           SizedBox(height: AppDimens.space12),
           Center(child: PaymentMethodChip(method: paymentMethod)),
           SizedBox(height: AppDimens.space24),
-          AppPrimaryButton(label: 'رجوع للطلبات', onPressed: onDismiss),
+          AppPrimaryButton(
+            label: context.l10n.backToRequests,
+            onPressed: onDismiss,
+          ),
         ],
       ),
     );

@@ -1,0 +1,43 @@
+{
+  "@@locale": "ar",
+  "settings": "الإعدادات",
+  "@settings": {
+    "description": "Action that opens the OS settings from a location prompt"
+  },
+  "enable": "تمكين",
+  "@enable": {
+    "description": "Action that requests the location permission"
+  },
+  "locationPermissionRequired": "إذن الموقع مطلوب",
+  "@locationPermissionRequired": {
+    "description": "Title shown when location permission is missing"
+  },
+  "locationPermissionRequiredMessage": "يرجى تمكين إذن الموقع للوصول إلى هذه الميزة.",
+  "@locationPermissionRequiredMessage": {
+    "description": "Body shown when location permission is missing"
+  },
+  "turnOnLocation": "شغّل الموقع حتى نلگه مكانك",
+  "@turnOnLocation": {
+    "description": "Banner prompting the user to turn on location services"
+  },
+  "locationServiceOff": "خدمة الموقع مطفّية، شغّلها حتى نگدر نوصل لموقعك",
+  "@locationServiceOff": {
+    "description": "Shown when the device location service is disabled"
+  },
+  "locationPermissionMissing": "ما نگدر نوصل لموقعك بدون إذن الموقع",
+  "@locationPermissionMissing": {
+    "description": "Shown when the location permission was denied"
+  },
+  "locationNotFound": "ما گدرنا نلگه موقعك، جرّب مرة ثانية",
+  "@locationNotFound": {
+    "description": "Shown when the current position could not be resolved"
+  },
+  "locationError": "صار خطأ وإحنا ندوّر على موقعك",
+  "@locationError": {
+    "description": "Shown when locating the user failed unexpectedly"
+  },
+  "addressSeparator": "، ",
+  "@addressSeparator": {
+    "description": "Joins the street and locality parts of an address"
+  }
+}

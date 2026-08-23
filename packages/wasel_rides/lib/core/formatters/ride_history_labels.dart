@@ -1,59 +1,75 @@
+import 'package:wasel_rides/l10n/rides_localizations.dart';
+
+/// Date and time labels for the ride history list.
 class RideHistoryLabels {
   const RideHistoryLabels._();
 
-  static const List<String> _months = [
-    'كانون الثاني',
-    'شباط',
-    'آذار',
-    'نيسان',
-    'أيار',
-    'حزيران',
-    'تموز',
-    'آب',
-    'أيلول',
-    'تشرين الأول',
-    'تشرين الثاني',
-    'كانون الأول',
-  ];
+  static String _month(RidesLocalizations l10n, int month) => switch (month) {
+    1 => l10n.month1,
+    2 => l10n.month2,
+    3 => l10n.month3,
+    4 => l10n.month4,
+    5 => l10n.month5,
+    6 => l10n.month6,
+    7 => l10n.month7,
+    8 => l10n.month8,
+    9 => l10n.month9,
+    10 => l10n.month10,
+    11 => l10n.month11,
+    _ => l10n.month12,
+  };
 
-  /// Indexed by DateTime.weekday (Monday == 1).
-  static const List<String> _weekdays = [
-    'الإثنين',
-    'الثلاثاء',
-    'الأربعاء',
-    'الخميس',
-    'الجمعة',
-    'السبت',
-    'الأحد',
-  ];
+  /// [weekday] follows DateTime.weekday, where Monday is 1.
+  static String _weekday(RidesLocalizations l10n, int weekday) =>
+      switch (weekday) {
+        1 => l10n.weekday1,
+        2 => l10n.weekday2,
+        3 => l10n.weekday3,
+        4 => l10n.weekday4,
+        5 => l10n.weekday5,
+        6 => l10n.weekday6,
+        _ => l10n.weekday7,
+      };
 
   static bool isSameDay(DateTime a, DateTime b) =>
       a.year == b.year && a.month == b.month && a.day == b.day;
 
-  static String dayLabel(DateTime when, {DateTime? now}) {
+  static String dayLabel(
+    RidesLocalizations l10n,
+    DateTime when, {
+    DateTime? now,
+  }) {
     final today = now ?? DateTime.now();
-    if (isSameDay(when, today)) return 'اليوم';
+    if (isSameDay(when, today)) return l10n.today;
 
     final yesterday = today.subtract(const Duration(days: 1));
-    if (isSameDay(when, yesterday)) return 'أمس';
+    if (isSameDay(when, yesterday)) return l10n.yesterday;
 
-    final month = _months[when.month - 1];
+    final month = _month(l10n, when.month);
 
     if (when.year == today.year) {
-      return '${_weekdays[when.weekday - 1]} ${when.day} $month';
+      return l10n.dayWithWeekday(_weekday(l10n, when.weekday), when.day, month);
     }
 
-    return '${when.day} $month ${when.year}';
+    return l10n.dayWithYear(when.day, month, when.year);
   }
 
-  static String fullDateLabel(DateTime when) =>
-      '${_weekdays[when.weekday - 1]}، ${when.day} '
-      '${_months[when.month - 1]} ${when.year}';
+  static String fullDateLabel(RidesLocalizations l10n, DateTime when) =>
+      l10n.fullDate(
+        _weekday(l10n, when.weekday),
+        when.day,
+        _month(l10n, when.month),
+        when.year,
+      );
 
-  static String timeLabel(DateTime when) {
+  static String timeLabel(RidesLocalizations l10n, DateTime when) {
     final hour = when.hour % 12 == 0 ? 12 : when.hour % 12;
-    final meridiem = when.hour < 12 ? 'ص' : 'م';
+    final meridiem = when.hour < 12 ? l10n.timeAm : l10n.timePm;
 
-    return '$hour:${when.minute.toString().padLeft(2, '0')} $meridiem';
+    return l10n.timeOfDay(
+      hour,
+      when.minute.toString().padLeft(2, '0'),
+      meridiem,
+    );
   }
 }

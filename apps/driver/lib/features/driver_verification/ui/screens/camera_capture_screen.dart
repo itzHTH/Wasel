@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:wasel_core/wasel_core.dart';
 import 'package:driver/features/driver_verification/ui/widgets/camera/camera_capture_view.dart';
 import 'package:driver/features/driver_verification/ui/widgets/camera/camera_error_view.dart';
@@ -44,7 +45,11 @@ class _CameraCaptureScreenState extends State<CameraCaptureScreen>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _init();
+    // Deferred a frame: the permission prompt reads Localizations, which
+    // cannot be looked up while initState is still running.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) _init();
+    });
   }
 
   @override
@@ -73,8 +78,8 @@ class _CameraCaptureScreenState extends State<CameraCaptureScreen>
     final granted = await ensurePermission(
       context,
       Permission.camera,
-      deniedTitle: 'إذن الكاميرا مطلوب',
-      deniedMessage: 'نحتاج إذن الكاميرا لالتقاط الصورة. فعّله من الإعدادات.',
+      deniedTitle: context.l10n.cameraPermissionRequired,
+      deniedMessage: context.l10n.cameraPermissionMessage,
     );
     if (!mounted) return;
     if (!granted) {
@@ -91,7 +96,7 @@ class _CameraCaptureScreenState extends State<CameraCaptureScreen>
     try {
       final cameras = await availableCameras();
       if (cameras.isEmpty) {
-        if (mounted) _error.value = 'لا توجد كاميرا متاحة';
+        if (mounted) _error.value = context.l10n.noCameraAvailable;
         return;
       }
       final camera = cameras.firstWhere(
@@ -111,7 +116,7 @@ class _CameraCaptureScreenState extends State<CameraCaptureScreen>
       _error.value = null;
       _controller.value = controller;
     } catch (_) {
-      if (mounted) _error.value = 'تعذّر تشغيل الكاميرا';
+      if (mounted) _error.value = context.l10n.cameraStartFailed;
     }
   }
 
@@ -135,9 +140,9 @@ class _CameraCaptureScreenState extends State<CameraCaptureScreen>
     } catch (_) {
       if (!mounted) return;
       _isCapturing.value = false;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('تعذّر الالتقاط، حاول مجدداً')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(context.l10n.captureFailed)));
     }
   }
 

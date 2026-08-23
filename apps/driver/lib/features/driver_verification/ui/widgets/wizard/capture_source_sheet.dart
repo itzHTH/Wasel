@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/theme/theme_context_extension.dart';
+import 'package:wasel_core/wasel_core.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 
 enum CaptureSource { camera, gallery }
 
@@ -30,20 +30,20 @@ class _CaptureSourceSheet extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              'اختر مصدر الصورة',
+              context.coreL10n.chooseImageSource,
               textAlign: TextAlign.center,
               style: context.styles.font20Secondary900Bold,
             ),
             SizedBox(height: AppDimens.space24),
             _SourceTile(
               icon: Icons.photo_camera_outlined,
-              label: 'التقاط بالكاميرا',
+              label: context.l10n.captureWithCamera,
               onTap: () => Navigator.of(context).pop(CaptureSource.camera),
             ),
             SizedBox(height: AppDimens.space12),
             _SourceTile(
               icon: Icons.photo_library_outlined,
-              label: 'اختيار من المعرض',
+              label: context.l10n.chooseFromGalleryDriver,
               onTap: () => Navigator.of(context).pop(CaptureSource.gallery),
             ),
           ],

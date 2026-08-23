@@ -1,0 +1,87 @@
+{
+  "@@locale": "ar",
+  "editPhoneOnlyNotice": "يمكنك تعديل رقم هاتفك فقط. لتغيير بقية بياناتك تواصل مع الدعم.",
+  "@editPhoneOnlyNotice": {
+    "description": "Notice explaining that only the phone number is editable"
+  },
+  "profileUpdated": "تم تحديث بياناتك بنجاح",
+  "@profileUpdated": {
+    "description": "Snackbar shown after the profile is saved"
+  },
+  "avatarUpdated": "تم تحديث الصورة بنجاح",
+  "@avatarUpdated": {
+    "description": "Snackbar shown after the avatar is replaced"
+  },
+  "discardChangesTitle": "تجاهل التعديلات؟",
+  "@discardChangesTitle": {
+    "description": "Title of the unsaved-changes dialog"
+  },
+  "discardChangesMessage": "لديك تغييرات لم يتم حفظها. هل تريد الخروج وتجاهلها؟",
+  "@discardChangesMessage": {
+    "description": "Body of the unsaved-changes dialog"
+  },
+  "discard": "تجاهل",
+  "@discard": {
+    "description": "Confirm action of the unsaved-changes dialog"
+  },
+  "keepEditing": "متابعة التعديل",
+  "@keepEditing": {
+    "description": "Cancel action of the unsaved-changes dialog"
+  },
+  "firstName": "الاسم الأول",
+  "@firstName": {
+    "description": "First name field label on the profile edit form"
+  },
+  "enterFirstName": "أدخل اسمك الأول",
+  "@enterFirstName": {
+    "description": "First name field hint"
+  },
+  "lastName": "اسم العائلة",
+  "@lastName": {
+    "description": "Last name field label on the profile edit form"
+  },
+  "enterLastName": "أدخل اسم عائلتك",
+  "@enterLastName": {
+    "description": "Last name field hint"
+  },
+  "phoneNumber": "رقم الهاتف",
+  "@phoneNumber": {
+    "description": "Phone number field label on the profile edit form"
+  },
+  "saveChanges": "حفظ التغييرات",
+  "@saveChanges": {
+    "description": "Submit button on the profile edit form"
+  },
+  "notSpecified": "غير محدد",
+  "@notSpecified": {
+    "description": "Placeholder shown when a profile field is empty"
+  },
+  "fieldRequired": "{field} مطلوب",
+  "@fieldRequired": {
+    "description": "Validation error when a named profile field is empty",
+    "placeholders": {
+      "field": {
+        "type": "String",
+        "example": "الاسم الأول"
+      }
+    }
+  },
+  "fieldTooShort": "{field} يجب أن لا يقل عن حرفين",
+  "@fieldTooShort": {
+    "description": "Validation error when a named profile field is too short",
+    "placeholders": {
+      "field": {
+        "type": "String",
+        "example": "الاسم الأول"
+      }
+    }
+  },
+  "phoneRequired": "رقم الهاتف مطلوب",
+  "@phoneRequired": {
+    "description": "Validation error when the phone field is empty"
+  },
+  "phoneLength": "رقم الهاتف يجب أن يتكون من ١١ رقماً",
+  "@phoneLength": {
+    "description": "Validation error when the phone number is the wrong length"
+  }
+}

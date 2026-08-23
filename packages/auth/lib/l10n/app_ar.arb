@@ -1,0 +1,185 @@
+{
+  "@@locale": "ar",
+  "login": "تسجيل الدخول",
+  "@login": {
+    "description": "Login screen title and the submit button on the login form"
+  },
+  "loggingIn": "جاري تسجيل الدخول...",
+  "@loggingIn": {
+    "description": "Button label while the login request is in flight"
+  },
+  "loginSuccess": "تم تسجيل الدخول بنجاح",
+  "@loginSuccess": {
+    "description": "Snackbar shown after a successful login"
+  },
+  "createAccount": "إنشاء حساب",
+  "@createAccount": {
+    "description": "Register submit button label"
+  },
+  "registerSuccess": "تم التسجيل بنجاح",
+  "@registerSuccess": {
+    "description": "Snackbar shown after a successful registration"
+  },
+  "registerFormDescription": "أدخل معلوماتك الشخصية لإكمال التسجيل",
+  "@registerFormDescription": {
+    "description": "Subtitle above the personal-details step of registration"
+  },
+  "completeYourInfo": "أكمل بياناتك",
+  "@completeYourInfo": {
+    "description": "Title of the personal-details step of registration"
+  },
+  "noAccount": "ليس لديك حساب؟ ",
+  "@noAccount": {
+    "description": "Leading text before the register link; keeps its trailing space"
+  },
+  "alreadyHaveAccount": "لديك حساب بالفعل؟ ",
+  "@alreadyHaveAccount": {
+    "description": "Leading text before the login link; keeps its trailing space"
+  },
+  "firstName": "الاسم الأول",
+  "@firstName": {
+    "description": "First name field label"
+  },
+  "enterFirstName": "أدخل اسمك الأول",
+  "@enterFirstName": {
+    "description": "First name field hint"
+  },
+  "lastName": "الاسم الأخير",
+  "@lastName": {
+    "description": "Last name field label"
+  },
+  "enterLastName": "أدخل اسمك الأخير",
+  "@enterLastName": {
+    "description": "Last name field hint"
+  },
+  "email": "البريد الإلكتروني",
+  "@email": {
+    "description": "Email field label"
+  },
+  "enterEmail": "أدخل بريدك الإلكتروني",
+  "@enterEmail": {
+    "description": "Email field hint"
+  },
+  "phoneNumber": "رقم الهاتف",
+  "@phoneNumber": {
+    "description": "Phone number field label"
+  },
+  "enterPhoneNumber": "أدخل رقم هاتفك",
+  "@enterPhoneNumber": {
+    "description": "Phone number field hint"
+  },
+  "password": "كلمة المرور",
+  "@password": {
+    "description": "Password field label"
+  },
+  "enterPassword": "أدخل كلمة المرور",
+  "@enterPassword": {
+    "description": "Password field hint on the register form"
+  },
+  "enterYourPassword": "أدخل كلمة المرور الخاصة بك",
+  "@enterYourPassword": {
+    "description": "Password field hint on the login form"
+  },
+  "confirmPassword": "تأكيد كلمة المرور",
+  "@confirmPassword": {
+    "description": "Confirm password field label"
+  },
+  "reenterPassword": "أعد إدخال كلمة المرور",
+  "@reenterPassword": {
+    "description": "Confirm password field hint"
+  },
+  "forgotPassword": "نسيت كلمة المرور؟",
+  "@forgotPassword": {
+    "description": "Link on the login form that starts the password reset flow"
+  },
+  "resetPassword": "إعادة تعيين كلمة المرور",
+  "@resetPassword": {
+    "description": "Title of the reset password flow"
+  },
+  "forgotPasswordDescription": "أدخل بريدك الإلكتروني وسنرسل لك رمز تحقق لإعادة تعيين كلمة المرور",
+  "@forgotPasswordDescription": {
+    "description": "Subtitle on the email step of the reset password flow"
+  },
+  "rememberedPassword": "تذكرت كلمة المرور؟ ",
+  "@rememberedPassword": {
+    "description": "Leading text before the back-to-login link; keeps its trailing space"
+  },
+  "newPasswordTitle": "كلمة مرور جديدة",
+  "@newPasswordTitle": {
+    "description": "Title of the new password step"
+  },
+  "chooseNewPassword": "اختر كلمة مرور جديدة لحسابك",
+  "@chooseNewPassword": {
+    "description": "Subtitle of the new password step"
+  },
+  "newPasswordLabel": "كلمة المرور الجديدة",
+  "@newPasswordLabel": {
+    "description": "New password field label"
+  },
+  "enterNewPassword": "أدخل كلمة المرور الجديدة",
+  "@enterNewPassword": {
+    "description": "New password field hint"
+  },
+  "reenterNewPassword": "أعد إدخال كلمة المرور الجديدة",
+  "@reenterNewPassword": {
+    "description": "Confirm new password field hint"
+  },
+  "passwordChangedSuccess": "تم تغيير كلمة المرور بنجاح",
+  "@passwordChangedSuccess": {
+    "description": "Snackbar shown after the password was reset"
+  },
+  "verificationCode": "رمز التحقق",
+  "@verificationCode": {
+    "description": "Title of the OTP step"
+  },
+  "otpSentToEmail": "لقد أرسلنا رمز التحقق إلى بريدك الإلكتروني\n{email}",
+  "@otpSentToEmail": {
+    "description": "Subtitle of the OTP step, naming the address the code went to",
+    "placeholders": {
+      "email": {
+        "type": "String",
+        "example": "user@example.com"
+      }
+    }
+  },
+  "otpSentSuccess": "تم ارسال الرمز الى الايميل بنجاح",
+  "@otpSentSuccess": {
+    "description": "Snackbar confirming the verification code was sent"
+  },
+  "sendCode": "إرسال الرمز",
+  "@sendCode": {
+    "description": "Button that requests a verification code"
+  },
+  "send": "إرسال",
+  "@send": {
+    "description": "Short submit label on the OTP step"
+  },
+  "requestNewCode": "طلب رمز جديد",
+  "@requestNewCode": {
+    "description": "Action that requests a fresh verification code"
+  },
+  "willNeedNewCode": "ستحتاج إلى طلب رمز جديد",
+  "@willNeedNewCode": {
+    "description": "Warning in the cancel dialog: cancelling voids the current code"
+  },
+  "confirm": "تأكيد",
+  "@confirm": {
+    "description": "Generic confirm action inside the auth flows"
+  },
+  "continueAction": "متابعة",
+  "@continueAction": {
+    "description": "Advances to the next step of a multi-step auth flow"
+  },
+  "cancelProcess": "إلغاء العملية",
+  "@cancelProcess": {
+    "description": "Confirm label of the dialog that abandons the auth flow"
+  },
+  "confirmCancel": "هل أنت متأكد من الإلغاء؟",
+  "@confirmCancel": {
+    "description": "Title of the dialog that abandons the auth flow"
+  },
+  "otpExpired": "انتهت صلاحية الرمز. يرجى طلب رمز جديد للمتابعة.",
+  "@otpExpired": {
+    "description": "Shown when the reset token has expired"
+  }
+}

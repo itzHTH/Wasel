@@ -1,3 +1,5 @@
+import 'package:wasel_core/wasel_core.dart';
+import 'package:driver/l10n/driver_localizations.dart';
 import 'dart:async';
 
 import 'package:driver/features/ride/data/models/update_location/update_location_arg.dart';
@@ -75,7 +77,7 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
         .read(isLocationServiceEnabledUseCaseProvider)
         .call(null);
     if (!serviceEnabled) {
-      _fail(session, 'خدمة الموقع مطفّية، شغّلها حتى نگدر نبعث موقعك');
+      _fail(session, _l10n.locationServiceOffDriver);
       return;
     }
 
@@ -87,7 +89,7 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
         .read(locationAccessControllerProvider.notifier)
         .ensure();
     if (!access.isGranted) {
-      _fail(session, 'ما نگدر نبعث موقعك بدون إذن الموقع');
+      _fail(session, _l10n.cannotSendLocation);
       return;
     }
 
@@ -207,7 +209,7 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
     _fixFailures++;
     if (_fixFailures != _fixFailureLimit) return;
 
-    _fail(session, 'ما نگدر نحدد موقعك، تأكد من إشارة الـ GPS');
+    _fail(session, _l10n.cannotDetermineLocation);
   }
 
   void _onBroadcastFailed(int session) {
@@ -221,9 +223,7 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
     ref
         .read(rideActionControllerProvider.notifier)
         .reportFailure(
-          const LocationBroadcastException(
-            'ماكو اتصال بالخادم، موقعك ما يوصل للتوزيع',
-          ),
+          LocationBroadcastException(_l10n.noServerConnection),
           StackTrace.current,
         );
   }
@@ -270,3 +270,10 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
     _session++;
   }
 }
+
+/// Localizations for a notifier, which has no BuildContext of its own.
+///
+/// Reads the active locale directly rather than through the Ref: these are
+/// called after long awaits, when the Ref may already be unmounted.
+DriverLocalizations get _l10n =>
+    lookupDriverLocalizations(AppLocalizationController.currentLocale);

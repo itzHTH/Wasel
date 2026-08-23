@@ -117,7 +117,7 @@ class RideRepo implements BaseRideRepo {
     final code = arg.method.code;
     if (code == null) {
       return ApiResults.failure(
-        ErrorHandler.message('طريقة دفع غير مدعومة'),
+        ErrorHandler.reason(ApiErrorReason.unsupportedPaymentMethod),
       );
     }
 

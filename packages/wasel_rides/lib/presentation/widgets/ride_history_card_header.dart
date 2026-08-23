@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_rides/l10n/rides_l10n_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_rides/domain/entities/ride_history_entry.dart';
@@ -41,7 +42,10 @@ class RideHistoryCardHeader extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                RideHistoryLabels.timeLabel(entry.requestedAt),
+                RideHistoryLabels.timeLabel(
+                  context.ridesL10n,
+                  entry.requestedAt,
+                ),
                 style: context.styles.font14Secondary900SemiBold,
               ),
               SizedBox(height: AppDimens.space4),

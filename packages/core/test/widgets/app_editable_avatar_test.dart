@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:wasel_core/l10n/core_localizations.dart';
 import 'package:wasel_core/theme/app_brand.dart';
 import 'package:wasel_core/theme/app_theme.dart';
 import 'package:wasel_core/widgets/app_editable_avatar.dart';
@@ -11,10 +13,15 @@ void main() {
     designSize: const Size(375, 812),
     builder: (_, _) => MaterialApp(
       theme: AppTheme.light(AppBrand.rider),
-      home: Directionality(
-        textDirection: TextDirection.rtl,
-        child: Scaffold(body: Center(child: child)),
-      ),
+      locale: const Locale('ar'),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        CoreLocalizations.delegate,
+      ],
+      supportedLocales: CoreLocalizations.supportedLocales,
+      home: Scaffold(body: Center(child: child)),
     ),
   );
 

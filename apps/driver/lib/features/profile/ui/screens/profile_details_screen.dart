@@ -1,5 +1,8 @@
 import 'package:driver/features/profile/ui/widgets/driver_approval_badge.dart';
 import 'package:flutter/material.dart';
+import 'package:wasel_auth/wasel_auth.dart';
+import 'package:wasel_profile/wasel_profile.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:wasel_core/extensions/navigation_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,8 +18,6 @@ import 'package:wasel_core/widgets/app_loading.dart';
 import 'package:wasel_core/widgets/app_profile_avatar.dart';
 import 'package:wasel_core/widgets/app_stat_cards.dart';
 import 'package:wasel_core/widgets/app_surface_card.dart';
-import 'package:wasel_profile/domain/entities/driver_profile.dart';
-import 'package:wasel_profile/presentation/providers/profile/driver_profile_provider.dart';
 
 class ProfileDetailsScreen extends ConsumerWidget {
   const ProfileDetailsScreen({super.key});
@@ -33,12 +34,12 @@ class ProfileDetailsScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: context.colors.screenBackground,
       appBar: AppBar(
-        title: const Text('الملف الشخصي'),
+        title: Text(context.l10n.profileDetails),
         backgroundColor: context.colors.screenBackground,
         surfaceTintColor: context.colors.screenBackground,
         actions: [
           IconButton(
-            tooltip: 'تعديل',
+            tooltip: context.l10n.edit,
             icon: const Icon(Icons.edit_outlined),
             color: context.colors.primary500,
             onPressed: () => context.pushNamed(AppRoutes.profileEdit),
@@ -55,7 +56,7 @@ class ProfileDetailsScreen extends ConsumerWidget {
         ),
         data: (profile) => profile == null
             ? AppErrorState(
-                message: 'تعذّر تحميل بيانات الملف الشخصي',
+                message: context.l10n.profileLoadFailed,
                 onRetry: refresh,
                 isRetrying: isRefreshing,
               )
@@ -94,7 +95,7 @@ class _DriverProfileDetailsBody extends StatelessWidget {
               AppProfileAvatar(photoUrl: profile.profilePictureUrl, size: 96.r),
               SizedBox(height: AppDimens.space16),
               Text(
-                fullName.isNotEmpty ? fullName : 'سائق وَصَل',
+                fullName.isNotEmpty ? fullName : context.l10n.waselDriverName,
                 textAlign: TextAlign.center,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -109,7 +110,7 @@ class _DriverProfileDetailsBody extends StatelessWidget {
                     icon: Icons.account_balance_wallet_rounded,
                     iconColor: context.colors.primary500,
                     background: context.colors.primary100,
-                    label: 'الرصيد',
+                    label: context.l10n.balance,
                     value: formatAmount(profile.balance),
                     valueTextDirection: TextDirection.ltr,
                   ),
@@ -117,7 +118,7 @@ class _DriverProfileDetailsBody extends StatelessWidget {
                     icon: Icons.star_rounded,
                     iconColor: context.colors.primary500,
                     background: context.colors.neutral100,
-                    label: 'التقييم',
+                    label: context.l10n.rating,
                     value:
                         '${profile.averageRating.toStringAsFixed(1)} '
                         '(${profile.totalReviews})',
@@ -133,34 +134,34 @@ class _DriverProfileDetailsBody extends StatelessWidget {
           children: [
             AppInfoRow(
               icon: Icons.person_outline_rounded,
-              label: 'الاسم الأول',
+              label: context.profileL10n.firstName,
               value: profile.firstName,
             ),
             AppInfoRow(
               icon: Icons.badge_outlined,
-              label: 'اسم العائلة',
+              label: context.profileL10n.lastName,
               value: profile.lastName,
             ),
             AppInfoRow(
               icon: Icons.phone_outlined,
-              label: 'رقم الهاتف',
+              label: context.profileL10n.phoneNumber,
               value: profile.phoneNumber,
               valueTextDirection: TextDirection.ltr,
             ),
             AppInfoRow(
               icon: Icons.mail_outline_rounded,
-              label: 'البريد الإلكتروني',
+              label: context.authL10n.email,
               value: profile.email,
               valueTextDirection: TextDirection.ltr,
             ),
             AppInfoRow(
               icon: Icons.location_city_outlined,
-              label: 'المدينة',
+              label: context.l10n.city,
               value: profile.city,
             ),
             AppInfoRow(
               icon: Icons.location_on_outlined,
-              label: 'العنوان',
+              label: context.l10n.address,
               value: profile.address,
             ),
           ],

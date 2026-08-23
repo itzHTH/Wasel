@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_profile/l10n/profile_l10n_extension.dart';
 import 'package:flutter/services.dart';
 import 'package:wasel_core/widgets/app_primary_button.dart';
 
@@ -18,7 +19,7 @@ class ProfileEditSaveButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppPrimaryButton(
-      label: 'حفظ التغييرات',
+      label: context.profileL10n.saveChanges,
       isLoading: isSaving,
       onPressed: isEnabled
           ? () {

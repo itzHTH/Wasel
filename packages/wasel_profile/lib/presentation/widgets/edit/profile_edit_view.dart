@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_profile/l10n/profile_l10n_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/widgets/app_inline_error.dart';
 import 'package:wasel_core/widgets/app_surface_card.dart';
@@ -23,9 +24,6 @@ class ProfileEditView extends StatelessWidget {
     this.lockedNote,
   });
 
-  static const String _defaultLockedNote =
-      'يمكنك تعديل رقم هاتفك فقط. لتغيير بقية بياناتك تواصل مع الدعم.';
-
   final ProfileEditCapabilities capabilities;
   final String firstName;
   final String lastName;
@@ -42,7 +40,10 @@ class ProfileEditView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final note =
-        lockedNote ?? (capabilities.canEditName ? null : _defaultLockedNote);
+        lockedNote ??
+        (capabilities.canEditName
+            ? null
+            : context.profileL10n.editPhoneOnlyNotice);
 
     return SingleChildScrollView(
       padding: EdgeInsets.fromLTRB(
@@ -102,7 +103,7 @@ class ProfileEditView extends StatelessWidget {
     // A failure stays on screen and surfaces through [saveError].
     if (!saved) return;
 
-    _showMessage(context, 'تم تحديث بياناتك بنجاح');
+    _showMessage(context, context.profileL10n.profileUpdated);
 
     // An explicit pop, not `maybePop` — the form's PopScope guards discarding
     // unsaved edits, and there is nothing left to discard at this point.

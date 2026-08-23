@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_auth/wasel_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
@@ -44,10 +45,13 @@ class RegisterFormPage extends StatelessWidget {
           AppBackButton(onTap: onBack),
           SizedBox(height: AppDimens.space24),
 
-          Text('أكمل بياناتك', style: context.styles.font24Secondary900Bold),
+          Text(
+            context.authL10n.completeYourInfo,
+            style: context.styles.font24Secondary900Bold,
+          ),
           SizedBox(height: AppDimens.space8),
           Text(
-            'أدخل معلوماتك الشخصية لإكمال التسجيل',
+            context.authL10n.registerFormDescription,
             style: context.styles.font14Neutral400Regular,
           ),
           SizedBox(height: AppDimens.space32),
@@ -68,7 +72,7 @@ class RegisterFormPage extends StatelessWidget {
             builder: (context, ref, child) {
               final isLoading = ref.watch(registerProvider).isLoading;
               return AuthPrimaryButton(
-                label: 'إنشاء حساب',
+                label: context.authL10n.createAccount,
                 onPressed: isLoading ? null : onSubmit,
                 isLoading: isLoading,
               );

@@ -33,7 +33,7 @@ class RidePriceErrorView extends ConsumerWidget {
               ),
             ),
             child: Text(
-              'إعادة المحاولة',
+              context.coreL10n.retry,
               style: context.styles.font16Neutral0SemiBold,
             ),
           ),

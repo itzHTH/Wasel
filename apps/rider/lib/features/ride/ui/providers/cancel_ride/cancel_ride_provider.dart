@@ -1,11 +1,11 @@
+import 'package:wasel_core/wasel_core.dart';
+import 'package:wasal/l10n/rider_localizations.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/features/ride/domain/entities/cancel_ride.dart';
 import 'package:wasal/features/ride/ui/providers/request_ride/request_ride_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:wasal/features/ride/ui/providers/ride_controller/ride_state.dart';
 import 'package:wasal/features/ride/ui/providers/ride_use_case_providers.dart';
-import 'package:wasel_core/networking/api_results.dart';
-import 'package:wasel_core/networking/errors/error_message.dart';
 
 part 'cancel_ride_provider.g.dart';
 
@@ -23,7 +23,7 @@ class CancelRideController extends _$CancelRideController {
 
     final rideId = ref.read(requestRideControllerProvider).value?.id;
     if (rideId == null) {
-      state = AsyncValue.error("ما موجودة رحلة نلغيها", StackTrace.current);
+      state = AsyncValue.error(_l10n(ref).noRideToCancel, StackTrace.current);
       return;
     }
 
@@ -45,3 +45,7 @@ class CancelRideController extends _$CancelRideController {
     );
   }
 }
+
+/// Localizations for a notifier, which has no BuildContext of its own.
+RiderLocalizations _l10n(Ref ref) =>
+    lookupRiderLocalizations(ref.read(appLocalizationControllerProvider));

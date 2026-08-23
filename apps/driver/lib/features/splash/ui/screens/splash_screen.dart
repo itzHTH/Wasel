@@ -1,6 +1,7 @@
 import 'package:driver/core/const/app_driver_consts.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:flutter/material.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:wasel_core/helpers/session_store.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/widgets/app_splash_branding.dart';
@@ -34,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
         child: AppSplashBranding(
           logoAsset: AppDriverConsts.logoIcon,
-          label: "وَصَل سائق",
+          label: context.l10n.brandName,
           onCompleted: _handleIsAuthenticatedUser,
         ),
       ),

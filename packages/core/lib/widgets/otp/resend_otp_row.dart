@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_core/l10n/core_l10n_extension.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 
 class ResendOtpRow extends StatelessWidget {
@@ -17,11 +18,14 @@ class ResendOtpRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('لم تستلم الرمز؟ ', style: context.styles.font14Neutral400Regular),
+        Text(
+          context.coreL10n.otpNotReceived,
+          style: context.styles.font14Neutral400Regular,
+        ),
         GestureDetector(
           onTap: _canResend ? _onResend : null,
           child: Text(
-            'أعد الإرسال',
+            context.coreL10n.otpResend,
             style: _canResend
                 ? context.styles.font14Primary500SemiBold
                 : context.styles.font14Neutral400Regular,

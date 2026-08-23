@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_rides/l10n/rides_l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/networking/errors/error_message.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
@@ -23,7 +24,7 @@ class RideHistoryScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: context.colors.screenBackground,
       appBar: AppBar(
-        title: const Text('سجل الرحلات'),
+        title: Text(context.ridesL10n.rideHistoryTitle),
         backgroundColor: context.colors.screenBackground,
         surfaceTintColor: context.colors.screenBackground,
       ),

@@ -29,6 +29,8 @@ void mainCommon({
   final themeMode = await ThemeModeController.restore();
   await AppMapStyle.preload();
 
+  final locale = await AppLocalizationController.restore();
+
   runApp(
     ProviderScope(
       overrides: [
@@ -37,6 +39,7 @@ void mainCommon({
         authUserTypeProvider.overrideWithValue(AuthUserType.driver),
         appBrandProvider.overrideWithValue(AppBrand.driver),
         initialThemeModeProvider.overrideWithValue(themeMode),
+        initialLocaleProvider.overrideWithValue(locale),
       ],
       child: const DriverApp(),
     ),

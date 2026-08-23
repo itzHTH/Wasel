@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_auth/wasel_auth.dart';
+import 'package:wasel_profile/wasel_profile.dart';
+import 'package:wasal/l10n/l10n_extension.dart';
 import 'package:wasal/core/routing/app_routes_name.dart';
 import 'package:wasel_core/extensions/navigation_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,8 +15,6 @@ import 'package:wasel_core/widgets/app_info_row.dart';
 import 'package:wasel_core/widgets/app_loading.dart';
 import 'package:wasel_core/widgets/app_stat_cards.dart';
 import 'package:wasel_core/widgets/app_surface_card.dart';
-import 'package:wasel_profile/domain/entities/rider_profile.dart';
-import 'package:wasel_profile/presentation/providers/profile/rider_profile_provider.dart';
 import 'package:wasel_profile/presentation/widgets/edit/profile_edit_avatar_section.dart';
 
 class ProfileDetailsScreen extends ConsumerWidget {
@@ -31,12 +32,12 @@ class ProfileDetailsScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: context.colors.screenBackground,
       appBar: AppBar(
-        title: const Text('الملف الشخصي'),
+        title: Text(context.l10n.profileDetails),
         backgroundColor: context.colors.screenBackground,
         surfaceTintColor: context.colors.screenBackground,
         actions: [
           IconButton(
-            tooltip: 'تعديل',
+            tooltip: context.l10n.edit,
             icon: const Icon(Icons.edit_outlined),
             color: context.colors.primary500,
             onPressed: () => context.pushNamed(AppRoutes.profileEdit),
@@ -53,7 +54,7 @@ class ProfileDetailsScreen extends ConsumerWidget {
         ),
         data: (profile) => profile == null
             ? AppErrorState(
-                message: 'تعذّر تحميل بيانات الملف الشخصي',
+                message: context.l10n.profileLoadFailed,
                 onRetry: refresh,
                 isRetrying: isRefreshing,
               )
@@ -101,7 +102,7 @@ class _RiderProfileDetailsBody extends StatelessWidget {
               ),
               SizedBox(height: AppDimens.space16),
               Text(
-                fullName.isNotEmpty ? fullName : 'مستخدم وَصَل',
+                fullName.isNotEmpty ? fullName : context.l10n.defaultUserName,
                 textAlign: TextAlign.center,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -114,7 +115,7 @@ class _RiderProfileDetailsBody extends StatelessWidget {
                     icon: Icons.account_balance_wallet_rounded,
                     iconColor: context.colors.primary500,
                     background: context.colors.primary100,
-                    label: 'الرصيد',
+                    label: context.l10n.balance,
                     value: formatAmount(profile.balance),
                     valueTextDirection: TextDirection.ltr,
                   ),
@@ -128,23 +129,23 @@ class _RiderProfileDetailsBody extends StatelessWidget {
           children: [
             AppInfoRow(
               icon: Icons.person_outline_rounded,
-              label: 'الاسم الأول',
+              label: context.profileL10n.firstName,
               value: profile.firstName,
             ),
             AppInfoRow(
               icon: Icons.badge_outlined,
-              label: 'اسم العائلة',
+              label: context.profileL10n.lastName,
               value: profile.lastName,
             ),
             AppInfoRow(
               icon: Icons.phone_outlined,
-              label: 'رقم الهاتف',
+              label: context.profileL10n.phoneNumber,
               value: profile.phoneNumber,
               valueTextDirection: TextDirection.ltr,
             ),
             AppInfoRow(
               icon: Icons.mail_outline_rounded,
-              label: 'البريد الإلكتروني',
+              label: context.authL10n.email,
               value: profile.email,
               valueTextDirection: TextDirection.ltr,
             ),

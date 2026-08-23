@@ -1,3 +1,5 @@
+import 'package:wasel_core/wasel_core.dart';
+import 'package:driver/l10n/driver_localizations.dart';
 import 'dart:async';
 
 import 'package:driver/features/ride/data/models/change_payment/change_payment_arg.dart';
@@ -10,8 +12,6 @@ import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_st
 import 'package:driver/features/ride/ui/providers/ride_use_case_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:wasel_core/networking/api_results.dart';
-import 'package:wasel_core/networking/errors/error_handler.dart';
 import 'package:wasel_payments/domain/entities/payment_method.dart';
 
 part 'ride_controller.g.dart';
@@ -75,7 +75,7 @@ class RideController extends _$RideController {
       connectTimeout,
       () => _dropConnection(
         session,
-        const RideConnectionException('ما وصل رد من الخادم، حاول مرة ثانية'),
+        RideConnectionException(_l10n.noServerResponse),
         StackTrace.current,
       ),
     );
@@ -111,7 +111,7 @@ class RideController extends _$RideController {
               _dropConnection(session, error, stackTrace),
           onDone: () => _dropConnection(
             session,
-            const RideConnectionException('انقطع الاتصال بالخادم'),
+            RideConnectionException(_l10n.serverDisconnected),
             StackTrace.current,
           ),
         );
@@ -167,15 +167,13 @@ class RideController extends _$RideController {
 
     ErrorHandler? failure;
 
-    final succeeded = await ref
-        .read(rideActionControllerProvider.notifier)
-        .run(() async {
-          final result = await ref
-              .read(completeRideUseCaseProvider)
-              .call(rideId);
-          result.when(success: (_) {}, failure: (error) => failure = error);
-          return result;
-        });
+    final succeeded = await ref.read(rideActionControllerProvider.notifier).run(
+      () async {
+        final result = await ref.read(completeRideUseCaseProvider).call(rideId);
+        result.when(success: (_) {}, failure: (error) => failure = error);
+        return result;
+      },
+    );
 
     if (!ref.mounted) return CompletionOutcome.failed;
 
@@ -202,19 +200,14 @@ class RideController extends _$RideController {
           () => ref
               .read(changePaymentMethodUseCaseProvider)
               .call(
-                ChangePaymentArg(
-                  rideId: rideId,
-                  method: PaymentMethod.cash,
-                ),
+                ChangePaymentArg(rideId: rideId, method: PaymentMethod.cash),
               ),
         );
 
     if (!switched || !ref.mounted) return false;
 
     state = state.copyWith(
-      ride: state.ride?.copyWith(
-        paymentMethod: '${PaymentMethod.cash.code}',
-      ),
+      ride: state.ride?.copyWith(paymentMethod: '${PaymentMethod.cash.code}'),
     );
 
     return await completeRide() == CompletionOutcome.completed;
@@ -294,7 +287,7 @@ class RideController extends _$RideController {
         if (pending || state.stage == DriverStage.offline) return;
         _dropConnection(
           session,
-          const RideConnectionException('انقطع الاتصال بالخادم'),
+          RideConnectionException(_l10n.serverDisconnected),
           StackTrace.current,
         );
     }
@@ -476,3 +469,10 @@ class RideController extends _$RideController {
     useCase?.close();
   }
 }
+
+/// Localizations for a notifier, which has no BuildContext of its own.
+///
+/// Reads the active locale directly rather than through the Ref: these are
+/// called after long awaits, when the Ref may already be unmounted.
+DriverLocalizations get _l10n =>
+    lookupDriverLocalizations(AppLocalizationController.currentLocale);

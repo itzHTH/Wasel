@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_rides/l10n/rides_l10n_extension.dart';
 import 'package:wasel_core/networking/errors/error_message.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
@@ -78,7 +79,7 @@ class _EndOfListRow extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: AppDimens.space12),
             child: Text(
-              'لا مزيد من الرحلات',
+              context.ridesL10n.noMoreRides,
               style: context.styles.font12Neutral400Regular,
             ),
           ),

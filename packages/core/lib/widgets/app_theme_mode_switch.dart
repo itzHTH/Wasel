@@ -3,17 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wasel_core/l10n/core_l10n_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/providers/theme_mode_provider.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 
 const _orderedModes = [ThemeMode.light, ThemeMode.dark, ThemeMode.system];
-
-const _modeLabels = {
-  ThemeMode.light: 'فاتح',
-  ThemeMode.dark: 'داكن',
-  ThemeMode.system: 'النظام',
-};
 
 const _modeIcons = {
   ThemeMode.light: Icons.light_mode_rounded,
@@ -156,7 +151,11 @@ class _ModeSegment extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = context.colors;
     final foregroundColor = isSelected ? colors.onPrimary : colors.neutral600;
-    final label = _modeLabels[mode]!;
+    final label = switch (mode) {
+      ThemeMode.light => context.coreL10n.themeLight,
+      ThemeMode.dark => context.coreL10n.themeDark,
+      ThemeMode.system => context.coreL10n.themeSystem,
+    };
 
     return Semantics(
       button: true,

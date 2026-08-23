@@ -1,24 +1,26 @@
 import 'package:wasel_core/helpers/app_validators.dart';
+import 'package:wasel_profile/l10n/profile_localizations.dart';
 
-/// Arabic-facing validation for the profile edit form.
 class ProfileEditValidators {
   const ProfileEditValidators._();
 
-  static String? name(String? value, {required String fieldLabel}) {
+  static String? name(
+    String? value, {
+    required String fieldLabel,
+    required ProfileLocalizations l10n,
+  }) {
     final trimmed = value?.trim() ?? '';
-    if (trimmed.isEmpty) return '$fieldLabel مطلوب';
+    if (trimmed.isEmpty) return l10n.fieldRequired(fieldLabel);
 
     return AppValidators.name(trimmed) == null
         ? null
-        : '$fieldLabel يجب أن لا يقل عن حرفين';
+        : l10n.fieldTooShort(fieldLabel);
   }
 
-  static String? phoneNumber(String? value) {
+  static String? phoneNumber(String? value, ProfileLocalizations l10n) {
     final trimmed = value?.trim() ?? '';
-    if (trimmed.isEmpty) return 'رقم الهاتف مطلوب';
+    if (trimmed.isEmpty) return l10n.phoneRequired;
 
-    return AppValidators.phone(trimmed) == null
-        ? null
-        : 'رقم الهاتف يجب أن يتكون من ١١ رقماً';
+    return AppValidators.phone(trimmed) == null ? null : l10n.phoneLength;
   }
 }

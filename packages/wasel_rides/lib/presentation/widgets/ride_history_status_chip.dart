@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_rides/l10n/rides_l10n_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_rides/domain/entities/ride_history_status.dart';
@@ -12,19 +13,19 @@ class RideHistoryStatusChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final (label, icon, foreground, background) = switch (status) {
       RideHistoryStatus.completed => (
-        'مكتملة',
+        context.ridesL10n.rideStatusCompleted,
         Icons.check_circle_rounded,
         context.colors.alertSuccess500,
         context.colors.alertSuccess100,
       ),
       RideHistoryStatus.cancelled => (
-        'ملغاة',
+        context.ridesL10n.rideStatusCancelled,
         Icons.cancel_rounded,
         context.colors.alertError500,
         context.colors.alertError100,
       ),
       RideHistoryStatus.unknown => (
-        'غير معروفة',
+        context.ridesL10n.rideStatusUnknown,
         Icons.help_outline_rounded,
         context.colors.neutral600,
         context.colors.neutral100,

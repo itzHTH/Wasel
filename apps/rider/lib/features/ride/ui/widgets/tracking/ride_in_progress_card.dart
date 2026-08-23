@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/l10n/l10n_extension.dart';
 import 'package:wasal/features/ride/domain/entities/driver_profile.dart';
 import 'package:wasal/features/ride/domain/entities/ride_price.dart';
 import 'package:wasal/features/ride/ui/widgets/expandable_ride_card.dart';
@@ -51,13 +52,13 @@ class RideInProgressCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'رحلة موفقة',
+                      context.l10n.haveAGoodTrip,
                       style: context.styles.font20Secondary900Bold,
                     ),
                     if (etaMinutes != null) ...[
                       SizedBox(height: AppDimens.space4),
                       Text(
-                        'الوصول خلال $etaMinutes دقائق تقريباً',
+                        context.l10n.arrivalEtaMinutes(etaMinutes.toString()),
                         style: context.styles.font14Secondary500Medium,
                       ),
                     ],

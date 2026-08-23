@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:wasel_profile/l10n/profile_l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasel_core/helpers/app_image_picker.dart';
@@ -32,7 +33,9 @@ class ProfileEditAvatarSection extends ConsumerWidget {
       if (previous?.isLoading != true || next.isLoading) return;
 
       onMessage(
-        next.hasError ? errorMessageOf(next.error!) : 'تم تحديث الصورة بنجاح',
+        next.hasError
+            ? errorMessageOf(next.error!)
+            : context.profileL10n.avatarUpdated,
       );
     });
 

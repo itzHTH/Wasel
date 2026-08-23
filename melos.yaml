@@ -5,6 +5,14 @@ packages:
   - packages/*
 
 scripts:
+  l10n:
+    description: "Regenerate localizations in every package that has an l10n.yaml."
+    run: flutter gen-l10n
+    exec:
+      concurrency: 1
+    packageFilters:
+      fileExists: l10n.yaml
+
   gen:
     description: "Run build_runner codegen in every package that depends on build_runner."
     run: dart run build_runner build

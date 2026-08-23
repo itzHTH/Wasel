@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/l10n/l10n_extension.dart';
 import 'package:wasal/features/ride/domain/entities/driver_profile.dart';
 import 'package:wasel_core/wasel_core.dart';
 
@@ -22,7 +23,9 @@ class DriverInfoRow extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                driver.name,
+                driver.name.isEmpty
+                    ? context.l10n.waselDriverName
+                    : driver.name,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: context.styles.font20Secondary900Bold,

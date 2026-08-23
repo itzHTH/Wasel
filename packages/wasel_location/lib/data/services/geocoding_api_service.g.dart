@@ -23,7 +23,7 @@ class _GeocodingApiService implements GeocodingApiService {
   Future<GoogleGeocodingResponse> getLocationName(
     String lat,
     String lng, {
-    String languageCode = LocationApiConst.geocodingLanguageCode,
+    String languageCode = LocationApiConst.geocodingFallbackLanguageCode,
     String regionCode = LocationApiConst.geocodingRegionCode,
     CancelToken? cancelToken,
   }) async {

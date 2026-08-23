@@ -3,6 +3,7 @@ import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_st
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:driver/features/ride/ui/widgets/status/driver_earnings_chip.dart';
 import 'package:flutter/material.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/wasel_core.dart';
 
@@ -47,7 +48,7 @@ class DriverStatusBar extends ConsumerWidget {
             SizedBox(width: AppDimens.space8),
             Flexible(
               child: Text(
-                _titleFor(stage, connection),
+                _titleFor(context, stage, connection),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: context.styles.font14Secondary900SemiBold,
@@ -66,21 +67,24 @@ class DriverStatusBar extends ConsumerWidget {
 
   /// A live connection attempt outranks the stage: mid-reconnect the driver is
   /// still on their ride, but what they need to know is that the link is down.
-  String _titleFor(DriverStage stage, DriverConnectionState connection) =>
-      switch (connection) {
-        DriverConnectionState.connecting => 'دا نتصل...',
-        DriverConnectionState.reconnecting => 'دا نعيد الاتصال...',
-        DriverConnectionState.dropped => 'انقطع الاتصال',
-        DriverConnectionState.idle => switch (stage) {
-          DriverStage.offline => 'غير متصل',
-          DriverStage.online => 'متصل',
-          DriverStage.offerReceived => 'وصلك طلب',
-          DriverStage.heading => 'بالطريق للراكب',
-          DriverStage.arrived => 'بانتظار الراكب',
-          DriverStage.inProgress => 'رحلة جارية',
-          DriverStage.completed => 'خلصت الرحلة',
-        },
-      };
+  String _titleFor(
+    BuildContext context,
+    DriverStage stage,
+    DriverConnectionState connection,
+  ) => switch (connection) {
+    DriverConnectionState.connecting => context.l10n.connecting,
+    DriverConnectionState.reconnecting => context.l10n.reconnecting,
+    DriverConnectionState.dropped => context.l10n.disconnected,
+    DriverConnectionState.idle => switch (stage) {
+      DriverStage.offline => context.l10n.offline,
+      DriverStage.online => context.l10n.online,
+      DriverStage.offerReceived => context.l10n.requestReceived,
+      DriverStage.heading => context.l10n.onWayToRider,
+      DriverStage.arrived => context.l10n.waitingForRider,
+      DriverStage.inProgress => context.l10n.rideOngoing,
+      DriverStage.completed => context.l10n.rideFinished,
+    },
+  };
 }
 
 class _ConnectionDot extends StatelessWidget {

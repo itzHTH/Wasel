@@ -1,5 +1,6 @@
 import 'package:driver/features/driver_verification/domain/entities/verification_status.dart';
 import 'package:flutter/material.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/extensions/navigation_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
@@ -20,20 +21,13 @@ class UnderReviewScreen extends ConsumerWidget {
       case enVerificationStatus.approved:
         context.pushNamedAndRemoveUntil(AppRoutes.ride);
       case enVerificationStatus.rejected:
-        _goToWizard(
-          context,
-          reason: 'تم رفض طلبك السابق، يرجى مراجعة بياناتك وإعادة الإرسال.',
-        );
+        _goToWizard(context, reason: context.l10n.previousRequestRejected);
       case enVerificationStatus.pending:
         _goToWizard(context);
       case enVerificationStatus.underReview:
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              'لا يزال طلبك قيد المراجعة، سنخبرك فور تحديث الحالة.',
-            ),
-          ),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(context.l10n.stillUnderReview)));
     }
   }
 
@@ -56,7 +50,7 @@ class UnderReviewScreen extends ConsumerWidget {
           status?.status ?? enVerificationStatus.underReview,
         ),
         error: (_, __) => ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('تعذّر تحديث الحالة، حاول مجدداً.')),
+          SnackBar(content: Text(context.l10n.statusUpdateFailed)),
         ),
       );
     });
@@ -86,12 +80,12 @@ class UnderReviewScreen extends ConsumerWidget {
                       ),
                       SizedBox(height: AppDimens.space24),
                       Text(
-                        'طلبك قيد المراجعة',
+                        context.l10n.requestUnderReview,
                         style: context.styles.font20Secondary900Bold,
                       ),
                       SizedBox(height: AppDimens.space8),
                       Text(
-                        'نقوم بمراجعة مستنداتك، وعادةً ما يستغرق ذلك حتى ٢٤ ساعة.',
+                        context.l10n.reviewingDocuments,
                         style: context.styles.font14Neutral400Regular,
                         textAlign: TextAlign.center,
                       ),

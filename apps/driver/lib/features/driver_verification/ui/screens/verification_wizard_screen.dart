@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart' show XFile;
 import 'package:driver/features/driver_verification/domain/entities/driver_profile_submission.dart';
 import 'package:flutter/material.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:driver/features/driver_verification/ui/screens/uploading_screen.dart';
@@ -20,10 +21,11 @@ class VerificationWizardScreen extends ConsumerStatefulWidget {
 
 class _VerificationWizardScreenState
     extends ConsumerState<VerificationWizardScreen> {
-  static const _stepTitles = [
-    'رخصة القيادة',
-    'بيانات المركبة',
-    'الصورة الشخصية',
+  /// Localized per build: the titles change with the active language.
+  List<String> _stepTitles(BuildContext context) => [
+    context.l10n.driverLicense,
+    context.l10n.vehicleData,
+    context.l10n.personalPhoto,
   ];
 
   final _pageController = PageController();
@@ -138,13 +140,13 @@ class _VerificationWizardScreenState
       },
       child: Scaffold(
         backgroundColor: context.colors.neutral0,
-        appBar: AppBar(title: const Text('توثيق السائق')),
+        appBar: AppBar(title: Text(context.l10n.driverVerification)),
         body: SafeArea(
           child: Column(
             children: [
               WizardHeader(
                 currentStep: _currentStep,
-                stepTitles: _stepTitles,
+                stepTitles: _stepTitles(context),
                 rejectionReason: widget.rejectionReason,
               ),
               Expanded(
@@ -164,7 +166,7 @@ class _VerificationWizardScreenState
               WizardFooter(
                 gate: _gate,
                 currentStep: _currentStep,
-                stepCount: _stepTitles.length,
+                stepCount: _stepTitles(context).length,
                 isNextEnabled: () => _isNextEnabled,
                 onBack: _onBack,
                 onNext: _onNext,

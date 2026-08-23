@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:wasel_core/networking/errors/api_error_model.dart';
-import 'package:wasel_core/networking/errors/api_errors.dart';
+import 'package:wasel_core/networking/errors/api_error_reason.dart';
 
 /// 1 - DataSource — represents all possible error states (server or local)
 enum DataSource {
@@ -41,64 +41,32 @@ class ResponseCode {
   static const int defaultError = -7;
 }
 
-/// 3 - ResponseMessage — readable error messages for the user
-class ResponseMessage {
-  static const String noContent = ApiErrorMessages.noContent;
-  static const String badRequest = ApiErrorMessages.badRequestError;
-  static const String unauthorized = ApiErrorMessages.unauthorizedError;
-  static const String forbidden = ApiErrorMessages.forbiddenError;
-  static const String notFound = ApiErrorMessages.notFoundError;
-  static const String internalServerError =
-      ApiErrorMessages.internalServerError;
-  static const String connectTimeout = ApiErrorMessages.timeoutError;
-  static const String cancel = ApiErrorMessages.defaultError;
-  static const String receiveTimeout = ApiErrorMessages.timeoutError;
-  static const String sendTimeout = ApiErrorMessages.timeoutError;
-  static const String cacheError = ApiErrorMessages.cacheError;
-  static const String noInternetConnection = ApiErrorMessages.noInternetError;
-  static const String defaultError = ApiErrorMessages.defaultError;
-}
-
-/// 4 - DataSourceExtension — convert all DataSource to ApiErrorModel (get failure type)
+/// 3 - DataSourceExtension — convert a DataSource into an ApiErrorModel
+/// carrying the reason. The wording is chosen by the UI, once the active
+/// language is known.
 extension DataSourceExtension on DataSource {
-  ApiErrorModel getFailure() {
+  ApiErrorModel getFailure() => ApiErrorModel(succeeded: false, reason: reason);
+
+  ApiErrorReason get reason {
     return switch (this) {
-      DataSource.noContent => ApiErrorModel(message: ResponseMessage.noContent),
-      DataSource.badRequest => ApiErrorModel(
-        message: ResponseMessage.badRequest,
-      ),
-      DataSource.forbidden => ApiErrorModel(message: ResponseMessage.forbidden),
-      DataSource.unauthorized => ApiErrorModel(
-        message: ResponseMessage.unauthorized,
-      ),
-      DataSource.notFound => ApiErrorModel(message: ResponseMessage.notFound),
-      DataSource.internalServerError => ApiErrorModel(
-        message: ResponseMessage.internalServerError,
-      ),
-      DataSource.connectTimeout => ApiErrorModel(
-        message: ResponseMessage.connectTimeout,
-      ),
-      DataSource.cancel => ApiErrorModel(message: ResponseMessage.cancel),
-      DataSource.receiveTimeout => ApiErrorModel(
-        message: ResponseMessage.receiveTimeout,
-      ),
-      DataSource.sendTimeout => ApiErrorModel(
-        message: ResponseMessage.sendTimeout,
-      ),
-      DataSource.cacheError => ApiErrorModel(
-        message: ResponseMessage.cacheError,
-      ),
-      DataSource.noInternetConnection => ApiErrorModel(
-        message: ResponseMessage.noInternetConnection,
-      ),
-      DataSource.defaultError => ApiErrorModel(
-        message: ResponseMessage.defaultError,
-      ),
+      DataSource.noContent => ApiErrorReason.noContent,
+      DataSource.badRequest => ApiErrorReason.badRequest,
+      DataSource.forbidden => ApiErrorReason.forbidden,
+      DataSource.unauthorized => ApiErrorReason.unauthorized,
+      DataSource.notFound => ApiErrorReason.notFound,
+      DataSource.internalServerError => ApiErrorReason.internalServerError,
+      DataSource.connectTimeout => ApiErrorReason.timeout,
+      DataSource.receiveTimeout => ApiErrorReason.timeout,
+      DataSource.sendTimeout => ApiErrorReason.timeout,
+      DataSource.cancel => ApiErrorReason.cancelled,
+      DataSource.cacheError => ApiErrorReason.cacheError,
+      DataSource.noInternetConnection => ApiErrorReason.noInternetConnection,
+      DataSource.defaultError => ApiErrorReason.unknown,
     };
   }
 }
 
-/// 5 - ErrorHandler — entry point for handling all types of errors
+/// 4 - ErrorHandler — entry point for handling all types of errors
 class ErrorHandler implements Exception {
   late ApiErrorModel apiErrorModel;
 
@@ -120,6 +88,11 @@ class ErrorHandler implements Exception {
 
   ErrorHandler.message(String message) {
     apiErrorModel = ApiErrorModel(succeeded: false, message: message);
+  }
+
+  /// A failure decided on the device. Carries why, not what to say about it.
+  ErrorHandler.reason(ApiErrorReason reason) {
+    apiErrorModel = ApiErrorModel(succeeded: false, reason: reason);
   }
 
   /// convert DioException to ApiErrorModel according to the error type
@@ -149,6 +122,10 @@ class ErrorHandler implements Exception {
 
       // Any other unknown error
       DioExceptionType.unknown =>
+        error.response?.data != null
+            ? ApiErrorModel.fromJson(error.response!.data)
+            : DataSource.defaultError.getFailure(),
+      DioExceptionType.transformTimeout =>
         error.response?.data != null
             ? ApiErrorModel.fromJson(error.response!.data)
             : DataSource.defaultError.getFailure(),

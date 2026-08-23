@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/l10n/l10n_extension.dart';
+import 'package:wasel_payments/wasel_payments.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/features/ride/ui/providers/request_ride/request_ride_provider.dart';
 import 'package:wasal/features/ride/ui/widgets/request_ride_card/request_confirm_button.dart';
@@ -13,11 +15,17 @@ class RequestRideAction extends ConsumerWidget {
     return state.when(
       loading: () => const RequestConfirmButton(isLoading: true),
       error: (error, _) {
+        // A blocked payment method arrives as a reason, not a sentence, so the
+        // copy is chosen here rather than in the domain layer.
+        if (error is PaymentBlocker) {
+          return RequestRideErrorView(
+            message: error.message(context.paymentsL10n),
+          );
+        }
+
         final message = '$error'.trim();
         return RequestRideErrorView(
-          message: message.isEmpty
-              ? 'تعذّر إرسال الطلب، حاول مرة أخرى'
-              : message,
+          message: message.isEmpty ? context.l10n.requestRideFailed : message,
         );
       },
       data: (ride) =>

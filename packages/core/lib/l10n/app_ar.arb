@@ -1,0 +1,247 @@
+{
+  "@@locale": "ar",
+  "language": "اللغة",
+  "@language": {
+    "description": "Menu tile label for the language setting"
+  },
+  "languageSheetDescription": "اختر لغة التطبيق.",
+  "@languageSheetDescription": {
+    "description": "Subtitle inside the language bottom sheet"
+  },
+  "appearance": "المظهر",
+  "@appearance": {
+    "description": "Menu tile label and title of the appearance bottom sheet"
+  },
+  "appearanceSheetDescription": "اختر مظهر التطبيق أو اتركه يتبع إعدادات جهازك.",
+  "@appearanceSheetDescription": {
+    "description": "Subtitle inside the appearance bottom sheet"
+  },
+  "themeLight": "فاتح",
+  "@themeLight": {
+    "description": "Light theme mode segment label"
+  },
+  "themeDark": "داكن",
+  "@themeDark": {
+    "description": "Dark theme mode segment label"
+  },
+  "themeSystem": "النظام",
+  "@themeSystem": {
+    "description": "System theme mode segment label; follows the device setting"
+  },
+  "cancel": "إلغاء",
+  "@cancel": {
+    "description": "Generic cancel action, shared across dialogs and sheets"
+  },
+  "back": "رجوع",
+  "@back": {
+    "description": "Semantics label for the shared back button"
+  },
+  "retry": "إعادة المحاولة",
+  "@retry": {
+    "description": "Label of the retry button on an error state"
+  },
+  "retrying": "جارٍ إعادة المحاولة…",
+  "@retrying": {
+    "description": "Shown on the retry button while the retry is in flight"
+  },
+  "notSpecified": "غير محدد",
+  "@notSpecified": {
+    "description": "Placeholder shown when an info row has no value"
+  },
+  "soon": "قريبًا",
+  "@soon": {
+    "description": "Badge on menu entries that are not built yet"
+  },
+  "openSettings": "فتح الإعدادات",
+  "@openSettings": {
+    "description": "Action that sends the user to the OS app settings page"
+  },
+  "chooseImageSource": "اختر مصدر الصورة",
+  "@chooseImageSource": {
+    "description": "Title of the image source bottom sheet"
+  },
+  "takePhoto": "التقط صورة",
+  "@takePhoto": {
+    "description": "Image source option that opens the camera"
+  },
+  "chooseFromGallery": "اختر من المعرض",
+  "@chooseFromGallery": {
+    "description": "Image source option that opens the photo library"
+  },
+  "changeProfilePicture": "تغيير الصورة الشخصية",
+  "@changeProfilePicture": {
+    "description": "Semantics label for the editable avatar button"
+  },
+  "stepOfSteps": "الخطوة {current} من {total}",
+  "@stepOfSteps": {
+    "description": "Progress label in the multi-step indicator",
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "2"
+      },
+      "total": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "otpNotReceived": "لم تستلم الرمز؟ ",
+  "@otpNotReceived": {
+    "description": "Leading text of the resend OTP row; keeps its trailing space before the action"
+  },
+  "otpResend": "أعد الإرسال",
+  "@otpResend": {
+    "description": "Tappable action that resends the OTP code"
+  },
+  "confirm": "تأكيد",
+  "@confirm": {
+    "description": "Generic confirm action shared across flows"
+  },
+  "done": "تم",
+  "@done": {
+    "description": "Generic completion action"
+  },
+  "genericError": "حصل خطأ ما",
+  "@genericError": {
+    "description": "Fallback shown when no specific error message is available"
+  },
+  "errorNoContent": "لا توجد بيانات",
+  "@errorNoContent": {
+    "description": "Server returned no content"
+  },
+  "errorBadRequest": "طلب غير صالح، حاول مرة أخرى",
+  "@errorBadRequest": {
+    "description": "HTTP 400"
+  },
+  "errorForbidden": "ليس لديك صلاحية لهذا الإجراء",
+  "@errorForbidden": {
+    "description": "HTTP 403"
+  },
+  "errorUnauthorized": "انتهت الجلسة، يرجى تسجيل الدخول مجدداً",
+  "@errorUnauthorized": {
+    "description": "HTTP 401"
+  },
+  "errorNotFound": "لم نعثر على المطلوب",
+  "@errorNotFound": {
+    "description": "HTTP 404"
+  },
+  "errorServer": "خطأ في الخادم، حاول لاحقاً",
+  "@errorServer": {
+    "description": "HTTP 500"
+  },
+  "errorTimeout": "انتهت مهلة الاتصال، حاول مرة أخرى",
+  "@errorTimeout": {
+    "description": "Connect/send/receive timeout"
+  },
+  "errorCache": "خطأ في البيانات المحفوظة",
+  "@errorCache": {
+    "description": "Local cache failure"
+  },
+  "errorNoInternet": "تحقق من اتصالك بالإنترنت",
+  "@errorNoInternet": {
+    "description": "No connectivity"
+  },
+  "mediaPermissionDenied": "يرجى السماح بالوصول للكاميرا أو الصور من إعدادات التطبيق.",
+  "@mediaPermissionDenied": {
+    "description": "Shown when picking an image is blocked by permissions"
+  },
+  "currencyIqd": "د.ع",
+  "@currencyIqd": {
+    "description": "Iraqi dinar symbol appended to amounts"
+  },
+  "errorRoleNotAllowed": "هذا الحساب غير مصرح له بالدخول لهذا التطبيق",
+  "@errorRoleNotAllowed": {
+    "description": "Shown when a rider signs in to the driver app, or vice versa"
+  },
+  "errorRouteUnavailable": "ما نگدر نرسم الطريق",
+  "@errorRouteUnavailable": {
+    "description": "Shown when the route between two points cannot be drawn"
+  },
+  "errorUnsupportedPaymentMethod": "طريقة دفع غير مدعومة",
+  "@errorUnsupportedPaymentMethod": {
+    "description": "Shown when a ride cannot be settled with the chosen payment method"
+  },
+  "emailRequired": "البريد الإلكتروني مطلوب",
+  "@emailRequired": {
+    "description": "Validation: empty email"
+  },
+  "emailInvalid": "أدخل بريداً إلكترونياً صحيحاً",
+  "@emailInvalid": {
+    "description": "Validation: malformed email"
+  },
+  "passwordRequired": "كلمة المرور مطلوبة",
+  "@passwordRequired": {
+    "description": "Validation: empty password"
+  },
+  "passwordTooShort": "كلمة المرور يجب أن لا تقل عن 6 أحرف",
+  "@passwordTooShort": {
+    "description": "Validation: short password"
+  },
+  "passwordWeak": "يجب أن تحتوي على حرف كبير وصغير ورقم ورمز (‎!@#‎)",
+  "@passwordWeak": {
+    "description": "Validation: password complexity"
+  },
+  "confirmPasswordRequired": "يرجى تأكيد كلمة المرور",
+  "@confirmPasswordRequired": {
+    "description": "Validation: empty confirmation"
+  },
+  "passwordsDoNotMatch": "كلمتا المرور غير متطابقتين",
+  "@passwordsDoNotMatch": {
+    "description": "Validation: mismatched confirmation"
+  },
+  "phoneRequired": "رقم الهاتف مطلوب",
+  "@phoneRequired": {
+    "description": "Validation: empty phone"
+  },
+  "phoneLength": "رقم الهاتف يجب أن يتكون من 11 رقماً",
+  "@phoneLength": {
+    "description": "Validation: wrong phone length"
+  },
+  "yearRequired": "سنة الصنع مطلوبة",
+  "@yearRequired": {
+    "description": "Validation: empty year"
+  },
+  "yearFourDigits": "أدخل سنة من 4 أرقام",
+  "@yearFourDigits": {
+    "description": "Validation: malformed year"
+  },
+  "thisField": "هذا الحقل",
+  "@thisField": {
+    "description": "Default label when a field has no name of its own"
+  },
+  "nameLabel": "الاسم",
+  "@nameLabel": {
+    "description": "Default label for an unnamed name field"
+  },
+  "fieldRequired": "{field} مطلوب",
+  "@fieldRequired": {
+    "description": "Validation: a named field is empty",
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "fieldTooShort": "{field} يجب أن لا يقل عن حرفين",
+  "@fieldTooShort": {
+    "description": "Validation: a named field is too short",
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "yearRange": "أدخل سنة صحيحة ({min}–{max})",
+  "@yearRange": {
+    "description": "Validation: year out of range",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  }
+}

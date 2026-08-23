@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart' show XFile;
 import 'package:flutter/material.dart';
+import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
@@ -98,7 +99,7 @@ class FileThumbnail extends StatelessWidget {
                 ),
                 SizedBox(width: AppDimens.space8),
                 Text(
-                  'إعادة الالتقاط',
+                  context.l10n.retake,
                   style: context.styles.font16OnScrimSemiBold,
                 ),
               ],

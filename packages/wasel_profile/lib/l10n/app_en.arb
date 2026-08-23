@@ -1,0 +1,21 @@
+{
+  "@@locale": "en",
+  "editPhoneOnlyNotice": "You can only change your phone number. Contact support to update the rest of your details.",
+  "profileUpdated": "Your details were updated",
+  "avatarUpdated": "Your photo was updated",
+  "discardChangesTitle": "Discard changes?",
+  "discardChangesMessage": "You have unsaved changes. Do you want to leave and discard them?",
+  "discard": "Discard",
+  "keepEditing": "Keep editing",
+  "firstName": "First name",
+  "enterFirstName": "Enter your first name",
+  "lastName": "Family name",
+  "enterLastName": "Enter your family name",
+  "phoneNumber": "Phone number",
+  "saveChanges": "Save changes",
+  "notSpecified": "Not specified",
+  "fieldRequired": "{field} is required",
+  "fieldTooShort": "{field} must be at least 2 characters",
+  "phoneRequired": "Phone number is required",
+  "phoneLength": "Phone number must be 11 digits"
+}

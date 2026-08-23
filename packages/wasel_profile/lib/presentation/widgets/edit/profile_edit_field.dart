@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_profile/l10n/profile_l10n_extension.dart';
 import 'package:flutter/services.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
@@ -83,7 +84,7 @@ class _LockedValue extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  hasValue ? value : 'غير محدد',
+                  hasValue ? value : context.profileL10n.notSpecified,
                   textDirection: hasValue ? valueTextDirection : null,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_rides/l10n/rides_l10n_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_rides/domain/entities/ride_history_entry.dart';
@@ -21,23 +22,26 @@ class RideHistoryCardDetails extends StatelessWidget {
         Divider(height: 1, thickness: 1, color: context.colors.neutral100),
         SizedBox(height: AppDimens.space12),
         _DetailRow(
-          label: 'التاريخ',
+          label: context.ridesL10n.rideDate,
           value: Text(
-            RideHistoryLabels.fullDateLabel(entry.requestedAt),
+            RideHistoryLabels.fullDateLabel(
+              context.ridesL10n,
+              entry.requestedAt,
+            ),
             style: context.styles.font14Secondary900SemiBold,
           ),
         ),
         SizedBox(height: AppDimens.space8),
         _DetailRow(
-          label: 'وقت الطلب',
+          label: context.ridesL10n.rideRequestTime,
           value: Text(
-            RideHistoryLabels.timeLabel(entry.requestedAt),
+            RideHistoryLabels.timeLabel(context.ridesL10n, entry.requestedAt),
             style: context.styles.font14Secondary900SemiBold,
           ),
         ),
         SizedBox(height: AppDimens.space8),
         _DetailRow(
-          label: 'قيمة الرحلة',
+          label: context.ridesL10n.rideFare,
           value: RideHistoryAmount(
             price: entry.price,
             style: context.styles.font14Secondary900SemiBold,
