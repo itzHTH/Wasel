@@ -1,6 +1,315 @@
 {
-    "wasel":"وصل",
-    "@wasel": {
-        "description": "The app name"
+  "@@locale": "ar",
+  "brandName": "وَصَل",
+  "@brandName": {
+    "description": "Stylised brand wordmark shown in the auth header"
+  },
+  "authHeaderTagline": "احصل على تجربة رائعة مع ",
+  "@authHeaderTagline": {
+    "description": "Auth header lead-in that runs into the brand wordmark; keeps its trailing space"
+  },
+  "loginTagline": "اطلب تكسي في أي وقت",
+  "@loginTagline": {
+    "description": "Headline above the login form"
+  },
+  "registerTagline": "اطلب تكسي في أي وقت",
+  "@registerTagline": {
+    "description": "Headline above the registration form"
+  },
+  "orSignUpWith": "أو سجل باستخدام",
+  "@orSignUpWith": {
+    "description": "Divider label above the social sign-in buttons"
+  },
+  "signUpWithGoogle": "التسجيل باستخدام جوجل",
+  "@signUpWithGoogle": {
+    "description": "Default label of the Google button in the social section"
+  },
+  "registerWithGoogle": "سجل باستخدام جوجل",
+  "@registerWithGoogle": {
+    "description": "Google button label on the registration screen"
+  },
+  "loginWithGoogle": "سجّل الدخول باستخدام جوجل",
+  "@loginWithGoogle": {
+    "description": "Google button label on the login screen"
+  },
+  "myAccount": "حسابي",
+  "@myAccount": {
+    "description": "App bar title of the profile screen"
+  },
+  "profileDetails": "الملف الشخصي",
+  "@profileDetails": {
+    "description": "Menu tile that opens the profile details screen"
+  },
+  "rideHistory": "سجل الرحلات",
+  "@rideHistory": {
+    "description": "Menu tile that opens the ride history screen"
+  },
+  "settings": "الإعدادات",
+  "@settings": {
+    "description": "Menu tile for the settings screen; not built yet"
+  },
+  "logout": "تسجيل الخروج",
+  "@logout": {
+    "description": "Logout menu tile, and the confirm action of its dialog"
+  },
+  "logoutConfirmMessage": "هل أنت متأكد من تسجيل الخروج من حسابك؟",
+  "@logoutConfirmMessage": {
+    "description": "Body of the logout confirmation dialog"
+  },
+  "requestRideFailed": "تعذّر إرسال الطلب، حاول مرة أخرى",
+  "@requestRideFailed": {
+    "description": "Generic failure shown when requesting a ride errors without a message"
+  },
+  "homeTitle": "الرئيسية",
+  "@homeTitle": {
+    "description": "App bar title of the home screen"
+  },
+  "welcomeMessage": "مرحباً بك في تطبيقنا!",
+  "@welcomeMessage": {
+    "description": "Greeting on the home screen"
+  },
+  "logoutFailed": "فشل تسجيل الخروج",
+  "@logoutFailed": {
+    "description": "Shown when signing out does not succeed"
+  },
+  "editProfile": "تعديل الملف الشخصي",
+  "@editProfile": {
+    "description": "App bar title of the profile edit screen"
+  },
+  "profileLoadFailed": "تعذّر تحميل بيانات الملف الشخصي",
+  "@profileLoadFailed": {
+    "description": "Error state on the profile screens"
+  },
+  "edit": "تعديل",
+  "@edit": {
+    "description": "Action that opens the profile edit screen"
+  },
+  "defaultUserName": "مستخدم وَصَل",
+  "@defaultUserName": {
+    "description": "Fallback name when the rider has none set"
+  },
+  "balance": "الرصيد",
+  "@balance": {
+    "description": "Label of the wallet balance row"
+  },
+  "currencyIqd": "د.ع",
+  "@currencyIqd": {
+    "description": "Iraqi dinar symbol appended to fares"
+  },
+  "distanceKm": "{value} كم",
+  "@distanceKm": {
+    "description": "Trip distance with its unit",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "3.4"
+      }
     }
+  },
+  "coordinatePair": "{lat}، {lng}",
+  "@coordinatePair": {
+    "description": "Raw coordinates shown before a place name resolves",
+    "placeholders": {
+      "lat": {
+        "type": "String"
+      },
+      "lng": {
+        "type": "String"
+      }
+    }
+  },
+  "whereToGo": "وين تريد تروح؟",
+  "@whereToGo": {
+    "description": "Prompt on the destination picker"
+  },
+  "setPickup": "حدّد نقطة الانطلاق",
+  "@setPickup": {
+    "description": "Prompt on the pickup picker"
+  },
+  "confirmDestination": "تأكيد الوجهة",
+  "@confirmDestination": {
+    "description": "Confirms the chosen dropoff"
+  },
+  "confirmPickup": "تأكيد الانطلاق",
+  "@confirmPickup": {
+    "description": "Confirms the chosen pickup"
+  },
+  "fromLabel": "من",
+  "@fromLabel": {
+    "description": "Leading label of the pickup row"
+  },
+  "toLabel": "إلى",
+  "@toLabel": {
+    "description": "Leading label of the dropoff row"
+  },
+  "pickupLabel": "الانطلاق",
+  "@pickupLabel": {
+    "description": "Pickup point label"
+  },
+  "destinationLabel": "الوجهة",
+  "@destinationLabel": {
+    "description": "Destination label"
+  },
+  "estimatedFare": "الأجرة التقديرية",
+  "@estimatedFare": {
+    "description": "Fare estimate label"
+  },
+  "distanceLabel": "المسافة",
+  "@distanceLabel": {
+    "description": "Trip distance label"
+  },
+  "paymentMethodLabel": "طريقة الدفع",
+  "@paymentMethodLabel": {
+    "description": "Payment method row label"
+  },
+  "confirmRequest": "تأكيد الطلب",
+  "@confirmRequest": {
+    "description": "Submits the ride request"
+  },
+  "checkDetails": "تأكدلي من التفاصيل",
+  "@checkDetails": {
+    "description": "Asks the rider to review before confirming"
+  },
+  "cancelRequest": "إلغاء الطلب",
+  "@cancelRequest": {
+    "description": "Cancels an in-flight ride request"
+  },
+  "searchingForCaptain": "نبحث عن كابتن قريب...",
+  "@searchingForCaptain": {
+    "description": "Shown while matching a driver"
+  },
+  "stayOnline": "خليك على الخط، راح نلگه لك كابتن بأسرع وقت",
+  "@stayOnline": {
+    "description": "Reassurance shown while matching"
+  },
+  "captainOnWay": "الكابتن بالطريق إلك",
+  "@captainOnWay": {
+    "description": "Status once a driver accepts"
+  },
+  "captainArrived": "الكابتن وصل — اطلع اله",
+  "@captainArrived": {
+    "description": "Status once the driver is at pickup"
+  },
+  "findCarByPlate": "دور على السيارة برقم اللوحة",
+  "@findCarByPlate": {
+    "description": "Hint for spotting the vehicle"
+  },
+  "call": "اتصال",
+  "@call": {
+    "description": "Calls the captain"
+  },
+  "message": "رسالة",
+  "@message": {
+    "description": "Messages the captain"
+  },
+  "rideCancelled": "انلغت الرحلة",
+  "@rideCancelled": {
+    "description": "Shown after the ride is cancelled"
+  },
+  "captainDeclined": "اعتذر الكابتن عن الرحلة، جرب مرة ثانية",
+  "@captainDeclined": {
+    "description": "Shown when the driver declines"
+  },
+  "arrivedSafely": "وصلت بالسلامة",
+  "@arrivedSafely": {
+    "description": "Shown at the end of a ride"
+  },
+  "haveAGoodTrip": "رحلة موفقة",
+  "@haveAGoodTrip": {
+    "description": "Shown when the ride starts"
+  },
+  "howWasYourRide": "شلون كانت رحلتك؟",
+  "@howWasYourRide": {
+    "description": "Title of the rating sheet"
+  },
+  "writeNotesOptional": "اكتب ملاحظاتك (اختياري)",
+  "@writeNotesOptional": {
+    "description": "Hint of the review note field"
+  },
+  "backToHome": "العودة للرئيسية",
+  "@backToHome": {
+    "description": "Returns to the home screen"
+  },
+  "rideDetails": "تفاصيل الرحلة",
+  "@rideDetails": {
+    "description": "Title of the trip summary"
+  },
+  "waselDriverName": "سائق وصل",
+  "@waselDriverName": {
+    "description": "Fallback name when the driver has none"
+  },
+  "noRideToRate": "ما موجودة رحلة نقيمها",
+  "@noRideToRate": {
+    "description": "Guard when rating without a ride"
+  },
+  "noRideToCancel": "ما موجودة رحلة نلغيها",
+  "@noRideToCancel": {
+    "description": "Guard when cancelling without a ride"
+  },
+  "cardDetails": "بيانات البطاقة",
+  "@cardDetails": {
+    "description": "Title of the card form"
+  },
+  "cardNumber": "رقم البطاقة",
+  "@cardNumber": {
+    "description": "Card number field label"
+  },
+  "enterCardNumber": "أدخل رقم البطاقة",
+  "@enterCardNumber": {
+    "description": "Card number field hint"
+  },
+  "cardNumberLength": "رقم البطاقة 16 رقمًا",
+  "@cardNumberLength": {
+    "description": "Card number validation error"
+  },
+  "expiryDate": "تاريخ الانتهاء",
+  "@expiryDate": {
+    "description": "Expiry field label"
+  },
+  "enterExpiryDate": "أدخل تاريخ الانتهاء",
+  "@enterExpiryDate": {
+    "description": "Expiry field hint"
+  },
+  "expiryFormat": "الصيغة MM/YY",
+  "@expiryFormat": {
+    "description": "Expiry format validation error"
+  },
+  "invalidMonth": "شهر غير صحيح",
+  "@invalidMonth": {
+    "description": "Expiry month validation error"
+  },
+  "cardExpired": "البطاقة منتهية",
+  "@cardExpired": {
+    "description": "Expiry validation error"
+  },
+  "enterCvv": "أدخل الرمز",
+  "@enterCvv": {
+    "description": "CVV field hint"
+  },
+  "cvvLength": "من 3 إلى 4 أرقام",
+  "@cvvLength": {
+    "description": "CVV validation error"
+  },
+  "saveCard": "حفظ البطاقة",
+  "@saveCard": {
+    "description": "Submits the card form"
+  },
+  "captainEtaMinutes": "الكابتن يوصل خلال {minutes} دقائق",
+  "@captainEtaMinutes": {
+    "description": "Driver ETA while en route",
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "arrivalEtaMinutes": "الوصول خلال {minutes} دقائق تقريباً",
+  "@arrivalEtaMinutes": {
+    "description": "Trip ETA to the destination",
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  }
 }

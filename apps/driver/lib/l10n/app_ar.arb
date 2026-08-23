@@ -1,6 +1,551 @@
 {
-  "waselDriver": "كابتن وصل",
-  "@waselDriver": {
-    "description": "The app name"
+  "@@locale": "ar",
+  "brandName": "وَصَل سائق",
+  "@brandName": {
+    "description": "Stylised brand wordmark shown in the auth header"
+  },
+  "authHeaderTagline": "انضم إلى أسطول ",
+  "@authHeaderTagline": {
+    "description": "Auth header lead-in that runs into the brand wordmark; keeps its trailing space"
+  },
+  "loginTagline": "سجّل دخولك كسائق",
+  "@loginTagline": {
+    "description": "Headline above the login form"
+  },
+  "registerTagline": "أنشئ حساب سائق",
+  "@registerTagline": {
+    "description": "Headline above the registration form"
+  },
+  "city": "المدينة",
+  "@city": {
+    "description": "City field label on the driver registration form"
+  },
+  "enterCity": "أدخل مدينتك",
+  "@enterCity": {
+    "description": "City field hint"
+  },
+  "address": "العنوان",
+  "@address": {
+    "description": "Address field label on the driver registration form"
+  },
+  "enterAddress": "أدخل عنوانك",
+  "@enterAddress": {
+    "description": "Address field hint"
+  },
+  "myAccount": "حسابي",
+  "@myAccount": {
+    "description": "App bar title of the profile screen"
+  },
+  "profileDetails": "الملف الشخصي",
+  "@profileDetails": {
+    "description": "Menu tile and screen title"
+  },
+  "rideHistory": "سجل الرحلات",
+  "@rideHistory": {
+    "description": "Menu tile that opens the ride history screen"
+  },
+  "settings": "الإعدادات",
+  "@settings": {
+    "description": "Menu tile for the settings screen; not built yet"
+  },
+  "logout": "تسجيل الخروج",
+  "@logout": {
+    "description": "Logout menu tile, and the confirm action of its dialog"
+  },
+  "logoutConfirmMessage": "هل أنت متأكد من تسجيل الخروج من حسابك؟",
+  "@logoutConfirmMessage": {
+    "description": "Body of the logout confirmation dialog"
+  },
+  "todayEarnings": "أرباح اليوم",
+  "@todayEarnings": {
+    "description": "Stat tile on the driver home"
+  },
+  "todayRides": "رحلات اليوم",
+  "@todayRides": {
+    "description": "Stat tile on the driver home"
+  },
+  "todayOnlineTime": "مدة الاتصال اليوم",
+  "@todayOnlineTime": {
+    "description": "Stat tile on the driver home"
+  },
+  "rating": "التقييم",
+  "@rating": {
+    "description": "Driver rating stat tile"
+  },
+  "online": "متصل",
+  "@online": {
+    "description": "Driver is accepting rides"
+  },
+  "offline": "غير متصل",
+  "@offline": {
+    "description": "Driver is not accepting rides"
+  },
+  "youAreOffline": "إنت غير متصل",
+  "@youAreOffline": {
+    "description": "Banner when the driver is offline"
+  },
+  "noRequestsWhileOffline": "ما راح توصلك طلبات وإنت غير متصل",
+  "@noRequestsWhileOffline": {
+    "description": "Explains the offline state"
+  },
+  "startAcceptingRides": "ابدأ استلام الرحلات",
+  "@startAcceptingRides": {
+    "description": "Goes online"
+  },
+  "stopAcceptingRides": "إيقاف الاستلام",
+  "@stopAcceptingRides": {
+    "description": "Goes offline"
+  },
+  "stayInBusyArea": "خليك بمكان زحمة حتى توصلك طلبات أكثر",
+  "@stayInBusyArea": {
+    "description": "Tip while waiting"
+  },
+  "searchingForRequests": "دا ندوّر على طلبات",
+  "@searchingForRequests": {
+    "description": "Shown while waiting for a match"
+  },
+  "connecting": "دا نتصل...",
+  "@connecting": {
+    "description": "Hub connection state"
+  },
+  "connectingToServer": "دا نتصل بالخادم",
+  "@connectingToServer": {
+    "description": "Hub connection state"
+  },
+  "reconnecting": "دا نعيد الاتصال...",
+  "@reconnecting": {
+    "description": "Hub connection state"
+  },
+  "oneMomentConnecting": "ثانية وحدة، دا نكمل الاتصال",
+  "@oneMomentConnecting": {
+    "description": "Hub connection state"
+  },
+  "disconnected": "انقطع الاتصال",
+  "@disconnected": {
+    "description": "Hub connection state"
+  },
+  "serverDisconnected": "انقطع الاتصال بالخادم",
+  "@serverDisconnected": {
+    "description": "Hub connection state"
+  },
+  "noServerConnection": "ماكو اتصال بالخادم، موقعك ما يوصل للتوزيع",
+  "@noServerConnection": {
+    "description": "Hub failure detail"
+  },
+  "noServerResponse": "ما وصل رد من الخادم، حاول مرة ثانية",
+  "@noServerResponse": {
+    "description": "Hub failure detail"
+  },
+  "checkYourConnection": "تحقق من اتصالك بالإنترنت ثم أعد المحاولة.",
+  "@checkYourConnection": {
+    "description": "Retry guidance"
+  },
+  "locationServiceOffDriver": "خدمة الموقع مطفّية، شغّلها حتى نگدر نبعث موقعك",
+  "@locationServiceOffDriver": {
+    "description": "Driver location failure"
+  },
+  "cannotSendLocation": "ما نگدر نبعث موقعك بدون إذن الموقع",
+  "@cannotSendLocation": {
+    "description": "Driver location failure"
+  },
+  "cannotDetermineLocation": "ما نگدر نحدد موقعك، تأكد من إشارة الـ GPS",
+  "@cannotDetermineLocation": {
+    "description": "Driver location failure"
+  },
+  "cannotDrawRoute": "ما نگدر نرسم الطريق",
+  "@cannotDrawRoute": {
+    "description": "Route failure"
+  },
+  "noLocationNoRoute": "ماكو موقع، ما نگدر نرسم الطريق",
+  "@noLocationNoRoute": {
+    "description": "Route failure"
+  },
+  "newRequest": "وصلك طلب جديد",
+  "@newRequest": {
+    "description": "Incoming ride request"
+  },
+  "requestReceived": "وصلك طلب",
+  "@requestReceived": {
+    "description": "Incoming ride request"
+  },
+  "acceptRequest": "قبول الطلب",
+  "@acceptRequest": {
+    "description": "Accepts an incoming ride"
+  },
+  "onWayToPickup": "بالطريق لنقطة الانطلاق",
+  "@onWayToPickup": {
+    "description": "Ride stage"
+  },
+  "onWayToRider": "بالطريق للراكب",
+  "@onWayToRider": {
+    "description": "Ride stage"
+  },
+  "arrivedAtPickup": "وصلت لنقطة الانطلاق",
+  "@arrivedAtPickup": {
+    "description": "Ride stage"
+  },
+  "arrived": "وصلت",
+  "@arrived": {
+    "description": "Marks arrival at the pickup point"
+  },
+  "waitingForRider": "بانتظار الراكب",
+  "@waitingForRider": {
+    "description": "Ride stage"
+  },
+  "waitForRiderThenStart": "انتظر الراكب يركب وبعدين ابدأ الرحلة",
+  "@waitForRiderThenStart": {
+    "description": "Guidance at pickup"
+  },
+  "startRide": "ابدأ الرحلة",
+  "@startRide": {
+    "description": "Begins the trip"
+  },
+  "rideInProgress": "الرحلة جارية",
+  "@rideInProgress": {
+    "description": "Ride stage"
+  },
+  "rideOngoing": "رحلة جارية",
+  "@rideOngoing": {
+    "description": "Ride stage label"
+  },
+  "endRide": "إنهاء الرحلة",
+  "@endRide": {
+    "description": "Completes the trip"
+  },
+  "rideFinished": "خلصت الرحلة",
+  "@rideFinished": {
+    "description": "Ride stage"
+  },
+  "cancelRide": "إلغاء الرحلة",
+  "@cancelRide": {
+    "description": "Cancels the trip"
+  },
+  "backToRequests": "رجوع للطلبات",
+  "@backToRequests": {
+    "description": "Returns to the request list"
+  },
+  "pickupPoint": "نقطة الانطلاق",
+  "@pickupPoint": {
+    "description": "Pickup point label"
+  },
+  "dropoffPoint": "نقطة الوصول",
+  "@dropoffPoint": {
+    "description": "Dropoff point label"
+  },
+  "collectFareFromRider": "اجمع الأجرة من الراكب",
+  "@collectFareFromRider": {
+    "description": "Cash collection prompt"
+  },
+  "switchToCash": "تحويل إلى نقدي",
+  "@switchToCash": {
+    "description": "Converts the ride to a cash payment"
+  },
+  "switchToCashConfirm": "تحويل الرحلة إلى الدفع نقدًا وإنهاؤها؟",
+  "@switchToCashConfirm": {
+    "description": "Confirmation dialog"
+  },
+  "paymentCollectFailed": "تعذّر تحصيل الدفع",
+  "@paymentCollectFailed": {
+    "description": "Payment failure"
+  },
+  "statusUpdateFailed": "تعذّر تحديث الحالة، حاول مجدداً.",
+  "@statusUpdateFailed": {
+    "description": "Ride status failure"
+  },
+  "phoneUnavailable": "رقم الهاتف غير متوفر",
+  "@phoneUnavailable": {
+    "description": "Shown when the rider has no number"
+  },
+  "waselDriverName": "سائق وَصَل",
+  "@waselDriverName": {
+    "description": "Fallback driver name"
+  },
+  "driverVerification": "توثيق السائق",
+  "@driverVerification": {
+    "description": "Title of the verification flow"
+  },
+  "next": "التالي",
+  "@next": {
+    "description": "Advances a verification step"
+  },
+  "previous": "السابق",
+  "@previous": {
+    "description": "Returns to the previous verification step"
+  },
+  "personalPhoto": "الصورة الشخصية",
+  "@personalPhoto": {
+    "description": "Verification step title"
+  },
+  "selfiePhoto": "صورة شخصية",
+  "@selfiePhoto": {
+    "description": "Verification document label"
+  },
+  "takeClearSelfie": "التقط صورة شخصية واضحة لمطابقة هويتك.",
+  "@takeClearSelfie": {
+    "description": "Verification guidance"
+  },
+  "placeFaceInFrame": "ضع وجهك داخل الإطار",
+  "@placeFaceInFrame": {
+    "description": "Camera guidance"
+  },
+  "driverLicense": "رخصة القيادة",
+  "@driverLicense": {
+    "description": "Verification step title"
+  },
+  "licenseFront": "الوجه الأمامي للرخصة",
+  "@licenseFront": {
+    "description": "Verification document label"
+  },
+  "licenseBack": "الوجه الخلفي للرخصة",
+  "@licenseBack": {
+    "description": "Verification document label"
+  },
+  "photographLicense": "صوّر رخصة القيادة من الأمام والخلف داخل الإطار.",
+  "@photographLicense": {
+    "description": "Verification guidance"
+  },
+  "placeLicenseInFrame": "ضع الرخصة داخل الإطار",
+  "@placeLicenseInFrame": {
+    "description": "Camera guidance"
+  },
+  "vehicleData": "بيانات المركبة",
+  "@vehicleData": {
+    "description": "Verification step title"
+  },
+  "vehiclePhoto": "صورة المركبة",
+  "@vehiclePhoto": {
+    "description": "Verification document label"
+  },
+  "photographVehicle": "صوّر مركبتك وأدخل بياناتها.",
+  "@photographVehicle": {
+    "description": "Verification guidance"
+  },
+  "placeVehicleInFrame": "صوّر المركبة داخل الإطار",
+  "@placeVehicleInFrame": {
+    "description": "Camera guidance"
+  },
+  "vehicleModel": "موديل المركبة",
+  "@vehicleModel": {
+    "description": "Vehicle field label"
+  },
+  "vehicleModelExample": "مثال: Toyota Corolla",
+  "@vehicleModelExample": {
+    "description": "Vehicle model hint"
+  },
+  "manufactureYear": "سنة الصنع",
+  "@manufactureYear": {
+    "description": "Vehicle field label"
+  },
+  "manufactureYearExample": "مثال: 2020",
+  "@manufactureYearExample": {
+    "description": "Vehicle year hint"
+  },
+  "plateNumber": "رقم اللوحه",
+  "@plateNumber": {
+    "description": "Vehicle field label"
+  },
+  "plateNumberExample": "234244 C / 342134 ب",
+  "@plateNumberExample": {
+    "description": "Plate number hint"
+  },
+  "capture": "التقاط",
+  "@capture": {
+    "description": "Takes the photo"
+  },
+  "captureWithCamera": "التقاط بالكاميرا",
+  "@captureWithCamera": {
+    "description": "Image source option"
+  },
+  "chooseFromGalleryDriver": "اختيار من المعرض",
+  "@chooseFromGalleryDriver": {
+    "description": "Image source option"
+  },
+  "retake": "إعادة الالتقاط",
+  "@retake": {
+    "description": "Discards and retakes the photo"
+  },
+  "confirmPhoto": "تأكيد الصورة",
+  "@confirmPhoto": {
+    "description": "Accepts the captured photo"
+  },
+  "ensurePhotoClear": "تأكد أن الصورة واضحة ومقروءة قبل المتابعة.",
+  "@ensurePhotoClear": {
+    "description": "Photo review guidance"
+  },
+  "captureFailed": "تعذّر الالتقاط، حاول مجدداً",
+  "@captureFailed": {
+    "description": "Camera failure"
+  },
+  "cameraStartFailed": "تعذّر تشغيل الكاميرا",
+  "@cameraStartFailed": {
+    "description": "Camera failure"
+  },
+  "noCameraAvailable": "لا توجد كاميرا متاحة",
+  "@noCameraAvailable": {
+    "description": "Camera failure"
+  },
+  "cameraPermissionRequired": "إذن الكاميرا مطلوب",
+  "@cameraPermissionRequired": {
+    "description": "Camera permission prompt title"
+  },
+  "cameraPermissionMessage": "نحتاج إذن الكاميرا لالتقاط الصورة. فعّله من الإعدادات.",
+  "@cameraPermissionMessage": {
+    "description": "Camera permission prompt body"
+  },
+  "uploadingDocuments": "جارٍ رفع المستندات…",
+  "@uploadingDocuments": {
+    "description": "Upload progress"
+  },
+  "documentsUploaded": "تم رفع المستندات بنجاح",
+  "@documentsUploaded": {
+    "description": "Upload success"
+  },
+  "uploadFailed": "تعذّر رفع المستندات",
+  "@uploadFailed": {
+    "description": "Upload failure"
+  },
+  "pleaseWaitDontClose": "يرجى الانتظار وعدم إغلاق التطبيق.",
+  "@pleaseWaitDontClose": {
+    "description": "Upload progress guidance"
+  },
+  "backToForm": "العودة للنموذج",
+  "@backToForm": {
+    "description": "Returns from the upload screen"
+  },
+  "discard": "تجاهل",
+  "@discard": {
+    "description": "Discards unsaved changes"
+  },
+  "underReview": "قيد المراجعة",
+  "@underReview": {
+    "description": "Approval status"
+  },
+  "pendingStatus": "قيد الانتظار",
+  "@pendingStatus": {
+    "description": "Approval status"
+  },
+  "approved": "موثّق",
+  "@approved": {
+    "description": "Approval status"
+  },
+  "rejected": "مرفوض",
+  "@rejected": {
+    "description": "Approval status"
+  },
+  "requestUnderReview": "طلبك قيد المراجعة",
+  "@requestUnderReview": {
+    "description": "Approval screen title"
+  },
+  "reviewingDocuments": "نقوم بمراجعة مستنداتك، وعادةً ما يستغرق ذلك حتى ٢٤ ساعة.",
+  "@reviewingDocuments": {
+    "description": "Approval screen body"
+  },
+  "willNotifyResult": "سيتم مراجعة طلبك وإشعارك بالنتيجة.",
+  "@willNotifyResult": {
+    "description": "Approval screen body"
+  },
+  "stillUnderReview": "لا يزال طلبك قيد المراجعة، سنخبرك فور تحديث الحالة.",
+  "@stillUnderReview": {
+    "description": "Approval screen body"
+  },
+  "previousRequestRejected": "تم رفض طلبك السابق، يرجى مراجعة بياناتك وإعادة الإرسال.",
+  "@previousRequestRejected": {
+    "description": "Rejection notice"
+  },
+  "infoRejected": "تم رفض معلوماتك ، يرجى مراجعة بياناتك وإعادة الإرسال.",
+  "@infoRejected": {
+    "description": "Rejection notice"
+  },
+  "statusCheckFailed": "تعذّر التحقق من حالة طلبك",
+  "@statusCheckFailed": {
+    "description": "Approval failure"
+  },
+  "verifyingAccount": "جارٍ التحقق من حسابك وبعض المعلومات …",
+  "@verifyingAccount": {
+    "description": "Splash/loading text"
+  },
+  "editProfile": "تعديل الملف الشخصي",
+  "@editProfile": {
+    "description": "Edit screen title"
+  },
+  "profileLoadFailed": "تعذّر تحميل بيانات الملف الشخصي",
+  "@profileLoadFailed": {
+    "description": "Profile error state"
+  },
+  "balance": "الرصيد",
+  "@balance": {
+    "description": "Wallet balance label"
+  },
+  "edit": "تعديل",
+  "@edit": {
+    "description": "Opens the profile edit screen"
+  },
+  "editPhoneOnlyDriver": "يمكنك تعديل رقم هاتفك فقط. لتغيير اسمك أو بيانات مركبتك تواصل مع الدعم.",
+  "@editPhoneOnlyDriver": {
+    "description": "Notice on the driver profile edit screen"
+  },
+  "currencyIqd": "د.ع",
+  "@currencyIqd": {
+    "description": "Iraqi dinar symbol appended to fares"
+  },
+  "riderEtaMinutes": "توصل خلال {minutes} دقائق",
+  "@riderEtaMinutes": {
+    "description": "ETA to the rider",
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "distanceKm": "{value} كم",
+  "@distanceKm": {
+    "description": "Trip distance with its unit",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "coordinatePair": "{lat}، {lng}",
+  "@coordinatePair": {
+    "description": "Raw coordinates before a place name resolves",
+    "placeholders": {
+      "lat": {
+        "type": "String"
+      },
+      "lng": {
+        "type": "String"
+      }
+    }
+  },
+  "durationHoursMinutes": "{hours} س {minutes} د",
+  "@durationHoursMinutes": {
+    "description": "Online duration with both parts",
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "durationHours": "{hours} س",
+  "@durationHours": {
+    "description": "Online duration, whole hours",
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "durationMinutes": "{minutes} د",
+  "@durationMinutes": {
+    "description": "Online duration, minutes only",
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      }
+    }
   }
 }

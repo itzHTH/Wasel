@@ -1,0 +1,198 @@
+{
+  "@@locale": "ar",
+  "rideHistoryTitle": "سجل الرحلات",
+  "@rideHistoryTitle": {
+    "description": "App bar title of the ride history screen"
+  },
+  "noMoreRides": "لا مزيد من الرحلات",
+  "@noMoreRides": {
+    "description": "Footer shown when the ride history list is fully paged in"
+  },
+  "noRidesYet": "لا توجد رحلات بعد",
+  "@noRidesYet": {
+    "description": "Title of the empty ride history state"
+  },
+  "noRidesYetDescription": "ستظهر هنا رحلاتك المكتملة والملغاة فور انتهائها.",
+  "@noRidesYetDescription": {
+    "description": "Body of the empty ride history state"
+  },
+  "rideStatusCompleted": "مكتملة",
+  "@rideStatusCompleted": {
+    "description": "Status chip for a completed ride"
+  },
+  "rideStatusCancelled": "ملغاة",
+  "@rideStatusCancelled": {
+    "description": "Status chip for a cancelled ride"
+  },
+  "rideStatusUnknown": "غير معروفة",
+  "@rideStatusUnknown": {
+    "description": "Status chip when the ride status is not recognised"
+  },
+  "rideDate": "التاريخ",
+  "@rideDate": {
+    "description": "Label of the date row on a ride history card"
+  },
+  "rideRequestTime": "وقت الطلب",
+  "@rideRequestTime": {
+    "description": "Label of the request time row on a ride history card"
+  },
+  "rideFare": "قيمة الرحلة",
+  "@rideFare": {
+    "description": "Label of the fare row on a ride history card"
+  },
+  "month1": "كانون الثاني",
+  "@month1": {
+    "description": "Month 1 name, Levantine Arabic as used in Iraq"
+  },
+  "month2": "شباط",
+  "@month2": {
+    "description": "Month 2 name, Levantine Arabic as used in Iraq"
+  },
+  "month3": "آذار",
+  "@month3": {
+    "description": "Month 3 name, Levantine Arabic as used in Iraq"
+  },
+  "month4": "نيسان",
+  "@month4": {
+    "description": "Month 4 name, Levantine Arabic as used in Iraq"
+  },
+  "month5": "أيار",
+  "@month5": {
+    "description": "Month 5 name, Levantine Arabic as used in Iraq"
+  },
+  "month6": "حزيران",
+  "@month6": {
+    "description": "Month 6 name, Levantine Arabic as used in Iraq"
+  },
+  "month7": "تموز",
+  "@month7": {
+    "description": "Month 7 name, Levantine Arabic as used in Iraq"
+  },
+  "month8": "آب",
+  "@month8": {
+    "description": "Month 8 name, Levantine Arabic as used in Iraq"
+  },
+  "month9": "أيلول",
+  "@month9": {
+    "description": "Month 9 name, Levantine Arabic as used in Iraq"
+  },
+  "month10": "تشرين الأول",
+  "@month10": {
+    "description": "Month 10 name, Levantine Arabic as used in Iraq"
+  },
+  "month11": "تشرين الثاني",
+  "@month11": {
+    "description": "Month 11 name, Levantine Arabic as used in Iraq"
+  },
+  "month12": "كانون الأول",
+  "@month12": {
+    "description": "Month 12 name, Levantine Arabic as used in Iraq"
+  },
+  "weekday1": "الإثنين",
+  "@weekday1": {
+    "description": "Weekday name, 1 = Monday per DateTime.weekday"
+  },
+  "weekday2": "الثلاثاء",
+  "@weekday2": {
+    "description": "Weekday name, 2 = Monday per DateTime.weekday"
+  },
+  "weekday3": "الأربعاء",
+  "@weekday3": {
+    "description": "Weekday name, 3 = Monday per DateTime.weekday"
+  },
+  "weekday4": "الخميس",
+  "@weekday4": {
+    "description": "Weekday name, 4 = Monday per DateTime.weekday"
+  },
+  "weekday5": "الجمعة",
+  "@weekday5": {
+    "description": "Weekday name, 5 = Monday per DateTime.weekday"
+  },
+  "weekday6": "السبت",
+  "@weekday6": {
+    "description": "Weekday name, 6 = Monday per DateTime.weekday"
+  },
+  "weekday7": "الأحد",
+  "@weekday7": {
+    "description": "Weekday name, 7 = Monday per DateTime.weekday"
+  },
+  "today": "اليوم",
+  "@today": {
+    "description": "Day header for rides taken today"
+  },
+  "yesterday": "أمس",
+  "@yesterday": {
+    "description": "Day header for rides taken yesterday"
+  },
+  "timeAm": "ص",
+  "@timeAm": {
+    "description": "Morning meridiem marker"
+  },
+  "timePm": "م",
+  "@timePm": {
+    "description": "Afternoon meridiem marker"
+  },
+  "dayWithWeekday": "{weekday} {day} {month}",
+  "@dayWithWeekday": {
+    "description": "Day header inside the current year",
+    "placeholders": {
+      "weekday": {
+        "type": "String"
+      },
+      "day": {
+        "type": "int"
+      },
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "dayWithYear": "{day} {month} {year}",
+  "@dayWithYear": {
+    "description": "Day header for a previous year",
+    "placeholders": {
+      "day": {
+        "type": "int"
+      },
+      "month": {
+        "type": "String"
+      },
+      "year": {
+        "type": "int"
+      }
+    }
+  },
+  "fullDate": "{weekday}، {day} {month} {year}",
+  "@fullDate": {
+    "description": "Full date on a ride card; note the locale-specific comma",
+    "placeholders": {
+      "weekday": {
+        "type": "String"
+      },
+      "day": {
+        "type": "int"
+      },
+      "month": {
+        "type": "String"
+      },
+      "year": {
+        "type": "int"
+      }
+    }
+  },
+  "timeOfDay": "{hour}:{minute} {meridiem}",
+  "@timeOfDay": {
+    "description": "Clock time with meridiem marker",
+    "placeholders": {
+      "hour": {
+        "type": "int"
+      },
+      "minute": {
+        "type": "String"
+      },
+      "meridiem": {
+        "type": "String"
+      }
+    }
+  }
+}

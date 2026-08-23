@@ -1,0 +1,19 @@
+{
+  "@@locale": "ar",
+
+  "paymentMethodCash": "نقدي",
+  "@paymentMethodCash": { "description": "Cash payment method label" },
+  "paymentMethodCard": "بطاقة",
+  "@paymentMethodCard": { "description": "Card payment method label" },
+  "paymentMethodWallet": "المحفظة",
+  "@paymentMethodWallet": { "description": "Wallet payment method label" },
+  "paymentMethodUnknown": "غير محدد",
+  "@paymentMethodUnknown": { "description": "Shown when no payment method is selected" },
+
+  "addCardBeforeConfirming": "أضف بطاقة قبل تأكيد الطلب",
+  "@addCardBeforeConfirming": { "description": "Blocks confirming a ride while no card is on file" },
+  "walletBalanceTooLow": "رصيد المحفظة لا يكفي لهذه الرحلة",
+  "@walletBalanceTooLow": { "description": "Blocks confirming a ride when the wallet cannot cover the fare" },
+  "cardVerificationFailed": "تعذّر التحقق من البطاقة",
+  "@cardVerificationFailed": { "description": "Shown when card tokenization fails" }
+}

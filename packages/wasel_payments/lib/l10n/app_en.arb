@@ -1,0 +1,12 @@
+{
+  "@@locale": "en",
+
+  "paymentMethodCash": "Cash",
+  "paymentMethodCard": "Card",
+  "paymentMethodWallet": "Wallet",
+  "paymentMethodUnknown": "Not selected",
+
+  "addCardBeforeConfirming": "Add a card before confirming your ride",
+  "walletBalanceTooLow": "Your wallet balance doesn't cover this ride",
+  "cardVerificationFailed": "We couldn't verify your card"
+}
