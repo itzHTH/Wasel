@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_auth/wasel_auth.dart';
 import 'package:wasel_core/helpers/app_validators.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/widgets/password_field.dart';
@@ -23,8 +24,8 @@ class NewPasswordForm extends StatelessWidget {
         child: Column(
           children: [
             AppPasswordFormField(
-              label: 'كلمة المرور الجديدة',
-              hintText: 'أدخل كلمة المرور الجديدة',
+              label: context.authL10n.newPasswordLabel,
+              hintText: context.authL10n.enterNewPassword,
               controller: passwordCtrl,
               textInputAction: TextInputAction.next,
               autofillHints: const [AutofillHints.newPassword],
@@ -32,8 +33,8 @@ class NewPasswordForm extends StatelessWidget {
             ),
             SizedBox(height: AppDimens.space16),
             AppPasswordFormField(
-              label: 'تأكيد كلمة المرور',
-              hintText: 'أعد إدخال كلمة المرور الجديدة',
+              label: context.authL10n.confirmPassword,
+              hintText: context.authL10n.reenterNewPassword,
               controller: confirmPassCtrl,
               textInputAction: TextInputAction.done,
               autofillHints: const [AutofillHints.newPassword],

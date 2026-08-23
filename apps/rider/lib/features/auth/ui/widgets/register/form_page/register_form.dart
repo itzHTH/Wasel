@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_auth/wasel_auth.dart';
 import 'package:wasel_core/helpers/app_validators.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
@@ -31,13 +32,15 @@ class RegisterForm extends StatelessWidget {
         children: [
           // First Name
           AppLabeledFormField(
-            label: 'الاسم الأول',
-            hintText: 'أدخل اسمك الأول',
+            label: context.authL10n.firstName,
+            hintText: context.authL10n.enterFirstName,
             controller: firstNameCtrl,
             keyboardType: TextInputType.name,
             textInputAction: TextInputAction.next,
-            validator: (value) =>
-                AppValidators.name(value, fieldName: 'الاسم الأول'),
+            validator: (value) => AppValidators.name(
+              value,
+              fieldName: context.authL10n.firstName,
+            ),
             prefixIcon: Icon(
               Icons.person_outline_rounded,
               color: context.colors.neutral400,
@@ -48,13 +51,13 @@ class RegisterForm extends StatelessWidget {
 
           // Last Name
           AppLabeledFormField(
-            label: 'الاسم الأخير',
-            hintText: 'أدخل اسمك الأخير',
+            label: context.authL10n.lastName,
+            hintText: context.authL10n.enterLastName,
             controller: lastNameCtrl,
             keyboardType: TextInputType.name,
             textInputAction: TextInputAction.next,
             validator: (value) =>
-                AppValidators.name(value, fieldName: 'الاسم الأخير'),
+                AppValidators.name(value, fieldName: context.authL10n.lastName),
             prefixIcon: Icon(
               Icons.person_outline_rounded,
               color: context.colors.neutral400,
@@ -65,8 +68,8 @@ class RegisterForm extends StatelessWidget {
 
           // Phone Number
           AppLabeledFormField(
-            label: 'رقم الهاتف',
-            hintText: 'أدخل رقم هاتفك',
+            label: context.authL10n.phoneNumber,
+            hintText: context.authL10n.enterPhoneNumber,
             controller: phoneCtrl,
             keyboardType: TextInputType.phone,
             textInputAction: TextInputAction.next,
@@ -81,8 +84,8 @@ class RegisterForm extends StatelessWidget {
 
           // Password
           AppPasswordFormField(
-            label: 'كلمة المرور',
-            hintText: 'أدخل كلمة المرور',
+            label: context.authL10n.password,
+            hintText: context.authL10n.enterPassword,
             controller: passwordCtrl,
             textInputAction: TextInputAction.next,
             validator: AppValidators.password,
@@ -91,8 +94,8 @@ class RegisterForm extends StatelessWidget {
 
           // Confirm Password
           AppPasswordFormField(
-            label: 'تأكيد كلمة المرور',
-            hintText: 'أعد إدخال كلمة المرور',
+            label: context.authL10n.confirmPassword,
+            hintText: context.authL10n.reenterPassword,
             controller: confirmPassCtrl,
             textInputAction: TextInputAction.done,
             validator: (value) =>

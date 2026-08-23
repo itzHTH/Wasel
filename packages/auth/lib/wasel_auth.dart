@@ -6,6 +6,10 @@
 /// request models and read response/entity types directly.
 library;
 
+// Localization
+export 'l10n/auth_localizations.dart';
+export 'l10n/auth_l10n_extension.dart';
+
 // Config — selects rider vs driver registration endpoints
 export 'auth_user_type.dart';
 

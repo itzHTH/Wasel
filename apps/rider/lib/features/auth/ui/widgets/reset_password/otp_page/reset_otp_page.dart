@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_auth/wasel_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/features/auth/ui/widgets/common/auth_primary_button.dart';
-import 'package:wasel_auth/presentation/providers/reset_password/reset_password_controller.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/widgets/app_back_button.dart';
@@ -42,13 +42,13 @@ class ResetOtpPage extends ConsumerWidget {
           SizedBox(height: AppDimens.space40),
 
           Text(
-            'رمز التحقق',
+            context.authL10n.verificationCode,
             style: context.styles.font24Secondary900Bold,
             textAlign: TextAlign.center,
           ),
           SizedBox(height: AppDimens.space8),
           Text(
-            'لقد أرسلنا رمز التحقق إلى بريدك الإلكتروني\n${state.email}',
+            context.authL10n.otpSentToEmail(state.email),
             style: context.styles.font14Neutral400Regular,
             textAlign: TextAlign.center,
           ),
@@ -66,7 +66,7 @@ class ResetOtpPage extends ConsumerWidget {
           SizedBox(height: AppDimens.space24),
 
           AuthPrimaryButton(
-            label: 'تأكيد',
+            label: context.authL10n.confirm,
             onPressed: state.isSubmitting ? null : onSubmit,
             isLoading: state.isSubmitting,
           ),
@@ -76,7 +76,7 @@ class ResetOtpPage extends ConsumerWidget {
             TextButton(
               onPressed: onExpiredRestart,
               child: Text(
-                'طلب رمز جديد',
+                context.authL10n.requestNewCode,
                 style: context.styles.font14Primary500SemiBold,
               ),
             )

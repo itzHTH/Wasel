@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:driver/l10n/l10n_extension.dart';
+import 'package:wasel_auth/wasel_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
@@ -48,7 +50,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const AuthHeader(title: 'سجّل دخولك كسائق'),
+                AuthHeader(title: context.l10n.loginTagline),
                 SizedBox(height: AppDimens.space32),
 
                 // Login Form
@@ -70,7 +72,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         vertical: AppDimens.space12,
                       ),
                       child: Text(
-                        'نسيت كلمة المرور؟',
+                        context.authL10n.forgotPassword,
                         style: context.styles.font14Primary500SemiBold,
                       ),
                     ),
@@ -84,7 +86,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     final state = ref.watch(loginProvider);
                     return AuthPrimaryButton(
                       isLoading: state.isLoading,
-                      label: 'تسجيل الدخول',
+                      label: context.authL10n.login,
                       onPressed: _handleSubmit,
                     );
                   },
@@ -96,14 +98,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'ليس لديك حساب؟ ',
+                      context.authL10n.noAccount,
                       style: context.styles.font14Neutral400Regular,
                     ),
                     GestureDetector(
                       onTap: () =>
                           Navigator.pushNamed(context, AppRoutes.register),
                       child: Text(
-                        'إنشاء حساب',
+                        context.authL10n.createAccount,
                         style: context.styles.font14Primary500SemiBold,
                       ),
                     ),
@@ -127,11 +129,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       } else if (next.isLoading) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(const SnackBar(content: Text('جاري تسجيل الدخول...')));
+        ).showSnackBar(SnackBar(content: Text(context.authL10n.loggingIn)));
       } else if (next.value != null) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(const SnackBar(content: Text('تم تسجيل الدخول بنجاح')));
+        ).showSnackBar(SnackBar(content: Text(context.authL10n.loginSuccess)));
         Navigator.pushNamedAndRemoveUntil(
           context,
           AppRoutes.ride,

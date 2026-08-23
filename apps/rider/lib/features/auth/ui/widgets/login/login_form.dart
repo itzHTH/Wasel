@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_auth/wasel_auth.dart';
 import 'package:wasel_core/helpers/app_validators.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
@@ -24,8 +25,8 @@ class LoginForm extends StatelessWidget {
       child: Column(
         children: [
           AppLabeledFormField(
-            label: 'البريد الإلكتروني',
-            hintText: 'أدخل بريدك الإلكتروني',
+            label: context.authL10n.email,
+            hintText: context.authL10n.enterEmail,
             controller: emailCtrl,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
@@ -38,8 +39,8 @@ class LoginForm extends StatelessWidget {
           ),
           SizedBox(height: AppDimens.space16),
           AppPasswordFormField(
-            label: 'كلمة المرور',
-            hintText: 'أدخل كلمة المرور الخاصة بك',
+            label: context.authL10n.password,
+            hintText: context.authL10n.enterYourPassword,
             controller: passCtrl,
             validator: AppValidators.password,
           ),

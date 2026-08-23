@@ -1,3 +1,4 @@
+import 'package:wasel_core/networking/errors/api_error_reason.dart';
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_auth/core/policies/auth_role_policy.dart';
@@ -55,7 +56,7 @@ class AuthRepo implements BaseAuthRepo {
       if (!AuthRolePolicy.isAllowed(response.roles, _userType)) {
         await SessionStore.clear();
         return ApiResults.failure(
-          ErrorHandler.message(AuthRolePolicy.deniedMessage),
+          ErrorHandler.reason(ApiErrorReason.roleNotAllowed),
         );
       }
 
@@ -124,7 +125,7 @@ class AuthRepo implements BaseAuthRepo {
       if (!AuthRolePolicy.isAllowed(response.roles, _userType)) {
         await SessionStore.clear();
         return ApiResults.failure(
-          ErrorHandler.message(AuthRolePolicy.deniedMessage),
+          ErrorHandler.reason(ApiErrorReason.roleNotAllowed),
         );
       }
 

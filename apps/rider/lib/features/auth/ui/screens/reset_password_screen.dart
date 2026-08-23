@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_auth/wasel_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/core/routing/app_routes_name.dart';
 import 'package:wasal/features/auth/ui/widgets/reset_password/email_page/forgot_password_page.dart';
 import 'package:wasal/features/auth/ui/widgets/reset_password/otp_page/reset_otp_page.dart';
 import 'package:wasal/features/auth/ui/widgets/reset_password/password_page/create_new_password_page.dart';
-import 'package:wasel_auth/presentation/providers/reset_password/reset_password_controller.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/widgets/app_dialog.dart';
@@ -65,10 +65,10 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
   Future<void> _exitFlow() async {
     final confirmed = await AppDialog.show(
       context,
-      title: 'هل أنت متأكد من الإلغاء؟',
-      message: 'ستحتاج إلى طلب رمز جديد',
-      confirmLabel: 'إلغاء العملية',
-      cancelLabel: 'متابعة',
+      title: context.authL10n.confirmCancel,
+      message: context.authL10n.willNeedNewCode,
+      confirmLabel: context.authL10n.cancelProcess,
+      cancelLabel: context.authL10n.continueAction,
       icon: Icons.warning_amber_rounded,
       isDestructive: true,
     );
@@ -119,9 +119,9 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
 
     if (!reset || !mounted) return;
 
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('تم تغيير كلمة المرور بنجاح')));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(context.authL10n.passwordChangedSuccess)),
+    );
     Navigator.pushNamedAndRemoveUntil(
       context,
       AppRoutes.auth,

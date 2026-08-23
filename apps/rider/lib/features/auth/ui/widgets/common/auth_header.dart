@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/l10n/l10n_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 
@@ -22,11 +23,11 @@ class AuthHeader extends StatelessWidget {
         SizedBox(height: AppDimens.space8),
         Text.rich(
           TextSpan(
-            text: 'احصل على تجربة رائعة مع ',
+            text: context.l10n.authHeaderTagline,
             style: context.styles.font14Neutral400Regular,
             children: [
               TextSpan(
-                text: 'وَصَل',
+                text: context.l10n.brandName,
                 style: context.styles.font14Neutral400Regular.copyWith(
                   fontWeight: FontWeight.w700,
                   color: context.colors.secondary900,

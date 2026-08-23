@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_auth/wasel_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/features/auth/ui/widgets/common/auth_primary_button.dart';
-import 'package:wasel_auth/presentation/providers/reset_password/reset_password_controller.dart';
 import 'package:wasel_core/helpers/app_validators.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
@@ -33,12 +33,12 @@ class ForgotPasswordPage extends StatelessWidget {
           SizedBox(height: AppDimens.space24),
 
           Text(
-            'نسيت كلمة المرور؟',
+            context.authL10n.forgotPassword,
             style: context.styles.font24Secondary900Bold,
           ),
           SizedBox(height: AppDimens.space8),
           Text(
-            'أدخل بريدك الإلكتروني وسنرسل لك رمز تحقق لإعادة تعيين كلمة المرور',
+            context.authL10n.forgotPasswordDescription,
             style: context.styles.font14Neutral400Regular,
           ),
           SizedBox(height: AppDimens.space32),
@@ -47,8 +47,8 @@ class ForgotPasswordPage extends StatelessWidget {
             child: Form(
               key: formKey,
               child: AppLabeledFormField(
-                label: 'البريد الإلكتروني',
-                hintText: 'أدخل بريدك الإلكتروني',
+                label: context.authL10n.email,
+                hintText: context.authL10n.enterEmail,
                 controller: emailCtrl,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.done,
@@ -82,7 +82,7 @@ class ForgotPasswordPage extends StatelessWidget {
                 resetPasswordControllerProvider.select((s) => s.isSubmitting),
               );
               return AuthPrimaryButton(
-                label: 'إرسال الرمز',
+                label: context.authL10n.sendCode,
                 onPressed: isSubmitting ? null : onSubmit,
                 isLoading: isSubmitting,
               );
@@ -94,13 +94,13 @@ class ForgotPasswordPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'تذكرت كلمة المرور؟ ',
+                context.authL10n.rememberedPassword,
                 style: context.styles.font14Neutral400Regular,
               ),
               GestureDetector(
                 onTap: () => Navigator.pop(context),
                 child: Text(
-                  'تسجيل الدخول',
+                  context.authL10n.login,
                   style: context.styles.font14Primary500SemiBold,
                 ),
               ),

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:wasel_auth/wasel_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/core/routing/app_routes_name.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
@@ -69,7 +70,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       if (result != null && mounted) {
         _sessionToken = result.sessionToken;
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('تم ارسال الرمز الى الايميل بنجاح')),
+          SnackBar(content: Text(context.authL10n.otpSentSuccess)),
         );
         // Navigate to OTP page
         _goToPage(1);
@@ -120,9 +121,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           );
 
       if (mounted && result != null) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('تم التسجيل بنجاح')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(context.authL10n.registerSuccess)),
+        );
         Navigator.pushNamedAndRemoveUntil(
           context,
           AppRoutes.ride,

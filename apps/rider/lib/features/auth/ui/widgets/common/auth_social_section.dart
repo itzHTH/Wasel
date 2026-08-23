@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasal/l10n/l10n_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
@@ -6,13 +7,12 @@ import 'package:wasel_core/theme/theme_context_extension.dart';
 
 class AuthSocialSection extends StatelessWidget {
   final VoidCallback? onGoogleTap;
-  final String googleLabel;
 
-  const AuthSocialSection({
-    super.key,
-    this.onGoogleTap,
-    this.googleLabel = 'التسجيل باستخدام جوجل',
-  });
+  /// Defaults to the generic sign-up wording; screens that need different
+  /// copy pass their own, since a localized default is not a constant.
+  final String? googleLabel;
+
+  const AuthSocialSection({super.key, this.onGoogleTap, this.googleLabel});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,10 @@ class AuthSocialSection extends StatelessWidget {
       children: [
         const _DividerRow(),
         SizedBox(height: AppDimens.space16),
-        _GoogleButton(label: googleLabel, onTap: onGoogleTap),
+        _GoogleButton(
+          label: googleLabel ?? context.l10n.signUpWithGoogle,
+          onTap: onGoogleTap,
+        ),
       ],
     );
   }
@@ -39,7 +42,7 @@ class _DividerRow extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 12.w),
           child: Text(
-            'أو سجل باستخدام',
+            context.l10n.orSignUpWith,
             style: context.styles.font12Neutral400Regular,
           ),
         ),
