@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_location/l10n/location_l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
@@ -55,10 +56,10 @@ class MyLocationButton extends ConsumerWidget {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(_messageFor(reason)),
+        content: Text(_messageFor(context, reason)),
         action: isServiceDisabled
             ? SnackBarAction(
-                label: 'الإعدادات',
+                label: context.locationL10n.settings,
                 onPressed: () => ref
                     .read(recenterControllerProvider.notifier)
                     .openLocationSettings(),
@@ -68,13 +69,15 @@ class MyLocationButton extends ConsumerWidget {
     );
   }
 
-  String _messageFor(LocationFailureReason reason) => switch (reason) {
-    LocationFailureReason.serviceDisabled =>
-      'خدمة الموقع مطفّية، شغّلها حتى نگدر نوصل لموقعك',
-    LocationFailureReason.permissionDenied ||
-    LocationFailureReason.permissionPermanentlyDenied =>
-      'ما نگدر نوصل لموقعك بدون إذن الموقع',
-    LocationFailureReason.fixTimeout => 'ما گدرنا نلگه موقعك، جرّب مرة ثانية',
-    LocationFailureReason.unavailable => 'صار خطأ وإحنا ندوّر على موقعك',
-  };
+  String _messageFor(BuildContext context, LocationFailureReason reason) =>
+      switch (reason) {
+        LocationFailureReason.serviceDisabled =>
+          context.locationL10n.locationServiceOff,
+        LocationFailureReason.permissionDenied ||
+        LocationFailureReason.permissionPermanentlyDenied =>
+          context.locationL10n.locationPermissionMissing,
+        LocationFailureReason.fixTimeout =>
+          context.locationL10n.locationNotFound,
+        LocationFailureReason.unavailable => context.locationL10n.locationError,
+      };
 }

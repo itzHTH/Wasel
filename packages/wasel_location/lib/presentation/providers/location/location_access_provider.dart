@@ -3,12 +3,10 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/permissions/permission_gate.dart' as permission_gate;
 import 'package:wasel_location/domain/entities/location_access.dart';
+import 'package:wasel_location/l10n/location_l10n_extension.dart';
 import 'package:wasel_location/presentation/providers/location_di_providers.dart';
 
 part 'location_access_provider.g.dart';
-
-const String _deniedTitle = 'إذن الموقع مطلوب';
-const String _deniedMessage = 'يرجى تمكين إذن الموقع للوصول إلى هذه الميزة.';
 
 /// Manages the global location permission state and handles prompting.
 //
@@ -31,8 +29,8 @@ class LocationAccessController extends _$LocationAccessController {
     final granted = await permission_gate.ensurePermission(
       context,
       Permission.location,
-      deniedTitle: _deniedTitle,
-      deniedMessage: _deniedMessage,
+      deniedTitle: context.locationL10n.locationPermissionRequired,
+      deniedMessage: context.locationL10n.locationPermissionRequiredMessage,
     );
 
     // Re-read strictly from the platform to catch `permanentlyDenied` cases

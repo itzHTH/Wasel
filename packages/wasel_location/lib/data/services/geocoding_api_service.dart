@@ -23,7 +23,7 @@ abstract class GeocodingApiService {
     @Path('lat') String lat,
     @Path('lng') String lng, {
     @Query('languageCode')
-    String languageCode = LocationApiConst.geocodingLanguageCode,
+    String languageCode = LocationApiConst.geocodingFallbackLanguageCode,
     @Query('regionCode')
     String regionCode = LocationApiConst.geocodingRegionCode,
     @CancelRequest() CancelToken? cancelToken,

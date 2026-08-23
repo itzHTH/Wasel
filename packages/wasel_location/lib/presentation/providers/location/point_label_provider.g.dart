@@ -8,7 +8,7 @@ part of 'point_label_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// Resolves a GeoPoint into a localized 'street، locality' label.
+/// Resolves a GeoPoint into a localized 'street, locality' label.
 ///
 //? - Uses GeoPoint as the cache key: structurally identical points resolve
 //?   instantly from memory instead of triggering duplicate Google API billing.
@@ -22,7 +22,7 @@ part of 'point_label_provider.dart';
 @ProviderFor(pointLabel)
 final pointLabelProvider = PointLabelFamily._();
 
-/// Resolves a GeoPoint into a localized 'street، locality' label.
+/// Resolves a GeoPoint into a localized 'street, locality' label.
 ///
 //? - Uses GeoPoint as the cache key: structurally identical points resolve
 //?   instantly from memory instead of triggering duplicate Google API billing.
@@ -36,7 +36,7 @@ final pointLabelProvider = PointLabelFamily._();
 final class PointLabelProvider
     extends $FunctionalProvider<AsyncValue<String>, String, FutureOr<String>>
     with $FutureModifier<String>, $FutureProvider<String> {
-  /// Resolves a GeoPoint into a localized 'street، locality' label.
+  /// Resolves a GeoPoint into a localized 'street, locality' label.
   ///
   //? - Uses GeoPoint as the cache key: structurally identical points resolve
   //?   instantly from memory instead of triggering duplicate Google API billing.
@@ -89,9 +89,9 @@ final class PointLabelProvider
   }
 }
 
-String _$pointLabelHash() => r'aaf25c71129b1812eda9a58e3d616ff2b77e8ce4';
+String _$pointLabelHash() => r'e82d249bda183c05a7fcd3a01d563720b0b2c7ec';
 
-/// Resolves a GeoPoint into a localized 'street، locality' label.
+/// Resolves a GeoPoint into a localized 'street, locality' label.
 ///
 //? - Uses GeoPoint as the cache key: structurally identical points resolve
 //?   instantly from memory instead of triggering duplicate Google API billing.
@@ -113,7 +113,7 @@ final class PointLabelFamily extends $Family
         isAutoDispose: false,
       );
 
-  /// Resolves a GeoPoint into a localized 'street، locality' label.
+  /// Resolves a GeoPoint into a localized 'street, locality' label.
   ///
   //? - Uses GeoPoint as the cache key: structurally identical points resolve
   //?   instantly from memory instead of triggering duplicate Google API billing.

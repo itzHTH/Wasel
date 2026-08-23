@@ -1,6 +1,10 @@
 /// wasel_location — shared location logic for the Wasel apps.
 library;
 
+// Localization
+export 'l10n/location_localizations.dart';
+export 'l10n/location_l10n_extension.dart';
+
 // The map package itself. Re-exported so a screen needs a single import to get
 // both the coordinates and the types they are drawn with; `wasel_core` used to
 // carry this and no longer knows what a map is.

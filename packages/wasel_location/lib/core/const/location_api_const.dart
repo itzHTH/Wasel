@@ -5,7 +5,8 @@ class LocationApiConst {
 
   static const String geocodingFieldMask = 'results.addressComponents';
 
-  static const String geocodingLanguageCode = 'ar';
+  /// Used only when no active language is supplied.
+  static const String geocodingFallbackLanguageCode = 'ar';
 
   static const String geocodingRegionCode = 'IQ';
 
