@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
-import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/widgets/cards/app_menu_tile.dart';
 import 'package:wasel_core/widgets/cards/app_surface_card.dart';
 
@@ -34,7 +33,7 @@ class AppGroupCard extends StatelessWidget {
     return AppSurfaceCard(
       padding: EdgeInsets.zero,
       clipBehavior: Clip.antiAlias,
-      borderRadius: AppDimens.radius16,
+      borderRadius: context.shape.radiusCard,
       child: Column(mainAxisSize: MainAxisSize.min, children: rows),
     );
   }

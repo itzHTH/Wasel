@@ -55,9 +55,11 @@ class AppDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: context.colors.elementBackground,
-      insetPadding: EdgeInsets.symmetric(horizontal: AppDimens.screenHPadding),
+      insetPadding: EdgeInsets.symmetric(
+        horizontal: context.shape.screenPadding,
+      ),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppDimens.radius24),
+        borderRadius: BorderRadius.circular(context.shape.radiusDialog),
       ),
       child: Padding(
         padding: EdgeInsets.all(AppDimens.space24),
@@ -103,7 +105,7 @@ class AppDialog extends StatelessWidget {
             ),
             SizedBox(height: AppDimens.space24),
             SizedBox(
-              height: AppDimens.buttonHeight,
+              height: context.shape.buttonHeight,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: isDestructive
@@ -111,7 +113,9 @@ class AppDialog extends StatelessWidget {
                       : context.colors.primary500,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AppDimens.radius12),
+                    borderRadius: BorderRadius.circular(
+                      context.shape.radiusButton,
+                    ),
                   ),
                 ),
                 onPressed: () => Navigator.of(context).pop(true),
@@ -127,7 +131,7 @@ class AppDialog extends StatelessWidget {
             if (cancelLabel != null) ...[
               SizedBox(height: AppDimens.space8),
               SizedBox(
-                height: AppDimens.buttonHeight,
+                height: context.shape.buttonHeight,
                 child: TextButton(
                   onPressed: () => Navigator.of(context).pop(false),
                   child: Text(
