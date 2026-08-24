@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
-import 'package:wasel_core/widgets/app_text_form_field.dart';
+import 'package:wasel_core/widgets/forms/app_text_form_field.dart';
 
 class AppLabeledFormField extends StatelessWidget {
   final String label;

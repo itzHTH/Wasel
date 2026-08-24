@@ -3,11 +3,6 @@ import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 
 /// The single loading identity for the Wasel apps.
-///
-/// [AppInlineLoading] fits inside a card row, a label line, or a button slot.
-/// [AppLoadingOverlay] covers a whole area (e.g. the map) and swallows taps on
-/// whatever sits underneath it. Both draw the same indicator, so a screen never
-/// shows two different loading visuals.
 class AppInlineLoading extends StatelessWidget {
   const AppInlineLoading({super.key, this.size, this.color});
 

@@ -12,7 +12,6 @@ import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.
 import 'package:wasal/features/ride/ui/providers/ride_draft/selected_payment_method_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_price/ride_price_provider.dart';
 import 'package:wasal/features/ride/ui/screens/ride_completed_screen.dart';
-import 'package:wasal/features/ride/ui/widgets/ride_card_transition.dart';
 import 'package:wasal/features/ride/ui/widgets/tracking/driver_arrived_card.dart';
 import 'package:wasal/features/ride/ui/widgets/tracking/driver_on_the_way_card.dart';
 import 'package:wasal/features/ride/ui/widgets/tracking/ride_cancelled_dialog.dart';

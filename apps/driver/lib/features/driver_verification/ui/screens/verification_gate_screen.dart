@@ -1,10 +1,10 @@
+import 'package:wasel_auth/wasel_auth.dart';
 import 'package:driver/features/driver_verification/domain/entities/verification_status.dart';
 import 'package:flutter/material.dart';
 import 'package:wasel_core/wasel_core.dart';
 import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
-import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
 import 'package:driver/features/driver_verification/ui/providers/verify_status/verify_status_provider.dart';
 import 'package:driver/features/driver_verification/ui/screens/under_review_screen.dart';
 import 'package:driver/features/driver_verification/ui/screens/verification_wizard_screen.dart';

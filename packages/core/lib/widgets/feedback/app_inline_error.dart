@@ -3,9 +3,6 @@ import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 
 /// Persistent error shown next to the field that caused it.
-///
-/// `liveRegion` makes screen readers announce the message when it appears,
-/// which a SnackBar alone does not guarantee.
 class AppInlineError extends StatelessWidget {
   final String? message;
   final TextAlign textAlign;

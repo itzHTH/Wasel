@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/widgets/app_menu_tile.dart';
-import 'package:wasel_core/widgets/app_surface_card.dart';
+import 'package:wasel_core/widgets/cards/app_menu_tile.dart';
+import 'package:wasel_core/widgets/cards/app_surface_card.dart';
 
 class AppGroupCard extends StatelessWidget {
   const AppGroupCard({super.key, required this.children, this.dividerIndent});

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:wasal/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/features/ride/ui/providers/ride_price/ride_price_provider.dart';
-import 'package:wasal/features/ride/ui/widgets/ride_card_shell.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_price_card/ride_price_error_view.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_price_card/ride_price_loading.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_price_card/ride_price_view.dart';

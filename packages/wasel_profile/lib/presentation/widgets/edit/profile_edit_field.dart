@@ -3,7 +3,7 @@ import 'package:wasel_profile/l10n/profile_l10n_extension.dart';
 import 'package:flutter/services.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
-import 'package:wasel_core/widgets/app_labeled_field.dart';
+import 'package:wasel_core/widgets/forms/app_labeled_field.dart';
 
 /// One field of the edit form.
 class ProfileEditField extends StatelessWidget {

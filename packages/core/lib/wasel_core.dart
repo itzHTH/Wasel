@@ -72,38 +72,59 @@ export 'usecase/base_use_case.dart';
 export 'usecase/cancellable_use_case.dart';
 export 'usecase/stream_base_use_case.dart';
 
-// Widgets
-export 'widgets/app_appearance_sheet.dart';
-export 'widgets/app_back_button.dart';
-export 'widgets/app_dialog.dart';
-export 'widgets/app_editable_avatar.dart';
-export 'widgets/app_entrance_fade.dart';
-export 'widgets/app_error_retry.dart';
-export 'widgets/app_error_state.dart';
-export 'widgets/app_group_card.dart';
-export 'widgets/app_image_source_sheet.dart';
-export 'widgets/app_info_row.dart';
-export 'widgets/app_inline_error.dart';
-export 'widgets/app_language_sheet.dart';
-export 'widgets/app_language_switch.dart';
-export 'widgets/app_labeled_field.dart';
-export 'widgets/app_loading.dart';
-export 'widgets/app_map_profile_button.dart';
-export 'widgets/app_menu_tile.dart';
-export 'widgets/app_primary_button.dart';
-export 'widgets/app_profile_avatar.dart';
-export 'widgets/app_skeleton.dart';
-export 'widgets/app_soon_badge.dart';
-export 'widgets/app_splash_branding.dart';
-export 'widgets/app_stat_cards.dart';
-export 'widgets/app_step_indicator.dart';
-export 'widgets/app_surface_card.dart';
-export 'widgets/app_text_form_field.dart';
-export 'widgets/app_theme_mode_switch.dart';
-export 'widgets/password_field.dart';
+// Widgets — buttons
+export 'widgets/buttons/app_back_button.dart';
+export 'widgets/buttons/app_map_profile_button.dart';
+export 'widgets/buttons/app_primary_button.dart';
+export 'widgets/buttons/app_secondary_button.dart';
+
+// Widgets — form fields
+export 'widgets/forms/app_field_icon.dart';
+export 'widgets/forms/app_labeled_field.dart';
+export 'widgets/forms/app_text_form_field.dart';
+export 'widgets/forms/password_field.dart';
+
+// Widgets — feedback (dialogs, errors, loading)
+export 'widgets/feedback/app_dialog.dart';
+export 'widgets/feedback/app_error_retry.dart';
+export 'widgets/feedback/app_error_state.dart';
+export 'widgets/feedback/app_inline_error.dart';
+export 'widgets/feedback/app_loading.dart';
+export 'widgets/feedback/app_skeleton.dart';
+
+// Widgets — cards & rows
+export 'widgets/cards/app_group_card.dart';
+export 'widgets/cards/app_info_row.dart';
+export 'widgets/cards/app_menu_tile.dart';
+export 'widgets/cards/app_stat_cards.dart';
+export 'widgets/cards/app_surface_card.dart';
+
+// Widgets — modal sheets
+export 'widgets/sheets/app_appearance_sheet.dart';
+export 'widgets/sheets/app_image_source_sheet.dart';
+export 'widgets/sheets/app_language_sheet.dart';
+
+// Widgets — avatars
+export 'widgets/avatar/app_editable_avatar.dart';
+export 'widgets/avatar/app_profile_avatar.dart';
+
+// Widgets — appearance & language controls
+export 'widgets/settings/app_language_switch.dart';
+export 'widgets/settings/app_theme_mode_switch.dart';
 
 // Widgets — OTP (shared by the register and reset-password flows)
 export 'widgets/otp/otp_countdown_timer.dart';
 export 'widgets/otp/otp_pin_input.dart';
 export 'widgets/otp/otp_resend_section.dart';
 export 'widgets/otp/resend_otp_row.dart';
+
+// Widgets — ride cards
+export 'widgets/ride/expandable_ride_card.dart';
+export 'widgets/ride/ride_card_shell.dart';
+export 'widgets/ride/ride_card_transition.dart';
+
+// Widgets — misc
+export 'widgets/app_entrance_fade.dart';
+export 'widgets/app_soon_badge.dart';
+export 'widgets/app_splash_branding.dart';
+export 'widgets/app_step_indicator.dart';

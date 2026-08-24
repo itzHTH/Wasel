@@ -4,14 +4,6 @@ import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 
 /// A general-purpose, themed dialog for the Wasel apps.
-///
-/// Use it anywhere you need a centered confirm/cancel prompt: permission
-/// rationales, destructive confirmations, info notices, etc. It only renders and
-/// reports the user's choice — callers own the side effect of each action.
-///
-/// [show] returns `true` when the confirm action is tapped, `false` when the
-/// dialog is cancelled or dismissed. When [cancelLabel] is null only the confirm
-/// action is shown.
 class AppDialog extends StatelessWidget {
   final String title;
   final String message;

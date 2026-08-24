@@ -4,7 +4,6 @@ import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
-import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
 
 class WizardBottomBar extends StatelessWidget {
   final bool showBack;

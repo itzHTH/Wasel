@@ -2,7 +2,6 @@ import 'package:wasel_payments/domain/entities/payment_method.dart';
 import 'package:driver/features/ride/ui/widgets/ride_completed/completed_check_badge.dart';
 import 'package:driver/features/ride/ui/widgets/fare_hero.dart';
 import 'package:wasel_payments/presentation/widgets/payment_method_chip.dart';
-import 'package:driver/features/ride/ui/widgets/ride_card_shell.dart';
 import 'package:flutter/material.dart';
 import 'package:driver/l10n/l10n_extension.dart';
 import 'package:wasel_core/wasel_core.dart';

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_core/l10n/core_l10n_extension.dart';
-import 'package:wasel_core/localization/app_local_type.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
-import 'package:wasel_core/widgets/app_language_switch.dart';
+import 'package:wasel_core/widgets/settings/app_theme_mode_switch.dart';
 
-/// Bottom sheet holding the Arabic / English control.
-Future<void> showAppLanguageSheet(BuildContext context) {
+/// Bottom sheet holding the Light / Dark / System control.
+Future<void> showAppAppearanceSheet(BuildContext context) {
   return showModalBottomSheet<void>(
     context: context,
     useSafeArea: true,
@@ -33,27 +32,26 @@ Future<void> showAppLanguageSheet(BuildContext context) {
           ),
           SizedBox(height: AppDimens.space24),
           Text(
-            context.coreL10n.language,
+            context.coreL10n.appearance,
             style: context.styles.font20Secondary900Bold,
           ),
           SizedBox(height: AppDimens.space8),
           Text(
-            context.coreL10n.languageSheetDescription,
+            context.coreL10n.appearanceSheetDescription,
             style: context.styles.font14Neutral400Regular,
           ),
           SizedBox(height: AppDimens.space24),
-          const AppLanguageSwitch(),
+          const AppThemeModeSwitch(),
         ],
       ),
     ),
   );
 }
 
-/// The active language, for the trailing label on the language menu tile.
-/// Each language names itself, so this reads correctly in either direction.
-String appLocaleLabel(Locale locale) => AppLocaleType.values
-    .firstWhere(
-      (type) => type.code == locale.languageCode,
-      orElse: () => AppLocaleType.arabic,
-    )
-    .name;
+/// The active mode, for the trailing label on the appearance menu tile.
+String appThemeModeLabel(BuildContext context, ThemeMode mode) =>
+    switch (mode) {
+      ThemeMode.light => context.coreL10n.themeLight,
+      ThemeMode.dark => context.coreL10n.themeDark,
+      ThemeMode.system => context.coreL10n.themeSystem,
+    };

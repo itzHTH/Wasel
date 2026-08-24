@@ -5,7 +5,7 @@ import 'package:driver/l10n/l10n_extension.dart';
 import 'package:wasel_core/helpers/app_validators.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
-import 'package:wasel_core/widgets/app_labeled_field.dart';
+import 'package:wasel_core/widgets/forms/app_labeled_field.dart';
 import 'package:driver/features/driver_verification/ui/widgets/wizard/upload_card.dart';
 
 class VehicleStep extends StatelessWidget {

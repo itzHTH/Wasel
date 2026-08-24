@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/widgets/app_error_retry.dart';
+import 'package:wasel_core/widgets/feedback/app_error_retry.dart';
 
 /// Full-area failure state: a centred AppErrorRetry for when a screen has
 /// nothing to show, as opposed to an error beside a field.

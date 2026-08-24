@@ -1,9 +1,8 @@
-import 'package:driver/core/widgets/app_secondary_button.dart';
+import 'package:driver/features/ride/ui/providers/map/driver_is_camera_moving_provider.dart';
 import 'package:wasel_location/wasel_location.dart';
 import 'package:wasel_payments/domain/entities/payment_method.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/rider_profile/current_rider_profile_provider.dart';
-import 'package:driver/features/ride/ui/widgets/expandable_ride_card.dart';
 import 'package:driver/features/ride/ui/widgets/fare_hero.dart';
 import 'package:driver/features/ride/ui/widgets/incoming_offer/offer_countdown_ring.dart';
 import 'package:wasel_payments/presentation/widgets/payment_method_chip.dart';
@@ -45,6 +44,7 @@ class IncomingOfferCard extends ConsumerWidget {
     // the countdown and the answer buttons are what the driver decides on, so
     // those stay out; the addresses ride the card's own peek and a drag.
     return ExpandableRideCard(
+      isMapMoving: ref.watch(driverIsCameraMovingProvider),
       summary: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,

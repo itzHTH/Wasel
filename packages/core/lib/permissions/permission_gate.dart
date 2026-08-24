@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_core/l10n/core_l10n_extension.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:wasel_core/widgets/app_dialog.dart';
+import 'package:wasel_core/widgets/feedback/app_dialog.dart';
 
 /// Requests [permission] and returns whether it ended up usable.
 ///

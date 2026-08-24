@@ -11,9 +11,6 @@ class AppSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Built here rather than as a const: the shimmer follows the active theme.
-    // The ramp is picked per brightness — reusing one pair would make the
-    // highlight darker than the base in dark mode, so the sweep runs backwards.
     final colors = context.colors;
     final isDark = context.isDarkMode;
     final effect = ShimmerEffect(

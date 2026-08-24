@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wasal/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wasal/core/widgets/app_secondary_button.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/is_camera_moving_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_state.dart';

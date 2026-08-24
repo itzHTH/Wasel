@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wasel_core/l10n/core_l10n_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
-import 'package:wasel_core/widgets/app_loading.dart';
+import 'package:wasel_core/widgets/feedback/app_loading.dart';
 
 class AppErrorRetry extends StatelessWidget {
   const AppErrorRetry({

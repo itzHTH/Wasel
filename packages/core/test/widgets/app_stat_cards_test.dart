@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:wasel_core/theme/app_brand.dart';
 import 'package:wasel_core/theme/app_theme.dart';
 import 'package:wasel_core/theme/palettes/rider_palette.dart';
-import 'package:wasel_core/widgets/app_stat_cards.dart';
+import 'package:wasel_core/widgets/cards/app_stat_cards.dart';
 
 void main() {
   final balance = AppStat(

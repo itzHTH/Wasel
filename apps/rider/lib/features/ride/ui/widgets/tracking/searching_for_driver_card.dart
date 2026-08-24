@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wasal/l10n/l10n_extension.dart';
-import 'package:wasal/core/widgets/app_secondary_button.dart';
 import 'package:wasal/features/ride/domain/entities/ride_price.dart';
-import 'package:wasal/features/ride/ui/widgets/ride_card_shell.dart';
 import 'package:wasal/features/ride/ui/widgets/tracking/ride_trip_summary.dart';
 import 'package:wasel_core/wasel_core.dart';
 

@@ -1,10 +1,9 @@
-import 'package:driver/core/widgets/app_secondary_button.dart';
+import 'package:driver/features/ride/ui/providers/map/driver_is_camera_moving_provider.dart';
 import 'package:wasel_location/wasel_location.dart';
 import 'package:wasel_payments/domain/entities/payment_method.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/rider_profile/current_rider_profile_provider.dart';
 import 'package:driver/features/ride/ui/widgets/tracking/card_stage_header.dart';
-import 'package:driver/features/ride/ui/widgets/expandable_ride_card.dart';
 import 'package:driver/features/ride/ui/widgets/fare_hero.dart';
 import 'package:wasel_payments/presentation/widgets/payment_method_chip.dart';
 import 'package:driver/features/ride/ui/widgets/rider_info_row.dart';
@@ -36,6 +35,7 @@ class AtPickupCard extends ConsumerWidget {
     final isBusy = ref.watch(rideActionControllerProvider).isLoading;
 
     return ExpandableRideCard(
+      isMapMoving: ref.watch(driverIsCameraMovingProvider),
       summary: CardStageHeader(
         icon: Icons.check_circle_outline_rounded,
         title: context.l10n.arrivedAtPickup,

@@ -3,8 +3,8 @@ import 'package:wasel_core/helpers/app_image_picker.dart';
 import 'package:wasel_core/l10n/core_l10n_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
-import 'package:wasel_core/widgets/app_group_card.dart';
-import 'package:wasel_core/widgets/app_menu_tile.dart';
+import 'package:wasel_core/widgets/cards/app_group_card.dart';
+import 'package:wasel_core/widgets/cards/app_menu_tile.dart';
 
 Future<AppImageSource?> showAppImageSourceSheet({
   required BuildContext context,
