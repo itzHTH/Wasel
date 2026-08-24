@@ -34,7 +34,7 @@ final class ReviewRideControllerProvider
 }
 
 String _$reviewRideControllerHash() =>
-    r'6dfc3ee3086e0f9b01a377ef284606b17262b675';
+    r'1dd35be053a9ac780e6d592907c9c09ea7d754a2';
 
 abstract class _$ReviewRideController extends $AsyncNotifier<ReviewRide?> {
   FutureOr<ReviewRide?> build();

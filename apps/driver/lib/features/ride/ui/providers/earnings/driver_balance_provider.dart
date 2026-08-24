@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:driver/features/ride/ui/providers/ride_use_case_providers.dart';
+import 'package:driver/features/ride/ride_di_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/networking/api_results.dart';
 import 'package:wasel_core/networking/errors/error_message.dart';

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'driver_verification_use_case.dart';
+part of 'driver_verification_di_providers.dart';
 
 // **************************************************************************
 // RiverpodGenerator

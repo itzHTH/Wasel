@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'ride_use_case_providers.dart';
+part of 'ride_di_providers.dart';
 
 // **************************************************************************
 // RiverpodGenerator

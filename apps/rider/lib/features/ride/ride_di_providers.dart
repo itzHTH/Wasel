@@ -6,7 +6,7 @@ import 'package:wasal/features/ride/domain/usecases/request_ride_use_case.dart';
 import 'package:wasal/features/ride/domain/usecases/review_ride_use_case.dart';
 import 'package:wasal/features/ride/domain/usecases/watch_ride_use_case.dart';
 
-part 'ride_use_case_providers.g.dart';
+part 'ride_di_providers.g.dart';
 
 @riverpod
 GetRidePriceUseCase getRidePriceUseCase(Ref ref) {

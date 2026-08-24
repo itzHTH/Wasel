@@ -9,28 +9,16 @@ part of 'driver_car_motion_provider.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 /// The animated position and heading of the driver's own car.
-///
-/// The animator and the stream that feeds it share one provider on purpose: a
-/// separate feeder could outlive its animator, and an animator disposed mid
-/// glide would be rebuilt with no history and snap.
 
 @ProviderFor(driverCarMotion)
 final driverCarMotionProvider = DriverCarMotionProvider._();
 
 /// The animated position and heading of the driver's own car.
-///
-/// The animator and the stream that feeds it share one provider on purpose: a
-/// separate feeder could outlive its animator, and an animator disposed mid
-/// glide would be rebuilt with no history and snap.
 
 final class DriverCarMotionProvider
     extends $FunctionalProvider<VehicleMotion, VehicleMotion, VehicleMotion>
     with $Provider<VehicleMotion> {
   /// The animated position and heading of the driver's own car.
-  ///
-  /// The animator and the stream that feeds it share one provider on purpose: a
-  /// separate feeder could outlive its animator, and an animator disposed mid
-  /// glide would be rebuilt with no history and snap.
   DriverCarMotionProvider._()
     : super(
         from: null,
@@ -64,4 +52,4 @@ final class DriverCarMotionProvider
   }
 }
 
-String _$driverCarMotionHash() => r'3d1e8ef1c944326f4910c53e1c8c6f02ba888d06';
+String _$driverCarMotionHash() => r'c4d7e82d0bb235694dad97353d58772dadf96057';

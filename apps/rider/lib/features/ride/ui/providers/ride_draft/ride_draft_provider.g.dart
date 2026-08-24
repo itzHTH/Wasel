@@ -41,7 +41,7 @@ final class RideDraftProvider
   }
 }
 
-String _$rideDraftHash() => r'e51e96ec4ab11bea80b668730e47ae73860e2189';
+String _$rideDraftHash() => r'a54619b73591cc82554ceda2085e1c682e027dec';
 
 abstract class _$RideDraft extends $Notifier<RideDraftState> {
   RideDraftState build();

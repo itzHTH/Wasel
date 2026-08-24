@@ -2,7 +2,7 @@ import 'package:wasel_core/wasel_core.dart';
 import 'package:driver/l10n/driver_localizations.dart';
 import 'package:driver/features/driver_verification/domain/entities/driver_profile_submission.dart';
 import 'package:driver/features/driver_verification/domain/usecases/submit_driver_profile_use_case.dart';
-import 'package:driver/features/driver_verification/ui/providers/driver_verification_use_case.dart';
+import 'package:driver/features/driver_verification/driver_verification_di_providers.dart';
 import 'package:driver/features/driver_verification/ui/providers/submit_profile/submit_profile_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

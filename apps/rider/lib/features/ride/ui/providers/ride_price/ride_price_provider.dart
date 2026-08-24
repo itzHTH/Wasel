@@ -4,7 +4,7 @@ import 'package:wasel_core/networking/api_results.dart';
 import 'package:wasel_core/networking/errors/error_message.dart';
 import 'package:wasal/features/ride/domain/entities/ride_price.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.dart';
-import 'package:wasal/features/ride/ui/providers/ride_use_case_providers.dart';
+import 'package:wasal/features/ride/ride_di_providers.dart';
 
 part 'ride_price_provider.g.dart';
 

@@ -3,7 +3,7 @@ import 'package:driver/features/driver_verification/domain/usecases/get_verifica
 import 'package:driver/features/driver_verification/domain/usecases/submit_driver_profile_use_case.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'driver_verification_use_case.g.dart';
+part 'driver_verification_di_providers.g.dart';
 
 @riverpod
 GetVerificationStatusUseCase getVerificationStatusUseCase(Ref ref) {
