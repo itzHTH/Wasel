@@ -135,7 +135,7 @@ void main() {
     await _forEachTheme(tester, (brand, brightness, theme, _) {
       expect(
         theme.textTheme.bodyMedium?.fontFamily,
-        'packages/wasel_core/ReadexPro',
+        AppFonts.family,
         reason: '${brand.name}/${brightness.name}',
       );
     });

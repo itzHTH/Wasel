@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -74,4 +75,80 @@ void main() {
       reason: 'white on amber measures 1.6:1',
     );
   });
+
+  test('the bundled family covers every glyph the shipped copy uses', () {
+    final fonts = Directory(repoPath('packages/core/assets/fonts'))
+        .listSync()
+        .whereType<File>()
+        .where((f) => f.path.endsWith('.ttf'))
+        .where((f) => !f.path.contains('IBMPlexMono'))
+        .toList();
+    expect(fonts, isNotEmpty);
+
+    final covered = fonts.map((f) => _cmapCodepoints(f)).toList();
+
+    // Every Arabic codepoint that appears in a shipped .arb value.
+    final used = <int>{};
+    for (final dir in ['apps', 'packages']) {
+      for (final file
+          in Directory(repoPath(dir))
+              .listSync(recursive: true)
+              .whereType<File>()
+              .where((f) => f.path.endsWith('_ar.arb'))) {
+        for (final rune in file.readAsStringSync().runes) {
+          if (rune >= 0x0600 && rune <= 0x06FF) used.add(rune);
+        }
+      }
+    }
+    expect(used, isNotEmpty, reason: 'no Arabic copy found to check');
+
+    for (final codes in covered) {
+      final missing = used.difference(codes);
+      expect(
+        missing,
+        isEmpty,
+        reason:
+            'the shipped copy uses '
+            '${missing.map((c) => 'U+${c.toRadixString(16).toUpperCase()}').join(', ')} '
+            'which the bundled family cannot render; a fallback font will not '
+            'fix it, because Arabic joining is resolved per font run',
+      );
+    }
+  });
+}
+
+/// Minimal format-4 `cmap` reader — enough to know which codepoints a face
+/// can actually render.
+Set<int> _cmapCodepoints(File file) {
+  final b = ByteData.sublistView(file.readAsBytesSync());
+  final numTables = b.getUint16(4);
+  var cmapOffset = -1;
+  for (var i = 0; i < numTables; i++) {
+    final rec = 12 + i * 16;
+    final tag = String.fromCharCodes(
+      List.generate(4, (k) => b.getUint8(rec + k)),
+    );
+    if (tag == 'cmap') cmapOffset = b.getUint32(rec + 8);
+  }
+  expect(cmapOffset, greaterThan(0), reason: 'no cmap in ${file.path}');
+
+  final codes = <int>{};
+  final numSub = b.getUint16(cmapOffset + 2);
+  for (var i = 0; i < numSub; i++) {
+    final sub = cmapOffset + b.getUint32(cmapOffset + 4 + i * 8 + 4);
+    if (b.getUint16(sub) != 4) continue;
+    final segX2 = b.getUint16(sub + 6);
+    final segs = segX2 ~/ 2;
+    final endBase = sub + 14;
+    final startBase = endBase + segX2 + 2;
+    for (var s = 0; s < segs; s++) {
+      final end = b.getUint16(endBase + s * 2);
+      final start = b.getUint16(startBase + s * 2);
+      if (end == 0xFFFF) continue;
+      for (var c = start; c <= end; c++) {
+        codes.add(c);
+      }
+    }
+  }
+  return codes;
 }

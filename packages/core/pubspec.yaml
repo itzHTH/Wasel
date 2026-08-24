@@ -65,27 +65,20 @@ flutter:
 
   # Bundled, so first launch has no network dependency and no fallback flash.
   fonts:
-    - family: ReadexPro
+    - family: Cairo
       fonts:
-        - asset: assets/fonts/ReadexPro-300.ttf
-          weight: 300
-        - asset: assets/fonts/ReadexPro-400.ttf
+        - asset: assets/fonts/Cairo-400.ttf
           weight: 400
-        - asset: assets/fonts/ReadexPro-500.ttf
+        - asset: assets/fonts/Cairo-500.ttf
           weight: 500
-        - asset: assets/fonts/ReadexPro-600.ttf
+        - asset: assets/fonts/Cairo-600.ttf
           weight: 600
-        - asset: assets/fonts/ReadexPro-700.ttf
+        - asset: assets/fonts/Cairo-700.ttf
           weight: 700
 
-    # Live-updating numerals only — see AppFonts.numeralFamily.
+    # Live-updating numerals only — see AppFonts.numeralFamily. Only w600 is
+    # reachable today; add a weight here when a call site needs one.
     - family: IBMPlexMono
       fonts:
-        - asset: assets/fonts/IBMPlexMono-400.ttf
-          weight: 400
-        - asset: assets/fonts/IBMPlexMono-500.ttf
-          weight: 500
         - asset: assets/fonts/IBMPlexMono-600.ttf
           weight: 600
-        - asset: assets/fonts/IBMPlexMono-700.ttf
-          weight: 700
