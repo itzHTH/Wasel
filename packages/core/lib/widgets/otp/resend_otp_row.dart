@@ -20,18 +20,15 @@ class ResendOtpRow extends StatelessWidget {
       children: [
         Text(
           context.coreL10n.otpNotReceived,
-          style: context.styles.body(color: context.colors.neutral400),
+          style: context.styles.bodyMuted(),
         ),
         GestureDetector(
           onTap: _canResend ? _onResend : null,
           child: Text(
             context.coreL10n.otpResend,
             style: _canResend
-                ? context.styles.body(
-                    weight: FontWeight.w600,
-                    color: context.colors.primary500,
-                  )
-                : context.styles.body(color: context.colors.neutral400),
+                ? context.styles.bodyBrand()
+                : context.styles.bodyMuted(),
           ),
         ),
       ],
