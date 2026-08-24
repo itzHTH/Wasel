@@ -116,8 +116,6 @@ class _CardFormSheetState extends ConsumerState<_CardFormSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(tokenizeCardControllerProvider);
-
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.only(
@@ -141,18 +139,7 @@ class _CardFormSheetState extends ConsumerState<_CardFormSheet> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Center(
-                    child: Container(
-                      width: AppDimens.space40,
-                      height: AppDimens.space4,
-                      decoration: BoxDecoration(
-                        color: context.colors.neutral200,
-                        borderRadius: BorderRadius.circular(
-                          AppDimens.radiusPill,
-                        ),
-                      ),
-                    ),
-                  ),
+                  const _SheetHandle(),
                   SizedBox(height: AppDimens.space24),
                   Text(
                     context.l10n.cardDetails,
@@ -209,15 +196,28 @@ class _CardFormSheetState extends ConsumerState<_CardFormSheet> {
                       ),
                     ],
                   ),
-                  if (state.hasError) ...[
-                    SizedBox(height: AppDimens.space12),
-                    AppInlineError(message: state.error.toString()),
-                  ],
-                  SizedBox(height: AppDimens.space24),
-                  AppPrimaryButton(
-                    label: context.l10n.saveCard,
-                    isLoading: state.isLoading,
-                    onPressed: _submit,
+                  // Only the error line and the button follow the tokenize
+                  // call, so the card fields above are left out of its rebuild.
+                  Consumer(
+                    builder: (context, ref, _) {
+                      final state = ref.watch(tokenizeCardControllerProvider);
+
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          if (state.hasError) ...[
+                            SizedBox(height: AppDimens.space12),
+                            AppInlineError(message: state.error.toString()),
+                          ],
+                          SizedBox(height: AppDimens.space24),
+                          AppPrimaryButton(
+                            label: context.l10n.saveCard,
+                            isLoading: state.isLoading,
+                            onPressed: _submit,
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ],
               ),
@@ -227,4 +227,20 @@ class _CardFormSheetState extends ConsumerState<_CardFormSheet> {
       ),
     );
   }
+}
+
+class _SheetHandle extends StatelessWidget {
+  const _SheetHandle();
+
+  @override
+  Widget build(BuildContext context) => Center(
+    child: Container(
+      width: AppDimens.space40,
+      height: AppDimens.space4,
+      decoration: BoxDecoration(
+        color: context.colors.neutral200,
+        borderRadius: BorderRadius.circular(AppDimens.radiusPill),
+      ),
+    ),
+  );
 }
