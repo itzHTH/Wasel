@@ -258,7 +258,7 @@ footer{padding:44px 0 64px;color:var(--ink-3);font-size:13.5px}
   <dl class="meta">
     <div><dt>Prepared for</dt><dd>Wasel — Rider &amp; Captain</dd></div>
     <div><dt>Scope</dt><dd>Color, type, shape, theming architecture</dd></div>
-    <div><dt>Status</dt><dd>Approved · steps 1–4 built, in the working tree</dd></div>
+    <div><dt>Status</dt><dd>Built — six commits on feat/brand-identity-design-system</dd></div>
     <div><dt>Contrast</dt><dd>Every pair below measured, not estimated</dd></div>
   </dl>
 </header>
@@ -562,7 +562,7 @@ footer{padding:44px 0 64px;color:var(--ink-3);font-size:13.5px}
 
   <ul class="clean">
     <li><b>Weights ship at 300–700.</b> Readex Pro is variable; restrict usage to 400 / 500 / 600 / 700 so the ramp stays legible and the download stays small.</li>
-    <li><b>Readex Pro has no tabular figures — confirmed, and it needs a decision.</b> Inspecting the shipped TTFs: the GSUB feature list is <code>calt ccmp dnom fina frac init liga locl medi numr rlig</code> — no <code>tnum</code> — and the digit advances are proportional (Latin 0–9 run 500–620 units, Arabic-Indic 281–630). <code>FontFeature.tabularFigures()</code> would be a silent no-op, so a ticking fare or trip timer will visibly shift. Three ways out: give numeric styles a second family that does carry <code>tnum</code>, lay ticking numbers out in fixed-width slots, or accept the shift outside the live-trip screens. Flagged rather than chosen — it changes the type system.</li>
+    <li><b>Readex Pro has no tabular figures — confirmed, and it needs a decision.</b> Inspecting the shipped TTFs: the GSUB feature list is <code>calt ccmp dnom fina frac init liga locl medi numr rlig</code> — no <code>tnum</code> — and the digit advances are proportional (Latin 0–9 run 500–620 units, Arabic-Indic 281–630). <code>FontFeature.tabularFigures()</code> would be a silent no-op, so a ticking fare or trip timer will visibly shift. Resolved by bundling IBM Plex Mono for live numerals only, behind <code>timerTextStyle</code>. Every digit and the <code>.</code> <code>,</code> <code>:</code> separators are one 600-unit advance in all four weights, so a ticking value cannot shift. Applied to the offer countdown and the OTP timer — the two values in either app that re-render every second.</li>
     <li><b>Arabic needs more leading than Latin.</b> Arabic ascenders and descenders run deeper. Set body line-height to 1.7 rather than the 1.5 Latin default, or diacritics clip.</li>
     <li><b>Hierarchy by weight and size only — never by colour.</b> Colour carries state in this system; if it also carried emphasis, neither would read cleanly.</li>
     <li><b>The switch has a runtime cost.</b> <code>google_fonts</code> fetches faces over the network on first launch. Bundling Readex Pro as a local asset instead removes a cold-start dependency and a first-paint flash — recommended for both apps regardless of which family wins.</li>
@@ -650,16 +650,16 @@ footer{padding:44px 0 64px;color:var(--ink-3);font-size:13.5px}
       <p>Replace the four constants in <code>rider_palette.dart</code> and <code>driver_palette.dart</code> with the values specified above. This is the commit where both apps change appearance. It touches two files.</p></div>
     </li>
     <li>
-      <div><h4>Introduce per-brand shape <span style="color:var(--warn);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600">NOT STARTED</span></h4>
+      <div><h4>Introduce per-brand shape <span style="color:var(--ok);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600">✓ DONE</span></h4>
       <p>Add <code>AppShape</code> and <code>brand.shapeFor()</code> beside the existing <code>paletteFor()</code>. Thread it through <code>AppTheme.build()</code> so buttons, cards and sheets read radii from the brand. Point <code>inputDecorationTheme</code> at <code>borderStrong</code> in the same change.</p></div>
     </li>
     <li>
-      <div><h4>Swap the type family and split the ramp <span style="color:var(--warn);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600">FAMILY DONE · RAMP PENDING</span></h4>
+      <div><h4>Swap the type family and split the ramp <span style="color:var(--ok);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600">✓ DONE</span></h4>
       <p>Move <code>AppTextStyles</code> and <code>AppTheme</code>'s <code>textTheme</code> from IBM Plex Sans Arabic to Readex Pro, apply the per-app ramp, and add tabular figures to the numeric styles. Bundle the face locally rather than fetching it at runtime.</p></div>
     </li>
     <li>
-      <div><h4>Retune the map styles <span style="color:var(--warn);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600">NOT STARTED</span></h4>
-      <p>Rewrite <code>assets/map_styles/light.json</code> and <code>dark.json</code> against the new grounds, and check the route stroke — <code>#097A8F</code> on light cartography, <code>#5FE2FA</code> on dark — actually holds 3:1 over real tiles rather than over a flat swatch.</p></div>
+      <div><h4>Retune the map styles <span style="color:var(--ok);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600">✓ DONE</span></h4>
+      <p>All four styles regenerate from the new tokens. Measured on the real rules: labels clear AA against their ground in every style, and the route stroke clears <b>4.50–11.85:1</b> against both the base ground and the road fill. Highways diverge on purpose — warm sand for the rider so it reads against a teal route, graphite for the captain so amber stays the brand and the route alone.</p></div>
     </li>
     <li>
       <div><h4>Verify on device</h4>
