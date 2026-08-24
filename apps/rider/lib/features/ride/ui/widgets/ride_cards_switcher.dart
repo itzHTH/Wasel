@@ -1,7 +1,7 @@
+import 'package:wasel_core/wasel_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/features/ride/ui/providers/request_ride/request_ride_provider.dart';
-import 'package:wasal/features/ride/ui/widgets/ride_card_transition.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_draft_card/ride_draft_card.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_price_card/ride_price_card.dart';
 import 'package:wasal/features/ride/ui/widgets/tracking/ride_tracking_cards.dart';

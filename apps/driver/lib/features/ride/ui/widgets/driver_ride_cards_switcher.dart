@@ -9,7 +9,6 @@ import 'package:driver/features/ride/ui/widgets/tracking/pickup_on_the_way_card.
 import 'package:driver/features/ride/ui/widgets/searching/searching_card.dart';
 import 'package:driver/features/ride/ui/widgets/ride_completed/trip_completed_card.dart';
 import 'package:driver/features/ride/ui/widgets/tracking/trip_in_progress_card.dart';
-import 'package:driver/features/ride/ui/widgets/ride_card_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:wasel_core/wasel_core.dart';
 import 'package:driver/l10n/l10n_extension.dart';

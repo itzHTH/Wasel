@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_profile/l10n/profile_l10n_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/widgets/app_inline_error.dart';
-import 'package:wasel_core/widgets/app_surface_card.dart';
+import 'package:wasel_core/widgets/feedback/app_inline_error.dart';
+import 'package:wasel_core/widgets/cards/app_surface_card.dart';
 import 'package:wasel_profile/domain/entities/profile_edit_capabilities.dart';
 import 'package:wasel_profile/presentation/widgets/edit/profile_edit_avatar_section.dart';
 import 'package:wasel_profile/presentation/widgets/edit/profile_edit_form.dart';

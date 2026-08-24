@@ -9,7 +9,7 @@ import 'package:driver/features/ride/domain/use_case/watch_ride_connection_use_c
 import 'package:driver/features/ride/domain/use_case/watch_ride_event_use_case.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
-import 'package:driver/features/ride/ui/providers/ride_use_case_providers.dart';
+import 'package:driver/features/ride/ride_di_providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_payments/domain/entities/payment_method.dart';

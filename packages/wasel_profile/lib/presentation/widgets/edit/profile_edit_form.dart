@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wasel_profile/l10n/profile_l10n_extension.dart';
 import 'package:flutter/services.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/widgets/app_dialog.dart';
+import 'package:wasel_core/widgets/feedback/app_dialog.dart';
 import 'package:wasel_profile/domain/entities/profile_edit_capabilities.dart';
 import 'package:wasel_profile/core/validators/profile_edit_validators.dart';
 import 'package:wasel_profile/presentation/widgets/edit/profile_edit_field.dart';

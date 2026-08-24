@@ -1,5 +1,3 @@
-import 'package:driver/core/widgets/app_secondary_button.dart';
-import 'package:driver/features/ride/ui/widgets/ride_card_shell.dart';
 import 'package:flutter/material.dart';
 import 'package:driver/l10n/l10n_extension.dart';
 import 'package:wasel_core/wasel_core.dart';

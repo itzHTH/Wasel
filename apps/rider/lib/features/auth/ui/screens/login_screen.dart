@@ -7,9 +7,7 @@ import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasal/features/auth/ui/providers/login/login_provider.dart';
 import 'package:wasal/features/auth/ui/widgets/common/auth_header.dart';
-import 'package:wasal/features/auth/ui/widgets/common/auth_primary_button.dart';
 import 'package:wasal/features/auth/ui/widgets/common/auth_social_section.dart';
-import 'package:wasal/features/auth/ui/widgets/login/login_form.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});

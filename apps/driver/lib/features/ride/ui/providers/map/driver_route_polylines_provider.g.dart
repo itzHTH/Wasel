@@ -47,4 +47,4 @@ final class DriverRoutePolylinesProvider
 }
 
 String _$driverRoutePolylinesHash() =>
-    r'ac6574c8f6851e6b44066c9b94e6181cc32cd55b';
+    r'3edfdeecba885bc4ee3d677e2b6ad66f92548e42';

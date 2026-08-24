@@ -54,12 +54,6 @@ class RiderLocalizationsAr extends RiderLocalizations {
   String get requestRideFailed => 'تعذّر إرسال الطلب، حاول مرة أخرى';
 
   @override
-  String get homeTitle => 'الرئيسية';
-
-  @override
-  String get welcomeMessage => 'مرحباً بك في تطبيقنا!';
-
-  @override
   String get logoutFailed => 'فشل تسجيل الخروج';
 
   @override

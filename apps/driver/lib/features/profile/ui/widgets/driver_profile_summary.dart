@@ -6,9 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasel_core/extensions/navigation_extension.dart';
 import 'package:wasel_core/networking/errors/error_message.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/widgets/app_error_retry.dart';
-import 'package:wasel_core/widgets/app_loading.dart';
-import 'package:wasel_core/widgets/app_surface_card.dart';
+import 'package:wasel_core/widgets/feedback/app_error_retry.dart';
+import 'package:wasel_core/widgets/feedback/app_loading.dart';
+import 'package:wasel_core/widgets/cards/app_surface_card.dart';
 import 'package:wasel_profile/presentation/providers/profile/driver_profile_provider.dart';
 
 class DriverProfileSummary extends ConsumerWidget {

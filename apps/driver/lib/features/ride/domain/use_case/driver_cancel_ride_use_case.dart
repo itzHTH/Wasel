@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:driver/features/ride/domain/repos/ride_repo.dart';
+import 'package:driver/features/ride/domain/repo/base_ride_repo.dart';
 import 'package:wasel_core/networking/api_results.dart';
 import 'package:wasel_core/usecase/cancellable_use_case.dart';
 

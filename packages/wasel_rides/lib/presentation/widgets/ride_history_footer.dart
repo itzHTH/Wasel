@@ -3,8 +3,8 @@ import 'package:wasel_rides/l10n/rides_l10n_extension.dart';
 import 'package:wasel_core/networking/errors/error_message.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
-import 'package:wasel_core/widgets/app_error_retry.dart';
-import 'package:wasel_core/widgets/app_loading.dart';
+import 'package:wasel_core/widgets/feedback/app_error_retry.dart';
+import 'package:wasel_core/widgets/feedback/app_loading.dart';
 import 'package:wasel_rides/presentation/providers/history/ride_history_state.dart';
 import 'package:wasel_rides/presentation/widgets/ride_history_load_more_sentinel.dart';
 

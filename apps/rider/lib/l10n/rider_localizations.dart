@@ -188,18 +188,6 @@ abstract class RiderLocalizations {
   /// **'تعذّر إرسال الطلب، حاول مرة أخرى'**
   String get requestRideFailed;
 
-  /// App bar title of the home screen
-  ///
-  /// In ar, this message translates to:
-  /// **'الرئيسية'**
-  String get homeTitle;
-
-  /// Greeting on the home screen
-  ///
-  /// In ar, this message translates to:
-  /// **'مرحباً بك في تطبيقنا!'**
-  String get welcomeMessage;
-
   /// Shown when signing out does not succeed
   ///
   /// In ar, this message translates to:

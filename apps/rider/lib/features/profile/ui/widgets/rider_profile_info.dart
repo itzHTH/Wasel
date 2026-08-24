@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasel_core/helpers/app_amount_format.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
-import 'package:wasel_core/widgets/app_profile_avatar.dart';
-import 'package:wasel_core/widgets/app_stat_cards.dart';
+import 'package:wasel_core/widgets/avatar/app_profile_avatar.dart';
+import 'package:wasel_core/widgets/cards/app_stat_cards.dart';
 import 'package:wasel_profile/domain/entities/rider_profile.dart';
 
 class RiderProfileInfo extends StatelessWidget {

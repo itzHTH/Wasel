@@ -6,8 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasel_core/helpers/app_image_picker.dart';
 import 'package:wasel_core/networking/errors/error_message.dart';
-import 'package:wasel_core/widgets/app_editable_avatar.dart';
-import 'package:wasel_core/widgets/app_image_source_sheet.dart';
+import 'package:wasel_core/widgets/avatar/app_editable_avatar.dart';
+import 'package:wasel_core/widgets/sheets/app_image_source_sheet.dart';
 import 'package:wasel_profile/presentation/providers/profile/rider_photo_upload_provider.dart';
 
 /// Photo picker for the edit form.

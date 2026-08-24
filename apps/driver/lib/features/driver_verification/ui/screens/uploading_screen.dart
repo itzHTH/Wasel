@@ -1,9 +1,9 @@
+import 'package:wasel_auth/wasel_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wasel_core/wasel_core.dart';
 import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
 import 'package:driver/features/driver_verification/domain/entities/driver_profile_submission.dart';
 import 'package:driver/features/driver_verification/ui/providers/submit_profile/submit_profile_provider.dart';
 import 'package:driver/features/driver_verification/ui/providers/submit_profile/submit_profile_state.dart';

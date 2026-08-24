@@ -89,7 +89,7 @@ final class PointLabelProvider
   }
 }
 
-String _$pointLabelHash() => r'e82d249bda183c05a7fcd3a01d563720b0b2c7ec';
+String _$pointLabelHash() => r'09c3c2d5649f0a8c222591fc692875c9efa31c12';
 
 /// Resolves a GeoPoint into a localized 'street, locality' label.
 ///

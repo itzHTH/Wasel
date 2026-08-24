@@ -1,6 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_location/domain/entities/device_fix.dart';
-import 'package:wasel_location/domain/entities/geo_point.dart';
 import 'package:wasel_location/presentation/providers/location_di_providers.dart';
 
 part 'device_location_provider.g.dart';
@@ -17,13 +16,4 @@ part 'device_location_provider.g.dart';
 @riverpod
 Stream<DeviceFix> deviceLocation(Ref ref) {
   return ref.watch(watchDeviceLocationUseCaseProvider).call(null);
-}
-
-/// Derives just the coordinates from the location feed.
-//
-// Acts as a rebuild shield: //? prevents UI widgets that only need the coordinate
-//? from needlessly rebuilding when only the heading or speed jitter.
-@riverpod
-GeoPoint? currentPoint(Ref ref) {
-  return ref.watch(deviceLocationProvider).value?.point;
 }

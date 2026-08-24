@@ -1,15 +1,15 @@
+import 'package:wasal/features/ride/ui/providers/ride_draft/is_camera_moving_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/l10n/l10n_extension.dart';
-import 'package:wasal/core/widgets/app_secondary_button.dart';
 import 'package:wasal/features/ride/domain/entities/driver_profile.dart';
 import 'package:wasal/features/ride/domain/entities/ride_price.dart';
-import 'package:wasal/features/ride/ui/widgets/expandable_ride_card.dart';
 import 'package:wasal/features/ride/ui/widgets/tracking/driver_contact_actions.dart';
 import 'package:wasal/features/ride/ui/widgets/tracking/driver_info_row.dart';
 import 'package:wasal/features/ride/ui/widgets/tracking/ride_trip_summary.dart';
 import 'package:wasel_core/wasel_core.dart';
 
-class DriverArrivedCard extends StatelessWidget {
+class DriverArrivedCard extends ConsumerWidget {
   const DriverArrivedCard({
     super.key,
     required this.driver,
@@ -32,11 +32,12 @@ class DriverArrivedCard extends StatelessWidget {
   final RidePrice? price;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final call = onCall;
     final message = onMessage;
 
     return ExpandableRideCard(
+      isMapMoving: ref.watch(isCameraMovingProvider),
       initiallyExpanded: true,
       summary: Column(
         mainAxisSize: MainAxisSize.min,

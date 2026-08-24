@@ -5,8 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:wasel_core/l10n/core_localizations.dart';
 import 'package:wasel_core/theme/app_brand.dart';
 import 'package:wasel_core/theme/app_theme.dart';
-import 'package:wasel_core/widgets/app_editable_avatar.dart';
-import 'package:wasel_core/widgets/app_loading.dart';
+import 'package:wasel_core/widgets/avatar/app_editable_avatar.dart';
+import 'package:wasel_core/widgets/feedback/app_loading.dart';
 
 void main() {
   Widget wrap(Widget child) => ScreenUtilInit(

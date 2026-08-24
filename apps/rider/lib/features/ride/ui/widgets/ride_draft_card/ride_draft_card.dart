@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wasal/features/ride/ui/widgets/ride_card_shell.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_draft_card/ride_action_buttons.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_draft_card/ride_back_button.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_draft_card/ride_card_title.dart';

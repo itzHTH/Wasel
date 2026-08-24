@@ -1,9 +1,9 @@
+import 'package:wasel_auth/wasel_auth.dart';
 import 'package:camera/camera.dart' show XFile;
 import 'package:flutter/material.dart';
 import 'package:wasel_core/wasel_core.dart';
 import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
 import 'package:driver/features/driver_verification/ui/widgets/wizard/captured_image.dart';
 
 Future<bool?> showCapturePreviewSheet({

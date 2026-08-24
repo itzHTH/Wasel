@@ -4,7 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/features/ride/domain/entities/review_ride.dart';
 import 'package:wasal/features/ride/domain/usecases/review_ride_use_case.dart';
 import 'package:wasal/features/ride/ui/providers/request_ride/request_ride_provider.dart';
-import 'package:wasal/features/ride/ui/providers/ride_use_case_providers.dart';
+import 'package:wasal/features/ride/ride_di_providers.dart';
 
 part 'review_ride_provider.g.dart';
 

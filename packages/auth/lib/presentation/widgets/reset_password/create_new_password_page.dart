@@ -1,0 +1,78 @@
+import 'package:flutter/material.dart';
+import 'package:wasel_auth/wasel_auth.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wasel_core/theme/app_dimens.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
+import 'package:wasel_core/widgets/buttons/app_back_button.dart';
+import 'package:wasel_core/widgets/feedback/app_inline_error.dart';
+
+class CreateNewPasswordPage extends ConsumerWidget {
+  final GlobalKey<FormState> formKey;
+  final TextEditingController passwordCtrl;
+  final TextEditingController confirmPassCtrl;
+  final VoidCallback onSubmit;
+  final VoidCallback onBack;
+  final VoidCallback onExpiredRestart;
+
+  const CreateNewPasswordPage({
+    super.key,
+    required this.formKey,
+    required this.passwordCtrl,
+    required this.confirmPassCtrl,
+    required this.onSubmit,
+    required this.onBack,
+    required this.onExpiredRestart,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(resetPasswordControllerProvider);
+
+    return SingleChildScrollView(
+      padding: EdgeInsets.symmetric(horizontal: AppDimens.screenHPadding),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: AppDimens.space24),
+          AppBackButton(onTap: onBack),
+          SizedBox(height: AppDimens.space24),
+
+          Text(
+            context.authL10n.newPasswordTitle,
+            style: context.styles.font24Secondary900Bold,
+          ),
+          SizedBox(height: AppDimens.space8),
+          Text(
+            context.authL10n.chooseNewPassword,
+            style: context.styles.font14Neutral400Regular,
+          ),
+          SizedBox(height: AppDimens.space32),
+
+          NewPasswordForm(
+            formKey: formKey,
+            passwordCtrl: passwordCtrl,
+            confirmPassCtrl: confirmPassCtrl,
+          ),
+          AppInlineError(message: state.fieldError),
+          SizedBox(height: AppDimens.space32),
+
+          if (state.tokenExpired)
+            TextButton(
+              onPressed: onExpiredRestart,
+              child: Text(
+                context.authL10n.requestNewCode,
+                style: context.styles.font14Primary500SemiBold,
+              ),
+            )
+          else
+            AuthPrimaryButton(
+              label: context.authL10n.resetPassword,
+              onPressed: state.isSubmitting ? null : onSubmit,
+              isLoading: state.isSubmitting,
+            ),
+          SizedBox(height: AppDimens.space32),
+        ],
+      ),
+    );
+  }
+}

@@ -4,11 +4,11 @@ import 'package:wasel_auth/wasel_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/helpers/app_validators.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
+import 'package:wasel_core/widgets/forms/app_field_icon.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasal/features/auth/ui/providers/register/register_provider.dart';
 import 'package:wasal/features/auth/ui/widgets/common/auth_header.dart';
-import 'package:wasel_core/widgets/app_labeled_field.dart';
-import 'package:wasal/features/auth/ui/widgets/common/auth_primary_button.dart';
+import 'package:wasel_core/widgets/forms/app_labeled_field.dart';
 import 'package:wasal/features/auth/ui/widgets/common/auth_social_section.dart';
 
 class RegisterEmailPage extends StatelessWidget {
@@ -46,11 +46,7 @@ class RegisterEmailPage extends StatelessWidget {
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.done,
                 validator: AppValidators.email,
-                prefixIcon: Icon(
-                  Icons.email_outlined,
-                  color: context.colors.neutral400,
-                  size: AppDimens.icon20,
-                ),
+                prefixIcon: const AppFieldIcon(Icons.email_outlined),
               ),
             ),
             SizedBox(height: AppDimens.space24),

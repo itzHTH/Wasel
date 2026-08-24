@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/widgets/app_surface_card.dart';
+import 'package:wasel_core/widgets/cards/app_surface_card.dart';
 import 'package:wasel_rides/domain/entities/ride_history_entry.dart';
 import 'package:wasel_rides/presentation/widgets/ride_history_card_details.dart';
 import 'package:wasel_rides/presentation/widgets/ride_history_card_header.dart';

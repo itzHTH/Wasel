@@ -3,7 +3,7 @@ import 'package:wasel_location/l10n/location_l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/widgets/app_loading.dart';
+import 'package:wasel_core/widgets/feedback/app_loading.dart';
 import 'package:wasel_location/domain/entities/location_exception.dart';
 import 'package:wasel_location/presentation/providers/location/recenter_controller.dart';
 

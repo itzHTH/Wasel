@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_profile/l10n/profile_l10n_extension.dart';
 import 'package:flutter/services.dart';
-import 'package:wasel_core/widgets/app_primary_button.dart';
+import 'package:wasel_core/widgets/buttons/app_primary_button.dart';
 
 /// Save action for the edit form.
 class ProfileEditSaveButton extends StatelessWidget {
