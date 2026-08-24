@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_auth/wasel_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
-import 'package:driver/features/auth/ui/widgets/reset_password/password_page/new_password_form.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
-import 'package:wasel_core/widgets/app_back_button.dart';
-import 'package:wasel_core/widgets/app_inline_error.dart';
+import 'package:wasel_core/widgets/buttons/app_back_button.dart';
+import 'package:wasel_core/widgets/feedback/app_inline_error.dart';
 
 class CreateNewPasswordPage extends ConsumerWidget {
   final GlobalKey<FormState> formKey;

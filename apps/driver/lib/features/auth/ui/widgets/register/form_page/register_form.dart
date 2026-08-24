@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:driver/l10n/l10n_extension.dart';
 import 'package:wasel_auth/wasel_auth.dart';
 import 'package:wasel_core/helpers/app_validators.dart';
-import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/widgets/app_labeled_field.dart';
-import 'package:wasel_core/widgets/password_field.dart';
+import 'package:wasel_core/widgets/forms/app_field_icon.dart';
+import 'package:wasel_core/widgets/forms/app_labeled_field.dart';
+import 'package:wasel_core/widgets/forms/password_field.dart';
 
 class RegisterForm extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -46,11 +46,7 @@ class RegisterForm extends StatelessWidget {
               value,
               fieldName: context.authL10n.firstName,
             ),
-            prefixIcon: Icon(
-              Icons.person_outline_rounded,
-              color: context.colors.neutral400,
-              size: AppDimens.icon20,
-            ),
+            prefixIcon: const AppFieldIcon(Icons.person_outline_rounded),
           ),
           SizedBox(height: AppDimens.space16),
 
@@ -63,11 +59,7 @@ class RegisterForm extends StatelessWidget {
             textInputAction: TextInputAction.next,
             validator: (value) =>
                 AppValidators.name(value, fieldName: context.authL10n.lastName),
-            prefixIcon: Icon(
-              Icons.person_outline_rounded,
-              color: context.colors.neutral400,
-              size: AppDimens.icon20,
-            ),
+            prefixIcon: const AppFieldIcon(Icons.person_outline_rounded),
           ),
           SizedBox(height: AppDimens.space16),
 
@@ -79,11 +71,7 @@ class RegisterForm extends StatelessWidget {
             keyboardType: TextInputType.phone,
             textInputAction: TextInputAction.next,
             validator: AppValidators.phone,
-            prefixIcon: Icon(
-              Icons.phone_outlined,
-              color: context.colors.neutral400,
-              size: AppDimens.icon20,
-            ),
+            prefixIcon: const AppFieldIcon(Icons.phone_outlined),
           ),
           SizedBox(height: AppDimens.space16),
 
@@ -96,11 +84,7 @@ class RegisterForm extends StatelessWidget {
             textInputAction: TextInputAction.next,
             validator: (value) =>
                 AppValidators.name(value, fieldName: context.l10n.city),
-            prefixIcon: Icon(
-              Icons.location_city_outlined,
-              color: context.colors.neutral400,
-              size: AppDimens.icon20,
-            ),
+            prefixIcon: const AppFieldIcon(Icons.location_city_outlined),
           ),
           SizedBox(height: AppDimens.space16),
 
@@ -113,11 +97,7 @@ class RegisterForm extends StatelessWidget {
             textInputAction: TextInputAction.next,
             validator: (value) =>
                 AppValidators.name(value, fieldName: context.l10n.address),
-            prefixIcon: Icon(
-              Icons.location_on_outlined,
-              color: context.colors.neutral400,
-              size: AppDimens.icon20,
-            ),
+            prefixIcon: const AppFieldIcon(Icons.location_on_outlined),
           ),
           SizedBox(height: AppDimens.space16),
 

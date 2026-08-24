@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_auth/wasel_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:driver/features/auth/ui/widgets/common/auth_primary_button.dart';
 import 'package:wasel_core/helpers/app_validators.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
+import 'package:wasel_core/widgets/forms/app_field_icon.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
-import 'package:wasel_core/widgets/app_back_button.dart';
-import 'package:wasel_core/widgets/app_inline_error.dart';
-import 'package:wasel_core/widgets/app_labeled_field.dart';
+import 'package:wasel_core/widgets/buttons/app_back_button.dart';
+import 'package:wasel_core/widgets/feedback/app_inline_error.dart';
+import 'package:wasel_core/widgets/forms/app_labeled_field.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -57,11 +57,7 @@ class ForgotPasswordPage extends StatelessWidget {
                   AutofillHints.email,
                 ],
                 validator: AppValidators.email,
-                prefixIcon: Icon(
-                  Icons.email_outlined,
-                  color: context.colors.neutral400,
-                  size: AppDimens.icon20,
-                ),
+                prefixIcon: const AppFieldIcon(Icons.email_outlined),
               ),
             ),
           ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_auth/wasel_auth.dart';
 import 'package:wasel_core/helpers/app_validators.dart';
-import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/widgets/app_labeled_field.dart';
-import 'package:wasel_core/widgets/password_field.dart';
+import 'package:wasel_core/widgets/forms/app_field_icon.dart';
+import 'package:wasel_core/widgets/forms/app_labeled_field.dart';
+import 'package:wasel_core/widgets/forms/password_field.dart';
 
 class LoginForm extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -31,11 +31,7 @@ class LoginForm extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             validator: AppValidators.email,
-            prefixIcon: Icon(
-              Icons.email_outlined,
-              color: context.colors.neutral400,
-              size: AppDimens.icon20,
-            ),
+            prefixIcon: const AppFieldIcon(Icons.email_outlined),
           ),
           SizedBox(height: AppDimens.space16),
           AppPasswordFormField(

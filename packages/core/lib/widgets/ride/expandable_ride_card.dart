@@ -1,30 +1,34 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wasal/features/ride/ui/providers/ride_draft/is_camera_moving_provider.dart';
-import 'package:wasal/features/ride/ui/widgets/ride_card_shell.dart';
-import 'package:wasel_core/wasel_core.dart';
+import 'package:wasel_core/theme/app_dimens.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
+import 'package:wasel_core/widgets/ride/ride_card_shell.dart';
 
-class ExpandableRideCard extends ConsumerStatefulWidget {
+class ExpandableRideCard extends StatefulWidget {
   const ExpandableRideCard({
     super.key,
     required this.summary,
     required this.details,
+    this.isMapMoving = false,
     this.footer,
     this.initiallyExpanded = false,
   });
 
   final Widget summary;
   final Widget details;
+
+  /// True while the map is being panned. The card collapses on the rising edge
+  /// so the gesture is not fighting it; each app feeds in its own signal.
+  final bool isMapMoving;
   final Widget? footer;
   final bool initiallyExpanded;
 
   @override
-  ConsumerState<ExpandableRideCard> createState() => _ExpandableRideCardState();
+  State<ExpandableRideCard> createState() => _ExpandableRideCardState();
 }
 
-class _ExpandableRideCardState extends ConsumerState<ExpandableRideCard>
+class _ExpandableRideCardState extends State<ExpandableRideCard>
     with SingleTickerProviderStateMixin {
   static const _flingVelocity = 300.0;
 
@@ -99,12 +103,15 @@ class _ExpandableRideCardState extends ConsumerState<ExpandableRideCard>
   }
 
   @override
+  void didUpdateWidget(ExpandableRideCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (!oldWidget.isMapMoving && widget.isMapMoving) _collapseOnMapMove();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final footer = widget.footer;
-
-    ref.listen(isCameraMovingProvider, (previous, next) {
-      if (next) _collapseOnMapMove();
-    });
 
     return GestureDetector(
       onVerticalDragUpdate: _onDragUpdate,

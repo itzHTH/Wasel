@@ -3,9 +3,8 @@ import 'package:wasel_auth/wasel_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
-import 'package:wasel_core/widgets/app_back_button.dart';
+import 'package:wasel_core/widgets/buttons/app_back_button.dart';
 import 'package:wasal/features/auth/ui/providers/register/register_provider.dart';
-import 'package:wasal/features/auth/ui/widgets/common/auth_primary_button.dart';
 import 'package:wasal/features/auth/ui/widgets/register/form_page/register_form.dart';
 
 class RegisterFormPage extends StatelessWidget {

@@ -64,3 +64,10 @@ export 'presentation/providers/reset_password/reset_password_state.dart';
 
 // DI — use-case providers (authApiService -> authRepo -> use cases)
 export 'providers/auth_use_case_providers.dart';
+export 'presentation/widgets/login_form.dart';
+export 'presentation/widgets/new_password_form.dart';
+export 'presentation/widgets/auth_primary_button.dart';
+export 'presentation/widgets/reset_password/forgot_password_page.dart';
+export 'presentation/widgets/reset_password/reset_otp_page.dart';
+export 'presentation/widgets/reset_password/create_new_password_page.dart';
+export 'presentation/screens/reset_password_screen.dart';

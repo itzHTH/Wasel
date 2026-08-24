@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wasel_core/widgets/app_primary_button.dart';
+import 'package:wasel_core/widgets/buttons/app_primary_button.dart';
 
-/// Auth-flow primary button. Kept as a thin alias over the shared
-/// [AppPrimaryButton] so styling stays in one place.
 class AuthPrimaryButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;

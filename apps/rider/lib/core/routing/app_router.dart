@@ -1,10 +1,10 @@
+import 'package:wasel_auth/wasel_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wasel_core/routing/app_page_transitions.dart';
 import 'package:wasel_rides/presentation/screens/ride_history_screen.dart';
 import 'package:wasal/core/routing/app_routes_name.dart';
 import 'package:wasal/features/auth/ui/screens/login_screen.dart';
 import 'package:wasal/features/auth/ui/screens/register_screen.dart';
-import 'package:wasal/features/auth/ui/screens/reset_password_screen.dart';
 import 'package:wasal/features/profile/ui/screens/profile_details_screen.dart';
 import 'package:wasal/features/profile/ui/screens/profile_edit_screen.dart';
 import 'package:wasal/features/profile/ui/screens/profile_screen.dart';
@@ -24,7 +24,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
 
       case AppRoutes.resetPassword:
-        return MaterialPageRoute(builder: (_) => const ResetPasswordScreen());
+        return MaterialPageRoute(builder: (_) => const ResetPasswordScreen(doneRoute: AppRoutes.auth));
 
       case AppRoutes.ride:
         return MaterialPageRoute(builder: (_) => const RideScreen());

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_auth/wasel_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:driver/core/routing/app_routes_name.dart';
-import 'package:driver/features/auth/ui/widgets/reset_password/email_page/forgot_password_page.dart';
-import 'package:driver/features/auth/ui/widgets/reset_password/otp_page/reset_otp_page.dart';
-import 'package:driver/features/auth/ui/widgets/reset_password/password_page/create_new_password_page.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/widgets/app_dialog.dart';
+import 'package:wasel_core/widgets/feedback/app_dialog.dart';
 import 'package:wasel_core/widgets/app_step_indicator.dart';
 
 class ResetPasswordScreen extends ConsumerStatefulWidget {
-  const ResetPasswordScreen({super.key});
+  const ResetPasswordScreen({super.key, required this.doneRoute});
+
+  /// Where a completed reset lands. Each app owns its own route table, so the
+  /// destination is handed in rather than looked up here.
+  final String doneRoute;
 
   @override
   ConsumerState<ResetPasswordScreen> createState() =>
@@ -124,7 +124,7 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
     );
     Navigator.pushNamedAndRemoveUntil(
       context,
-      AppRoutes.auth,
+      widget.doneRoute,
       (route) => false,
     );
   }

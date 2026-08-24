@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wasel_auth/wasel_auth.dart';
 import 'package:wasel_core/helpers/app_validators.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/widgets/password_field.dart';
+import 'package:wasel_core/widgets/forms/password_field.dart';
 
 class NewPasswordForm extends StatelessWidget {
   final GlobalKey<FormState> formKey;

@@ -1,3 +1,4 @@
+import 'package:wasel_auth/wasel_auth.dart';
 import 'package:driver/features/driver_verification/ui/screens/verification_wizard_screen.dart';
 import 'package:driver/features/profile/ui/screens/profile_details_screen.dart';
 import 'package:driver/features/profile/ui/screens/profile_edit_screen.dart';
@@ -9,7 +10,6 @@ import 'package:wasel_rides/presentation/screens/ride_history_screen.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:driver/features/auth/ui/screens/login_screen.dart';
 import 'package:driver/features/auth/ui/screens/register_screen.dart';
-import 'package:driver/features/auth/ui/screens/reset_password_screen.dart';
 import 'package:driver/features/driver_verification/ui/screens/verification_gate_screen.dart';
 import 'package:driver/features/splash/ui/screens/splash_screen.dart';
 
@@ -26,7 +26,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
 
       case AppRoutes.resetPassword:
-        return MaterialPageRoute(builder: (_) => const ResetPasswordScreen());
+        return MaterialPageRoute(builder: (_) => const ResetPasswordScreen(doneRoute: AppRoutes.auth));
 
       case AppRoutes.driverVerificationGate:
         return MaterialPageRoute(

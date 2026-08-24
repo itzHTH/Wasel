@@ -55,12 +55,6 @@ class RiderLocalizationsEn extends RiderLocalizations {
   String get requestRideFailed => 'We couldn\'t send your request, try again';
 
   @override
-  String get homeTitle => 'Home';
-
-  @override
-  String get welcomeMessage => 'Welcome to our app!';
-
-  @override
   String get logoutFailed => 'Logout failed';
 
   @override

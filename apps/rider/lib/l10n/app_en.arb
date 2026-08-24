@@ -15,8 +15,6 @@
   "logout": "Log out",
   "logoutConfirmMessage": "Are you sure you want to log out of your account?",
   "requestRideFailed": "We couldn't send your request, try again",
-  "homeTitle": "Home",
-  "welcomeMessage": "Welcome to our app!",
   "logoutFailed": "Logout failed",
   "editProfile": "Edit profile",
   "profileLoadFailed": "We couldn't load your profile",

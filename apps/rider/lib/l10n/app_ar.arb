@@ -60,14 +60,6 @@
   "@requestRideFailed": {
     "description": "Generic failure shown when requesting a ride errors without a message"
   },
-  "homeTitle": "الرئيسية",
-  "@homeTitle": {
-    "description": "App bar title of the home screen"
-  },
-  "welcomeMessage": "مرحباً بك في تطبيقنا!",
-  "@welcomeMessage": {
-    "description": "Greeting on the home screen"
-  },
   "logoutFailed": "فشل تسجيل الخروج",
   "@logoutFailed": {
     "description": "Shown when signing out does not succeed"
