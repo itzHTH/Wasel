@@ -3,7 +3,7 @@
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#081610"
+        "color": "#0f1315"
       }
     ]
   },
@@ -11,7 +11,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#b4c6bd"
+        "color": "#a8b2b8"
       }
     ]
   },
@@ -19,7 +19,7 @@
     "elementType": "labels.text.stroke",
     "stylers": [
       {
-        "color": "#081610"
+        "color": "#0f1315"
       }
     ]
   },
@@ -28,7 +28,7 @@
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#081610"
+        "color": "#0f1315"
       }
     ]
   },
@@ -37,7 +37,7 @@
     "elementType": "geometry.fill",
     "stylers": [
       {
-        "color": "#1e2b26"
+        "color": "#1c2124"
       }
     ]
   },
@@ -46,7 +46,7 @@
     "elementType": "geometry.stroke",
     "stylers": [
       {
-        "color": "#0f1d17"
+        "color": "#262d31"
       }
     ]
   },
@@ -55,7 +55,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#8fa79a"
+        "color": "#98a3a9"
       }
     ]
   },
@@ -64,7 +64,7 @@
     "elementType": "labels.text.stroke",
     "stylers": [
       {
-        "color": "#081610"
+        "color": "#0f1315"
       }
     ]
   },
@@ -82,7 +82,7 @@
     "elementType": "geometry.fill",
     "stylers": [
       {
-        "color": "#2d3934"
+        "color": "#171c1f"
       }
     ]
   },
@@ -91,7 +91,7 @@
     "elementType": "geometry.fill",
     "stylers": [
       {
-        "color": "#503f1f"
+        "color": "#2f373b"
       }
     ]
   },
@@ -100,7 +100,7 @@
     "elementType": "geometry.stroke",
     "stylers": [
       {
-        "color": "#7d5828"
+        "color": "#3d474c"
       }
     ]
   },
@@ -109,7 +109,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#b4c6bd"
+        "color": "#a8b2b8"
       }
     ]
   },
@@ -118,7 +118,7 @@
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#142d41"
+        "color": "#0d1a20"
       }
     ]
   },
@@ -127,7 +127,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#7c9192"
+        "color": "#7d8f98"
       }
     ]
   },
@@ -145,7 +145,7 @@
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#162d1d"
+        "color": "#14201a"
       }
     ]
   },
@@ -154,7 +154,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#7d9185"
+        "color": "#7b8d80"
       }
     ]
   },
@@ -181,7 +181,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#e7f0eb"
+        "color": "#e9edef"
       }
     ]
   },
@@ -190,7 +190,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#8fa79a"
+        "color": "#98a3a9"
       }
     ]
   },
@@ -217,7 +217,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#b4c6bd"
+        "color": "#a8b2b8"
       }
     ]
   },
@@ -226,7 +226,7 @@
     "elementType": "labels.text.stroke",
     "stylers": [
       {
-        "color": "#081610"
+        "color": "#0f1315"
       }
     ]
   },
@@ -235,7 +235,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#e7f0eb"
+        "color": "#e9edef"
       }
     ]
   },
@@ -244,7 +244,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#e7f0eb"
+        "color": "#e9edef"
       }
     ]
   },
@@ -253,7 +253,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#e7f0eb"
+        "color": "#e9edef"
       }
     ]
   },
@@ -262,7 +262,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#e7f0eb"
+        "color": "#e9edef"
       }
     ]
   },
@@ -280,7 +280,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#8fa79a"
+        "color": "#98a3a9"
       }
     ]
   },
@@ -289,7 +289,7 @@
     "elementType": "labels.text.stroke",
     "stylers": [
       {
-        "color": "#081610"
+        "color": "#0f1315"
       }
     ]
   }
