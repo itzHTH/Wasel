@@ -36,13 +36,15 @@ class OfflineCard extends StatelessWidget {
                       isConnecting
                           ? context.l10n.connectingToServer
                           : context.l10n.youAreOffline,
-                      style: context.styles.font20Secondary900Bold,
+                      style: context.styles.title(),
                     ),
                     Text(
                       isConnecting
                           ? context.l10n.oneMomentConnecting
                           : context.l10n.noRequestsWhileOffline,
-                      style: context.styles.font14Neutral400Regular,
+                      style: context.styles.body(
+                        color: context.colors.neutral400,
+                      ),
                     ),
                   ],
                 ),

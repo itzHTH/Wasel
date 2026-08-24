@@ -31,7 +31,10 @@ class RidePriceView extends StatelessWidget {
             children: [
               Text(
                 context.l10n.estimatedFare,
-                style: context.styles.font14Secondary500Medium,
+                style: context.styles.body(
+                  weight: FontWeight.w500,
+                  color: context.colors.secondary500,
+                ),
               ),
               SizedBox(height: AppDimens.space4),
               Text(
@@ -40,7 +43,7 @@ class RidePriceView extends StatelessWidget {
                   price.estimatedPrice,
                   currency: price.currency,
                 ),
-                style: context.styles.font32Secondary900Bold,
+                style: context.styles.display(),
               ),
             ],
           ),

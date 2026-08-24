@@ -54,7 +54,12 @@ class AppInfoRow extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(label, style: context.styles.font12Neutral400Regular),
+                Text(
+                  label,
+                  style: context.styles.caption(
+                    color: context.colors.neutral400,
+                  ),
+                ),
                 SizedBox(height: AppDimens.space4),
                 Text(
                   hasValue
@@ -64,8 +69,8 @@ class AppInfoRow extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: hasValue
-                      ? context.styles.font14Secondary900SemiBold
-                      : context.styles.font14Neutral400Regular,
+                      ? context.styles.body(weight: FontWeight.w600)
+                      : context.styles.body(color: context.colors.neutral400),
                 ),
               ],
             ),

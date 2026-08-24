@@ -37,13 +37,13 @@ class RegisterOtpPage extends StatelessWidget {
 
           Text(
             context.authL10n.verificationCode,
-            style: context.styles.font24Secondary900Bold,
+            style: context.styles.headline(),
             textAlign: TextAlign.center,
           ),
           SizedBox(height: AppDimens.space8),
           Text(
             context.authL10n.otpSentToEmail(emailCtrl.text),
-            style: context.styles.font14Neutral400Regular,
+            style: context.styles.body(color: context.colors.neutral400),
             textAlign: TextAlign.center,
           ),
           SizedBox(height: AppDimens.space40),

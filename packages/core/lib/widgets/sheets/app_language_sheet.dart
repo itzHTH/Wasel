@@ -32,14 +32,11 @@ Future<void> showAppLanguageSheet(BuildContext context) {
             ),
           ),
           SizedBox(height: AppDimens.space24),
-          Text(
-            context.coreL10n.language,
-            style: context.styles.font20Secondary900Bold,
-          ),
+          Text(context.coreL10n.language, style: context.styles.title()),
           SizedBox(height: AppDimens.space8),
           Text(
             context.coreL10n.languageSheetDescription,
-            style: context.styles.font14Neutral400Regular,
+            style: context.styles.body(color: context.colors.neutral400),
           ),
           SizedBox(height: AppDimens.space24),
           const AppLanguageSwitch(),

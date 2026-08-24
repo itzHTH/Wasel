@@ -73,8 +73,14 @@ class _ContactButton extends StatelessWidget {
               Text(
                 label,
                 style: filled
-                    ? context.styles.font16Neutral0SemiBold
-                    : context.styles.font14Primary500SemiBold,
+                    ? context.styles.bodyLarge(
+                        weight: FontWeight.w600,
+                        color: context.colors.onPrimary,
+                      )
+                    : context.styles.body(
+                        weight: FontWeight.w600,
+                        color: context.colors.primary500,
+                      ),
               ),
             ],
           ),

@@ -14,7 +14,7 @@ class RideHistoryAmount extends StatelessWidget {
       formatAmountWithCurrency(price),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: style ?? context.styles.font16Secondary900Bold,
+      style: style ?? context.styles.bodyLarge(weight: FontWeight.w700),
     );
   }
 }

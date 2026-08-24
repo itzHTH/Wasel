@@ -39,12 +39,12 @@ class CreateNewPasswordPage extends ConsumerWidget {
 
           Text(
             context.authL10n.newPasswordTitle,
-            style: context.styles.font24Secondary900Bold,
+            style: context.styles.headline(),
           ),
           SizedBox(height: AppDimens.space8),
           Text(
             context.authL10n.chooseNewPassword,
-            style: context.styles.font14Neutral400Regular,
+            style: context.styles.body(color: context.colors.neutral400),
           ),
           SizedBox(height: AppDimens.space32),
 
@@ -61,7 +61,10 @@ class CreateNewPasswordPage extends ConsumerWidget {
               onPressed: onExpiredRestart,
               child: Text(
                 context.authL10n.requestNewCode,
-                style: context.styles.font14Primary500SemiBold,
+                style: context.styles.body(
+                  weight: FontWeight.w600,
+                  color: context.colors.primary500,
+                ),
               ),
             )
           else

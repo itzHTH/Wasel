@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:wasel_core/theme/app_brand.dart';
 import 'package:wasel_core/theme/app_shape.dart';
 import 'package:wasel_core/theme/app_theme.dart';
+import 'package:wasel_core/theme/app_type_scale.dart';
 
 Future<void> _inScreenUtil(WidgetTester tester, VoidCallback body) async {
   await tester.pumpWidget(
@@ -90,5 +91,58 @@ void main() {
         expect(light, dark, reason: brand.name);
       }
     });
+  });
+
+  testWidgets('the captain ramp is compressed with a higher floor', (
+    tester,
+  ) async {
+    await _inScreenUtil(tester, () {
+      final rider = AppBrand.rider.typeScale();
+      final driver = AppBrand.driver.typeScale();
+
+      expect(rider.displaySize, greaterThan(driver.displaySize));
+      expect(rider.headlineSize, greaterThan(driver.headlineSize));
+      expect(rider.titleSize, greaterThan(driver.titleSize));
+
+      expect(
+        driver.bodySize,
+        greaterThan(rider.bodySize),
+        reason: 'the captain reads at arm\'s length',
+      );
+      expect(driver.labelSize, greaterThan(rider.labelSize));
+      expect(
+        driver.captionSize,
+        greaterThan(rider.captionSize),
+        reason: 'the captain ramp has no 12sp tier',
+      );
+
+      expect(
+        rider.bodyLargeSize,
+        driver.bodyLargeSize,
+        reason: 'the primary reading size is the same in both',
+      );
+
+      final riderRange = rider.displaySize - rider.captionSize;
+      final driverRange = driver.displaySize - driver.captionSize;
+      expect(
+        riderRange,
+        greaterThan(driverRange),
+        reason: 'the rider ramp is the expressive one',
+      );
+    });
+  });
+
+  testWidgets('the theme carries the brand type scale', (tester) async {
+    for (final brand in AppBrand.values) {
+      late ThemeData theme;
+      await _inScreenUtil(tester, () {
+        theme = AppTheme.build(brand: brand, brightness: Brightness.light);
+      });
+      expect(
+        theme.extension<AppTypeScale>(),
+        brand.typeScale(),
+        reason: brand.name,
+      );
+    }
   });
 }

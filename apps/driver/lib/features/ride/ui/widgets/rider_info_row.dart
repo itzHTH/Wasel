@@ -37,7 +37,7 @@ class RiderInfoRow extends StatelessWidget {
                 profile.name,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: context.styles.font14Secondary900SemiBold,
+                style: context.styles.body(weight: FontWeight.w600),
               ),
               SizedBox(height: AppDimens.space4),
               if (canCall)
@@ -45,7 +45,10 @@ class RiderInfoRow extends StatelessWidget {
                   phoneNumber ?? context.l10n.phoneUnavailable,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: context.styles.font14Neutral400Medium,
+                  style: context.styles.body(
+                    weight: FontWeight.w500,
+                    color: context.colors.neutral400,
+                  ),
                 ),
             ],
           ),

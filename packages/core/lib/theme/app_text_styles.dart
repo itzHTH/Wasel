@@ -1,134 +1,111 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasel_core/theme/app_colors_extension.dart';
 import 'package:wasel_core/theme/app_fonts.dart';
+import 'package:wasel_core/theme/app_type_scale.dart';
 
+/// Semantic text roles. Size and default weight come from the brand's
+/// [AppTypeScale]; colour and weight are overridable per call site.
 @immutable
 class AppTextStyles {
-  const AppTextStyles(this._appColors);
+  const AppTextStyles(this._colors, this._scale);
 
-  final AppColorsExtension _appColors;
+  final AppColorsExtension _colors;
+  final AppTypeScale _scale;
 
-  // Base helper — all styles go through here so fontFamily is never missing
-  TextStyle _base({
-    required double fontSize,
-    required FontWeight fontWeight,
-    required Color color,
-    double height = AppFonts.bodyHeight,
+  TextStyle _role({
+    required double size,
+    required FontWeight defaultWeight,
+    required Color defaultColor,
+    required double height,
+    Color? color,
+    FontWeight? weight,
   }) => TextStyle(
     fontFamily: AppFonts.family,
-    fontSize: fontSize,
-    fontWeight: fontWeight,
-    color: color,
+    fontSize: size,
+    fontWeight: weight ?? defaultWeight,
+    color: color ?? defaultColor,
     height: height,
   );
 
-  TextStyle get font48Neutral0Bold => _base(
-    fontSize: 48.sp,
-    fontWeight: FontWeight.w700,
-    color: _appColors.onScrim,
+  /// Splash and full-bleed hero moments only.
+  TextStyle displayLarge({Color? color, FontWeight? weight}) => _role(
+    size: _scale.displayLargeSize,
+    defaultWeight: FontWeight.w700,
+    defaultColor: _colors.onScrim,
     height: AppFonts.headingHeight,
+    color: color,
+    weight: weight,
   );
 
-  TextStyle get font32Secondary900Bold => _base(
-    fontSize: 32.sp,
-    fontWeight: FontWeight.w700,
-    color: _appColors.secondary900,
+  TextStyle display({Color? color, FontWeight? weight}) => _role(
+    size: _scale.displaySize,
+    defaultWeight: _scale.displayWeight,
+    defaultColor: _colors.secondary900,
     height: AppFonts.headingHeight,
+    color: color,
+    weight: weight,
   );
 
-  TextStyle get font24Secondary900Bold => _base(
-    fontSize: 24.sp,
-    fontWeight: FontWeight.w700,
-    color: _appColors.secondary900,
+  TextStyle headline({Color? color, FontWeight? weight}) => _role(
+    size: _scale.headlineSize,
+    defaultWeight: _scale.headlineWeight,
+    defaultColor: _colors.secondary900,
     height: AppFonts.headingHeight,
+    color: color,
+    weight: weight,
   );
 
-  TextStyle get font20Secondary900Bold => _base(
-    fontSize: 20.sp,
-    fontWeight: FontWeight.w700,
-    color: _appColors.secondary900,
+  TextStyle title({Color? color, FontWeight? weight}) => _role(
+    size: _scale.titleSize,
+    defaultWeight: _scale.titleWeight,
+    defaultColor: _colors.secondary900,
     height: AppFonts.headingHeight,
+    color: color,
+    weight: weight,
   );
 
-  TextStyle get font16Secondary500Regular => _base(
-    fontSize: 16.sp,
-    fontWeight: FontWeight.w400,
-    color: _appColors.secondary500,
+  TextStyle bodyLarge({Color? color, FontWeight? weight}) => _role(
+    size: _scale.bodyLargeSize,
+    defaultWeight: FontWeight.w400,
+    defaultColor: _colors.secondary900,
+    height: AppFonts.bodyHeight,
+    color: color,
+    weight: weight,
   );
 
-  TextStyle get font16Secondary900Bold => _base(
-    fontSize: 16.sp,
-    fontWeight: FontWeight.w700,
-    color: _appColors.secondary900,
+  TextStyle body({Color? color, FontWeight? weight}) => _role(
+    size: _scale.bodySize,
+    defaultWeight: FontWeight.w400,
+    defaultColor: _colors.secondary900,
+    height: AppFonts.bodyHeight,
+    color: color,
+    weight: weight,
   );
 
-  TextStyle get font16Neutral0SemiBold => _base(
-    fontSize: 16.sp,
-    fontWeight: FontWeight.w600,
-    color: _appColors.onPrimary,
+  TextStyle label({Color? color, FontWeight? weight}) => _role(
+    size: _scale.labelSize,
+    defaultWeight: _scale.labelWeight,
+    defaultColor: _colors.secondary900,
+    height: AppFonts.bodyHeight,
+    color: color,
+    weight: weight,
   );
 
-  TextStyle get font16OnScrimSemiBold => _base(
-    fontSize: 16.sp,
-    fontWeight: FontWeight.w600,
-    color: _appColors.onScrim,
-  );
-
-  TextStyle get font14Secondary900SemiBold => _base(
-    fontSize: 14.sp,
-    fontWeight: FontWeight.w600,
-    color: _appColors.secondary900,
-  );
-
-  TextStyle get font14Secondary500Medium => _base(
-    fontSize: 14.sp,
-    fontWeight: FontWeight.w500,
-    color: _appColors.secondary500,
-  );
-
-  TextStyle get font14Neutral400Regular => _base(
-    fontSize: 14.sp,
-    fontWeight: FontWeight.w400,
-    color: _appColors.neutral400,
-  );
-
-  TextStyle get font14Neutral400Medium => _base(
-    fontSize: 14.sp,
-    fontWeight: FontWeight.w500,
-    color: _appColors.neutral400,
-  );
-
-  TextStyle get font12Neutral400Regular => _base(
-    fontSize: 12.sp,
-    fontWeight: FontWeight.w400,
-    color: _appColors.neutral400,
-  );
-
-  TextStyle get font12Neutral600SemiBold => _base(
-    fontSize: 12.sp,
-    fontWeight: FontWeight.w600,
-    color: _appColors.neutral600,
-  );
-
-  TextStyle get font14Primary500SemiBold => _base(
-    fontSize: 14.sp,
-    fontWeight: FontWeight.w600,
-    color: _appColors.primary500,
-  );
-
-  TextStyle get font14alertError500SemiBold => _base(
-    fontSize: 14.sp,
-    fontWeight: FontWeight.w600,
-    color: _appColors.alertError500,
+  TextStyle caption({Color? color, FontWeight? weight}) => _role(
+    size: _scale.captionSize,
+    defaultWeight: FontWeight.w400,
+    defaultColor: _colors.secondary900,
+    height: AppFonts.bodyHeight,
+    color: color,
+    weight: weight,
   );
 
   /// Numerals that update in place — countdowns, fare meters, trip timers.
-  TextStyle get timerTextStyle => TextStyle(
+  TextStyle timerTextStyle({Color? color, FontWeight? weight}) => TextStyle(
     fontFamily: AppFonts.numeralFamily,
-    fontSize: 14.sp,
-    fontWeight: FontWeight.w600,
-    color: _appColors.secondary900,
+    fontSize: _scale.bodySize,
+    fontWeight: weight ?? FontWeight.w600,
+    color: color ?? _colors.secondary900,
     height: AppFonts.bodyHeight,
   );
 }

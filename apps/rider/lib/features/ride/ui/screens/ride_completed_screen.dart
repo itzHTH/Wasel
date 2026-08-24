@@ -67,13 +67,13 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
               Text(
                 context.l10n.arrivedSafely,
                 textAlign: TextAlign.center,
-                style: context.styles.font24Secondary900Bold,
+                style: context.styles.headline(),
               ),
               SizedBox(height: AppDimens.space8),
               Text(
                 widget.fare,
                 textAlign: TextAlign.center,
-                style: context.styles.font32Secondary900Bold,
+                style: context.styles.display(),
               ),
               SizedBox(height: AppDimens.space32),
               _summaryCard(),
@@ -81,7 +81,7 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
               Text(
                 context.l10n.howWasYourRide,
                 textAlign: TextAlign.center,
-                style: context.styles.font20Secondary900Bold,
+                style: context.styles.title(),
               ),
               SizedBox(height: AppDimens.space16),
               StarRatingBar(
@@ -110,10 +110,10 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
       maxLines: 3,
       maxLength: 500,
       textInputAction: TextInputAction.newline,
-      style: context.styles.font14Secondary900SemiBold,
+      style: context.styles.body(weight: FontWeight.w600),
       decoration: InputDecoration(
         hintText: context.l10n.writeNotesOptional,
-        hintStyle: context.styles.font14Neutral400Regular,
+        hintStyle: context.styles.body(color: context.colors.neutral400),
         counterText: '',
         filled: true,
         fillColor: context.colors.elementBackground,

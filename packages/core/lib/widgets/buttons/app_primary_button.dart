@@ -42,7 +42,13 @@ class AppPrimaryButton extends StatelessWidget {
                   color: context.colors.onPrimary,
                 ),
               )
-            : Text(label, style: context.styles.font16Neutral0SemiBold),
+            : Text(
+                label,
+                style: context.styles.bodyLarge(
+                  weight: FontWeight.w600,
+                  color: context.colors.onPrimary,
+                ),
+              ),
       ),
     );
   }

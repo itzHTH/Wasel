@@ -24,7 +24,7 @@ class OtpPinInput extends StatelessWidget {
     final defaultTheme = PinTheme(
       width: AppDimens.otpBoxSize,
       height: AppDimens.otpBoxSize,
-      textStyle: context.styles.font24Secondary900Bold,
+      textStyle: context.styles.headline(),
       decoration: BoxDecoration(
         color: context.colors.neutral50,
         borderRadius: BorderRadius.circular(AppDimens.radius12),

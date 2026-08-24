@@ -21,7 +21,10 @@ class GuidanceText extends StatelessWidget {
       child: Text(
         message,
         textAlign: TextAlign.center,
-        style: context.styles.font16OnScrimSemiBold,
+        style: context.styles.bodyLarge(
+          weight: FontWeight.w600,
+          color: context.colors.onScrim,
+        ),
       ),
     );
   }

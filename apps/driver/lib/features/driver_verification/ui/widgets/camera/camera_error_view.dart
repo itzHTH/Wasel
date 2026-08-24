@@ -28,14 +28,20 @@ class CameraErrorView extends StatelessWidget {
             Text(
               message,
               textAlign: TextAlign.center,
-              style: context.styles.font16OnScrimSemiBold,
+              style: context.styles.bodyLarge(
+                weight: FontWeight.w600,
+                color: context.colors.onScrim,
+              ),
             ),
             SizedBox(height: AppDimens.space24),
             TextButton(
               onPressed: onBack,
               child: Text(
                 context.coreL10n.back,
-                style: context.styles.font14Primary500SemiBold,
+                style: context.styles.body(
+                  weight: FontWeight.w600,
+                  color: context.colors.primary500,
+                ),
               ),
             ),
           ],

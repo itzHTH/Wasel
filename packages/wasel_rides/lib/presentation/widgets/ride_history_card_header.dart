@@ -46,7 +46,7 @@ class RideHistoryCardHeader extends StatelessWidget {
                   context.ridesL10n,
                   entry.requestedAt,
                 ),
-                style: context.styles.font14Secondary900SemiBold,
+                style: context.styles.body(weight: FontWeight.w600),
               ),
               SizedBox(height: AppDimens.space4),
               RideHistoryStatusChip(status: entry.status),

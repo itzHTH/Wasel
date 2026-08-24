@@ -51,7 +51,7 @@ class DriverStatusBar extends ConsumerWidget {
                 _titleFor(context, stage, connection),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: context.styles.font14Secondary900SemiBold,
+                style: context.styles.body(weight: FontWeight.w600),
               ),
             ),
             SizedBox(width: AppDimens.space12),

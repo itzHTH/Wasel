@@ -32,7 +32,7 @@ class _CaptureSourceSheet extends StatelessWidget {
             Text(
               context.coreL10n.chooseImageSource,
               textAlign: TextAlign.center,
-              style: context.styles.font20Secondary900Bold,
+              style: context.styles.title(),
             ),
             SizedBox(height: AppDimens.space24),
             _SourceTile(
@@ -84,7 +84,12 @@ class _SourceTile extends StatelessWidget {
               color: context.colors.primary500,
             ),
             SizedBox(width: AppDimens.space16),
-            Text(label, style: context.styles.font16Secondary500Regular),
+            Text(
+              label,
+              style: context.styles.bodyLarge(
+                color: context.colors.secondary500,
+              ),
+            ),
           ],
         ),
       ),

@@ -53,7 +53,7 @@ class _RidePriceCardState extends ConsumerState<RidePriceCard> {
               Expanded(
                 child: Text(
                   context.l10n.rideDetails,
-                  style: context.styles.font20Secondary900Bold,
+                  style: context.styles.title(),
                 ),
               ),
             ],

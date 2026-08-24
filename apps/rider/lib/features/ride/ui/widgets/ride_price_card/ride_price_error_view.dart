@@ -17,7 +17,10 @@ class RidePriceErrorView extends ConsumerWidget {
         Text(
           message,
           textAlign: TextAlign.center,
-          style: context.styles.font14Secondary500Medium,
+          style: context.styles.body(
+            weight: FontWeight.w500,
+            color: context.colors.secondary500,
+          ),
         ),
         SizedBox(height: AppDimens.space16),
         SizedBox(
@@ -34,7 +37,10 @@ class RidePriceErrorView extends ConsumerWidget {
             ),
             child: Text(
               context.coreL10n.retry,
-              style: context.styles.font16Neutral0SemiBold,
+              style: context.styles.bodyLarge(
+                weight: FontWeight.w600,
+                color: context.colors.onPrimary,
+              ),
             ),
           ),
         ),

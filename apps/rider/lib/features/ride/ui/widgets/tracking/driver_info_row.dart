@@ -28,7 +28,7 @@ class DriverInfoRow extends StatelessWidget {
                     : driver.name,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: context.styles.font20Secondary900Bold,
+                style: context.styles.title(),
               ),
               if (vehicle != null) ...[
                 SizedBox(height: AppDimens.space4),
@@ -36,7 +36,10 @@ class DriverInfoRow extends StatelessWidget {
                   vehicle,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: context.styles.font14Secondary500Medium,
+                  style: context.styles.body(
+                    weight: FontWeight.w500,
+                    color: context.colors.secondary500,
+                  ),
                 ),
               ],
             ],
@@ -103,7 +106,10 @@ class _PlateChip extends StatelessWidget {
       child: Text(
         plateNumber,
         textDirection: TextDirection.ltr,
-        style: context.styles.font16Neutral0SemiBold,
+        style: context.styles.bodyLarge(
+          weight: FontWeight.w600,
+          color: context.colors.onPrimary,
+        ),
       ),
     );
   }

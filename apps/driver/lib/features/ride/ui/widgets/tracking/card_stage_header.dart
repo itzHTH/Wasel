@@ -39,9 +39,12 @@ class CardStageHeader extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: context.styles.font20Secondary900Bold),
+              Text(title, style: context.styles.title()),
               if (subtitle != null)
-                Text(subtitle, style: context.styles.font14Neutral400Regular),
+                Text(
+                  subtitle,
+                  style: context.styles.body(color: context.colors.neutral400),
+                ),
             ],
           ),
         ),

@@ -48,9 +48,12 @@ class RideHistoryStatusChip extends StatelessWidget {
           SizedBox(width: AppDimens.space4),
           Text(
             label,
-            style: context.styles.font12Neutral600SemiBold.copyWith(
-              color: foreground,
-            ),
+            style: context.styles
+                .caption(
+                  weight: FontWeight.w600,
+                  color: context.colors.neutral600,
+                )
+                .copyWith(color: foreground),
           ),
         ],
       ),

@@ -57,7 +57,7 @@ class ProfileScreen extends ConsumerWidget {
                     context,
                     ref.watch(themeModeControllerProvider),
                   ),
-                  style: context.styles.font14Neutral400Regular,
+                  style: context.styles.body(color: context.colors.neutral400),
                 ),
               ),
               AppMenuTile(
@@ -66,7 +66,7 @@ class ProfileScreen extends ConsumerWidget {
                 onTap: () => showAppLanguageSheet(context),
                 trailing: Text(
                   appLocaleLabel(ref.watch(appLocalizationControllerProvider)),
-                  style: context.styles.font14Neutral400Regular,
+                  style: context.styles.body(color: context.colors.neutral400),
                 ),
               ),
             ],

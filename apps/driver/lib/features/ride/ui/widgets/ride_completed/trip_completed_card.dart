@@ -30,14 +30,14 @@ class TripCompletedCard extends StatelessWidget {
           Center(
             child: Text(
               context.l10n.rideFinished,
-              style: context.styles.font20Secondary900Bold,
+              style: context.styles.title(),
             ),
           ),
           SizedBox(height: AppDimens.space4),
           Center(
             child: Text(
               context.l10n.collectFareFromRider,
-              style: context.styles.font14Neutral400Regular,
+              style: context.styles.body(color: context.colors.neutral400),
             ),
           ),
           SizedBox(height: AppDimens.space24),

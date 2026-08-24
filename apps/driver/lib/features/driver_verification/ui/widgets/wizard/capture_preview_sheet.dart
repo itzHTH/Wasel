@@ -39,13 +39,13 @@ class _CapturePreviewSheet extends StatelessWidget {
           children: [
             Text(
               context.l10n.confirmPhoto,
-              style: context.styles.font20Secondary900Bold,
+              style: context.styles.title(),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: AppDimens.space8),
             Text(
               context.l10n.ensurePhotoClear,
-              style: context.styles.font14Neutral400Regular,
+              style: context.styles.body(color: context.colors.neutral400),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: AppDimens.space24),
@@ -78,7 +78,7 @@ class _CapturePreviewSheet extends StatelessWidget {
                       ),
                       child: Text(
                         context.coreL10n.cancel,
-                        style: context.styles.font14Secondary900SemiBold,
+                        style: context.styles.body(weight: FontWeight.w600),
                       ),
                     ),
                   ),

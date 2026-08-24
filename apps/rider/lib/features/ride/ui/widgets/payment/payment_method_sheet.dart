@@ -61,7 +61,7 @@ class _PaymentMethodSheet extends StatelessWidget {
             Text(
               context.l10n.paymentMethodLabel,
               textAlign: TextAlign.center,
-              style: context.styles.font16Secondary900Bold,
+              style: context.styles.bodyLarge(weight: FontWeight.w700),
             ),
             SizedBox(height: AppDimens.space16),
             AppGroupCard(
@@ -114,7 +114,10 @@ class _MethodTrailing extends ConsumerWidget {
         if (balance != null) ...[
           Text(
             RideFormatters.fare(context.l10n, balance),
-            style: context.styles.font14Secondary500Medium,
+            style: context.styles.body(
+              weight: FontWeight.w500,
+              color: context.colors.secondary500,
+            ),
           ),
           SizedBox(width: AppDimens.space8),
         ],

@@ -12,6 +12,6 @@ class RideCardTitle extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final stage = ref.watch(rideDraftProvider.select((s) => s.stage));
     final title = stage.cardTitle(context.l10n);
-    return Text(title, style: context.styles.font20Secondary900Bold);
+    return Text(title, style: context.styles.title());
   }
 }

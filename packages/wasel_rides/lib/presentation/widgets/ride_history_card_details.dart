@@ -28,7 +28,7 @@ class RideHistoryCardDetails extends StatelessWidget {
               context.ridesL10n,
               entry.requestedAt,
             ),
-            style: context.styles.font14Secondary900SemiBold,
+            style: context.styles.body(weight: FontWeight.w600),
           ),
         ),
         SizedBox(height: AppDimens.space8),
@@ -36,7 +36,7 @@ class RideHistoryCardDetails extends StatelessWidget {
           label: context.ridesL10n.rideRequestTime,
           value: Text(
             RideHistoryLabels.timeLabel(context.ridesL10n, entry.requestedAt),
-            style: context.styles.font14Secondary900SemiBold,
+            style: context.styles.body(weight: FontWeight.w600),
           ),
         ),
         SizedBox(height: AppDimens.space8),
@@ -44,7 +44,7 @@ class RideHistoryCardDetails extends StatelessWidget {
           label: context.ridesL10n.rideFare,
           value: RideHistoryAmount(
             price: entry.price,
-            style: context.styles.font14Secondary900SemiBold,
+            style: context.styles.body(weight: FontWeight.w600),
           ),
         ),
       ],
@@ -64,7 +64,10 @@ class _DetailRow extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: Text(label, style: context.styles.font12Neutral400Regular),
+          child: Text(
+            label,
+            style: context.styles.caption(color: context.colors.neutral400),
+          ),
         ),
         SizedBox(width: AppDimens.space12),
         Flexible(child: value),

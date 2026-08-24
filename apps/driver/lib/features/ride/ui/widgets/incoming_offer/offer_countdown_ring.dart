@@ -45,7 +45,7 @@ class OfferCountdownRing extends StatelessWidget {
         child: Center(
           child: Text(
             '${remaining.inSeconds}',
-            style: context.styles.timerTextStyle.copyWith(color: color),
+            style: context.styles.timerTextStyle().copyWith(color: color),
           ),
         ),
       ),

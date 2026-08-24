@@ -16,7 +16,10 @@ class RequestRideErrorView extends StatelessWidget {
         Text(
           message,
           textAlign: TextAlign.center,
-          style: context.styles.font14alertError500SemiBold,
+          style: context.styles.body(
+            weight: FontWeight.w600,
+            color: context.colors.alertError500,
+          ),
         ),
         SizedBox(height: AppDimens.space16),
         const RequestConfirmButton(),

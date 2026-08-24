@@ -55,13 +55,16 @@ class RideInProgressCard extends ConsumerWidget {
                   children: [
                     Text(
                       context.l10n.haveAGoodTrip,
-                      style: context.styles.font20Secondary900Bold,
+                      style: context.styles.title(),
                     ),
                     if (etaMinutes != null) ...[
                       SizedBox(height: AppDimens.space4),
                       Text(
                         context.l10n.arrivalEtaMinutes(etaMinutes.toString()),
-                        style: context.styles.font14Secondary500Medium,
+                        style: context.styles.body(
+                          weight: FontWeight.w500,
+                          color: context.colors.secondary500,
+                        ),
                       ),
                     ],
                   ],

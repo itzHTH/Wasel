@@ -28,11 +28,13 @@ class SearchingCard extends ConsumerWidget {
                   children: [
                     Text(
                       context.l10n.searchingForRequests,
-                      style: context.styles.font20Secondary900Bold,
+                      style: context.styles.title(),
                     ),
                     Text(
                       context.l10n.stayInBusyArea,
-                      style: context.styles.font14Neutral400Regular,
+                      style: context.styles.body(
+                        color: context.colors.neutral400,
+                      ),
                     ),
                   ],
                 ),
@@ -77,7 +79,7 @@ class _TodayPanel extends ConsumerWidget {
             children: [
               Text(
                 context.l10n.todayEarnings,
-                style: context.styles.font12Neutral400Regular,
+                style: context.styles.caption(color: context.colors.neutral400),
               ),
               SizedBox(width: AppDimens.space8),
               if (earnings.isLoading)
@@ -99,10 +101,10 @@ class _TodayPanel extends ConsumerWidget {
                     data.totalEarnings.toString(),
                   ),
             style: data == null
-                ? context.styles.font24Secondary900Bold.copyWith(
+                ? context.styles.headline().copyWith(
                     color: context.colors.neutral400,
                   )
-                : context.styles.font24Secondary900Bold,
+                : context.styles.headline(),
           ),
           Divider(color: context.colors.neutral200, height: AppDimens.space24),
           IntrinsicHeight(
@@ -163,15 +165,21 @@ class _Metric extends StatelessWidget {
               color: context.colors.neutral400,
             ),
             SizedBox(width: AppDimens.space4),
-            Text(label, style: context.styles.font12Neutral400Regular),
+            Text(
+              label,
+              style: context.styles.caption(color: context.colors.neutral400),
+            ),
           ],
         ),
         SizedBox(height: AppDimens.space4),
         Text(
           value ?? '—',
           style: value == null
-              ? context.styles.font14Neutral400Medium
-              : context.styles.font14Secondary900SemiBold,
+              ? context.styles.body(
+                  weight: FontWeight.w500,
+                  color: context.colors.neutral400,
+                )
+              : context.styles.body(weight: FontWeight.w600),
         ),
       ],
     );
@@ -221,9 +229,9 @@ class _RetryButton extends StatelessWidget {
             SizedBox(width: AppDimens.space4),
             Text(
               context.coreL10n.retry,
-              style: context.styles.font12Neutral400Regular.copyWith(
-                color: context.colors.primary500,
-              ),
+              style: context.styles
+                  .caption(color: context.colors.neutral400)
+                  .copyWith(color: context.colors.primary500),
             ),
           ],
         ),

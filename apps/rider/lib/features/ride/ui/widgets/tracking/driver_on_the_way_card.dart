@@ -64,7 +64,7 @@ class DriverOnTheWayCard extends ConsumerWidget {
                   etaMinutes != null
                       ? context.l10n.captainEtaMinutes(etaMinutes.toString())
                       : context.l10n.captainOnWay,
-                  style: context.styles.font20Secondary900Bold,
+                  style: context.styles.title(),
                 ),
               ),
             ],

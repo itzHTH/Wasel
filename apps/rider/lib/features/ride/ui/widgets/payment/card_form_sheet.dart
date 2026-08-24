@@ -144,7 +144,7 @@ class _CardFormSheetState extends ConsumerState<_CardFormSheet> {
                   Text(
                     context.l10n.cardDetails,
                     textAlign: TextAlign.center,
-                    style: context.styles.font16Secondary900Bold,
+                    style: context.styles.bodyLarge(weight: FontWeight.w700),
                   ),
                   SizedBox(height: AppDimens.space16),
                   AppLabeledFormField(

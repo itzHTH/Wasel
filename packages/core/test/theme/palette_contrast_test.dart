@@ -145,9 +145,9 @@ void main() {
     tester,
   ) async {
     await _forEachTheme(tester, (brand, brightness, theme, colors) {
-      final styles = AppTextStyles(colors);
-      expect(styles.timerTextStyle.fontFamily, AppFonts.numeralFamily);
-      expect(styles.font14Secondary900SemiBold.fontFamily, AppFonts.family);
+      final styles = AppTextStyles(colors, brand.typeScale());
+      expect(styles.timerTextStyle().fontFamily, AppFonts.numeralFamily);
+      expect(styles.body().fontFamily, AppFonts.family);
       expect(AppFonts.numeralFamily, isNot(AppFonts.family));
     });
   });

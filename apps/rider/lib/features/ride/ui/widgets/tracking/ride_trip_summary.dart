@@ -60,7 +60,10 @@ class RideTripSummary extends StatelessWidget {
               children: [
                 Text(
                   context.l10n.estimatedFare,
-                  style: context.styles.font14Secondary500Medium,
+                  style: context.styles.body(
+                    weight: FontWeight.w500,
+                    color: context.colors.secondary500,
+                  ),
                 ),
                 Text(
                   RideFormatters.fare(
@@ -68,7 +71,7 @@ class RideTripSummary extends StatelessWidget {
                     fare.estimatedPrice,
                     currency: fare.currency,
                   ),
-                  style: context.styles.font20Secondary900Bold,
+                  style: context.styles.title(),
                 ),
               ],
             ),
@@ -124,7 +127,7 @@ class _RoutePoint extends StatelessWidget {
                 label,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: context.styles.font14Secondary900SemiBold,
+                style: context.styles.body(weight: FontWeight.w600),
               ),
             ),
           ),

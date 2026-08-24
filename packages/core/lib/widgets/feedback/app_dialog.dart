@@ -91,13 +91,15 @@ class AppDialog extends StatelessWidget {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: context.styles.font20Secondary900Bold,
+              style: context.styles.title(),
             ),
             SizedBox(height: AppDimens.space8),
             Text(
               message,
               textAlign: TextAlign.center,
-              style: context.styles.font16Secondary500Regular,
+              style: context.styles.bodyLarge(
+                color: context.colors.secondary500,
+              ),
             ),
             SizedBox(height: AppDimens.space24),
             SizedBox(
@@ -115,7 +117,10 @@ class AppDialog extends StatelessWidget {
                 onPressed: () => Navigator.of(context).pop(true),
                 child: Text(
                   confirmLabel,
-                  style: context.styles.font16Neutral0SemiBold,
+                  style: context.styles.bodyLarge(
+                    weight: FontWeight.w600,
+                    color: context.colors.onPrimary,
+                  ),
                 ),
               ),
             ),
@@ -128,8 +133,11 @@ class AppDialog extends StatelessWidget {
                   child: Text(
                     cancelLabel!,
                     style: isDestructive
-                        ? context.styles.font14Secondary900SemiBold
-                        : context.styles.font14Primary500SemiBold,
+                        ? context.styles.body(weight: FontWeight.w600)
+                        : context.styles.body(
+                            weight: FontWeight.w600,
+                            color: context.colors.primary500,
+                          ),
                   ),
                 ),
               ),

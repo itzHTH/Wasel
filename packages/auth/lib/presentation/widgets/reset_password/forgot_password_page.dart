@@ -34,12 +34,12 @@ class ForgotPasswordPage extends StatelessWidget {
 
           Text(
             context.authL10n.forgotPassword,
-            style: context.styles.font24Secondary900Bold,
+            style: context.styles.headline(),
           ),
           SizedBox(height: AppDimens.space8),
           Text(
             context.authL10n.forgotPasswordDescription,
-            style: context.styles.font14Neutral400Regular,
+            style: context.styles.body(color: context.colors.neutral400),
           ),
           SizedBox(height: AppDimens.space32),
 
@@ -91,13 +91,16 @@ class ForgotPasswordPage extends StatelessWidget {
             children: [
               Text(
                 context.authL10n.rememberedPassword,
-                style: context.styles.font14Neutral400Regular,
+                style: context.styles.body(color: context.colors.neutral400),
               ),
               GestureDetector(
                 onTap: () => Navigator.pop(context),
                 child: Text(
                   context.authL10n.login,
-                  style: context.styles.font14Primary500SemiBold,
+                  style: context.styles.body(
+                    weight: FontWeight.w600,
+                    color: context.colors.primary500,
+                  ),
                 ),
               ),
             ],

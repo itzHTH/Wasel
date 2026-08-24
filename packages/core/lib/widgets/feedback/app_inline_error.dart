@@ -37,7 +37,10 @@ class AppInlineError extends StatelessWidget {
             Flexible(
               child: Text(
                 text,
-                style: context.styles.font14alertError500SemiBold,
+                style: context.styles.body(
+                  weight: FontWeight.w600,
+                  color: context.colors.alertError500,
+                ),
                 textAlign: textAlign,
               ),
             ),

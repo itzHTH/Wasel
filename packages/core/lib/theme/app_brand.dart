@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_core/theme/app_colors_extension.dart';
 import 'package:wasel_core/theme/app_shape.dart';
+import 'package:wasel_core/theme/app_type_scale.dart';
 import 'package:wasel_core/theme/palettes/driver_palette.dart';
 import 'package:wasel_core/theme/palettes/rider_palette.dart';
 
@@ -20,5 +21,10 @@ extension AppBrandPalette on AppBrand {
   AppShape shape() => switch (this) {
     AppBrand.rider => AppShape.rider(),
     AppBrand.driver => AppShape.driver(),
+  };
+
+  AppTypeScale typeScale() => switch (this) {
+    AppBrand.rider => AppTypeScale.rider(),
+    AppBrand.driver => AppTypeScale.driver(),
   };
 }

@@ -20,6 +20,7 @@ class AppTheme {
   }) {
     final appColors = brand.paletteFor(brightness);
     final appShape = brand.shape();
+    final appTypeScale = brand.typeScale();
     final isDark = brightness == Brightness.dark;
 
     final textTheme = ThemeData(brightness: brightness).textTheme.apply(
@@ -42,7 +43,7 @@ class AppTheme {
       canvasColor: appColors.elementBackground,
       dividerColor: appColors.neutral200,
       textTheme: textTheme,
-      extensions: [appColors, appShape],
+      extensions: [appColors, appShape, appTypeScale],
 
       appBarTheme: AppBarTheme(
         backgroundColor: appColors.screenBackground,
