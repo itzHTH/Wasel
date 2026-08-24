@@ -29,10 +29,7 @@ class PointLabelRow extends ConsumerWidget {
       children: [
         Text(
           '$prefix: ',
-          style: context.styles.body(
-            weight: FontWeight.w500,
-            color: context.colors.secondary500,
-          ),
+          style: context.styles.bodySecondary(),
         ),
         Expanded(
           child: label.when(

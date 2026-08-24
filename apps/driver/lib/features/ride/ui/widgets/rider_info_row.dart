@@ -45,10 +45,7 @@ class RiderInfoRow extends StatelessWidget {
                   phoneNumber ?? context.l10n.phoneUnavailable,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: context.styles.body(
-                    weight: FontWeight.w500,
-                    color: context.colors.neutral400,
-                  ),
+                  style: context.styles.bodyMuted(weight: FontWeight.w500),
                 ),
             ],
           ),

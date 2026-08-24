@@ -24,7 +24,7 @@ class AuthHeader extends StatelessWidget {
         Text.rich(
           TextSpan(
             text: context.l10n.authHeaderTagline,
-            style: context.styles.body(color: context.colors.neutral400),
+            style: context.styles.bodyMuted(),
             children: [
               TextSpan(
                 text: context.l10n.brandName,

@@ -39,7 +39,7 @@ class ForgotPasswordPage extends StatelessWidget {
           SizedBox(height: AppDimens.space8),
           Text(
             context.authL10n.forgotPasswordDescription,
-            style: context.styles.body(color: context.colors.neutral400),
+            style: context.styles.bodyMuted(),
           ),
           SizedBox(height: AppDimens.space32),
 
@@ -91,16 +91,13 @@ class ForgotPasswordPage extends StatelessWidget {
             children: [
               Text(
                 context.authL10n.rememberedPassword,
-                style: context.styles.body(color: context.colors.neutral400),
+                style: context.styles.bodyMuted(),
               ),
               GestureDetector(
                 onTap: () => Navigator.pop(context),
                 child: Text(
                   context.authL10n.login,
-                  style: context.styles.body(
-                    weight: FontWeight.w600,
-                    color: context.colors.primary500,
-                  ),
+                  style: context.styles.bodyBrand(),
                 ),
               ),
             ],

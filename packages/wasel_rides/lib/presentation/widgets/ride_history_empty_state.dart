@@ -55,9 +55,7 @@ class RideHistoryEmptyState extends StatelessWidget {
                       Text(
                         context.ridesL10n.noRidesYetDescription,
                         textAlign: TextAlign.center,
-                        style: context.styles.body(
-                          color: context.colors.neutral400,
-                        ),
+                        style: context.styles.bodyMuted(),
                       ),
                     ],
                   ),

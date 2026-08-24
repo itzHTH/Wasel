@@ -111,7 +111,7 @@ class _Point extends ConsumerWidget {
       children: [
         Text(
           title,
-          style: context.styles.caption(color: context.colors.neutral400),
+          style: context.styles.captionMuted(),
         ),
         label.when(
           loading: () => Align(

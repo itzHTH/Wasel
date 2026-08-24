@@ -28,10 +28,7 @@ class AppErrorRetry extends StatelessWidget {
           message,
           maxLines: 3,
           overflow: TextOverflow.ellipsis,
-          style: context.styles.body(
-            weight: FontWeight.w600,
-            color: context.colors.alertError500,
-          ),
+          style: context.styles.bodyDanger(),
         ),
         SizedBox(height: AppDimens.space8),
         TextButton.icon(
@@ -45,10 +42,7 @@ class AppErrorRetry extends StatelessWidget {
                 ),
           label: Text(
             isRetrying ? context.coreL10n.retrying : context.coreL10n.retry,
-            style: context.styles.body(
-              weight: FontWeight.w600,
-              color: context.colors.primary500,
-            ),
+            style: context.styles.bodyBrand(),
           ),
           style: TextButton.styleFrom(padding: EdgeInsets.zero),
         ),

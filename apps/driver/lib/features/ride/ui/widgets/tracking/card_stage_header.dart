@@ -43,7 +43,7 @@ class CardStageHeader extends StatelessWidget {
               if (subtitle != null)
                 Text(
                   subtitle,
-                  style: context.styles.body(color: context.colors.neutral400),
+                  style: context.styles.bodyMuted(),
                 ),
             ],
           ),

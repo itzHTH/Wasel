@@ -14,10 +14,7 @@ class RideDetailRow extends StatelessWidget {
       children: [
         Text(
           label,
-          style: context.styles.body(
-            weight: FontWeight.w500,
-            color: context.colors.secondary500,
-          ),
+          style: context.styles.bodySecondary(),
         ),
         Text(value, style: context.styles.body(weight: FontWeight.w600)),
       ],

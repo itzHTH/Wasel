@@ -51,7 +51,7 @@ class AppLabeledFormField extends StatelessWidget {
           autofillHints: autofillHints,
           inputFormatters: inputFormatters,
           backgroundColor: context.colors.neutral50,
-          hintStyle: context.styles.body(color: context.colors.neutral400),
+          hintStyle: context.styles.bodyMuted(),
           inputTextStyle: context.styles.body(weight: FontWeight.w600),
         ),
       ],

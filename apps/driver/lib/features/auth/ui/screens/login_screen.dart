@@ -71,10 +71,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ),
                       child: Text(
                         context.authL10n.forgotPassword,
-                        style: context.styles.body(
-                          weight: FontWeight.w600,
-                          color: context.colors.primary500,
-                        ),
+                        style: context.styles.bodyBrand(),
                       ),
                     ),
                   ),
@@ -100,19 +97,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   children: [
                     Text(
                       context.authL10n.noAccount,
-                      style: context.styles.body(
-                        color: context.colors.neutral400,
-                      ),
+                      style: context.styles.bodyMuted(),
                     ),
                     GestureDetector(
                       onTap: () =>
                           Navigator.pushNamed(context, AppRoutes.register),
                       child: Text(
                         context.authL10n.createAccount,
-                        style: context.styles.body(
-                          weight: FontWeight.w600,
-                          color: context.colors.primary500,
-                        ),
+                        style: context.styles.bodyBrand(),
                       ),
                     ),
                   ],

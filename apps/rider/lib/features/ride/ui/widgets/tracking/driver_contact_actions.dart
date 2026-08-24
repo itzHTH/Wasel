@@ -77,10 +77,7 @@ class _ContactButton extends StatelessWidget {
                         weight: FontWeight.w600,
                         color: context.colors.onPrimary,
                       )
-                    : context.styles.body(
-                        weight: FontWeight.w600,
-                        color: context.colors.primary500,
-                      ),
+                    : context.styles.bodyBrand(),
               ),
             ],
           ),

@@ -40,10 +40,7 @@ class SearchingForDriverCard extends StatelessWidget {
                     SizedBox(height: AppDimens.space4),
                     Text(
                       context.l10n.stayOnline,
-                      style: context.styles.body(
-                        weight: FontWeight.w500,
-                        color: context.colors.secondary500,
-                      ),
+                      style: context.styles.bodySecondary(),
                     ),
                   ],
                 ),

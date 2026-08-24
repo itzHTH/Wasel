@@ -64,7 +64,7 @@ class EmptyThumbnail extends StatelessWidget {
           SizedBox(height: AppDimens.space8),
           Text(
             label,
-            style: context.styles.body(color: context.colors.neutral400),
+            style: context.styles.bodyMuted(),
           ),
         ],
       ),

@@ -56,9 +56,7 @@ class AppInfoRow extends StatelessWidget {
               children: [
                 Text(
                   label,
-                  style: context.styles.caption(
-                    color: context.colors.neutral400,
-                  ),
+                  style: context.styles.captionMuted(),
                 ),
                 SizedBox(height: AppDimens.space4),
                 Text(
@@ -70,7 +68,7 @@ class AppInfoRow extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: hasValue
                       ? context.styles.body(weight: FontWeight.w600)
-                      : context.styles.body(color: context.colors.neutral400),
+                      : context.styles.bodyMuted(),
                 ),
               ],
             ),

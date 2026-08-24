@@ -113,7 +113,7 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
       style: context.styles.body(weight: FontWeight.w600),
       decoration: InputDecoration(
         hintText: context.l10n.writeNotesOptional,
-        hintStyle: context.styles.body(color: context.colors.neutral400),
+        hintStyle: context.styles.bodyMuted(),
         counterText: '',
         filled: true,
         fillColor: context.colors.elementBackground,

@@ -66,7 +66,7 @@ class _DetailRow extends StatelessWidget {
         Expanded(
           child: Text(
             label,
-            style: context.styles.caption(color: context.colors.neutral400),
+            style: context.styles.captionMuted(),
           ),
         ),
         SizedBox(width: AppDimens.space12),

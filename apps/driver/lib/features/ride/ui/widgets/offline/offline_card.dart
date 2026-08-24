@@ -42,9 +42,7 @@ class OfflineCard extends StatelessWidget {
                       isConnecting
                           ? context.l10n.oneMomentConnecting
                           : context.l10n.noRequestsWhileOffline,
-                      style: context.styles.body(
-                        color: context.colors.neutral400,
-                      ),
+                      style: context.styles.bodyMuted(),
                     ),
                   ],
                 ),

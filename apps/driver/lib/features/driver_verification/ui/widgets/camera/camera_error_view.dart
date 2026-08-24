@@ -38,10 +38,7 @@ class CameraErrorView extends StatelessWidget {
               onPressed: onBack,
               child: Text(
                 context.coreL10n.back,
-                style: context.styles.body(
-                  weight: FontWeight.w600,
-                  color: context.colors.primary500,
-                ),
+                style: context.styles.bodyBrand(),
               ),
             ),
           ],

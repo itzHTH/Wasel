@@ -86,9 +86,7 @@ class UnderReviewScreen extends ConsumerWidget {
                       SizedBox(height: AppDimens.space8),
                       Text(
                         context.l10n.reviewingDocuments,
-                        style: context.styles.body(
-                          color: context.colors.neutral400,
-                        ),
+                        style: context.styles.bodyMuted(),
                         textAlign: TextAlign.center,
                       ),
                     ],

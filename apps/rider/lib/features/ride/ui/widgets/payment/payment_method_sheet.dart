@@ -114,10 +114,7 @@ class _MethodTrailing extends ConsumerWidget {
         if (balance != null) ...[
           Text(
             RideFormatters.fare(context.l10n, balance),
-            style: context.styles.body(
-              weight: FontWeight.w500,
-              color: context.colors.secondary500,
-            ),
+            style: context.styles.bodySecondary(),
           ),
           SizedBox(width: AppDimens.space8),
         ],

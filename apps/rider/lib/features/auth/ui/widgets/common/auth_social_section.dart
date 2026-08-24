@@ -43,7 +43,7 @@ class _DividerRow extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 12.w),
           child: Text(
             context.l10n.orSignUpWith,
-            style: context.styles.caption(color: context.colors.neutral400),
+            style: context.styles.captionMuted(),
           ),
         ),
         Expanded(
@@ -79,10 +79,7 @@ class _GoogleButton extends StatelessWidget {
             SizedBox(width: 10.w),
             Text(
               label,
-              style: context.styles.body(
-                weight: FontWeight.w500,
-                color: context.colors.secondary500,
-              ),
+              style: context.styles.bodySecondary(),
             ),
           ],
         ),

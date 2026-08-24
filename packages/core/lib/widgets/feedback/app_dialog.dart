@@ -134,10 +134,7 @@ class AppDialog extends StatelessWidget {
                     cancelLabel!,
                     style: isDestructive
                         ? context.styles.body(weight: FontWeight.w600)
-                        : context.styles.body(
-                            weight: FontWeight.w600,
-                            color: context.colors.primary500,
-                          ),
+                        : context.styles.bodyBrand(),
                   ),
                 ),
               ),

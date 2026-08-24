@@ -57,9 +57,7 @@ class IncomingOfferCard extends ConsumerWidget {
                   children: [
                     Text(
                       context.l10n.newRequest,
-                      style: context.styles.body(
-                        color: context.colors.neutral400,
-                      ),
+                      style: context.styles.bodyMuted(),
                     ),
                     SizedBox(height: AppDimens.space4),
                     FareHero(amount: fare),

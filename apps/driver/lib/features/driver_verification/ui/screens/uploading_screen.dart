@@ -105,7 +105,7 @@ class _UploadingBody extends StatelessWidget {
         SizedBox(height: AppDimens.space8),
         Text(
           context.l10n.pleaseWaitDontClose,
-          style: context.styles.body(color: context.colors.neutral400),
+          style: context.styles.bodyMuted(),
           textAlign: TextAlign.center,
         ),
       ],
@@ -131,7 +131,7 @@ class _SuccessBody extends StatelessWidget {
         SizedBox(height: AppDimens.space8),
         Text(
           context.l10n.willNotifyResult,
-          style: context.styles.body(color: context.colors.neutral400),
+          style: context.styles.bodyMuted(),
           textAlign: TextAlign.center,
         ),
       ],
@@ -165,7 +165,7 @@ class _FailureBody extends StatelessWidget {
         SizedBox(height: AppDimens.space8),
         Text(
           message,
-          style: context.styles.body(color: context.colors.neutral400),
+          style: context.styles.bodyMuted(),
           textAlign: TextAlign.center,
         ),
         SizedBox(height: AppDimens.space32),

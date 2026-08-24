@@ -45,7 +45,7 @@ class _CapturePreviewSheet extends StatelessWidget {
             SizedBox(height: AppDimens.space8),
             Text(
               context.l10n.ensurePhotoClear,
-              style: context.styles.body(color: context.colors.neutral400),
+              style: context.styles.bodyMuted(),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: AppDimens.space24),

@@ -44,10 +44,7 @@ class PaymentMethodRow extends ConsumerWidget {
           children: [
             Text(
               context.l10n.paymentMethodLabel,
-              style: context.styles.body(
-                weight: FontWeight.w500,
-                color: context.colors.secondary500,
-              ),
+              style: context.styles.bodySecondary(),
             ),
             Row(
               children: [

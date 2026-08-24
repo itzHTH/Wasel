@@ -80,7 +80,7 @@ class _EndOfListRow extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: AppDimens.space12),
             child: Text(
               context.ridesL10n.noMoreRides,
-              style: context.styles.caption(color: context.colors.neutral400),
+              style: context.styles.captionMuted(),
             ),
           ),
           Expanded(

@@ -89,11 +89,8 @@ class _LockedValue extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: hasValue
-                      ? context.styles.body(
-                          weight: FontWeight.w500,
-                          color: context.colors.neutral400,
-                        )
-                      : context.styles.body(color: context.colors.neutral400),
+                      ? context.styles.bodyMuted(weight: FontWeight.w500)
+                      : context.styles.bodyMuted(),
                 ),
               ),
               SizedBox(width: AppDimens.space8),

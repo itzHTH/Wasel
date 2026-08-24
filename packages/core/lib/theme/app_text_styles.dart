@@ -100,6 +100,31 @@ class AppTextStyles {
     weight: weight,
   );
 
+  // ── Emphasis variants ─────────────────────────────────────────────────
+  // Colour is the emphasis; the role still owns the size. Weights default to
+  // how each emphasis is actually used: muted and secondary read as running
+  // text, brand and danger are emphatic by nature.
+
+  /// De-emphasised body — hints, timestamps, supporting detail.
+  TextStyle bodyMuted({FontWeight? weight}) =>
+      body(color: _colors.neutral400, weight: weight);
+
+  /// Body at the second text level, a step down from [body].
+  TextStyle bodySecondary({FontWeight? weight}) =>
+      body(color: _colors.secondary500, weight: weight ?? FontWeight.w500);
+
+  /// Body that acts — inline links and tappable text.
+  TextStyle bodyBrand({FontWeight? weight}) =>
+      body(color: _colors.primary500, weight: weight ?? FontWeight.w600);
+
+  /// Body carrying an error. Never the only signal — pair it with an icon.
+  TextStyle bodyDanger({FontWeight? weight}) =>
+      body(color: _colors.alertError500, weight: weight ?? FontWeight.w600);
+
+  /// De-emphasised caption — legal text, meta lines.
+  TextStyle captionMuted({FontWeight? weight}) =>
+      caption(color: _colors.neutral400, weight: weight);
+
   /// Numerals that update in place — countdowns, fare meters, trip timers.
   TextStyle timerTextStyle({Color? color, FontWeight? weight}) => TextStyle(
     fontFamily: AppFonts.numeralFamily,

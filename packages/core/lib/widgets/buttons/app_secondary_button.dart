@@ -26,10 +26,7 @@ class AppSecondaryButton extends StatelessWidget {
         ),
         child: Text(
           label,
-          style: context.styles.body(
-            weight: FontWeight.w600,
-            color: context.colors.primary500,
-          ),
+          style: context.styles.bodyBrand(),
         ),
       ),
     );

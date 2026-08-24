@@ -36,10 +36,7 @@ class DriverInfoRow extends StatelessWidget {
                   vehicle,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: context.styles.body(
-                    weight: FontWeight.w500,
-                    color: context.colors.secondary500,
-                  ),
+                  style: context.styles.bodySecondary(),
                 ),
               ],
             ],

@@ -32,9 +32,7 @@ class SearchingCard extends ConsumerWidget {
                     ),
                     Text(
                       context.l10n.stayInBusyArea,
-                      style: context.styles.body(
-                        color: context.colors.neutral400,
-                      ),
+                      style: context.styles.bodyMuted(),
                     ),
                   ],
                 ),
@@ -79,7 +77,7 @@ class _TodayPanel extends ConsumerWidget {
             children: [
               Text(
                 context.l10n.todayEarnings,
-                style: context.styles.caption(color: context.colors.neutral400),
+                style: context.styles.captionMuted(),
               ),
               SizedBox(width: AppDimens.space8),
               if (earnings.isLoading)
@@ -167,7 +165,7 @@ class _Metric extends StatelessWidget {
             SizedBox(width: AppDimens.space4),
             Text(
               label,
-              style: context.styles.caption(color: context.colors.neutral400),
+              style: context.styles.captionMuted(),
             ),
           ],
         ),
@@ -175,10 +173,7 @@ class _Metric extends StatelessWidget {
         Text(
           value ?? '—',
           style: value == null
-              ? context.styles.body(
-                  weight: FontWeight.w500,
-                  color: context.colors.neutral400,
-                )
+              ? context.styles.bodyMuted(weight: FontWeight.w500)
               : context.styles.body(weight: FontWeight.w600),
         ),
       ],

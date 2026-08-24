@@ -47,7 +47,7 @@ class RegisterFormPage extends StatelessWidget {
           SizedBox(height: AppDimens.space8),
           Text(
             context.authL10n.registerFormDescription,
-            style: context.styles.body(color: context.colors.neutral400),
+            style: context.styles.bodyMuted(),
           ),
           SizedBox(height: AppDimens.space32),
 

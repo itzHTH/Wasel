@@ -48,7 +48,7 @@ class ResetOtpPage extends ConsumerWidget {
           SizedBox(height: AppDimens.space8),
           Text(
             context.authL10n.otpSentToEmail(state.email),
-            style: context.styles.body(color: context.colors.neutral400),
+            style: context.styles.bodyMuted(),
             textAlign: TextAlign.center,
           ),
           SizedBox(height: AppDimens.space40),
@@ -76,10 +76,7 @@ class ResetOtpPage extends ConsumerWidget {
               onPressed: onExpiredRestart,
               child: Text(
                 context.authL10n.requestNewCode,
-                style: context.styles.body(
-                  weight: FontWeight.w600,
-                  color: context.colors.primary500,
-                ),
+                style: context.styles.bodyBrand(),
               ),
             )
           else
