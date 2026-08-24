@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:wasel_core/theme/app_brand.dart';
 import 'package:wasel_core/theme/app_colors_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
+import 'package:wasel_core/theme/app_fonts.dart';
 
 class AppTheme {
   AppTheme._();
@@ -21,13 +21,11 @@ class AppTheme {
     final appColors = brand.paletteFor(brightness);
     final isDark = brightness == Brightness.dark;
 
-    final textTheme =
-        GoogleFonts.ibmPlexSansArabicTextTheme(
-          ThemeData(brightness: brightness).textTheme,
-        ).apply(
-          bodyColor: appColors.secondary900,
-          displayColor: appColors.secondary900,
-        );
+    final textTheme = ThemeData(brightness: brightness).textTheme.apply(
+      fontFamily: AppFonts.family,
+      bodyColor: appColors.secondary900,
+      displayColor: appColors.secondary900,
+    );
 
     OutlineInputBorder fieldBorder(Color color, {double width = 1}) =>
         OutlineInputBorder(
@@ -93,8 +91,8 @@ class AppTheme {
         fillColor: appColors.elementBackground,
         hintStyle: textTheme.bodyMedium?.copyWith(color: appColors.neutral400),
         labelStyle: textTheme.bodyMedium?.copyWith(color: appColors.neutral600),
-        border: fieldBorder(appColors.neutral200),
-        enabledBorder: fieldBorder(appColors.neutral200),
+        border: fieldBorder(appColors.borderStrong),
+        enabledBorder: fieldBorder(appColors.borderStrong),
         focusedBorder: fieldBorder(appColors.primary500, width: 1.5),
         errorBorder: fieldBorder(appColors.alertError500, width: 1.5),
         focusedErrorBorder: fieldBorder(appColors.alertError500, width: 1.5),

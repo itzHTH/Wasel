@@ -28,7 +28,7 @@ class AlertTokens {
   static const Color error100Dark = Color(0xFF3A1A18);
   static const Color error500Dark = Color(0xFFFF8A80);
   static const Color error700Dark = Color(0xFFFFB4AB);
-  static const Color onlineDark = Color(0xFF34D399);
+  static const Color onlineDark = Color(0xFF3ED598);
   static const Color offlineDark = Color(0xFF7B8B98);
 
   // Media overlays (identical in both modes)

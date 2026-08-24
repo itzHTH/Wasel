@@ -1,0 +1,680 @@
+<title>Wasel Dual-Brand Identity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Readex+Pro:wght@300;400;500;600;700&display=swap">
+
+<style>
+:root{
+  --ground:#F4F7F7;
+  --surface:#FFFFFF;
+  --surface-2:#EDF2F2;
+  --ink:#0F1618;
+  --ink-2:#3C4A4E;
+  --ink-3:#66757A;
+  --rule:#D9E1E2;
+  --rule-2:#C2CED0;
+  --accent:#0A7183;
+  --accent-soft:#E4F2F4;
+  --ok:#186A3B;
+  --ok-soft:#E2F1E8;
+  --warn:#8A5A06;
+  --warn-soft:#FBF0DC;
+  --shadow:0 1px 2px rgba(15,22,24,.05), 0 8px 24px -16px rgba(15,22,24,.25);
+  --maxw:1080px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0B0F11;
+    --surface:#141A1C;
+    --surface-2:#1B2325;
+    --ink:#E8EEEF;
+    --ink-2:#AEBBBF;
+    --ink-3:#859398;
+    --rule:#283134;
+    --rule-2:#3B474B;
+    --accent:#5DCBE2;
+    --accent-soft:#0F2A31;
+    --ok:#5FD394;
+    --ok-soft:#11291D;
+    --warn:#EFBB55;
+    --warn-soft:#2A2110;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0B0F11;
+  --surface:#141A1C;
+  --surface-2:#1B2325;
+  --ink:#E8EEEF;
+  --ink-2:#AEBBBF;
+  --ink-3:#859398;
+  --rule:#283134;
+  --rule-2:#3B474B;
+  --accent:#5DCBE2;
+  --accent-soft:#0F2A31;
+  --ok:#5FD394;
+  --ok-soft:#11291D;
+  --warn:#EFBB55;
+  --warn-soft:#2A2110;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:Archivo,"Helvetica Neue",Arial,sans-serif;text-wrap:balance;margin:0;line-height:1.15;letter-spacing:-.015em}
+p{margin:0}
+a{color:var(--accent)}
+code,.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+.prose{max-width:68ch}
+
+/* ---- top bar ---- */
+.bar{
+  position:sticky;top:0;z-index:50;
+  background:color-mix(in srgb, var(--ground) 88%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--rule);
+}
+.bar-in{max-width:var(--maxw);margin:0 auto;padding:11px 28px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.bar-mark{font-family:Archivo;font-weight:700;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.bar nav{display:flex;gap:18px;flex-wrap:wrap;margin-inline-start:auto}
+.bar nav a{color:var(--ink-3);text-decoration:none;font-size:13px;font-weight:500}
+.bar nav a:hover{color:var(--accent)}
+.bar nav a:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+
+/* ---- masthead ---- */
+.mast{padding:76px 0 56px;border-bottom:1px solid var(--rule)}
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:500;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);
+}
+.mast h1{font-size:clamp(38px,6vw,64px);font-weight:700;margin:16px 0 0;max-width:16ch}
+.mast .lede{margin-top:22px;font-size:19px;color:var(--ink-2);max-width:60ch}
+.meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:34px;padding-top:22px;border-top:1px solid var(--rule)}
+.meta div{display:flex;flex-direction:column;gap:3px}
+.meta dt{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.meta dd{margin:0;font-size:14px;font-weight:500}
+
+section{padding:64px 0;border-bottom:1px solid var(--rule)}
+section:last-of-type{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:12px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(25px,3.2vw,34px);font-weight:600}
+.sec-lede{margin-top:18px;font-size:17px;color:var(--ink-2);max-width:66ch}
+h3{font-size:19px;font-weight:600;margin-top:38px}
+h4{font-size:14.5px;font-weight:600;letter-spacing:.01em}
+section p + p{margin-top:14px}
+.sec-lede + h3{margin-top:34px}
+
+/* ---- generic card ---- */
+.card{background:var(--surface);border:1px solid var(--rule);border-radius:10px;box-shadow:var(--shadow)}
+.pad{padding:24px}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.stack{display:flex;flex-direction:column;gap:14px}
+.mt24{margin-top:24px}
+.mt32{margin-top:32px}
+
+/* ---- market bars ---- */
+.mkt{display:flex;flex-direction:column;gap:9px;margin-top:22px}
+.mkt-row{display:grid;grid-template-columns:118px 1fr;gap:14px;align-items:center}
+.mkt-name{font-size:13.5px;font-weight:500;color:var(--ink-2)}
+.mkt-chips{display:flex;gap:6px;align-items:center}
+.dot{width:26px;height:26px;border-radius:6px;border:1px solid rgba(128,128,128,.28)}
+.mkt-note{font-size:12.5px;color:var(--ink-3);margin-inline-start:6px}
+
+/* ---- brand block ---- */
+.brand{border-radius:12px;overflow:hidden;border:1px solid var(--rule);box-shadow:var(--shadow)}
+.brand-top{padding:26px 26px 24px;color:#fff;position:relative}
+.brand-top .kicker{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;opacity:.82}
+.brand-top h3{font-family:Archivo;font-size:27px;font-weight:700;margin:8px 0 0;color:#fff;letter-spacing:-.02em}
+.brand-top .sub{font-size:14px;margin-top:8px;opacity:.9;line-height:1.5}
+.brand-body{background:var(--surface);padding:22px 26px 26px}
+.brand-body p{font-size:14.5px;color:var(--ink-2)}
+
+/* ---- swatch ramp ---- */
+.ramp{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:0;border-radius:8px;overflow:hidden;margin-top:16px;border:1px solid var(--rule)}
+.sw{padding:14px 12px 12px;min-height:86px;display:flex;flex-direction:column;justify-content:flex-end;gap:2px}
+.sw b{font-size:11px;font-weight:600;letter-spacing:.04em;opacity:.85}
+.sw span{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:500}
+
+/* ---- token table ---- */
+.tbl-scroll{overflow-x:auto;margin-top:16px;border:1px solid var(--rule);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:640px}
+th{
+  text-align:start;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);font-weight:500;
+  padding:12px 16px;border-bottom:1px solid var(--rule);background:var(--surface-2);white-space:nowrap;
+}
+td{padding:11px 16px;border-bottom:1px solid var(--rule);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+td.tok{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--ink);white-space:nowrap}
+td.hex{font-family:"IBM Plex Mono",monospace;font-size:12.5px;white-space:nowrap}
+.chip{display:inline-block;width:19px;height:19px;border-radius:5px;border:1px solid rgba(128,128,128,.3);vertical-align:-4px;margin-inline-end:9px}
+td.use{color:var(--ink-2);font-size:13px}
+
+.ratio{
+  display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:5px;
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:600;white-space:nowrap;
+  background:var(--ok-soft);color:var(--ok);
+}
+.ratio.aa3{background:var(--warn-soft);color:var(--warn)}
+
+/* ---- UI preview ---- */
+.preview{border-radius:12px;padding:20px;border:1px solid rgba(128,128,128,.22);display:flex;flex-direction:column;gap:14px}
+.pv-label{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;color:var(--ink-3)}
+.pv-card{border-radius:14px;padding:16px}
+.pv-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.pv-eta{font-family:Archivo;font-size:26px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.pv-meta{font-size:12.5px}
+.pv-btn{
+  border-radius:100px;padding:13px 20px;text-align:center;font-weight:600;font-size:14.5px;
+  font-family:"IBM Plex Sans",sans-serif;
+}
+.pv-btn.sq{border-radius:14px}
+.pv-pill{display:inline-flex;align-items:center;gap:6px;border-radius:100px;padding:4px 11px;font-size:11.5px;font-weight:600}
+.pv-line{height:1px;width:100%}
+
+/* ---- type specimen ---- */
+.spec{font-family:"Readex Pro","IBM Plex Sans",sans-serif}
+.spec-row{display:grid;grid-template-columns:minmax(110px,150px) 1fr;gap:20px;padding:15px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.spec-row:last-child{border-bottom:0}
+.spec-meta{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);letter-spacing:.05em;line-height:1.5}
+.spec-ar{direction:rtl;text-align:right}
+
+/* ---- radius demo ---- */
+.rad{display:flex;flex-direction:column;align-items:center;gap:9px}
+.rad-box{width:100%;height:64px;background:var(--accent-soft);border:1.5px solid var(--accent)}
+.rad-cap{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);text-align:center;line-height:1.45}
+
+/* ---- callout ---- */
+.callout{border-inline-start:3px solid var(--accent);background:var(--surface);padding:18px 22px;border-radius:0 10px 10px 0;margin-top:22px}
+.callout.flag{border-inline-start-color:var(--warn)}
+.callout h4{margin-bottom:7px}
+.callout p{font-size:14.5px;color:var(--ink-2)}
+
+/* ---- lists ---- */
+ul.clean{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-direction:column;gap:11px}
+ul.clean li{padding-inline-start:20px;position:relative;font-size:15px;color:var(--ink-2)}
+ul.clean li::before{content:"";position:absolute;inset-inline-start:2px;top:9px;width:6px;height:6px;border-radius:2px;background:var(--accent)}
+ul.clean li b{color:var(--ink);font-weight:600}
+
+/* ---- steps ---- */
+ol.steps{list-style:none;counter-reset:s;padding:0;margin:22px 0 0;display:flex;flex-direction:column;gap:0}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:18px;padding:18px 0;border-bottom:1px solid var(--rule)}
+ol.steps li:last-child{border-bottom:0}
+ol.steps li::before{
+  content:counter(s,decimal-leading-zero);
+  font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:var(--accent);
+  padding-top:2px;letter-spacing:.05em;
+}
+ol.steps h4{margin-bottom:5px}
+ol.steps p{font-size:14.5px;color:var(--ink-2)}
+
+footer{padding:44px 0 64px;color:var(--ink-3);font-size:13.5px}
+
+@media (max-width:640px){
+  .wrap,.bar-in{padding-inline:20px}
+  .mast{padding:52px 0 40px}
+  section{padding:48px 0}
+  .spec-row{grid-template-columns:1fr;gap:8px}
+  .mkt-row{grid-template-columns:1fr;gap:6px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .bar nav a{transition:color .18s ease}
+}
+</style>
+
+<div class="bar">
+  <div class="bar-in">
+    <span class="bar-mark">Wasel</span>
+    <nav>
+      <a href="#market">Market</a>
+      <a href="#identity">Identity</a>
+      <a href="#tokens">Tokens</a>
+      <a href="#type">Type</a>
+      <a href="#shape">Shape</a>
+      <a href="#debt">Tech Debt</a>
+      <a href="#plan">Plan</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="mast">
+  <div class="eyebrow">Brand Identity &amp; Design System Proposal</div>
+  <h1>Two apps, one family, opposite jobs.</h1>
+  <p class="lede">A ground-up visual identity for Wasel Rider and Wasel Captain — built so the passenger app feels quick and modern in daylight, and the driver app stays readable at 2&nbsp;a.m. without burning the driver's night vision.</p>
+  <dl class="meta">
+    <div><dt>Prepared for</dt><dd>Wasel — Rider &amp; Captain</dd></div>
+    <div><dt>Scope</dt><dd>Color, type, shape, theming architecture</dd></div>
+    <div><dt>Status</dt><dd>Approved · steps 1–4 built, in the working tree</dd></div>
+    <div><dt>Contrast</dt><dd>Every pair below measured, not estimated</dd></div>
+  </dl>
+</header>
+
+<section id="market">
+  <div class="sec-head"><div class="eyebrow">01 — Market read</div></div>
+  <h2>Why the current palette can't stay</h2>
+  <p class="sec-lede">Ride-hailing in the MENA region has effectively standardised on green. Careem, Bolt and inDrive all lead with it. Wasel Captain's current primary — <code>#047857</code> in light, <code>#34D399</code> in dark — sits inside that crowd rather than beside it.</p>
+
+  <div class="mkt">
+    <div class="mkt-row"><span class="mkt-name">Careem</span><span class="mkt-chips"><i class="dot" style="background:#3FB984"></i><i class="dot" style="background:#0C2340"></i><span class="mkt-note">green + navy</span></span></div>
+    <div class="mkt-row"><span class="mkt-name">Bolt</span><span class="mkt-chips"><i class="dot" style="background:#34D186"></i><i class="dot" style="background:#0B0B0B"></i><span class="mkt-note">mint + black</span></span></div>
+    <div class="mkt-row"><span class="mkt-name">inDrive</span><span class="mkt-chips"><i class="dot" style="background:#C1F11D"></i><i class="dot" style="background:#000000"></i><span class="mkt-note">acid green + black</span></span></div>
+    <div class="mkt-row"><span class="mkt-name">Uber</span><span class="mkt-chips"><i class="dot" style="background:#000000"></i><i class="dot" style="background:#FFFFFF"></i><span class="mkt-note">monochrome</span></span></div>
+    <div class="mkt-row"><span class="mkt-name">DiDi</span><span class="mkt-chips"><i class="dot" style="background:#FF7D41"></i><span class="mkt-note">orange</span></span></div>
+    <div class="mkt-row"><span class="mkt-name">Lyft</span><span class="mkt-chips"><i class="dot" style="background:#EA0B8C"></i><span class="mkt-note">magenta</span></span></div>
+    <div class="mkt-row"><span class="mkt-name">Wasel today</span><span class="mkt-chips"><i class="dot" style="background:#4F46E5"></i><i class="dot" style="background:#047857"></i><span class="mkt-note">indigo rider + green captain</span></span></div>
+  </div>
+
+  <div class="callout flag">
+    <h4>A real collision, not a matter of taste</h4>
+    <p>In <code>driver_palette.dart</code> the dark-mode brand primary is <code>#34D399</code>. In <code>alert_tokens.dart</code> the availability token <code>onlineDark</code> is <em>also</em> <code>#34D399</code> — byte-identical. On the Captain's home screen the brand colour and the "you are online" signal are the same green, so the single most important piece of state in the whole app carries no colour meaning of its own. Moving the Captain brand off green fixes this at the root.</p>
+  </div>
+
+  <p class="mt24" style="color:var(--ink-2);max-width:66ch">The second problem is that Rider indigo and Captain green share no visual DNA. They read as two unrelated products rather than two halves of one network. The proposal below gives both apps a common spine and lets each lead with a different colour from it.</p>
+</section>
+
+<section id="identity">
+  <div class="sec-head"><div class="eyebrow">02 — The two identities</div></div>
+  <h2>Velocity Teal and Signal Amber</h2>
+  <p class="sec-lede">One shared teal spine. The Rider app leads with it; the Captain app carries it as a secondary and leads with amber instead. Same family, opposite temperature — which is exactly the difference between the two jobs.</p>
+
+  <div class="grid2 mt32">
+    <article class="brand">
+      <div class="brand-top" style="background:linear-gradient(135deg,#097A8F 0%,#0B5F73 62%,#6D4AFF 190%)">
+        <div class="kicker">Rider · Passenger</div>
+        <h3>Velocity Teal</h3>
+        <p class="sub">Cool, bright, in motion. Teal is unclaimed in this category, survives on both light and dark map tiles, and pairs with a violet accent for premium tiers and promotions.</p>
+      </div>
+      <div class="brand-body">
+        <p><b>Leads with</b> teal <code>#097A8F</code> for every committing action, <code>#00C2E0</code> as an expression colour for route strokes and gradients, and <code>#6D4AFF</code> violet for anything that should feel like an upgrade.</p>
+        <div class="ramp">
+          <div class="sw" style="background:#05606F;color:#fff"><b>700</b><span>#05606F</span></div>
+          <div class="sw" style="background:#097A8F;color:#fff"><b>500</b><span>#097A8F</span></div>
+          <div class="sw" style="background:#9FD9E4;color:#05343E"><b>300</b><span>#9FD9E4</span></div>
+          <div class="sw" style="background:#E6F6F9;color:#05343E"><b>100</b><span>#E6F6F9</span></div>
+          <div class="sw" style="background:#00C2E0;color:#04212A"><b>Vivid</b><span>#00C2E0</span></div>
+          <div class="sw" style="background:#6D4AFF;color:#fff"><b>Accent</b><span>#6D4AFF</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="brand">
+      <div class="brand-top" style="background:linear-gradient(135deg,#1B1E20 0%,#20262A 55%,#8A5A06 165%)">
+        <div class="kicker">Captain · Driver</div>
+        <h3>Signal Amber</h3>
+        <p class="sub">Dark-first, warm, instrument-grade. Amber is the colour every car dashboard already uses at night, for a reason: warm light at low luminance preserves dark adaptation far better than blue-white.</p>
+      </div>
+      <div class="brand-body">
+        <p><b>Leads with</b> amber <code>#FFB020</code> in dark mode and bronze <code>#A65C06</code> in light, over graphite neutrals. Teal <code>#0A7183</code> returns as the accent — the thread back to Rider.</p>
+        <div class="ramp">
+          <div class="sw" style="background:#7E4404;color:#fff"><b>700 L</b><span>#7E4404</span></div>
+          <div class="sw" style="background:#A65C06;color:#fff"><b>500 L</b><span>#A65C06</span></div>
+          <div class="sw" style="background:#F5A314;color:#1A1206"><b>Vivid</b><span>#F5A314</span></div>
+          <div class="sw" style="background:#FFB020;color:#1A1206"><b>500 D</b><span>#FFB020</span></div>
+          <div class="sw" style="background:#2A1F0B;color:#FFB020"><b>100 D</b><span>#2A1F0B</span></div>
+          <div class="sw" style="background:#0A7183;color:#fff"><b>Accent</b><span>#0A7183</span></div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <h3>The reasoning, colour by colour</h3>
+  <ul class="clean">
+    <li><b>Teal for the passenger.</b> Blue is the trust colour every fintech and airline already uses, and it disappears into map water and route lines. Teal keeps blue's calm-and-competent read but shifts far enough toward cyan to stay legible over both light and dark cartography. It is also the closest colour to the brand's own meaning — <span dir="rtl" lang="ar" style="font-family:'Readex Pro',sans-serif">واصل</span>, to connect and to arrive.</li>
+    <li><b>Violet as the Rider accent.</b> Reserved for surge, premium tiers and promotional surfaces. Violet reads as "elevated" without reading as "alarm", which red and orange both do — and those two hues must stay free for error and warning semantics.</li>
+    <li><b>Amber for the driver.</b> Two independent reasons converge. Perceptually: warm, long-wavelength light at low luminance is the standard for night instrumentation because it disturbs dark adaptation least, and the Captain app is looked at repeatedly in a dark cabin. Culturally: amber is taxi. A driver recognises the category instantly.</li>
+    <li><b>Amber with ink on top, never white.</b> White text on amber is unreadable. Every amber surface carries <code>#1A1206</code> ink — measured at 10.13:1 in dark mode. This is the same convention as a taxi roof sign, and it makes the Captain's primary CTA the highest-contrast element on the screen.</li>
+    <li><b>Green freed for status.</b> With the Captain brand off green, <code>statusOnline</code> green finally means one thing only: you are online and earning. Amber and green are far enough apart in hue that the distinction survives at a glance, in peripheral vision, while driving.</li>
+    <li><b>Graphite neutrals, not blue-grey.</b> The Captain's neutral ramp is hue-neutral graphite so the amber never picks up a competing cast. Rider neutrals carry a faint cyan bias so its surfaces feel of a piece with the teal rather than pasted onto default grey.</li>
+  </ul>
+
+  <h3>How trust is actually built here</h3>
+  <p style="color:var(--ink-2);max-width:66ch">Colour alone does not make a rider feel safe; consistency and legibility do. Three rules carry most of the weight. <b>One brand colour means one thing</b> — teal is always "this commits you", never decoration, so a rider learns in two trips exactly which control charges their card. <b>Status colour is never brand colour</b> — the green/amber/red band belongs to state alone, which is what makes "driver arriving" and "trip cancelled" readable without reading. And <b>every foreground pair clears WCAG AA</b>, so the interface never asks a stressed passenger at night, or a driver in direct sun, to work at reading it.</p>
+
+  <h3>In context</h3>
+  <div class="grid2 mt24">
+    <div>
+      <div class="pv-label">Rider — light</div>
+      <div class="preview" style="background:#F5F8FA">
+        <div class="pv-card" style="background:#FFFFFF;border:1px solid #DCE5EA">
+          <div class="pv-row">
+            <span class="pv-eta" style="color:#0E1729">7 min</span>
+            <span class="pv-pill" style="background:#E6F6F9;color:#05606F">Wasel&nbsp;Go</span>
+          </div>
+          <div class="pv-meta" style="color:#5F7180;margin-top:4px">Toyota Corolla · 4.9 ★ · ABC 4821</div>
+          <div class="pv-line" style="background:#DCE5EA;margin:14px 0"></div>
+          <div class="pv-row"><span class="pv-meta" style="color:#4A5A6B">Fare estimate</span><span class="mono" style="color:#0E1729;font-weight:600">SAR 27.50</span></div>
+        </div>
+        <div class="pv-btn" style="background:#097A8F;color:#FFFFFF">Confirm ride</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pv-label">Rider — dark</div>
+      <div class="preview" style="background:#0D1418">
+        <div class="pv-card" style="background:#151F25;border:1px solid #2B3A43">
+          <div class="pv-row">
+            <span class="pv-eta" style="color:#E8EEF2">7 min</span>
+            <span class="pv-pill" style="background:#0E2B33;color:#3FD3EE">Wasel&nbsp;Go</span>
+          </div>
+          <div class="pv-meta" style="color:#90A5B1;margin-top:4px">Toyota Corolla · 4.9 ★ · ABC 4821</div>
+          <div class="pv-line" style="background:#2B3A43;margin:14px 0"></div>
+          <div class="pv-row"><span class="pv-meta" style="color:#A9BCC7">Fare estimate</span><span class="mono" style="color:#E8EEF2;font-weight:600">SAR 27.50</span></div>
+        </div>
+        <div class="pv-btn" style="background:#3FD3EE;color:#04212A">Confirm ride</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pv-label">Captain — dark (primary mode)</div>
+      <div class="preview" style="background:#0E1113">
+        <div class="pv-card" style="background:#181C1F;border:1px solid #2A3136">
+          <div class="pv-row">
+            <span class="pv-meta" style="color:#A8B2B8">Today's earnings</span>
+            <span class="pv-pill" style="background:#11291D;color:#3ED598">● Online</span>
+          </div>
+          <div class="pv-eta" style="color:#E9EDEF;font-size:32px;display:block;margin-top:6px">SAR 342.75</div>
+          <div class="pv-line" style="background:#2A3136;margin:14px 0"></div>
+          <div class="pv-row"><span class="pv-meta" style="color:#A8B2B8">12 trips · 6h 20m</span><span class="pv-meta mono" style="color:#FFB020;font-weight:600">+18%</span></div>
+        </div>
+        <div class="pv-btn sq" style="background:#FFB020;color:#1A1206">Go offline</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pv-label">Captain — light (daylight glare)</div>
+      <div class="preview" style="background:#F4F6F7">
+        <div class="pv-card" style="background:#FFFFFF;border:1px solid #DFE3E5">
+          <div class="pv-row">
+            <span class="pv-meta" style="color:#4C565E">Today's earnings</span>
+            <span class="pv-pill" style="background:#E2F1E8;color:#186A3B">● Online</span>
+          </div>
+          <div class="pv-eta" style="color:#12161A;font-size:32px;display:block;margin-top:6px">SAR 342.75</div>
+          <div class="pv-line" style="background:#DFE3E5;margin:14px 0"></div>
+          <div class="pv-row"><span class="pv-meta" style="color:#4C565E">12 trips · 6h 20m</span><span class="pv-meta mono" style="color:#A65C06;font-weight:600">+18%</span></div>
+        </div>
+        <div class="pv-btn sq" style="background:#F5A314;color:#1A1206">Go offline</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tokens">
+  <div class="sec-head"><div class="eyebrow">03 — Token specification</div></div>
+  <h2>Every value, measured</h2>
+  <p class="sec-lede">These map one-to-one onto the existing <code>AppColorsExtension</code> fields, plus three new tokens noted below. Every ratio in the right-hand column was computed against the surface it actually sits on — none are estimates.</p>
+
+  <h3>Wasel Rider — light</h3>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Token</th><th>Hex</th><th>Used for</th><th>Measured</th></tr></thead>
+    <tbody>
+      <tr><td class="tok">primary700</td><td class="hex"><i class="chip" style="background:#05606F"></i>#05606F</td><td class="use">Pressed state, links on white</td><td><span class="ratio">7.22:1 AA</span></td></tr>
+      <tr><td class="tok">primary500</td><td class="hex"><i class="chip" style="background:#097A8F"></i>#097A8F</td><td class="use">Primary fill, route stroke</td><td><span class="ratio">5.01:1 AA</span></td></tr>
+      <tr><td class="tok">primary300</td><td class="hex"><i class="chip" style="background:#9FD9E4"></i>#9FD9E4</td><td class="use">Disabled fill</td><td><span class="ratio aa3">decorative</span></td></tr>
+      <tr><td class="tok">primary100</td><td class="hex"><i class="chip" style="background:#E6F6F9"></i>#E6F6F9</td><td class="use">Chip / container</td><td><span class="ratio">6.50:1 AA</span></td></tr>
+      <tr><td class="tok">primaryVivid <b>new</b></td><td class="hex"><i class="chip" style="background:#00C2E0"></i>#00C2E0</td><td class="use">Gradients, glow, brand expression only</td><td><span class="ratio aa3">non-text</span></td></tr>
+      <tr><td class="tok">onPrimary</td><td class="hex"><i class="chip" style="background:#FFFFFF"></i>#FFFFFF</td><td class="use">Label on primary fill</td><td><span class="ratio">5.01:1 AA</span></td></tr>
+      <tr><td class="tok">accent500</td><td class="hex"><i class="chip" style="background:#6D4AFF"></i>#6D4AFF</td><td class="use">Premium tier, promotions</td><td><span class="ratio">5.15:1 AA</span></td></tr>
+      <tr><td class="tok">accent100</td><td class="hex"><i class="chip" style="background:#EFEBFF"></i>#EFEBFF</td><td class="use">Premium container</td><td><span class="ratio aa3">container</span></td></tr>
+      <tr><td class="tok">secondary900</td><td class="hex"><i class="chip" style="background:#0E1729"></i>#0E1729</td><td class="use">Headings, body text</td><td><span class="ratio">17.90:1 AAA</span></td></tr>
+      <tr><td class="tok">secondary500</td><td class="hex"><i class="chip" style="background:#4A5A6B"></i>#4A5A6B</td><td class="use">Secondary text</td><td><span class="ratio">7.08:1 AAA</span></td></tr>
+      <tr><td class="tok">secondary300</td><td class="hex"><i class="chip" style="background:#60707C"></i>#60707C</td><td class="use">Tertiary text</td><td><span class="ratio">4.80:1 AA</span></td></tr>
+      <tr><td class="tok">neutral400</td><td class="hex"><i class="chip" style="background:#5F7180"></i>#5F7180</td><td class="use">Hint text, unselected nav</td><td><span class="ratio">5.05:1 AA</span></td></tr>
+      <tr><td class="tok">neutral600</td><td class="hex"><i class="chip" style="background:#45535F"></i>#45535F</td><td class="use">Field labels</td><td><span class="ratio">7.91:1 AAA</span></td></tr>
+      <tr><td class="tok">neutral200</td><td class="hex"><i class="chip" style="background:#DCE5EA"></i>#DCE5EA</td><td class="use">Dividers (decorative)</td><td><span class="ratio aa3">decorative</span></td></tr>
+      <tr><td class="tok">borderStrong <b>new</b></td><td class="hex"><i class="chip" style="background:#798E9D"></i>#798E9D</td><td class="use">Input outlines, control boundaries</td><td><span class="ratio">3.19:1 AA</span></td></tr>
+      <tr><td class="tok">neutral100</td><td class="hex"><i class="chip" style="background:#F0F4F6"></i>#F0F4F6</td><td class="use">Sunken surface</td><td><span class="ratio aa3">surface</span></td></tr>
+      <tr><td class="tok">screenBackground</td><td class="hex"><i class="chip" style="background:#F5F8FA"></i>#F5F8FA</td><td class="use">Scaffold</td><td><span class="ratio aa3">surface</span></td></tr>
+      <tr><td class="tok">elementBackground</td><td class="hex"><i class="chip" style="background:#FFFFFF"></i>#FFFFFF</td><td class="use">Cards, sheets, fields</td><td><span class="ratio aa3">surface</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Wasel Rider — dark</h3>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Token</th><th>Hex</th><th>Used for</th><th>Measured</th></tr></thead>
+    <tbody>
+      <tr><td class="tok">primary700</td><td class="hex"><i class="chip" style="background:#17B0CE"></i>#17B0CE</td><td class="use">Pressed state</td><td><span class="ratio aa3">state</span></td></tr>
+      <tr><td class="tok">primary500</td><td class="hex"><i class="chip" style="background:#3FD3EE"></i>#3FD3EE</td><td class="use">Primary fill, teal text</td><td><span class="ratio">9.38:1 AAA</span></td></tr>
+      <tr><td class="tok">primary300</td><td class="hex"><i class="chip" style="background:#2C5A66"></i>#2C5A66</td><td class="use">Disabled fill</td><td><span class="ratio aa3">decorative</span></td></tr>
+      <tr><td class="tok">primary100</td><td class="hex"><i class="chip" style="background:#0E2B33"></i>#0E2B33</td><td class="use">Chip / container</td><td><span class="ratio">8.33:1 AAA</span></td></tr>
+      <tr><td class="tok">primaryVivid <b>new</b></td><td class="hex"><i class="chip" style="background:#5FE2FA"></i>#5FE2FA</td><td class="use">Route stroke on dark map</td><td><span class="ratio">11.07:1</span></td></tr>
+      <tr><td class="tok">onPrimary</td><td class="hex"><i class="chip" style="background:#04212A"></i>#04212A</td><td class="use">Label on primary fill</td><td><span class="ratio">9.36:1 AAA</span></td></tr>
+      <tr><td class="tok">accent500</td><td class="hex"><i class="chip" style="background:#B9A6FF"></i>#B9A6FF</td><td class="use">Premium tier</td><td><span class="ratio">7.94:1 AAA</span></td></tr>
+      <tr><td class="tok">onAccent</td><td class="hex"><i class="chip" style="background:#17093D"></i>#17093D</td><td class="use">Label on accent</td><td><span class="ratio">8.72:1 AAA</span></td></tr>
+      <tr><td class="tok">secondary900</td><td class="hex"><i class="chip" style="background:#E8EEF2"></i>#E8EEF2</td><td class="use">Headings, body</td><td><span class="ratio">14.30:1 AAA</span></td></tr>
+      <tr><td class="tok">secondary500</td><td class="hex"><i class="chip" style="background:#A9BCC7"></i>#A9BCC7</td><td class="use">Secondary text</td><td><span class="ratio">8.53:1 AAA</span></td></tr>
+      <tr><td class="tok">neutral400</td><td class="hex"><i class="chip" style="background:#90A5B1"></i>#90A5B1</td><td class="use">Hint text</td><td><span class="ratio">6.54:1 AAA</span></td></tr>
+      <tr><td class="tok">neutral200</td><td class="hex"><i class="chip" style="background:#2B3A43"></i>#2B3A43</td><td class="use">Dividers (decorative)</td><td><span class="ratio aa3">decorative</span></td></tr>
+      <tr><td class="tok">borderStrong <b>new</b></td><td class="hex"><i class="chip" style="background:#526C78"></i>#526C78</td><td class="use">Input outlines</td><td><span class="ratio">3.01:1 AA</span></td></tr>
+      <tr><td class="tok">screenBackground</td><td class="hex"><i class="chip" style="background:#0D1418"></i>#0D1418</td><td class="use">Scaffold</td><td><span class="ratio aa3">surface</span></td></tr>
+      <tr><td class="tok">elementBackground</td><td class="hex"><i class="chip" style="background:#151F25"></i>#151F25</td><td class="use">Cards, sheets</td><td><span class="ratio aa3">surface</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Wasel Captain — dark <span style="font-family:'IBM Plex Sans';font-weight:400;font-size:14px;color:var(--ink-3)">· the mode this app is designed in first</span></h3>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Token</th><th>Hex</th><th>Used for</th><th>Measured</th></tr></thead>
+    <tbody>
+      <tr><td class="tok">primary700</td><td class="hex"><i class="chip" style="background:#D98E0C"></i>#D98E0C</td><td class="use">Pressed, amber text at rest</td><td><span class="ratio">6.39:1 AAA</span></td></tr>
+      <tr><td class="tok">primary500</td><td class="hex"><i class="chip" style="background:#FFB020"></i>#FFB020</td><td class="use">Go online/offline, primary CTA</td><td><span class="ratio">9.38:1 AAA</span></td></tr>
+      <tr><td class="tok">primary300</td><td class="hex"><i class="chip" style="background:#6B5320"></i>#6B5320</td><td class="use">Disabled fill</td><td><span class="ratio aa3">decorative</span></td></tr>
+      <tr><td class="tok">primary100</td><td class="hex"><i class="chip" style="background:#2A1F0B"></i>#2A1F0B</td><td class="use">Amber container</td><td><span class="ratio">8.84:1 AAA</span></td></tr>
+      <tr><td class="tok">onPrimary</td><td class="hex"><i class="chip" style="background:#1A1206"></i>#1A1206</td><td class="use">Ink label on amber</td><td><span class="ratio">10.13:1 AAA</span></td></tr>
+      <tr><td class="tok">accent500</td><td class="hex"><i class="chip" style="background:#4FC3DD"></i>#4FC3DD</td><td class="use">Navigation, links (Wasel teal)</td><td><span class="ratio">8.31:1 AAA</span></td></tr>
+      <tr><td class="tok">onAccent</td><td class="hex"><i class="chip" style="background:#04212A"></i>#04212A</td><td class="use">Label on accent</td><td><span class="ratio">8.11:1 AAA</span></td></tr>
+      <tr><td class="tok">secondary900</td><td class="hex"><i class="chip" style="background:#E9EDEF"></i>#E9EDEF</td><td class="use">Earnings figures, headings</td><td><span class="ratio">14.55:1 AAA</span></td></tr>
+      <tr><td class="tok">secondary500</td><td class="hex"><i class="chip" style="background:#A8B2B8"></i>#A8B2B8</td><td class="use">Secondary text</td><td><span class="ratio">7.94:1 AAA</span></td></tr>
+      <tr><td class="tok">neutral400</td><td class="hex"><i class="chip" style="background:#98A3A9"></i>#98A3A9</td><td class="use">Hint text</td><td><span class="ratio">6.65:1 AAA</span></td></tr>
+      <tr><td class="tok">neutral200</td><td class="hex"><i class="chip" style="background:#2A3136"></i>#2A3136</td><td class="use">Dividers (decorative)</td><td><span class="ratio aa3">decorative</span></td></tr>
+      <tr><td class="tok">borderStrong <b>new</b></td><td class="hex"><i class="chip" style="background:#657077"></i>#657077</td><td class="use">Input outlines</td><td><span class="ratio">3.38:1 AA</span></td></tr>
+      <tr><td class="tok">statusOnline</td><td class="hex"><i class="chip" style="background:#3ED598"></i>#3ED598</td><td class="use">Online — now unambiguous</td><td><span class="ratio">9.13:1 AAA</span></td></tr>
+      <tr><td class="tok">screenBackground</td><td class="hex"><i class="chip" style="background:#0E1113"></i>#0E1113</td><td class="use">Scaffold — graphite, not pure black</td><td><span class="ratio aa3">surface</span></td></tr>
+      <tr><td class="tok">elementBackground</td><td class="hex"><i class="chip" style="background:#181C1F"></i>#181C1F</td><td class="use">Cards, sheets</td><td><span class="ratio aa3">surface</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Wasel Captain — light</h3>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Token</th><th>Hex</th><th>Used for</th><th>Measured</th></tr></thead>
+    <tbody>
+      <tr><td class="tok">primary700</td><td class="hex"><i class="chip" style="background:#7E4404"></i>#7E4404</td><td class="use">Pressed, amber text on light</td><td><span class="ratio">7.04:1 AAA</span></td></tr>
+      <tr><td class="tok">primary500</td><td class="hex"><i class="chip" style="background:#A65C06"></i>#A65C06</td><td class="use">Fills carrying white labels</td><td><span class="ratio">5.05:1 AA</span></td></tr>
+      <tr><td class="tok">primary300</td><td class="hex"><i class="chip" style="background:#E8C99A"></i>#E8C99A</td><td class="use">Disabled fill</td><td><span class="ratio aa3">decorative</span></td></tr>
+      <tr><td class="tok">primary100</td><td class="hex"><i class="chip" style="background:#FDF3E3"></i>#FDF3E3</td><td class="use">Amber container</td><td><span class="ratio">7.04:1 AAA</span></td></tr>
+      <tr><td class="tok">primaryVivid <b>new</b></td><td class="hex"><i class="chip" style="background:#F5A314"></i>#F5A314</td><td class="use">Taxi-amber CTA with ink label</td><td><span class="ratio">8.94:1 AAA</span></td></tr>
+      <tr><td class="tok">onPrimaryVivid <b>new</b></td><td class="hex"><i class="chip" style="background:#1A1206"></i>#1A1206</td><td class="use">Ink label + <code>#B87406</code> hairline</td><td><span class="ratio">3.50:1 AA</span></td></tr>
+      <tr><td class="tok">accent500</td><td class="hex"><i class="chip" style="background:#0A7183"></i>#0A7183</td><td class="use">Navigation, links (Wasel teal)</td><td><span class="ratio">5.67:1 AA</span></td></tr>
+      <tr><td class="tok">secondary900</td><td class="hex"><i class="chip" style="background:#12161A"></i>#12161A</td><td class="use">Earnings figures, headings</td><td><span class="ratio">18.18:1 AAA</span></td></tr>
+      <tr><td class="tok">secondary500</td><td class="hex"><i class="chip" style="background:#4C565E"></i>#4C565E</td><td class="use">Secondary text</td><td><span class="ratio">7.50:1 AAA</span></td></tr>
+      <tr><td class="tok">secondary300</td><td class="hex"><i class="chip" style="background:#636E75"></i>#636E75</td><td class="use">Tertiary text</td><td><span class="ratio">4.82:1 AA</span></td></tr>
+      <tr><td class="tok">neutral400</td><td class="hex"><i class="chip" style="background:#5A646B"></i>#5A646B</td><td class="use">Hint text</td><td><span class="ratio">6.05:1 AAA</span></td></tr>
+      <tr><td class="tok">borderStrong <b>new</b></td><td class="hex"><i class="chip" style="background:#828D93"></i>#828D93</td><td class="use">Input outlines</td><td><span class="ratio">3.40:1 AA</span></td></tr>
+      <tr><td class="tok">neutral200</td><td class="hex"><i class="chip" style="background:#DFE3E5"></i>#DFE3E5</td><td class="use">Dividers (decorative)</td><td><span class="ratio aa3">decorative</span></td></tr>
+      <tr><td class="tok">screenBackground</td><td class="hex"><i class="chip" style="background:#F4F6F7"></i>#F4F6F7</td><td class="use">Scaffold</td><td><span class="ratio aa3">surface</span></td></tr>
+      <tr><td class="tok">elementBackground</td><td class="hex"><i class="chip" style="background:#FFFFFF"></i>#FFFFFF</td><td class="use">Cards, sheets</td><td><span class="ratio aa3">surface</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout">
+    <h4>Three new tokens, and why they're worth it</h4>
+    <p><code>primaryVivid</code> separates the colour the brand <em>expresses</em> with from the colour it <em>acts</em> with — the electric cyan and the taxi amber are too light to carry white text, but they're the memorable part of each identity, so they get a home instead of being smuggled in as raw hex. <code>borderStrong</code> exists because <code>neutral200</code> is a decorative divider at roughly 1.3:1 and is currently doing double duty as the input outline, which fails the 3:1 non-text requirement in both apps today. <code>onPrimaryVivid</code> guarantees an amber fill never picks up a white label by accident.</p>
+  </div>
+</section>
+
+<section id="type">
+  <div class="sec-head"><div class="eyebrow">04 — Typography</div></div>
+  <h2>One family, two voices</h2>
+  <p class="sec-lede">The app is RTL Arabic and currently sets everything in IBM Plex Sans Arabic. The recommendation keeps the single-family discipline but changes the family: <b>Readex Pro</b>, which was drawn from the start as a matched Arabic-and-Latin pair rather than a Latin face with Arabic bolted on. Specimens below are live — this section is set in the proposed face.</p>
+
+  <div class="card pad mt24">
+    <div class="spec">
+      <div class="spec-row"><div class="spec-meta">Display · 32 / 700<br>Rider only</div><div style="font-size:32px;font-weight:700;line-height:1.2">Your captain is arriving</div></div>
+      <div class="spec-row"><div class="spec-meta">Display · 32 / 700<br>Arabic</div><div class="spec-ar" lang="ar" style="font-size:32px;font-weight:700;line-height:1.5">السائق في الطريق إليك</div></div>
+      <div class="spec-row"><div class="spec-meta">Title · 20 / 600</div><div style="font-size:20px;font-weight:600">Trip details</div></div>
+      <div class="spec-row"><div class="spec-meta">Body · 16 / 400<br>minimum size</div><div style="font-size:16px;font-weight:400;max-width:52ch">Fares are estimated before pickup and confirmed when the trip ends. Tolls and waiting time are shown separately on the receipt.</div></div>
+      <div class="spec-row"><div class="spec-meta">Data · 28 / 600<br>tabular figures</div><div style="font-size:28px;font-weight:600;font-variant-numeric:tabular-nums">SAR 342.75</div></div>
+      <div class="spec-row"><div class="spec-meta">Label · 13 / 500<br>+0.04em</div><div style="font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase">Payment method</div></div>
+    </div>
+  </div>
+
+  <h3>The ramp differs per app, the family doesn't</h3>
+  <div class="grid2 mt24">
+    <div class="card pad">
+      <h4 style="color:var(--accent)">Rider — expressive</h4>
+      <p style="font-size:14.5px;color:var(--ink-2);margin-top:8px">Wider range, more contrast between steps. The app is read at rest, held close, often one-handed.</p>
+      <div class="tbl-scroll" style="margin-top:14px"><table style="min-width:0"><tbody>
+        <tr><td class="tok">display</td><td class="hex">32 / 700</td><td class="use">Hero moments, ETA</td></tr>
+        <tr><td class="tok">headline</td><td class="hex">24 / 700</td><td class="use">Screen titles</td></tr>
+        <tr><td class="tok">title</td><td class="hex">20 / 600</td><td class="use">Sheet + card headers</td></tr>
+        <tr><td class="tok">bodyLarge</td><td class="hex">16 / 400</td><td class="use">Primary reading size</td></tr>
+        <tr><td class="tok">body</td><td class="hex">14 / 400</td><td class="use">Supporting copy</td></tr>
+        <tr><td class="tok">label</td><td class="hex">13 / 500</td><td class="use">Chips, tabs, captions</td></tr>
+        <tr><td class="tok">caption</td><td class="hex">12 / 400</td><td class="use">Legal, timestamps — floor</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="card pad">
+      <h4 style="color:var(--warn)">Captain — functional</h4>
+      <p style="font-size:14.5px;color:var(--ink-2);margin-top:8px">Compressed range, higher floor. Read in glances, at arm's length, in a moving vehicle. Nothing below 14.</p>
+      <div class="tbl-scroll" style="margin-top:14px"><table style="min-width:0"><tbody>
+        <tr><td class="tok">display</td><td class="hex">28 / 600</td><td class="use">Earnings, fare, distance</td></tr>
+        <tr><td class="tok">headline</td><td class="hex">22 / 600</td><td class="use">Screen titles</td></tr>
+        <tr><td class="tok">title</td><td class="hex">18 / 600</td><td class="use">Request cards</td></tr>
+        <tr><td class="tok">bodyLarge</td><td class="hex">16 / 400</td><td class="use">Primary reading size</td></tr>
+        <tr><td class="tok">body</td><td class="hex">15 / 400</td><td class="use">Supporting copy</td></tr>
+        <tr><td class="tok">label</td><td class="hex">14 / 500</td><td class="use">Chips, tabs — floor</td></tr>
+        <tr><td class="tok">caption</td><td class="hex">14 / 400</td><td class="use">No 12px tier at all</td></tr>
+      </tbody></table></div>
+    </div>
+  </div>
+
+  <ul class="clean">
+    <li><b>Weights ship at 300–700.</b> Readex Pro is variable; restrict usage to 400 / 500 / 600 / 700 so the ramp stays legible and the download stays small.</li>
+    <li><b>Readex Pro has no tabular figures — confirmed, and it needs a decision.</b> Inspecting the shipped TTFs: the GSUB feature list is <code>calt ccmp dnom fina frac init liga locl medi numr rlig</code> — no <code>tnum</code> — and the digit advances are proportional (Latin 0–9 run 500–620 units, Arabic-Indic 281–630). <code>FontFeature.tabularFigures()</code> would be a silent no-op, so a ticking fare or trip timer will visibly shift. Three ways out: give numeric styles a second family that does carry <code>tnum</code>, lay ticking numbers out in fixed-width slots, or accept the shift outside the live-trip screens. Flagged rather than chosen — it changes the type system.</li>
+    <li><b>Arabic needs more leading than Latin.</b> Arabic ascenders and descenders run deeper. Set body line-height to 1.7 rather than the 1.5 Latin default, or diacritics clip.</li>
+    <li><b>Hierarchy by weight and size only — never by colour.</b> Colour carries state in this system; if it also carried emphasis, neither would read cleanly.</li>
+    <li><b>The switch has a runtime cost.</b> <code>google_fonts</code> fetches faces over the network on first launch. Bundling Readex Pro as a local asset instead removes a cold-start dependency and a first-paint flash — recommended for both apps regardless of which family wins.</li>
+  </ul>
+</section>
+
+<section id="shape">
+  <div class="sec-head"><div class="eyebrow">05 — Shape &amp; dimension</div></div>
+  <h2>Soft for the rider, squared for the captain</h2>
+  <p class="sec-lede">Shape is where the two apps separate most cheaply. Rider rounds generously — pills and 20px cards read approachable and consumer. Captain squares off — a 14px radius reads as a control rather than a suggestion, and drivers are operating equipment, not browsing.</p>
+
+  <div class="grid3 mt32">
+    <div class="rad"><div class="rad-box" style="border-radius:8px"></div><div class="rad-cap">radiusXs · 8<br>chips, badges, tags</div></div>
+    <div class="rad"><div class="rad-box" style="border-radius:12px"></div><div class="rad-cap">radiusSm · 12<br>inputs, small tiles</div></div>
+    <div class="rad"><div class="rad-box" style="border-radius:16px"></div><div class="rad-cap">radiusMd · 16<br>captain cards</div></div>
+    <div class="rad"><div class="rad-box" style="border-radius:20px"></div><div class="rad-cap">radiusLg · 20<br>rider cards</div></div>
+    <div class="rad"><div class="rad-box" style="border-radius:28px 28px 0 0"></div><div class="rad-cap">radiusSheet · 28 / 24<br>rider / captain sheets</div></div>
+    <div class="rad"><div class="rad-box" style="border-radius:100px"></div><div class="rad-cap">radiusPill · 100<br>rider CTAs only</div></div>
+  </div>
+
+  <div class="tbl-scroll mt32"><table>
+    <thead><tr><th>Element</th><th>Rider</th><th>Captain</th><th>Reasoning</th></tr></thead>
+    <tbody>
+      <tr><td class="use"><b>Primary button</b></td><td class="hex">pill · 100</td><td class="hex">14</td><td class="use">Pills invite; squared reads as a control</td></tr>
+      <tr><td class="use"><b>Button height</b></td><td class="hex">56</td><td class="hex">60</td><td class="use">Captain taps while parked, gloved, in motion</td></tr>
+      <tr><td class="use"><b>Card</b></td><td class="hex">20</td><td class="hex">16</td><td class="use">Consumer softness vs. instrument panel</td></tr>
+      <tr><td class="use"><b>Bottom sheet</b></td><td class="hex">28 top</td><td class="hex">24 top</td><td class="use">The rider's main surface deserves the softer arc</td></tr>
+      <tr><td class="use"><b>Input field</b></td><td class="hex">12</td><td class="hex">12</td><td class="use">Shared — forms behave identically in both</td></tr>
+      <tr><td class="use"><b>Field height</b></td><td class="hex">54</td><td class="hex">58</td><td class="use">Same rationale as button height</td></tr>
+      <tr><td class="use"><b>Screen padding</b></td><td class="hex">24</td><td class="hex">20</td><td class="use">Captain trades margin for data density</td></tr>
+      <tr><td class="use"><b>Min tap target</b></td><td class="hex">48</td><td class="hex">48</td><td class="use">Non-negotiable in both</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout">
+    <h4>This needs one architectural change</h4>
+    <p><code>AppDimens</code> is currently a static class shared by both apps, so it can't express a per-brand radius. The clean fix is an <code>AppShape</code> record resolved from <code>AppBrand</code> exactly as the palette already is — <code>brand.shapeFor()</code> alongside the existing <code>brand.paletteFor(brightness)</code> — and <code>AppTheme.build()</code> reads shape from the brand rather than from a global. Spacing, icon sizes and the 4/8 rhythm stay shared and stay in <code>AppDimens</code>.</p>
+  </div>
+
+  <h3>Elevation and motion, briefly</h3>
+  <ul class="clean">
+    <li><b>Keep elevation at zero, keep the borders.</b> The current theme already sets <code>elevation: 0</code> everywhere and separates surfaces with colour and hairlines. That's the right call for a map-heavy app — drop shadows over cartography read as mud. No change.</li>
+    <li><b>Two motion tokens, not one.</b> <code>fast</code> at 160ms for press and state feedback, <code>standard</code> at 260ms with an emphasised-decelerate curve for sheets and route arrivals. Exits run at roughly 70% of the entrance.</li>
+    <li><b>The Captain app moves less.</b> Anything animating in the driver's peripheral vision competes with the road. Restrict motion there to state feedback and sheet transitions — no decorative reveals, no staggered lists.</li>
+    <li><b>Respect reduced motion in both.</b> Query <code>MediaQuery.disableAnimations</code> and collapse transitions to crossfades.</li>
+  </ul>
+</section>
+
+<section id="debt">
+  <div class="sec-head"><div class="eyebrow">06 — Tech debt</div></div>
+  <h2>The duplication is already gone</h2>
+
+  <div class="callout flag">
+    <h4>Correction to the brief</h4>
+    <p>The brief describes ~175 lines duplicated between <code>light()</code> and <code>dark()</code> in <code>packages/core/lib/theme/app_theme.dart</code>. That's no longer the state of the file. It is 224 lines total, and both methods are already one-line delegates into a single <code>build({required brand, required brightness})</code>. It looks like the recent architecture-and-performance audit (<code>99865b2</code>) collapsed it. There is no duplication left to remove — the goal named in the brief is complete.</p>
+  </div>
+
+  <p class="mt24" style="color:var(--ink-2);max-width:66ch">So the theme work in this proposal is not a deduplication. It's a re-palette of a structure that's already correct, plus three additions the new system needs. What genuinely remains:</p>
+
+  <ul class="clean">
+    <li><b>The palette files carry the duplication now, not the theme.</b> <code>rider_palette.dart</code> and <code>driver_palette.dart</code> each repeat the same 18 <code>AlertTokens.*</code> assignments across their light and dark constants — four near-identical blocks. A <code>const AppColorsExtension.withAlerts({...})</code> factory that fills the alert band from the shared ramp would remove about 70 lines and make it impossible to wire a status token to the wrong brightness.</li>
+    <li><b>Input borders fail non-text contrast in both apps today.</b> <code>inputDecorationTheme</code> uses <code>neutral200</code> for <code>enabledBorder</code>, which measures roughly 1.3:1 against the field fill. <code>borderStrong</code> fixes it.</li>
+    <li><b>Shape can't vary per brand.</b> Covered above — <code>AppShape</code> resolved from <code>AppBrand</code>.</li>
+    <li><b>Nothing else blocks the rebrand.</b> A sweep found <b>zero</b> raw <code>Color(0x…)</code> literals anywhere outside <code>lib/theme/</code>, across both apps and all packages. All 284 colour reads go through <code>context.colors.*</code> and all 190 text reads through <code>context.styles.*</code>.</li>
+  </ul>
+
+  <div class="callout">
+    <h4>Which makes this an unusually cheap rebrand</h4>
+    <p>Because the token layer is airtight, swapping the two palette files re-skins every screen in both apps with no call-site edits at all. The risk in this project isn't the repaint — it's the two map style JSONs in <code>assets/map_styles/</code>, which hold their own colours outside the token system and have to be retuned by hand to sit under the new palettes.</p>
+  </div>
+</section>
+
+<section id="plan">
+  <div class="sec-head"><div class="eyebrow">07 — On approval</div></div>
+  <h2>How this lands, in order</h2>
+  <p class="sec-lede">Sequenced so the app compiles and runs at every step, and so the visible change lands in one reviewable commit rather than trickling across the codebase.</p>
+
+  <ol class="steps">
+    <li>
+      <div><h4>Extend the token contract <span style="color:var(--ok);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600">✓ DONE</span></h4>
+      <p>Add <code>primaryVivid</code>, <code>onPrimaryVivid</code> and <code>borderStrong</code> to <code>AppColorsExtension</code>, including <code>copyWith</code> and <code>lerp</code>. Add the <code>withAlerts</code> factory in the same pass. Both palettes still hold their current values — nothing changes visually yet.</p></div>
+    </li>
+    <li>
+      <div><h4>Repaint the palettes <span style="color:var(--ok);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600">✓ DONE</span></h4>
+      <p>Replace the four constants in <code>rider_palette.dart</code> and <code>driver_palette.dart</code> with the values specified above. This is the commit where both apps change appearance. It touches two files.</p></div>
+    </li>
+    <li>
+      <div><h4>Introduce per-brand shape <span style="color:var(--warn);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600">NOT STARTED</span></h4>
+      <p>Add <code>AppShape</code> and <code>brand.shapeFor()</code> beside the existing <code>paletteFor()</code>. Thread it through <code>AppTheme.build()</code> so buttons, cards and sheets read radii from the brand. Point <code>inputDecorationTheme</code> at <code>borderStrong</code> in the same change.</p></div>
+    </li>
+    <li>
+      <div><h4>Swap the type family and split the ramp <span style="color:var(--warn);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600">FAMILY DONE · RAMP PENDING</span></h4>
+      <p>Move <code>AppTextStyles</code> and <code>AppTheme</code>'s <code>textTheme</code> from IBM Plex Sans Arabic to Readex Pro, apply the per-app ramp, and add tabular figures to the numeric styles. Bundle the face locally rather than fetching it at runtime.</p></div>
+    </li>
+    <li>
+      <div><h4>Retune the map styles <span style="color:var(--warn);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600">NOT STARTED</span></h4>
+      <p>Rewrite <code>assets/map_styles/light.json</code> and <code>dark.json</code> against the new grounds, and check the route stroke — <code>#097A8F</code> on light cartography, <code>#5FE2FA</code> on dark — actually holds 3:1 over real tiles rather than over a flat swatch.</p></div>
+    </li>
+    <li>
+      <div><h4>Verify on device</h4>
+      <p>Both apps, both themes, RTL, largest Dynamic Type. Then <code>/flutter-code-review</code> for the layer-boundary and theming rules, and <code>@code-reviewer</code> before anything opens as a PR.</p></div>
+    </li>
+  </ol>
+
+  <div class="callout">
+    <h4>Two calls I'd like made before step one</h4>
+    <p>First, the <b>Captain amber</b> — it's the boldest move here and it walks away from a green the drivers may already associate with the brand. Second, the <b>type change</b>, which is the only item with a real runtime cost; keeping IBM Plex Sans Arabic and adopting only the per-app ramp is a perfectly good outcome if you'd rather not move the family. Everything else follows from the tables above.</p>
+  </div>
+</section>
+
+<footer>
+  Contrast ratios computed per WCAG 2.1 relative luminance against the specific surface each token sits on. AA is 4.5:1 for text and 3:1 for control boundaries; AAA is 7:1. Tokens marked decorative, surface or state carry no text and are exempt.
+</footer>
+
+</div>

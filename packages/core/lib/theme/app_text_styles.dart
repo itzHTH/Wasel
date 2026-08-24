@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:wasel_core/theme/app_colors_extension.dart';
+import 'package:wasel_core/theme/app_fonts.dart';
 
 @immutable
 class AppTextStyles {
@@ -14,34 +14,41 @@ class AppTextStyles {
     required double fontSize,
     required FontWeight fontWeight,
     required Color color,
-  }) => GoogleFonts.ibmPlexSansArabic(
+    double height = AppFonts.bodyHeight,
+  }) => TextStyle(
+    fontFamily: AppFonts.family,
     fontSize: fontSize,
     fontWeight: fontWeight,
     color: color,
+    height: height,
   );
 
   TextStyle get font48Neutral0Bold => _base(
     fontSize: 48.sp,
     fontWeight: FontWeight.w700,
     color: _appColors.onScrim,
+    height: AppFonts.headingHeight,
   );
 
   TextStyle get font32Secondary900Bold => _base(
     fontSize: 32.sp,
     fontWeight: FontWeight.w700,
     color: _appColors.secondary900,
+    height: AppFonts.headingHeight,
   );
 
   TextStyle get font24Secondary900Bold => _base(
     fontSize: 24.sp,
     fontWeight: FontWeight.w700,
     color: _appColors.secondary900,
+    height: AppFonts.headingHeight,
   );
 
   TextStyle get font20Secondary900Bold => _base(
     fontSize: 20.sp,
     fontWeight: FontWeight.w700,
     color: _appColors.secondary900,
+    height: AppFonts.headingHeight,
   );
 
   TextStyle get font16Secondary500Regular => _base(
@@ -114,5 +121,14 @@ class AppTextStyles {
     fontSize: 14.sp,
     fontWeight: FontWeight.w600,
     color: _appColors.alertError500,
+  );
+
+  /// Numerals that update in place — countdowns, fare meters, trip timers.
+  TextStyle get timerTextStyle => TextStyle(
+    fontFamily: AppFonts.numeralFamily,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w600,
+    color: _appColors.secondary900,
+    height: AppFonts.bodyHeight,
   );
 }
