@@ -70,14 +70,18 @@ class _ContactButton extends StatelessWidget {
             children: [
               Icon(icon, color: foreground, size: AppDimens.icon20),
               SizedBox(width: AppDimens.space8),
-              Text(
-                label,
-                style: filled
-                    ? context.styles.bodyLarge(
-                        weight: FontWeight.w600,
-                        color: context.colors.onPrimary,
-                      )
-                    : context.styles.bodyBrand(),
+              Flexible(
+                child: Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: filled
+                      ? context.styles.bodyLarge(
+                          weight: FontWeight.w600,
+                          color: context.colors.onPrimary,
+                        )
+                      : context.styles.bodyBrand(),
+                ),
               ),
             ],
           ),

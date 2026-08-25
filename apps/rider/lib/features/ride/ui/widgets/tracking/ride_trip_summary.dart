@@ -55,8 +55,13 @@ class RideTripSummary extends StatelessWidget {
               Divider(height: 1, color: context.colors.neutral200),
               SizedBox(height: AppDimens.space12),
             ],
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // Reads as a justified row while both halves fit, and stacks them
+            // instead of clipping the figure when they do not.
+            Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: AppDimens.space12,
+              runSpacing: AppDimens.space4,
               children: [
                 Text(
                   context.l10n.estimatedFare,

@@ -22,13 +22,25 @@ class DriverInfoRow extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                driver.name.isEmpty
-                    ? context.l10n.waselDriverName
-                    : driver.name,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: context.styles.title(),
+              // The plate sits beside the name while both fit and drops to its
+              // own line when they do not — a plate is how the rider finds the
+              // car, so it is the one thing here that must never be clipped.
+              Wrap(
+                spacing: AppDimens.space8,
+                runSpacing: AppDimens.space8,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  Text(
+                    driver.name.isEmpty
+                        ? context.l10n.waselDriverName
+                        : driver.name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: context.styles.title(),
+                  ),
+                  if (plate != null && plate.isNotEmpty)
+                    _PlateChip(plateNumber: plate),
+                ],
               ),
               if (vehicle != null) ...[
                 SizedBox(height: AppDimens.space4),
@@ -42,10 +54,6 @@ class DriverInfoRow extends StatelessWidget {
             ],
           ),
         ),
-        if (plate != null && plate.isNotEmpty) ...[
-          SizedBox(width: AppDimens.space8),
-          _PlateChip(plateNumber: plate),
-        ],
       ],
     );
   }
@@ -103,6 +111,8 @@ class _PlateChip extends StatelessWidget {
       child: Text(
         plateNumber,
         textDirection: TextDirection.ltr,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
         style: context.styles.bodyLarge(
           weight: FontWeight.w600,
           color: context.colors.onPrimary,
