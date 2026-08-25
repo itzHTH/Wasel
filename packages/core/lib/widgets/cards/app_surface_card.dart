@@ -23,7 +23,9 @@ class AppSurfaceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final onTap = this.onTap;
-    final radius = BorderRadius.circular(borderRadius ?? AppDimens.radius16);
+    final radius = BorderRadius.circular(
+      borderRadius ?? context.shape.radiusCard,
+    );
 
     return Container(
       width: double.infinity,

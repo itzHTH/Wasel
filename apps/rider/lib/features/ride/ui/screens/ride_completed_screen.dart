@@ -119,7 +119,7 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
         fillColor: context.colors.elementBackground,
         contentPadding: EdgeInsets.all(AppDimens.space16),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppDimens.radius16),
+          borderRadius: BorderRadius.circular(context.shape.radiusCard),
           borderSide: BorderSide.none,
         ),
       ),
@@ -131,7 +131,7 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
       padding: EdgeInsets.all(AppDimens.space16),
       decoration: BoxDecoration(
         color: context.colors.elementBackground,
-        borderRadius: BorderRadius.circular(AppDimens.radius16),
+        borderRadius: BorderRadius.circular(context.shape.radiusCard),
       ),
       child: Column(
         children: [

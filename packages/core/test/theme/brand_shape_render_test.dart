@@ -6,6 +6,7 @@ import 'package:wasel_core/theme/app_shape.dart';
 import 'package:wasel_core/theme/app_theme.dart';
 import 'package:wasel_core/widgets/buttons/app_primary_button.dart';
 import 'package:wasel_core/widgets/buttons/app_secondary_button.dart';
+import 'package:wasel_core/widgets/cards/app_surface_card.dart';
 
 /// Asserting the ThemeData slot is not enough: these widgets set their own
 /// `styleFrom`, so a brand shape can be correct in the theme and still never
@@ -119,5 +120,33 @@ void main() {
       greaterThan(heights[AppBrand.rider]!),
       reason: 'the captain taps in a moving vehicle',
     );
+  });
+
+  testWidgets('the default card surface renders at the brand radius', (
+    tester,
+  ) async {
+    for (final brand in AppBrand.values) {
+      final shape = await _pump(
+        tester,
+        brand,
+        const AppSurfaceCard(child: Text('x')),
+      );
+
+      final container = tester.widget<Container>(
+        find
+            .descendant(
+              of: find.byType(AppSurfaceCard),
+              matching: find.byType(Container),
+            )
+            .first,
+      );
+      final decoration = container.decoration! as BoxDecoration;
+      expect(
+        (decoration.borderRadius as BorderRadius?)?.topLeft.x,
+        shape.radiusCard,
+        reason:
+            '${brand.name} — most cards in both apps come through this widget',
+      );
+    }
   });
 }

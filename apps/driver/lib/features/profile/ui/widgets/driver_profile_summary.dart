@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wasel_core/extensions/navigation_extension.dart';
+import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/networking/errors/error_message.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/widgets/feedback/app_error_retry.dart';
@@ -23,14 +24,14 @@ class DriverProfileSummary extends ConsumerWidget {
     return profile.when(
       skipLoadingOnRefresh: false,
       loading: () => AppSurfaceCard(
-        borderRadius: AppDimens.radius24,
+        borderRadius: context.shape.radiusSheet,
         child: SizedBox(
           height: _placeholderHeight,
           child: const Center(child: AppInlineLoading()),
         ),
       ),
       error: (error, _) => AppSurfaceCard(
-        borderRadius: AppDimens.radius24,
+        borderRadius: context.shape.radiusSheet,
         padding: EdgeInsets.all(AppDimens.space16),
         child: SizedBox(
           height: _placeholderHeight,
@@ -44,7 +45,7 @@ class DriverProfileSummary extends ConsumerWidget {
         ),
       ),
       data: (profile) => AppSurfaceCard(
-        borderRadius: AppDimens.radius24,
+        borderRadius: context.shape.radiusSheet,
         padding: EdgeInsets.zero,
         clipBehavior: Clip.antiAlias,
         onTap: () => context.pushNamed(AppRoutes.profileDetails),

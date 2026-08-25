@@ -20,14 +20,14 @@ class RideCardShell extends StatelessWidget {
       padding:
           padding ??
           EdgeInsets.only(
-            left: AppDimens.screenHPadding,
+            left: context.shape.screenPadding,
             top: AppDimens.space16,
-            right: AppDimens.screenHPadding,
+            right: context.shape.screenPadding,
             bottom: AppDimens.space24,
           ),
       decoration: BoxDecoration(
         color: context.colors.elementBackground,
-        borderRadius: BorderRadius.circular(AppDimens.radius24),
+        borderRadius: BorderRadius.circular(context.shape.radiusSheet),
         boxShadow: [
           BoxShadow(
             color: context.colors.scrim.withValues(alpha: 0.08),

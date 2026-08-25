@@ -88,7 +88,7 @@ class _RiderProfileDetailsBody extends StatelessWidget {
       ),
       children: [
         AppSurfaceCard(
-          borderRadius: AppDimens.radius24,
+          borderRadius: context.shape.radiusSheet,
           padding: EdgeInsets.symmetric(
             horizontal: AppDimens.space16,
             vertical: AppDimens.space24,

@@ -31,7 +31,7 @@ class RideTripSummary extends StatelessWidget {
       padding: EdgeInsets.all(AppDimens.space16),
       decoration: BoxDecoration(
         color: context.colors.neutral50,
-        borderRadius: BorderRadius.circular(AppDimens.radius16),
+        borderRadius: BorderRadius.circular(context.shape.radiusCard),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -50,7 +50,7 @@ class DriverArrivedCard extends ConsumerWidget {
             ),
             decoration: BoxDecoration(
               color: context.colors.alertSuccess100,
-              borderRadius: BorderRadius.circular(AppDimens.radius16),
+              borderRadius: BorderRadius.circular(context.shape.radiusCard),
             ),
             child: Row(
               children: [

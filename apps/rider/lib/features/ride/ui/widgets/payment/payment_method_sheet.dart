@@ -21,7 +21,7 @@ Future<PaymentMethod?> showPaymentMethodSheet({
     useSafeArea: true,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
-        top: Radius.circular(AppDimens.radius24),
+        top: Radius.circular(context.shape.radiusSheet),
       ),
     ),
     builder: (context) => _PaymentMethodSheet(selected: selected),

@@ -10,7 +10,7 @@ Future<CaptureSource?> showCaptureSourceSheet({required BuildContext context}) {
     backgroundColor: context.colors.neutral0,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
-        top: Radius.circular(AppDimens.radius24),
+        top: Radius.circular(context.shape.radiusSheet),
       ),
     ),
     builder: (context) => const _CaptureSourceSheet(),
@@ -68,12 +68,12 @@ class _SourceTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(AppDimens.radius16),
+      borderRadius: BorderRadius.circular(context.shape.radiusCard),
       child: Container(
         padding: EdgeInsets.all(AppDimens.space16),
         decoration: BoxDecoration(
           color: context.colors.neutral50,
-          borderRadius: BorderRadius.circular(AppDimens.radius16),
+          borderRadius: BorderRadius.circular(context.shape.radiusCard),
           border: Border.all(color: context.colors.neutral200),
         ),
         child: Row(

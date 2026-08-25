@@ -67,7 +67,7 @@ class _TodayPanel extends ConsumerWidget {
       padding: EdgeInsets.all(AppDimens.space16),
       decoration: BoxDecoration(
         color: context.colors.neutral50,
-        borderRadius: BorderRadius.circular(AppDimens.radius16),
+        borderRadius: BorderRadius.circular(context.shape.radiusCard),
         border: Border.all(color: context.colors.neutral200),
       ),
       child: Column(
@@ -163,10 +163,9 @@ class _Metric extends StatelessWidget {
               color: context.colors.neutral400,
             ),
             SizedBox(width: AppDimens.space4),
-            Text(
-              label,
-              style: context.styles.captionMuted(),
-            ),
+            // The captain ramp has no 12sp tier, so this label needs room to
+            // wrap rather than a fixed width to overflow out of.
+            Expanded(child: Text(label, style: context.styles.captionMuted())),
           ],
         ),
         SizedBox(height: AppDimens.space4),

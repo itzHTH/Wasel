@@ -16,7 +16,7 @@ Future<bool?> showCapturePreviewSheet({
     backgroundColor: context.colors.neutral0,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
-        top: Radius.circular(AppDimens.radius24),
+        top: Radius.circular(context.shape.radiusSheet),
       ),
     ),
     builder: (context) => _CapturePreviewSheet(file: file),
@@ -50,7 +50,7 @@ class _CapturePreviewSheet extends StatelessWidget {
             ),
             SizedBox(height: AppDimens.space24),
             ClipRRect(
-              borderRadius: BorderRadius.circular(AppDimens.radius16),
+              borderRadius: BorderRadius.circular(context.shape.radiusCard),
               child: ConstrainedBox(
                 constraints: BoxConstraints(maxHeight: 360.h),
                 child: CapturedImage(file: file, fit: BoxFit.contain),

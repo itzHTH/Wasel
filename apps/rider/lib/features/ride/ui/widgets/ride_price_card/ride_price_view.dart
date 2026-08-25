@@ -25,7 +25,7 @@ class RidePriceView extends StatelessWidget {
           ),
           decoration: BoxDecoration(
             color: context.colors.primary100,
-            borderRadius: BorderRadius.circular(AppDimens.radius16),
+            borderRadius: BorderRadius.circular(context.shape.radiusCard),
           ),
           child: Column(
             children: [

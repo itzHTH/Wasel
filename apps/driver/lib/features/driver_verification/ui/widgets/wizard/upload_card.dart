@@ -32,7 +32,7 @@ class UploadCard extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           color: _isFilled ? context.colors.neutral0 : context.colors.neutral50,
-          borderRadius: BorderRadius.circular(AppDimens.radius16),
+          borderRadius: BorderRadius.circular(context.shape.radiusCard),
           border: Border.all(
             color: _isFilled
                 ? context.colors.primary300
@@ -62,10 +62,7 @@ class EmptyThumbnail extends StatelessWidget {
         children: [
           Icon(icon, size: AppDimens.icon36, color: context.colors.neutral400),
           SizedBox(height: AppDimens.space8),
-          Text(
-            label,
-            style: context.styles.bodyMuted(),
-          ),
+          Text(label, style: context.styles.bodyMuted()),
         ],
       ),
     );
