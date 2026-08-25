@@ -42,9 +42,6 @@ class DriverLocalizationsAr extends DriverLocalizations {
   String get rideHistory => 'سجل الرحلات';
 
   @override
-  String get settings => 'الإعدادات';
-
-  @override
   String get logout => 'تسجيل الخروج';
 
   @override

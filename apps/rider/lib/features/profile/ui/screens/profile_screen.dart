@@ -43,12 +43,6 @@ class ProfileScreen extends ConsumerWidget {
                 onTap: () => context.pushNamed(AppRoutes.rideHistory),
               ),
               AppMenuTile(
-                icon: Icons.settings_outlined,
-                label: context.l10n.settings,
-                isMuted: true,
-                trailing: const AppSoonBadge(),
-              ),
-              AppMenuTile(
                 icon: Icons.brightness_6_outlined,
                 label: context.coreL10n.appearance,
                 onTap: () => showAppAppearanceSheet(context),

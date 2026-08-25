@@ -44,10 +44,6 @@
   "@rideHistory": {
     "description": "Menu tile that opens the ride history screen"
   },
-  "settings": "الإعدادات",
-  "@settings": {
-    "description": "Menu tile for the settings screen; not built yet"
-  },
   "logout": "تسجيل الخروج",
   "@logout": {
     "description": "Logout menu tile, and the confirm action of its dialog"
