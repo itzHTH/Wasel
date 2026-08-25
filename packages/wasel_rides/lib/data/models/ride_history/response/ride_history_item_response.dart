@@ -37,18 +37,23 @@ class RideHistoryItemResponse {
   );
 
   /// Rebuilds a single timestamp from the API's split date + time-of-day.
+  ///
+  /// Both halves describe one UTC instant, so they are recomposed in UTC and
+  /// handed back in local time. Rebuilding them on a local wall clock would
+  /// relabel 01:04Z as 01:04 in Baghdad — three hours early, and a day early
+  /// for anything logged after local midnight.
   static DateTime _composeRequestedAt(String? date, String? time) {
     final parsedDate = DateTime.tryParse(date?.trim() ?? '');
     if (parsedDate == null) return DateTime.fromMillisecondsSinceEpoch(0);
 
     final span = _parseTimeSpan(time);
-    if (span == null) return parsedDate;
+    if (span == null) return parsedDate.toLocal();
 
-    return DateTime(
-      parsedDate.year,
-      parsedDate.month,
-      parsedDate.day,
-    ).add(span);
+    final midnight = parsedDate.isUtc
+        ? DateTime.utc(parsedDate.year, parsedDate.month, parsedDate.day)
+        : DateTime(parsedDate.year, parsedDate.month, parsedDate.day);
+
+    return midnight.add(span).toLocal();
   }
 
   static Duration? _parseTimeSpan(String? raw) {
