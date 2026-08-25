@@ -90,6 +90,7 @@ export 'widgets/feedback/app_error_retry.dart';
 export 'widgets/feedback/app_error_state.dart';
 export 'widgets/feedback/app_inline_error.dart';
 export 'widgets/feedback/app_loading.dart';
+export 'widgets/feedback/app_shimmer_sheen.dart';
 export 'widgets/feedback/app_skeleton.dart';
 
 // Widgets — cards & rows

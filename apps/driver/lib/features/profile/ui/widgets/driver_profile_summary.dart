@@ -8,7 +8,8 @@ import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/networking/errors/error_message.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/widgets/feedback/app_error_retry.dart';
-import 'package:wasel_core/widgets/feedback/app_loading.dart';
+import 'package:wasel_core/widgets/feedback/app_skeleton.dart';
+import 'package:wasel_profile/presentation/widgets/profile_placeholders.dart';
 import 'package:wasel_core/widgets/cards/app_surface_card.dart';
 import 'package:wasel_profile/presentation/providers/profile/driver_profile_provider.dart';
 
@@ -25,16 +26,19 @@ class DriverProfileSummary extends ConsumerWidget {
       skipLoadingOnRefresh: false,
       loading: () => AppSurfaceCard(
         borderRadius: context.shape.radiusSheet,
-        child: SizedBox(
-          height: _placeholderHeight,
-          child: const Center(child: AppInlineLoading()),
+        padding: EdgeInsets.zero,
+        clipBehavior: Clip.antiAlias,
+        child: AppSkeleton(
+          child: DriverProfileInfo(profile: placeholderDriverProfile),
         ),
       ),
       error: (error, _) => AppSurfaceCard(
         borderRadius: context.shape.radiusSheet,
         padding: EdgeInsets.all(AppDimens.space16),
-        child: SizedBox(
-          height: _placeholderHeight,
+        child: ConstrainedBox(
+          // A minimum, not a fixed height: the message has to be able to grow
+          // the card at large text scales rather than overflow it.
+          constraints: BoxConstraints(minHeight: _placeholderHeight),
           child: Center(
             child: AppErrorRetry(
               message: errorMessageOf(error),
