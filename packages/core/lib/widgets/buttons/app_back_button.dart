@@ -23,7 +23,9 @@ class AppBackButton extends StatelessWidget {
             height: 44.r,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              shape: BoxShape.circle,
+              borderRadius: BorderRadius.circular(
+                context.shape.badgeRadiusFor(44.r),
+              ),
               border: Border.all(color: context.colors.neutral200, width: 1.5),
             ),
             // Icons.arrow_back_rounded carries matchTextDirection, so Flutter

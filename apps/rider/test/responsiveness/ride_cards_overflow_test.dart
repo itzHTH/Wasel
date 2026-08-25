@@ -9,6 +9,7 @@ import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_state.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_draft_card/ride_back_button.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_draft_card/ride_card_title.dart';
+import 'package:wasal/features/ride/ui/widgets/ride_price_card/ride_price_card.dart';
 import 'package:wasal/features/ride/ui/widgets/tracking/driver_arrived_card.dart';
 import 'package:wasal/features/ride/ui/widgets/tracking/driver_on_the_way_card.dart';
 import 'package:wasal/features/ride/ui/widgets/tracking/ride_in_progress_card.dart';
@@ -136,6 +137,10 @@ void main() {
       price: _price,
     ),
   };
+
+  // The price body needs payment and request providers of its own; this covers
+  // the header, which is the row that gained a back button and a badge.
+  cases['RidePriceCard header'] = () => RidePriceCard(onClose: () {});
 
   for (final scale in [1.0, 1.3]) {
     group('320w · textScale $scale', () {

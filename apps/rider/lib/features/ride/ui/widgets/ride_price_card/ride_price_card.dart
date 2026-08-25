@@ -37,19 +37,10 @@ class _RidePriceCardState extends ConsumerState<RidePriceCard> {
         children: [
           Row(
             children: [
-              Padding(
-                padding: EdgeInsetsDirectional.only(start: AppDimens.space8),
-                child: IconButton(
-                  onPressed: widget.onClose,
-                  style: IconButton.styleFrom(
-                    backgroundColor: context.colors.neutral100,
-                  ),
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: context.colors.secondary900,
-                  ),
-                ),
-              ),
+              AppBackButton(onTap: widget.onClose),
+              SizedBox(width: AppDimens.space12),
+              const RideStageBadge(stage: RideStageVisual.reviewingTrip),
+              SizedBox(width: AppDimens.space12),
               Expanded(
                 child: Text(
                   context.l10n.rideDetails,

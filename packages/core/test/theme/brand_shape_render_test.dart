@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:wasel_core/theme/app_brand.dart';
 import 'package:wasel_core/theme/app_shape.dart';
 import 'package:wasel_core/theme/app_theme.dart';
+import 'package:wasel_core/l10n/core_localizations.dart';
+import 'package:wasel_core/widgets/buttons/app_back_button.dart';
 import 'package:wasel_core/widgets/buttons/app_primary_button.dart';
 import 'package:wasel_core/widgets/buttons/app_secondary_button.dart';
 import 'package:wasel_core/widgets/cards/app_surface_card.dart';
@@ -24,6 +27,14 @@ Future<AppShape> _pump(
         shape = brand.shape();
         return MaterialApp(
           theme: AppTheme.build(brand: brand, brightness: Brightness.light),
+          locale: const Locale('ar'),
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            CoreLocalizations.delegate,
+          ],
+          supportedLocales: CoreLocalizations.supportedLocales,
           home: Scaffold(body: Center(child: child)),
         );
       },
@@ -84,6 +95,38 @@ void main() {
 
       final button = tester.widget<OutlinedButton>(find.byType(OutlinedButton));
       expect(_radiusOf(button.style), shape.radiusButton, reason: brand.name);
+    }
+  });
+
+  testWidgets('the back button follows the brand, not a hardcoded circle', (
+    tester,
+  ) async {
+    for (final brand in AppBrand.values) {
+      final shape = await _pump(tester, brand, const AppBackButton());
+
+      final decoration =
+          tester
+                  .widget<Container>(
+                    find
+                        .descendant(
+                          of: find.byType(AppBackButton),
+                          matching: find.byType(Container),
+                        )
+                        .first,
+                  )
+                  .decoration!
+              as BoxDecoration;
+
+      expect(
+        decoration.shape,
+        BoxShape.rectangle,
+        reason: '${brand.name} back button must take a brand radius',
+      );
+      expect(
+        (decoration.borderRadius! as BorderRadius).topLeft.x,
+        shape.badgeRadiusFor(44.r),
+        reason: '${brand.name} back button radius',
+      );
     }
   });
 
