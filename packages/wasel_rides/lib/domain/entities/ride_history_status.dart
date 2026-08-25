@@ -3,13 +3,15 @@ enum RideHistoryStatus {
   cancelled,
   unknown;
 
-  /// Requests now send `Accept-Language`, so a server that localizes this
-  /// field can answer in Arabic. Both spellings are accepted, matching how
-  /// `PaymentMethod.fromApi` already handles its own vocabulary.
+  /// Requests send `Accept-Language`, so the server answers this field in the
+  /// active language and its Arabic wording is prose, not a stable code —
+  /// "ملغية" and "ملغاة" are both cancelled. Every spelling seen from the API
+  /// is accepted, matching how `PaymentMethod.fromApi` handles its own
+  /// vocabulary.
   static RideHistoryStatus fromApi(String? raw) =>
       switch (raw?.trim().toLowerCase()) {
-        'completed' || 'مكتملة' => completed,
-        'cancelled' || 'canceled' || 'ملغاة' => cancelled,
+        'completed' || 'مكتملة' || 'مكتمل' => completed,
+        'cancelled' || 'canceled' || 'ملغية' || 'ملغاة' || 'ملغي' => cancelled,
         _ => unknown,
       };
 }
