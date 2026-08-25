@@ -12,6 +12,15 @@ String errorMessageOf(
 }) {
   final strings = l10n ?? _coreL10n();
 
+  // Providers disagree on what they store: some keep the resolved sentence,
+  // others the failure itself. A non-empty String has already been through
+  // here, so hand it back rather than resolving it a second time — which
+  // would replace a specific message with the generic apology.
+  if (error is String) {
+    if (error.isNotEmpty) return error;
+    return fallback ?? strings.genericError;
+  }
+
   if (error is ErrorHandler) {
     final serverMessage = error.apiErrorModel.displayMessage;
     if (serverMessage != null) return serverMessage;

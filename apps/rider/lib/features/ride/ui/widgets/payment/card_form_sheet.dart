@@ -207,7 +207,9 @@ class _CardFormSheetState extends ConsumerState<_CardFormSheet> {
                         children: [
                           if (state.hasError) ...[
                             SizedBox(height: AppDimens.space12),
-                            AppInlineError(message: state.error.toString()),
+                            AppInlineError(
+                              message: errorMessageOf(state.error!),
+                            ),
                           ],
                           SizedBox(height: AppDimens.space24),
                           AppPrimaryButton(

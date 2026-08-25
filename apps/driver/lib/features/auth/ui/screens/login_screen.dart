@@ -122,6 +122,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   void _loginListener(BuildContext context) {
     ref.listen(loginProvider, (previous, next) {
+      // A request in flight carries the PREVIOUS error forward, because
+      // Riverpod copies the old state onto AsyncLoading. Reporting it here
+      // replays the last failure for the whole round trip.
+      if (next.isLoading) return;
+
       if (next.hasError) {
         // The raw object would put a DioException in front of the user.
         AppSnackBar.showError(context, errorMessageOf(next.error!));

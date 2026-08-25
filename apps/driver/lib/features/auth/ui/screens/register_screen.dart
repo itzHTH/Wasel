@@ -202,6 +202,11 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
   void _registerListener(BuildContext context) {
     ref.listen(registerProvider, (previous, next) {
+      // A request in flight carries the PREVIOUS error forward, because
+      // Riverpod copies the old state onto AsyncLoading. Reporting it here
+      // replays the last failure for the whole round trip.
+      if (next.isLoading) return;
+
       if (next.hasError) {
         AppSnackBar.showError(context, errorMessageOf(next.error!));
       }
