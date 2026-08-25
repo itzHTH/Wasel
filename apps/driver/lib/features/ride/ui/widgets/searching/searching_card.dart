@@ -1,6 +1,5 @@
 import 'package:driver/core/helpers/ride_formatters.dart';
 import 'package:driver/features/ride/ui/providers/earnings/driver_earnings_provider.dart';
-import 'package:driver/features/ride/ui/widgets/searching/searching_radar.dart';
 import 'package:flutter/material.dart';
 import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,26 +17,10 @@ class SearchingCard extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
-            children: [
-              const SearchingRadar(),
-              SizedBox(width: AppDimens.space12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      context.l10n.searchingForRequests,
-                      style: context.styles.title(),
-                    ),
-                    Text(
-                      context.l10n.stayInBusyArea,
-                      style: context.styles.bodyMuted(),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          RideStageHeader(
+            stage: RideStageVisual.searching,
+            title: context.l10n.searchingForRequests,
+            subtitle: context.l10n.stayInBusyArea,
           ),
           SizedBox(height: AppDimens.space24),
           const _TodayPanel(),

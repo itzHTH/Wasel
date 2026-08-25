@@ -3,6 +3,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/animation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:wasel_core/wasel_core.dart';
 import 'package:wasel_location/wasel_location.dart';
 
 /// Drives the expanding "looking for a driver" radius and its opacity pulse.
@@ -22,8 +23,8 @@ class SearchRadiusMotion extends ChangeNotifier {
   static const stepMeters = 2000.0;
   static const maxMeters = 10000.0;
   static const stepInterval = Duration(seconds: 60);
-  static const stepDuration = Duration(milliseconds: 800);
-  static const pulsePeriod = Duration(milliseconds: 2000);
+  static const stepDuration = RideSearchMotion.expansionDuration;
+  static const pulsePeriod = RideSearchMotion.pulsePeriod;
 
   late final AnimationController _step;
   late final AnimationController _pulse;
@@ -94,7 +95,7 @@ class SearchRadiusMotion extends ChangeNotifier {
   }
 
   void _onStepFrame() {
-    final eased = Curves.easeOutCubic.transform(_step.value);
+    final eased = RideSearchMotion.expansionCurve.transform(_step.value);
     _radiusMeters = _fromMeters + (_targetMeters - _fromMeters) * eased;
 
     if (_step.isCompleted) {

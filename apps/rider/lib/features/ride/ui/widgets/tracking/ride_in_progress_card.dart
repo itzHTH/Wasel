@@ -30,46 +30,12 @@ class RideInProgressCard extends ConsumerWidget {
 
     return ExpandableRideCard(
       isMapMoving: ref.watch(isCameraMovingProvider),
-      summary: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            children: [
-              Container(
-                padding: EdgeInsets.all(AppDimens.space8),
-                decoration: BoxDecoration(
-                  color: context.colors.primary100,
-                  borderRadius: BorderRadius.circular(AppDimens.radius12),
-                ),
-                child: Icon(
-                  Icons.navigation_rounded,
-                  color: context.colors.primary500,
-                  size: AppDimens.icon20,
-                ),
-              ),
-              SizedBox(width: AppDimens.space12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      context.l10n.haveAGoodTrip,
-                      style: context.styles.title(),
-                    ),
-                    if (etaMinutes != null) ...[
-                      SizedBox(height: AppDimens.space4),
-                      Text(
-                        context.l10n.arrivalEtaMinutes(etaMinutes.toString()),
-                        style: context.styles.bodySecondary(),
-                      ),
-                    ],
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ],
+      summary: RideStageHeader(
+        stage: RideStageVisual.inTrip,
+        title: context.l10n.haveAGoodTrip,
+        subtitle: etaMinutes != null
+            ? context.l10n.arrivalEtaMinutes(etaMinutes.toString())
+            : null,
       ),
       details: Column(
         mainAxisSize: MainAxisSize.min,

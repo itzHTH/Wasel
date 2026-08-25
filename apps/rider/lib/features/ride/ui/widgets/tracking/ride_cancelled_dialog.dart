@@ -16,7 +16,7 @@ Future<void> showRideCancelledDialog(
     title: context.l10n.rideCancelled,
     message: reason,
     confirmLabel: context.l10n.backToHome,
-    icon: Icons.cancel_outlined,
+    icon: RideStageVisual.cancelled.icon,
     barrierDismissible: false,
   );
   onDismiss();

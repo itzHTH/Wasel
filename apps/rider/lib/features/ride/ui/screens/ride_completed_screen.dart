@@ -49,18 +49,9 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
             children: [
               SizedBox(height: AppDimens.space40),
               Center(
-                child: Container(
-                  width: AppDimens.icon48,
-                  height: AppDimens.icon48,
-                  decoration: BoxDecoration(
-                    color: context.colors.alertSuccess100,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    Icons.check_rounded,
-                    color: context.colors.alertSuccess500,
-                    size: AppDimens.icon24,
-                  ),
+                child: RideStageBadge(
+                  stage: RideStageVisual.completed,
+                  size: AppDimens.icon48,
                 ),
               ),
               SizedBox(height: AppDimens.space16),

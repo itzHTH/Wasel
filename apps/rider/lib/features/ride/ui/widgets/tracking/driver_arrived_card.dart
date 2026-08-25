@@ -43,41 +43,10 @@ class DriverArrivedCard extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
-            padding: EdgeInsets.symmetric(
-              vertical: AppDimens.space16,
-              horizontal: AppDimens.space16,
-            ),
-            decoration: BoxDecoration(
-              color: context.colors.alertSuccess100,
-              borderRadius: BorderRadius.circular(context.shape.radiusCard),
-            ),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.check_circle_rounded,
-                  color: context.colors.alertSuccess500,
-                  size: AppDimens.icon24,
-                ),
-                SizedBox(width: AppDimens.space12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        context.l10n.captainArrived,
-                        style: context.styles.title(),
-                      ),
-                      SizedBox(height: AppDimens.space4),
-                      Text(
-                        context.l10n.findCarByPlate,
-                        style: context.styles.bodySecondary(),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+          RideStageHeader(
+            stage: RideStageVisual.arrived,
+            title: context.l10n.captainArrived,
+            subtitle: context.l10n.findCarByPlate,
           ),
           SizedBox(height: AppDimens.space16),
           DriverInfoRow(driver: driver),

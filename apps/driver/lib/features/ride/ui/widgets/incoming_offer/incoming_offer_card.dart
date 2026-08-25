@@ -51,6 +51,8 @@ class IncomingOfferCard extends ConsumerWidget {
         children: [
           Row(
             children: [
+              const RideStageBadge(stage: RideStageVisual.offerReceived),
+              SizedBox(width: AppDimens.space12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

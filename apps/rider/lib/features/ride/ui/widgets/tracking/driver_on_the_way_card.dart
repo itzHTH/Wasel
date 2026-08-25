@@ -44,30 +44,11 @@ class DriverOnTheWayCard extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
-            children: [
-              Container(
-                padding: EdgeInsets.all(AppDimens.space8),
-                decoration: BoxDecoration(
-                  color: context.colors.primary100,
-                  borderRadius: BorderRadius.circular(AppDimens.radius12),
-                ),
-                child: Icon(
-                  Icons.directions_car_rounded,
-                  color: context.colors.primary500,
-                  size: AppDimens.icon20,
-                ),
-              ),
-              SizedBox(width: AppDimens.space12),
-              Expanded(
-                child: Text(
-                  etaMinutes != null
-                      ? context.l10n.captainEtaMinutes(etaMinutes.toString())
-                      : context.l10n.captainOnWay,
-                  style: context.styles.title(),
-                ),
-              ),
-            ],
+          RideStageHeader(
+            stage: RideStageVisual.accepted,
+            title: etaMinutes != null
+                ? context.l10n.captainEtaMinutes(etaMinutes.toString())
+                : context.l10n.captainOnWay,
           ),
           SizedBox(height: AppDimens.space16),
           DriverInfoRow(driver: driver),

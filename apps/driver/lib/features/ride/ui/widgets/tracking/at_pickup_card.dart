@@ -3,7 +3,6 @@ import 'package:wasel_location/wasel_location.dart';
 import 'package:wasel_payments/domain/entities/payment_method.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/rider_profile/current_rider_profile_provider.dart';
-import 'package:driver/features/ride/ui/widgets/tracking/card_stage_header.dart';
 import 'package:driver/features/ride/ui/widgets/fare_hero.dart';
 import 'package:wasel_payments/presentation/widgets/payment_method_chip.dart';
 import 'package:driver/features/ride/ui/widgets/rider_info_row.dart';
@@ -36,12 +35,10 @@ class AtPickupCard extends ConsumerWidget {
 
     return ExpandableRideCard(
       isMapMoving: ref.watch(driverIsCameraMovingProvider),
-      summary: CardStageHeader(
-        icon: Icons.check_circle_outline_rounded,
+      summary: RideStageHeader(
+        stage: RideStageVisual.arrived,
         title: context.l10n.arrivedAtPickup,
         subtitle: context.l10n.waitForRiderThenStart,
-        tint: context.colors.alertSuccess500,
-        background: context.colors.alertSuccess100,
       ),
       details: Column(
         mainAxisSize: MainAxisSize.min,

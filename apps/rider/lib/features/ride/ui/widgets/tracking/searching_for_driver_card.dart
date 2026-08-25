@@ -25,27 +25,10 @@ class SearchingForDriverCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
-            children: [
-              const AppInlineLoading(),
-              SizedBox(width: AppDimens.space12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      context.l10n.searchingForCaptain,
-                      style: context.styles.title(),
-                    ),
-                    SizedBox(height: AppDimens.space4),
-                    Text(
-                      context.l10n.stayOnline,
-                      style: context.styles.bodySecondary(),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          RideStageHeader(
+            stage: RideStageVisual.searching,
+            title: context.l10n.searchingForCaptain,
+            subtitle: context.l10n.stayOnline,
           ),
           SizedBox(height: AppDimens.space16),
           RideTripSummary(

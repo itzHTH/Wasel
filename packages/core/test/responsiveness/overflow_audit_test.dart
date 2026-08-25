@@ -19,6 +19,8 @@ import 'package:wasel_core/widgets/feedback/app_error_retry.dart';
 import 'package:wasel_core/widgets/feedback/app_inline_error.dart';
 import 'package:wasel_core/widgets/settings/app_language_switch.dart';
 import 'package:wasel_core/widgets/settings/app_theme_mode_switch.dart';
+import 'package:wasel_core/widgets/ride/ride_stage_badge.dart';
+import 'package:wasel_core/widgets/ride/ride_stage_header.dart';
 
 /// The narrowest device the apps support, and the one the new type ramp is
 /// most likely to break.
@@ -77,7 +79,9 @@ Future<void> _pumpAt(
       ),
     ),
   );
-  await tester.pumpAndSettle();
+  // Not pumpAndSettle: a searching stage runs a radar that never stops.
+  await tester.pump();
+  await tester.pump(const Duration(milliseconds: 400));
 }
 
 /// Every widget the audit covers, built with copy long enough to stress it.
@@ -122,6 +126,15 @@ final _cases = <String, Widget Function()>{
   ),
   'AppLanguageSwitch': () => const AppLanguageSwitch(),
   'AppThemeModeSwitch': () => const AppThemeModeSwitch(),
+  for (final stage in RideStageVisual.values)
+    'RideStageHeader.${stage.name}': () =>
+        RideStageHeader(stage: stage, title: _longLabel, subtitle: _longValue),
+  'RideStageHeader (with trailing)': () => const RideStageHeader(
+    stage: RideStageVisual.offerReceived,
+    title: _longLabel,
+    subtitle: _longValue,
+    trailing: SizedBox.square(dimension: 48),
+  ),
 };
 
 void main() {
