@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wasel_core/theme/app_dimens.dart';
 
 /// Per-brand shape. Rider rounds generously so its surfaces read consumer;
 /// Captain squares off so its controls read as equipment.
@@ -11,6 +12,7 @@ class AppShape extends ThemeExtension<AppShape> {
     required this.radiusSheet,
     required this.radiusDialog,
     required this.radiusField,
+    required this.radiusBadge,
     required this.buttonHeight,
     required this.fieldHeight,
     required this.screenPadding,
@@ -22,6 +24,7 @@ class AppShape extends ThemeExtension<AppShape> {
       radiusSheet = 28.r,
       radiusDialog = 24.r,
       radiusField = 12.r,
+      radiusBadge = 18.r,
       buttonHeight = 56.h,
       fieldHeight = 54.h,
       screenPadding = 24.w;
@@ -32,6 +35,7 @@ class AppShape extends ThemeExtension<AppShape> {
       radiusSheet = 24.r,
       radiusDialog = 20.r,
       radiusField = 12.r,
+      radiusBadge = 12.r,
       buttonHeight = 60.h,
       fieldHeight = 58.h,
       screenPadding = 20.w;
@@ -41,6 +45,7 @@ class AppShape extends ThemeExtension<AppShape> {
   final double radiusSheet;
   final double radiusDialog;
   final double radiusField;
+  final double radiusBadge;
   final double buttonHeight;
   final double fieldHeight;
   final double screenPadding;
@@ -52,6 +57,7 @@ class AppShape extends ThemeExtension<AppShape> {
     double? radiusSheet,
     double? radiusDialog,
     double? radiusField,
+    double? radiusBadge,
     double? buttonHeight,
     double? fieldHeight,
     double? screenPadding,
@@ -61,6 +67,7 @@ class AppShape extends ThemeExtension<AppShape> {
     radiusSheet: radiusSheet ?? this.radiusSheet,
     radiusDialog: radiusDialog ?? this.radiusDialog,
     radiusField: radiusField ?? this.radiusField,
+    radiusBadge: radiusBadge ?? this.radiusBadge,
     buttonHeight: buttonHeight ?? this.buttonHeight,
     fieldHeight: fieldHeight ?? this.fieldHeight,
     screenPadding: screenPadding ?? this.screenPadding,
@@ -75,11 +82,17 @@ class AppShape extends ThemeExtension<AppShape> {
       radiusSheet: lerpDouble(radiusSheet, other.radiusSheet, t),
       radiusDialog: lerpDouble(radiusDialog, other.radiusDialog, t),
       radiusField: lerpDouble(radiusField, other.radiusField, t),
+      radiusBadge: lerpDouble(radiusBadge, other.radiusBadge, t),
       buttonHeight: lerpDouble(buttonHeight, other.buttonHeight, t),
       fieldHeight: lerpDouble(fieldHeight, other.fieldHeight, t),
       screenPadding: lerpDouble(screenPadding, other.screenPadding, t),
     );
   }
+
+  /// Corners for a square control of [size]. Scaling keeps the brand's
+  /// roundness ratio as the box grows, so a badge and a back button of
+  /// different sizes still read as the same family.
+  double badgeRadiusFor(double size) => radiusBadge * size / AppDimens.icon40;
 
   static double lerpDouble(double a, double b, double t) => a + (b - a) * t;
 
@@ -94,6 +107,7 @@ class AppShape extends ThemeExtension<AppShape> {
         other.radiusSheet == radiusSheet &&
         other.radiusDialog == radiusDialog &&
         other.radiusField == radiusField &&
+        other.radiusBadge == radiusBadge &&
         other.buttonHeight == buttonHeight &&
         other.fieldHeight == fieldHeight &&
         other.screenPadding == screenPadding;
@@ -106,6 +120,7 @@ class AppShape extends ThemeExtension<AppShape> {
     radiusSheet,
     radiusDialog,
     radiusField,
+    radiusBadge,
     buttonHeight,
     fieldHeight,
     screenPadding,
