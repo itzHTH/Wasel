@@ -12,8 +12,11 @@ class RideDetailRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: context.styles.font14Secondary500Medium),
-        Text(value, style: context.styles.font14Secondary900SemiBold),
+        Text(
+          label,
+          style: context.styles.bodySecondary(),
+        ),
+        Text(value, style: context.styles.body(weight: FontWeight.w600)),
       ],
     );
   }

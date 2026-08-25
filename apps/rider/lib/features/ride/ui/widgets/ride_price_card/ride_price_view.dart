@@ -25,13 +25,13 @@ class RidePriceView extends StatelessWidget {
           ),
           decoration: BoxDecoration(
             color: context.colors.primary100,
-            borderRadius: BorderRadius.circular(AppDimens.radius16),
+            borderRadius: BorderRadius.circular(context.shape.radiusCard),
           ),
           child: Column(
             children: [
               Text(
                 context.l10n.estimatedFare,
-                style: context.styles.font14Secondary500Medium,
+                style: context.styles.bodySecondary(),
               ),
               SizedBox(height: AppDimens.space4),
               Text(
@@ -40,7 +40,7 @@ class RidePriceView extends StatelessWidget {
                   price.estimatedPrice,
                   currency: price.currency,
                 ),
-                style: context.styles.font32Secondary900Bold,
+                style: context.styles.display(),
               ),
             ],
           ),

@@ -42,12 +42,12 @@ class RegisterFormPage extends StatelessWidget {
 
           Text(
             context.authL10n.completeYourInfo,
-            style: context.styles.font24Secondary900Bold,
+            style: context.styles.headline(),
           ),
           SizedBox(height: AppDimens.space8),
           Text(
             context.authL10n.registerFormDescription,
-            style: context.styles.font14Neutral400Regular,
+            style: context.styles.bodyMuted(),
           ),
           SizedBox(height: AppDimens.space32),
 

@@ -16,7 +16,7 @@ Future<bool?> showCapturePreviewSheet({
     backgroundColor: context.colors.neutral0,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
-        top: Radius.circular(AppDimens.radius24),
+        top: Radius.circular(context.shape.radiusSheet),
       ),
     ),
     builder: (context) => _CapturePreviewSheet(file: file),
@@ -39,18 +39,18 @@ class _CapturePreviewSheet extends StatelessWidget {
           children: [
             Text(
               context.l10n.confirmPhoto,
-              style: context.styles.font20Secondary900Bold,
+              style: context.styles.title(),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: AppDimens.space8),
             Text(
               context.l10n.ensurePhotoClear,
-              style: context.styles.font14Neutral400Regular,
+              style: context.styles.bodyMuted(),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: AppDimens.space24),
             ClipRRect(
-              borderRadius: BorderRadius.circular(AppDimens.radius16),
+              borderRadius: BorderRadius.circular(context.shape.radiusCard),
               child: ConstrainedBox(
                 constraints: BoxConstraints(maxHeight: 360.h),
                 child: CapturedImage(file: file, fit: BoxFit.contain),
@@ -78,7 +78,7 @@ class _CapturePreviewSheet extends StatelessWidget {
                       ),
                       child: Text(
                         context.coreL10n.cancel,
-                        style: context.styles.font14Secondary900SemiBold,
+                        style: context.styles.body(weight: FontWeight.w600),
                       ),
                     ),
                   ),

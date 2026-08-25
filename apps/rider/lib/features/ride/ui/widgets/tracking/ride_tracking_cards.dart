@@ -121,10 +121,27 @@ class RideTrackingCards extends ConsumerWidget {
     });
 
     ref.listen(cancelRideControllerProvider, (previous, next) {
-      if (next.value?.isCancelled == true) _reset(ref);
+      if (next.value?.isCancelled == true) {
+        _reset(ref);
+        return;
+      }
+      // Without this the card keeps its searching radar spinning and the rider
+      // is left tapping a button that looks broken.
+      if (next.hasError) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              next.error?.toString() ?? context.coreL10n.genericError,
+            ),
+          ),
+        );
+      }
     });
 
     final stage = ref.watch(rideControllerProvider.select((s) => s.stage));
+    final isCancelling = ref.watch(
+      cancelRideControllerProvider.select((s) => s.isLoading),
+    );
     final driver = ref.watch(rideControllerProvider.select((s) => s.driver));
     final labels = ref.watch(
       rideDraftProvider.select((s) => (s.pickupLabel, s.dropoffLabel)),
@@ -146,6 +163,7 @@ class RideTrackingCards extends ConsumerWidget {
         pickupLabel: labels.$1,
         dropoffLabel: labels.$2,
         price: price,
+        isCancelling: isCancelling,
       ),
       RideStage.arrived => DriverArrivedCard(
         driver: captain,
@@ -155,6 +173,7 @@ class RideTrackingCards extends ConsumerWidget {
         pickupLabel: labels.$1,
         dropoffLabel: labels.$2,
         price: price,
+        isCancelling: isCancelling,
       ),
       RideStage.inProgress || RideStage.completed => RideInProgressCard(
         destinationLabel: labels.$2 ?? '',
@@ -169,6 +188,7 @@ class RideTrackingCards extends ConsumerWidget {
         pickupLabel: labels.$1,
         dropoffLabel: labels.$2,
         price: price,
+        isCancelling: isCancelling,
       ),
     };
 

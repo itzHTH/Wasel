@@ -59,9 +59,9 @@ class DriverEarningsChip extends StatelessWidget {
                     currency: currency,
                   ),
             textDirection: TextDirection.ltr,
-            style: context.styles.font14Primary500SemiBold.copyWith(
-              color: foreground,
-            ),
+            style: context.styles
+                .body(weight: FontWeight.w600, color: context.colors.primary500)
+                .copyWith(color: foreground),
           ),
         ],
       ),

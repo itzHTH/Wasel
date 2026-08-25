@@ -39,10 +39,13 @@ class AppMenuTile extends StatelessWidget {
         ? context.colors.neutral100
         : context.colors.primary100;
     final labelStyle = isDestructive
-        ? context.styles.font14alertError500SemiBold.copyWith(
-            color: context.colors.alertError700,
-          )
-        : context.styles.font14Secondary900SemiBold;
+        ? context.styles
+              .body(
+                weight: FontWeight.w600,
+                color: context.colors.alertError500,
+              )
+              .copyWith(color: context.colors.alertError700)
+        : context.styles.body(weight: FontWeight.w600);
 
     return Material(
       type: MaterialType.transparency,

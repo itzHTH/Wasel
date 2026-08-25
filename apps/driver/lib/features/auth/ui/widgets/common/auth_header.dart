@@ -18,21 +18,23 @@ class AuthHeader extends StatelessWidget {
         SizedBox(height: AppDimens.space24),
         Text(
           title,
-          style: context.styles.font24Secondary900Bold,
+          style: context.styles.headline(),
           textAlign: TextAlign.center,
         ),
         SizedBox(height: AppDimens.space8),
         Text.rich(
           TextSpan(
             text: context.l10n.authHeaderTagline,
-            style: context.styles.font14Neutral400Regular,
+            style: context.styles.bodyMuted(),
             children: [
               TextSpan(
                 text: context.l10n.brandName,
-                style: context.styles.font14Neutral400Regular.copyWith(
-                  fontWeight: FontWeight.w700,
-                  color: context.colors.secondary900,
-                ),
+                style: context.styles
+                    .body(color: context.colors.neutral400)
+                    .copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: context.colors.secondary900,
+                    ),
               ),
             ],
           ),

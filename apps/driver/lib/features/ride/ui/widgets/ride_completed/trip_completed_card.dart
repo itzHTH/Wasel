@@ -1,5 +1,4 @@
 import 'package:wasel_payments/domain/entities/payment_method.dart';
-import 'package:driver/features/ride/ui/widgets/ride_completed/completed_check_badge.dart';
 import 'package:driver/features/ride/ui/widgets/fare_hero.dart';
 import 'package:wasel_payments/presentation/widgets/payment_method_chip.dart';
 import 'package:flutter/material.dart';
@@ -25,19 +24,24 @@ class TripCompletedCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Center(child: CompletedCheckBadge()),
+          Center(
+            child: RideStageBadge(
+              stage: RideStageVisual.completed,
+              size: AppDimens.icon48,
+            ),
+          ),
           SizedBox(height: AppDimens.space16),
           Center(
             child: Text(
               context.l10n.rideFinished,
-              style: context.styles.font20Secondary900Bold,
+              style: context.styles.title(),
             ),
           ),
           SizedBox(height: AppDimens.space4),
           Center(
             child: Text(
               context.l10n.collectFareFromRider,
-              style: context.styles.font14Neutral400Regular,
+              style: context.styles.bodyMuted(),
             ),
           ),
           SizedBox(height: AppDimens.space24),

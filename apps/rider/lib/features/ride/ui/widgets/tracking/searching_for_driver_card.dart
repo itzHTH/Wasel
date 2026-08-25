@@ -11,9 +11,11 @@ class SearchingForDriverCard extends StatelessWidget {
     this.pickupLabel,
     this.dropoffLabel,
     this.price,
+    this.isCancelling = false,
   });
 
   final VoidCallback onCancel;
+  final bool isCancelling;
   final String? pickupLabel;
   final String? dropoffLabel;
   final RidePrice? price;
@@ -25,27 +27,10 @@ class SearchingForDriverCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
-            children: [
-              const AppInlineLoading(),
-              SizedBox(width: AppDimens.space12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      context.l10n.searchingForCaptain,
-                      style: context.styles.font20Secondary900Bold,
-                    ),
-                    SizedBox(height: AppDimens.space4),
-                    Text(
-                      context.l10n.stayOnline,
-                      style: context.styles.font14Secondary500Medium,
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          RideStageHeader(
+            stage: RideStageVisual.searching,
+            title: context.l10n.searchingForCaptain,
+            subtitle: context.l10n.stayOnline,
           ),
           SizedBox(height: AppDimens.space16),
           RideTripSummary(
@@ -57,6 +42,7 @@ class SearchingForDriverCard extends StatelessWidget {
           AppSecondaryButton(
             label: context.l10n.cancelRequest,
             onPressed: onCancel,
+            isLoading: isCancelling,
           ),
         ],
       ),

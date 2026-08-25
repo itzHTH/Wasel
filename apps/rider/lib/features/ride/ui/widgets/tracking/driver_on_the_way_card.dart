@@ -20,6 +20,7 @@ class DriverOnTheWayCard extends ConsumerWidget {
     this.pickupLabel,
     this.dropoffLabel,
     this.price,
+    this.isCancelling = false,
   });
 
   final DriverProfile driver;
@@ -32,6 +33,7 @@ class DriverOnTheWayCard extends ConsumerWidget {
   final String? pickupLabel;
   final String? dropoffLabel;
   final RidePrice? price;
+  final bool isCancelling;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -44,30 +46,11 @@ class DriverOnTheWayCard extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
-            children: [
-              Container(
-                padding: EdgeInsets.all(AppDimens.space8),
-                decoration: BoxDecoration(
-                  color: context.colors.primary100,
-                  borderRadius: BorderRadius.circular(AppDimens.radius12),
-                ),
-                child: Icon(
-                  Icons.directions_car_rounded,
-                  color: context.colors.primary500,
-                  size: AppDimens.icon20,
-                ),
-              ),
-              SizedBox(width: AppDimens.space12),
-              Expanded(
-                child: Text(
-                  etaMinutes != null
-                      ? context.l10n.captainEtaMinutes(etaMinutes.toString())
-                      : context.l10n.captainOnWay,
-                  style: context.styles.font20Secondary900Bold,
-                ),
-              ),
-            ],
+          RideStageHeader(
+            stage: RideStageVisual.accepted,
+            title: etaMinutes != null
+                ? context.l10n.captainEtaMinutes(etaMinutes.toString())
+                : context.l10n.captainOnWay,
           ),
           SizedBox(height: AppDimens.space16),
           DriverInfoRow(driver: driver),
@@ -91,6 +74,7 @@ class DriverOnTheWayCard extends ConsumerWidget {
       footer: AppSecondaryButton(
         label: context.l10n.cancelRequest,
         onPressed: onCancel,
+        isLoading: isCancelling,
       ),
     );
   }

@@ -1,6 +1,5 @@
 import 'package:driver/core/helpers/ride_formatters.dart';
 import 'package:driver/features/ride/ui/providers/earnings/driver_earnings_provider.dart';
-import 'package:driver/features/ride/ui/widgets/searching/searching_radar.dart';
 import 'package:flutter/material.dart';
 import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,26 +17,10 @@ class SearchingCard extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
-            children: [
-              const SearchingRadar(),
-              SizedBox(width: AppDimens.space12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      context.l10n.searchingForRequests,
-                      style: context.styles.font20Secondary900Bold,
-                    ),
-                    Text(
-                      context.l10n.stayInBusyArea,
-                      style: context.styles.font14Neutral400Regular,
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          RideStageHeader(
+            stage: RideStageVisual.searching,
+            title: context.l10n.searchingForRequests,
+            subtitle: context.l10n.stayInBusyArea,
           ),
           SizedBox(height: AppDimens.space24),
           const _TodayPanel(),
@@ -67,7 +50,7 @@ class _TodayPanel extends ConsumerWidget {
       padding: EdgeInsets.all(AppDimens.space16),
       decoration: BoxDecoration(
         color: context.colors.neutral50,
-        borderRadius: BorderRadius.circular(AppDimens.radius16),
+        borderRadius: BorderRadius.circular(context.shape.radiusCard),
         border: Border.all(color: context.colors.neutral200),
       ),
       child: Column(
@@ -77,7 +60,7 @@ class _TodayPanel extends ConsumerWidget {
             children: [
               Text(
                 context.l10n.todayEarnings,
-                style: context.styles.font12Neutral400Regular,
+                style: context.styles.captionMuted(),
               ),
               SizedBox(width: AppDimens.space8),
               if (earnings.isLoading)
@@ -99,10 +82,10 @@ class _TodayPanel extends ConsumerWidget {
                     data.totalEarnings.toString(),
                   ),
             style: data == null
-                ? context.styles.font24Secondary900Bold.copyWith(
+                ? context.styles.headline().copyWith(
                     color: context.colors.neutral400,
                   )
-                : context.styles.font24Secondary900Bold,
+                : context.styles.headline(),
           ),
           Divider(color: context.colors.neutral200, height: AppDimens.space24),
           IntrinsicHeight(
@@ -163,15 +146,17 @@ class _Metric extends StatelessWidget {
               color: context.colors.neutral400,
             ),
             SizedBox(width: AppDimens.space4),
-            Text(label, style: context.styles.font12Neutral400Regular),
+            // The captain ramp has no 12sp tier, so this label needs room to
+            // wrap rather than a fixed width to overflow out of.
+            Expanded(child: Text(label, style: context.styles.captionMuted())),
           ],
         ),
         SizedBox(height: AppDimens.space4),
         Text(
           value ?? '—',
           style: value == null
-              ? context.styles.font14Neutral400Medium
-              : context.styles.font14Secondary900SemiBold,
+              ? context.styles.bodyMuted(weight: FontWeight.w500)
+              : context.styles.body(weight: FontWeight.w600),
         ),
       ],
     );
@@ -221,9 +206,9 @@ class _RetryButton extends StatelessWidget {
             SizedBox(width: AppDimens.space4),
             Text(
               context.coreL10n.retry,
-              style: context.styles.font12Neutral400Regular.copyWith(
-                color: context.colors.primary500,
-              ),
+              style: context.styles
+                  .caption(color: context.colors.neutral400)
+                  .copyWith(color: context.colors.primary500),
             ),
           ],
         ),

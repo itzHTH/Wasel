@@ -70,7 +70,7 @@ class _LockedValue extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: context.styles.font14Secondary900SemiBold),
+        Text(label, style: context.styles.body(weight: FontWeight.w600)),
         SizedBox(height: AppDimens.space8),
         Container(
           height: AppDimens.fieldHeight,
@@ -89,8 +89,8 @@ class _LockedValue extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: hasValue
-                      ? context.styles.font14Neutral400Medium
-                      : context.styles.font14Neutral400Regular,
+                      ? context.styles.bodyMuted(weight: FontWeight.w500)
+                      : context.styles.bodyMuted(),
                 ),
               ),
               SizedBox(width: AppDimens.space8),

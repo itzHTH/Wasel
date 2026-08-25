@@ -44,7 +44,7 @@ class PaymentMethodRow extends ConsumerWidget {
           children: [
             Text(
               context.l10n.paymentMethodLabel,
-              style: context.styles.font14Secondary500Medium,
+              style: context.styles.bodySecondary(),
             ),
             Row(
               children: [
@@ -56,7 +56,7 @@ class PaymentMethodRow extends ConsumerWidget {
                 SizedBox(width: AppDimens.space8),
                 Text(
                   selected.label(context.paymentsL10n),
-                  style: context.styles.font14Secondary900SemiBold,
+                  style: context.styles.body(weight: FontWeight.w600),
                 ),
                 Icon(
                   Icons.chevron_left_rounded,

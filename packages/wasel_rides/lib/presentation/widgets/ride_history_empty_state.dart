@@ -49,13 +49,13 @@ class RideHistoryEmptyState extends StatelessWidget {
                       Text(
                         context.ridesL10n.noRidesYet,
                         textAlign: TextAlign.center,
-                        style: context.styles.font20Secondary900Bold,
+                        style: context.styles.title(),
                       ),
                       SizedBox(height: AppDimens.space8),
                       Text(
                         context.ridesL10n.noRidesYetDescription,
                         textAlign: TextAlign.center,
-                        style: context.styles.font14Neutral400Regular,
+                        style: context.styles.bodyMuted(),
                       ),
                     ],
                   ),

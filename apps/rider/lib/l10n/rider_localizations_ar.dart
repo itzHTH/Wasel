@@ -181,6 +181,12 @@ class RiderLocalizationsAr extends RiderLocalizations {
   String get noRideToCancel => 'ما موجودة رحلة نلغيها';
 
   @override
+  String get cancelRideFailed => 'ما گدرنا نلغي الرحلة، جرّب مرة ثانية';
+
+  @override
+  String get cannotCancelInProgress => 'ما تگدر تلغي رحلة بديت بيها';
+
+  @override
   String get cardDetails => 'بيانات البطاقة';
 
   @override

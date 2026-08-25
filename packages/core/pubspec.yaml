@@ -36,7 +36,6 @@ dependencies:
   # UI
   flutter_screenutil: ^5.9.3
   flutter_svg: ^2.3.0
-  google_fonts: ^8.1.0
   pinput: ^6.0.2
   skeletonizer: ^2.1.3
 
@@ -63,3 +62,23 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+
+  # Bundled, so first launch has no network dependency and no fallback flash.
+  fonts:
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/Cairo-400.ttf
+          weight: 400
+        - asset: assets/fonts/Cairo-500.ttf
+          weight: 500
+        - asset: assets/fonts/Cairo-600.ttf
+          weight: 600
+        - asset: assets/fonts/Cairo-700.ttf
+          weight: 700
+
+    # Live-updating numerals only — see AppFonts.numeralFamily. Only w600 is
+    # reachable today; add a weight here when a call site needs one.
+    - family: IBMPlexMono
+      fonts:
+        - asset: assets/fonts/IBMPlexMono-600.ttf
+          weight: 600

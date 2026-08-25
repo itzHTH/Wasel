@@ -37,7 +37,7 @@ class AppLabeledFormField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: context.styles.font14Secondary900SemiBold),
+        Text(label, style: context.styles.body(weight: FontWeight.w600)),
         SizedBox(height: AppDimens.space8),
         AppTextFormField(
           hintText: hintText,
@@ -51,8 +51,8 @@ class AppLabeledFormField extends StatelessWidget {
           autofillHints: autofillHints,
           inputFormatters: inputFormatters,
           backgroundColor: context.colors.neutral50,
-          hintStyle: context.styles.font14Neutral400Regular,
-          inputTextStyle: context.styles.font14Secondary900SemiBold,
+          hintStyle: context.styles.bodyMuted(),
+          inputTextStyle: context.styles.body(weight: FontWeight.w600),
         ),
       ],
     );

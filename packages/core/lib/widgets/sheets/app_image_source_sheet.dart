@@ -24,7 +24,7 @@ Future<AppImageSource?> showAppImageSourceSheet({
     useSafeArea: true,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
-        top: Radius.circular(AppDimens.radius24),
+        top: Radius.circular(context.shape.radiusSheet),
       ),
     ),
     builder: (context) => _AppImageSourceSheet(
@@ -74,7 +74,7 @@ class _AppImageSourceSheet extends StatelessWidget {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: context.styles.font16Secondary900Bold,
+              style: context.styles.bodyLarge(weight: FontWeight.w700),
             ),
             SizedBox(height: AppDimens.space16),
             AppGroupCard(

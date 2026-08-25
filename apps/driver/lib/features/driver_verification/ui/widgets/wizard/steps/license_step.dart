@@ -30,7 +30,7 @@ class LicenseStep extends StatelessWidget {
           SizedBox(height: AppDimens.space24),
           Text(
             context.l10n.photographLicense,
-            style: context.styles.font14Neutral400Regular,
+            style: context.styles.bodyMuted(),
           ),
           SizedBox(height: AppDimens.space24),
           ValueListenableBuilder<XFile?>(

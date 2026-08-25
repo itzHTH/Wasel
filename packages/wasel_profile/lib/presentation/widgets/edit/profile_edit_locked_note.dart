@@ -29,9 +29,12 @@ class ProfileEditLockedNote extends StatelessWidget {
           Expanded(
             child: Text(
               message,
-              style: context.styles.font12Neutral600SemiBold.copyWith(
-                color: context.colors.alertInfo500,
-              ),
+              style: context.styles
+                  .caption(
+                    weight: FontWeight.w600,
+                    color: context.colors.neutral600,
+                  )
+                  .copyWith(color: context.colors.alertInfo500),
             ),
           ),
         ],

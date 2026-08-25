@@ -79,7 +79,7 @@ class _BackButton extends StatelessWidget {
         ),
         child: Text(
           context.l10n.previous,
-          style: context.styles.font14Secondary900SemiBold,
+          style: context.styles.body(weight: FontWeight.w600),
         ),
       ),
     );

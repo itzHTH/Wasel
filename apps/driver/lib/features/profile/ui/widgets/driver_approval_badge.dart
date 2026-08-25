@@ -55,9 +55,9 @@ class DriverApprovalBadge extends StatelessWidget {
           SizedBox(width: AppDimens.space4),
           Text(
             label,
-            style: context.styles.font14Secondary900SemiBold.copyWith(
-              color: foreground,
-            ),
+            style: context.styles
+                .body(weight: FontWeight.w600)
+                .copyWith(color: foreground),
           ),
         ],
       ),

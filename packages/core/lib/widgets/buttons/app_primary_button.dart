@@ -19,7 +19,7 @@ class AppPrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: AppDimens.buttonHeight,
+      height: context.shape.buttonHeight,
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
@@ -30,7 +30,7 @@ class AppPrimaryButton extends StatelessWidget {
               : context.colors.primary300,
           elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppDimens.radiusPill),
+            borderRadius: BorderRadius.circular(context.shape.radiusButton),
           ),
         ),
         child: isLoading
@@ -42,7 +42,13 @@ class AppPrimaryButton extends StatelessWidget {
                   color: context.colors.onPrimary,
                 ),
               )
-            : Text(label, style: context.styles.font16Neutral0SemiBold),
+            : Text(
+                label,
+                style: context.styles.bodyLarge(
+                  weight: FontWeight.w600,
+                  color: context.colors.onPrimary,
+                ),
+              ),
       ),
     );
   }

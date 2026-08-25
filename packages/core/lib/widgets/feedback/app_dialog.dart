@@ -55,9 +55,11 @@ class AppDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: context.colors.elementBackground,
-      insetPadding: EdgeInsets.symmetric(horizontal: AppDimens.screenHPadding),
+      insetPadding: EdgeInsets.symmetric(
+        horizontal: context.shape.screenPadding,
+      ),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppDimens.radius24),
+        borderRadius: BorderRadius.circular(context.shape.radiusDialog),
       ),
       child: Padding(
         padding: EdgeInsets.all(AppDimens.space24),
@@ -91,17 +93,19 @@ class AppDialog extends StatelessWidget {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: context.styles.font20Secondary900Bold,
+              style: context.styles.title(),
             ),
             SizedBox(height: AppDimens.space8),
             Text(
               message,
               textAlign: TextAlign.center,
-              style: context.styles.font16Secondary500Regular,
+              style: context.styles.bodyLarge(
+                color: context.colors.secondary500,
+              ),
             ),
             SizedBox(height: AppDimens.space24),
             SizedBox(
-              height: AppDimens.buttonHeight,
+              height: context.shape.buttonHeight,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: isDestructive
@@ -109,27 +113,32 @@ class AppDialog extends StatelessWidget {
                       : context.colors.primary500,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AppDimens.radius12),
+                    borderRadius: BorderRadius.circular(
+                      context.shape.radiusButton,
+                    ),
                   ),
                 ),
                 onPressed: () => Navigator.of(context).pop(true),
                 child: Text(
                   confirmLabel,
-                  style: context.styles.font16Neutral0SemiBold,
+                  style: context.styles.bodyLarge(
+                    weight: FontWeight.w600,
+                    color: context.colors.onPrimary,
+                  ),
                 ),
               ),
             ),
             if (cancelLabel != null) ...[
               SizedBox(height: AppDimens.space8),
               SizedBox(
-                height: AppDimens.buttonHeight,
+                height: context.shape.buttonHeight,
                 child: TextButton(
                   onPressed: () => Navigator.of(context).pop(false),
                   child: Text(
                     cancelLabel!,
                     style: isDestructive
-                        ? context.styles.font14Secondary900SemiBold
-                        : context.styles.font14Primary500SemiBold,
+                        ? context.styles.body(weight: FontWeight.w600)
+                        : context.styles.bodyBrand(),
                   ),
                 ),
               ),

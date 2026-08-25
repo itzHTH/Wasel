@@ -46,7 +46,7 @@ class DriverProfileInfo extends StatelessWidget {
                           : context.l10n.waselDriverName,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: context.styles.font20Secondary900Bold,
+                      style: context.styles.title(),
                     ),
                     if (profile != null) ...[
                       SizedBox(height: AppDimens.space4),
@@ -55,7 +55,7 @@ class DriverProfileInfo extends StatelessWidget {
                         textDirection: TextDirection.ltr,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: context.styles.font14Secondary500Medium,
+                        style: context.styles.bodySecondary(),
                       ),
                     ],
                   ],

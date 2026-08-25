@@ -6,25 +6,29 @@ class AppSecondaryButton extends StatelessWidget {
     super.key,
     required this.label,
     required this.onPressed,
+    this.isLoading = false,
   });
 
   final String label;
   final VoidCallback? onPressed;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: AppDimens.buttonHeight,
+      height: context.shape.buttonHeight,
       child: OutlinedButton(
-        onPressed: onPressed,
+        onPressed: isLoading ? null : onPressed,
         style: OutlinedButton.styleFrom(
           side: BorderSide(color: context.colors.primary500),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppDimens.radiusPill),
+            borderRadius: BorderRadius.circular(context.shape.radiusButton),
           ),
         ),
-        child: Text(label, style: context.styles.font14Primary500SemiBold),
+        child: isLoading
+            ? AppInlineLoading(size: AppDimens.icon24)
+            : Text(label, style: context.styles.bodyBrand()),
       ),
     );
   }

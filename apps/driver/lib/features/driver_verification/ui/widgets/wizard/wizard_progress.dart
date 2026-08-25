@@ -40,10 +40,10 @@ class WizardProgress extends StatelessWidget {
         SizedBox(height: AppDimens.space12),
         Text(
           context.coreL10n.stepOfSteps(currentStep + 1, totalSteps),
-          style: context.styles.font12Neutral400Regular,
+          style: context.styles.captionMuted(),
         ),
         SizedBox(height: AppDimens.space4),
-        Text(stepTitle, style: context.styles.font20Secondary900Bold),
+        Text(stepTitle, style: context.styles.title()),
       ],
     );
   }

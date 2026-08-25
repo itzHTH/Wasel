@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:wasel_core/theme/app_brand.dart';
 import 'package:wasel_core/theme/app_colors_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
+import 'package:wasel_core/theme/app_fonts.dart';
 
 class AppTheme {
   AppTheme._();
@@ -19,19 +19,19 @@ class AppTheme {
     required Brightness brightness,
   }) {
     final appColors = brand.paletteFor(brightness);
+    final appShape = brand.shape();
+    final appTypeScale = brand.typeScale();
     final isDark = brightness == Brightness.dark;
 
-    final textTheme =
-        GoogleFonts.ibmPlexSansArabicTextTheme(
-          ThemeData(brightness: brightness).textTheme,
-        ).apply(
-          bodyColor: appColors.secondary900,
-          displayColor: appColors.secondary900,
-        );
+    final textTheme = ThemeData(brightness: brightness).textTheme.apply(
+      fontFamily: AppFonts.family,
+      bodyColor: appColors.secondary900,
+      displayColor: appColors.secondary900,
+    );
 
     OutlineInputBorder fieldBorder(Color color, {double width = 1}) =>
         OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppDimens.radius12),
+          borderRadius: BorderRadius.circular(appShape.radiusField),
           borderSide: BorderSide(color: color, width: width),
         );
 
@@ -43,7 +43,7 @@ class AppTheme {
       canvasColor: appColors.elementBackground,
       dividerColor: appColors.neutral200,
       textTheme: textTheme,
-      extensions: [appColors],
+      extensions: [appColors, appShape, appTypeScale],
 
       appBarTheme: AppBarTheme(
         backgroundColor: appColors.screenBackground,
@@ -69,7 +69,7 @@ class AppTheme {
           disabledForegroundColor: appColors.onPrimary,
           elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppDimens.radiusPill),
+            borderRadius: BorderRadius.circular(appShape.radiusButton),
           ),
         ),
       ),
@@ -83,7 +83,7 @@ class AppTheme {
           foregroundColor: appColors.primary500,
           side: BorderSide(color: appColors.neutral200),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppDimens.radiusPill),
+            borderRadius: BorderRadius.circular(appShape.radiusButton),
           ),
         ),
       ),
@@ -93,8 +93,8 @@ class AppTheme {
         fillColor: appColors.elementBackground,
         hintStyle: textTheme.bodyMedium?.copyWith(color: appColors.neutral400),
         labelStyle: textTheme.bodyMedium?.copyWith(color: appColors.neutral600),
-        border: fieldBorder(appColors.neutral200),
-        enabledBorder: fieldBorder(appColors.neutral200),
+        border: fieldBorder(appColors.borderStrong),
+        enabledBorder: fieldBorder(appColors.borderStrong),
         focusedBorder: fieldBorder(appColors.primary500, width: 1.5),
         errorBorder: fieldBorder(appColors.alertError500, width: 1.5),
         focusedErrorBorder: fieldBorder(appColors.alertError500, width: 1.5),
@@ -107,7 +107,7 @@ class AppTheme {
         elevation: 0,
         margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppDimens.radius16),
+          borderRadius: BorderRadius.circular(appShape.radiusCard),
         ),
       ),
 
@@ -116,7 +116,7 @@ class AppTheme {
         surfaceTintColor: appColors.elementBackground,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppDimens.radius24),
+          borderRadius: BorderRadius.circular(appShape.radiusDialog),
         ),
         titleTextStyle: textTheme.titleMedium?.copyWith(
           fontWeight: FontWeight.w700,
@@ -134,7 +134,7 @@ class AppTheme {
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
-            top: Radius.circular(AppDimens.radius24),
+            top: Radius.circular(appShape.radiusSheet),
           ),
         ),
       ),

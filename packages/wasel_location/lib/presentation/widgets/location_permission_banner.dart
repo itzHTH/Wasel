@@ -50,7 +50,7 @@ class LocationPermissionBanner extends ConsumerWidget {
               Expanded(
                 child: Text(
                   context.locationL10n.turnOnLocation,
-                  style: context.styles.font14Secondary500Medium,
+                  style: context.styles.bodySecondary(),
                 ),
               ),
               TextButton(
@@ -63,7 +63,7 @@ class LocationPermissionBanner extends ConsumerWidget {
                   needsSettings
                       ? context.locationL10n.settings
                       : context.locationL10n.enable,
-                  style: context.styles.font14Primary500SemiBold,
+                  style: context.styles.bodyBrand(),
                 ),
               ),
             ],

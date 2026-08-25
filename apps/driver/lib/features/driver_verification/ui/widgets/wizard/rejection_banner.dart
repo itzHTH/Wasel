@@ -28,9 +28,9 @@ class RejectionBanner extends StatelessWidget {
           Expanded(
             child: Text(
               reason,
-              style: context.styles.font14Secondary900SemiBold.copyWith(
-                color: context.colors.alertError500,
-              ),
+              style: context.styles
+                  .body(weight: FontWeight.w600)
+                  .copyWith(color: context.colors.alertError500),
             ),
           ),
         ],

@@ -51,13 +51,15 @@ class IncomingOfferCard extends ConsumerWidget {
         children: [
           Row(
             children: [
+              const RideStageBadge(stage: RideStageVisual.offerReceived),
+              SizedBox(width: AppDimens.space12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       context.l10n.newRequest,
-                      style: context.styles.font14Neutral400Regular,
+                      style: context.styles.bodyMuted(),
                     ),
                     SizedBox(height: AppDimens.space4),
                     FareHero(amount: fare),

@@ -11,10 +11,6 @@ class AppBackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // The arrow points back the way the reader came, which flips with the
-    // text direction now that direction follows the locale.
-    final isRtl = Directionality.of(context) == TextDirection.rtl;
-
     return Align(
       alignment: AlignmentDirectional.centerStart,
       child: Semantics(
@@ -27,11 +23,17 @@ class AppBackButton extends StatelessWidget {
             height: 44.r,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              shape: BoxShape.circle,
+              borderRadius: BorderRadius.circular(
+                context.shape.badgeRadiusFor(44.r),
+              ),
               border: Border.all(color: context.colors.neutral200, width: 1.5),
             ),
+            // Icons.arrow_back_rounded carries matchTextDirection, so Flutter
+            // already mirrors it in RTL. Picking the forward glyph here as
+            // well cancelled that out and left the arrow pointing the way the
+            // reader is going.
             child: Icon(
-              isRtl ? Icons.arrow_forward_rounded : Icons.arrow_back_rounded,
+              Icons.arrow_back_rounded,
               size: AppDimens.icon20,
               color: context.colors.secondary900,
             ),

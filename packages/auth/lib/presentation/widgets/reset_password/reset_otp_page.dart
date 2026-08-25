@@ -42,13 +42,13 @@ class ResetOtpPage extends ConsumerWidget {
 
           Text(
             context.authL10n.verificationCode,
-            style: context.styles.font24Secondary900Bold,
+            style: context.styles.headline(),
             textAlign: TextAlign.center,
           ),
           SizedBox(height: AppDimens.space8),
           Text(
             context.authL10n.otpSentToEmail(state.email),
-            style: context.styles.font14Neutral400Regular,
+            style: context.styles.bodyMuted(),
             textAlign: TextAlign.center,
           ),
           SizedBox(height: AppDimens.space40),
@@ -76,7 +76,7 @@ class ResetOtpPage extends ConsumerWidget {
               onPressed: onExpiredRestart,
               child: Text(
                 context.authL10n.requestNewCode,
-                style: context.styles.font14Primary500SemiBold,
+                style: context.styles.bodyBrand(),
               ),
             )
           else

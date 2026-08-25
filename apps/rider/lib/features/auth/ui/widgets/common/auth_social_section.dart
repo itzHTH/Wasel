@@ -43,7 +43,7 @@ class _DividerRow extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 12.w),
           child: Text(
             context.l10n.orSignUpWith,
-            style: context.styles.font12Neutral400Regular,
+            style: context.styles.captionMuted(),
           ),
         ),
         Expanded(
@@ -77,7 +77,10 @@ class _GoogleButton extends StatelessWidget {
           children: [
             SvgPicture.asset('assets/icons/google_logo.svg'),
             SizedBox(width: 10.w),
-            Text(label, style: context.styles.font14Secondary500Medium),
+            Text(
+              label,
+              style: context.styles.bodySecondary(),
+            ),
           ],
         ),
       ),

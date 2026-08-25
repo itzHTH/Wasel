@@ -49,31 +49,22 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
             children: [
               SizedBox(height: AppDimens.space40),
               Center(
-                child: Container(
-                  width: AppDimens.icon48,
-                  height: AppDimens.icon48,
-                  decoration: BoxDecoration(
-                    color: context.colors.alertSuccess100,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    Icons.check_rounded,
-                    color: context.colors.alertSuccess500,
-                    size: AppDimens.icon24,
-                  ),
+                child: RideStageBadge(
+                  stage: RideStageVisual.completed,
+                  size: AppDimens.icon48,
                 ),
               ),
               SizedBox(height: AppDimens.space16),
               Text(
                 context.l10n.arrivedSafely,
                 textAlign: TextAlign.center,
-                style: context.styles.font24Secondary900Bold,
+                style: context.styles.headline(),
               ),
               SizedBox(height: AppDimens.space8),
               Text(
                 widget.fare,
                 textAlign: TextAlign.center,
-                style: context.styles.font32Secondary900Bold,
+                style: context.styles.display(),
               ),
               SizedBox(height: AppDimens.space32),
               _summaryCard(),
@@ -81,7 +72,7 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
               Text(
                 context.l10n.howWasYourRide,
                 textAlign: TextAlign.center,
-                style: context.styles.font20Secondary900Bold,
+                style: context.styles.title(),
               ),
               SizedBox(height: AppDimens.space16),
               StarRatingBar(
@@ -110,16 +101,16 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
       maxLines: 3,
       maxLength: 500,
       textInputAction: TextInputAction.newline,
-      style: context.styles.font14Secondary900SemiBold,
+      style: context.styles.body(weight: FontWeight.w600),
       decoration: InputDecoration(
         hintText: context.l10n.writeNotesOptional,
-        hintStyle: context.styles.font14Neutral400Regular,
+        hintStyle: context.styles.bodyMuted(),
         counterText: '',
         filled: true,
         fillColor: context.colors.elementBackground,
         contentPadding: EdgeInsets.all(AppDimens.space16),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppDimens.radius16),
+          borderRadius: BorderRadius.circular(context.shape.radiusCard),
           borderSide: BorderSide.none,
         ),
       ),
@@ -131,7 +122,7 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
       padding: EdgeInsets.all(AppDimens.space16),
       decoration: BoxDecoration(
         color: context.colors.elementBackground,
-        borderRadius: BorderRadius.circular(AppDimens.radius16),
+        borderRadius: BorderRadius.circular(context.shape.radiusCard),
       ),
       child: Column(
         children: [

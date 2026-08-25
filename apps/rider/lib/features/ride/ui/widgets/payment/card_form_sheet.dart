@@ -16,7 +16,7 @@ Future<bool> showCardFormSheet(BuildContext context, WidgetRef ref) async {
     isScrollControlled: true,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
-        top: Radius.circular(AppDimens.radius24),
+        top: Radius.circular(context.shape.radiusSheet),
       ),
     ),
     builder: (context) => const _CardFormSheet(),
@@ -144,7 +144,7 @@ class _CardFormSheetState extends ConsumerState<_CardFormSheet> {
                   Text(
                     context.l10n.cardDetails,
                     textAlign: TextAlign.center,
-                    style: context.styles.font16Secondary900Bold,
+                    style: context.styles.bodyLarge(weight: FontWeight.w700),
                   ),
                   SizedBox(height: AppDimens.space16),
                   AppLabeledFormField(

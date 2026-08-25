@@ -87,7 +87,7 @@ class _GateLoader extends StatelessWidget {
         SizedBox(height: AppDimens.space24),
         Text(
           context.l10n.verifyingAccount,
-          style: context.styles.font14Neutral400Regular,
+          style: context.styles.bodyMuted(),
         ),
       ],
     );
@@ -114,13 +114,13 @@ class _GateError extends StatelessWidget {
           SizedBox(height: AppDimens.space24),
           Text(
             context.l10n.statusCheckFailed,
-            style: context.styles.font20Secondary900Bold,
+            style: context.styles.title(),
             textAlign: TextAlign.center,
           ),
           SizedBox(height: AppDimens.space8),
           Text(
             context.l10n.checkYourConnection,
-            style: context.styles.font14Neutral400Regular,
+            style: context.styles.bodyMuted(),
             textAlign: TextAlign.center,
           ),
           SizedBox(height: AppDimens.space32),

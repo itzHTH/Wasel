@@ -24,30 +24,16 @@ class OfflineCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
-            children: [
-              _OfflineBadge(isConnecting: isConnecting),
-              SizedBox(width: AppDimens.space12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      isConnecting
-                          ? context.l10n.connectingToServer
-                          : context.l10n.youAreOffline,
-                      style: context.styles.font20Secondary900Bold,
-                    ),
-                    Text(
-                      isConnecting
-                          ? context.l10n.oneMomentConnecting
-                          : context.l10n.noRequestsWhileOffline,
-                      style: context.styles.font14Neutral400Regular,
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          RideStageHeader(
+            stage: isConnecting
+                ? RideStageVisual.connecting
+                : RideStageVisual.offline,
+            title: isConnecting
+                ? context.l10n.connectingToServer
+                : context.l10n.youAreOffline,
+            subtitle: isConnecting
+                ? context.l10n.oneMomentConnecting
+                : context.l10n.noRequestsWhileOffline,
           ),
           SizedBox(height: AppDimens.space24),
           AppPrimaryButton(
@@ -64,32 +50,6 @@ class OfflineCard extends StatelessWidget {
             ),
           ],
         ],
-      ),
-    );
-  }
-}
-
-class _OfflineBadge extends StatelessWidget {
-  const _OfflineBadge({required this.isConnecting});
-
-  final bool isConnecting;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(AppDimens.space8),
-      decoration: BoxDecoration(
-        color: isConnecting
-            ? context.colors.primary100
-            : context.colors.neutral100,
-        borderRadius: BorderRadius.circular(AppDimens.radius12),
-      ),
-      child: Icon(
-        Icons.power_settings_new_rounded,
-        size: AppDimens.icon20,
-        color: isConnecting
-            ? context.colors.primary500
-            : context.colors.neutral400,
       ),
     );
   }

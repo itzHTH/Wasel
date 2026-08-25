@@ -122,6 +122,10 @@ export 'widgets/otp/resend_otp_row.dart';
 export 'widgets/ride/expandable_ride_card.dart';
 export 'widgets/ride/ride_card_shell.dart';
 export 'widgets/ride/ride_card_transition.dart';
+export 'widgets/ride/ride_search_motion.dart';
+export 'widgets/ride/ride_search_radar.dart';
+export 'widgets/ride/ride_stage_badge.dart';
+export 'widgets/ride/ride_stage_header.dart';
 
 // Widgets — misc
 export 'widgets/app_entrance_fade.dart';

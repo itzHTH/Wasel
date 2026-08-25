@@ -182,9 +182,9 @@ class _ModeSegment extends StatelessWidget {
               Flexible(
                 child: AnimatedDefaultTextStyle(
                   duration: motionDuration,
-                  style: context.styles.font14Secondary900SemiBold.copyWith(
-                    color: foregroundColor,
-                  ),
+                  style: context.styles
+                      .body(weight: FontWeight.w600)
+                      .copyWith(color: foregroundColor),
                   child: Text(
                     label,
                     maxLines: 1,

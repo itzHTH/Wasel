@@ -69,13 +69,13 @@ class RegisterEmailPage extends StatelessWidget {
               children: [
                 Text(
                   context.authL10n.alreadyHaveAccount,
-                  style: context.styles.font14Neutral400Regular,
+                  style: context.styles.bodyMuted(),
                 ),
                 GestureDetector(
                   onTap: () => Navigator.pop(context),
                   child: Text(
                     context.authL10n.login,
-                    style: context.styles.font14Primary500SemiBold,
+                    style: context.styles.bodyBrand(),
                   ),
                 ),
               ],

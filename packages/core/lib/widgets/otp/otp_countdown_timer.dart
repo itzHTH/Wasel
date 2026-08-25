@@ -53,7 +53,7 @@ class _OtpCountdownTimerState extends State<OtpCountdownTimer> {
     final seconds = (_remaining % 60).toString().padLeft(2, '0');
     return Text(
       '$minutes:$seconds',
-      style: context.styles.font14Secondary500Medium,
+      style: context.styles.timerTextStyle(color: context.colors.secondary500),
       textAlign: TextAlign.center,
     );
   }

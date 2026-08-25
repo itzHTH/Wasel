@@ -23,7 +23,10 @@ class AppSoonBadge extends StatelessWidget {
       ),
       child: Text(
         label ?? context.coreL10n.soon,
-        style: context.styles.font12Neutral600SemiBold,
+        style: context.styles.caption(
+          weight: FontWeight.w600,
+          color: context.colors.neutral600,
+        ),
       ),
     );
   }

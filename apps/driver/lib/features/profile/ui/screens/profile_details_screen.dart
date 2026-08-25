@@ -84,7 +84,7 @@ class _DriverProfileDetailsBody extends StatelessWidget {
       ),
       children: [
         AppSurfaceCard(
-          borderRadius: AppDimens.radius24,
+          borderRadius: context.shape.radiusSheet,
           padding: EdgeInsets.symmetric(
             horizontal: AppDimens.space16,
             vertical: AppDimens.space24,
@@ -99,7 +99,7 @@ class _DriverProfileDetailsBody extends StatelessWidget {
                 textAlign: TextAlign.center,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: context.styles.font20Secondary900Bold,
+                style: context.styles.title(),
               ),
               SizedBox(height: AppDimens.space8),
               DriverApprovalBadge(status: profile.approvalStatus),

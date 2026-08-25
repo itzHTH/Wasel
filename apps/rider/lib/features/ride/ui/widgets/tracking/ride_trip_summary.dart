@@ -31,7 +31,7 @@ class RideTripSummary extends StatelessWidget {
       padding: EdgeInsets.all(AppDimens.space16),
       decoration: BoxDecoration(
         color: context.colors.neutral50,
-        borderRadius: BorderRadius.circular(AppDimens.radius16),
+        borderRadius: BorderRadius.circular(context.shape.radiusCard),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -55,12 +55,17 @@ class RideTripSummary extends StatelessWidget {
               Divider(height: 1, color: context.colors.neutral200),
               SizedBox(height: AppDimens.space12),
             ],
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // Reads as a justified row while both halves fit, and stacks them
+            // instead of clipping the figure when they do not.
+            Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: AppDimens.space12,
+              runSpacing: AppDimens.space4,
               children: [
                 Text(
                   context.l10n.estimatedFare,
-                  style: context.styles.font14Secondary500Medium,
+                  style: context.styles.bodySecondary(),
                 ),
                 Text(
                   RideFormatters.fare(
@@ -68,7 +73,7 @@ class RideTripSummary extends StatelessWidget {
                     fare.estimatedPrice,
                     currency: fare.currency,
                   ),
-                  style: context.styles.font20Secondary900Bold,
+                  style: context.styles.title(),
                 ),
               ],
             ),
@@ -124,7 +129,7 @@ class _RoutePoint extends StatelessWidget {
                 label,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: context.styles.font14Secondary900SemiBold,
+                style: context.styles.body(weight: FontWeight.w600),
               ),
             ),
           ),

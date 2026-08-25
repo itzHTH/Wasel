@@ -34,7 +34,7 @@ final class CancelRideControllerProvider
 }
 
 String _$cancelRideControllerHash() =>
-    r'2aac7b339f6bc63f277a0f652a55eac409e9cb91';
+    r'c44d4237af7ff1d3e6759a42f37ee705faaaa2b1';
 
 abstract class _$CancelRideController extends $AsyncNotifier<CancelRide?> {
   FutureOr<CancelRide?> build();

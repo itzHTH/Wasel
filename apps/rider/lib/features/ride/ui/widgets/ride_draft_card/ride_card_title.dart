@@ -8,10 +8,27 @@ import 'package:wasel_core/wasel_core.dart';
 class RideCardTitle extends ConsumerWidget {
   const RideCardTitle({super.key});
 
+  static RideStageVisual _badgeFor(PickingStage stage) => switch (stage) {
+    PickingStage.pickup => RideStageVisual.choosingPickup,
+    PickingStage.dropoff => RideStageVisual.choosingDropoff,
+    PickingStage.done => RideStageVisual.reviewingTrip,
+  };
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final stage = ref.watch(rideDraftProvider.select((s) => s.stage));
-    final title = stage.cardTitle(context.l10n);
-    return Text(title, style: context.styles.font20Secondary900Bold);
+
+    return Row(
+      children: [
+        RideStageBadge(stage: _badgeFor(stage)),
+        SizedBox(width: AppDimens.space12),
+        Expanded(
+          child: Text(
+            stage.cardTitle(context.l10n),
+            style: context.styles.title(),
+          ),
+        ),
+      ],
+    );
   }
 }

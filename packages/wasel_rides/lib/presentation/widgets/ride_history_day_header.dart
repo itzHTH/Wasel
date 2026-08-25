@@ -19,7 +19,10 @@ class RideHistoryDayHeader extends StatelessWidget {
       ),
       child: Text(
         RideHistoryLabels.dayLabel(context.ridesL10n, day),
-        style: context.styles.font12Neutral600SemiBold,
+        style: context.styles.caption(
+          weight: FontWeight.w600,
+          color: context.colors.neutral600,
+        ),
       ),
     );
   }
