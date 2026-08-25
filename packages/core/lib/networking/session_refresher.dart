@@ -56,12 +56,21 @@ class SessionRefresher {
   /// Re-arms [forceLogout] so a later sign-in can expire the way this one did.
   void armLogout() => _isLoggingOut = false;
 
+  /// Marks a sign-out the app performed itself
+  void beginLogout() => _isLoggingOut = true;
+
   /// Clears the session and fires [onSessionExpired].
   Future<void> forceLogout() async {
     if (_isLoggingOut) return;
     _isLoggingOut = true;
+
+    // Nothing stored means nothing to expire
+    final hadSession =
+        await SessionStore.readToken() != null ||
+        await SessionStore.readRefreshToken() != null;
+
     await SessionStore.clear();
-    onSessionExpired?.call();
+    if (hadSession) onSessionExpired?.call();
   }
 
   /// Refreshes the token and returns the new one.
