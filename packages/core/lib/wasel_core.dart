@@ -59,6 +59,7 @@ export 'routing/app_page_transitions.dart';
 export 'theme/app_brand.dart';
 export 'theme/app_colors_extension.dart';
 export 'theme/app_dimens.dart';
+export 'theme/app_text_scaling.dart';
 export 'theme/app_text_styles.dart';
 export 'theme/app_theme.dart';
 export 'theme/palettes/alert_tokens.dart';

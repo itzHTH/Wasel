@@ -26,6 +26,7 @@ class DriverApp extends ConsumerWidget {
       minTextAdapt: true,
       builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
+        builder: AppTextScaling.clamp,
         navigatorKey: AppNavigation.navigatorKey,
         theme: AppTheme.light(brand),
         darkTheme: AppTheme.dark(brand),
