@@ -140,9 +140,7 @@ class _CameraCaptureScreenState extends State<CameraCaptureScreen>
     } catch (_) {
       if (!mounted) return;
       _isCapturing.value = false;
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(context.l10n.captureFailed)));
+      AppSnackBar.showError(context, context.l10n.captureFailed);
     }
   }
 

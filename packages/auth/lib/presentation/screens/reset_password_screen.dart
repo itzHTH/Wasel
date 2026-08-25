@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_core/widgets/feedback/app_snack_bar.dart';
 import 'package:wasel_auth/wasel_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
@@ -119,9 +120,7 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
 
     if (!reset || !mounted) return;
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(context.authL10n.passwordChangedSuccess)),
-    );
+    AppSnackBar.show(context, context.authL10n.passwordChangedSuccess);
     Navigator.pushNamedAndRemoveUntil(
       context,
       widget.doneRoute,

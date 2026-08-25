@@ -94,6 +94,7 @@ export 'widgets/feedback/app_loading.dart';
 export 'widgets/feedback/app_progress_ring.dart';
 export 'widgets/feedback/app_shimmer_sheen.dart';
 export 'widgets/feedback/app_skeleton.dart';
+export 'widgets/feedback/app_snack_bar.dart';
 
 // Widgets — cards & rows
 export 'widgets/cards/app_group_card.dart';

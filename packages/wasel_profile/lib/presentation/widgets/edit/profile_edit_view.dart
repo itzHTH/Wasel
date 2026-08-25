@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_core/widgets/feedback/app_snack_bar.dart';
 import 'package:wasel_profile/l10n/profile_l10n_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/widgets/feedback/app_inline_error.dart';
@@ -58,7 +59,7 @@ class ProfileEditView extends StatelessWidget {
           if (capabilities.canEditPhoto) ...[
             ProfileEditAvatarSection(
               photoUrl: photoUrl,
-              onMessage: (message) => _showMessage(context, message),
+              onMessage: (message) => AppSnackBar.show(context, message),
             ),
             SizedBox(height: AppDimens.space24),
           ],
@@ -103,16 +104,10 @@ class ProfileEditView extends StatelessWidget {
     // A failure stays on screen and surfaces through [saveError].
     if (!saved) return;
 
-    _showMessage(context, context.profileL10n.profileUpdated);
+    AppSnackBar.showSuccess(context, context.profileL10n.profileUpdated);
 
     // An explicit pop, not `maybePop` — the form's PopScope guards discarding
     // unsaved edits, and there is nothing left to discard at this point.
     Navigator.of(context).pop();
-  }
-
-  void _showMessage(BuildContext context, String message) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text(message)));
   }
 }

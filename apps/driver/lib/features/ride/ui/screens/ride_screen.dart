@@ -22,9 +22,7 @@ class _RideScreenState extends ConsumerState<RideScreen> {
   Widget build(BuildContext context) {
     ref.listen(rideActionControllerProvider, (previous, next) {
       if (!next.hasError) return;
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(next.error.toString())));
+      AppSnackBar.showError(context, errorMessageOf(next.error!));
     });
 
     // Kept alive for as long as the screen is: neither drives this build, so
