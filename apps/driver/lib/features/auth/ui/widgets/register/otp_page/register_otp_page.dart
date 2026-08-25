@@ -26,47 +26,64 @@ class RegisterOtpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppDimens.screenHPadding),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(height: AppDimens.space24),
-          AppBackButton(onTap: onBack),
-          const Spacer(),
+    // The Spacers below need a bounded height, and the keyboard takes that
+    // height away. Scrolling keeps the layout centred when there is room and
+    // lets it move out of the keyboard's way when there is not.
+    return LayoutBuilder(
+      builder: (context, constraints) => SingleChildScrollView(
+        padding: EdgeInsets.only(
+          left: AppDimens.screenHPadding,
+          right: AppDimens.screenHPadding,
+          bottom: MediaQuery.viewInsetsOf(context).bottom,
+        ),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minHeight: constraints.maxHeight),
+          child: IntrinsicHeight(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: AppDimens.space24),
+                AppBackButton(onTap: onBack),
+                const Spacer(),
 
-          Text(
-            context.authL10n.verificationCode,
-            style: context.styles.headline(),
-            textAlign: TextAlign.center,
+                Text(
+                  context.authL10n.verificationCode,
+                  style: context.styles.headline(),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: AppDimens.space8),
+                Text(
+                  context.authL10n.otpSentToEmail(emailCtrl.text),
+                  style: context.styles.bodyMuted(),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: AppDimens.space40),
+
+                OtpPinInput(
+                  controller: otpCtrl,
+                  onCompleted: (_) => onSubmit(),
+                ),
+                SizedBox(height: AppDimens.space24),
+
+                Consumer(
+                  builder: (context, ref, child) {
+                    final isLoading = ref.watch(registerProvider).isLoading;
+                    return AuthPrimaryButton(
+                      label: context.authL10n.send,
+                      onPressed: isLoading ? null : onSubmit,
+                      isLoading: isLoading,
+                    );
+                  },
+                ),
+                SizedBox(height: AppDimens.space16),
+
+                OtpResendSection(onResend: onResend),
+                SizedBox(height: AppDimens.space32),
+                const Spacer(),
+              ],
+            ),
           ),
-          SizedBox(height: AppDimens.space8),
-          Text(
-            context.authL10n.otpSentToEmail(emailCtrl.text),
-            style: context.styles.bodyMuted(),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: AppDimens.space40),
-
-          OtpPinInput(controller: otpCtrl, onCompleted: (_) => onSubmit()),
-          SizedBox(height: AppDimens.space24),
-
-          Consumer(
-            builder: (context, ref, child) {
-              final isLoading = ref.watch(registerProvider).isLoading;
-              return AuthPrimaryButton(
-                label: context.authL10n.send,
-                onPressed: isLoading ? null : onSubmit,
-                isLoading: isLoading,
-              );
-            },
-          ),
-          SizedBox(height: AppDimens.space16),
-
-          OtpResendSection(onResend: onResend),
-          SizedBox(height: AppDimens.space32),
-          const Spacer(),
-        ],
+        ),
       ),
     );
   }
