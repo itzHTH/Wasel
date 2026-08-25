@@ -56,6 +56,8 @@
   "waselDriverName": "Wasel driver",
   "noRideToRate": "There is no ride to rate",
   "noRideToCancel": "There is no ride to cancel",
+  "cancelRideFailed": "We could not cancel the ride, please try again",
+  "cannotCancelInProgress": "You cannot cancel a ride that has already started",
   "cardDetails": "Card details",
   "cardNumber": "Card number",
   "enterCardNumber": "Enter your card number",

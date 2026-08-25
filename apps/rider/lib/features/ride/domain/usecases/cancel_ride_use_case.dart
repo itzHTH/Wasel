@@ -14,6 +14,6 @@ class CancelRideUseCase
     String params,
     CancelToken cancelToken,
   ) {
-    return _repo.cancelRide(params);
+    return _repo.cancelRide(params, cancelToken: cancelToken);
   }
 }

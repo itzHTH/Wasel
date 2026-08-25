@@ -20,6 +20,7 @@ class DriverOnTheWayCard extends ConsumerWidget {
     this.pickupLabel,
     this.dropoffLabel,
     this.price,
+    this.isCancelling = false,
   });
 
   final DriverProfile driver;
@@ -32,6 +33,7 @@ class DriverOnTheWayCard extends ConsumerWidget {
   final String? pickupLabel;
   final String? dropoffLabel;
   final RidePrice? price;
+  final bool isCancelling;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -72,6 +74,7 @@ class DriverOnTheWayCard extends ConsumerWidget {
       footer: AppSecondaryButton(
         label: context.l10n.cancelRequest,
         onPressed: onCancel,
+        isLoading: isCancelling,
       ),
     );
   }

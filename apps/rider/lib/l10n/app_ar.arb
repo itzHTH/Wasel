@@ -238,6 +238,14 @@
   "@noRideToCancel": {
     "description": "Guard when cancelling without a ride"
   },
+  "cancelRideFailed": "ما گدرنا نلغي الرحلة، جرّب مرة ثانية",
+  "@cancelRideFailed": {
+    "description": "Shown when the cancel request fails or the server refuses it"
+  },
+  "cannotCancelInProgress": "ما تگدر تلغي رحلة بديت بيها",
+  "@cannotCancelInProgress": {
+    "description": "Guard when cancelling a ride that has already started"
+  },
   "cardDetails": "بيانات البطاقة",
   "@cardDetails": {
     "description": "Title of the card form"

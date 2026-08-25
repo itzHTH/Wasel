@@ -183,6 +183,14 @@ class RiderLocalizationsEn extends RiderLocalizations {
   String get noRideToCancel => 'There is no ride to cancel';
 
   @override
+  String get cancelRideFailed =>
+      'We could not cancel the ride, please try again';
+
+  @override
+  String get cannotCancelInProgress =>
+      'You cannot cancel a ride that has already started';
+
+  @override
   String get cardDetails => 'Card details';
 
   @override

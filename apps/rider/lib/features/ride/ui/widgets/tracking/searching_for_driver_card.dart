@@ -11,9 +11,11 @@ class SearchingForDriverCard extends StatelessWidget {
     this.pickupLabel,
     this.dropoffLabel,
     this.price,
+    this.isCancelling = false,
   });
 
   final VoidCallback onCancel;
+  final bool isCancelling;
   final String? pickupLabel;
   final String? dropoffLabel;
   final RidePrice? price;
@@ -40,6 +42,7 @@ class SearchingForDriverCard extends StatelessWidget {
           AppSecondaryButton(
             label: context.l10n.cancelRequest,
             onPressed: onCancel,
+            isLoading: isCancelling,
           ),
         ],
       ),

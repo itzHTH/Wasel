@@ -434,6 +434,18 @@ abstract class RiderLocalizations {
   /// **'ما موجودة رحلة نلغيها'**
   String get noRideToCancel;
 
+  /// Shown when the cancel request fails or the server refuses it
+  ///
+  /// In ar, this message translates to:
+  /// **'ما گدرنا نلغي الرحلة، جرّب مرة ثانية'**
+  String get cancelRideFailed;
+
+  /// Guard when cancelling a ride that has already started
+  ///
+  /// In ar, this message translates to:
+  /// **'ما تگدر تلغي رحلة بديت بيها'**
+  String get cannotCancelInProgress;
+
   /// Title of the card form
   ///
   /// In ar, this message translates to:
