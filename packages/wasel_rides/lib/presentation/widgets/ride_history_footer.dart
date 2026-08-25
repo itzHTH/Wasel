@@ -4,8 +4,10 @@ import 'package:wasel_core/networking/errors/error_message.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/widgets/feedback/app_error_retry.dart';
-import 'package:wasel_core/widgets/feedback/app_loading.dart';
+import 'package:wasel_core/widgets/feedback/app_skeleton.dart';
 import 'package:wasel_rides/presentation/providers/history/ride_history_state.dart';
+import 'package:wasel_rides/presentation/widgets/ride_history_card.dart';
+import 'package:wasel_rides/presentation/widgets/ride_history_placeholders.dart';
 import 'package:wasel_rides/presentation/widgets/ride_history_load_more_sentinel.dart';
 
 /// Tail of the history list: the paging trigger, its progress, its failure and
@@ -30,6 +32,7 @@ class RideHistoryFooter extends StatelessWidget {
         child: AppErrorRetry(
           message: errorMessageOf(loadMoreError),
           onRetry: onLoadMore,
+          maxLines: null,
         ),
       );
     }
@@ -48,14 +51,17 @@ class RideHistoryFooter extends StatelessWidget {
   }
 }
 
+/// The next page, shimmering in the shape it will arrive in.
 class _LoadingMoreRow extends StatelessWidget {
   const _LoadingMoreRow();
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: AppDimens.space24),
-      child: const Center(child: AppInlineLoading()),
+      padding: EdgeInsets.only(bottom: AppDimens.space12),
+      child: AppSkeleton(
+        child: RideHistoryCard(entry: rideHistoryPlaceholders.first),
+      ),
     );
   }
 }

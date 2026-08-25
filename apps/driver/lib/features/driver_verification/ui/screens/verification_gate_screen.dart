@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:wasel_core/wasel_core.dart';
 import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:driver/core/const/app_driver_consts.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:driver/features/driver_verification/ui/providers/verify_status/verify_status_provider.dart';
 import 'package:driver/features/driver_verification/ui/screens/under_review_screen.dart';
@@ -80,16 +81,20 @@ class _GateLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        CircularProgressIndicator(color: context.colors.primary500),
-        SizedBox(height: AppDimens.space24),
-        Text(
-          context.l10n.verifyingAccount,
-          style: context.styles.bodyMuted(),
-        ),
-      ],
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: AppDimens.screenHPadding),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const AppBrandPulse(logoAsset: AppDriverConsts.logoIcon),
+          SizedBox(height: AppDimens.space24),
+          Text(
+            context.l10n.verifyingAccount,
+            style: context.styles.bodyMuted(),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
     );
   }
 }

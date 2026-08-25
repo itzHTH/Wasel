@@ -35,5 +35,7 @@ class AppDimens {
   static double get icon48 => 48.r;
 
   // ── Screen
+  static double get brandPulse => 96.r;
+
   static double get screenHPadding => 24.w;
 }

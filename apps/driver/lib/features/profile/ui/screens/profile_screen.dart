@@ -81,9 +81,14 @@ class ProfileScreen extends ConsumerWidget {
               isDestructive: true,
               onTap: isLoggingOut ? null : () => _logout(context, ref),
               trailing: isLoggingOut
-                  ? AppInlineLoading(
-                      size: AppDimens.icon20,
-                      color: context.colors.alertError700,
+                  ? AppShimmerSheen(
+                      borderRadius: BorderRadius.circular(AppDimens.radiusPill),
+                      highlight: context.colors.alertError700,
+                      child: Icon(
+                        Icons.logout_rounded,
+                        size: AppDimens.icon20,
+                        color: context.colors.alertError700,
+                      ),
                     )
                   : const SizedBox.shrink(),
             ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wasel_core/l10n/core_l10n_extension.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
-import 'package:wasel_core/widgets/feedback/app_loading.dart';
+import 'package:wasel_core/widgets/feedback/app_skeleton.dart';
 import 'package:wasel_core/widgets/avatar/app_profile_avatar.dart';
 
 class AppEditableAvatar extends StatelessWidget {
@@ -41,22 +41,10 @@ class AppEditableAvatar extends StatelessWidget {
     final avatar = Stack(
       clipBehavior: Clip.none,
       children: [
-        AppProfileAvatar(photoUrl: photoUrl, size: resolvedSize),
-        if (isLoading)
-          Positioned.fill(
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: context.colors.scrim.withValues(alpha: 0.5),
-                shape: BoxShape.circle,
-              ),
-              child: Center(
-                child: AppInlineLoading(
-                  size: resolvedSize / 3,
-                  color: context.colors.onScrim,
-                ),
-              ),
-            ),
-          ),
+        AppSkeleton(
+          enabled: isLoading,
+          child: AppProfileAvatar(photoUrl: photoUrl, size: resolvedSize),
+        ),
         PositionedDirectional(bottom: 0, end: 0, child: badge),
       ],
     );

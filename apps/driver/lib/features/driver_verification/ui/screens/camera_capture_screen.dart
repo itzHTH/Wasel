@@ -164,9 +164,7 @@ class _CameraCaptureScreenState extends State<CameraCaptureScreen>
             );
           }
           if (controller == null || !controller.value.isInitialized) {
-            return Center(
-              child: CircularProgressIndicator(color: context.colors.onScrim),
-            );
+            return AppLoadingOverlay(backgroundColor: context.colors.scrim);
           }
           return CameraCaptureView(
             controller: controller,

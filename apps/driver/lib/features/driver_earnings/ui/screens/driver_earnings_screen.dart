@@ -1,21 +1,13 @@
-import 'package:driver/features/driver_earnings/domain/entities/driver_earnings.dart';
 import 'package:driver/features/driver_earnings/domain/entities/earnings_period.dart';
 import 'package:driver/features/driver_earnings/ui/providers/driver_earnings_provider.dart';
 import 'package:driver/features/driver_earnings/ui/providers/earnings_range_provider.dart';
 import 'package:driver/features/driver_earnings/ui/widgets/earnings_dashboard.dart';
+import 'package:driver/features/driver_earnings/ui/widgets/earnings_placeholders.dart';
 import 'package:driver/features/driver_earnings/ui/widgets/earnings_range_selector.dart';
 import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/wasel_core.dart';
-
-/// Stand-in figures the skeleton lays out.
-const _placeholderEarnings = DriverEarnings(
-  completedRides: 12,
-  totalEarnings: 125000,
-  onlineMinutes: 315,
-  canCashOut: true,
-);
 
 class DriverEarningsScreen extends ConsumerWidget {
   const DriverEarningsScreen({super.key});
@@ -58,7 +50,7 @@ class DriverEarningsScreen extends ConsumerWidget {
               child: earnings.when(
                 loading: () => const AppSkeleton(
                   key: ValueKey('skeleton'),
-                  child: EarningsDashboard(earnings: _placeholderEarnings),
+                  child: EarningsDashboard(earnings: placeholderEarnings),
                 ),
                 error: (error, _) => AppErrorState(
                   key: const ValueKey('error'),

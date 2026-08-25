@@ -12,7 +12,8 @@ import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/widgets/feedback/app_error_state.dart';
 import 'package:wasel_core/widgets/cards/app_group_card.dart';
 import 'package:wasel_core/widgets/cards/app_info_row.dart';
-import 'package:wasel_core/widgets/feedback/app_loading.dart';
+import 'package:wasel_core/widgets/feedback/app_skeleton.dart';
+import 'package:wasel_profile/presentation/widgets/profile_placeholders.dart';
 import 'package:wasel_core/widgets/cards/app_stat_cards.dart';
 import 'package:wasel_core/widgets/cards/app_surface_card.dart';
 import 'package:wasel_profile/presentation/widgets/edit/profile_edit_avatar_section.dart';
@@ -46,7 +47,9 @@ class ProfileDetailsScreen extends ConsumerWidget {
       ),
       body: profile.when(
         skipLoadingOnRefresh: true,
-        loading: () => const Center(child: AppInlineLoading()),
+        loading: () => AppSkeleton(
+          child: _RiderProfileDetailsBody(profile: placeholderRiderProfile),
+        ),
         error: (error, _) => AppErrorState(
           message: errorMessageOf(error),
           onRetry: refresh,

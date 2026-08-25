@@ -85,11 +85,13 @@ export 'widgets/forms/app_text_form_field.dart';
 export 'widgets/forms/password_field.dart';
 
 // Widgets — feedback (dialogs, errors, loading)
+export 'widgets/feedback/app_brand_pulse.dart';
 export 'widgets/feedback/app_dialog.dart';
 export 'widgets/feedback/app_error_retry.dart';
 export 'widgets/feedback/app_error_state.dart';
 export 'widgets/feedback/app_inline_error.dart';
 export 'widgets/feedback/app_loading.dart';
+export 'widgets/feedback/app_progress_ring.dart';
 export 'widgets/feedback/app_shimmer_sheen.dart';
 export 'widgets/feedback/app_skeleton.dart';
 

@@ -15,20 +15,27 @@ class AppSecondaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: context.shape.buttonHeight,
-      child: OutlinedButton(
-        onPressed: isLoading ? null : onPressed,
-        style: OutlinedButton.styleFrom(
-          side: BorderSide(color: context.colors.primary500),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(context.shape.radiusButton),
+    return AppShimmerSheen(
+      enabled: isLoading,
+      borderRadius: BorderRadius.circular(context.shape.radiusButton),
+      highlight: context.colors.primary500,
+      child: SizedBox(
+        width: double.infinity,
+        height: context.shape.buttonHeight,
+        child: OutlinedButton(
+          onPressed: isLoading ? null : onPressed,
+          style: OutlinedButton.styleFrom(
+            backgroundColor: isLoading ? context.colors.primary100 : null,
+            disabledBackgroundColor: isLoading
+                ? context.colors.primary100
+                : null,
+            side: BorderSide(color: context.colors.primary500),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(context.shape.radiusButton),
+            ),
           ),
+          child: Text(label, style: context.styles.bodyBrand()),
         ),
-        child: isLoading
-            ? AppInlineLoading(size: AppDimens.icon24)
-            : Text(label, style: context.styles.bodyBrand()),
       ),
     );
   }
