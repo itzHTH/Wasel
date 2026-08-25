@@ -14,12 +14,3 @@ DriverEarningsResponse _$DriverEarningsResponseFromJson(
   onlineMinutes: json['onlineMinutes'] as num,
   canCashOut: json['canCashOut'] as bool,
 );
-
-Map<String, dynamic> _$DriverEarningsResponseToJson(
-  DriverEarningsResponse instance,
-) => <String, dynamic>{
-  'completedRides': instance.completedRides,
-  'totalEarnings': instance.totalEarnings,
-  'onlineMinutes': instance.onlineMinutes,
-  'canCashOut': instance.canCashOut,
-};

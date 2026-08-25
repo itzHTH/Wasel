@@ -9,7 +9,3 @@ part of 'driver_balance_response.dart';
 DriverBalanceResponse _$DriverBalanceResponseFromJson(
   Map<String, dynamic> json,
 ) => DriverBalanceResponse(balance: (json['balance'] as num).toDouble());
-
-Map<String, dynamic> _$DriverBalanceResponseToJson(
-  DriverBalanceResponse instance,
-) => <String, dynamic>{'balance': instance.balance};

@@ -18,7 +18,7 @@ final class DriverBalanceControllerProvider
     : super(
         from: null,
         argument: null,
-        retry: null,
+        retry: _noRetry,
         name: r'driverBalanceControllerProvider',
         isAutoDispose: true,
         dependencies: null,
@@ -34,7 +34,7 @@ final class DriverBalanceControllerProvider
 }
 
 String _$driverBalanceControllerHash() =>
-    r'beed681ab8c6a612d88485d4f4a61af9ba07ee3a';
+    r'8d2b912e1cf212fff75236b93c23237284fa802b';
 
 abstract class _$DriverBalanceController extends $AsyncNotifier<double> {
   FutureOr<double> build();

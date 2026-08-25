@@ -1,5 +1,6 @@
 import 'package:driver/core/helpers/ride_formatters.dart';
-import 'package:driver/features/ride/ui/providers/earnings/driver_earnings_provider.dart';
+import 'package:driver/features/driver_earnings/domain/entities/earnings_period.dart';
+import 'package:driver/features/driver_earnings/ui/providers/driver_earnings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -40,7 +41,8 @@ class _TodayPanel extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final earnings = ref.watch(driverEarningsControllerProvider);
+    const range = EarningsRange.today;
+    final earnings = ref.watch(driverEarningsControllerProvider(range));
 
     // Null covers both the first load and a failed one: the panel keeps its
     // shape and shows dashes, so a missing figure is never read as a zero.
@@ -68,7 +70,7 @@ class _TodayPanel extends ConsumerWidget {
               else if (earnings.hasError)
                 _RetryButton(
                   onPressed: () => ref
-                      .read(driverEarningsControllerProvider.notifier)
+                      .read(driverEarningsControllerProvider(range).notifier)
                       .refresh(),
                 ),
             ],

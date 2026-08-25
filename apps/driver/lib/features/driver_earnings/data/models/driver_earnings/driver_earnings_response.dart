@@ -1,15 +1,10 @@
-import 'package:driver/features/ride/domain/entities/driver_earnings.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:driver/features/driver_earnings/domain/entities/driver_earnings.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'driver_earnings_response.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class DriverEarningsResponse {
-  final int completedRides;
-  final num totalEarnings;
-  final num onlineMinutes;
-  final bool canCashOut;
-
   DriverEarningsResponse({
     required this.completedRides,
     required this.totalEarnings,
@@ -17,10 +12,14 @@ class DriverEarningsResponse {
     required this.canCashOut,
   });
 
+  /// Unwraps the `ApiResponse<T>` envelope; only `data` is ours.
   factory DriverEarningsResponse.fromJson(Map<String, dynamic> json) =>
       _$DriverEarningsResponseFromJson(json["data"] as Map<String, dynamic>);
 
-  Map<String, dynamic> toJson() => _$DriverEarningsResponseToJson(this);
+  final int completedRides;
+  final num totalEarnings;
+  final num onlineMinutes;
+  final bool canCashOut;
 
   DriverEarnings toEntity() {
     return DriverEarnings(

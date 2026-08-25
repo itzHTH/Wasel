@@ -412,4 +412,38 @@ class DriverLocalizationsAr extends DriverLocalizations {
   String durationMinutes(String minutes) {
     return '$minutes د';
   }
+
+  @override
+  String get earnings => 'الأرباح';
+
+  @override
+  String get totalEarnings => 'إجمالي الأرباح';
+
+  @override
+  String get periodToday => 'اليوم';
+
+  @override
+  String get periodLast7Days => 'آخر 7 أيام';
+
+  @override
+  String get periodLast30Days => 'آخر 30 يوماً';
+
+  @override
+  String get completedRidesLabel => 'الرحلات المكتملة';
+
+  @override
+  String get onlineTimeLabel => 'وقت الاتصال';
+
+  @override
+  String get cashOut => 'سحب الأرباح';
+
+  @override
+  String get cashOutUnavailableHint => 'لا توجد أرباح متاحة للسحب حالياً.';
+
+  @override
+  String get cashOutSoonTitle => 'السحب قريباً';
+
+  @override
+  String get cashOutSoonMessage =>
+      'سحب الأرباح إلى حسابك قيد التجهيز، وسنخبرك فور توفره.';
 }

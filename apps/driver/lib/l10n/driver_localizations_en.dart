@@ -420,4 +420,39 @@ class DriverLocalizationsEn extends DriverLocalizations {
   String durationMinutes(String minutes) {
     return '${minutes}m';
   }
+
+  @override
+  String get earnings => 'Earnings';
+
+  @override
+  String get totalEarnings => 'Total earnings';
+
+  @override
+  String get periodToday => 'Today';
+
+  @override
+  String get periodLast7Days => 'Last 7 days';
+
+  @override
+  String get periodLast30Days => 'Last 30 days';
+
+  @override
+  String get completedRidesLabel => 'Completed rides';
+
+  @override
+  String get onlineTimeLabel => 'Online time';
+
+  @override
+  String get cashOut => 'Cash out';
+
+  @override
+  String get cashOutUnavailableHint =>
+      'You have no earnings available to cash out right now.';
+
+  @override
+  String get cashOutSoonTitle => 'Cash out coming soon';
+
+  @override
+  String get cashOutSoonMessage =>
+      'Transferring your earnings to your account is on the way — we\'ll let you know the moment it\'s ready.';
 }

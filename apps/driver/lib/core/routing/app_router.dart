@@ -1,4 +1,5 @@
 import 'package:wasel_auth/wasel_auth.dart';
+import 'package:driver/features/driver_earnings/ui/screens/driver_earnings_screen.dart';
 import 'package:driver/features/driver_verification/ui/screens/verification_wizard_screen.dart';
 import 'package:driver/features/profile/ui/screens/profile_details_screen.dart';
 import 'package:driver/features/profile/ui/screens/profile_edit_screen.dart';
@@ -56,6 +57,12 @@ class AppRouter {
       case AppRoutes.rideHistory:
         return AppPageTransitions.sharedAxis(
           const RideHistoryScreen(),
+          settings: settings,
+        );
+
+      case AppRoutes.earnings:
+        return AppPageTransitions.sharedAxis(
+          const DriverEarningsScreen(),
           settings: settings,
         );
 
