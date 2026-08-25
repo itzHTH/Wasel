@@ -8,16 +8,9 @@ part of 'search_radius_motion_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// The animated search radius, handed out as a [Listenable] so the map can
-/// follow it through an `AnimatedBuilder` without the frames passing through
-/// the provider graph.
 
 @ProviderFor(searchRadiusMotion)
 final searchRadiusMotionProvider = SearchRadiusMotionProvider._();
-
-/// The animated search radius, handed out as a [Listenable] so the map can
-/// follow it through an `AnimatedBuilder` without the frames passing through
-/// the provider graph.
 
 final class SearchRadiusMotionProvider
     extends
@@ -27,9 +20,6 @@ final class SearchRadiusMotionProvider
           SearchRadiusMotion
         >
     with $Provider<SearchRadiusMotion> {
-  /// The animated search radius, handed out as a [Listenable] so the map can
-  /// follow it through an `AnimatedBuilder` without the frames passing through
-  /// the provider graph.
   SearchRadiusMotionProvider._()
     : super(
         from: null,
