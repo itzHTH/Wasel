@@ -3,6 +3,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/const/app_constants.dart';
 import 'package:wasel_core/networking/interceptors/auth_interceptor.dart';
+import 'package:wasel_core/networking/dio/secret_paths.dart';
 import 'package:wasel_core/networking/interceptors/localization_interceptor.dart';
 import '../api_constants.dart';
 
@@ -45,19 +46,6 @@ class DioFactory {
     _addInterceptors();
   }
 
-  // Card numbers, CVVs, payment tokens and passwords travel these paths; the
-  // logger must never print either side of the exchange.
-  static const _secretPaths = [
-    '/Payments/',
-    '/Auth/login',
-    '/Auth/reset-password',
-    '/Auth/refresh-token',
-    '/Auth/revoke-token',
-    '/complete-registration',
-  ];
-
-  static bool _carriesSecrets(String path) => _secretPaths.any(path.contains);
-
   void _addInterceptors() {
     dio.interceptors.addAll([
       // Asks the API to answer in the language the user is reading.
@@ -73,7 +61,7 @@ class DioFactory {
         error: true,
         compact: true,
         enabled: AppConstants.isDebug,
-        filter: (options, _) => !_carriesSecrets(options.path),
+        filter: (options, _) => !ApiSecretPaths.carries(options.path),
       ),
     ]);
   }

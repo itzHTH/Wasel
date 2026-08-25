@@ -164,12 +164,6 @@ abstract class RiderLocalizations {
   /// **'سجل الرحلات'**
   String get rideHistory;
 
-  /// Menu tile for the settings screen; not built yet
-  ///
-  /// In ar, this message translates to:
-  /// **'الإعدادات'**
-  String get settings;
-
   /// Logout menu tile, and the confirm action of its dialog
   ///
   /// In ar, this message translates to:

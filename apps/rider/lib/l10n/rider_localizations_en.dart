@@ -42,9 +42,6 @@ class RiderLocalizationsEn extends RiderLocalizations {
   String get rideHistory => 'Ride history';
 
   @override
-  String get settings => 'Settings';
-
-  @override
   String get logout => 'Log out';
 
   @override

@@ -11,7 +11,6 @@
   "myAccount": "My account",
   "profileDetails": "Profile",
   "rideHistory": "Ride history",
-  "settings": "Settings",
   "logout": "Log out",
   "logoutConfirmMessage": "Are you sure you want to log out of your account?",
   "todayEarnings": "Today's earnings",
@@ -127,5 +126,16 @@
   "coordinatePair": "{lat}, {lng}",
   "durationHoursMinutes": "{hours}h {minutes}m",
   "durationHours": "{hours}h",
-  "durationMinutes": "{minutes}m"
+  "durationMinutes": "{minutes}m",
+  "earnings": "Earnings",
+  "totalEarnings": "Total earnings",
+  "periodToday": "Today",
+  "periodLast7Days": "Last 7 days",
+  "periodLast30Days": "Last 30 days",
+  "completedRidesLabel": "Completed rides",
+  "onlineTimeLabel": "Online time",
+  "cashOut": "Cash out",
+  "cashOutUnavailableHint": "You have no earnings available to cash out right now.",
+  "cashOutSoonTitle": "Cash out coming soon",
+  "cashOutSoonMessage": "Transferring your earnings to your account is on the way — we'll let you know the moment it's ready."
 }

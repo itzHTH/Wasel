@@ -164,12 +164,6 @@ abstract class DriverLocalizations {
   /// **'سجل الرحلات'**
   String get rideHistory;
 
-  /// Menu tile for the settings screen; not built yet
-  ///
-  /// In ar, this message translates to:
-  /// **'الإعدادات'**
-  String get settings;
-
   /// Logout menu tile, and the confirm action of its dialog
   ///
   /// In ar, this message translates to:
@@ -865,6 +859,72 @@ abstract class DriverLocalizations {
   /// In ar, this message translates to:
   /// **'{minutes} د'**
   String durationMinutes(String minutes);
+
+  /// Earnings dashboard title and the profile menu entry that opens it
+  ///
+  /// In ar, this message translates to:
+  /// **'الأرباح'**
+  String get earnings;
+
+  /// Label on the earnings dashboard hero card, above the amount
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي الأرباح'**
+  String get totalEarnings;
+
+  /// Earnings range selector: today only
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get periodToday;
+
+  /// Earnings range selector: rolling seven-day window
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر 7 أيام'**
+  String get periodLast7Days;
+
+  /// Earnings range selector: rolling thirty-day window
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر 30 يوماً'**
+  String get periodLast30Days;
+
+  /// Earnings stat card label for the number of completed rides in the selected range
+  ///
+  /// In ar, this message translates to:
+  /// **'الرحلات المكتملة'**
+  String get completedRidesLabel;
+
+  /// Earnings stat card label for time spent online in the selected range
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت الاتصال'**
+  String get onlineTimeLabel;
+
+  /// Cash-out section heading and button label on the earnings dashboard
+  ///
+  /// In ar, this message translates to:
+  /// **'سحب الأرباح'**
+  String get cashOut;
+
+  /// Helper line under a disabled cash-out button explaining why it cannot be tapped
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد أرباح متاحة للسحب حالياً.'**
+  String get cashOutUnavailableHint;
+
+  /// Title of the dialog shown when cash out is tapped before the transfer flow ships
+  ///
+  /// In ar, this message translates to:
+  /// **'السحب قريباً'**
+  String get cashOutSoonTitle;
+
+  /// Body of the cash-out coming-soon dialog
+  ///
+  /// In ar, this message translates to:
+  /// **'سحب الأرباح إلى حسابك قيد التجهيز، وسنخبرك فور توفره.'**
+  String get cashOutSoonMessage;
 }
 
 class _DriverLocalizationsDelegate

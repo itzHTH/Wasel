@@ -1,4 +1,6 @@
-import 'package:driver/features/ride/ui/providers/earnings/driver_balance_provider.dart';
+import 'package:driver/features/driver_earnings/domain/entities/earnings_period.dart';
+import 'package:driver/features/driver_earnings/ui/providers/driver_balance_provider.dart';
+import 'package:driver/features/driver_earnings/ui/providers/driver_earnings_provider.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_state.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:driver/features/ride/ui/widgets/status/driver_earnings_chip.dart';
@@ -28,7 +30,10 @@ class DriverStatusBar extends ConsumerWidget {
       next,
     ) {
       if (next == DriverStage.completed) {
+        // The status bar outlives every ride card, so it is the one place
+        // that always sees the transition.
         ref.read(driverBalanceControllerProvider.notifier).refresh();
+        ref.invalidate(driverEarningsControllerProvider(EarningsRange.today));
       }
     });
 

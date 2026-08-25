@@ -1,5 +1,6 @@
-import 'package:driver/features/ride/domain/entities/driver_earnings.dart';
-import 'package:driver/features/ride/ui/providers/earnings/driver_earnings_provider.dart';
+import 'package:driver/features/driver_earnings/domain/entities/driver_earnings.dart';
+import 'package:driver/features/driver_earnings/domain/entities/earnings_period.dart';
+import 'package:driver/features/driver_earnings/ui/providers/driver_earnings_provider.dart';
 import 'package:driver/features/ride/ui/providers/rider_profile/current_rider_profile_provider.dart';
 import 'package:driver/features/ride/ui/widgets/fare_hero.dart';
 import 'package:driver/features/ride/ui/widgets/incoming_offer/incoming_offer_card.dart';
@@ -33,8 +34,17 @@ const _address = 'شارع المعلمين، حي الحمداني، بغداد
 /// under test without standing up DI.
 class _StubEarnings extends DriverEarningsController {
   @override
-  Future<DriverEarnings?> build() async => null;
+  Future<DriverEarnings> build(EarningsRange range) async => _widestEarnings;
 }
+
+/// The widest figures the panel can be asked to lay out: a seven-digit fare,
+/// a three-digit ride count and a two-part duration.
+const _widestEarnings = DriverEarnings(
+  completedRides: 128,
+  totalEarnings: 1250000,
+  onlineMinutes: 1439,
+  canCashOut: true,
+);
 
 Future<void> _pump(
   WidgetTester tester,
@@ -49,7 +59,9 @@ Future<void> _pump(
     ProviderScope(
       overrides: [
         currentRiderProfileProvider.overrideWithValue(null),
-        driverEarningsControllerProvider.overrideWith(_StubEarnings.new),
+        driverEarningsControllerProvider(
+          EarningsRange.today,
+        ).overrideWith(_StubEarnings.new),
         pointLabelProvider(_pickup).overrideWith((ref) async => _address),
         pointLabelProvider(_dropoff).overrideWith((ref) async => _address),
       ],

@@ -11,7 +11,6 @@
   "myAccount": "My account",
   "profileDetails": "Profile",
   "rideHistory": "Ride history",
-  "settings": "Settings",
   "logout": "Log out",
   "logoutConfirmMessage": "Are you sure you want to log out of your account?",
   "requestRideFailed": "We couldn't send your request, try again",

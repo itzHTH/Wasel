@@ -3,6 +3,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:wasel_core/const/app_constants.dart';
 import 'package:wasel_core/helpers/session_store.dart';
 import 'package:wasel_core/networking/api_constants.dart';
+import 'package:wasel_core/networking/dio/secret_paths.dart';
 import 'package:wasel_core/networking/session_refresher.dart';
 
 /// Attaches the stored access token, and on a 401 refreshes the session and
@@ -50,12 +51,17 @@ class AuthInterceptor extends Interceptor {
           ),
         )
         ..interceptors.add(
+          // Every request replayed after a 401 runs on this client, so bodies
+          // stay on — otherwise a refreshed request vanishes from the log at
+          // exactly the point you want to read it. The filter keeps the
+          // refresh exchange itself silent.
           PrettyDioLogger(
             enabled: AppConstants.isDebug,
-            requestBody: false,
-            responseBody: false,
+            requestBody: true,
+            responseBody: true,
             error: true,
             compact: true,
+            filter: (options, _) => !ApiSecretPaths.carries(options.path),
           ),
         );
 

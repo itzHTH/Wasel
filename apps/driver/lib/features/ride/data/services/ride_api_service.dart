@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:driver/core/const/driver_api_consts.dart';
 import 'package:driver/features/ride/data/models/change_payment/change_payment_body.dart';
-import 'package:driver/features/ride/data/models/driver_balance/driver_balance_response.dart';
-import 'package:driver/features/ride/data/models/driver_earnings/driver_earnings_response.dart';
 import 'package:retrofit/dio.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
@@ -50,18 +48,6 @@ abstract class RideApiService {
   Future<void> changePaymentMethod(
     @Path("id") String rideId,
     @Body() ChangePaymentBody body, {
-    @CancelRequest() CancelToken? cancelToken,
-  });
-
-  @GET(DriverApiConsts.getDriverWalletBalance)
-  Future<DriverBalanceResponse> getDriverWalletBalance({
-    @CancelRequest() CancelToken? cancelToken,
-  });
-
-  @GET(DriverApiConsts.getDriverEarnings)
-  Future<DriverEarningsResponse> getDriverEarnings({
-    @Query("startDate") DateTime? startDate,
-    @Query("endDate") DateTime? endDate,
     @CancelRequest() CancelToken? cancelToken,
   });
 }

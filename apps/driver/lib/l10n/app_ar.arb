@@ -44,10 +44,6 @@
   "@rideHistory": {
     "description": "Menu tile that opens the ride history screen"
   },
-  "settings": "الإعدادات",
-  "@settings": {
-    "description": "Menu tile for the settings screen; not built yet"
-  },
   "logout": "تسجيل الخروج",
   "@logout": {
     "description": "Logout menu tile, and the confirm action of its dialog"
@@ -547,5 +543,49 @@
         "type": "String"
       }
     }
+  },
+  "earnings": "الأرباح",
+  "@earnings": {
+    "description": "Earnings dashboard title and the profile menu entry that opens it"
+  },
+  "totalEarnings": "إجمالي الأرباح",
+  "@totalEarnings": {
+    "description": "Label on the earnings dashboard hero card, above the amount"
+  },
+  "periodToday": "اليوم",
+  "@periodToday": {
+    "description": "Earnings range selector: today only"
+  },
+  "periodLast7Days": "آخر 7 أيام",
+  "@periodLast7Days": {
+    "description": "Earnings range selector: rolling seven-day window"
+  },
+  "periodLast30Days": "آخر 30 يوماً",
+  "@periodLast30Days": {
+    "description": "Earnings range selector: rolling thirty-day window"
+  },
+  "completedRidesLabel": "الرحلات المكتملة",
+  "@completedRidesLabel": {
+    "description": "Earnings stat card label for the number of completed rides in the selected range"
+  },
+  "onlineTimeLabel": "وقت الاتصال",
+  "@onlineTimeLabel": {
+    "description": "Earnings stat card label for time spent online in the selected range"
+  },
+  "cashOut": "سحب الأرباح",
+  "@cashOut": {
+    "description": "Cash-out section heading and button label on the earnings dashboard"
+  },
+  "cashOutUnavailableHint": "لا توجد أرباح متاحة للسحب حالياً.",
+  "@cashOutUnavailableHint": {
+    "description": "Helper line under a disabled cash-out button explaining why it cannot be tapped"
+  },
+  "cashOutSoonTitle": "السحب قريباً",
+  "@cashOutSoonTitle": {
+    "description": "Title of the dialog shown when cash out is tapped before the transfer flow ships"
+  },
+  "cashOutSoonMessage": "سحب الأرباح إلى حسابك قيد التجهيز، وسنخبرك فور توفره.",
+  "@cashOutSoonMessage": {
+    "description": "Body of the cash-out coming-soon dialog"
   }
 }

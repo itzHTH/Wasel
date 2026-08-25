@@ -38,15 +38,14 @@ class ProfileScreen extends ConsumerWidget {
                 onTap: () => context.pushNamed(AppRoutes.profileDetails),
               ),
               AppMenuTile(
+                icon: Icons.account_balance_wallet_outlined,
+                label: context.l10n.earnings,
+                onTap: () => context.pushNamed(AppRoutes.earnings),
+              ),
+              AppMenuTile(
                 icon: Icons.history_rounded,
                 label: context.l10n.rideHistory,
                 onTap: () => context.pushNamed(AppRoutes.rideHistory),
-              ),
-              AppMenuTile(
-                icon: Icons.settings_outlined,
-                label: context.l10n.settings,
-                isMuted: true,
-                trailing: const AppSoonBadge(),
               ),
               AppMenuTile(
                 icon: Icons.brightness_6_outlined,
