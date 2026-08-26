@@ -12,11 +12,26 @@ class RideDetailRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          label,
-          style: context.styles.bodySecondary(),
+        Flexible(
+          child: Text(
+            label,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: context.styles.bodySecondary(),
+          ),
         ),
-        Text(value, style: context.styles.body(weight: FontWeight.w600)),
+        SizedBox(width: AppDimens.space8),
+        // Outweighs the label because the figure is what the row exists for.
+        Flexible(
+          flex: 2,
+          child: Text(
+            value,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.end,
+            style: context.styles.body(weight: FontWeight.w600),
+          ),
+        ),
       ],
     );
   }

@@ -98,11 +98,15 @@ class FileThumbnail extends StatelessWidget {
                   color: context.colors.onScrim,
                 ),
                 SizedBox(width: AppDimens.space8),
-                Text(
-                  context.l10n.retake,
-                  style: context.styles.bodyLarge(
-                    weight: FontWeight.w600,
-                    color: context.colors.onScrim,
+                Flexible(
+                  child: Text(
+                    context.l10n.retake,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: context.styles.bodyLarge(
+                      weight: FontWeight.w600,
+                      color: context.colors.onScrim,
+                    ),
                   ),
                 ),
               ],

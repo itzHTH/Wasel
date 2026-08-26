@@ -82,11 +82,15 @@ class _EndOfListRow extends StatelessWidget {
               color: context.colors.neutral200,
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppDimens.space12),
-            child: Text(
-              context.ridesL10n.noMoreRides,
-              style: context.styles.captionMuted(),
+          Flexible(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: AppDimens.space12),
+              child: Text(
+                context.ridesL10n.noMoreRides,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: context.styles.captionMuted(),
+              ),
             ),
           ),
           Expanded(

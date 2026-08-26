@@ -42,28 +42,41 @@ class PaymentMethodRow extends ConsumerWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              context.l10n.paymentMethodLabel,
-              style: context.styles.bodySecondary(),
+            Flexible(
+              child: Text(
+                context.l10n.paymentMethodLabel,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: context.styles.bodySecondary(),
+              ),
             ),
-            Row(
-              children: [
-                Icon(
-                  paymentMethodIcon(selected),
-                  size: AppDimens.icon20,
-                  color: context.colors.primary500,
-                ),
-                SizedBox(width: AppDimens.space8),
-                Text(
-                  selected.label(context.paymentsL10n),
-                  style: context.styles.body(weight: FontWeight.w600),
-                ),
-                Icon(
-                  Icons.chevron_left_rounded,
-                  size: AppDimens.icon20,
-                  color: context.colors.neutral400,
-                ),
-              ],
+            SizedBox(width: AppDimens.space8),
+            Flexible(
+              flex: 2,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    paymentMethodIcon(selected),
+                    size: AppDimens.icon20,
+                    color: context.colors.primary500,
+                  ),
+                  SizedBox(width: AppDimens.space8),
+                  Flexible(
+                    child: Text(
+                      selected.label(context.paymentsL10n),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: context.styles.body(weight: FontWeight.w600),
+                    ),
+                  ),
+                  Icon(
+                    Icons.chevron_left_rounded,
+                    size: AppDimens.icon20,
+                    color: context.colors.neutral400,
+                  ),
+                ],
+              ),
             ),
           ],
         ),

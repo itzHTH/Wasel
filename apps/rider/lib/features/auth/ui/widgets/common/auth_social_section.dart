@@ -39,11 +39,15 @@ class _DividerRow extends StatelessWidget {
         Expanded(
           child: Divider(color: context.colors.neutral200, thickness: 1),
         ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12.w),
-          child: Text(
-            context.l10n.orSignUpWith,
-            style: context.styles.captionMuted(),
+        Flexible(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12.w),
+            child: Text(
+              context.l10n.orSignUpWith,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: context.styles.captionMuted(),
+            ),
           ),
         ),
         Expanded(
@@ -77,9 +81,13 @@ class _GoogleButton extends StatelessWidget {
           children: [
             SvgPicture.asset('assets/icons/google_logo.svg'),
             SizedBox(width: 10.w),
-            Text(
-              label,
-              style: context.styles.bodySecondary(),
+            Flexible(
+              child: Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: context.styles.bodySecondary(),
+              ),
             ),
           ],
         ),

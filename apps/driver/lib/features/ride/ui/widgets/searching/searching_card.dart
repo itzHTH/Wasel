@@ -208,9 +208,13 @@ class _RetryButton extends StatelessWidget {
           children: [
             Icon(Icons.refresh, size: AppDimens.icon18, color: color),
             SizedBox(width: AppDimens.space4),
-            Text(
-              isRetrying ? context.coreL10n.retrying : context.coreL10n.retry,
-              style: context.styles.caption(color: color),
+            Flexible(
+              child: Text(
+                isRetrying ? context.coreL10n.retrying : context.coreL10n.retry,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: context.styles.caption(color: color),
+              ),
             ),
           ],
         ),
