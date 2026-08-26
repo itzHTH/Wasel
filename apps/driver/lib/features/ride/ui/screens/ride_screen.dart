@@ -79,7 +79,7 @@ class _RideScreenState extends ConsumerState<RideScreen> {
                     ),
                   ),
                 ),
-                const DriverRideCardsSwitcher(),
+                const Flexible(child: DriverRideCardsSwitcher()),
               ],
             ),
           ),

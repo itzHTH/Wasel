@@ -37,7 +37,14 @@ class RideCardShell extends StatelessWidget {
         ],
       ),
 
-      child: child,
+      child: LayoutBuilder(
+        // A tall card on a short screen has to scroll rather than overflow the
+        // map. Only when the host actually bounds the height: a card measured
+        // inside another scrollable has none to work with.
+        builder: (context, constraints) => constraints.hasBoundedHeight
+            ? SingleChildScrollView(child: child)
+            : child,
+      ),
     );
   }
 }
