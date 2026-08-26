@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/core/routing/app_routes_name.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
+import 'package:wasel_core/widgets/app_prompt_row.dart';
 import 'package:wasal/features/auth/ui/providers/login/login_provider.dart';
 import 'package:wasal/features/auth/ui/widgets/common/auth_header.dart';
 import 'package:wasal/features/auth/ui/widgets/common/auth_social_section.dart';
@@ -98,23 +99,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 AuthSocialSection(googleLabel: context.l10n.loginWithGoogle),
                 SizedBox(height: AppDimens.space24),
 
-                // Navigate to Register
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      context.authL10n.noAccount,
-                      style: context.styles.bodyMuted(),
-                    ),
-                    GestureDetector(
-                      onTap: () =>
-                          Navigator.pushNamed(context, AppRoutes.register),
-                      child: Text(
-                        context.authL10n.createAccount,
-                        style: context.styles.bodyBrand(),
-                      ),
-                    ),
-                  ],
+                AppPromptRow(
+                  message: context.authL10n.noAccount,
+                  actionLabel: context.authL10n.createAccount,
+                  onTap: () => Navigator.pushNamed(context, AppRoutes.register),
                 ),
                 SizedBox(height: AppDimens.space48),
               ],

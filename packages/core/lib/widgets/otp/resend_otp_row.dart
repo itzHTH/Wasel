@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wasel_core/l10n/core_l10n_extension.dart';
-import 'package:wasel_core/theme/theme_context_extension.dart';
+import 'package:wasel_core/widgets/app_prompt_row.dart';
 
 class ResendOtpRow extends StatelessWidget {
   const ResendOtpRow({
@@ -15,23 +15,10 @@ class ResendOtpRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          context.coreL10n.otpNotReceived,
-          style: context.styles.bodyMuted(),
-        ),
-        GestureDetector(
-          onTap: _canResend ? _onResend : null,
-          child: Text(
-            context.coreL10n.otpResend,
-            style: _canResend
-                ? context.styles.bodyBrand()
-                : context.styles.bodyMuted(),
-          ),
-        ),
-      ],
+    return AppPromptRow(
+      message: context.coreL10n.otpNotReceived,
+      actionLabel: context.coreL10n.otpResend,
+      onTap: _canResend ? _onResend : null,
     );
   }
 }

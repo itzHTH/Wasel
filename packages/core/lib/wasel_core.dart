@@ -134,6 +134,7 @@ export 'widgets/ride/ride_stage_header.dart';
 
 // Widgets — misc
 export 'widgets/app_entrance_fade.dart';
+export 'widgets/app_prompt_row.dart';
 export 'widgets/app_soon_badge.dart';
 export 'widgets/app_splash_branding.dart';
 export 'widgets/app_step_indicator.dart';

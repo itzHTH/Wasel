@@ -4,8 +4,8 @@ import 'package:wasel_auth/wasel_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/helpers/app_validators.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
+import 'package:wasel_core/widgets/app_prompt_row.dart';
 import 'package:wasel_core/widgets/forms/app_field_icon.dart';
-import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasal/features/auth/ui/providers/register/register_provider.dart';
 import 'package:wasal/features/auth/ui/widgets/common/auth_header.dart';
 import 'package:wasel_core/widgets/forms/app_labeled_field.dart';
@@ -67,22 +67,10 @@ class RegisterEmailPage extends StatelessWidget {
             AuthSocialSection(googleLabel: context.l10n.registerWithGoogle),
             SizedBox(height: AppDimens.space24),
 
-            // Navigate to Login
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  context.authL10n.alreadyHaveAccount,
-                  style: context.styles.bodyMuted(),
-                ),
-                GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: Text(
-                    context.authL10n.login,
-                    style: context.styles.bodyBrand(),
-                  ),
-                ),
-              ],
+            AppPromptRow(
+              message: context.authL10n.alreadyHaveAccount,
+              actionLabel: context.authL10n.login,
+              onTap: () => Navigator.pop(context),
             ),
             SizedBox(height: AppDimens.space32),
           ],
