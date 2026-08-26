@@ -112,9 +112,13 @@ class _MethodTrailing extends ConsumerWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         if (balance != null) ...[
-          Text(
-            RideFormatters.fare(context.l10n, balance),
-            style: context.styles.bodySecondary(),
+          Flexible(
+            child: Text(
+              RideFormatters.fare(context.l10n, balance),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: context.styles.bodySecondary(),
+            ),
           ),
           SizedBox(width: AppDimens.space8),
         ],

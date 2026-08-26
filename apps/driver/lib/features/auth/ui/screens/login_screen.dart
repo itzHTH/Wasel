@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:wasel_core/widgets/feedback/app_snack_bar.dart';
+import 'package:wasel_core/networking/errors/error_message.dart';
 import 'package:driver/l10n/l10n_extension.dart';
 import 'package:wasel_auth/wasel_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
+import 'package:wasel_core/widgets/app_prompt_row.dart';
 import 'package:driver/features/auth/ui/providers/login/login_provider.dart';
 import 'package:driver/features/auth/ui/widgets/common/auth_header.dart';
 
@@ -91,23 +94,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 ),
                 SizedBox(height: AppDimens.space24),
 
-                // Navigate to Register
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      context.authL10n.noAccount,
-                      style: context.styles.bodyMuted(),
-                    ),
-                    GestureDetector(
-                      onTap: () =>
-                          Navigator.pushNamed(context, AppRoutes.register),
-                      child: Text(
-                        context.authL10n.createAccount,
-                        style: context.styles.bodyBrand(),
-                      ),
-                    ),
-                  ],
+                AppPromptRow(
+                  message: context.authL10n.noAccount,
+                  actionLabel: context.authL10n.createAccount,
+                  onTap: () => Navigator.pushNamed(context, AppRoutes.register),
                 ),
                 SizedBox(height: AppDimens.space48),
               ],
@@ -119,19 +109,19 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 
   void _loginListener(BuildContext context) {
-    ref.listen(loginProvider.select((state) => state), (previous, next) {
+    ref.listen(loginProvider, (previous, next) {
+      // A request in flight carries the PREVIOUS error forward, because
+      // Riverpod copies the old state onto AsyncLoading. Reporting it here
+      // replays the last failure for the whole round trip.
+      if (next.isLoading) return;
+
       if (next.hasError) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(next.error.toString())));
-      } else if (next.isLoading) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(context.authL10n.loggingIn)));
+        // The raw object would put a DioException in front of the user.
+        AppSnackBar.showError(context, errorMessageOf(next.error!));
       } else if (next.value != null) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(context.authL10n.loginSuccess)));
+        // No message for the in-flight state: the button already carries it,
+        // and a second snackbar per attempt is what backed the queue up.
+        AppSnackBar.show(context, context.authL10n.loginSuccess);
         Navigator.pushNamedAndRemoveUntil(
           context,
           AppRoutes.ride,

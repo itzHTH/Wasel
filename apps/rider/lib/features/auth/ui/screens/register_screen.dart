@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:wasel_core/widgets/feedback/app_snack_bar.dart';
+import 'package:wasel_core/networking/errors/error_message.dart';
 import 'package:wasel_auth/wasel_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/core/routing/app_routes_name.dart';
@@ -69,9 +71,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
       if (result != null && mounted) {
         _sessionToken = result.sessionToken;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.authL10n.otpSentSuccess)),
-        );
+        AppSnackBar.show(context, context.authL10n.otpSentSuccess);
         // Navigate to OTP page
         _goToPage(1);
       }
@@ -121,9 +121,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           );
 
       if (mounted && result != null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.authL10n.registerSuccess)),
-        );
+        AppSnackBar.show(context, context.authL10n.registerSuccess);
         Navigator.pushNamedAndRemoveUntil(
           context,
           AppRoutes.ride,
@@ -193,11 +191,14 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   // ── Provider listener ─────────────────────────────────────────────────────
 
   void _registerListener(BuildContext context) {
-    ref.listen(registerProvider.select((state) => state), (previous, next) {
+    ref.listen(registerProvider, (previous, next) {
+      // A request in flight carries the PREVIOUS error forward, because
+      // Riverpod copies the old state onto AsyncLoading. Reporting it here
+      // replays the last failure for the whole round trip.
+      if (next.isLoading) return;
+
       if (next.hasError) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(next.error.toString())));
+        AppSnackBar.showError(context, errorMessageOf(next.error!));
       }
     });
   }

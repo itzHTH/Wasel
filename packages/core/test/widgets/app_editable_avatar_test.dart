@@ -6,7 +6,7 @@ import 'package:wasel_core/l10n/core_localizations.dart';
 import 'package:wasel_core/theme/app_brand.dart';
 import 'package:wasel_core/theme/app_theme.dart';
 import 'package:wasel_core/widgets/avatar/app_editable_avatar.dart';
-import 'package:wasel_core/widgets/feedback/app_loading.dart';
+import 'package:wasel_core/widgets/feedback/app_skeleton.dart';
 
 void main() {
   Widget wrap(Widget child) => ScreenUtilInit(
@@ -25,27 +25,28 @@ void main() {
     ),
   );
 
-  testWidgets('shows no spinner and stays tappable when idle', (tester) async {
+  bool isShimmering(WidgetTester tester) =>
+      tester.widget<AppSkeleton>(find.byType(AppSkeleton)).enabled;
+
+  testWidgets('does not shimmer and stays tappable when idle', (tester) async {
     var taps = 0;
     await tester.pumpWidget(
       wrap(AppEditableAvatar(size: 96, onTap: () => taps++)),
     );
 
-    expect(find.byType(AppInlineLoading), findsNothing);
+    expect(isShimmering(tester), isFalse);
 
     await tester.tap(find.byType(AppEditableAvatar));
     expect(taps, 1);
   });
 
-  testWidgets('shows a spinner and swallows taps while loading', (
-    tester,
-  ) async {
+  testWidgets('shimmers and swallows taps while loading', (tester) async {
     var taps = 0;
     await tester.pumpWidget(
       wrap(AppEditableAvatar(size: 96, isLoading: true, onTap: () => taps++)),
     );
 
-    expect(find.byType(AppInlineLoading), findsOneWidget);
+    expect(isShimmering(tester), isTrue);
 
     await tester.tap(find.byType(AppEditableAvatar));
     expect(taps, 0);
@@ -57,6 +58,6 @@ void main() {
     await tester.pumpWidget(wrap(const AppEditableAvatar(size: 96)));
 
     expect(find.byType(InkWell), findsNothing);
-    expect(find.byType(AppInlineLoading), findsNothing);
+    expect(isShimmering(tester), isFalse);
   });
 }

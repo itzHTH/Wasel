@@ -6,12 +6,11 @@ import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/widgets/feedback/app_error_state.dart';
 import 'package:wasel_core/widgets/feedback/app_skeleton.dart';
-import 'package:wasel_rides/domain/entities/ride_history_entry.dart';
-import 'package:wasel_rides/domain/entities/ride_history_status.dart';
 import 'package:wasel_rides/presentation/providers/history/ride_history_controller.dart';
 import 'package:wasel_rides/presentation/widgets/ride_history_empty_state.dart';
 import 'package:wasel_rides/presentation/widgets/ride_history_list.dart';
 import 'package:wasel_rides/presentation/widgets/ride_history_card.dart';
+import 'package:wasel_rides/presentation/widgets/ride_history_placeholders.dart';
 
 class RideHistoryScreen extends ConsumerWidget {
   const RideHistoryScreen({super.key});
@@ -43,10 +42,10 @@ class RideHistoryScreen extends ConsumerWidget {
                 AppDimens.space16,
                 AppDimens.space32,
               ),
-              itemCount: _placeholderEntries.length,
+              itemCount: rideHistoryPlaceholders.length,
               itemBuilder: (context, index) => Padding(
                 padding: EdgeInsets.only(bottom: AppDimens.space12),
-                child: RideHistoryCard(entry: _placeholderEntries[index]),
+                child: RideHistoryCard(entry: rideHistoryPlaceholders[index]),
               ),
             ),
           ),
@@ -70,15 +69,3 @@ class RideHistoryScreen extends ConsumerWidget {
     );
   }
 }
-
-/// Stand-in rows for the loading state.
-final _placeholderEntries = List<RideHistoryEntry>.unmodifiable(
-  List.generate(
-    8,
-    (index) => RideHistoryEntry(
-      requestedAt: DateTime(2026, 1, 1, 12, index),
-      price: 12500,
-      status: RideHistoryStatus.completed,
-    ),
-  ),
-);

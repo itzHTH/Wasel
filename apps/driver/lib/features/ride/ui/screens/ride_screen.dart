@@ -21,10 +21,11 @@ class _RideScreenState extends ConsumerState<RideScreen> {
   @override
   Widget build(BuildContext context) {
     ref.listen(rideActionControllerProvider, (previous, next) {
-      if (!next.hasError) return;
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(next.error.toString())));
+      // A request in flight carries the PREVIOUS error forward, because
+      // Riverpod copies the old state onto AsyncLoading. Reporting it here
+      // replays the last failure for the whole round trip.
+      if (next.isLoading || !next.hasError) return;
+      AppSnackBar.showError(context, errorMessageOf(next.error!));
     });
 
     // Kept alive for as long as the screen is: neither drives this build, so
@@ -78,7 +79,7 @@ class _RideScreenState extends ConsumerState<RideScreen> {
                     ),
                   ),
                 ),
-                const DriverRideCardsSwitcher(),
+                const Flexible(child: DriverRideCardsSwitcher()),
               ],
             ),
           ),

@@ -27,16 +27,11 @@ class PointLabelRow extends ConsumerWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          '$prefix: ',
-          style: context.styles.bodySecondary(),
-        ),
+        Text('$prefix: ', style: context.styles.bodySecondary()),
         Expanded(
           child: label.when(
-            loading: () => Align(
-              alignment: AlignmentDirectional.centerStart,
-              child: AppInlineLoading(size: AppDimens.icon18),
-            ),
+            loading: () =>
+                const AppSkeleton(child: _LabelText(_placeholderLabel)),
             error: (_, _) => _LabelText(fallback),
             data: (value) => _LabelText(value.isEmpty ? fallback : value),
           ),
@@ -45,6 +40,9 @@ class PointLabelRow extends ConsumerWidget {
     );
   }
 }
+
+/// Stand-in address the skeleton lays out while the real one resolves.
+const _placeholderLabel = 'شارع المعلمين، حي الحمداني';
 
 class _LabelText extends StatelessWidget {
   const _LabelText(this.value);

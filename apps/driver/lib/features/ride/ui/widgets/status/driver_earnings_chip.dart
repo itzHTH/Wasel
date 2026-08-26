@@ -32,39 +32,18 @@ class DriverEarningsChip extends StatelessWidget {
       ),
       _ => (context.colors.neutral400, context.colors.neutral100),
     };
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: AppDimens.space12,
-        vertical: AppDimens.space4,
-      ),
-      decoration: BoxDecoration(
-        color: background,
-        borderRadius: BorderRadius.circular(AppDimens.radiusPill),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            Icons.account_balance_wallet_outlined,
-            size: AppDimens.icon18,
-            color: foreground,
-          ),
-          SizedBox(width: AppDimens.space4),
-          Text(
-            total == null
-                ? '—'
-                : RideFormatters.fare(
-                    context.l10n,
-                    total.toString(),
-                    currency: currency,
-                  ),
-            textDirection: TextDirection.ltr,
-            style: context.styles
-                .body(weight: FontWeight.w600, color: context.colors.primary500)
-                .copyWith(color: foreground),
-          ),
-        ],
-      ),
+    return AppIconPill(
+      icon: Icons.account_balance_wallet_outlined,
+      label: total == null
+          ? '—'
+          : RideFormatters.fare(
+              context.l10n,
+              total.toString(),
+              currency: currency,
+            ),
+      foreground: foreground,
+      background: background,
+      labelTextDirection: TextDirection.ltr,
     );
   }
 }

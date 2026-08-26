@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_auth/core/policies/auth_role_policy.dart';
 import 'package:wasel_core/helpers/session_store.dart';
+import 'package:wasel_core/networking/session_refresher.dart';
 import 'package:wasel_core/networking/api_results.dart';
 import 'package:wasel_core/networking/errors/error_handler.dart';
 import 'package:wasel_auth/data/models/logout/request/logout_request.dart';
@@ -155,6 +156,9 @@ class AuthRepo implements BaseAuthRepo {
       return ApiResults.failure(ErrorHandler.handle(e));
     } finally {
       // Signing out locally must not depend on the revoke call succeeding.
+      // Marked first: the caller routes itself, so a 401 from the hub or a
+      // request still in flight must not route again on top of it.
+      SessionRefresher.instance.beginLogout();
       await SessionStore.clear();
     }
   }

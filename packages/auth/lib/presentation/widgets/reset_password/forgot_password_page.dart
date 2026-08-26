@@ -5,6 +5,7 @@ import 'package:wasel_core/helpers/app_validators.dart';
 import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/widgets/forms/app_field_icon.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
+import 'package:wasel_core/widgets/app_prompt_row.dart';
 import 'package:wasel_core/widgets/buttons/app_back_button.dart';
 import 'package:wasel_core/widgets/feedback/app_inline_error.dart';
 import 'package:wasel_core/widgets/forms/app_labeled_field.dart';
@@ -86,21 +87,10 @@ class ForgotPasswordPage extends StatelessWidget {
           ),
           SizedBox(height: AppDimens.space24),
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                context.authL10n.rememberedPassword,
-                style: context.styles.bodyMuted(),
-              ),
-              GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: Text(
-                  context.authL10n.login,
-                  style: context.styles.bodyBrand(),
-                ),
-              ),
-            ],
+          AppPromptRow(
+            message: context.authL10n.rememberedPassword,
+            actionLabel: context.authL10n.login,
+            onTap: () => Navigator.pop(context),
           ),
           SizedBox(height: AppDimens.space32),
         ],

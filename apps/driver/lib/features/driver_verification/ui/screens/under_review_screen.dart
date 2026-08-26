@@ -1,5 +1,6 @@
 import 'package:driver/features/driver_verification/domain/entities/verification_status.dart';
 import 'package:flutter/material.dart';
+import 'package:wasel_core/widgets/feedback/app_snack_bar.dart';
 import 'package:driver/l10n/l10n_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/extensions/navigation_extension.dart';
@@ -25,9 +26,7 @@ class UnderReviewScreen extends ConsumerWidget {
       case enVerificationStatus.pending:
         _goToWizard(context);
       case enVerificationStatus.underReview:
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(context.l10n.stillUnderReview)));
+        AppSnackBar.show(context, context.l10n.stillUnderReview);
     }
   }
 
@@ -49,9 +48,8 @@ class UnderReviewScreen extends ConsumerWidget {
           context,
           status?.status ?? enVerificationStatus.underReview,
         ),
-        error: (_, __) => ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.statusUpdateFailed)),
-        ),
+        error: (_, __) =>
+            AppSnackBar.showError(context, context.l10n.statusUpdateFailed),
       );
     });
 

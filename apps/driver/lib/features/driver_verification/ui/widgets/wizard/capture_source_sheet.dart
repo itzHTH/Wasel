@@ -84,10 +84,14 @@ class _SourceTile extends StatelessWidget {
               color: context.colors.primary500,
             ),
             SizedBox(width: AppDimens.space16),
-            Text(
-              label,
-              style: context.styles.bodyLarge(
-                color: context.colors.secondary500,
+            Expanded(
+              child: Text(
+                label,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: context.styles.bodyLarge(
+                  color: context.colors.secondary500,
+                ),
               ),
             ),
           ],

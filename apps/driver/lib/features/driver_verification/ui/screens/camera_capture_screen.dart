@@ -140,9 +140,7 @@ class _CameraCaptureScreenState extends State<CameraCaptureScreen>
     } catch (_) {
       if (!mounted) return;
       _isCapturing.value = false;
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(context.l10n.captureFailed)));
+      AppSnackBar.showError(context, context.l10n.captureFailed);
     }
   }
 
@@ -164,9 +162,7 @@ class _CameraCaptureScreenState extends State<CameraCaptureScreen>
             );
           }
           if (controller == null || !controller.value.isInitialized) {
-            return Center(
-              child: CircularProgressIndicator(color: context.colors.onScrim),
-            );
+            return AppLoadingOverlay(backgroundColor: context.colors.scrim);
           }
           return CameraCaptureView(
             controller: controller,

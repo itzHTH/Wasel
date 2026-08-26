@@ -59,6 +59,7 @@ export 'routing/app_page_transitions.dart';
 export 'theme/app_brand.dart';
 export 'theme/app_colors_extension.dart';
 export 'theme/app_dimens.dart';
+export 'theme/app_text_scaling.dart';
 export 'theme/app_text_styles.dart';
 export 'theme/app_theme.dart';
 export 'theme/palettes/alert_tokens.dart';
@@ -85,12 +86,16 @@ export 'widgets/forms/app_text_form_field.dart';
 export 'widgets/forms/password_field.dart';
 
 // Widgets — feedback (dialogs, errors, loading)
+export 'widgets/feedback/app_brand_pulse.dart';
 export 'widgets/feedback/app_dialog.dart';
 export 'widgets/feedback/app_error_retry.dart';
 export 'widgets/feedback/app_error_state.dart';
 export 'widgets/feedback/app_inline_error.dart';
 export 'widgets/feedback/app_loading.dart';
+export 'widgets/feedback/app_progress_ring.dart';
+export 'widgets/feedback/app_shimmer_sheen.dart';
 export 'widgets/feedback/app_skeleton.dart';
+export 'widgets/feedback/app_snack_bar.dart';
 
 // Widgets — cards & rows
 export 'widgets/cards/app_group_card.dart';
@@ -129,6 +134,8 @@ export 'widgets/ride/ride_stage_header.dart';
 
 // Widgets — misc
 export 'widgets/app_entrance_fade.dart';
+export 'widgets/app_icon_pill.dart';
+export 'widgets/app_prompt_row.dart';
 export 'widgets/app_soon_badge.dart';
 export 'widgets/app_splash_branding.dart';
 export 'widgets/app_step_indicator.dart';

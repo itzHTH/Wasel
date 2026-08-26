@@ -42,53 +42,69 @@ class _RideCompletedScreenState extends State<RideCompletedScreen> {
     return Scaffold(
       backgroundColor: context.colors.screenBackground,
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppDimens.screenHPadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SizedBox(height: AppDimens.space40),
-              Center(
-                child: RideStageBadge(
-                  stage: RideStageVisual.completed,
-                  size: AppDimens.icon48,
+        // The same recipe the OTP page uses: centred while it fits, scrollable
+        // once the type ramp or the keyboard makes it taller than the screen.
+        child: LayoutBuilder(
+          builder: (context, constraints) => SingleChildScrollView(
+            padding: EdgeInsets.only(
+              left: AppDimens.screenHPadding,
+              right: AppDimens.screenHPadding,
+              bottom: MediaQuery.viewInsetsOf(context).bottom,
+            ),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+              child: IntrinsicHeight(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SizedBox(height: AppDimens.space40),
+                    Center(
+                      child: RideStageBadge(
+                        stage: RideStageVisual.completed,
+                        size: AppDimens.icon48,
+                      ),
+                    ),
+                    SizedBox(height: AppDimens.space16),
+                    Text(
+                      context.l10n.arrivedSafely,
+                      textAlign: TextAlign.center,
+                      style: context.styles.headline(),
+                    ),
+                    SizedBox(height: AppDimens.space8),
+                    Text(
+                      widget.fare,
+                      textAlign: TextAlign.center,
+                      style: context.styles.display(),
+                    ),
+                    SizedBox(height: AppDimens.space32),
+                    _summaryCard(),
+                    SizedBox(height: AppDimens.space32),
+                    Text(
+                      context.l10n.howWasYourRide,
+                      textAlign: TextAlign.center,
+                      style: context.styles.title(),
+                    ),
+                    SizedBox(height: AppDimens.space16),
+                    StarRatingBar(
+                      onRatingChanged: (value) =>
+                          setState(() => _rating = value),
+                    ),
+                    SizedBox(height: AppDimens.space16),
+                    _commentField(),
+                    const Spacer(),
+                    AppPrimaryButton(
+                      label: context.coreL10n.done,
+                      isLoading: widget.isSubmitting,
+                      onPressed: () => widget.onDone(
+                        _rating,
+                        _commentController.text.trim(),
+                      ),
+                    ),
+                    SizedBox(height: AppDimens.space24),
+                  ],
                 ),
               ),
-              SizedBox(height: AppDimens.space16),
-              Text(
-                context.l10n.arrivedSafely,
-                textAlign: TextAlign.center,
-                style: context.styles.headline(),
-              ),
-              SizedBox(height: AppDimens.space8),
-              Text(
-                widget.fare,
-                textAlign: TextAlign.center,
-                style: context.styles.display(),
-              ),
-              SizedBox(height: AppDimens.space32),
-              _summaryCard(),
-              SizedBox(height: AppDimens.space32),
-              Text(
-                context.l10n.howWasYourRide,
-                textAlign: TextAlign.center,
-                style: context.styles.title(),
-              ),
-              SizedBox(height: AppDimens.space16),
-              StarRatingBar(
-                onRatingChanged: (value) => setState(() => _rating = value),
-              ),
-              SizedBox(height: AppDimens.space16),
-              _commentField(),
-              const Spacer(),
-              AppPrimaryButton(
-                label: context.coreL10n.done,
-                isLoading: widget.isSubmitting,
-                onPressed: () =>
-                    widget.onDone(_rating, _commentController.text.trim()),
-              ),
-              SizedBox(height: AppDimens.space24),
-            ],
+            ),
           ),
         ),
       ),

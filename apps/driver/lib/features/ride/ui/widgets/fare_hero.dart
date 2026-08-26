@@ -21,6 +21,8 @@ class FareHero extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       RideFormatters.fare(context.l10n, amount.toString(), currency: currency),
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
       style: color == null
           ? context.styles.display()
           : context.styles.display().copyWith(color: color),

@@ -4,7 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasel_core/networking/errors/error_message.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 import 'package:wasel_core/widgets/feedback/app_error_state.dart';
-import 'package:wasel_core/widgets/feedback/app_loading.dart';
+import 'package:wasel_core/widgets/feedback/app_skeleton.dart';
+import 'package:wasel_profile/presentation/widgets/profile_placeholders.dart';
 import 'package:wasel_profile/domain/entities/profile_edit_capabilities.dart';
 import 'package:wasel_profile/presentation/providers/profile/rider_profile_edit_provider.dart';
 import 'package:wasel_profile/presentation/providers/profile/rider_profile_provider.dart';
@@ -31,7 +32,21 @@ class ProfileEditScreen extends ConsumerWidget {
         surfaceTintColor: context.colors.screenBackground,
       ),
       body: profile.when(
-        loading: () => const Center(child: AppInlineLoading()),
+        // Keyed apart from the real form so its fields are rebuilt from
+        // live values rather than kept from the stand-in.
+        loading: () => AppSkeleton(
+          child: ProfileEditView(
+            key: const ValueKey('skeleton'),
+            capabilities: const ProfileEditCapabilities.rider(),
+            firstName: placeholderRiderProfile.firstName,
+            lastName: placeholderRiderProfile.lastName,
+            phoneNumber: placeholderRiderProfile.phoneNumber,
+            photoUrl: null,
+            isSaving: false,
+            saveError: null,
+            onSave: (_) async => false,
+          ),
+        ),
         error: (error, _) => AppErrorState(
           message: errorMessageOf(error),
           onRetry: refresh,

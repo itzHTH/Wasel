@@ -60,8 +60,9 @@ class PickupOnTheWayCard extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              FareHero(amount: fare),
-              PaymentMethodChip(method: paymentMethod),
+              Flexible(child: FareHero(amount: fare)),
+              SizedBox(width: AppDimens.space8),
+              Flexible(child: PaymentMethodChip(method: paymentMethod)),
             ],
           ),
         ],

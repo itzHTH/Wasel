@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:driver/l10n/l10n_extension.dart';
-import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
+import 'package:wasel_core/widgets/app_icon_pill.dart';
 import 'package:wasel_profile/domain/entities/driver_approval_status.dart';
 
 /// The driver's account standing, as a coloured pill.
@@ -39,28 +39,11 @@ class DriverApprovalBadge extends StatelessWidget {
       ),
     };
 
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: AppDimens.space12,
-        vertical: AppDimens.space4,
-      ),
-      decoration: BoxDecoration(
-        color: background,
-        borderRadius: BorderRadius.circular(AppDimens.radiusPill),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: AppDimens.icon18, color: foreground),
-          SizedBox(width: AppDimens.space4),
-          Text(
-            label,
-            style: context.styles
-                .body(weight: FontWeight.w600)
-                .copyWith(color: foreground),
-          ),
-        ],
-      ),
+    return AppIconPill(
+      icon: icon,
+      label: label,
+      foreground: foreground,
+      background: background,
     );
   }
 }

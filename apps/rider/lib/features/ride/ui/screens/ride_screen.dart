@@ -84,10 +84,12 @@ class _RideScreenState extends ConsumerState<RideScreen> {
                   ),
                 ),
                 const LocationPermissionBanner(),
-                RideCardsSwitcher(
-                  onConfirm: () => ref
-                      .read(rideDraftProvider.notifier)
-                      .confirmCurrentPoint(_center),
+                Flexible(
+                  child: RideCardsSwitcher(
+                    onConfirm: () => ref
+                        .read(rideDraftProvider.notifier)
+                        .confirmCurrentPoint(_center),
+                  ),
                 ),
               ],
             ),

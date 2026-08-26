@@ -79,25 +79,12 @@ class _UploadingBody extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(
-          width: 132.r,
-          height: 132.r,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              SizedBox.expand(
-                child: CircularProgressIndicator(
-                  value: progress,
-                  strokeWidth: 6,
-                  backgroundColor: context.colors.neutral100,
-                  valueColor: AlwaysStoppedAnimation(context.colors.primary500),
-                ),
-              ),
-              Text(
-                '${(progress * 100).round()}%',
-                style: context.styles.headline(),
-              ),
-            ],
+        AppProgressRing(
+          progress: progress,
+          size: 132.r,
+          child: Text(
+            '${(progress * 100).round()}%',
+            style: context.styles.headline(),
           ),
         ),
         SizedBox(height: AppDimens.space24),
