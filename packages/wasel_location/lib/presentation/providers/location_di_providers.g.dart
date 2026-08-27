@@ -9,6 +9,52 @@ part of 'location_di_providers.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
+@ProviderFor(placesApiService)
+final placesApiServiceProvider = PlacesApiServiceProvider._();
+
+final class PlacesApiServiceProvider
+    extends
+        $FunctionalProvider<
+          PlacesApiService,
+          PlacesApiService,
+          PlacesApiService
+        >
+    with $Provider<PlacesApiService> {
+  PlacesApiServiceProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'placesApiServiceProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$placesApiServiceHash();
+
+  @$internal
+  @override
+  $ProviderElement<PlacesApiService> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  PlacesApiService create(Ref ref) {
+    return placesApiService(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(PlacesApiService value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<PlacesApiService>(value),
+    );
+  }
+}
+
+String _$placesApiServiceHash() => r'67b8d1764fb2bed136bfc5440c18bbf293993cbf';
+
 @ProviderFor(geocodingApiService)
 final geocodingApiServiceProvider = GeocodingApiServiceProvider._();
 
@@ -55,7 +101,63 @@ final class GeocodingApiServiceProvider
 }
 
 String _$geocodingApiServiceHash() =>
-    r'cdac9b00ae5e6365d0d1fade013094d5c4a3d255';
+    r'0ad8e2decd472791e5d821f8f45981304e0fe1e5';
+
+/// One session per container: the pickup and drop-off searches run one after
+/// the other, so they share the billing session the rider is in.
+
+@ProviderFor(placeSearchSession)
+final placeSearchSessionProvider = PlaceSearchSessionProvider._();
+
+/// One session per container: the pickup and drop-off searches run one after
+/// the other, so they share the billing session the rider is in.
+
+final class PlaceSearchSessionProvider
+    extends
+        $FunctionalProvider<
+          PlaceSearchSession,
+          PlaceSearchSession,
+          PlaceSearchSession
+        >
+    with $Provider<PlaceSearchSession> {
+  /// One session per container: the pickup and drop-off searches run one after
+  /// the other, so they share the billing session the rider is in.
+  PlaceSearchSessionProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'placeSearchSessionProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$placeSearchSessionHash();
+
+  @$internal
+  @override
+  $ProviderElement<PlaceSearchSession> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  PlaceSearchSession create(Ref ref) {
+    return placeSearchSession(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(PlaceSearchSession value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<PlaceSearchSession>(value),
+    );
+  }
+}
+
+String _$placeSearchSessionHash() =>
+    r'9f9a768bbe933f9739c8b67f9112a7de5fb831d4';
 
 @ProviderFor(routeRemoteService)
 final routeRemoteServiceProvider = RouteRemoteServiceProvider._();
@@ -198,7 +300,7 @@ final class GeocodingRepoProvider
   }
 }
 
-String _$geocodingRepoHash() => r'9a9540fd3cec9b44d418adf1e798ce1194eb6096';
+String _$geocodingRepoHash() => r'3e212fb8f4336e1de2d8505610c85284bd26b7ad';
 
 @ProviderFor(routeRepo)
 final routeRepoProvider = RouteRepoProvider._();
@@ -378,6 +480,102 @@ final class GetRouteUseCaseProvider
 }
 
 String _$getRouteUseCaseHash() => r'8b806898b7690185a5446979af6556395450b16f';
+
+@ProviderFor(searchPlacesUseCase)
+final searchPlacesUseCaseProvider = SearchPlacesUseCaseProvider._();
+
+final class SearchPlacesUseCaseProvider
+    extends
+        $FunctionalProvider<
+          SearchPlacesUseCase,
+          SearchPlacesUseCase,
+          SearchPlacesUseCase
+        >
+    with $Provider<SearchPlacesUseCase> {
+  SearchPlacesUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'searchPlacesUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$searchPlacesUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<SearchPlacesUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  SearchPlacesUseCase create(Ref ref) {
+    return searchPlacesUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(SearchPlacesUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<SearchPlacesUseCase>(value),
+    );
+  }
+}
+
+String _$searchPlacesUseCaseHash() =>
+    r'0bded59d098a0b7f6c3e2b9012e8365886bbe1ab';
+
+@ProviderFor(retrievePlaceUseCase)
+final retrievePlaceUseCaseProvider = RetrievePlaceUseCaseProvider._();
+
+final class RetrievePlaceUseCaseProvider
+    extends
+        $FunctionalProvider<
+          RetrievePlaceUseCase,
+          RetrievePlaceUseCase,
+          RetrievePlaceUseCase
+        >
+    with $Provider<RetrievePlaceUseCase> {
+  RetrievePlaceUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'retrievePlaceUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$retrievePlaceUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<RetrievePlaceUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  RetrievePlaceUseCase create(Ref ref) {
+    return retrievePlaceUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(RetrievePlaceUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<RetrievePlaceUseCase>(value),
+    );
+  }
+}
+
+String _$retrievePlaceUseCaseHash() =>
+    r'efdcdfc6988316875b100bb8b15068d9bc80ab30';
 
 @ProviderFor(watchDeviceLocationUseCase)
 final watchDeviceLocationUseCaseProvider =
