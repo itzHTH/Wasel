@@ -22,6 +22,7 @@ export 'helpers/app_local_cache.dart';
 export 'helpers/app_navigation.dart';
 export 'helpers/app_url_launcher.dart';
 export 'helpers/app_validators.dart';
+export 'helpers/debouncer.dart';
 export 'helpers/session_store.dart';
 
 // Localization
