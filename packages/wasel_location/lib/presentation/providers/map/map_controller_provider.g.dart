@@ -61,7 +61,7 @@ final class MapControllerHolderProvider
 }
 
 String _$mapControllerHolderHash() =>
-    r'd9792eb1406511cc4571579a25d3d583a92ecc0b';
+    r'35d0452a413c1b9a0f2a84da97e3f95cc75cf4e6';
 
 /// Holds the GoogleMapController of the currently mounted `AppMap`.
 //

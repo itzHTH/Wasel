@@ -72,6 +72,7 @@ export 'presentation/animation/utils/motion_vsync.dart';
 export 'presentation/animation/vehicle_motion.dart';
 
 // Presentation — location providers
+export 'presentation/providers/location/current_location_label_provider.dart';
 export 'presentation/providers/location/device_location_provider.dart';
 export 'presentation/providers/location/last_known_location_provider.dart';
 export 'presentation/providers/location/location_access_provider.dart';
@@ -79,8 +80,16 @@ export 'presentation/providers/location/point_label_provider.dart';
 export 'presentation/providers/location/recenter_controller.dart';
 
 // Presentation — search providers
+export 'presentation/providers/search/place_search_controller.dart';
+export 'presentation/providers/search/place_search_state.dart';
+export 'presentation/providers/search/search_field_type.dart';
 
 // Presentation — search widgets
+export 'presentation/widgets/search/place_search_action_row.dart';
+export 'presentation/widgets/search/place_search_field.dart';
+export 'presentation/widgets/search/place_search_message.dart';
+export 'presentation/widgets/search/place_search_results.dart';
+export 'presentation/widgets/search/place_suggestion_tile.dart';
 
 // Presentation — map providers
 export 'presentation/providers/map/initial_camera_target_provider.dart';

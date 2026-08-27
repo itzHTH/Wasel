@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:wasel_location/core/extensions/geo_point_map_x.dart';
+import 'package:wasel_location/domain/entities/geo_point.dart';
 
 part 'map_controller_provider.g.dart';
 
@@ -26,4 +28,18 @@ class MapControllerHolder extends _$MapControllerHolder {
 
     state = AsyncValue.data(controller);
   }
+
+  /// Frames [point], for following a choice the rider just made elsewhere —
+  /// picking a place out of search, say.
+  Future<void> focusOn(GeoPoint point, {double zoom = _focusZoom}) async {
+    final controller = await future;
+    if (!ref.mounted) return;
+
+    await controller.animateCamera(
+      CameraUpdate.newLatLngZoom(point.toLatLng(), zoom),
+    );
+  }
 }
+
+/// Close enough to read street names, matching the "my location" recentre.
+const double _focusZoom = 16;

@@ -41,4 +41,36 @@ class LocationLocalizationsEn extends LocationLocalizations {
 
   @override
   String get addressSeparator => ', ';
+
+  @override
+  String get searchPlaceHint => 'Search for a place';
+
+  @override
+  String get searchPromptTitle => 'Start typing';
+
+  @override
+  String get searchPromptMessage =>
+      'Type an area or street name and nearby places will appear';
+
+  @override
+  String get searchNoResultsTitle => 'We couldn\'t find that place';
+
+  @override
+  String get searchNoResultsMessage =>
+      'Try spelling it differently, or search for a nearby area';
+
+  @override
+  String get searchFailedTitle => 'We couldn\'t search';
+
+  @override
+  String get currentLocation => 'My current location';
+
+  @override
+  String get clearSearchField => 'Clear search';
+
+  @override
+  String get searchResultsLabel => 'Search results';
+
+  @override
+  String get pickupRequiredFirst => 'Please choose your pickup point first';
 }

@@ -160,6 +160,66 @@ abstract class LocationLocalizations {
   /// In ar, this message translates to:
   /// **'، '**
   String get addressSeparator;
+
+  /// Hint inside a place-search text field
+  ///
+  /// In ar, this message translates to:
+  /// **'دوّر على مكان'**
+  String get searchPlaceHint;
+
+  /// Title of the empty state before the user types
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب حتى ندوّر'**
+  String get searchPromptTitle;
+
+  /// Body of the empty state before the user types
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب اسم منطقة أو شارع، وراح تظهرلك الأماكن القريبة منك'**
+  String get searchPromptMessage;
+
+  /// Title when the search returned nothing
+  ///
+  /// In ar, this message translates to:
+  /// **'ما لگينا هذا المكان'**
+  String get searchNoResultsTitle;
+
+  /// Body when the search returned nothing
+  ///
+  /// In ar, this message translates to:
+  /// **'جرّب تكتب الاسم بشكل ثاني أو دوّر على منطقة قريبة'**
+  String get searchNoResultsMessage;
+
+  /// Title when the search request failed
+  ///
+  /// In ar, this message translates to:
+  /// **'ما گدرنا ندوّر'**
+  String get searchFailedTitle;
+
+  /// Label for the device's current position used as the pickup
+  ///
+  /// In ar, this message translates to:
+  /// **'موقعي الحالي'**
+  String get currentLocation;
+
+  /// Accessibility label for the button that clears a search field
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح البحث'**
+  String get clearSearchField;
+
+  /// Accessibility label announcing the results list
+  ///
+  /// In ar, this message translates to:
+  /// **'نتائج البحث'**
+  String get searchResultsLabel;
+
+  /// Shown when the rider taps drop-off before setting a pickup
+  ///
+  /// In ar, this message translates to:
+  /// **'الرجاء تحديد نقطة الانطلاق أولاً'**
+  String get pickupRequiredFirst;
 }
 
 class _LocationLocalizationsDelegate
