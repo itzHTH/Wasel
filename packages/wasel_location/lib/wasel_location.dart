@@ -18,7 +18,7 @@ export 'domain/entities/location_exception.dart';
 export 'domain/entities/route_request.dart';
 
 // Domain — movement maths
-export 'domain/geo/geo_interpolation.dart';
+export 'core/geo/geo_interpolation.dart';
 
 // Domain — abstract repos
 export 'domain/repos/base_device_location_repo.dart';

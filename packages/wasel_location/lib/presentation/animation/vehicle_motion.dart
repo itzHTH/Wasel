@@ -1,7 +1,7 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:wasel_location/core/geo/geo_interpolation.dart';
 import 'package:wasel_location/domain/entities/geo_point.dart';
-import 'package:wasel_location/domain/geo/geo_interpolation.dart';
 import 'package:wasel_location/presentation/animation/config/vehicle_motion_config.dart';
 import 'package:wasel_location/presentation/animation/models/vehicle_pose.dart';
 import 'package:wasel_location/presentation/animation/utils/motion_vsync.dart';
