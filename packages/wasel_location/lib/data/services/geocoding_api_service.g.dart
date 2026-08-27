@@ -20,29 +20,24 @@ class _GeocodingApiService implements GeocodingApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<GoogleGeocodingResponse> getLocationName(
-    String lat,
-    String lng, {
-    String languageCode = LocationApiConst.geocodingFallbackLanguageCode,
-    String regionCode = LocationApiConst.geocodingRegionCode,
+  Future<ReverseGeocodingResponse> reverseGeocode({
+    required String latlng,
+    String language = LocationApiConst.geocodingFallbackLanguageCode,
     CancelToken? cancelToken,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'languageCode': languageCode,
-      r'regionCode': regionCode,
+      r'latlng': latlng,
+      r'language': language,
     };
     queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{
-      r'X-Goog-FieldMask': 'results.addressComponents',
-    };
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<GoogleGeocodingResponse>(
+    final _options = _setStreamType<ReverseGeocodingResponse>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/geocode/location/${lat},${lng}',
+            '/json',
             queryParameters: queryParameters,
             data: _data,
             cancelToken: cancelToken,
@@ -50,9 +45,9 @@ class _GeocodingApiService implements GeocodingApiService {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late GoogleGeocodingResponse _value;
+    late ReverseGeocodingResponse _value;
     try {
-      _value = GoogleGeocodingResponse.fromJson(_result.data!);
+      _value = ReverseGeocodingResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;

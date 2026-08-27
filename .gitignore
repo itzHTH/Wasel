@@ -65,3 +65,5 @@ graphify-out/
 
 .kilo/
 AGENTS.md
+# Golden-test diff artifacts, written on a failed run
+**/test/**/failures/

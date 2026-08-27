@@ -9,5 +9,18 @@
   "locationPermissionMissing": "We can't reach your location without permission",
   "locationNotFound": "We couldn't find your location. Try again.",
   "locationError": "Something went wrong while finding your location",
-  "addressSeparator": ", "
+  "addressSeparator": ", ",
+  "searchPlaceHint": "Search for a place",
+  "searchPromptTitle": "Start typing",
+  "searchPromptMessage": "Type an area or street name and nearby places will appear",
+  "searchNoResultsTitle": "We couldn't find that place",
+  "searchNoResultsMessage": "Try spelling it differently, or search for a nearby area",
+  "searchFailedTitle": "We couldn't search",
+  "currentLocation": "My current location",
+  "clearSearchField": "Clear search",
+  "searchResultsLabel": "Search results",
+  "pickupRequiredFirst": "Please choose your pickup point first",
+  "@pickupRequiredFirst": {
+    "description": "Shown when the rider taps drop-off before setting a pickup"
+  }
 }

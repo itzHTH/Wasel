@@ -39,5 +39,45 @@
   "addressSeparator": "، ",
   "@addressSeparator": {
     "description": "Joins the street and locality parts of an address"
+  },
+  "searchPlaceHint": "دوّر على مكان",
+  "@searchPlaceHint": {
+    "description": "Hint inside a place-search text field"
+  },
+  "searchPromptTitle": "اكتب حتى ندوّر",
+  "@searchPromptTitle": {
+    "description": "Title of the empty state before the user types"
+  },
+  "searchPromptMessage": "اكتب اسم منطقة أو شارع، وراح تظهرلك الأماكن القريبة منك",
+  "@searchPromptMessage": {
+    "description": "Body of the empty state before the user types"
+  },
+  "searchNoResultsTitle": "ما لگينا هذا المكان",
+  "@searchNoResultsTitle": {
+    "description": "Title when the search returned nothing"
+  },
+  "searchNoResultsMessage": "جرّب تكتب الاسم بشكل ثاني أو دوّر على منطقة قريبة",
+  "@searchNoResultsMessage": {
+    "description": "Body when the search returned nothing"
+  },
+  "searchFailedTitle": "ما گدرنا ندوّر",
+  "@searchFailedTitle": {
+    "description": "Title when the search request failed"
+  },
+  "currentLocation": "موقعي الحالي",
+  "@currentLocation": {
+    "description": "Label for the device's current position used as the pickup"
+  },
+  "clearSearchField": "مسح البحث",
+  "@clearSearchField": {
+    "description": "Accessibility label for the button that clears a search field"
+  },
+  "searchResultsLabel": "نتائج البحث",
+  "@searchResultsLabel": {
+    "description": "Accessibility label announcing the results list"
+  },
+  "pickupRequiredFirst": "الرجاء تحديد نقطة الانطلاق أولاً",
+  "@pickupRequiredFirst": {
+    "description": "Shown when the rider taps drop-off before setting a pickup"
   }
 }

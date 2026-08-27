@@ -15,10 +15,11 @@ export 'domain/entities/device_fix.dart';
 export 'domain/entities/geo_point.dart';
 export 'domain/entities/location_access.dart';
 export 'domain/entities/location_exception.dart';
+export 'domain/entities/place_suggestion.dart';
 export 'domain/entities/route_request.dart';
 
 // Domain — movement maths
-export 'domain/geo/geo_interpolation.dart';
+export 'core/geo/geo_interpolation.dart';
 
 // Domain — abstract repos
 export 'domain/repos/base_device_location_repo.dart';
@@ -31,6 +32,8 @@ export 'domain/usecases/get_last_known_location_use_case.dart';
 export 'domain/usecases/get_point_label_use_case.dart';
 export 'domain/usecases/get_route_use_case.dart';
 export 'domain/usecases/is_location_service_enabled_use_case.dart';
+export 'domain/usecases/retrieve_place_use_case.dart';
+export 'domain/usecases/search_places_use_case.dart';
 export 'domain/usecases/watch_device_location_use_case.dart';
 
 // Core — constants
@@ -38,17 +41,21 @@ export 'core/const/app_map_defaults.dart';
 export 'core/const/location_api_const.dart';
 
 // Data — models
-export 'data/models/geocoding/address_component.dart';
-export 'data/models/geocoding/google_geocoding_response.dart';
+export 'data/models/geocoding/reverse_geocoding_response.dart';
+export 'data/models/places/autocomplete/request/autocomplete_body.dart';
+export 'data/models/places/autocomplete/response/autocomplete_response.dart';
+export 'data/models/places/details/response/place_details_response.dart';
 
 // Data — services
 export 'data/services/device_location_service.dart';
 export 'data/services/geocoding_api_service.dart';
+export 'data/services/places_api_service.dart';
+export 'data/session/place_search_session.dart';
 export 'data/services/route_remote_service.dart';
 
 // Data — repo implementations
 export 'data/repos/device_location_repo.dart';
-export 'data/repos/geocoding_repo.dart';
+export 'data/repos/google_geocoding_repo.dart';
 export 'data/repos/route_repo.dart';
 
 // DI — the composition root: services, repos and use cases as providers
@@ -65,11 +72,24 @@ export 'presentation/animation/utils/motion_vsync.dart';
 export 'presentation/animation/vehicle_motion.dart';
 
 // Presentation — location providers
+export 'presentation/providers/location/current_location_label_provider.dart';
 export 'presentation/providers/location/device_location_provider.dart';
 export 'presentation/providers/location/last_known_location_provider.dart';
 export 'presentation/providers/location/location_access_provider.dart';
 export 'presentation/providers/location/point_label_provider.dart';
 export 'presentation/providers/location/recenter_controller.dart';
+
+// Presentation — search providers
+export 'presentation/providers/search/place_search_controller.dart';
+export 'presentation/providers/search/place_search_state.dart';
+export 'presentation/providers/search/search_field_type.dart';
+
+// Presentation — search widgets
+export 'presentation/widgets/search/place_search_action_row.dart';
+export 'presentation/widgets/search/place_search_field.dart';
+export 'presentation/widgets/search/place_search_message.dart';
+export 'presentation/widgets/search/place_search_results.dart';
+export 'presentation/widgets/search/place_suggestion_tile.dart';
 
 // Presentation — map providers
 export 'presentation/providers/map/initial_camera_target_provider.dart';

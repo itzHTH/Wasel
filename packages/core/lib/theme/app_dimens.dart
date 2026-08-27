@@ -4,6 +4,7 @@ class AppDimens {
   AppDimens._();
 
   // ── Border Radii
+  static double get radius4 => 4.r;
   static double get radius8 => 8.r;
   static double get radius12 => 12.r;
   static double get radius16 => 16.r;
@@ -27,6 +28,7 @@ class AppDimens {
   static double get otpBoxSize => 58.r;
 
   // ── Icon Sizes
+  static double get icon12 => 12.r;
   static double get icon18 => 18.r;
   static double get icon20 => 20.r;
   static double get icon24 => 24.r;

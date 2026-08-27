@@ -2,8 +2,9 @@ import 'package:wasel_core/flavors/flavors_config.dart';
 
 class ApiConstants {
   static String get baseUrl => FlavorConfig.instance.baseUrl;
-  static const String googleGeocodingBaseUrl =
-      'https://geocode.googleapis.com/v4';
+  static const String placesBaseUrl = 'https://places.googleapis.com/v1';
+  static const String geocodingBaseUrl =
+      'https://maps.googleapis.com/maps/api/geocode';
   static String get hubUrl => "https://apiservice.ddns.net/wasl/hubs/tracking";
 
   static const String apiVersion = '1.0';

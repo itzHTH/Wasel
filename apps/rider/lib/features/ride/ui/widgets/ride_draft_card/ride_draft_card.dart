@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_draft_card/ride_action_buttons.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_draft_card/ride_back_button.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_draft_card/ride_card_title.dart';
+import 'package:wasal/features/ride/ui/widgets/ride_draft_card/ride_search_bar.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_draft_card/ride_summary_text.dart';
 import 'package:wasel_core/wasel_core.dart';
 
@@ -35,6 +36,7 @@ class RideDraftCard extends StatelessWidget {
             ],
           ),
           const RideSummaryText(),
+          const RideSearchBar(),
           SizedBox(height: AppDimens.space16),
           RideActionButtons(
             onConfirm: onConfirm,

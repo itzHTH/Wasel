@@ -39,4 +39,36 @@ class LocationLocalizationsAr extends LocationLocalizations {
 
   @override
   String get addressSeparator => '، ';
+
+  @override
+  String get searchPlaceHint => 'دوّر على مكان';
+
+  @override
+  String get searchPromptTitle => 'اكتب حتى ندوّر';
+
+  @override
+  String get searchPromptMessage =>
+      'اكتب اسم منطقة أو شارع، وراح تظهرلك الأماكن القريبة منك';
+
+  @override
+  String get searchNoResultsTitle => 'ما لگينا هذا المكان';
+
+  @override
+  String get searchNoResultsMessage =>
+      'جرّب تكتب الاسم بشكل ثاني أو دوّر على منطقة قريبة';
+
+  @override
+  String get searchFailedTitle => 'ما گدرنا ندوّر';
+
+  @override
+  String get currentLocation => 'موقعي الحالي';
+
+  @override
+  String get clearSearchField => 'مسح البحث';
+
+  @override
+  String get searchResultsLabel => 'نتائج البحث';
+
+  @override
+  String get pickupRequiredFirst => 'الرجاء تحديد نقطة الانطلاق أولاً';
 }

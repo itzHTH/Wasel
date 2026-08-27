@@ -83,7 +83,7 @@ final class AppLocalizationControllerProvider
 }
 
 String _$appLocalizationControllerHash() =>
-    r'a4b3b03e62c856a13c415e2b0e860d695c9b3387';
+    r'fcafbc5d69bb80b10478d49a5b6f85f175c0a9f7';
 
 abstract class _$AppLocalizationController extends $Notifier<Locale> {
   Locale build();

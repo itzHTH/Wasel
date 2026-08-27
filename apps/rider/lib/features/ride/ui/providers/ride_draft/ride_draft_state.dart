@@ -52,6 +52,8 @@ extension PickingStageCopy on PickingStage {
     PickingStage.done => l10n.checkDetails,
   };
 
+  bool get isPickupStage => this == PickingStage.pickup;
+
   String confirmButtonLabel(RiderLocalizations l10n) => switch (this) {
     PickingStage.pickup => l10n.confirmPickup,
     PickingStage.dropoff => l10n.confirmDestination,
