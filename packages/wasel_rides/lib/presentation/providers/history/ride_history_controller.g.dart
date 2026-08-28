@@ -9,23 +9,14 @@ part of 'ride_history_controller.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 /// Paginated ride history.
-///
-/// One controller serves both apps: `GET /Rides/history` derives rider vs
-/// driver from the JWT, so there is nothing role-specific to parameterise.
 
 @ProviderFor(RideHistoryController)
 final rideHistoryControllerProvider = RideHistoryControllerProvider._();
 
 /// Paginated ride history.
-///
-/// One controller serves both apps: `GET /Rides/history` derives rider vs
-/// driver from the JWT, so there is nothing role-specific to parameterise.
 final class RideHistoryControllerProvider
     extends $AsyncNotifierProvider<RideHistoryController, RideHistoryState> {
   /// Paginated ride history.
-  ///
-  /// One controller serves both apps: `GET /Rides/history` derives rider vs
-  /// driver from the JWT, so there is nothing role-specific to parameterise.
   RideHistoryControllerProvider._()
     : super(
         from: null,
@@ -46,12 +37,9 @@ final class RideHistoryControllerProvider
 }
 
 String _$rideHistoryControllerHash() =>
-    r'e226d670bf66808e513b43d15ed5171e375b7c24';
+    r'd9e80879356c02585eac76afa1d14eba1d1b42f5';
 
 /// Paginated ride history.
-///
-/// One controller serves both apps: `GET /Rides/history` derives rider vs
-/// driver from the JWT, so there is nothing role-specific to parameterise.
 
 abstract class _$RideHistoryController
     extends $AsyncNotifier<RideHistoryState> {

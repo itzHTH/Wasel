@@ -13,12 +13,19 @@ export 'l10n/rides_l10n_extension.dart';
 export 'core/const/rides_api_const.dart';
 
 // Data
+export 'data/models/active_ride/active_ride_payload.dart';
+export 'data/models/active_ride/response/active_ride_response.dart';
+export 'data/repos/active_ride_repo.dart';
 export 'data/models/ride_history/response/ride_history_item_response.dart';
 export 'data/models/ride_history/response/ride_history_page_response.dart';
 export 'data/repos/rides_history_repo.dart';
 export 'data/services/rides_api_service.dart';
 
 // Domain
+export 'domain/entities/active_ride.dart';
+export 'domain/entities/ride_status.dart';
+export 'domain/repos/base_active_ride_repo.dart';
+export 'domain/usecases/get_active_ride_use_case.dart';
 export 'domain/entities/ride_history_entry.dart';
 export 'domain/entities/ride_history_status.dart';
 export 'domain/repos/base_rides_history_repo.dart';
