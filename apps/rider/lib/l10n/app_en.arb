@@ -70,5 +70,7 @@
   "cvvLength": "3 to 4 digits",
   "saveCard": "Save card",
   "captainEtaMinutes": "Your captain arrives in {minutes} min",
-  "arrivalEtaMinutes": "Arriving in about {minutes} min"
+  "arrivalEtaMinutes": "Arriving in about {minutes} min",
+  "driverConnectionLost": "Driver connection lost. Waiting for reconnection...",
+  "restoringRide": "Setting up your connection"
 }

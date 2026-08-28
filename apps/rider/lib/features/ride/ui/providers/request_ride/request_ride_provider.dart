@@ -3,6 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/features/ride/data/models/geo_point_request/geo_point_request_body.dart';
 import 'package:wasal/features/ride/data/models/request_ride/request/request_ride_body.dart';
 import 'package:wasal/features/ride/domain/entities/request_ride.dart';
+import 'package:wasal/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/selected_payment_method_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_price/ride_price_provider.dart';
@@ -59,8 +60,9 @@ class RequestRideController extends _$RequestRideController {
       failure: (error) {
         state = AsyncValue.error(errorMessageOf(error), StackTrace.current);
       },
-      success: (price) {
-        state = AsyncValue.data(price);
+      success: (requested) {
+        ref.read(rideControllerProvider.notifier).startTracking(requested.id);
+        state = AsyncValue.data(requested);
       },
     );
   }

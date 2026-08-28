@@ -228,4 +228,10 @@ class RiderLocalizationsAr extends RiderLocalizations {
   String arrivalEtaMinutes(String minutes) {
     return 'الوصول خلال $minutes دقائق تقريباً';
   }
+
+  @override
+  String get driverConnectionLost => 'انقطع اتصال الكابتن، ننتظر رجوعه...';
+
+  @override
+  String get restoringRide => 'يتم إعداد بيئة الاتصال';
 }

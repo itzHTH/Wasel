@@ -307,5 +307,13 @@
         "type": "String"
       }
     }
+  },
+  "driverConnectionLost": "انقطع اتصال الكابتن، ننتظر رجوعه...",
+  "@driverConnectionLost": {
+    "description": "Overlay shown when the driver loses the socket mid-ride; the ride itself keeps running"
+  },
+  "restoringRide": "يتم إعداد بيئة الاتصال",
+  "@restoringRide": {
+    "description": "Shown in the blocking loader while the app re-reads the active ride and brings the tracking socket up"
   }
 }

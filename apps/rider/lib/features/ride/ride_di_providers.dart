@@ -2,6 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasal/features/ride/data/repo/ride_repo.dart';
 import 'package:wasal/features/ride/domain/usecases/cancel_ride_use_case.dart';
 import 'package:wasal/features/ride/domain/usecases/get_ride_price_use_case.dart';
+import 'package:wasal/features/ride/domain/usecases/reconnect_to_ride_use_case.dart';
 import 'package:wasal/features/ride/domain/usecases/request_ride_use_case.dart';
 import 'package:wasal/features/ride/domain/usecases/review_ride_use_case.dart';
 import 'package:wasal/features/ride/domain/usecases/watch_ride_use_case.dart';
@@ -18,6 +19,12 @@ GetRidePriceUseCase getRidePriceUseCase(Ref ref) {
 RequestRideUseCase requestRideUseCase(Ref ref) {
   final rideRepo = ref.watch(rideRepoProvider);
   return RequestRideUseCase(rideRepo);
+}
+
+@riverpod
+ReconnectToRideUseCase reconnectToRideUseCase(Ref ref) {
+  final rideRepo = ref.watch(rideRepoProvider);
+  return ReconnectToRideUseCase(rideRepo);
 }
 
 @riverpod

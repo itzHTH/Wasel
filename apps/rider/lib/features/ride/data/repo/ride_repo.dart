@@ -96,6 +96,10 @@ class RideRepo extends BaseRideRepo {
   }
 
   @override
+  Future<bool> reconnectToRide(String rideId) =>
+      _rideHubService.reconnectToRide(rideId);
+
+  @override
   Stream<RideEvent> watchRide(String rideId) async* {
     final queue = StreamController<HubRideEvent>();
     final subscription = _rideHubService.events.listen(

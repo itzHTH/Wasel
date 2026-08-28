@@ -8,19 +8,43 @@ part of 'ride_controller.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
+/// The rider's view of the current ride.
+///
+/// The backend owns this state; nothing here is authoritative. On every entry
+/// point — cold start, app resume, socket reconnect — the ride is re-read from
+/// the server and this state is rebuilt from the answer.
+///
+/// Kept alive so a screen rebuild does not re-run recovery. `RideTrackingCards`
+/// invalidates it when a ride ends, which is what returns it to idle.
 
 @ProviderFor(RideController)
 final rideControllerProvider = RideControllerProvider._();
 
+/// The rider's view of the current ride.
+///
+/// The backend owns this state; nothing here is authoritative. On every entry
+/// point — cold start, app resume, socket reconnect — the ride is re-read from
+/// the server and this state is rebuilt from the answer.
+///
+/// Kept alive so a screen rebuild does not re-run recovery. `RideTrackingCards`
+/// invalidates it when a ride ends, which is what returns it to idle.
 final class RideControllerProvider
     extends $NotifierProvider<RideController, RideState> {
+  /// The rider's view of the current ride.
+  ///
+  /// The backend owns this state; nothing here is authoritative. On every entry
+  /// point — cold start, app resume, socket reconnect — the ride is re-read from
+  /// the server and this state is rebuilt from the answer.
+  ///
+  /// Kept alive so a screen rebuild does not re-run recovery. `RideTrackingCards`
+  /// invalidates it when a ride ends, which is what returns it to idle.
   RideControllerProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
         name: r'rideControllerProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -41,7 +65,16 @@ final class RideControllerProvider
   }
 }
 
-String _$rideControllerHash() => r'835bafeae9557e8737d519d5c351a6ab25db096b';
+String _$rideControllerHash() => r'69cbc5f19d130f694ee8a6f9161fe671d7f4c1c6';
+
+/// The rider's view of the current ride.
+///
+/// The backend owns this state; nothing here is authoritative. On every entry
+/// point — cold start, app resume, socket reconnect — the ride is re-read from
+/// the server and this state is rebuilt from the answer.
+///
+/// Kept alive so a screen rebuild does not re-run recovery. `RideTrackingCards`
+/// invalidates it when a ride ends, which is what returns it to idle.
 
 abstract class _$RideController extends $Notifier<RideState> {
   RideState build();

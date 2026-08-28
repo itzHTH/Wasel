@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:wasal/features/ride/ui/providers/request_ride/request_ride_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:wasel_location/wasel_location.dart';
 
@@ -12,10 +11,10 @@ VehicleMotion driverCarMotion(Ref ref) {
   final motion = VehicleMotion();
   ref.onDispose(motion.dispose);
 
-  final requestSent = ref.watch(
-    requestRideControllerProvider.select((s) => s.value != null),
+  final hasActiveRide = ref.watch(
+    rideControllerProvider.select((s) => s.hasActiveRide),
   );
-  if (!requestSent) return motion;
+  if (!hasActiveRide) return motion;
 
   // A null means the hub is no longer reporting a car. Ignoring it would leave
   // the marker parked at the last position it ever sent.

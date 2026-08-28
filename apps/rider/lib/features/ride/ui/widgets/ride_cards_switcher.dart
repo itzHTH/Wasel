@@ -1,9 +1,10 @@
 import 'package:wasel_core/wasel_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wasal/features/ride/ui/providers/request_ride/request_ride_provider.dart';
+import 'package:wasal/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_draft_card/ride_draft_card.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_price_card/ride_price_card.dart';
+import 'package:wasal/features/ride/ui/widgets/ride_recovery_error_card.dart';
 import 'package:wasal/features/ride/ui/widgets/tracking/ride_tracking_cards.dart';
 
 class RideCardsSwitcher extends ConsumerStatefulWidget {
@@ -20,19 +21,39 @@ class _RideCardsSwitcherState extends ConsumerState<RideCardsSwitcher> {
 
   @override
   Widget build(BuildContext context) {
-
-    ref.listen(requestRideControllerProvider.select((s) => s.value != null), (
+    ref.listen(rideControllerProvider.select((s) => s.hasActiveRide), (
       previous,
       next,
     ) {
       if (next && _showPrice) setState(() => _showPrice = false);
     });
 
-    final requestSent = ref.watch(
-      requestRideControllerProvider.select((s) => s.value != null),
+    final recoveryError = ref.watch(
+      rideControllerProvider.select((s) => s.recoveryError),
+    );
+    if (recoveryError != null) {
+      return RideCardTransition(
+        child: RideRecoveryErrorCard(
+          key: const ValueKey('recoveryError'),
+          message: recoveryError,
+        ),
+      );
+    }
+
+    final isRecovering = ref.watch(
+      rideControllerProvider.select((s) => s.isRecovering),
+    );
+    if (isRecovering) {
+      return const RideCardTransition(
+        child: SizedBox.shrink(key: ValueKey('recovering')),
+      );
+    }
+
+    final hasActiveRide = ref.watch(
+      rideControllerProvider.select((s) => s.hasActiveRide),
     );
 
-    final Widget card = requestSent
+    final Widget card = hasActiveRide
         ? const RideTrackingCards(key: ValueKey('tracking'))
         : _showPrice
         ? RidePriceCard(

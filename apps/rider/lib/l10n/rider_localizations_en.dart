@@ -232,4 +232,11 @@ class RiderLocalizationsEn extends RiderLocalizations {
   String arrivalEtaMinutes(String minutes) {
     return 'Arriving in about $minutes min';
   }
+
+  @override
+  String get driverConnectionLost =>
+      'Driver connection lost. Waiting for reconnection...';
+
+  @override
+  String get restoringRide => 'Setting up your connection';
 }

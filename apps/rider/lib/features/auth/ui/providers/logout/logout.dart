@@ -1,4 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:wasal/features/ride/ui/providers/ride_controller/ride_controller.dart';
+import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.dart';
+import 'package:wasal/features/ride/ui/providers/ride_price/ride_price_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/selected_payment_method_provider.dart';
 import 'package:wasel_core/networking/api_results.dart';
 import 'package:wasel_core/networking/errors/error_message.dart';
@@ -28,11 +31,12 @@ class Logout extends _$Logout {
 
     final result = await _useCase.call(null);
 
-    // These outlive the session otherwise: the ProviderScope sits above the
-    // navigator, so the next account would inherit this account's card.
     ref.invalidate(tokenizeCardControllerProvider);
     ref.invalidate(selectedPaymentMethodProvider);
     ref.invalidate(riderWalletBalanceControllerProvider);
+    ref.invalidate(rideControllerProvider);
+    ref.invalidate(rideDraftProvider);
+    ref.invalidate(ridePriceEstimateProvider);
 
     if (!ref.mounted) return true;
 

@@ -1,19 +1,17 @@
-import 'dart:async';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:wasal/features/ride/domain/entities/cancel_ride.dart';
-import 'package:wasal/features/ride/domain/entities/request_ride.dart';
 import 'package:wasal/features/ride/domain/repo/base_ride_repo.dart';
 import 'package:wasal/features/ride/domain/usecases/cancel_ride_use_case.dart';
 import 'package:wasal/features/ride/ride_di_providers.dart';
 import 'package:wasal/features/ride/ui/providers/cancel_ride/cancel_ride_provider.dart';
-import 'package:wasal/features/ride/ui/providers/request_ride/request_ride_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:wasal/features/ride/ui/providers/ride_controller/ride_state.dart';
 import 'package:wasel_core/networking/api_results.dart';
 import 'package:wasel_core/networking/errors/error_handler.dart';
+import 'package:wasel_rides/domain/entities/active_ride.dart';
+import 'package:wasel_rides/domain/entities/ride_status.dart';
 
 class _UnusedRepo implements BaseRideRepo {
   @override
@@ -54,31 +52,41 @@ class _FakeCancelUseCase extends CancelRideUseCase {
   }
 }
 
-class _StubRequestRide extends RequestRideController {
-  // Synchronous, like the real build: an async stub would leave the provider
-  // in AsyncLoading and hand the controller a null ride id.
-  @override
-  FutureOr<RequestRide?> build() => RequestRide(id: 'ride-1');
-}
-
 class _StubRideController extends RideController {
-  _StubRideController(this.stage);
+  _StubRideController(this.stage, {this.snapshot = true});
 
   final RideStage stage;
 
+  final bool snapshot;
+
   @override
-  RideState build() => RideState(stage: stage);
+  RideState build() => RideState(
+    stage: stage,
+    trackedRideId: 'ride-1',
+    ride: snapshot
+        ? const ActiveRide(
+            rideId: 'ride-1',
+            status: RideStatus.pending,
+            pickupLatitude: 33.3152,
+            pickupLongitude: 44.3661,
+            dropoffLatitude: 33.2989,
+            dropoffLongitude: 44.4009,
+          )
+        : null,
+  );
 }
 
 ProviderContainer _container(
   _FakeCancelUseCase useCase, {
   RideStage stage = RideStage.searching,
+  bool snapshot = true,
 }) {
   final container = ProviderContainer(
     overrides: [
       cancelRideUseCaseProvider.overrideWithValue(useCase),
-      requestRideControllerProvider.overrideWith(_StubRequestRide.new),
-      rideControllerProvider.overrideWith(() => _StubRideController(stage)),
+      rideControllerProvider.overrideWith(
+        () => _StubRideController(stage, snapshot: snapshot),
+      ),
     ],
   );
   addTearDown(container.dispose);
@@ -94,6 +102,20 @@ void main() {
       ApiResults.success(CancelRide(isCancelled: true)),
     );
     final container = _container(useCase);
+
+    await container.read(cancelRideControllerProvider.notifier).cancelRide();
+
+    expect(
+      container.read(cancelRideControllerProvider).value?.isCancelled,
+      isTrue,
+    );
+  });
+
+  test('cancels a ride requested moments ago, before any snapshot', () async {
+    final useCase = _FakeCancelUseCase(
+      ApiResults.success(CancelRide(isCancelled: true)),
+    );
+    final container = _container(useCase, snapshot: false);
 
     await container.read(cancelRideControllerProvider.notifier).cancelRide();
 
