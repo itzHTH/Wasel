@@ -97,7 +97,7 @@ class RideController extends _$RideController {
     final stage = ride?.status?.driverStage;
 
     if (ride == null || stage == null) {
-      if (state.stage == DriverStage.completed) {
+      if (state.stage == DriverStage.completed || _hasLiveOffer) {
         state = state.copyWith(isRecovering: isRecovering);
         return;
       }
@@ -392,6 +392,9 @@ class RideController extends _$RideController {
 
   DriverStage get _idleStage =>
       _hub.isOpen ? DriverStage.online : DriverStage.offline;
+
+  bool get _hasLiveOffer =>
+      state.stage == DriverStage.offerReceived && state.secondsLeft > 0;
 }
 
 DriverLocalizations get _l10n =>

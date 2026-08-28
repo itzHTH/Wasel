@@ -931,6 +931,54 @@ abstract class DriverLocalizations {
   /// In ar, this message translates to:
   /// **'يتم إعداد بيئة الاتصال'**
   String get restoringRide;
+
+  /// Android notification channel shown in system settings
+  ///
+  /// In ar, this message translates to:
+  /// **'وضع القيادة'**
+  String get shiftChannelName;
+
+  /// Foreground service notification
+  ///
+  /// In ar, this message translates to:
+  /// **'متصل'**
+  String get shiftOnlineTitle;
+
+  /// Foreground service notification
+  ///
+  /// In ar, this message translates to:
+  /// **'دا ننطر طلبات الركاب'**
+  String get shiftOnlineBody;
+
+  /// Foreground service notification
+  ///
+  /// In ar, this message translates to:
+  /// **'برحلة'**
+  String get shiftOnTripTitle;
+
+  /// Foreground service notification
+  ///
+  /// In ar, this message translates to:
+  /// **'دا نبعث موقعك للراكب'**
+  String get shiftOnTripBody;
+
+  /// Foreground service notification
+  ///
+  /// In ar, this message translates to:
+  /// **'دا نعيد الاتصال'**
+  String get shiftReconnectingTitle;
+
+  /// Foreground service notification
+  ///
+  /// In ar, this message translates to:
+  /// **'ما تجيك طلبات لحد ما يرجع الاتصال'**
+  String get shiftReconnectingBody;
+
+  /// Driver shift failure
+  ///
+  /// In ar, this message translates to:
+  /// **'فعّل الإشعارات حتى توصلك الطلبات وانت خارج التطبيق'**
+  String get notificationsRequiredForShift;
 }
 
 class _DriverLocalizationsDelegate

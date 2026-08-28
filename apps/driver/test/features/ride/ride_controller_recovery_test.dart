@@ -15,6 +15,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:wasel_core/networking/api_results.dart';
 import 'package:wasel_core/networking/errors/error_handler.dart';
+import 'package:wasel_location/domain/entities/geo_point.dart';
 import 'package:wasel_rides/domain/entities/active_ride.dart';
 import 'package:wasel_rides/domain/entities/ride_status.dart';
 import 'package:wasel_rides/domain/repos/base_active_ride_repo.dart';
@@ -315,5 +316,62 @@ void main() {
       container.read(rideControllerProvider).stage,
       DriverStage.inProgress,
     );
+  });
+  group('a pending offer survives recovery', () {
+    test('resuming with no active ride leaves the offer standing', () async {
+      final container = containerFor(const ApiResults.success(null));
+      await settle();
+
+      final notifier = container.read(rideControllerProvider.notifier);
+      await notifier.goOnline();
+      connection.emit(RideConnectionStatus.connected);
+      await settle();
+
+      events.emit(
+        const ReceiveRideRequest(
+          rideId: 'offer-1',
+          position: GeoPoint(latitude: 33.3152, longitude: 44.3661),
+          dropPosition: GeoPoint(latitude: 33.2989, longitude: 44.4009),
+          calculatedPrice: 7500,
+          paymentMethod: 'Cash',
+          riderName: 'Ali Hassan',
+          riderPhone: '+9647701234567',
+          message: '',
+        ),
+      );
+      await settle();
+      expect(
+        container.read(rideControllerProvider).stage,
+        DriverStage.offerReceived,
+      );
+
+      await notifier.refreshFromBackend();
+      await settle();
+
+      final state = container.read(rideControllerProvider);
+      expect(state.stage, DriverStage.offerReceived);
+      expect(state.ride?.rideId, 'offer-1');
+      expect(state.secondsLeft, greaterThan(0));
+      expect(state.isRecovering, isFalse);
+    });
+
+    test('an expired offer is still cleared by recovery', () async {
+      final container = containerFor(const ApiResults.success(null));
+      await settle();
+
+      final notifier = container.read(rideControllerProvider.notifier);
+      await notifier.goOnline();
+      connection.emit(RideConnectionStatus.connected);
+      await settle();
+
+      notifier.rejectOffer();
+      await notifier.refreshFromBackend();
+      await settle();
+
+      expect(
+        container.read(rideControllerProvider).stage,
+        isNot(DriverStage.offerReceived),
+      );
+    });
   });
 }

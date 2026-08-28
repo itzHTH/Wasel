@@ -138,5 +138,13 @@
   "cashOutUnavailableHint": "You have no earnings available to cash out right now.",
   "cashOutSoonTitle": "Cash out coming soon",
   "cashOutSoonMessage": "Transferring your earnings to your account is on the way — we'll let you know the moment it's ready.",
-  "restoringRide": "Setting up your connection"
+  "restoringRide": "Setting up your connection",
+  "shiftChannelName": "Driver shift",
+  "shiftOnlineTitle": "Online",
+  "shiftOnlineBody": "Waiting for ride requests",
+  "shiftOnTripTitle": "On a trip",
+  "shiftOnTripBody": "Sharing your location with the rider",
+  "shiftReconnectingTitle": "Reconnecting",
+  "shiftReconnectingBody": "You won't get requests until the connection is back",
+  "notificationsRequiredForShift": "Turn on notifications so requests reach you outside the app"
 }

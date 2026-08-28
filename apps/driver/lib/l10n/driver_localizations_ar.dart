@@ -446,4 +446,29 @@ class DriverLocalizationsAr extends DriverLocalizations {
 
   @override
   String get restoringRide => 'يتم إعداد بيئة الاتصال';
+
+  @override
+  String get shiftChannelName => 'وضع القيادة';
+
+  @override
+  String get shiftOnlineTitle => 'متصل';
+
+  @override
+  String get shiftOnlineBody => 'دا ننطر طلبات الركاب';
+
+  @override
+  String get shiftOnTripTitle => 'برحلة';
+
+  @override
+  String get shiftOnTripBody => 'دا نبعث موقعك للراكب';
+
+  @override
+  String get shiftReconnectingTitle => 'دا نعيد الاتصال';
+
+  @override
+  String get shiftReconnectingBody => 'ما تجيك طلبات لحد ما يرجع الاتصال';
+
+  @override
+  String get notificationsRequiredForShift =>
+      'فعّل الإشعارات حتى توصلك الطلبات وانت خارج التطبيق';
 }

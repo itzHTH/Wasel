@@ -25,7 +25,15 @@ class DriverForegroundService implements IDriverForegroundService {
 
   final bool _isAndroid = Platform.isAndroid;
 
+  static Future<void> _queue = Future<void>.value();
+
   bool _initialized = false;
+
+  static Future<T> _serial<T>(Future<T> Function() action) {
+    final result = _queue.then((_) => action());
+    _queue = result.then((_) {}, onError: (_) {});
+    return result;
+  }
 
   @override
   Future<bool> get isRunning => FlutterForegroundTask.isRunningService;
@@ -57,10 +65,13 @@ class DriverForegroundService implements IDriverForegroundService {
   }
 
   @override
-  Future<void> startService(ForegroundNotificationArg notification) async {
+  Future<void> startService(ForegroundNotificationArg notification) =>
+      _serial(() => _startService(notification));
+
+  Future<void> _startService(ForegroundNotificationArg notification) async {
     if (!_isAndroid) return;
     _initialize(notification);
-    if (await isRunning) return updateService(notification);
+    if (await isRunning) return _updateService(notification);
 
     final result = await FlutterForegroundTask.startService(
       serviceTypes: [ForegroundServiceTypes.location],
@@ -72,14 +83,17 @@ class DriverForegroundService implements IDriverForegroundService {
 
     if (result is! ServiceRequestFailure) return;
     if (result.error is ServiceAlreadyStartedException) {
-      return updateService(notification);
+      return _updateService(notification);
     }
 
     throw ForegroundServiceException(result.error);
   }
 
   @override
-  Future<void> updateService(ForegroundNotificationArg notification) async {
+  Future<void> updateService(ForegroundNotificationArg notification) =>
+      _serial(() => _updateService(notification));
+
+  Future<void> _updateService(ForegroundNotificationArg notification) async {
     if (!_isAndroid) return;
     _initialize(notification);
     if (!await isRunning) return;
@@ -94,7 +108,9 @@ class DriverForegroundService implements IDriverForegroundService {
   }
 
   @override
-  Future<void> stopService() async {
+  Future<void> stopService() => _serial(_stopService);
+
+  Future<void> _stopService() async {
     if (!_isAndroid || !await isRunning) return;
 
     _throwUnlessStopped(await FlutterForegroundTask.stopService());
@@ -125,6 +141,8 @@ class DriverForegroundService implements IDriverForegroundService {
         allowWifiLock: true,
         autoRunOnBoot: false,
         autoRunOnMyPackageReplaced: false,
+        allowAutoRestart: false,
+        stopWithTask: true,
       ),
     );
   }
