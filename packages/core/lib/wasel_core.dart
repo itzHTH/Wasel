@@ -25,6 +25,9 @@ export 'helpers/app_validators.dart';
 export 'helpers/debouncer.dart';
 export 'helpers/session_store.dart';
 
+// Lifecycle
+export 'lifecycle/app_return_observer.dart';
+
 // Localization
 export 'l10n/core_localizations.dart';
 export 'l10n/core_l10n_extension.dart';
