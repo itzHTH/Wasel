@@ -452,4 +452,7 @@ class DriverLocalizationsEn extends DriverLocalizations {
   @override
   String get cashOutSoonMessage =>
       'Transferring your earnings to your account is on the way — we\'ll let you know the moment it\'s ready.';
+
+  @override
+  String get restoringRide => 'Setting up your connection';
 }

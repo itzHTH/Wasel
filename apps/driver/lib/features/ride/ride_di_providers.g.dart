@@ -440,3 +440,51 @@ final class DriverCancelRideUseCaseProvider
 
 String _$driverCancelRideUseCaseHash() =>
     r'c94c18f8b32096aa9f8210e4f75a43b0639220d5';
+
+@ProviderFor(reconnectToRideUseCase)
+final reconnectToRideUseCaseProvider = ReconnectToRideUseCaseProvider._();
+
+final class ReconnectToRideUseCaseProvider
+    extends
+        $FunctionalProvider<
+          ReconnectToRideUseCase,
+          ReconnectToRideUseCase,
+          ReconnectToRideUseCase
+        >
+    with $Provider<ReconnectToRideUseCase> {
+  ReconnectToRideUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'reconnectToRideUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$reconnectToRideUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<ReconnectToRideUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  ReconnectToRideUseCase create(Ref ref) {
+    return reconnectToRideUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(ReconnectToRideUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<ReconnectToRideUseCase>(value),
+    );
+  }
+}
+
+String _$reconnectToRideUseCaseHash() =>
+    r'a10643871abb545b4b6743686ebafc61f74d1d33';

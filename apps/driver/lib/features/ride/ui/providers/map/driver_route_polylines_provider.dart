@@ -24,7 +24,7 @@ class RouteUnavailableException implements Exception {
 @riverpod
 Future<Set<Polyline>> driverRoutePolylines(Ref ref) async {
   final stage = ref.watch(rideControllerProvider.select((s) => s.stage));
-  final ride = ref.watch(rideControllerProvider.select((s) => s.ride));
+  final ride = ref.watch(rideControllerProvider.select((s) => s.currentRide));
   if (ride == null) return const {};
 
   final (GeoPoint, GeoPoint)? segment = switch (stage) {

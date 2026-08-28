@@ -234,7 +234,7 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
     return switch (ride.stage) {
       DriverStage.heading ||
       DriverStage.arrived ||
-      DriverStage.inProgress => ride.ride?.rideId ?? '',
+      DriverStage.inProgress => ride.rideId ?? '',
       _ => '',
     };
   }

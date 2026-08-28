@@ -2,8 +2,11 @@ import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:driver/features/ride/ui/providers/location/driver_location_broadcaster.dart';
 import 'package:driver/features/ride/ui/providers/map/driver_camera_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
+import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
+import 'package:driver/features/ride/ui/providers/ride_controller/ride_lifecycle_observer.dart';
 import 'package:driver/features/ride/ui/widgets/driver_ride_cards_switcher.dart';
 import 'package:driver/features/ride/ui/widgets/driver_ride_map.dart';
+import 'package:driver/features/ride/ui/widgets/ride_recovery_overlay.dart';
 import 'package:driver/features/ride/ui/widgets/status/driver_status_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,6 +35,12 @@ class _RideScreenState extends ConsumerState<RideScreen> {
     // both stay here rather than moving down into the map.
     ref.watch(driverLocationBroadcasterProvider);
     ref.watch(driverCameraControllerProvider);
+
+    ref.watch(rideLifecycleObserverProvider);
+
+    final isRecovering = ref.watch(
+      rideControllerProvider.select((state) => state.isRecovering),
+    );
 
     return Scaffold(
       body: Stack(
@@ -83,6 +92,8 @@ class _RideScreenState extends ConsumerState<RideScreen> {
               ],
             ),
           ),
+
+          if (isRecovering) const Positioned.fill(child: RideRecoveryOverlay()),
         ],
       ),
     );

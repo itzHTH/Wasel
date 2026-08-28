@@ -587,5 +587,9 @@
   "cashOutSoonMessage": "سحب الأرباح إلى حسابك قيد التجهيز، وسنخبرك فور توفره.",
   "@cashOutSoonMessage": {
     "description": "Body of the cash-out coming-soon dialog"
+  },
+  "restoringRide": "يتم إعداد بيئة الاتصال",
+  "@restoringRide": {
+    "description": "Shown in the blocking loader while the app re-reads the active ride and brings the tracking socket up"
   }
 }

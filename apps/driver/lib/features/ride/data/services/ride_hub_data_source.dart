@@ -1,10 +1,14 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+
 import 'package:driver/core/const/ride_hub_methods.dart';
 import 'package:driver/features/ride/data/models/ride_events/hub_ride_events.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:wasel_core/networking/signalR/hub_payload.dart';
 import 'package:wasel_core/networking/signalR/i_signalr_client.dart';
 import 'package:wasel_core/networking/signalR/signalr_client_impl.dart';
+import 'package:wasel_rides/data/models/active_ride/active_ride_payload.dart';
 
 part 'ride_hub_data_source.g.dart';
 
@@ -17,12 +21,14 @@ abstract class IRideHubDataSource {
     double longitude,
     String? rideId,
   );
+  Future<bool> reconnectToRide(String rideId);
   Future<void> disconnect();
   Future<void> dispose();
 }
 
 class RideHubDatasource implements IRideHubDataSource {
   RideHubDatasource(this._client);
+
   final ISignalRClient _client;
 
   final _controller = StreamController<HubRideEvent>.broadcast();
@@ -32,9 +38,6 @@ class RideHubDatasource implements IRideHubDataSource {
 
   @override
   Stream<SignalRStatus> get connectionStatus {
-    // Stream.multi rather than an async* generator: the current state has to be
-    // read and the live stream subscribed to in the same synchronous step, or a
-    // transition landing between the two would be dropped.
     return Stream.multi((controller) {
       controller.add(_client.status);
 
@@ -54,73 +57,6 @@ class RideHubDatasource implements IRideHubDataSource {
     await _client.connect();
   }
 
-  void _registerListeners() {
-    _client.on(RideHubMethods.receiveRideRequest, (args) {
-      if (_controller.isClosed) return;
-
-      final data = _obj(args);
-      if (data == null) return;
-
-      final rideId = data['rideid'];
-      final position = _point(data['lat'], data['lng']);
-      final dropPosition = _point(data['droplat'], data['droplng']);
-      final price = _number(data['calculatedprice']);
-
-      if (rideId is! String || position == null || dropPosition == null) {
-        return;
-      }
-
-      _controller.add(
-        HubRideEvent.receiveRideRequest(
-          rideId: rideId,
-          position: position,
-          dropPosition: dropPosition,
-          calculatedPrice: price ?? 0,
-          paymentMethod: data['paymentmethod']?.toString() ?? '',
-          riderName: data['ridername']?.toString() ?? '',
-          riderPhone: data['riderphone']?.toString() ?? '',
-          message: _msg(data['message']) ?? '',
-        ),
-      );
-    });
-
-    _client.on(RideHubMethods.hideRideRequest, (args) {
-      if (_controller.isClosed) return;
-
-      final rideId = _obj(args)?['rideid'] ?? args?.firstOrNull;
-      if (rideId is! String) return;
-
-      _controller.add(HubRideEvent.hideRideRequest(rideId));
-    });
-
-    _client.on(RideHubMethods.profileReviewed, (args) {
-      if (_controller.isClosed) return;
-
-      final data = _obj(args);
-      if (data == null) return;
-
-      final isApproved = data['isapproved'];
-      if (isApproved is! bool) return;
-
-      _controller.add(
-        HubRideEvent.profileReviewed(
-          isApproved: isApproved,
-          message: _msg(data['message']) ?? '',
-        ),
-      );
-    });
-
-    _client.on(RideHubMethods.rideCancelled, (args) {
-      if (_controller.isClosed) return;
-
-      _controller.add(
-        HubRideEvent.cancelled(
-          message: _msg(_obj(args)?['message'] ?? args?.firstOrNull),
-        ),
-      );
-    });
-  }
-
   @override
   Future<void> updateLocation(
     double latitude,
@@ -134,45 +70,111 @@ class RideHubDatasource implements IRideHubDataSource {
   }
 
   @override
+  Future<bool> reconnectToRide(String rideId) async {
+    try {
+      await _client.invoke(RideHubMethods.reconnectToRide, args: [rideId]);
+      return true;
+    } catch (e) {
+      debugPrint('🔁 ReconnectToRide($rideId) refused → $e');
+      return false;
+    }
+  }
+
+  @override
   Future<void> disconnect() async {
     await _client.disconnect();
-  }
-
-  String? _msg(Object? raw) {
-    if (raw == null) return null;
-    if (raw is String) return raw;
-    if (raw is Map) return (raw['value'] ?? raw['name'])?.toString();
-    return raw.toString();
-  }
-
-  LatLngDto? _point(Object? rawLat, Object? rawLng) {
-    final lat = _number(rawLat);
-    final lng = _number(rawLng);
-    if (lat == null || lng == null) return null;
-    return LatLngDto(lat: lat, lng: lng);
-  }
-
-  double? _number(Object? raw) {
-    if (raw is num) return raw.toDouble();
-    if (raw is String) return double.tryParse(raw);
-    return null;
-  }
-
-  Map<String, dynamic>? _obj(List<Object?>? args) {
-    final first = args?.firstOrNull;
-    if (first is Map) {
-      return {
-        for (final entry in first.entries)
-          entry.key.toString().toLowerCase(): entry.value,
-      };
-    }
-    return null;
   }
 
   @override
   Future<void> dispose() async {
     await _client.disconnect();
     await _controller.close();
+  }
+
+  void _registerListeners() {
+    _listen(RideHubMethods.receiveRideRequest, _readRideRequest);
+    _listen(RideHubMethods.hideRideRequest, _readHideRequest);
+    _listen(RideHubMethods.profileReviewed, _readProfileReviewed);
+    _listen(RideHubMethods.rideCancelled, _readCancelled);
+    _listen(RideHubMethods.rideStatusSync, _readStatusSync);
+  }
+
+  void _listen(
+    String method,
+    HubRideEvent? Function(List<Object?>? args) read,
+  ) {
+    _client.on(method, (args) {
+      if (_controller.isClosed) return;
+
+      final event = read(args);
+      if (event == null) {
+        debugPrint('📡 $method: unrecognized payload → $args');
+        return;
+      }
+
+      _controller.add(event);
+    });
+  }
+
+  static HubRideEvent? _readRideRequest(List<Object?>? args) {
+    final data = HubPayload.of(args);
+    if (data == null) return null;
+
+    final rideId = data.text('rideId');
+    final position = _point(data, 'lat', 'lng');
+    final dropPosition = _point(data, 'dropLat', 'dropLng');
+    if (rideId == null || position == null || dropPosition == null) return null;
+
+    return HubRideEvent.receiveRideRequest(
+      rideId: rideId,
+      position: position,
+      dropPosition: dropPosition,
+      calculatedPrice: data.number('calculatedPrice') ?? 0,
+      paymentMethod: data.loose('paymentMethod') ?? '',
+      riderName: data.loose('riderName') ?? '',
+      riderPhone: data.loose('riderPhone') ?? '',
+      message: data.message('message') ?? '',
+    );
+  }
+
+  static HubRideEvent? _readHideRequest(List<Object?>? args) {
+    final rideId =
+        HubPayload.of(args)?.text('rideId') ??
+        HubPayload.textOf(args?.firstOrNull);
+
+    return rideId == null ? null : HubRideEvent.hideRideRequest(rideId);
+  }
+
+  static HubRideEvent? _readProfileReviewed(List<Object?>? args) {
+    final data = HubPayload.of(args);
+    final isApproved = data?['isApproved'];
+    if (data == null || isApproved is! bool) return null;
+
+    return HubRideEvent.profileReviewed(
+      isApproved: isApproved,
+      message: data.message('message') ?? '',
+    );
+  }
+
+  static HubRideEvent _readCancelled(List<Object?>? args) {
+    final data = HubPayload.of(args);
+
+    return HubRideEvent.cancelled(
+      message: data == null
+          ? HubPayload.messageOf(args?.firstOrNull)
+          : data.message('message'),
+    );
+  }
+
+  static HubRideEvent _readStatusSync(List<Object?>? args) =>
+      HubRideEvent.statusSync(ActiveRidePayload.parse(args));
+
+  static LatLngDto? _point(HubPayload data, String latKey, String lngKey) {
+    final lat = data.number(latKey);
+    final lng = data.number(lngKey);
+    if (lat == null || lng == null) return null;
+
+    return LatLngDto(lat: lat, lng: lng);
   }
 }
 

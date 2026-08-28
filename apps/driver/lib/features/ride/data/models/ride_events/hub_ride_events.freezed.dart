@@ -55,14 +55,15 @@ extension HubRideEventPatterns on HubRideEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ReceiveRideRequest value)?  receiveRideRequest,TResult Function( HideRideRequest value)?  hideRideRequest,TResult Function( ProfileReviewed value)?  profileReviewed,TResult Function( RideCancelled value)?  cancelled,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ReceiveRideRequest value)?  receiveRideRequest,TResult Function( HideRideRequest value)?  hideRideRequest,TResult Function( ProfileReviewed value)?  profileReviewed,TResult Function( RideCancelled value)?  cancelled,TResult Function( RideStatusSync value)?  statusSync,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case ReceiveRideRequest() when receiveRideRequest != null:
 return receiveRideRequest(_that);case HideRideRequest() when hideRideRequest != null:
 return hideRideRequest(_that);case ProfileReviewed() when profileReviewed != null:
 return profileReviewed(_that);case RideCancelled() when cancelled != null:
-return cancelled(_that);case _:
+return cancelled(_that);case RideStatusSync() when statusSync != null:
+return statusSync(_that);case _:
   return orElse();
 
 }
@@ -80,14 +81,15 @@ return cancelled(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ReceiveRideRequest value)  receiveRideRequest,required TResult Function( HideRideRequest value)  hideRideRequest,required TResult Function( ProfileReviewed value)  profileReviewed,required TResult Function( RideCancelled value)  cancelled,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ReceiveRideRequest value)  receiveRideRequest,required TResult Function( HideRideRequest value)  hideRideRequest,required TResult Function( ProfileReviewed value)  profileReviewed,required TResult Function( RideCancelled value)  cancelled,required TResult Function( RideStatusSync value)  statusSync,}){
 final _that = this;
 switch (_that) {
 case ReceiveRideRequest():
 return receiveRideRequest(_that);case HideRideRequest():
 return hideRideRequest(_that);case ProfileReviewed():
 return profileReviewed(_that);case RideCancelled():
-return cancelled(_that);}
+return cancelled(_that);case RideStatusSync():
+return statusSync(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -101,14 +103,15 @@ return cancelled(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ReceiveRideRequest value)?  receiveRideRequest,TResult? Function( HideRideRequest value)?  hideRideRequest,TResult? Function( ProfileReviewed value)?  profileReviewed,TResult? Function( RideCancelled value)?  cancelled,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ReceiveRideRequest value)?  receiveRideRequest,TResult? Function( HideRideRequest value)?  hideRideRequest,TResult? Function( ProfileReviewed value)?  profileReviewed,TResult? Function( RideCancelled value)?  cancelled,TResult? Function( RideStatusSync value)?  statusSync,}){
 final _that = this;
 switch (_that) {
 case ReceiveRideRequest() when receiveRideRequest != null:
 return receiveRideRequest(_that);case HideRideRequest() when hideRideRequest != null:
 return hideRideRequest(_that);case ProfileReviewed() when profileReviewed != null:
 return profileReviewed(_that);case RideCancelled() when cancelled != null:
-return cancelled(_that);case _:
+return cancelled(_that);case RideStatusSync() when statusSync != null:
+return statusSync(_that);case _:
   return null;
 
 }
@@ -125,13 +128,14 @@ return cancelled(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String rideId,  LatLngDto position,  LatLngDto dropPosition,  double calculatedPrice,  String paymentMethod,  String riderName,  String riderPhone,  String message)?  receiveRideRequest,TResult Function( String rideId)?  hideRideRequest,TResult Function( bool isApproved,  String message)?  profileReviewed,TResult Function( String? message)?  cancelled,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String rideId,  LatLngDto position,  LatLngDto dropPosition,  double calculatedPrice,  String paymentMethod,  String riderName,  String riderPhone,  String message)?  receiveRideRequest,TResult Function( String rideId)?  hideRideRequest,TResult Function( bool isApproved,  String message)?  profileReviewed,TResult Function( String? message)?  cancelled,TResult Function( ActiveRide? ride)?  statusSync,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ReceiveRideRequest() when receiveRideRequest != null:
 return receiveRideRequest(_that.rideId,_that.position,_that.dropPosition,_that.calculatedPrice,_that.paymentMethod,_that.riderName,_that.riderPhone,_that.message);case HideRideRequest() when hideRideRequest != null:
 return hideRideRequest(_that.rideId);case ProfileReviewed() when profileReviewed != null:
 return profileReviewed(_that.isApproved,_that.message);case RideCancelled() when cancelled != null:
-return cancelled(_that.message);case _:
+return cancelled(_that.message);case RideStatusSync() when statusSync != null:
+return statusSync(_that.ride);case _:
   return orElse();
 
 }
@@ -149,13 +153,14 @@ return cancelled(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String rideId,  LatLngDto position,  LatLngDto dropPosition,  double calculatedPrice,  String paymentMethod,  String riderName,  String riderPhone,  String message)  receiveRideRequest,required TResult Function( String rideId)  hideRideRequest,required TResult Function( bool isApproved,  String message)  profileReviewed,required TResult Function( String? message)  cancelled,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String rideId,  LatLngDto position,  LatLngDto dropPosition,  double calculatedPrice,  String paymentMethod,  String riderName,  String riderPhone,  String message)  receiveRideRequest,required TResult Function( String rideId)  hideRideRequest,required TResult Function( bool isApproved,  String message)  profileReviewed,required TResult Function( String? message)  cancelled,required TResult Function( ActiveRide? ride)  statusSync,}) {final _that = this;
 switch (_that) {
 case ReceiveRideRequest():
 return receiveRideRequest(_that.rideId,_that.position,_that.dropPosition,_that.calculatedPrice,_that.paymentMethod,_that.riderName,_that.riderPhone,_that.message);case HideRideRequest():
 return hideRideRequest(_that.rideId);case ProfileReviewed():
 return profileReviewed(_that.isApproved,_that.message);case RideCancelled():
-return cancelled(_that.message);}
+return cancelled(_that.message);case RideStatusSync():
+return statusSync(_that.ride);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -169,13 +174,14 @@ return cancelled(_that.message);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String rideId,  LatLngDto position,  LatLngDto dropPosition,  double calculatedPrice,  String paymentMethod,  String riderName,  String riderPhone,  String message)?  receiveRideRequest,TResult? Function( String rideId)?  hideRideRequest,TResult? Function( bool isApproved,  String message)?  profileReviewed,TResult? Function( String? message)?  cancelled,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String rideId,  LatLngDto position,  LatLngDto dropPosition,  double calculatedPrice,  String paymentMethod,  String riderName,  String riderPhone,  String message)?  receiveRideRequest,TResult? Function( String rideId)?  hideRideRequest,TResult? Function( bool isApproved,  String message)?  profileReviewed,TResult? Function( String? message)?  cancelled,TResult? Function( ActiveRide? ride)?  statusSync,}) {final _that = this;
 switch (_that) {
 case ReceiveRideRequest() when receiveRideRequest != null:
 return receiveRideRequest(_that.rideId,_that.position,_that.dropPosition,_that.calculatedPrice,_that.paymentMethod,_that.riderName,_that.riderPhone,_that.message);case HideRideRequest() when hideRideRequest != null:
 return hideRideRequest(_that.rideId);case ProfileReviewed() when profileReviewed != null:
 return profileReviewed(_that.isApproved,_that.message);case RideCancelled() when cancelled != null:
-return cancelled(_that.message);case _:
+return cancelled(_that.message);case RideStatusSync() when statusSync != null:
+return statusSync(_that.ride);case _:
   return null;
 
 }
@@ -475,6 +481,72 @@ class _$RideCancelledCopyWithImpl<$Res>
   return _then(RideCancelled(
 message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String?,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class RideStatusSync implements HubRideEvent {
+  const RideStatusSync(this.ride);
+  
+
+ final  ActiveRide? ride;
+
+/// Create a copy of HubRideEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$RideStatusSyncCopyWith<RideStatusSync> get copyWith => _$RideStatusSyncCopyWithImpl<RideStatusSync>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RideStatusSync&&(identical(other.ride, ride) || other.ride == ride));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,ride);
+
+@override
+String toString() {
+  return 'HubRideEvent.statusSync(ride: $ride)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $RideStatusSyncCopyWith<$Res> implements $HubRideEventCopyWith<$Res> {
+  factory $RideStatusSyncCopyWith(RideStatusSync value, $Res Function(RideStatusSync) _then) = _$RideStatusSyncCopyWithImpl;
+@useResult
+$Res call({
+ ActiveRide? ride
+});
+
+
+
+
+}
+/// @nodoc
+class _$RideStatusSyncCopyWithImpl<$Res>
+    implements $RideStatusSyncCopyWith<$Res> {
+  _$RideStatusSyncCopyWithImpl(this._self, this._then);
+
+  final RideStatusSync _self;
+  final $Res Function(RideStatusSync) _then;
+
+/// Create a copy of HubRideEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? ride = freezed,}) {
+  return _then(RideStatusSync(
+freezed == ride ? _self.ride : ride // ignore: cast_nullable_to_non_nullable
+as ActiveRide?,
   ));
 }
 

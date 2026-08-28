@@ -78,7 +78,7 @@ class DriverCameraController extends _$DriverCameraController {
   }
 
   Future<void> _frameOffer() async {
-    final ride = ref.read(rideControllerProvider).ride;
+    final ride = ref.read(rideControllerProvider).currentRide;
     if (ride == null) return;
 
     final route = await _routePoints();

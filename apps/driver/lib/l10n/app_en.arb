@@ -137,5 +137,6 @@
   "cashOut": "Cash out",
   "cashOutUnavailableHint": "You have no earnings available to cash out right now.",
   "cashOutSoonTitle": "Cash out coming soon",
-  "cashOutSoonMessage": "Transferring your earnings to your account is on the way — we'll let you know the moment it's ready."
+  "cashOutSoonMessage": "Transferring your earnings to your account is on the way — we'll let you know the moment it's ready.",
+  "restoringRide": "Setting up your connection"
 }

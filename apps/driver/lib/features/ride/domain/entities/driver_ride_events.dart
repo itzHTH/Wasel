@@ -1,5 +1,6 @@
 import 'package:wasel_location/domain/entities/geo_point.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wasel_rides/domain/entities/active_ride.dart';
 
 part 'driver_ride_events.freezed.dart';
 
@@ -25,4 +26,22 @@ sealed class DriverRideEvent with _$DriverRideEvent {
   }) = ProfileReviewed;
 
   const factory DriverRideEvent.cancelled({String? message}) = RideCancelled;
+
+  const factory DriverRideEvent.statusSync(ActiveRide? ride) = RideStatusSync;
+}
+
+extension ActiveRideOffer on ActiveRide {
+  ReceiveRideRequest toOffer() => ReceiveRideRequest(
+    rideId: rideId,
+    position: GeoPoint(latitude: pickupLatitude, longitude: pickupLongitude),
+    dropPosition: GeoPoint(
+      latitude: dropoffLatitude,
+      longitude: dropoffLongitude,
+    ),
+    calculatedPrice: calculatedPrice,
+    paymentMethod: paymentMethod ?? '',
+    riderName: riderName ?? '',
+    riderPhone: riderPhone ?? '',
+    message: '',
+  );
 }

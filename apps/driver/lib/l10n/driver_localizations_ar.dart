@@ -443,4 +443,7 @@ class DriverLocalizationsAr extends DriverLocalizations {
   @override
   String get cashOutSoonMessage =>
       'سحب الأرباح إلى حسابك قيد التجهيز، وسنخبرك فور توفره.';
+
+  @override
+  String get restoringRide => 'يتم إعداد بيئة الاتصال';
 }

@@ -14,7 +14,7 @@ const _pinSize = 48.0;
 @riverpod
 Set<Marker> driverMarkers(Ref ref) {
   final stage = ref.watch(rideControllerProvider.select((s) => s.stage));
-  final ride = ref.watch(rideControllerProvider.select((s) => s.ride));
+  final ride = ref.watch(rideControllerProvider.select((s) => s.currentRide));
   if (ride == null) return const {};
 
   final (bool pickup, bool dropoff) = switch (stage) {
