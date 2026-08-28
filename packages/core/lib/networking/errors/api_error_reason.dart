@@ -19,5 +19,9 @@ enum ApiErrorReason {
   /// The ride cannot be settled with the method chosen.
   unsupportedPaymentMethod,
 
+  /// The Android foreground service that keeps the driver reachable while
+  /// online refused to start, update or stop.
+  foregroundServiceUnavailable,
+
   unknown,
 }

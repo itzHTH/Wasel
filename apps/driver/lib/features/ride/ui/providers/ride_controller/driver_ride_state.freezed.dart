@@ -14,12 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DriverRideState {
 
- DriverStage get stage; DriverConnectionState get connection; ReceiveRideRequest? get ride; int get secondsLeft;/// The last snapshot the backend gave us for the ride in hand. This is what
-/// a ride recovered after a restart is rebuilt from — the offer that
-/// created [ride] only exists in the session that received it.
- ActiveRide? get activeRide;/// The opening `GET /Rides/active` is still in flight, so we do not yet
-/// know whether this driver is mid-trip.
- bool get isRecovering;
+ DriverStage get stage; DriverConnectionState get connection; ReceiveRideRequest? get ride; int get secondsLeft; ActiveRide? get activeRide; bool get isRecovering;
 /// Create a copy of DriverRideState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -223,12 +218,7 @@ class _DriverRideState extends DriverRideState {
 @override@JsonKey() final  DriverConnectionState connection;
 @override final  ReceiveRideRequest? ride;
 @override@JsonKey() final  int secondsLeft;
-/// The last snapshot the backend gave us for the ride in hand. This is what
-/// a ride recovered after a restart is rebuilt from — the offer that
-/// created [ride] only exists in the session that received it.
 @override final  ActiveRide? activeRide;
-/// The opening `GET /Rides/active` is still in flight, so we do not yet
-/// know whether this driver is mid-trip.
 @override@JsonKey() final  bool isRecovering;
 
 /// Create a copy of DriverRideState
