@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:wasel_rides/core/const/rides_api_const.dart';
+import 'package:wasel_rides/data/models/active_ride/response/active_ride_response.dart';
 import 'package:wasel_rides/data/models/ride_history/response/ride_history_page_response.dart';
 
 part 'rides_api_service.g.dart';
@@ -14,6 +15,11 @@ abstract class RidesApiService {
   Future<RideHistoryPageResponse> getRideHistory({
     @Query('PageNumber') required int pageNumber,
     @Query('PageSize') required int pageSize,
+    @CancelRequest() CancelToken? cancelToken,
+  });
+
+  @GET(RidesApiConst.activeRide)
+  Future<ActiveRideEnvelopeResponse> getActiveRide({
     @CancelRequest() CancelToken? cancelToken,
   });
 }

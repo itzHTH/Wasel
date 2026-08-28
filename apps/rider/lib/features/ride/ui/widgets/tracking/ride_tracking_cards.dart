@@ -24,17 +24,17 @@ import 'package:wasel_payments/presentation/providers/wallet/rider_wallet_balanc
 class RideTrackingCards extends ConsumerWidget {
   const RideTrackingCards({super.key});
 
-  void _reset(WidgetRef ref) {
-    ref.invalidate(rideControllerProvider);
-    ref.invalidate(requestRideControllerProvider);
+  void _reset(ProviderContainer container) {
+    container.read(rideControllerProvider.notifier).clearRide();
+    container.invalidate(requestRideControllerProvider);
 
-    ref.invalidate(cancelRideControllerProvider);
+    container.invalidate(cancelRideControllerProvider);
 
-    ref.invalidate(ridePriceEstimateProvider);
-    ref.invalidate(selectedPaymentMethodProvider);
-    ref.invalidate(tokenizeCardControllerProvider);
-    ref.invalidate(riderWalletBalanceControllerProvider);
-    ref.read(rideDraftProvider.notifier).reset();
+    container.invalidate(ridePriceEstimateProvider);
+    container.invalidate(selectedPaymentMethodProvider);
+    container.invalidate(tokenizeCardControllerProvider);
+    container.invalidate(riderWalletBalanceControllerProvider);
+    container.read(rideDraftProvider.notifier).reset();
   }
 
   void _cancelRide(WidgetRef ref) {
@@ -44,6 +44,7 @@ class RideTrackingCards extends ConsumerWidget {
   void _openCompleted(BuildContext context, WidgetRef ref) {
     final draft = ref.read(rideDraftProvider);
     final price = ref.read(ridePriceEstimateProvider).value;
+    final container = ProviderScope.containerOf(context, listen: false);
     Navigator.of(context)
         .push(
           MaterialPageRoute(
@@ -91,9 +92,7 @@ class RideTrackingCards extends ConsumerWidget {
             ),
           ),
         )
-        .then((_) {
-          if (context.mounted) _reset(ref);
-        });
+        .then((_) => _reset(container));
   }
 
   void _close(BuildContext routeContext) => Navigator.of(routeContext).pop();
@@ -102,10 +101,11 @@ class RideTrackingCards extends ConsumerWidget {
     final reason =
         ref.read(rideControllerProvider.select((s) => s.error)) ??
         context.l10n.captainDeclined;
+    final container = ProviderScope.containerOf(context, listen: false);
     showRideCancelledDialog(
       context,
       reason: reason,
-      onDismiss: () => _reset(ref),
+      onDismiss: () => _reset(container),
     );
   }
 
@@ -122,7 +122,7 @@ class RideTrackingCards extends ConsumerWidget {
 
     ref.listen(cancelRideControllerProvider, (previous, next) {
       if (next.value?.isCancelled == true) {
-        _reset(ref);
+        _reset(ProviderScope.containerOf(context, listen: false));
         return;
       }
       // Without this the card keeps its searching radar spinning and the rider

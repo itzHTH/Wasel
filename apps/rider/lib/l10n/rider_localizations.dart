@@ -523,6 +523,18 @@ abstract class RiderLocalizations {
   /// In ar, this message translates to:
   /// **'الوصول خلال {minutes} دقائق تقريباً'**
   String arrivalEtaMinutes(String minutes);
+
+  /// Overlay shown when the driver loses the socket mid-ride; the ride itself keeps running
+  ///
+  /// In ar, this message translates to:
+  /// **'انقطع اتصال الكابتن، ننتظر رجوعه...'**
+  String get driverConnectionLost;
+
+  /// Shown in the blocking loader while the app re-reads the active ride and brings the tracking socket up
+  ///
+  /// In ar, this message translates to:
+  /// **'يتم إعداد بيئة الاتصال'**
+  String get restoringRide;
 }
 
 class _RiderLocalizationsDelegate

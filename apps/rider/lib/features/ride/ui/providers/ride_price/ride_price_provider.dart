@@ -15,6 +15,10 @@ class RidePriceEstimate extends _$RidePriceEstimate {
     return null;
   }
 
+  void adoptFare(num fare) {
+    state = AsyncValue.data(RidePrice(estimatedPrice: fare, distanceInKm: ''));
+  }
+
   Future<void> getPrice() async {
     final draft = ref.read(rideDraftProvider);
     final pickup = draft.pickup;

@@ -52,4 +52,4 @@ final class DriverCarMotionProvider
   }
 }
 
-String _$driverCarMotionHash() => r'1c0ad26b6af0eeb29902fde5a45003c28e3cf585';
+String _$driverCarMotionHash() => r'b2635d07132ed2a7fafe261c62f8a283fb22a5db';

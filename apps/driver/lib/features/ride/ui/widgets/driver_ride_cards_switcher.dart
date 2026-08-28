@@ -51,7 +51,7 @@ class DriverRideCardsSwitcher extends ConsumerWidget {
       rideControllerProvider.select((state) => state.stage),
     );
     final ride = ref.watch(
-      rideControllerProvider.select((state) => state.ride),
+      rideControllerProvider.select((state) => state.currentRide),
     );
     final secondsLeft = ref.watch(
       rideControllerProvider.select((state) => state.secondsLeft),
@@ -60,6 +60,15 @@ class DriverRideCardsSwitcher extends ConsumerWidget {
       rideControllerProvider.select((state) => state.connection),
     );
     final controller = ref.read(rideControllerProvider.notifier);
+
+    final isRecovering = ref.watch(
+      rideControllerProvider.select((state) => state.isRecovering),
+    );
+    if (isRecovering) {
+      return const RideCardTransition(
+        child: SizedBox.shrink(key: ValueKey('recovering')),
+      );
+    }
 
     final card = switch ((stage, ride)) {
       (DriverStage.offline, _) => OfflineCard(

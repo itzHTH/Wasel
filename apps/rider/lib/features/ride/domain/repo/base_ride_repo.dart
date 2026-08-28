@@ -32,4 +32,6 @@ abstract class BaseRideRepo {
   });
 
   Stream<RideEvent> watchRide(String rideId);
+
+  Future<bool> reconnectToRide(String rideId);
 }

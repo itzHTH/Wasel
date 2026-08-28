@@ -25,6 +25,9 @@ export 'helpers/app_validators.dart';
 export 'helpers/debouncer.dart';
 export 'helpers/session_store.dart';
 
+// Lifecycle
+export 'lifecycle/app_return_observer.dart';
+
 // Localization
 export 'l10n/core_localizations.dart';
 export 'l10n/core_l10n_extension.dart';
@@ -89,6 +92,7 @@ export 'widgets/forms/app_text_form_field.dart';
 export 'widgets/forms/password_field.dart';
 
 // Widgets — feedback (dialogs, errors, loading)
+export 'widgets/feedback/app_blocking_loader.dart';
 export 'widgets/feedback/app_brand_pulse.dart';
 export 'widgets/feedback/app_dialog.dart';
 export 'widgets/feedback/app_error_retry.dart';

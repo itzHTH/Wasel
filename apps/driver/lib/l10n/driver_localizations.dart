@@ -925,6 +925,12 @@ abstract class DriverLocalizations {
   /// In ar, this message translates to:
   /// **'سحب الأرباح إلى حسابك قيد التجهيز، وسنخبرك فور توفره.'**
   String get cashOutSoonMessage;
+
+  /// Shown in the blocking loader while the app re-reads the active ride and brings the tracking socket up
+  ///
+  /// In ar, this message translates to:
+  /// **'يتم إعداد بيئة الاتصال'**
+  String get restoringRide;
 }
 
 class _DriverLocalizationsDelegate

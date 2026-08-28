@@ -81,6 +81,10 @@ class RideRepo implements BaseRideRepo {
   }
 
   @override
+  Future<bool> reconnectToRide(String rideId) =>
+      _rideHubService.reconnectToRide(rideId);
+
+  @override
   Future<void> updateLocation(UpdateLocationArg updateLocationArg) async {
     await _rideHubService.updateLocation(
       updateLocationArg.lat,

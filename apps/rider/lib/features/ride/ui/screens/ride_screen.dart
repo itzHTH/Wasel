@@ -3,10 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/is_camera_moving_provider.dart';
 import 'package:wasal/features/ride/ui/providers/ride_draft/ride_draft_provider.dart';
 import 'package:wasal/core/routing/app_routes_name.dart';
+import 'package:wasal/features/ride/ui/providers/ride_controller/ride_controller.dart';
+import 'package:wasal/features/ride/ui/providers/ride_controller/ride_lifecycle_observer.dart';
+import 'package:wasal/features/ride/ui/widgets/tracking/driver_disconnected_banner.dart';
 import 'package:wasal/features/ride/ui/providers/tracking/ride_camera_controller.dart';
 import 'package:wasal/features/ride/ui/widgets/custom_pin_map.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_cards_switcher.dart';
 import 'package:wasal/features/ride/ui/widgets/ride_map.dart';
+import 'package:wasal/features/ride/ui/widgets/ride_recovery_overlay.dart';
 import 'package:wasel_core/wasel_core.dart';
 import 'package:wasel_location/wasel_location.dart';
 
@@ -20,23 +24,34 @@ class RideScreen extends ConsumerStatefulWidget {
 class _RideScreenState extends ConsumerState<RideScreen> {
   LatLng _center = AppMapDefaults.initialTarget;
 
-  void _centerOnUserLocation() {
-    ref.read(recenterControllerProvider.notifier).centerOnUser(context);
-  }
+  bool _centredOnUser = false;
 
-  @override
-  void initState() {
-    super.initState();
-    // Deferred a frame: centering asks for location permission, whose prompt
-    // reads Localizations, and those cannot be looked up during initState.
+  void _centreOnUserOnce() {
+    if (_centredOnUser) return;
+    _centredOnUser = true;
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) _centerOnUserLocation();
+      if (!mounted) return;
+      ref.read(recenterControllerProvider.notifier).centerOnUser(context);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     ref.watch(rideCameraControllerProvider);
+
+    ref.watch(rideLifecycleObserverProvider);
+
+    final isAwaitingRecovery = ref.watch(
+      rideControllerProvider.select((s) => s.isAwaitingRecovery),
+    );
+    final isRecovering = ref.watch(
+      rideControllerProvider.select((s) => s.isRecovering),
+    );
+    final hasActiveRide = ref.watch(
+      rideControllerProvider.select((s) => s.hasActiveRide),
+    );
+    if (!isAwaitingRecovery && !hasActiveRide) _centreOnUserOnce();
 
     return Scaffold(
       body: Stack(
@@ -83,6 +98,8 @@ class _RideScreenState extends ConsumerState<RideScreen> {
                     child: MyLocationButton(),
                   ),
                 ),
+                const DriverDisconnectedBanner(),
+                SizedBox(height: AppDimens.space8),
                 const LocationPermissionBanner(),
                 Flexible(
                   child: RideCardsSwitcher(
@@ -94,6 +111,8 @@ class _RideScreenState extends ConsumerState<RideScreen> {
               ],
             ),
           ),
+
+          if (isRecovering) const Positioned.fill(child: RideRecoveryOverlay()),
         ],
       ),
     );

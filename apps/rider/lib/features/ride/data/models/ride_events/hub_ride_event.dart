@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wasel_location/domain/entities/geo_point.dart';
 import 'package:wasal/features/ride/domain/entities/ride_event.dart';
+import 'package:wasel_rides/domain/entities/active_ride.dart';
 
 part 'hub_ride_event.freezed.dart';
 
@@ -37,6 +38,13 @@ sealed class HubRideEvent with _$HubRideEvent {
   }) = RideCompleted;
 
   const factory HubRideEvent.cancelled({String? message}) = RideCancelled;
+
+  const factory HubRideEvent.driverDisconnected({
+    required String rideId,
+    required String message,
+  }) = DriverDisconnected;
+
+  const factory HubRideEvent.statusSync(ActiveRide? ride) = RideStatusSync;
 }
 
 extension HubRideEventX on HubRideEvent {
@@ -59,6 +67,11 @@ extension HubRideEventX on HubRideEvent {
     ),
 
     RideCancelled(:final message) => RideEvent.cancelled(message: message),
+
+    DriverDisconnected(:final rideId, :final message) =>
+      RideEvent.driverDisconnected(rideId: rideId, message: message),
+
+    RideStatusSync(:final ride) => RideEvent.statusSync(ride),
 
     RideAccepted() => throw UnimplementedError(
       'accepted enrichment happens in RideRepo (needs REST)',

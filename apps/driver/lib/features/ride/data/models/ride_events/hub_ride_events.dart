@@ -1,6 +1,7 @@
 import 'package:wasel_location/domain/entities/geo_point.dart';
 import 'package:driver/features/ride/domain/entities/driver_ride_events.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wasel_rides/domain/entities/active_ride.dart';
 
 part 'hub_ride_events.freezed.dart';
 
@@ -25,6 +26,8 @@ sealed class HubRideEvent with _$HubRideEvent {
   }) = ProfileReviewed;
 
   const factory HubRideEvent.cancelled({String? message}) = RideCancelled;
+
+  const factory HubRideEvent.statusSync(ActiveRide? ride) = RideStatusSync;
 }
 
 extension HubRideEventX on HubRideEvent {
@@ -58,6 +61,8 @@ extension HubRideEventX on HubRideEvent {
     RideCancelled(:final message) => DriverRideEvent.cancelled(
       message: message,
     ),
+
+    RideStatusSync(:final ride) => DriverRideEvent.statusSync(ride),
   };
 }
 

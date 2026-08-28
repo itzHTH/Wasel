@@ -14,4 +14,5 @@ abstract class BaseRideRepo {
   Future<ApiResults<void>> completeRide(String rideId);
   Future<ApiResults<void>> driverCancelRide(String rideId);
   Future<ApiResults<void>> changePaymentMethod(ChangePaymentArg arg);
+  Future<bool> reconnectToRide(String rideId);
 }

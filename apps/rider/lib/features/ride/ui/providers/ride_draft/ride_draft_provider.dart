@@ -111,6 +111,19 @@ class RideDraft extends _$RideDraft {
     _searchedField = null;
   }
 
+  void hydrateFrom(LatLng pickup, LatLng dropoff) {
+    _clearSearched();
+
+    state = RideDraftState(
+      stage: PickingStage.done,
+      pickup: pickup,
+      dropoff: dropoff,
+    );
+
+    _storeLabelFor(pickup, isPickup: true);
+    _storeLabelFor(dropoff, isPickup: false);
+  }
+
   void goBackOneStep() {
     _clearSearched();
 
