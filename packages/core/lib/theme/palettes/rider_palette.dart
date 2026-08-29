@@ -28,7 +28,7 @@ class RiderPalette {
     neutral600: Color(0xFF45535F),
     screenBackground: Color(0xFFF5F8FA),
     elementBackground: Color(0xFFFFFFFF),
-    splashBackground: Color(0xFF0E1729),
+    splashBackground: Color(0xFFF5F8FA),
   );
 
   static const AppColorsExtension dark = AppColorsExtension.dark(

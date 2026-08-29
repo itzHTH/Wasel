@@ -97,7 +97,12 @@ class _AppSplashBrandingState extends State<AppSplashBranding>
           opacity: _labelOpacity,
           child: SlideTransition(
             position: _labelSlide,
-            child: Text(widget.label, style: context.styles.displayLarge()),
+            child: Text(
+              widget.label,
+              style: context.styles.displayLarge().copyWith(
+                color: context.colors.secondary900,
+              ),
+            ),
           ),
         ),
       ],
