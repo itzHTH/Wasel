@@ -128,6 +128,10 @@ class CoreLocalizationsEn extends CoreLocalizations {
   String get errorUnsupportedPaymentMethod => 'Unsupported payment method';
 
   @override
+  String get errorForegroundServiceUnavailable =>
+      'The background service could not start, please try again';
+
+  @override
   String get emailRequired => 'Email is required';
 
   @override

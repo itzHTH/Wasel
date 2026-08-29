@@ -38,6 +38,7 @@
   "errorRoleNotAllowed": "This account is not allowed to sign in to this app",
   "errorRouteUnavailable": "We can't draw the route",
   "errorUnsupportedPaymentMethod": "Unsupported payment method",
+  "errorForegroundServiceUnavailable": "The background service could not start, please try again",
   "emailRequired": "Email is required",
   "emailInvalid": "Enter a valid email address",
   "passwordRequired": "Password is required",

@@ -159,6 +159,7 @@
     "description": "Shown when the route between two points cannot be drawn"
   },
   "errorUnsupportedPaymentMethod": "طريقة دفع غير مدعومة",
+  "errorForegroundServiceUnavailable": "تعذّر تشغيل خدمة العمل بالخلفية، حاول مرة أخرى",
   "@errorUnsupportedPaymentMethod": {
     "description": "Shown when a ride cannot be settled with the chosen payment method"
   },

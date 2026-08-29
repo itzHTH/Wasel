@@ -128,6 +128,10 @@ class CoreLocalizationsAr extends CoreLocalizations {
   String get errorUnsupportedPaymentMethod => 'طريقة دفع غير مدعومة';
 
   @override
+  String get errorForegroundServiceUnavailable =>
+      'تعذّر تشغيل خدمة العمل بالخلفية، حاول مرة أخرى';
+
+  @override
   String get emailRequired => 'البريد الإلكتروني مطلوب';
 
   @override

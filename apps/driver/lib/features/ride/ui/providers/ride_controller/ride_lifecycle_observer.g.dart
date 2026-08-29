@@ -8,29 +8,13 @@ part of 'ride_lifecycle_observer.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// Re-reads the ride whenever the app comes back from the background.
-///
-/// Auto-disposed on purpose: it lives exactly as long as the ride screen that
-/// watches it. Kept alive it would outlive a sign-out and wake the controller
-/// into an unauthenticated read on the next return to the foreground.
 
 @ProviderFor(rideLifecycleObserver)
 final rideLifecycleObserverProvider = RideLifecycleObserverProvider._();
 
-/// Re-reads the ride whenever the app comes back from the background.
-///
-/// Auto-disposed on purpose: it lives exactly as long as the ride screen that
-/// watches it. Kept alive it would outlive a sign-out and wake the controller
-/// into an unauthenticated read on the next return to the foreground.
-
 final class RideLifecycleObserverProvider
     extends $FunctionalProvider<void, void, void>
     with $Provider<void> {
-  /// Re-reads the ride whenever the app comes back from the background.
-  ///
-  /// Auto-disposed on purpose: it lives exactly as long as the ride screen that
-  /// watches it. Kept alive it would outlive a sign-out and wake the controller
-  /// into an unauthenticated read on the next return to the foreground.
   RideLifecycleObserverProvider._()
     : super(
         from: null,

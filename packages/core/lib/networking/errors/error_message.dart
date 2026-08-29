@@ -50,6 +50,8 @@ String _messageFor(CoreLocalizations l10n, ApiErrorReason reason) =>
       ApiErrorReason.routeUnavailable => l10n.errorRouteUnavailable,
       ApiErrorReason.unsupportedPaymentMethod =>
         l10n.errorUnsupportedPaymentMethod,
+      ApiErrorReason.foregroundServiceUnavailable =>
+        l10n.errorForegroundServiceUnavailable,
       // A cancelled request was not a failure the user needs explaining.
       ApiErrorReason.cancelled => l10n.genericError,
       ApiErrorReason.unknown => l10n.genericError,

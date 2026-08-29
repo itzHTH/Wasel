@@ -326,6 +326,12 @@ abstract class CoreLocalizations {
   /// **'طريقة دفع غير مدعومة'**
   String get errorUnsupportedPaymentMethod;
 
+  /// No description provided for @errorForegroundServiceUnavailable.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر تشغيل خدمة العمل بالخلفية، حاول مرة أخرى'**
+  String get errorForegroundServiceUnavailable;
+
   /// Validation: empty email
   ///
   /// In ar, this message translates to:

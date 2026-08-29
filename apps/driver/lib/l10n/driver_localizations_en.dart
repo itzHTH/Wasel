@@ -455,4 +455,43 @@ class DriverLocalizationsEn extends DriverLocalizations {
 
   @override
   String get restoringRide => 'Setting up your connection';
+
+  @override
+  String get shiftChannelName => 'Driver shift';
+
+  @override
+  String get shiftOnlineTitle => 'Online';
+
+  @override
+  String get shiftOnlineBody => 'Waiting for ride requests';
+
+  @override
+  String get shiftOnTripTitle => 'On a trip';
+
+  @override
+  String get shiftOnTripBody => 'Sharing your location with the rider';
+
+  @override
+  String get shiftReconnectingTitle => 'Reconnecting';
+
+  @override
+  String get shiftReconnectingBody =>
+      'You won\'t get requests until the connection is back';
+
+  @override
+  String get notificationsRequiredForShift =>
+      'Turn on notifications so requests reach you outside the app';
+
+  @override
+  String get offerChannelName => 'Ride requests';
+
+  @override
+  String get offerChannelDescription => 'Rings when a new ride request arrives';
+
+  @override
+  String get offerAlertTitle => 'New ride request';
+
+  @override
+  String get offerAlertBody =>
+      'Open the app and accept before the timer runs out';
 }
