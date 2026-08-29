@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'driver_foreground_controller.dart';
+part of 'ride_offer_alert.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,29 +9,28 @@ part of 'driver_foreground_controller.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(DriverForegroundController)
-final driverForegroundControllerProvider =
-    DriverForegroundControllerProvider._();
+@ProviderFor(RideOfferAlert)
+final rideOfferAlertProvider = RideOfferAlertProvider._();
 
-final class DriverForegroundControllerProvider
-    extends $NotifierProvider<DriverForegroundController, void> {
-  DriverForegroundControllerProvider._()
+final class RideOfferAlertProvider
+    extends $NotifierProvider<RideOfferAlert, void> {
+  RideOfferAlertProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'driverForegroundControllerProvider',
+        name: r'rideOfferAlertProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$driverForegroundControllerHash();
+  String debugGetCreateSourceHash() => _$rideOfferAlertHash();
 
   @$internal
   @override
-  DriverForegroundController create() => DriverForegroundController();
+  RideOfferAlert create() => RideOfferAlert();
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(void value) {
@@ -42,10 +41,9 @@ final class DriverForegroundControllerProvider
   }
 }
 
-String _$driverForegroundControllerHash() =>
-    r'022360dcb23adb879afa690f6f668588a09d03d2';
+String _$rideOfferAlertHash() => r'55560d4be01049e42a879b10552d54c3ce43853a';
 
-abstract class _$DriverForegroundController extends $Notifier<void> {
+abstract class _$RideOfferAlert extends $Notifier<void> {
   void build();
   @$mustCallSuper
   @override

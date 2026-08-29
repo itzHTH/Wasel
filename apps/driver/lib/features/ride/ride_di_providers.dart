@@ -1,6 +1,8 @@
 import 'package:driver/features/ride/data/repos/driver_foreground_repo.dart';
 import 'package:driver/features/ride/data/repos/ride_repo.dart';
 import 'package:driver/features/ride/domain/use_case/accept_ride_use_case.dart';
+import 'package:driver/features/ride/domain/use_case/alert_ride_offer_use_case.dart';
+import 'package:driver/features/ride/domain/use_case/clear_ride_offer_alert_use_case.dart';
 import 'package:driver/features/ride/domain/use_case/arrive_at_start_point_use_case.dart';
 import 'package:driver/features/ride/domain/use_case/change_payment_method_use_case.dart';
 import 'package:driver/features/ride/domain/use_case/complete_ride_use_case.dart';
@@ -118,4 +120,16 @@ StopForegroundServiceUseCase stopForegroundServiceUseCase(Ref ref) {
 IsForegroundServiceRunningUseCase isForegroundServiceRunningUseCase(Ref ref) {
   final repo = ref.watch(driverForegroundRepoProvider);
   return IsForegroundServiceRunningUseCase(repo);
+}
+
+@riverpod
+AlertRideOfferUseCase alertRideOfferUseCase(Ref ref) {
+  final repo = ref.watch(driverForegroundRepoProvider);
+  return AlertRideOfferUseCase(repo);
+}
+
+@riverpod
+ClearRideOfferAlertUseCase clearRideOfferAlertUseCase(Ref ref) {
+  final repo = ref.watch(driverForegroundRepoProvider);
+  return ClearRideOfferAlertUseCase(repo);
 }

@@ -13,6 +13,7 @@ import 'package:driver/features/ride/ui/providers/ride_controller/driver_ride_st
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_controller.dart';
 import 'package:driver/l10n/driver_localizations.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wasel_core/wasel_core.dart';
@@ -86,6 +87,7 @@ class DriverForegroundController extends _$DriverForegroundController {
       return;
     }
 
+    debugPrint('🟢 starting shift service');
     await _promptBatteryOnce();
     if (session != _session || !ref.mounted) return;
 
@@ -111,6 +113,7 @@ class DriverForegroundController extends _$DriverForegroundController {
   }
 
   Future<void> _update(int session, ShiftPhase phase) async {
+    debugPrint('🟢 phase → $phase (started=$_started)');
     if (!_started) return;
 
     final result = await _updateNotification.call(_notificationFor(phase));
@@ -128,6 +131,7 @@ class DriverForegroundController extends _$DriverForegroundController {
     // Recorded only once the dialog has been answered, so a driver who
     // dismissed it by accident is asked again rather than left under Doze.
     final granted = await _ensureUnrestricted.call(null);
+    debugPrint('🔋 battery exemption granted=$granted');
     if (granted) {
       await AppLocalCache.setData(AppDriverConsts.batteryPromptKey, true);
     }

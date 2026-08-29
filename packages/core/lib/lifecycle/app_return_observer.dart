@@ -38,3 +38,21 @@ class _AppReturnObserver with WidgetsBindingObserver {
     }
   }
 }
+
+/// Whether the UI is on screen right now.
+///
+/// Null before the first lifecycle event, which is a cold start with the UI
+/// coming up — treated as foregrounded so nothing alerts over a visible app.
+bool get isAppForegrounded {
+  try {
+    final state = WidgetsBinding.instance.lifecycleState;
+    // `inactive` is still on screen — a pulled-down shade, a system permission
+    // dialog, an incoming-call banner. Alerting over it would interrupt a
+    // driver who is already looking at the app.
+    return state == null ||
+        state == AppLifecycleState.resumed ||
+        state == AppLifecycleState.inactive;
+  } catch (_) {
+    return true;
+  }
+}

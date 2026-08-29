@@ -55,4 +55,4 @@ final class DriverForegroundRepoProvider
 }
 
 String _$driverForegroundRepoHash() =>
-    r'e54385f0ce7a0b8c5fb0c9d86cf36ed00ebd0633';
+    r'41e7cde4bbe3ead6c68cae5a1429af5d5e3a6f2e';

@@ -481,4 +481,17 @@ class DriverLocalizationsEn extends DriverLocalizations {
   @override
   String get notificationsRequiredForShift =>
       'Turn on notifications so requests reach you outside the app';
+
+  @override
+  String get offerChannelName => 'Ride requests';
+
+  @override
+  String get offerChannelDescription => 'Rings when a new ride request arrives';
+
+  @override
+  String get offerAlertTitle => 'New ride request';
+
+  @override
+  String get offerAlertBody =>
+      'Open the app and accept before the timer runs out';
 }

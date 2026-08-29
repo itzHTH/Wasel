@@ -1,5 +1,6 @@
 import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:driver/features/ride/ui/providers/foreground/driver_foreground_controller.dart';
+import 'package:driver/features/ride/ui/providers/foreground/ride_offer_alert.dart';
 import 'package:driver/features/ride/ui/providers/location/driver_location_broadcaster.dart';
 import 'package:driver/features/ride/ui/providers/map/driver_camera_controller.dart';
 import 'package:driver/features/ride/ui/providers/ride_controller/ride_action_controller.dart';
@@ -36,6 +37,7 @@ class _RideScreenState extends ConsumerState<RideScreen> {
     // both stay here rather than moving down into the map.
     ref.watch(driverLocationBroadcasterProvider);
     ref.watch(driverForegroundControllerProvider);
+    ref.watch(rideOfferAlertProvider);
     ref.watch(driverCameraControllerProvider);
 
     ref.watch(rideLifecycleObserverProvider);

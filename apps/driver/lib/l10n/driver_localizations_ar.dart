@@ -454,7 +454,7 @@ class DriverLocalizationsAr extends DriverLocalizations {
   String get shiftOnlineTitle => 'متصل';
 
   @override
-  String get shiftOnlineBody => 'دا ننطر طلبات الركاب';
+  String get shiftOnlineBody => 'دا ندورلك طلبات';
 
   @override
   String get shiftOnTripTitle => 'برحلة';
@@ -471,4 +471,16 @@ class DriverLocalizationsAr extends DriverLocalizations {
   @override
   String get notificationsRequiredForShift =>
       'فعّل الإشعارات حتى توصلك الطلبات وانت خارج التطبيق';
+
+  @override
+  String get offerChannelName => 'طلبات الرحلات';
+
+  @override
+  String get offerChannelDescription => 'تنبيه صوتي عند وصول طلب رحلة جديد';
+
+  @override
+  String get offerAlertTitle => 'طلب رحلة جديد';
+
+  @override
+  String get offerAlertBody => 'افتح التطبيق واقبل الطلب قبل ما ينتهي الوقت!';
 }

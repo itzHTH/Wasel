@@ -106,14 +106,23 @@ class RideHubDatasource implements IRideHubDataSource {
     _client.on(method, (args) {
       if (_controller.isClosed) return;
 
+      debugPrint('📡 hub frame: $method');
+
       final event = read(args);
       if (event == null) {
-        debugPrint('📡 $method: unrecognized payload → $args');
+        // Keys only: the payload carries the rider's name, phone and
+        // pickup/drop coordinates, and debugPrint survives release builds.
+        debugPrint('📡 $method: unrecognized payload, keys=${_keysOf(args)}');
         return;
       }
 
       _controller.add(event);
     });
+  }
+
+  static Object _keysOf(List<Object?>? args) {
+    final first = args?.firstOrNull;
+    return first is Map ? first.keys.map((key) => '$key').toList() : 'none';
   }
 
   static HubRideEvent? _readRideRequest(List<Object?>? args) {

@@ -600,7 +600,7 @@
   "@shiftOnlineTitle": {
     "description": "Foreground service notification"
   },
-  "shiftOnlineBody": "دا ننطر طلبات الركاب",
+  "shiftOnlineBody": "دا ندورلك طلبات",
   "@shiftOnlineBody": {
     "description": "Foreground service notification"
   },
@@ -623,5 +623,21 @@
   "notificationsRequiredForShift": "فعّل الإشعارات حتى توصلك الطلبات وانت خارج التطبيق",
   "@notificationsRequiredForShift": {
     "description": "Driver shift failure"
+  },
+  "offerChannelName": "طلبات الرحلات",
+  "@offerChannelName": {
+    "description": "Notification channel for incoming ride offers"
+  },
+  "offerChannelDescription": "تنبيه صوتي عند وصول طلب رحلة جديد",
+  "@offerChannelDescription": {
+    "description": "Notification channel description"
+  },
+  "offerAlertTitle": "طلب رحلة جديد",
+  "@offerAlertTitle": {
+    "description": "Incoming offer notification"
+  },
+  "offerAlertBody": "افتح التطبيق واقبل الطلب قبل ما ينتهي الوقت!",
+  "@offerAlertBody": {
+    "description": "Incoming offer notification"
   }
 }

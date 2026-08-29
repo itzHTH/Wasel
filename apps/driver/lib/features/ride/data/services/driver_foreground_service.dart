@@ -142,7 +142,6 @@ class DriverForegroundService implements IDriverForegroundService {
         autoRunOnBoot: false,
         autoRunOnMyPackageReplaced: false,
         allowAutoRestart: false,
-        stopWithTask: true,
       ),
     );
   }

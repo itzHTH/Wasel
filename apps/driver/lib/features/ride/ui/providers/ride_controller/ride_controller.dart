@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+
 import 'package:driver/features/ride/data/models/change_payment/change_payment_arg.dart';
 import 'package:driver/features/ride/domain/entities/driver_ride_events.dart';
 import 'package:driver/features/ride/domain/entities/ride_connection_status.dart';
@@ -83,8 +85,15 @@ class RideController extends _$RideController {
 
     if (!ref.mounted || recovery != _recovery) return;
 
-    if (opening &&
-        state.activeRide != null &&
+    // On a cold start an active ride means the driver was mid-shift. On a
+    // resume, only a committed ride re-opens: a driver who went offline on
+    // purpose must not be dragged back online, but a trip whose hub died has
+    // no other route back — no card exposes `goOnline` past DriverStage.online.
+    final reopen = opening
+        ? state.activeRide != null
+        : _hasCommittedRide(state.stage);
+
+    if (reopen &&
         state.connection != DriverConnectionState.connecting &&
         !_hub.isOpen) {
       await goOnline();
@@ -157,6 +166,7 @@ class RideController extends _$RideController {
   }
 
   void _onConnectionStatus(int generation, RideConnectionStatus status) {
+    debugPrint('🔌 hub → $status (stage=${state.stage})');
     if (generation != _hub.generation || !ref.mounted) return;
 
     final pending = state.connection == DriverConnectionState.connecting;

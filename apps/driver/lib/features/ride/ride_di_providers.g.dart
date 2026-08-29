@@ -793,3 +793,100 @@ final class IsForegroundServiceRunningUseCaseProvider
 
 String _$isForegroundServiceRunningUseCaseHash() =>
     r'b1b9098d661389cd343a49ce6cedbac2e1c2f1b7';
+
+@ProviderFor(alertRideOfferUseCase)
+final alertRideOfferUseCaseProvider = AlertRideOfferUseCaseProvider._();
+
+final class AlertRideOfferUseCaseProvider
+    extends
+        $FunctionalProvider<
+          AlertRideOfferUseCase,
+          AlertRideOfferUseCase,
+          AlertRideOfferUseCase
+        >
+    with $Provider<AlertRideOfferUseCase> {
+  AlertRideOfferUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'alertRideOfferUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$alertRideOfferUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<AlertRideOfferUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  AlertRideOfferUseCase create(Ref ref) {
+    return alertRideOfferUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AlertRideOfferUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AlertRideOfferUseCase>(value),
+    );
+  }
+}
+
+String _$alertRideOfferUseCaseHash() =>
+    r'a11b9662fca4b516e6e7b53a8f124f78d2296a26';
+
+@ProviderFor(clearRideOfferAlertUseCase)
+final clearRideOfferAlertUseCaseProvider =
+    ClearRideOfferAlertUseCaseProvider._();
+
+final class ClearRideOfferAlertUseCaseProvider
+    extends
+        $FunctionalProvider<
+          ClearRideOfferAlertUseCase,
+          ClearRideOfferAlertUseCase,
+          ClearRideOfferAlertUseCase
+        >
+    with $Provider<ClearRideOfferAlertUseCase> {
+  ClearRideOfferAlertUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'clearRideOfferAlertUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$clearRideOfferAlertUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<ClearRideOfferAlertUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  ClearRideOfferAlertUseCase create(Ref ref) {
+    return clearRideOfferAlertUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(ClearRideOfferAlertUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<ClearRideOfferAlertUseCase>(value),
+    );
+  }
+}
+
+String _$clearRideOfferAlertUseCaseHash() =>
+    r'8e6d646d7d3b1b6dd2941b70435596bd5c0ee52b';

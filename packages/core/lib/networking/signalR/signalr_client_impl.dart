@@ -82,6 +82,11 @@ class SignalrClientImpl implements ISignalRClient {
         .withAutomaticReconnect(retryDelays: [0, 2000, 10000, 30000])
         .build();
 
+    // Left at the library defaults (30s / 15s) these are tight for a phone
+    // whose radio is dozing; a missed ping reads as a dead server.
+    connection.serverTimeoutInMilliseconds = 60 * 1000;
+    connection.keepAliveIntervalInMilliseconds = 20 * 1000;
+
     _hubConnection = connection;
 
     connection
@@ -122,6 +127,8 @@ class SignalrClientImpl implements ISignalRClient {
       await connection.stop();
       return;
     }
+
+    debugPrint('🔌 hub connected (state=${connection.state})');
 
     _setStatus(SignalRStatus.connected);
   }

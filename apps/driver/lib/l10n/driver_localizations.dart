@@ -947,7 +947,7 @@ abstract class DriverLocalizations {
   /// Foreground service notification
   ///
   /// In ar, this message translates to:
-  /// **'دا ننطر طلبات الركاب'**
+  /// **'دا ندورلك طلبات'**
   String get shiftOnlineBody;
 
   /// Foreground service notification
@@ -979,6 +979,30 @@ abstract class DriverLocalizations {
   /// In ar, this message translates to:
   /// **'فعّل الإشعارات حتى توصلك الطلبات وانت خارج التطبيق'**
   String get notificationsRequiredForShift;
+
+  /// Notification channel for incoming ride offers
+  ///
+  /// In ar, this message translates to:
+  /// **'طلبات الرحلات'**
+  String get offerChannelName;
+
+  /// Notification channel description
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه صوتي عند وصول طلب رحلة جديد'**
+  String get offerChannelDescription;
+
+  /// Incoming offer notification
+  ///
+  /// In ar, this message translates to:
+  /// **'طلب رحلة جديد'**
+  String get offerAlertTitle;
+
+  /// Incoming offer notification
+  ///
+  /// In ar, this message translates to:
+  /// **'افتح التطبيق واقبل الطلب قبل ما ينتهي الوقت!'**
+  String get offerAlertBody;
 }
 
 class _DriverLocalizationsDelegate

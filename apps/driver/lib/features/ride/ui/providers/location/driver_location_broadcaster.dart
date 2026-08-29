@@ -2,6 +2,8 @@ import 'package:wasel_core/wasel_core.dart';
 import 'package:driver/l10n/driver_localizations.dart';
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+
 import 'package:driver/features/ride/data/models/update_location/update_location_arg.dart';
 import 'package:driver/features/ride/domain/entities/ride_connection_status.dart';
 import 'package:driver/features/ride/domain/use_case/update_driver_location_use_case.dart';
@@ -171,7 +173,9 @@ class DriverLocationBroadcaster extends _$DriverLocationBroadcaster {
         ),
       );
       _failures = 0;
-    } catch (_) {
+      debugPrint('🛰 location sent (rideId=${_activeRideId().isEmpty ? '-' : 'set'})');
+    } catch (error) {
+      debugPrint('🛰 location send FAILED → $error');
       _onBroadcastFailed(session);
     } finally {
       _sending = false;
