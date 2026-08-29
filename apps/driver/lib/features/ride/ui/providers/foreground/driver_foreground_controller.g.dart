@@ -43,7 +43,7 @@ final class DriverForegroundControllerProvider
 }
 
 String _$driverForegroundControllerHash() =>
-    r'022360dcb23adb879afa690f6f668588a09d03d2';
+    r'94c2ce4869001029e7aac4bea7ed8270ddc6cf62';
 
 abstract class _$DriverForegroundController extends $Notifier<void> {
   void build();

@@ -8,17 +8,13 @@ part of 'place_search_controller.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// A provider so tests override it to zero instead of waiting on the clock.
 
 @ProviderFor(placeSearchDebounce)
 final placeSearchDebounceProvider = PlaceSearchDebounceProvider._();
 
-/// A provider so tests override it to zero instead of waiting on the clock.
-
 final class PlaceSearchDebounceProvider
     extends $FunctionalProvider<Duration, Duration, Duration>
     with $Provider<Duration> {
-  /// A provider so tests override it to zero instead of waiting on the clock.
   PlaceSearchDebounceProvider._()
     : super(
         from: null,
@@ -55,33 +51,15 @@ final class PlaceSearchDebounceProvider
 String _$placeSearchDebounceHash() =>
     r'2f03b6fec74990c69d3dd599104f22ccdeaec6e4';
 
-/// Debounced place search for a single [SearchFieldType].
-///
-/// Keyed by field so the pickup and drop-off searches never share state.
-///
-//! Consumers must `ref.watch` this while the field is on screen. Reaching it
-//! only through `ref.read` lets the auto-disposed element die between
-//! keystrokes, rebuilding the debouncer, so every character fires a request.
+/// Debounced place search for a single SearchFieldType.
 
 @ProviderFor(PlaceSearchController)
 final placeSearchControllerProvider = PlaceSearchControllerFamily._();
 
-/// Debounced place search for a single [SearchFieldType].
-///
-/// Keyed by field so the pickup and drop-off searches never share state.
-///
-//! Consumers must `ref.watch` this while the field is on screen. Reaching it
-//! only through `ref.read` lets the auto-disposed element die between
-//! keystrokes, rebuilding the debouncer, so every character fires a request.
+/// Debounced place search for a single SearchFieldType.
 final class PlaceSearchControllerProvider
     extends $NotifierProvider<PlaceSearchController, PlaceSearchState> {
-  /// Debounced place search for a single [SearchFieldType].
-  ///
-  /// Keyed by field so the pickup and drop-off searches never share state.
-  ///
-  //! Consumers must `ref.watch` this while the field is on screen. Reaching it
-  //! only through `ref.read` lets the auto-disposed element die between
-  //! keystrokes, rebuilding the debouncer, so every character fires a request.
+  /// Debounced place search for a single SearchFieldType.
   PlaceSearchControllerProvider._({
     required PlaceSearchControllerFamily super.from,
     required SearchFieldType super.argument,
@@ -127,15 +105,9 @@ final class PlaceSearchControllerProvider
 }
 
 String _$placeSearchControllerHash() =>
-    r'0a381b00a27e91a4deac2e51cbbbc5492c2deda5';
+    r'a9bf0925fb9ce3d0e11c74f2f9c0ab6d34158ef2';
 
-/// Debounced place search for a single [SearchFieldType].
-///
-/// Keyed by field so the pickup and drop-off searches never share state.
-///
-//! Consumers must `ref.watch` this while the field is on screen. Reaching it
-//! only through `ref.read` lets the auto-disposed element die between
-//! keystrokes, rebuilding the debouncer, so every character fires a request.
+/// Debounced place search for a single SearchFieldType.
 
 final class PlaceSearchControllerFamily extends $Family
     with
@@ -155,13 +127,7 @@ final class PlaceSearchControllerFamily extends $Family
         isAutoDispose: true,
       );
 
-  /// Debounced place search for a single [SearchFieldType].
-  ///
-  /// Keyed by field so the pickup and drop-off searches never share state.
-  ///
-  //! Consumers must `ref.watch` this while the field is on screen. Reaching it
-  //! only through `ref.read` lets the auto-disposed element die between
-  //! keystrokes, rebuilding the debouncer, so every character fires a request.
+  /// Debounced place search for a single SearchFieldType.
 
   PlaceSearchControllerProvider call(SearchFieldType field) =>
       PlaceSearchControllerProvider._(argument: field, from: this);
@@ -170,13 +136,7 @@ final class PlaceSearchControllerFamily extends $Family
   String toString() => r'placeSearchControllerProvider';
 }
 
-/// Debounced place search for a single [SearchFieldType].
-///
-/// Keyed by field so the pickup and drop-off searches never share state.
-///
-//! Consumers must `ref.watch` this while the field is on screen. Reaching it
-//! only through `ref.read` lets the auto-disposed element die between
-//! keystrokes, rebuilding the debouncer, so every character fires a request.
+/// Debounced place search for a single SearchFieldType.
 
 abstract class _$PlaceSearchController extends $Notifier<PlaceSearchState> {
   late final _$args = ref.$arg as SearchFieldType;

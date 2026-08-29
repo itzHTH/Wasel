@@ -43,7 +43,7 @@ RouteRemoteService routeRemoteService(Ref ref) =>
 
 @riverpod
 DeviceLocationService deviceLocationService(Ref ref) =>
-    const DeviceLocationService();
+    DeviceLocationService(ref.watch(trackingSettingsProvider));
 
 @riverpod
 BaseGeocodingRepo geocodingRepo(Ref ref) => GoogleGeocodingRepo(
