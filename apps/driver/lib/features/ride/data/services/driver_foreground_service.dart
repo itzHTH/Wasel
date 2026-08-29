@@ -134,7 +134,10 @@ class DriverForegroundService implements IDriverForegroundService {
         channelImportance: NotificationChannelImportance.LOW,
         priority: NotificationPriority.LOW,
       ),
-      iosNotificationOptions: const IOSNotificationOptions(),
+      iosNotificationOptions: const IOSNotificationOptions(
+        playSound: true,
+        showNotification: true,
+      ),
       foregroundTaskOptions: ForegroundTaskOptions(
         eventAction: ForegroundTaskEventAction.nothing(),
         allowWakeLock: true,

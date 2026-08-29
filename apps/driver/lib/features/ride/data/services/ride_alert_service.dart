@@ -38,6 +38,14 @@ class RideAlertService implements IRideAlertService {
       title: alert.title,
       body: alert.body,
       notificationDetails: NotificationDetails(
+        iOS: DarwinNotificationDetails(
+          presentAlert: true,
+          presentBadge: true,
+          presentSound: true,
+          presentBanner: true,
+          presentList: true,
+          interruptionLevel: InterruptionLevel.timeSensitive,
+        ),
         android: AndroidNotificationDetails(
           _channelId,
           alert.channelName,
@@ -77,6 +85,7 @@ class RideAlertService implements IRideAlertService {
         .initialize(
           settings: const InitializationSettings(
             android: AndroidInitializationSettings(_icon),
+            iOS: IOSInitializationSettings(),
           ),
           onDidReceiveNotificationResponse: (_) =>
               FlutterForegroundTask.launchApp(),
