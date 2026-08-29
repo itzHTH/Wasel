@@ -42,7 +42,7 @@ final class DriverLocationBroadcasterProvider
 }
 
 String _$driverLocationBroadcasterHash() =>
-    r'79cfa861431c5fd29b1fcd36abd8bce877e78c7d';
+    r'7de5eb75fc0f93d2e2ad4f927bea90f15529b7e2';
 
 abstract class _$DriverLocationBroadcaster extends $Notifier<void> {
   void build();

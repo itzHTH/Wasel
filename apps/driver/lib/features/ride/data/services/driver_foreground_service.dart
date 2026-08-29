@@ -24,6 +24,7 @@ class DriverForegroundService implements IDriverForegroundService {
       'com.zimiru.wasel.driver.service.NOTIFICATION_ICON';
 
   final bool _isAndroid = Platform.isAndroid;
+  final bool _isIOS = Platform.isIOS;
 
   static Future<void> _queue = Future<void>.value();
 
@@ -40,7 +41,7 @@ class DriverForegroundService implements IDriverForegroundService {
 
   @override
   Future<ForegroundStatus> ensureReady() async {
-    if (!_isAndroid) return ForegroundStatus.unsupported;
+    if (!_isAndroid && !_isIOS) return ForegroundStatus.unsupported;
 
     var permission = await FlutterForegroundTask.checkNotificationPermission();
 
@@ -58,7 +59,7 @@ class DriverForegroundService implements IDriverForegroundService {
 
   @override
   Future<bool> ensureUnrestricted() async {
-    if (!_isAndroid) return true;
+    if (!_isAndroid && !_isIOS) return true;
     if (await FlutterForegroundTask.isIgnoringBatteryOptimizations) return true;
 
     return FlutterForegroundTask.requestIgnoreBatteryOptimization();
@@ -69,7 +70,7 @@ class DriverForegroundService implements IDriverForegroundService {
       _serial(() => _startService(notification));
 
   Future<void> _startService(ForegroundNotificationArg notification) async {
-    if (!_isAndroid) return;
+    if (!_isAndroid && !_isIOS) return;
     _initialize(notification);
     if (await isRunning) return _updateService(notification);
 
@@ -94,7 +95,7 @@ class DriverForegroundService implements IDriverForegroundService {
       _serial(() => _updateService(notification));
 
   Future<void> _updateService(ForegroundNotificationArg notification) async {
-    if (!_isAndroid) return;
+    if (!_isAndroid && !_isIOS) return;
     _initialize(notification);
     if (!await isRunning) return;
 
@@ -111,7 +112,7 @@ class DriverForegroundService implements IDriverForegroundService {
   Future<void> stopService() => _serial(_stopService);
 
   Future<void> _stopService() async {
-    if (!_isAndroid || !await isRunning) return;
+    if (!_isAndroid && !_isIOS || !await isRunning) return;
 
     _throwUnlessStopped(await FlutterForegroundTask.stopService());
   }
@@ -134,7 +135,10 @@ class DriverForegroundService implements IDriverForegroundService {
         channelImportance: NotificationChannelImportance.LOW,
         priority: NotificationPriority.LOW,
       ),
-      iosNotificationOptions: const IOSNotificationOptions(),
+      iosNotificationOptions: const IOSNotificationOptions(
+        playSound: true,
+        showNotification: true,
+      ),
       foregroundTaskOptions: ForegroundTaskOptions(
         eventAction: ForegroundTaskEventAction.nothing(),
         allowWakeLock: true,

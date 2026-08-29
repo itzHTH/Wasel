@@ -253,7 +253,7 @@ final class DeviceLocationServiceProvider
 }
 
 String _$deviceLocationServiceHash() =>
-    r'4f0efd047e476c0c591515be9dd487049070dfb6';
+    r'b404b0c1bcdc6f4a932ed8a01ebd73dde880d311';
 
 @ProviderFor(geocodingRepo)
 final geocodingRepoProvider = GeocodingRepoProvider._();

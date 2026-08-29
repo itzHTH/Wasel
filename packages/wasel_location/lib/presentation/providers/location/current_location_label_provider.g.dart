@@ -10,33 +10,18 @@ part of 'current_location_label_provider.dart';
 // ignore_for_file: type=lint, type=warning
 /// A human-readable name for where the rider is standing, for pre-filling a
 /// pickup field.
-///
-/// Never fails: a missing fix, a denied permission, a nameless point or a
-/// geocoder error all fall back to "my current location", which is still true
-/// and still selectable. A pickup field showing an error is worse than one
-/// showing a generic label.
 
 @ProviderFor(currentLocationLabel)
 final currentLocationLabelProvider = CurrentLocationLabelProvider._();
 
 /// A human-readable name for where the rider is standing, for pre-filling a
 /// pickup field.
-///
-/// Never fails: a missing fix, a denied permission, a nameless point or a
-/// geocoder error all fall back to "my current location", which is still true
-/// and still selectable. A pickup field showing an error is worse than one
-/// showing a generic label.
 
 final class CurrentLocationLabelProvider
     extends $FunctionalProvider<AsyncValue<String>, String, FutureOr<String>>
     with $FutureModifier<String>, $FutureProvider<String> {
   /// A human-readable name for where the rider is standing, for pre-filling a
   /// pickup field.
-  ///
-  /// Never fails: a missing fix, a denied permission, a nameless point or a
-  /// geocoder error all fall back to "my current location", which is still true
-  /// and still selectable. A pickup field showing an error is worse than one
-  /// showing a generic label.
   CurrentLocationLabelProvider._()
     : super(
         from: null,

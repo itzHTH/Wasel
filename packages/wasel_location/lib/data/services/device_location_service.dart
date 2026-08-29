@@ -1,4 +1,11 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'device_location_service.g.dart';
+
+@riverpod
+LocationSettings trackingSettings(Ref ref) =>
+    const LocationSettings(accuracy: LocationAccuracy.high, distanceFilter: 10);
 
 /// A thin, logic-free wrapper around [Geolocator] static methods.
 ///
@@ -6,14 +13,12 @@ import 'package:geolocator/geolocator.dart';
 /// the hardware. By keeping this //* class "dumb" (no try-catch, no mapping),
 ///  we can easily mock it in tests to simulate GPS timeouts, denied permissions,
 /// and cold-start failures without needing a physical device.
+
 class DeviceLocationService {
-  const DeviceLocationService();
+  DeviceLocationService(this.trackingSettings);
 
   /// Tracking profile for the continuous stream.
-  static const LocationSettings trackingSettings = LocationSettings(
-    accuracy: LocationAccuracy.high,
-    distanceFilter: 10, // send new location only //! when the user move 10 m.
-  );
+  final LocationSettings trackingSettings;
 
   /// How long a cold one-shot fix may take before it is abandoned.
   static const Duration defaultFixTimeout = Duration(seconds: 15);

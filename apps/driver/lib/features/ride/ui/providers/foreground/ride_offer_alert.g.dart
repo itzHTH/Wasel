@@ -41,7 +41,7 @@ final class RideOfferAlertProvider
   }
 }
 
-String _$rideOfferAlertHash() => r'55560d4be01049e42a879b10552d54c3ce43853a';
+String _$rideOfferAlertHash() => r'8d838c89555882d4f6c4ab9503fba344a8ef0048';
 
 abstract class _$RideOfferAlert extends $Notifier<void> {
   void build();

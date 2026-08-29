@@ -1,13 +1,17 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geolocator/geolocator.dart'
+    show LocationSettings, LocationAccuracy, AppleSettings, ActivityType;
 import 'package:wasel_auth/auth_user_type.dart';
 import 'package:driver/core/routing/app_routes_name.dart';
 import 'package:driver/driver_app.dart';
 import 'package:driver/firebase_options.dart';
 import 'package:wasel_core/theme/app_map_style.dart';
 import 'package:wasel_core/wasel_core.dart';
+import 'package:wasel_location/data/services/device_location_service.dart';
 
 void mainCommon({
   required Flavor flavor,
@@ -31,6 +35,16 @@ void mainCommon({
 
   final locale = await AppLocalizationController.restore();
 
+  final trackingSettings = (defaultTargetPlatform == TargetPlatform.iOS)
+      ? AppleSettings(
+          accuracy: LocationAccuracy.high,
+          activityType: ActivityType.automotiveNavigation,
+          distanceFilter: 10,
+          pauseLocationUpdatesAutomatically: false,
+          showBackgroundLocationIndicator: true,
+        )
+      : LocationSettings(accuracy: LocationAccuracy.high, distanceFilter: 10);
+
   runApp(
     ProviderScope(
       overrides: [
@@ -40,6 +54,7 @@ void mainCommon({
         appBrandProvider.overrideWithValue(AppBrand.driver),
         initialThemeModeProvider.overrideWithValue(themeMode),
         initialLocaleProvider.overrideWithValue(locale),
+        trackingSettingsProvider.overrideWithValue(trackingSettings),
       ],
       child: const DriverApp(),
     ),
