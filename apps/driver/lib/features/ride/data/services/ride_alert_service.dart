@@ -28,7 +28,7 @@ class RideAlertService implements IRideAlertService {
 
   @override
   Future<void> showOffer(RideAlertArg alert) async {
-    if (!Platform.isAndroid) return;
+    if (!Platform.isAndroid && !Platform.isIOS) return;
 
     await _initialize();
     debugPrint('🔔 showing offer notification on channel $_channelId');
@@ -66,13 +66,16 @@ class RideAlertService implements IRideAlertService {
       ),
     );
 
-    FlutterForegroundTask.wakeUpScreen();
-    debugPrint('🔔 offer notification shown, screen woken');
+    // the Android foreground service wakes the screen, but the iOS one does not.
+    if (Platform.isAndroid) {
+      FlutterForegroundTask.wakeUpScreen();
+      debugPrint('🔔 offer notification shown, screen woken');
+    }
   }
 
   @override
   Future<void> clearOffer() async {
-    if (!Platform.isAndroid || _initialization == null) return;
+    if (_initialization == null) return;
 
     await _plugin.cancel(id: _notificationId);
   }
@@ -85,7 +88,11 @@ class RideAlertService implements IRideAlertService {
         .initialize(
           settings: const InitializationSettings(
             android: AndroidInitializationSettings(_icon),
-            iOS: IOSInitializationSettings(),
+            iOS: IOSInitializationSettings(
+              requestAlertPermission: false,
+              requestBadgePermission: false,
+              requestSoundPermission: false,
+            ),
           ),
           onDidReceiveNotificationResponse: (_) =>
               FlutterForegroundTask.launchApp(),
