@@ -88,7 +88,7 @@ class RideAlertService implements IRideAlertService {
         .initialize(
           settings: const InitializationSettings(
             android: AndroidInitializationSettings(_icon),
-            iOS: IOSInitializationSettings(
+            iOS: DarwinInitializationSettings(
               requestAlertPermission: false,
               requestBadgePermission: false,
               requestSoundPermission: false,
