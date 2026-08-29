@@ -596,19 +596,19 @@
   "@shiftChannelName": {
     "description": "Android notification channel shown in system settings"
   },
-  "shiftOnlineTitle": "متصل",
+  "shiftOnlineTitle": "انت متصل هسه",
   "@shiftOnlineTitle": {
     "description": "Foreground service notification"
   },
-  "shiftOnlineBody": "دا ندورلك طلبات",
+  "shiftOnlineBody": "جاي ندورلك طلبات",
   "@shiftOnlineBody": {
     "description": "Foreground service notification"
   },
-  "shiftOnTripTitle": "برحلة",
+  "shiftOnTripTitle": "الرحله الك",
   "@shiftOnTripTitle": {
     "description": "Foreground service notification"
   },
-  "shiftOnTripBody": "دا نبعث موقعك للراكب",
+"shiftOnTripBody": "مبروك الرحله يا بطل !",
   "@shiftOnTripBody": {
     "description": "Foreground service notification"
   },

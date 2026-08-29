@@ -451,16 +451,16 @@ class DriverLocalizationsAr extends DriverLocalizations {
   String get shiftChannelName => 'وضع القيادة';
 
   @override
-  String get shiftOnlineTitle => 'متصل';
+  String get shiftOnlineTitle => 'انت متصل هسه';
 
   @override
-  String get shiftOnlineBody => 'دا ندورلك طلبات';
+  String get shiftOnlineBody => 'جاي ندورلك طلبات';
 
   @override
-  String get shiftOnTripTitle => 'برحلة';
+  String get shiftOnTripTitle => 'الرحله الك';
 
   @override
-  String get shiftOnTripBody => 'دا نبعث موقعك للراكب';
+  String get shiftOnTripBody => 'مبروك الرحله يا بطل !';
 
   @override
   String get shiftReconnectingTitle => 'دا نعيد الاتصال';

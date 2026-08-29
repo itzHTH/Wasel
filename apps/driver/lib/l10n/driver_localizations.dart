@@ -941,25 +941,25 @@ abstract class DriverLocalizations {
   /// Foreground service notification
   ///
   /// In ar, this message translates to:
-  /// **'متصل'**
+  /// **'انت متصل هسه'**
   String get shiftOnlineTitle;
 
   /// Foreground service notification
   ///
   /// In ar, this message translates to:
-  /// **'دا ندورلك طلبات'**
+  /// **'جاي ندورلك طلبات'**
   String get shiftOnlineBody;
 
   /// Foreground service notification
   ///
   /// In ar, this message translates to:
-  /// **'برحلة'**
+  /// **'الرحله الك'**
   String get shiftOnTripTitle;
 
   /// Foreground service notification
   ///
   /// In ar, this message translates to:
-  /// **'دا نبعث موقعك للراكب'**
+  /// **'مبروك الرحله يا بطل !'**
   String get shiftOnTripBody;
 
   /// Foreground service notification
