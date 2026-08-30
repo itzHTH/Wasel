@@ -14,6 +14,8 @@ import 'package:driver/features/auth/ui/screens/register_screen.dart';
 import 'package:driver/features/driver_verification/ui/screens/verification_gate_screen.dart';
 import 'package:driver/features/splash/ui/screens/splash_screen.dart';
 
+import 'package:wasel_core/widgets/feedback/app_error_screen.dart';
+
 class AppRouter {
   Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -27,7 +29,9 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
 
       case AppRoutes.resetPassword:
-        return MaterialPageRoute(builder: (_) => const ResetPasswordScreen(doneRoute: AppRoutes.auth));
+        return MaterialPageRoute(
+          builder: (_) => const ResetPasswordScreen(doneRoute: AppRoutes.auth),
+        );
 
       case AppRoutes.driverVerificationGate:
         return MaterialPageRoute(
@@ -66,8 +70,11 @@ class AppRouter {
           settings: settings,
         );
 
+      case AppRoutes.error:
+        return MaterialPageRoute(builder: (_) => AppErrorScreen());
+
       default:
-        return MaterialPageRoute(builder: (_) => const SplashScreen());
+        return MaterialPageRoute(builder: (_) => AppErrorScreen());
     }
   }
 }

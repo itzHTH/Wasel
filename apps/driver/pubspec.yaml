@@ -12,21 +12,16 @@ dependencies:
     sdk: flutter
 
   # Shared packages
-  wasel_core:
-    path: ../../packages/core
-  wasel_auth:
-    path: ../../packages/auth
-  wasel_location:
-    path: ../../packages/wasel_location
-  wasel_profile:
-    path: ../../packages/wasel_profile
-  wasel_payments:
-    path: ../../packages/wasel_payments
-  wasel_rides:
-    path: ../../packages/wasel_rides
+  wasel_core: any
+  wasel_auth: any
+  wasel_location: any
+  wasel_profile: any
+  wasel_payments: any
+  wasel_rides: any
 
   # Firebase (no FCM yet — verification status is polled in driver_verification)
   firebase_core: ^4.12.1
+  firebase_crashlytics: ^5.1.0
 
   # Serialization
   freezed_annotation: ^3.1.0

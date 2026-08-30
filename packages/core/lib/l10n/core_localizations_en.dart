@@ -185,4 +185,17 @@ class CoreLocalizationsEn extends CoreLocalizations {
   String yearRange(String min, String max) {
     return 'Enter a valid year ($min–$max)';
   }
+
+  @override
+  String get errorHeading => 'error';
+
+  @override
+  String get errorTitle => 'Something went wrong';
+
+  @override
+  String get errorBody =>
+      'We\'re sorry, an error occurred and the application stopped working.\nWe have sent an error report to the development team to work on solving it as soon as possible.';
+
+  @override
+  String get exitApp => 'Exit the app';
 }

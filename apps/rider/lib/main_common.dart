@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -23,6 +24,32 @@ void mainCommon({
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  /// Pass all uncaught "fatal" errors from the framework to Crashlytics
+  FlutterError.onError = (FlutterErrorDetails details) {
+    FirebaseCrashlytics.instance.recordFlutterFatalError(details);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AppNavigation.navigatorKey.currentState?.pushNamedAndRemoveUntil(
+        AppRoutes.error,
+        (route) => false,
+      );
+    });
+  };
+
+  /// Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AppNavigation.navigatorKey.currentState?.pushNamedAndRemoveUntil(
+        AppRoutes.error,
+        (route) => false,
+      );
+    });
+
+    return true;
+  };
 
   // The shared auth interceptor (wasel_core) is app-agnostic; tell it how this
   // app should react to a non-refreshable session (forced logout → auth screen).

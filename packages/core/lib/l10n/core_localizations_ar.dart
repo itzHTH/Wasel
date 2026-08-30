@@ -185,4 +185,17 @@ class CoreLocalizationsAr extends CoreLocalizations {
   String yearRange(String min, String max) {
     return 'أدخل سنة صحيحة ($min–$max)';
   }
+
+  @override
+  String get errorHeading => 'خطأ';
+
+  @override
+  String get errorTitle => 'حدث خطأ ما';
+
+  @override
+  String get errorBody =>
+      'احنا نعتذر منك كلش ! \nصارت مشاكل بالتطبيق\nوحالياَ تم تبليغ المطورين لحل المشاكل باسرع وقت\nشكراَ لصبرك يا بطلنا العزيز';
+
+  @override
+  String get exitApp => 'الخروج من التطبيق';
 }
