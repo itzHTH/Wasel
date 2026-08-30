@@ -35,6 +35,7 @@ class AppDimens {
   static double get icon36 => 36.r;
   static double get icon40 => 40.r;
   static double get icon48 => 48.r;
+  static double get icon100 => 100.r;
 
   // ── Screen
   static double get brandPulse => 96.r;

@@ -28,7 +28,7 @@ class DriverPalette {
     neutral600: Color(0xFF464F55),
     screenBackground: Color(0xFFF4F6F7),
     elementBackground: Color(0xFFFFFFFF),
-    splashBackground: Color(0xFF12161A),
+    splashBackground: Color(0xFFF4F6F7),
   );
 
   static const AppColorsExtension dark = AppColorsExtension.dark(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:wasel_core/theme/app_dimens.dart';
 import 'package:wasel_core/theme/theme_context_extension.dart';
 
 /// The animated brand lockup both splashes share. [onCompleted] fires when the
@@ -89,7 +90,10 @@ class _AppSplashBrandingState extends State<AppSplashBranding>
           opacity: _logoOpacity,
           child: ScaleTransition(
             scale: _logoScale,
-            child: SvgPicture.asset(widget.logoAsset),
+            child: SvgPicture.asset(
+              widget.logoAsset,
+              height: AppDimens.icon100,
+            ),
           ),
         ),
         const SizedBox(height: 10),
