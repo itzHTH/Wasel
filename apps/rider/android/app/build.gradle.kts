@@ -71,7 +71,6 @@ android {
     productFlavors {
         create("production") {
             dimension = "app"
-            resValue("string", "app_name", "Wasel")
         }
         create("development") {
             dimension = "app"
