@@ -20,4 +20,30 @@ scripts:
       concurrency: 1
     packageFilters:
       dependsOn: build_runner
+
+  shorebird:release:dev:
+    run: shorebird release android --flavor development
+    exec:
+      dir-exists: [android]
+    description: "create a shorebird release for android (Development)"
+
+  shorebird:release:prod:
+    run: shorebird release android --flavor production
+    exec:
+      dir-exists: [android]
+    description: 'create a shorebird release for android (Production)'
+
+  
+  shorebird:patch:dev:
+    run: shorebird patch android --flavor development
+    exec:
+      dir-exists: [android]
+    description: "Create a shorebird patch for android (Development)"
+
+  shorebird:patch:prod:
+    run: shorebird patch android --flavor production
+    exec:
+      dir-exists: [android]
+    description: "Create a shorebird patch for android (Production)"
+    
 sdkPath: .fvm/flutter_sdk

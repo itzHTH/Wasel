@@ -90,6 +90,7 @@ flutter:
   generate: true
 
   assets:
-  - assets/icons/
-  - assets/map_styles/
-  - .env
+    - assets/icons/
+    - assets/map_styles/
+    - .env
+    - shorebird.yaml
