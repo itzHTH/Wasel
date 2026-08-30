@@ -1,0 +1,18 @@
+flutter_native_splash:
+  #! FOR ALL PLATFORM, except Android 12+:
+  color: "#F4F6F7"
+  color_dark: "#12161A"
+  image: assets/icons/wasel-driver-icon.png
+  image_dark: assets/icons/wasel-driver-icon-dark.png
+
+  ios: true
+  android: true
+
+
+  #! ANDROID 12+ configuration:
+  android_12:
+    # background color
+    color: "#F4F6F7"
+    color_dark: "#12161A"
+    image: assets/icons/wasel-driver-splash-icon-android-12.png
+    image_dark: assets/icons/wasel-driver-splash-icon-android-12-dark.png

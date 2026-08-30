@@ -9,6 +9,8 @@ class AppDriverConsts {
 
   static const String logoIcon = 'assets/icons/wasel-icon.svg';
 
+  static const String logoIconDark = 'assets/icons/wasel-icon-dark.svg';
+
   static const String batteryPromptKey = 'driverBatteryPrompted';
 
   static const String routeAPIKeyName = 'ROUTES_API_KEY';

@@ -32,7 +32,9 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: context.colors.splashBackground,
       body: Center(
         child: AppSplashBranding(
-          logoAsset: AppIcons.logo,
+          logoAsset: Theme.of(context).brightness == Brightness.dark
+              ? AppIcons.logoDark
+              : AppIcons.logo,
           label: context.l10n.brandName,
           onCompleted: _handleIsAuthenticatedUser,
         ),

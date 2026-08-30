@@ -6,4 +6,6 @@ class AppIcons {
   static const String car = 'assets/icons/car.svg';
 
   static const String logo = 'assets/icons/wasel-icon.svg';
+
+  static const String logoDark = 'assets/icons/wasel-icon-dark.svg';
 }
