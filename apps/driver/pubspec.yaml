@@ -40,7 +40,6 @@ dependencies:
   flutter_riverpod: ^3.3.1
   riverpod_annotation: ^4.0.2
 
-
   # Lcoalization
   flutter_localizations:
     sdk: flutter
@@ -48,20 +47,13 @@ dependencies:
 
   # UI
   flutter_screenutil: ^5.9.3
-  flutter_svg: ^2.3.0
-  pinput: ^6.0.2
 
   # Driver verification — manual camera capture + gallery picker (vehicle only)
   camera: ^0.12.0+1
   image_picker: ^1.2.2
 
-  cupertino_icons: ^1.0.8
-
   # For Files 
   cross_file: ^0.3.5+2
-
-  # Navigation handoff to the installed map apps
-  url_launcher: ^6.3.2
 
   # Utils
   geolocator: ^14.0.3
@@ -81,7 +73,6 @@ dev_dependencies:
   retrofit_generator: ^10.2.6
   build_runner: ^2.4.13
   riverpod_generator: ^4.0.3
-  plugin_platform_interface: ^2.1.8
 
 flutter:
   uses-material-design: true
