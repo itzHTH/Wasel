@@ -244,5 +244,21 @@
         "type": "String"
       }
     }
+  },
+  "errorHeading": "خطأ",
+  "@errorHeading": {
+    "description": "Generic error heading"
+  },
+  "errorTitle": "حدث خطأ ما",
+  "@errorTitle": {
+    "description": "Generic error title"
+  },
+  "errorBody": "احنا نعتذر منك كلش ! \nصارت مشاكل بالتطبيق\nوحالياَ تم تبليغ المطورين لحل المشاكل باسرع وقت\nشكراَ لصبرك يا بطلنا العزيز",
+  "@errorRetry": {
+    "description": "Generic error body"
+  },
+  "exitApp": "الخروج من التطبيق",
+  "@exitApp": {
+    "description": "Restart the app by clearing the navigator and going to root '/'"
   }
 }

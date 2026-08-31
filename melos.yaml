@@ -20,4 +20,78 @@ scripts:
       concurrency: 1
     packageFilters:
       dependsOn: build_runner
+
+  test:
+    description: "Run the test suite in every package that has a test directory."
+    run: flutter test
+    exec:
+      concurrency: 1
+    packageFilters:
+      dirExists: test
+
+  run:rider:
+    description: "Run the rider app (production flavor) with the shared env files."
+    run: flutter run --flavor production -t lib/main_prod.dart --dart-define-from-file=../../env.prod.json --dart-define-from-file=env.keys.json
+    exec:
+      concurrency: 1
+    packageFilters:
+      scope: wasal
+
+  run:driver:
+    description: "Run the driver app (production flavor) with the shared env files."
+    run: flutter run --flavor production -t lib/main_prod.dart --dart-define-from-file=../../env.prod.json --dart-define-from-file=env.keys.json
+    exec:
+      concurrency: 1
+    packageFilters:
+      scope: driver
+
+  build:rider:
+    description: "Build the rider release bundle with the production env files."
+    run: flutter build appbundle --flavor production -t lib/main_prod.dart --dart-define-from-file=../../env.prod.json --dart-define-from-file=env.keys.json
+    exec:
+      concurrency: 1
+    packageFilters:
+      scope: wasal
+
+  build:driver:
+    description: "Build the driver release bundle with the production env files."
+    run: flutter build appbundle --flavor production -t lib/main_prod.dart --dart-define-from-file=../../env.prod.json --dart-define-from-file=env.keys.json
+    exec:
+      concurrency: 1
+    packageFilters:
+      scope: driver
+
+  shorebird:release:dev:
+    run: shorebird release android --flavor development -t lib/main_dev.dart -- --dart-define-from-file=../../env.dev.json --dart-define-from-file=env.keys.json
+    exec:
+      concurrency: 1
+    packageFilters:
+      dirExists: android
+    description: "create a shorebird release for android (Development)"
+
+  shorebird:release:prod:
+    run: shorebird release android --flavor production -t lib/main_prod.dart -- --dart-define-from-file=../../env.prod.json --dart-define-from-file=env.keys.json
+    exec:
+      concurrency: 1
+    packageFilters:
+      dirExists: android
+    description: 'create a shorebird release for android (Production)'
+
+  
+  shorebird:patch:dev:
+    run: shorebird patch android --flavor development -t lib/main_dev.dart -- --dart-define-from-file=../../env.dev.json --dart-define-from-file=env.keys.json
+    exec:
+      concurrency: 1
+    packageFilters:
+      dirExists: android
+    description: "Create a shorebird patch for android (Development)"
+
+  shorebird:patch:prod:
+    run: shorebird patch android --flavor production -t lib/main_prod.dart -- --dart-define-from-file=../../env.prod.json --dart-define-from-file=env.keys.json
+    exec:
+      concurrency: 1
+    packageFilters:
+      dirExists: android
+    description: "Create a shorebird patch for android (Production)"
+    
 sdkPath: .fvm/flutter_sdk

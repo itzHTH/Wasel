@@ -205,7 +205,7 @@ final class RouteRemoteServiceProvider
 }
 
 String _$routeRemoteServiceHash() =>
-    r'8cf9250542d8e4ca820db262d7f92324a31570fa';
+    r'd90b578f58eadbc7e78fce46b9ef6926d8f74cde';
 
 @ProviderFor(deviceLocationService)
 final deviceLocationServiceProvider = DeviceLocationServiceProvider._();

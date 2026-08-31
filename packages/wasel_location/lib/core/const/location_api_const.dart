@@ -26,6 +26,4 @@ class LocationApiConst {
   static const String geocodingCountryCode = 'iq';
 
   static const String routesFieldMask = 'routes.polyline.encodedPolyline';
-
-  static const String routeApiKeyName = 'ROUTES_API_KEY';
 }

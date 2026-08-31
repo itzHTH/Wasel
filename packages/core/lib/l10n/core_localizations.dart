@@ -427,6 +427,30 @@ abstract class CoreLocalizations {
   /// In ar, this message translates to:
   /// **'أدخل سنة صحيحة ({min}–{max})'**
   String yearRange(String min, String max);
+
+  /// Generic error heading
+  ///
+  /// In ar, this message translates to:
+  /// **'خطأ'**
+  String get errorHeading;
+
+  /// Generic error title
+  ///
+  /// In ar, this message translates to:
+  /// **'حدث خطأ ما'**
+  String get errorTitle;
+
+  /// No description provided for @errorBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'احنا نعتذر منك كلش ! \nصارت مشاكل بالتطبيق\nوحالياَ تم تبليغ المطورين لحل المشاكل باسرع وقت\nشكراَ لصبرك يا بطلنا العزيز'**
+  String get errorBody;
+
+  /// Restart the app by clearing the navigator and going to root '/'
+  ///
+  /// In ar, this message translates to:
+  /// **'الخروج من التطبيق'**
+  String get exitApp;
 }
 
 class _CoreLocalizationsDelegate

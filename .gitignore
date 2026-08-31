@@ -49,6 +49,11 @@ app.*.map.json
 # FVM Version Cache
 .fvm/
 
+# Environment config: real values stay local, only the examples are tracked
+env.*.json
+!env.example.json
+!env.keys.example.json
+
 # Machine-generated Flutter tooling / local config (should never be tracked)
 **/android/local.properties
 **/ios/Flutter/Generated.xcconfig
@@ -65,5 +70,6 @@ graphify-out/
 
 .kilo/
 AGENTS.md
+.agents/
 # Golden-test diff artifacts, written on a failed run
 **/test/**/failures/

@@ -8,6 +8,10 @@ library;
 // Constants
 export 'const/app_constants.dart';
 
+// Config
+export 'config/app_env.dart';
+export 'config/config_error_app.dart';
+
 // Flavors
 export 'flavors/flavors_config.dart';
 

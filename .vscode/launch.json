@@ -11,7 +11,11 @@
                 "--flavor",
                 "development",
                 "--target",
-                "lib/main_dev.dart"
+                "lib/main_dev.dart",
+                "--dart-define-from-file",
+                "../../env.dev.json",
+                "--dart-define-from-file",
+                "env.keys.json"
             ]
         },
         {
@@ -24,7 +28,11 @@
                 "--flavor",
                 "production",
                 "--target",
-                "lib/main_prod.dart"
+                "lib/main_prod.dart",
+                "--dart-define-from-file",
+                "../../env.prod.json",
+                "--dart-define-from-file",
+                "env.keys.json"
             ]
         },
         {
@@ -37,7 +45,11 @@
                 "--flavor",
                 "development",
                 "--target",
-                "lib/main_dev.dart"
+                "lib/main_dev.dart",
+                "--dart-define-from-file",
+                "../../env.dev.json",
+                "--dart-define-from-file",
+                "env.keys.json"
             ]
         },
         {
@@ -50,7 +62,11 @@
                 "--flavor",
                 "production",
                 "--target",
-                "lib/main_prod.dart"
+                "lib/main_prod.dart",
+                "--dart-define-from-file",
+                "../../env.prod.json",
+                "--dart-define-from-file",
+                "env.keys.json"
             ]
         }
     ]

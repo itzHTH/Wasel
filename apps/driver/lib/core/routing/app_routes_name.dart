@@ -21,4 +21,6 @@ class AppRoutes {
   static const String rideHistory = '/ride-history';
 
   static const String earnings = '/earnings';
+
+  static const String error = '/error';
 }

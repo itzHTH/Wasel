@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wasel_core/config/app_env.dart';
+import 'package:wasel_core/config/config_error_app.dart';
 import 'package:wasel_core/localization/providers/app_localization_provider.dart';
 import 'package:wasel_core/theme/app_map_style.dart';
 import 'package:wasel_core/helpers/app_navigation.dart';
@@ -14,15 +16,48 @@ import 'package:wasel_core/flavors/flavors_config.dart';
 import 'package:wasel_core/theme/providers/theme_mode_provider.dart';
 import 'package:wasal/wasal_app.dart';
 
-void mainCommon({
-  required Flavor flavor,
-  required String appName,
-  required String baseUrl,
-}) async {
-  FlavorConfig(flavor: flavor, appName: appName, baseUrl: baseUrl);
+void mainCommon({required Flavor flavor, required String appName}) async {
+  FlavorConfig(flavor: flavor, appName: appName);
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  /// Pass all uncaught "fatal" errors from the framework to Crashlytics
+  FlutterError.onError = (FlutterErrorDetails details) {
+    FirebaseCrashlytics.instance.recordFlutterFatalError(details);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AppNavigation.navigatorKey.currentState?.pushNamedAndRemoveUntil(
+        AppRoutes.error,
+        (route) => false,
+      );
+    });
+  };
+
+  /// Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AppNavigation.navigatorKey.currentState?.pushNamedAndRemoveUntil(
+        AppRoutes.error,
+        (route) => false,
+      );
+    });
+
+    return true;
+  };
+
+  try {
+    AppEnv.ensureConfigured();
+  } catch (error, stackTrace) {
+    await FirebaseCrashlytics.instance.recordError(
+      error,
+      stackTrace,
+      fatal: true,
+    );
+    runApp(ConfigErrorApp(message: '$error'));
+    return;
+  }
 
   // The shared auth interceptor (wasel_core) is app-agnostic; tell it how this
   // app should react to a non-refreshable session (forced logout → auth screen).

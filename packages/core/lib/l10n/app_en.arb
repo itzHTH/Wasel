@@ -54,5 +54,9 @@
   "nameLabel": "Name",
   "fieldRequired": "{field} is required",
   "fieldTooShort": "{field} must be at least 2 characters",
-  "yearRange": "Enter a valid year ({min}–{max})"
+  "yearRange": "Enter a valid year ({min}–{max})",
+  "errorHeading": "error",
+  "errorTitle": "Something went wrong",
+  "errorBody": "We're sorry, an error occurred and the application stopped working.\nWe have sent an error report to the development team to work on solving it as soon as possible.",
+  "exitApp": "Exit the app"
 }
