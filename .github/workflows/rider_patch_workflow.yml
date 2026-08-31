@@ -1,0 +1,90 @@
+name: Patch Updates For Rider Android Workflow
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/rider/**'
+      - 'packages/**'
+  workflow_dispatch:
+
+concurrency:
+  group: patch-rider
+  cancel-in-progress: true
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Setup Shorebird
+        uses: shorebirdtech/setup-shorebird@v1
+        with:
+          cache: true
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+          cache-dependency-path: apps/rider/android/*.gradle*
+
+      - name: Setup env
+        env:
+          ROOT_ENV: ${{ secrets.ROOT_ENV_PROD_JSON }}
+          RIDER_KEYS: ${{ secrets.RIDER_ENV_PROD_JSON }}
+        run: |
+          set -euo pipefail
+          printf '%s' "$ROOT_ENV" > env.prod.json
+          printf '%s' "$RIDER_KEYS" > apps/rider/env.keys.json
+
+      - name: Setup signing
+        working-directory: apps/rider/android
+        env:
+          KEYSTORE_BASE64: ${{ secrets.RIDER_KEYSTORE_BASE64 }}
+          STORE_PASSWORD: ${{ secrets.RIDER_STORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.RIDER_KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.RIDER_KEY_ALIAS }}
+        run: |
+          set -euo pipefail
+          printf '%s' "$KEYSTORE_BASE64" | base64 --decode > app/keystore.jks
+          cat > key.properties <<EOF
+          storeFile=keystore.jks
+          storePassword=$STORE_PASSWORD
+          keyPassword=$KEY_PASSWORD
+          keyAlias=$KEY_ALIAS
+          EOF
+
+      - name: Setup maps key
+        working-directory: apps/rider/android
+        env:
+          MAPS_API_KEY: ${{ secrets.RIDER_MAPS_API_KEY }}
+        run: |
+          set -euo pipefail
+          printf 'MAPS_API_KEY=%s\n' "$MAPS_API_KEY" > local.properties
+
+      - name: Verify
+        working-directory: apps/rider
+        run: |
+          set -euo pipefail
+          ls -la ../../env.prod.json env.keys.json
+          ls -la android/key.properties android/local.properties android/app/keystore.jks
+          cat shorebird.yaml
+
+      - name: Shorebird Patch Android (Rider)
+        working-directory: apps/rider
+        env:
+          SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
+        run: |
+          set -euo pipefail
+          # TODO: أضف --track staging بعد تركيب shorebird_code_push
+          # ضروري قبل النشر — بدونه أي patch يصل للمستخدمين مباشرة
+          shorebird patch android \
+            --flavor production -t lib/main_prod.dart \
+            --release-version latest \
+            --no-confirm \
+            -- --dart-define-from-file=../../env.prod.json \
+               --dart-define-from-file=env.keys.json
