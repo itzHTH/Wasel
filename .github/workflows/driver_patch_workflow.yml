@@ -80,8 +80,6 @@ jobs:
           SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
         run: |
           set -euo pipefail
-          # TODO: أضف --track staging بعد تركيب shorebird_code_push
-          # ضروري قبل النشر — بدونه أي patch يصل للمستخدمين مباشرة
           shorebird patch android \
             --flavor production -t lib/main_prod.dart \
             --release-version latest \
