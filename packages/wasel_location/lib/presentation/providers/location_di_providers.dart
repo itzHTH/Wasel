@@ -1,7 +1,6 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:wasel_core/config/app_env.dart';
 import 'package:wasel_core/networking/dio/google_search_dio_factory.dart';
-import 'package:wasel_location/core/const/location_api_const.dart';
 import 'package:wasel_location/data/repos/device_location_repo.dart';
 import 'package:wasel_location/data/repos/google_geocoding_repo.dart';
 import 'package:wasel_location/data/repos/route_repo.dart';
@@ -39,7 +38,7 @@ PlaceSearchSession placeSearchSession(Ref ref) => PlaceSearchSession();
 
 @riverpod
 RouteRemoteService routeRemoteService(Ref ref) =>
-    RouteRemoteService(dotenv.get(LocationApiConst.routeApiKeyName));
+    RouteRemoteService(AppEnv.routesApiKey);
 
 @riverpod
 DeviceLocationService deviceLocationService(Ref ref) =>

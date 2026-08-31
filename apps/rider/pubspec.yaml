@@ -63,7 +63,6 @@ dependencies:
   # Utils
   connectivity_plus: ^7.1.1
   url_launcher: ^6.3.2
-  flutter_dotenv: ^6.0.1
   flutter_native_splash: ^2.4.8
 
 dev_dependencies:
@@ -87,5 +86,4 @@ flutter:
   assets:
     - assets/icons/
     - assets/map_styles/
-    - .env
     - shorebird.yaml

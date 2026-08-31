@@ -1,11 +1,11 @@
-import 'package:wasel_core/flavors/flavors_config.dart';
+import 'package:wasel_core/config/app_env.dart';
 
 class ApiConstants {
-  static String get baseUrl => FlavorConfig.instance.baseUrl;
+  static String get baseUrl => AppEnv.baseUrl;
   static const String placesBaseUrl = 'https://places.googleapis.com/v1';
   static const String geocodingBaseUrl =
       'https://maps.googleapis.com/maps/api/geocode';
-  static String get hubUrl => "https://apiservice.ddns.net/wasl/hubs/tracking";
+  static String get hubUrl => AppEnv.hubUrl;
 
   static const String apiVersion = '1.0';
   static const String acceptEncoding = 'br';

@@ -3,25 +3,12 @@ enum Flavor { production, development }
 class FlavorConfig {
   final Flavor flavor;
   final String appName;
-  final String baseUrl;
 
-  FlavorConfig._({
-    required this.flavor,
-    required this.appName,
-    required this.baseUrl,
-  });
+  FlavorConfig._({required this.flavor, required this.appName});
 
   static FlavorConfig? _instance;
-  factory FlavorConfig({
-    required Flavor flavor,
-    required String appName,
-    required String baseUrl,
-  }) {
-    _instance ??= FlavorConfig._(
-      flavor: flavor,
-      appName: appName,
-      baseUrl: baseUrl,
-    );
+  factory FlavorConfig({required Flavor flavor, required String appName}) {
+    _instance ??= FlavorConfig._(flavor: flavor, appName: appName);
     return _instance!;
   }
 

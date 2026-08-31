@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart'
     show LocationSettings, LocationAccuracy, AppleSettings, ActivityType;
@@ -14,14 +13,9 @@ import 'package:wasel_core/theme/app_map_style.dart';
 import 'package:wasel_core/wasel_core.dart';
 import 'package:wasel_location/data/services/device_location_service.dart';
 
-void mainCommon({
-  required Flavor flavor,
-  required String appName,
-  required String baseUrl,
-}) async {
-  FlavorConfig(flavor: flavor, appName: appName, baseUrl: baseUrl);
+void mainCommon({required Flavor flavor, required String appName}) async {
+  FlavorConfig(flavor: flavor, appName: appName);
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   /// Pass all uncaught "fatal" errors from the framework to Crashlytics
@@ -49,6 +43,18 @@ void mainCommon({
 
     return true;
   };
+  try {
+    AppEnv.ensureConfigured();
+  } catch (error, stackTrace) {
+    await FirebaseCrashlytics.instance.recordError(
+      error,
+      stackTrace,
+      fatal: true,
+    );
+    runApp(ConfigErrorApp(message: '$error'));
+    return;
+  }
+
   // The shared auth interceptor (wasel_core) is app-agnostic, but the app-specific navigation is injected here.
   // The whole stack is dropped so no authed screen stays reachable via back.
   AuthInterceptor.onSessionExpired = () => AppNavigation.maybeNavigator
