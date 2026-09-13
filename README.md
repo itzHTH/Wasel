@@ -23,9 +23,8 @@ Both apps are built from a single codebase. Most of what they do — networking,
 The apps are **Arabic-first and RTL**, with full English support and light/dark themes.
 
 <!-- Drop your cover image here (drag it into the GitHub editor and paste the URL). -->
-<img width="1600" alt="wasel flutter" src="docs/screenshots/cover.png" />
-
-> 🚧 Under active development. Not in the stores yet.
+<img width="1600" height="960" alt="Thumbnail-client" src="https://github.com/user-attachments/assets/eacf0557-f63a-451e-bfc2-29dbb510a8af" />
+<img width="1600" height="960" alt="Thumbnail-driver" src="https://github.com/user-attachments/assets/a30a1c64-3ce9-44a6-8852-d9de8d59b93a" />
 
 ---
 
@@ -145,25 +144,25 @@ It relies on **ASP.NET Core** to manage ride matching, trip lifecycle, payments,
 ### Rider
 
 <div align="center">
- <img width="220" alt="rider home" src="docs/screenshots/rider-home.png" />
+ <img width="220" alt="rider home" src="https://github.com/user-attachments/assets/d360ee47-755e-4ab7-95f5-1f06f6d76ed5" />
+   &nbsp;&nbsp;
+ <img width="220" alt="rider search" src="https://github.com/user-attachments/assets/71aa3b06-d10a-4d21-be2e-262982fed630" />
   &nbsp;&nbsp;
- <img width="220" alt="rider search" src="docs/screenshots/rider-search.png" />
+ <img width="220" alt="rider tracking" src="https://github.com/user-attachments/assets/076c3d81-3007-4553-bbcc-a39ab099790a" />
   &nbsp;&nbsp;
- <img width="220" alt="rider tracking" src="docs/screenshots/rider-tracking.png" />
-  &nbsp;&nbsp;
- <img width="220" alt="rider completed" src="docs/screenshots/rider-completed.png" />
+ <img width="220" alt="rider completed" src="https://github.com/user-attachments/assets/4a39317f-0e99-41b3-954e-4a591bc4dbc9" />
 </div>
 
 ### Driver
 
 <div align="center">
- <img width="220" alt="driver home" src="docs/screenshots/driver-home.png" />
+ <img width="220" alt="driver home" src="https://github.com/user-attachments/assets/405d02be-2b3a-4179-a3f4-e02538cb4af6" />
   &nbsp;&nbsp;
- <img width="220" alt="driver verification" src="docs/screenshots/driver-verification.png" />
+ <img width="220" alt="ride request" src="https://github.com/user-attachments/assets/1674c322-494b-4c18-83b2-d3f59d1e7e04" />
   &nbsp;&nbsp;
- <img width="220" alt="driver ride" src="docs/screenshots/driver-ride.png" />
+ <img width="220" alt="driver ride" src="https://github.com/user-attachments/assets/c7152373-1aea-4829-ae34-3d8642a9bff9" />
   &nbsp;&nbsp;
- <img width="220" alt="driver earnings" src="docs/screenshots/driver-earnings.png" />
+ <img width="220" alt="driver earings" src="https://github.com/user-attachments/assets/bd5aa780-1597-48d1-8688-17f7957bc4e5" />
 </div>
 
 ---
