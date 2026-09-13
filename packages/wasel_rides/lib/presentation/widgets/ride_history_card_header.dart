@@ -37,6 +37,7 @@ class RideHistoryCardHeader extends StatelessWidget {
         ),
         SizedBox(width: AppDimens.space12),
         Expanded(
+          flex: 2,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -56,7 +57,7 @@ class RideHistoryCardHeader extends StatelessWidget {
         SizedBox(width: AppDimens.space12),
         // Outweighs the time column so a scaled-up fare keeps its digits and
         // the status chip is what gives way.
-        Flexible(flex: 2, child: RideHistoryAmount(price: entry.price)),
+        Expanded(child: RideHistoryAmount(price: entry.price)),
         SizedBox(width: AppDimens.space4),
         AnimatedRotation(
           turns: isExpanded ? 0.25 : 0,
