@@ -299,13 +299,26 @@ Two GitHub Actions workflows build and ship both apps together.
 **Next** — `go_router` migration · iOS release pipeline · push notifications · wider test coverage
 
 ---
-
 ## 📄 License
 
-© Huthaifa Mohammed. All rights reserved.
+**© 2026 Huthaifa Mohammed. All rights reserved.** — see [LICENSE](LICENSE).
 
-The source is published for reading and evaluation. It is not licensed for reuse, redistribution, or derivative works.
+This project is **source-visible, not open source**. The code is published
+so it can be read and evaluated; it is not licensed for use, reuse,
+redistribution, or derivative works, commercial or otherwise.
 
+Pull requests are not accepted.
+
+The Wasel and Captain names and visual identity are placeholders and are
+not included in any code license or sale unless agreed separately.
+
+### 💼 Licensing & Acquisition
+
+The platform — rider app, driver app, and admin dashboard — is available
+for purchase or licensing as a whole, with the branding replaceable by
+the buyer's own identity. Inquiries welcome:
+
+**Huthaifa Mohammed** · jhuth981@gmail.com · [LinkedIn](https://www.linkedin.com/in/huthaifa-mohamed-929938291?utm_source=share_via&utm_content=profile&utm_medium=member_ios)
 ---
 
 ## 👨‍💻 Developed By
